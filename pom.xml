@@ -56,7 +56,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
-		
+        
+		<!-- Faces Library -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.2.4</version>
+		</dependency>
 				
 		<!-- AspectJ -->
 		<dependency>
