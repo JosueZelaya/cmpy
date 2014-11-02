@@ -8,6 +8,11 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
+	<!-- Configuracion de PrimeFaces -->
+	<context-param>
+    	<param-name>primefaces.THEME</param-name>
+    	<param-value>bootstrap</param-value>
+	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>

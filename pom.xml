@@ -93,10 +93,12 @@
 		<!-- Temas de PrimeFaces -->
 		
 		<dependency>
-		<groupId>org.primefaces.extensions</groupId>
-		<artifactId>all-themes</artifactId>
-		<version>1.0.8</version>
-	</dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.8</version>
+		</dependency>
+	
+	
 
 		
 		
