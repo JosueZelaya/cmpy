@@ -8,7 +8,9 @@
 <h1>
 	Hello world!  
 </h1>
-
+	<a href='primerControlador/holamundo'> primer controlador </a>
+	<br/>
+	<a href='segundoControlador/segundo'> segundo controlador </a>
 <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>

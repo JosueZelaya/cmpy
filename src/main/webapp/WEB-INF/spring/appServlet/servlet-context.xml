@@ -22,6 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.tecnogeek.cmpy" />
+	<context:component-scan base-package="primerPaquete" />
 	
 	
 	
