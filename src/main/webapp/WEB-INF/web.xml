@@ -29,5 +29,26 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	
+	<!-- JSF Servlet is defined to container -->
+   <servlet>
+     <servlet-name>FacesServlet</servlet-name>
+     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+     <load-on-startup>1</load-on-startup>
+   </servlet>
+
+   <!-- Mapping with servlet and url for the http requests. -->
+   <servlet-mapping>
+     <servlet-name>FacesServlet</servlet-name>
+     <url-pattern>*.jsf</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>FacesServlet</servlet-name>
+     <url-pattern>*.faces</url-pattern>
+   </servlet-mapping>
+
+	  
+	
 
 </web-app>
