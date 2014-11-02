@@ -83,12 +83,23 @@
 			<version>1.1.14</version>
 		</dependency>
 		
-    	<!-- Primefaces Version 5 -->
+    	<!-- PrimeFaces Version 5 -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>5.0</version>
 		</dependency>
+		
+		<!-- Temas de PrimeFaces -->
+		
+		<dependency>
+		<groupId>org.primefaces.extensions</groupId>
+		<artifactId>all-themes</artifactId>
+		<version>1.0.8</version>
+	</dependency>
+
+		
+		
 					
 		<!-- AspectJ -->
 		<dependency>
