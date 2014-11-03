@@ -52,6 +52,11 @@
      <servlet-name>FacesServlet</servlet-name>
      <url-pattern>*.faces</url-pattern>
    </servlet-mapping>
+   
+   <servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
 
 	<!-- Pagina de inicio -->
 <welcome-file-list> 

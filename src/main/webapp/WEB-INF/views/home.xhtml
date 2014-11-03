@@ -9,7 +9,19 @@
 <ui:composition template="nucleo/plantilla.xhtml">
 
 	<ui:define name="content">
-	         <p:editor/>      
+	    <p:layout>
+			<p:layoutUnit position="west" size="200" header="Menu" resizable="true" closable="true" collapsible="true" effect="slide">
+		    	<h:outputText value="Menu y otros" />
+		    </p:layoutUnit>
+		 
+		    <p:layoutUnit position="east" size="200" header="Menu" resizable="true" closable="true" collapsible="true" effect="slide">
+		        <h:outputText value="Anuncios y otros" />
+		    </p:layoutUnit>
+		 
+		    <p:layoutUnit position="center">
+		        <h:outputText value="Publicaciones y otros" />
+		    </p:layoutUnit>   
+	    </p:layout>
 	</ui:define>
 
 </ui:composition>
