@@ -53,6 +53,10 @@
      <url-pattern>*.faces</url-pattern>
    </servlet-mapping>
 
+	<!-- Pagina de inicio -->
+<welcome-file-list> 
+	<welcome-file>publico/inicio.xhtml</welcome-file> 
+</welcome-file-list> 
 	  
 	
 
