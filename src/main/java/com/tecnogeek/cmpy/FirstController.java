@@ -44,6 +44,7 @@ public class FirstController {
 			List<Sistema> sistemas = sisdao.findAll(Sistema.class);
 			session.getTransaction().commit();
 			respuesta = sistemas;
+			String var;
 		}catch(HibernateException hex){
 			logger.error("@JobStatisticsController.getLogsBoeing():  It wasn't possible to retrieve the information" + hex.getMessage());
 			WriteLogs.writeLogsLine("@JobStatisticsController.getLogsBoeing(): It wasn't possible to retrieve the information\n"+ hex.getMessage());			
