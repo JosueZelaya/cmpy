@@ -40,27 +40,11 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.6.Final</version>
 		</dependency>
-		
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
-        </dependency>
-        <dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-annotations</artifactId>
-		<version>3.5.6-Final</version>
-	</dependency>
+		    
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.6.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>4.3.6.Final</version>            
         </dependency>
         <!-- This first dependency includes all the JPA implementations for the DAOs -->
 		<dependency>
@@ -74,12 +58,12 @@
 		        <artifactId>search-jpa-hibernate</artifactId>
 		        <version>1.2.0</version> <!-- use current version -->
 		</dependency>
-		<!-- postgres -->
+		<!-- postgres -->		
 		<dependency>
-			<groupId>org.postgresql</groupId>
+			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.3-1102-jdbc41</version>
-		</dependency>		
+			<version>9.1-901.jdbc4</version>
+		</dependency>				
         
 		<!-- Faces Library -->
 		<dependency>

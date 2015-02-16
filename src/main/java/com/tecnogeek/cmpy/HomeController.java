@@ -2,14 +2,20 @@ package com.tecnogeek.cmpy;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.tecnogeek.cmpy.dao.SistemaDAO;
+import com.tecnogeek.cmpy.utils.HibernateUtils;
+import com.tecnogeek.model.Sistema;
 
 /**
  * Handles requests for the application home page.
@@ -29,10 +35,23 @@ public class HomeController {
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
-		String formattedDate = dateFormat.format(date);
+		/* PRUEBA HIBERNATE */
+		SistemaDAO sisdao = new SistemaDAO();
+		Session session = HibernateUtils.getSessionFactory().getCurrentSession();
 		
-		model.addAttribute("serverTime", formattedDate );
+		//session.beginTransaction();			
+		@SuppressWarnings("unchecked")
+		List<Sistema> sistemas = sisdao.findAll(Sistema.class);
+		for (Sistema sistema : sistemas) {
+			System.out.println("hola, este es mi id: "+sistema.getId());
+			logger.info("hola, este es mi id: "+sistema.getId(), locale);
+		}
+		//session.getTransaction().commit();		
+		/* PRUEBA HIBERNATE */		
 		
+		
+		String formattedDate = dateFormat.format(date);		
+		model.addAttribute("serverTime", formattedDate );		
 		return "home";
 	}
 	

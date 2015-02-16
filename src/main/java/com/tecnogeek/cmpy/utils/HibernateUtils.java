@@ -3,9 +3,7 @@ package com.tecnogeek.cmpy.utils;
 //import com.taca.operaciones.cipher.Crypt;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,19 +15,20 @@ public final class HibernateUtils {
 	
 private static final Logger logger = LoggerFactory.getLogger(HibernateUtils.class);
 private static final SessionFactory sessionFactory;
-private static final ServiceRegistry serviceRegistry;
+//private static final ServiceRegistry serviceRegistry;
 
-private HibernateUtils() {
-}
+//private HibernateUtils() {
+//}
 
 
 static {
-    try {
-        
-        Configuration config = new Configuration().configure();
+    try {        
+        /*Configuration config = new Configuration().configure();
         serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                 config.getProperties()).build();
-        sessionFactory = config.buildSessionFactory(serviceRegistry);        
+        sessionFactory = config.buildSessionFactory(serviceRegistry);*/ 
+        Configuration config = new Configuration().configure();          
+        sessionFactory = config.buildSessionFactory();
     } catch (HibernateException ex) {
   	  logger.error("@HibernateUtils.HibernateUtils(): Initial SessionFactory creation failed" + ex.getMessage());
 		  WriteLogs.writeLogsLine("@HibernateUtils.HibernateUtils(): Initial SessionFactory creation failed" + ex.getMessage());

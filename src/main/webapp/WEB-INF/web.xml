@@ -8,6 +8,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
+	
 	<!-- Configuracion de PrimeFaces -->
 	<context-param>
     	<param-name>primefaces.THEME</param-name>
@@ -51,7 +52,7 @@
    <servlet-mapping>
      <servlet-name>FacesServlet</servlet-name>
      <url-pattern>*.faces</url-pattern>
-   </servlet-mapping>
+   </servlet-mapping>   
    
    <servlet-mapping>
     	<servlet-name>default</servlet-name>

@@ -31,7 +31,7 @@ public class FirstController {
 		return "holamundo";		
 	}
 	
-	@RequestMapping(value="/getLogsBoeing", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/getSistema", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<Sistema> getSistema(){
 		logger.debug("@FirstController.getSistema() devuelve informacion de la tabla sistema");
 		WriteLogs.writeLogsLine("@FirstController.getSistema() devuelve informacion de la tabla sistema");
@@ -42,6 +42,9 @@ public class FirstController {
 			session.beginTransaction();			
 			@SuppressWarnings("unchecked")
 			List<Sistema> sistemas = sisdao.findAll(Sistema.class);
+			for (Sistema sistema : sistemas) {
+				System.out.println("hola, este es mi id: "+sistema.getId());
+			}
 			session.getTransaction().commit();
 			respuesta = sistemas;
 			String var;

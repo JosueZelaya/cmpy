@@ -10,16 +10,17 @@
         <property name="hibernate.connection.username">comprameya</property>
         <property name="hibernate.connection.password">password</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/comprameya</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <property name="connection_pool_size">1</property>
 
-        <property name="hbm2ddl.auto">create</property>
+        <!--  <property name="hbm2ddl.auto">create</property>-->
 
         <property name="show_sql">true</property>
-
-
 	  	
-       <mapping class="org.javabrains.sanjaya.dto.UserDetails"/>
+       <!--  <mapping class="org.javabrains.sanjaya.dto.UserDetails"/>-->
+	   <mapping class="com.tecnogeek.model.Sistema"/>
 
     </session-factory>
 </hibernate-configuration>
