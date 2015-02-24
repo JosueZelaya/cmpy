@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Sistema{
 
 	@Id
-    @Column(name="ID")
+    @Column(name="sistema_id")
     @GeneratedValue
 	private Integer id;
 	
