@@ -3,7 +3,6 @@ package com.tecnogeek.cmpy.dao;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
