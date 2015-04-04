@@ -23,7 +23,7 @@
             </props>
         </property>
     </bean>-->
-    
+    <gato></gato>
     <mvc:annotation-driven />
 
     <bean id="viewResolver"

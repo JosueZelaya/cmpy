@@ -17,11 +17,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController 
 {
+    
+    @RequestMapping(value="/",method=RequestMethod.GET)
+    public String welcomePage(Model model)
+    {
+        System.out.println("AQUI ESTOY");
+        model.addAttribute("parametro", "Pagina Inicio");
+        return "index";
+    }
+    
     @RequestMapping(value="/index",method=RequestMethod.GET)
     public String indexPublico(Model model)
     {
+        System.out.println("AQUI ESTOY");
         model.addAttribute("parametro", "Hola Mundo");
         return "index";
-    } 
+    }
     
 }
