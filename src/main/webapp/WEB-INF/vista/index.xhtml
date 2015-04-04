@@ -5,47 +5,46 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <f:view contentType="text/html">
-        <h:head>
-            <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
-            </f:facet>
-        </h:head>
-
-        <h:body>
-
-            <p:layout fullPage="true">
-
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
-                </p:layoutUnit>
-
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-
-                        </p:submenu>
-
-                    </p:menu>
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
-                    Welcome to PrimeFaces - ${parametro}
-                </p:layoutUnit>
-
-            </p:layout>
-
-        </h:body>
-
-    </f:view>
+    <ui:composition template="../../plantillas/principal/home.xhtml">
+    
+        
+        <ui:define name="content" >
+        
+	<h:form>
+		<p:growl id="messages" showDetail="true"/>
+	    <p:layout style="min-height:1000px;">
+			<p:layoutUnit position="west" size="200" header="Menu" resizable="true" collapsible="true" effect="slide">
+		    	<h:outputText value="Menu" />
+		    	    <p:slideMenu style="width:180px">
+        				<p:submenu label="Celulares" icon="ui-icon-refresh">
+            				<p:menuitem value="SmartPhone"  update="messages" icon="ui-icon-disk" />
+            				<p:menuitem value="BarPhone" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+        				</p:submenu>
+        				<p:submenu label="Ropa" icon="ui-icon-newwin">
+            				<p:menuitem value="Damas" ajax="false" icon="ui-icon-close"/>
+        				</p:submenu>
+        			<p:separator />
+        				<p:submenu label="Audio" icon="ui-icon-extlink">
+            				<p:submenu label="Reproductores">
+                				<p:menuitem value="MP3" url="http://google.com" />
+                				<p:menuitem value="Bocinas" url="http://google.com" />
+            				</p:submenu>
+            				<p:menuitem value="Tablets" url="http://google.com" />
+        				</p:submenu>
+    				</p:slideMenu>
+		    </p:layoutUnit>
+		 
+		    <p:layoutUnit position="east" size="200" header="Menu" resizable="true" collapsible="true" effect="slide">
+		        <h:outputText value="Anuncios" />
+		    </p:layoutUnit>
+		 
+		    <p:layoutUnit position="center">
+		        <h:outputText value="Publicaciones" />
+		    </p:layoutUnit>   
+	    </p:layout>
+	    </h:form>
+         </ui:define>  
+        
+        </ui:composition>
 </html>
 

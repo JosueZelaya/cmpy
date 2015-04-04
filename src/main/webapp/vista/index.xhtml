@@ -5,6 +5,10 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
+    <ui:composition template="nucleo/plantilla.xhtml">
+    
+        <ui:define name="content" >
+    
     <f:view contentType="text/html">
         <h:head>
             <f:facet name="first">
@@ -15,7 +19,7 @@
 
         <h:body>
 
-            <p:layout fullPage="true">
+<!--            <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
                     Header
@@ -43,9 +47,13 @@
                 </p:layoutUnit>
 
             </p:layout>
-
+-->
         </h:body>
 
     </f:view>
+            
+    </ui:define>
+        
+   </ui:composition>
 </html>
 
