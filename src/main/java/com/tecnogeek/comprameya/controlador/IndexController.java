@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package com.tecnogeek.comprameya.controlador;
-
+import com.tecnogeek.comprameya.dao.AbstractGenericDAO;
+import com.tecnogeek.comprameya.dao.SistemaDAO;
+import com.tecnogeek.comprameya.entidad.Sistema;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController 
 {
+    @Autowired
+    AbstractGenericDAO sisdao;
     
     @RequestMapping(value="/",method=RequestMethod.GET)
     public String welcomePage(Model model)
@@ -29,6 +35,13 @@ public class IndexController
     @RequestMapping(value="/index",method=RequestMethod.GET)
     public String indexPublico(Model model)
     {
+//        SistemaDAO sisdao = new SistemaDAO();
+        
+        @SuppressWarnings("unchecked")
+        List<Sistema> sistemas = sisdao.findAll(Sistema.class);
+        for (Sistema sistema : sistemas) {
+                System.out.println("hola, este es mi id: "+sistema.getSistemaId());                
+        }
         System.out.println("AQUI ESTOY");
         model.addAttribute("parametro", "Hola Mundo");
         return "index";
