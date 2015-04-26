@@ -56,7 +56,8 @@
         <servlet-name>faces</servlet-name>
         <url-pattern>*.faces</url-pattern>
     </servlet-mapping>
-   
+    
+        
     <session-config>
         <session-timeout>
             30
@@ -68,10 +69,12 @@
         <welcome-file>vista/index.xhtml</welcome-file>
     </welcome-file-list>-->
     
-    <context-param>
+    <!--<context-param>
 	<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
 	<param-value>.xhtml</param-value>
-    </context-param>
+    </context-param>-->
+    
+   
   
     <!-- Spring Security -->
     <filter>
