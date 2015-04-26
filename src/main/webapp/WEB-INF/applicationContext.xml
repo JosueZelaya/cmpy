@@ -15,12 +15,19 @@
     <!-- Escanear el paquete de controladores -->
     <context:component-scan base-package="com.tecnogeek.comprameya.controlador" />
     
-    <!--<mvc:annotation-driven />-->
+    
+    <!--<mvc:resources mapping="/resources/**" location="/resources/"  />-->
+    
+  
     
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/vista/"/>
         <property name="suffix" value=".xhtml"/>
     </bean>
+    
+    
+ 
+    
     
 <!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="vista/"/>
@@ -56,6 +63,15 @@
             </props>
         </property>
     </bean>
+    
+    
+    
+    
+    
+    
+    <!--<mvc:resources mapping="/resources/**" location="/, classpath:/resources/"/>-->
+    
+    <!--<mvc:annotation-driven />-->
 
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
 
