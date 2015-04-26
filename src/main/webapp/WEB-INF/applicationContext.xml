@@ -78,6 +78,14 @@
        <property name="sessionFactory" ref="sessionFactory" />
    </bean>
 
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+      <property name="sessionFactory" ref="sessionFactory" />
+   </bean>
+   
+   <bean id="abstractGenericDAO" class="com.tecnogeek.comprameya.dao.AbstractGenericDAO">
+       <property name="sessionFactory" ref="sessionFactory" />
+   </bean>
+
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
 
 </beans>
