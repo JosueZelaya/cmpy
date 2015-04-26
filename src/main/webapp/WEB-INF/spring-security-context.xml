@@ -4,18 +4,22 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security.xsd">
+	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
  
 	<http auto-config="true">
-		<intercept-url pattern="/admin**" access="ROLE_USER" />
+		<intercept-url pattern="/index**" access="hasRole('USER')" />
 	</http>
  
-	<authentication-manager>
+<!--	<authentication-manager>
 	  <authentication-provider>
 	    <user-service>
 		<user name="alexander" password="123456" authorities="ROLE_USER" />
 	    </user-service>
 	  </authentication-provider>
-	</authentication-manager>
+	</authentication-manager>-->
+        
+        <authentication-manager>
+            <authentication-provider user-service-ref='customjdbcUserService'/>
+        </authentication-manager>
  
 </beans:beans>

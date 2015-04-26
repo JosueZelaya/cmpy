@@ -61,7 +61,21 @@
    <bean id="abstractGenericDAO" class="com.tecnogeek.comprameya.dao.AbstractGenericDAO">
        <property name="sessionFactory" ref="sessionFactory" />
    </bean>
-
-    <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+   
+   <!-- Spring Security Custom DB Schema -->
+    <bean id="customjdbcUserService" class="com.tecnogeek.comprameya.dao.CustomJDBCDaoImpl">
+         <property name="dataSource" ref="dataSource"/>
+         <property name="enableAuthorities" value="true"/>
+         <property name="usersByUsernameQuery">
+             <!--<value>SELECT JSF_SPRING_SEC_USERS_USERNAME, JSF_SPRING_SEC_USERS_PASSWORD, JSF_SPRING_SEC_USERS_ENABLED FROM JSF_SPRING_SEC_USERS WHERE JSF_SPRING_SEC_USERS_USERNAME = ?</value>-->
+             <value>SELECT login,pass,sis_activo FROM usuario WHERE login = ?</value>
+         </property>
+         <property name="authoritiesByUsernameQuery">
+             <!--<value> select JSF_SPRING_SEC_ROLES_USERNAME,JSF_SPRING_SEC_ROLES_ROLE_NAME from JSF_SPRING_SEC_ROLES where JSF_SPRING_SEC_ROLES_USERNAME = ? </value>-->
+             <value>SELECT usr.login,pfl.nombre FROM usuario usr,perfil pfl WHERE usr.fk_perfil=pfl.perfil_id
+                    AND usr.login= ?</value>
+         </property>
+    </bean> 
+   
 
 </beans>
