@@ -5,7 +5,6 @@
  */
 package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.dao.AbstractGenericDAO;
-import com.tecnogeek.comprameya.dao.SistemaDAO;
 import com.tecnogeek.comprameya.entidad.Sistema;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,7 @@ public class IndexController
     
     @RequestMapping(value="/index",method=RequestMethod.GET)
     public String indexPublico(Model model)
-    {
-//        SistemaDAO sisdao = new SistemaDAO();
-        
+    {   
         @SuppressWarnings("unchecked")
         List<Sistema> sistemas = sisdao.findAll(Sistema.class);
         for (Sistema sistema : sistemas) {
