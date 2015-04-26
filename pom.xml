@@ -15,29 +15,55 @@
     </properties>
     
     <dependencies>
-<!--         Spring 
+
+        <!-- jaxen -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.1.6.RELEASE</version>
-            <exclusions>
-                 Exclude Commons Logging in favor of SLF4j 
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                 </exclusion>
-            </exclusions>
+            <groupId>jaxen</groupId>
+            <artifactId>jaxen</artifactId>
+            <version>1.1.6</version>
+        </dependency>
+        <!-- Logging -->
+        <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.12</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.1.6.RELEASE</version>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>1.7.12</version>
+                <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>4.1.6.RELEASE</version>
-        </dependency>-->
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.12</version>
+                <scope>runtime</scope>
+        </dependency>
+        <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.15</version>
+                <exclusions>
+                        <exclusion>
+                                <groupId>javax.mail</groupId>
+                                <artifactId>mail</artifactId>
+                        </exclusion>
+                        <exclusion>
+                                <groupId>javax.jms</groupId>
+                                <artifactId>jms</artifactId>
+                        </exclusion>
+                        <exclusion>
+                                <groupId>com.sun.jdmk</groupId>
+                                <artifactId>jmxtools</artifactId>
+                        </exclusion>
+                        <exclusion>
+                                <groupId>com.sun.jmx</groupId>
+                                <artifactId>jmxri</artifactId>
+                        </exclusion>
+                </exclusions>
+            <type>jar</type>
+        </dependency>
         <!-- postgres -->
         <dependency>
             <groupId>postgresql</groupId>
