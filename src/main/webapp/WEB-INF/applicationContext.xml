@@ -12,19 +12,21 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     
-    <!-- Escanear los paquetes -->
+    <!-- Escanear los paquetes  -->
     <context:component-scan base-package="com.tecnogeek.comprameya" />
     
 
+    <mvc:annotation-driven />
+    <context:annotation-config />
     
     <!--<mvc:resources mapping="/resources/**" location="/resources/"  />-->
     
   
     
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+   <!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/vista/"/>
         <property name="suffix" value=".xhtml"/>
-    </bean>
+    </bean>-->
     
     
     
