@@ -2,7 +2,8 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
   <title><ui:insert name="title">ComprameYa!</ui:insert></title>
@@ -26,7 +27,12 @@
 
 <div id="footer">
   <ui:insert name="footer">
-    	<ui:include src="../componentes/pie.xhtml"/>
+<!--    <p:dock position="bottom">
+        <p:menuitem value="Home" icon="/resources/demo/images/dock/home.png" url="#"/>
+        <p:menuitem value="Music" icon="/resources/demo/images/dock/music.png" url="#"/>
+         more menuitems 
+    </p:dock>-->
+    <ui:include src="../componentes/pie.xhtml"/>
   </ui:insert>
 </div>
 

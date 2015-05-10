@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.dao.AbstractGenericDAO;
+import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Sistema;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author genaro
  */
 @Controller
-public class IndexController 
+public class HomeController 
 {
     @Autowired
     AbstractGenericDAO sisdao;
@@ -27,6 +28,9 @@ public class IndexController
     public String welcomePage(Model model)
     {
         System.out.println("AQUI ESTOY");
+        
+        List<Publicacion> publicaciones = sisdao.findAll(Publicacion.class);
+        model.addAttribute("publicaciones", publicaciones);
         model.addAttribute("parametro", "Pagina Inicio");
         return "index";
     }

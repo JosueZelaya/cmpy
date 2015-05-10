@@ -104,6 +104,9 @@ public class Publicacion implements Serializable {
     @JoinColumn(name = "fk_usuario", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario fkUsuario;
+    @JoinColumn(name = "fk_id_recurso", referencedColumnName = "recurso_id")
+    @ManyToOne
+    private Recurso fkRecurso;
 
     public Publicacion() {
     }
@@ -253,6 +256,14 @@ public class Publicacion implements Serializable {
         this.fkUsuario = fkUsuario;
     }
 
+    public Recurso getFkRecurso(){
+        return fkRecurso;
+    }
+    
+    public void setFkRecurso(Recurso fkRecurso){
+        this.fkRecurso = fkRecurso;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -36,6 +36,12 @@
 
                 <p:layoutUnit position="east" size="200" header="Menu" resizable="true" collapsible="true" effect="slide">
                     <h:outputText value="Anuncios" />
+                    <p:dataList value="#{publicaciones}" var="publicacion" itemType="disc">
+                        #{publicacion.titulo}, #{publicacion.descripcion}
+                        <h:graphicImage library="publicaciones" name="#{publicacion.fkRecurso.ruta}" width="400" />
+                    </p:dataList>
+
+                    
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
