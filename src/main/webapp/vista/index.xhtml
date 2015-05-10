@@ -13,25 +13,25 @@
     <h:form>
             <p:growl id="messages" showDetail="true"/>
         <p:layout style="min-height:1000px;">
-                    <p:layoutUnit position="west" size="200" header="Menu" resizable="true" collapsible="true" effect="slide">
-                    <h:outputText value="Menu" />
-                        <p:slideMenu style="width:180px">
-                                    <p:submenu label="Celulares" icon="ui-icon-refresh">
-                                    <p:menuitem value="SmartPhone"  update="messages" icon="ui-icon-disk" />
-                                    <p:menuitem value="BarPhone" update="messages" icon="ui-icon-arrowrefresh-1-w" />
-                                    </p:submenu>
-                                    <p:submenu label="Ropa" icon="ui-icon-newwin">
-                                    <p:menuitem value="Damas" ajax="false" icon="ui-icon-close"/>
-                                    </p:submenu>
-                            <p:separator />
-                                    <p:submenu label="Audio" icon="ui-icon-extlink">
-                                    <p:submenu label="Reproductores">
-                                            <p:menuitem value="MP3" url="http://google.com" />
-                                            <p:menuitem value="Bocinas" url="http://google.com" />
-                                    </p:submenu>
-                                    <p:menuitem value="Tablets" url="http://google.com" />
-                                    </p:submenu>
-                            </p:slideMenu>
+                    <p:layoutUnit position="west" size="200" header="Menu" resizable="false" collapsible="false" effect="slide">
+                    <!--<h:outputText value="Menu" />-->
+                    <p:slideMenu style="width:93%">
+                                <p:submenu label="Celulares" icon="ui-icon-refresh">
+                                <p:menuitem value="SmartPhone"  update="messages" icon="ui-icon-disk" />
+                                <p:menuitem value="BarPhone" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+                                </p:submenu>
+                                <p:submenu label="Ropa" icon="ui-icon-newwin">
+                                <p:menuitem value="Damas" ajax="false" icon="ui-icon-close"/>
+                                </p:submenu>
+                        <p:separator />
+                                <p:submenu label="Audio" icon="ui-icon-extlink">
+                                <p:submenu label="Reproductores">
+                                        <p:menuitem value="MP3" url="http://google.com" />
+                                        <p:menuitem value="Bocinas" url="http://google.com" />
+                                </p:submenu>
+                                <p:menuitem value="Tablets" url="http://google.com" />
+                                </p:submenu>
+                        </p:slideMenu>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="east" size="200" header="Menu" resizable="true" collapsible="true" effect="slide">
@@ -48,6 +48,13 @@
                     <h:outputText value="Publicaciones" />
                     <p:editor/>
                 </p:layoutUnit>   
+            
+            
+                <p:layoutUnit position="east" size="200" header="Anuncios" resizable="false" collapsible="false" effect="slide">
+                    <!--<h:outputText value="Anuncios" />-->
+                </p:layoutUnit>
+
+
         </p:layout>
         </h:form>
      </ui:define>  
