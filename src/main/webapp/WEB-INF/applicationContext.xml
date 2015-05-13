@@ -23,6 +23,9 @@
         <property name="suffix" value=".xhtml"/>
     </bean>
     
+    <!-- Para que puede resolver y entregar los recursos que le solicitan como: imagenes, css, etc. -->
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    
     <!-- Indicamos en qué archivo buscar las propiedades de conexion a la BD -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location">

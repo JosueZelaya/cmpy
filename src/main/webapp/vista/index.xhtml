@@ -43,7 +43,7 @@
                     <!--<h:outputText value="Anuncios" />-->
                     <p:dataList value="#{publicaciones}" var="publicacion" itemType="disc">
                         #{publicacion.titulo}, #{publicacion.descripcion}
-                        <h:graphicImage library="publicaciones" name="#{publicacion.fkRecurso.ruta}" width="400" />
+                        <h:graphicImage library="publicaciones" name="#{publicacion.fkRecurso.ruta}" width="140" height='100' />
                     </p:dataList>
                 </p:layoutUnit>
 
