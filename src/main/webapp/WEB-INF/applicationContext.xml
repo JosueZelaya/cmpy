@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    
+    <!-- Escanear los paquetes -->
+    <context:component-scan base-package="com.tecnogeek.comprameya" />
+    
+    <mvc:annotation-driven />
+    <context:annotation-config />
+    
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="vista/"/>
+        <property name="suffix" value=".xhtml"/>
+    </bean>
+    
+    <!-- Indicamos en qué archivo buscar las propiedades de conexion a la BD -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>/WEB-INF/database.properties</value>
+	</property>
+    </bean>
+    
+    <!--Data source has the database information -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+         <property name="driverClassName" value="${jdbc.driverClassName}"/>
+         <property name="url" value="${jdbc.url}"/>
+         <property name="username" value="${jdbc.username}"/>
+         <property name="password" value="${jdbc.password}"/>
+    </bean>
+    
+    <!-- SessonFactory for Hibernate -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.tecnogeek.comprameya.entidad"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.max_fetch_depth">3</prop>
+                <prop key="hibernate.jdbc.fetch_size">50</prop>
+                <prop key="hibernate.jdbc.batch_size">10</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+      <property name="sessionFactory" ref="sessionFactory" />
+   </bean>
+   
+   <bean id="abstractGenericDAO" class="com.tecnogeek.comprameya.dao.AbstractGenericDAO">
+       <property name="sessionFactory" ref="sessionFactory" />
+   </bean>
+   
+   <!-- Spring Security Custom DB Schema -->
+    <bean id="customjdbcUserService" class="com.tecnogeek.comprameya.dao.CustomJDBCDaoImpl">
+         <property name="dataSource" ref="dataSource"/>
+         <property name="enableAuthorities" value="true"/>
+         <property name="usersByUsernameQuery">
+             <!--<value>SELECT JSF_SPRING_SEC_USERS_USERNAME, JSF_SPRING_SEC_USERS_PASSWORD, JSF_SPRING_SEC_USERS_ENABLED FROM JSF_SPRING_SEC_USERS WHERE JSF_SPRING_SEC_USERS_USERNAME = ?</value>-->
+             <value>SELECT login,pass,sis_activo FROM usuario WHERE login = ?</value>
+         </property>
+         <property name="authoritiesByUsernameQuery">
+             <!--<value> select JSF_SPRING_SEC_ROLES_USERNAME,JSF_SPRING_SEC_ROLES_ROLE_NAME from JSF_SPRING_SEC_ROLES where JSF_SPRING_SEC_ROLES_USERNAME = ? </value>-->
+             <value>SELECT usr.login,pfl.nombre FROM usuario usr,perfil pfl WHERE usr.fk_perfil=pfl.perfil_id
+                    AND usr.login= ?</value>
+         </property>
+    </bean> 
+   
+
+</beans>
