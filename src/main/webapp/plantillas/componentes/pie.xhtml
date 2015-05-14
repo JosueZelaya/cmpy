@@ -5,11 +5,11 @@
       	xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:p="http://primefaces.org/ui">
-<head>
+<h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
-</head>
-<body>
+</h:head>
+<h:body>
 	<h:form id="form">
 	    <p:dataList value="" var="car" type="ordered">
 	        <f:facet name="header">
@@ -24,5 +24,18 @@
 	        
 	    </p:dataList>
     </h:form>
-</body>
+    
+    <p:dock position="bottom">
+        <p:menuitem value="Coca Cola" icon="/resources/patrocinadores/cocacola.png" url="#"/>
+        <p:menuitem value="Claro" icon="/resources/patrocinadores/clarologo.png" url="#"/>
+        <p:menuitem value="Burger King" icon="/resources/patrocinadores/Burger_King.png" url="#"/>
+        <p:menuitem value="Shell" icon="/resources/patrocinadores/Shell_Logo.png" url="#"/>
+        <p:menuitem value="Toyota" icon="/resources/patrocinadores/toyota-logo.png" url="#"/>
+        <p:menuitem value="Pizza Hut" icon="/resources/patrocinadores/pizza_hut_logo.png" url="#"/>
+        <p:menuitem value="Siman" icon="/resources/patrocinadores/siman.png" url="#"/>
+        <p:menuitem value="Tigo" icon="/resources/patrocinadores/tigo.png" url="#"/>
+        <!-- more menuitems -->
+    </p:dock>
+    
+</h:body>
 </html>
