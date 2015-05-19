@@ -23,7 +23,7 @@
         <developer>
           <id>gmartinez</id>
           <name>Genaro Martinez</name>
-          <email>unknown@unknown.com</email>
+          <email>genaro1024@hotmail.com</email>
           <organization>TecnoGeek</organization>
           <roles>
             <role>developer</role>
@@ -91,7 +91,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring-version}</version>
-        </dependency>
+        </dependency>                
         <dependency>
 	<groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -107,8 +107,6 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security-version}</version>
         </dependency>
-
-
         
         <!-- jaxen -->
         <dependency>
@@ -174,18 +172,6 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.3.1.Final</version>
         </dependency>
-        
-        <!-- Prime Faces -->
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>5.0</version>
-        </dependency>
-        <dependency>  
-            <groupId>org.primefaces.themes</groupId>  
-            <artifactId>all-themes</artifactId>  
-            <version>1.0.10</version>  
-        </dependency> 
         
         <!-- jsp Servlet -->
         <dependency>

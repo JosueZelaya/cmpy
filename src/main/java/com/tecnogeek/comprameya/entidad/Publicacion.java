@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -103,10 +104,9 @@ public class Publicacion implements Serializable {
     private TipoPublicacion fkTipoPublicacion;
     @JoinColumn(name = "fk_usuario", referencedColumnName = "usuario_id")
     @ManyToOne
-    private Usuario fkUsuario;
-    @JoinColumn(name = "fk_id_recurso", referencedColumnName = "recurso_id")
-    @ManyToOne
-    private Recurso fkRecurso;
+    private Usuario fkUsuario;   
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "publicacion",cascade = CascadeType.ALL)
+    private List<Recurso> recursoList;
 
     public Publicacion() {
     }
@@ -256,12 +256,13 @@ public class Publicacion implements Serializable {
         this.fkUsuario = fkUsuario;
     }
 
-    public Recurso getFkRecurso(){
-        return fkRecurso;
+    @XmlTransient
+    public List<Recurso> getRecursoList() {
+        return recursoList;
     }
-    
-    public void setFkRecurso(Recurso fkRecurso){
-        this.fkRecurso = fkRecurso;
+
+    public void setRecursoList(List<Recurso> recursoList) {
+        this.recursoList = recursoList;
     }
     
     @Override

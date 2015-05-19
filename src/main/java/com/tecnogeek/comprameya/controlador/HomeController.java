@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.dao.AbstractGenericDAO;
 import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.Sistema;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,12 @@ public class HomeController
         System.out.println("AQUI ESTOY");
         
         List<Publicacion> publicaciones = sisdao.findAll(Publicacion.class);
+        for (Publicacion publicacion : publicaciones){
+            List<Recurso> recursos = publicacion.getRecursoList();
+            for(Recurso recurso : recursos){
+                System.out.println("recurso: "+recurso.getRuta());
+            }            
+        }        
         model.addAttribute("publicaciones", publicaciones);
         model.addAttribute("parametro", "Pagina Inicio");
         return "index";
