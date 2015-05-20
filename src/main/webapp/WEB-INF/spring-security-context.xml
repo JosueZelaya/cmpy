@@ -8,6 +8,7 @@
  
 	<http auto-config="true">
 		<intercept-url pattern="/index**" access="hasRole('USER')" />
+                <intercept-url pattern="/resources/**" access="permitAll" />
 	</http>
  
 <!--	<authentication-manager>
