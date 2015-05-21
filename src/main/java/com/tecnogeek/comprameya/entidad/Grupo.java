@@ -171,7 +171,7 @@ public class Grupo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Grupo[ grupoId=" + grupoId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Grupo[ grupoId=" + grupoId + " ]";
     }
     
 }

@@ -148,7 +148,7 @@ public class TipoPublicacion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.TipoPublicacion[ tipoPublicacionId=" + tipoPublicacionId + " ]";
+        return "com.tecnogeek.comprameya.entidad.TipoPublicacion[ tipoPublicacionId=" + tipoPublicacionId + " ]";
     }
     
 }

@@ -161,7 +161,7 @@ public class Ciudad implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Ciudad[ ciudadId=" + ciudadId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Ciudad[ ciudadId=" + ciudadId + " ]";
     }
     
 }

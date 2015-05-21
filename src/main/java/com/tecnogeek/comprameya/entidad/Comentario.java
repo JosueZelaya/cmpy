@@ -186,7 +186,7 @@ public class Comentario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Comentario[ comentarioId=" + comentarioId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Comentario[ comentarioId=" + comentarioId + " ]";
     }
     
 }

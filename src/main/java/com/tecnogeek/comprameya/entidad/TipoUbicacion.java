@@ -14,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,70 +30,56 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author genaro
  */
 @Entity
-@Table(name = "pais")
+@Table(name = "tipo_ubicacion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Pais.findAll", query = "SELECT p FROM Pais p"),
-    @NamedQuery(name = "Pais.findByPaisId", query = "SELECT p FROM Pais p WHERE p.paisId = :paisId"),
-    @NamedQuery(name = "Pais.findByNombre", query = "SELECT p FROM Pais p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Pais.findBySisActivo", query = "SELECT p FROM Pais p WHERE p.sisActivo = :sisActivo"),
-    @NamedQuery(name = "Pais.findBySisFechaCreacion", query = "SELECT p FROM Pais p WHERE p.sisFechaCreacion = :sisFechaCreacion"),
-    @NamedQuery(name = "Pais.findBySisFechaModificacion", query = "SELECT p FROM Pais p WHERE p.sisFechaModificacion = :sisFechaModificacion")})
-public class Pais implements Serializable {
+    @NamedQuery(name = "TipoUbicacion.findAll", query = "SELECT t FROM TipoUbicacion t"),
+    @NamedQuery(name = "TipoUbicacion.findByTipoUbicacionId", query = "SELECT t FROM TipoUbicacion t WHERE t.tipoUbicacionId = :tipoUbicacionId"),
+    @NamedQuery(name = "TipoUbicacion.findBySisActivo", query = "SELECT t FROM TipoUbicacion t WHERE t.sisActivo = :sisActivo"),
+    @NamedQuery(name = "TipoUbicacion.findBySisFechaCreacion", query = "SELECT t FROM TipoUbicacion t WHERE t.sisFechaCreacion = :sisFechaCreacion"),
+    @NamedQuery(name = "TipoUbicacion.findBySisFechaModificacion", query = "SELECT t FROM TipoUbicacion t WHERE t.sisFechaModificacion = :sisFechaModificacion"),
+    @NamedQuery(name = "TipoUbicacion.findByNombre", query = "SELECT t FROM TipoUbicacion t WHERE t.nombre = :nombre")})
+public class TipoUbicacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pais_id")
-    private Long paisId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2147483647)
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "tipo_ubicacion_id")
+    private Long tipoUbicacionId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "sis_activo")
     private boolean sisActivo;
     @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date sisFechaCreacion;
     @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date sisFechaModificacion;
-    @OneToMany(mappedBy = "fkPais")
-    private List<Estado> estadoList;
-    @JoinColumn(name = "fk_continente", referencedColumnName = "continente_id")
-    @ManyToOne
-    private Continente fkContinente;
+    @Size(max = 2147483647)
+    @Column(name = "nombre")
+    private String nombre;
+    @OneToMany(mappedBy = "fkTipoUbicacion")
+    private List<Ubicacion> ubicacionList;
 
-    public Pais() {
+    public TipoUbicacion() {
     }
 
-    public Pais(Long paisId) {
-        this.paisId = paisId;
+    public TipoUbicacion(Long tipoUbicacionId) {
+        this.tipoUbicacionId = tipoUbicacionId;
     }
 
-    public Pais(Long paisId, String nombre, boolean sisActivo) {
-        this.paisId = paisId;
-        this.nombre = nombre;
+    public TipoUbicacion(Long tipoUbicacionId, boolean sisActivo) {
+        this.tipoUbicacionId = tipoUbicacionId;
         this.sisActivo = sisActivo;
     }
 
-    public Long getPaisId() {
-        return paisId;
+    public Long getTipoUbicacionId() {
+        return tipoUbicacionId;
     }
 
-    public void setPaisId(Long paisId) {
-        this.paisId = paisId;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setTipoUbicacionId(Long tipoUbicacionId) {
+        this.tipoUbicacionId = tipoUbicacionId;
     }
 
     public boolean getSisActivo() {
@@ -122,38 +106,38 @@ public class Pais implements Serializable {
         this.sisFechaModificacion = sisFechaModificacion;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @XmlTransient
-    public List<Estado> getEstadoList() {
-        return estadoList;
+    public List<Ubicacion> getUbicacionList() {
+        return ubicacionList;
     }
 
-    public void setEstadoList(List<Estado> estadoList) {
-        this.estadoList = estadoList;
-    }
-
-    public Continente getFkContinente() {
-        return fkContinente;
-    }
-
-    public void setFkContinente(Continente fkContinente) {
-        this.fkContinente = fkContinente;
+    public void setUbicacionList(List<Ubicacion> ubicacionList) {
+        this.ubicacionList = ubicacionList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (paisId != null ? paisId.hashCode() : 0);
+        hash += (tipoUbicacionId != null ? tipoUbicacionId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pais)) {
+        if (!(object instanceof TipoUbicacion)) {
             return false;
         }
-        Pais other = (Pais) object;
-        if ((this.paisId == null && other.paisId != null) || (this.paisId != null && !this.paisId.equals(other.paisId))) {
+        TipoUbicacion other = (TipoUbicacion) object;
+        if ((this.tipoUbicacionId == null && other.tipoUbicacionId != null) || (this.tipoUbicacionId != null && !this.tipoUbicacionId.equals(other.tipoUbicacionId))) {
             return false;
         }
         return true;
@@ -161,7 +145,7 @@ public class Pais implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidad.Pais[ paisId=" + paisId + " ]";
+        return "com.tecnogeek.comprameya.entidad.TipoUbicacion[ tipoUbicacionId=" + tipoUbicacionId + " ]";
     }
     
 }

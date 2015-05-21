@@ -186,7 +186,7 @@ public class Notificacion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Notificacion[ notificacionId=" + notificacionId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Notificacion[ notificacionId=" + notificacionId + " ]";
     }
     
 }

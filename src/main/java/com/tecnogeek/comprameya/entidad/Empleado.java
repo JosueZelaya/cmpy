@@ -198,7 +198,7 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Empleado[ empleadoId=" + empleadoId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Empleado[ empleadoId=" + empleadoId + " ]";
     }
     
 }

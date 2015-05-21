@@ -90,6 +90,8 @@ public class Producto implements Serializable {
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
     @ManyToOne
     private Publicacion fkPublicacion;
+    @OneToMany(mappedBy = "fkProducto")
+    private List<Cesta> cestaList;
 
     public Producto() {
     }
@@ -203,6 +205,15 @@ public class Producto implements Serializable {
         this.fkPublicacion = fkPublicacion;
     }
 
+    @XmlTransient
+    public List<Cesta> getCestaList() {
+        return cestaList;
+    }
+
+    public void setCestaList(List<Cesta> cestaList) {
+        this.cestaList = cestaList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -225,7 +236,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Producto[ productoId=" + productoId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Producto[ productoId=" + productoId + " ]";
     }
     
 }

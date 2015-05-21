@@ -176,7 +176,7 @@ public class Ranking implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Ranking[ rankingId=" + rankingId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Ranking[ rankingId=" + rankingId + " ]";
     }
     
 }

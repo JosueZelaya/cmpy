@@ -7,6 +7,7 @@ package com.tecnogeek.comprameya.entidad;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,12 +18,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -66,12 +69,11 @@ public class Mensaje implements Serializable {
     @Column(name = "sis_fecha_modificacion")
     @Temporal(TemporalType.DATE)
     private Date sisFechaModificacion;
+    @OneToMany(mappedBy = "fkMensaje")
+    private List<Destinatario> destinatarioList;
     @JoinColumn(name = "fk_usuario_emisor", referencedColumnName = "usuario_id")
     @ManyToOne(optional = false)
     private Usuario fkUsuarioEmisor;
-    @JoinColumn(name = "fk_usuario_receptor", referencedColumnName = "usuario_id")
-    @ManyToOne(optional = false)
-    private Usuario fkUsuarioReceptor;
 
     public Mensaje() {
     }
@@ -135,20 +137,21 @@ public class Mensaje implements Serializable {
         this.sisFechaModificacion = sisFechaModificacion;
     }
 
+    @XmlTransient
+    public List<Destinatario> getDestinatarioList() {
+        return destinatarioList;
+    }
+
+    public void setDestinatarioList(List<Destinatario> destinatarioList) {
+        this.destinatarioList = destinatarioList;
+    }
+
     public Usuario getFkUsuarioEmisor() {
         return fkUsuarioEmisor;
     }
 
     public void setFkUsuarioEmisor(Usuario fkUsuarioEmisor) {
         this.fkUsuarioEmisor = fkUsuarioEmisor;
-    }
-
-    public Usuario getFkUsuarioReceptor() {
-        return fkUsuarioReceptor;
-    }
-
-    public void setFkUsuarioReceptor(Usuario fkUsuarioReceptor) {
-        this.fkUsuarioReceptor = fkUsuarioReceptor;
     }
 
     @Override
@@ -173,7 +176,7 @@ public class Mensaje implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Mensaje[ mensajeId=" + mensajeId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Mensaje[ mensajeId=" + mensajeId + " ]";
     }
     
 }

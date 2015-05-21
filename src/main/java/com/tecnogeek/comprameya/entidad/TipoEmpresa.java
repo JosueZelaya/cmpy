@@ -163,7 +163,7 @@ public class TipoEmpresa implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.TipoEmpresa[ tipoEmpresaId=" + tipoEmpresaId + " ]";
+        return "com.tecnogeek.comprameya.entidad.TipoEmpresa[ tipoEmpresaId=" + tipoEmpresaId + " ]";
     }
     
 }

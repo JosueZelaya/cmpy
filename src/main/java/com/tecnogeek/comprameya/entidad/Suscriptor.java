@@ -142,7 +142,7 @@ public class Suscriptor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Suscriptor[ suscriptorId=" + suscriptorId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Suscriptor[ suscriptorId=" + suscriptorId + " ]";
     }
     
 }

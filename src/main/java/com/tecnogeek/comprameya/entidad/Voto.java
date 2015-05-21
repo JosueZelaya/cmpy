@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Voto.findByValor", query = "SELECT v FROM Voto v WHERE v.valor = :valor"),
     @NamedQuery(name = "Voto.findBySisActivo", query = "SELECT v FROM Voto v WHERE v.sisActivo = :sisActivo"),
     @NamedQuery(name = "Voto.findBySisFechaCreacion", query = "SELECT v FROM Voto v WHERE v.sisFechaCreacion = :sisFechaCreacion"),
-    @NamedQuery(name = "Voto.findBySisFechaModificacion", query = "SELECT v FROM Voto v WHERE v.sisFechaModificacion = :sisFechaModificacion")})
+    @NamedQuery(name = "Voto.findBySisFechaModificacion", query = "SELECT v FROM Voto v WHERE v.sisFechaModificacion = :sisFechaModificacion"),
+    @NamedQuery(name = "Voto.findByComentario", query = "SELECT v FROM Voto v WHERE v.comentario = :comentario")})
 public class Voto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,12 +58,15 @@ public class Voto implements Serializable {
     @Column(name = "sis_fecha_modificacion")
     @Temporal(TemporalType.DATE)
     private Date sisFechaModificacion;
-    @JoinColumn(name = "fk_usuario_votante", referencedColumnName = "usuario_id")
-    @ManyToOne
-    private Usuario fkUsuarioVotante;
+    @Size(max = 2147483647)
+    @Column(name = "comentario")
+    private String comentario;
     @JoinColumn(name = "fk_usuario_evaluado", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario fkUsuarioEvaluado;
+    @JoinColumn(name = "fk_usuario_votante", referencedColumnName = "usuario_id")
+    @ManyToOne
+    private Usuario fkUsuarioVotante;
 
     public Voto() {
     }
@@ -115,12 +120,12 @@ public class Voto implements Serializable {
         this.sisFechaModificacion = sisFechaModificacion;
     }
 
-    public Usuario getFkUsuarioVotante() {
-        return fkUsuarioVotante;
+    public String getComentario() {
+        return comentario;
     }
 
-    public void setFkUsuarioVotante(Usuario fkUsuarioVotante) {
-        this.fkUsuarioVotante = fkUsuarioVotante;
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     public Usuario getFkUsuarioEvaluado() {
@@ -129,6 +134,14 @@ public class Voto implements Serializable {
 
     public void setFkUsuarioEvaluado(Usuario fkUsuarioEvaluado) {
         this.fkUsuarioEvaluado = fkUsuarioEvaluado;
+    }
+
+    public Usuario getFkUsuarioVotante() {
+        return fkUsuarioVotante;
+    }
+
+    public void setFkUsuarioVotante(Usuario fkUsuarioVotante) {
+        this.fkUsuarioVotante = fkUsuarioVotante;
     }
 
     @Override
@@ -153,7 +166,7 @@ public class Voto implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Voto[ votoId=" + votoId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Voto[ votoId=" + votoId + " ]";
     }
     
 }

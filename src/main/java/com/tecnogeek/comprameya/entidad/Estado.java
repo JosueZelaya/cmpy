@@ -161,7 +161,7 @@ public class Estado implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Estado[ estadoId=" + estadoId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Estado[ estadoId=" + estadoId + " ]";
     }
     
 }

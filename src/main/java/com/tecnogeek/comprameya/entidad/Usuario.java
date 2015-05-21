@@ -84,10 +84,16 @@ public class Usuario implements Serializable {
     @Column(name = "sis_fecha_modificacion")
     @Temporal(TemporalType.DATE)
     private Date sisFechaModificacion;
-    @OneToMany(mappedBy = "fkUsuarioVotante")
-    private List<Voto> votoList;
+    @OneToMany(mappedBy = "fkUsuario")
+    private List<Compra> compraList;
     @OneToMany(mappedBy = "fkUsuarioEvaluado")
+    private List<Voto> votoList;
+    @OneToMany(mappedBy = "fkUsuarioVotante")
     private List<Voto> votoList1;
+    @OneToMany(mappedBy = "fkUsuarioContacto")
+    private List<Contacto> contactoList;
+    @OneToMany(mappedBy = "fkUsuarioDuenio")
+    private List<Contacto> contactoList1;
     @OneToMany(mappedBy = "fkUsuarioProveedor")
     private List<Suscriptor> suscriptorList;
     @OneToMany(mappedBy = "fkUsuarioSuscriptor")
@@ -98,6 +104,8 @@ public class Usuario implements Serializable {
     private List<Notificacion> notificacionList;
     @OneToMany(mappedBy = "fkUsuario")
     private List<Publicacion> publicacionList;
+    @OneToMany(mappedBy = "fkUsuarioDestinatario")
+    private List<Destinatario> destinatarioList;
     @JoinColumn(name = "fk_perfil", referencedColumnName = "perfil_id")
     @ManyToOne
     private Perfil fkPerfil;
@@ -109,8 +117,6 @@ public class Usuario implements Serializable {
     private Ranking fkRanking;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuarioEmisor")
     private List<Mensaje> mensajeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuarioReceptor")
-    private List<Mensaje> mensajeList1;
 
     public Usuario() {
     }
@@ -201,6 +207,15 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<Compra> getCompraList() {
+        return compraList;
+    }
+
+    public void setCompraList(List<Compra> compraList) {
+        this.compraList = compraList;
+    }
+
+    @XmlTransient
     public List<Voto> getVotoList() {
         return votoList;
     }
@@ -216,6 +231,24 @@ public class Usuario implements Serializable {
 
     public void setVotoList1(List<Voto> votoList1) {
         this.votoList1 = votoList1;
+    }
+
+    @XmlTransient
+    public List<Contacto> getContactoList() {
+        return contactoList;
+    }
+
+    public void setContactoList(List<Contacto> contactoList) {
+        this.contactoList = contactoList;
+    }
+
+    @XmlTransient
+    public List<Contacto> getContactoList1() {
+        return contactoList1;
+    }
+
+    public void setContactoList1(List<Contacto> contactoList1) {
+        this.contactoList1 = contactoList1;
     }
 
     @XmlTransient
@@ -263,6 +296,15 @@ public class Usuario implements Serializable {
         this.publicacionList = publicacionList;
     }
 
+    @XmlTransient
+    public List<Destinatario> getDestinatarioList() {
+        return destinatarioList;
+    }
+
+    public void setDestinatarioList(List<Destinatario> destinatarioList) {
+        this.destinatarioList = destinatarioList;
+    }
+
     public Perfil getFkPerfil() {
         return fkPerfil;
     }
@@ -296,15 +338,6 @@ public class Usuario implements Serializable {
         this.mensajeList = mensajeList;
     }
 
-    @XmlTransient
-    public List<Mensaje> getMensajeList1() {
-        return mensajeList1;
-    }
-
-    public void setMensajeList1(List<Mensaje> mensajeList1) {
-        this.mensajeList1 = mensajeList1;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -327,7 +360,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Usuario[ usuarioId=" + usuarioId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Usuario[ usuarioId=" + usuarioId + " ]";
     }
     
 }

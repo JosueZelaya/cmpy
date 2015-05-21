@@ -196,7 +196,7 @@ public class Empresa implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Empresa[ empresaId=" + empresaId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Empresa[ empresaId=" + empresaId + " ]";
     }
     
 }

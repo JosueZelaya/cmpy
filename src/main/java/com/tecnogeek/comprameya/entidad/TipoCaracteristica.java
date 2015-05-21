@@ -148,7 +148,7 @@ public class TipoCaracteristica implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.TipoCaracteristica[ tipoCaracteristicaId=" + tipoCaracteristicaId + " ]";
+        return "com.tecnogeek.comprameya.entidad.TipoCaracteristica[ tipoCaracteristicaId=" + tipoCaracteristicaId + " ]";
     }
     
 }

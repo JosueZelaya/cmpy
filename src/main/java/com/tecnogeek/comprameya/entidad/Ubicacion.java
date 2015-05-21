@@ -89,6 +89,9 @@ public class Ubicacion implements Serializable {
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
     @ManyToOne
     private Publicacion fkPublicacion;
+    @JoinColumn(name = "fk_tipo_ubicacion", referencedColumnName = "tipo_ubicacion_id")
+    @ManyToOne
+    private TipoUbicacion fkTipoUbicacion;
     @OneToMany(mappedBy = "fkUbicacion")
     private List<Persona> personaList;
 
@@ -208,6 +211,14 @@ public class Ubicacion implements Serializable {
         this.fkPublicacion = fkPublicacion;
     }
 
+    public TipoUbicacion getFkTipoUbicacion() {
+        return fkTipoUbicacion;
+    }
+
+    public void setFkTipoUbicacion(TipoUbicacion fkTipoUbicacion) {
+        this.fkTipoUbicacion = fkTipoUbicacion;
+    }
+
     @XmlTransient
     public List<Persona> getPersonaList() {
         return personaList;
@@ -239,7 +250,7 @@ public class Ubicacion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Ubicacion[ ubicacionId=" + ubicacionId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Ubicacion[ ubicacionId=" + ubicacionId + " ]";
     }
     
 }

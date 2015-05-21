@@ -145,7 +145,7 @@ public class Continente implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Continente[ continenteId=" + continenteId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Continente[ continenteId=" + continenteId + " ]";
     }
     
 }

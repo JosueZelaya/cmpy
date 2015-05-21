@@ -173,7 +173,7 @@ public class Modelo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Modelo[ modeloId=" + modeloId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Modelo[ modeloId=" + modeloId + " ]";
     }
     
 }

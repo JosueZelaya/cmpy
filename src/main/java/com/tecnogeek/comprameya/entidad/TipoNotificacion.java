@@ -160,7 +160,7 @@ public class TipoNotificacion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.TipoNotificacion[ tipoNotificacionId=" + tipoNotificacionId + " ]";
+        return "com.tecnogeek.comprameya.entidad.TipoNotificacion[ tipoNotificacionId=" + tipoNotificacionId + " ]";
     }
     
 }

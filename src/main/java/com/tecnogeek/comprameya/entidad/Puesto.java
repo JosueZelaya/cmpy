@@ -160,7 +160,7 @@ public class Puesto implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Puesto[ puestoId=" + puestoId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Puesto[ puestoId=" + puestoId + " ]";
     }
     
 }

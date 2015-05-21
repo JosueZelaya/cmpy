@@ -76,12 +76,12 @@ public class Recurso implements Serializable {
     @JoinColumn(name = "fk_perfil", referencedColumnName = "perfil_id")
     @ManyToOne
     private Perfil fkPerfil;
+    @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
+    @ManyToOne
+    private Publicacion fkPublicacion;
     @JoinColumn(name = "fk_tipo_recurso", referencedColumnName = "tipo_recuso_id")
     @ManyToOne
     private TipoRecurso fkTipoRecurso;
-    @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
-    @ManyToOne
-    private Publicacion publicacion;
 
     public Recurso() {
     }
@@ -169,20 +169,20 @@ public class Recurso implements Serializable {
         this.fkPerfil = fkPerfil;
     }
 
+    public Publicacion getFkPublicacion() {
+        return fkPublicacion;
+    }
+
+    public void setFkPublicacion(Publicacion fkPublicacion) {
+        this.fkPublicacion = fkPublicacion;
+    }
+
     public TipoRecurso getFkTipoRecurso() {
         return fkTipoRecurso;
     }
 
     public void setFkTipoRecurso(TipoRecurso fkTipoRecurso) {
         this.fkTipoRecurso = fkTipoRecurso;
-    }
-    
-    public Publicacion getPublicacion(){
-        return this.publicacion;
-    }
-    
-    public void setPublicacion(Publicacion publicacion){
-        this.publicacion = publicacion;
     }
 
     @Override
@@ -207,7 +207,7 @@ public class Recurso implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Recurso[ recursoId=" + recursoId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Recurso[ recursoId=" + recursoId + " ]";
     }
     
 }

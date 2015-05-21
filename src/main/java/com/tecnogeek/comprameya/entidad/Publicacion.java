@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -94,6 +93,8 @@ public class Publicacion implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date sisFechaModificacion;
     @OneToMany(mappedBy = "fkPublicacion")
+    private List<Recurso> recursoList;
+    @OneToMany(mappedBy = "fkPublicacion")
     private List<Ubicacion> ubicacionList;
     @OneToMany(mappedBy = "fkPublicacion")
     private List<Producto> productoList;
@@ -104,9 +105,7 @@ public class Publicacion implements Serializable {
     private TipoPublicacion fkTipoPublicacion;
     @JoinColumn(name = "fk_usuario", referencedColumnName = "usuario_id")
     @ManyToOne
-    private Usuario fkUsuario;   
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "publicacion",cascade = CascadeType.ALL)
-    private List<Recurso> recursoList;
+    private Usuario fkUsuario;
 
     public Publicacion() {
     }
@@ -214,6 +213,15 @@ public class Publicacion implements Serializable {
     }
 
     @XmlTransient
+    public List<Recurso> getRecursoList() {
+        return recursoList;
+    }
+
+    public void setRecursoList(List<Recurso> recursoList) {
+        this.recursoList = recursoList;
+    }
+
+    @XmlTransient
     public List<Ubicacion> getUbicacionList() {
         return ubicacionList;
     }
@@ -256,15 +264,6 @@ public class Publicacion implements Serializable {
         this.fkUsuario = fkUsuario;
     }
 
-    @XmlTransient
-    public List<Recurso> getRecursoList() {
-        return recursoList;
-    }
-
-    public void setRecursoList(List<Recurso> recursoList) {
-        this.recursoList = recursoList;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -287,7 +286,7 @@ public class Publicacion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Publicacion[ publicacionId=" + publicacionId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Publicacion[ publicacionId=" + publicacionId + " ]";
     }
     
 }

@@ -184,7 +184,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Categoria[ categoriaId=" + categoriaId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Categoria[ categoriaId=" + categoriaId + " ]";
     }
     
 }

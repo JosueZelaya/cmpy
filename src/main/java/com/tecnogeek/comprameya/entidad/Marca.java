@@ -163,7 +163,7 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Marca[ marcaId=" + marcaId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Marca[ marcaId=" + marcaId + " ]";
     }
     
 }

@@ -184,7 +184,7 @@ public class Perfil implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Perfil[ perfilId=" + perfilId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Perfil[ perfilId=" + perfilId + " ]";
     }
     
 }

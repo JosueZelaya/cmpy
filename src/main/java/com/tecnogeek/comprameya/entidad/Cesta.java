@@ -13,13 +13,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,33 +28,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author genaro
  */
 @Entity
-@Table(name = "sistema")
+@Table(name = "cesta")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Sistema.findAll", query = "SELECT s FROM Sistema s"),
-    @NamedQuery(name = "Sistema.findBySistemaId", query = "SELECT s FROM Sistema s WHERE s.sistemaId = :sistemaId"),
-    @NamedQuery(name = "Sistema.findByVariable", query = "SELECT s FROM Sistema s WHERE s.variable = :variable"),
-    @NamedQuery(name = "Sistema.findByValor", query = "SELECT s FROM Sistema s WHERE s.valor = :valor"),
-    @NamedQuery(name = "Sistema.findBySisActivo", query = "SELECT s FROM Sistema s WHERE s.sisActivo = :sisActivo"),
-    @NamedQuery(name = "Sistema.findBySisFechaCreacion", query = "SELECT s FROM Sistema s WHERE s.sisFechaCreacion = :sisFechaCreacion"),
-    @NamedQuery(name = "Sistema.findBySisFechaModificacion", query = "SELECT s FROM Sistema s WHERE s.sisFechaModificacion = :sisFechaModificacion")})
-public class Sistema implements Serializable {
+    @NamedQuery(name = "Cesta.findAll", query = "SELECT c FROM Cesta c"),
+    @NamedQuery(name = "Cesta.findByCestaId", query = "SELECT c FROM Cesta c WHERE c.cestaId = :cestaId"),
+    @NamedQuery(name = "Cesta.findBySisActivo", query = "SELECT c FROM Cesta c WHERE c.sisActivo = :sisActivo"),
+    @NamedQuery(name = "Cesta.findBySisFechaCreacion", query = "SELECT c FROM Cesta c WHERE c.sisFechaCreacion = :sisFechaCreacion"),
+    @NamedQuery(name = "Cesta.findBySisFechaModificacion", query = "SELECT c FROM Cesta c WHERE c.sisFechaModificacion = :sisFechaModificacion")})
+public class Cesta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "sistema_id")
-    private Long sistemaId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2147483647)
-    @Column(name = "variable")
-    private String variable;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2147483647)
-    @Column(name = "valor")
-    private String valor;
+    @Column(name = "cesta_id")
+    private Long cestaId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "sis_activo")
@@ -64,43 +53,31 @@ public class Sistema implements Serializable {
     @Column(name = "sis_fecha_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date sisFechaModificacion;
+    @JoinColumn(name = "fk_compra", referencedColumnName = "compra_id")
+    @ManyToOne
+    private Compra fkCompra;
+    @JoinColumn(name = "fk_producto", referencedColumnName = "producto_id")
+    @ManyToOne
+    private Producto fkProducto;
 
-    public Sistema() {
+    public Cesta() {
     }
 
-    public Sistema(Long sistemaId) {
-        this.sistemaId = sistemaId;
+    public Cesta(Long cestaId) {
+        this.cestaId = cestaId;
     }
 
-    public Sistema(Long sistemaId, String variable, String valor, boolean sisActivo) {
-        this.sistemaId = sistemaId;
-        this.variable = variable;
-        this.valor = valor;
+    public Cesta(Long cestaId, boolean sisActivo) {
+        this.cestaId = cestaId;
         this.sisActivo = sisActivo;
     }
 
-    public Long getSistemaId() {
-        return sistemaId;
+    public Long getCestaId() {
+        return cestaId;
     }
 
-    public void setSistemaId(Long sistemaId) {
-        this.sistemaId = sistemaId;
-    }
-
-    public String getVariable() {
-        return variable;
-    }
-
-    public void setVariable(String variable) {
-        this.variable = variable;
-    }
-
-    public String getValor() {
-        return valor;
-    }
-
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setCestaId(Long cestaId) {
+        this.cestaId = cestaId;
     }
 
     public boolean getSisActivo() {
@@ -127,21 +104,37 @@ public class Sistema implements Serializable {
         this.sisFechaModificacion = sisFechaModificacion;
     }
 
+    public Compra getFkCompra() {
+        return fkCompra;
+    }
+
+    public void setFkCompra(Compra fkCompra) {
+        this.fkCompra = fkCompra;
+    }
+
+    public Producto getFkProducto() {
+        return fkProducto;
+    }
+
+    public void setFkProducto(Producto fkProducto) {
+        this.fkProducto = fkProducto;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (sistemaId != null ? sistemaId.hashCode() : 0);
+        hash += (cestaId != null ? cestaId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sistema)) {
+        if (!(object instanceof Cesta)) {
             return false;
         }
-        Sistema other = (Sistema) object;
-        if ((this.sistemaId == null && other.sistemaId != null) || (this.sistemaId != null && !this.sistemaId.equals(other.sistemaId))) {
+        Cesta other = (Cesta) object;
+        if ((this.cestaId == null && other.cestaId != null) || (this.cestaId != null && !this.cestaId.equals(other.cestaId))) {
             return false;
         }
         return true;
@@ -149,7 +142,7 @@ public class Sistema implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidad.Sistema[ sistemaId=" + sistemaId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Cesta[ cestaId=" + cestaId + " ]";
     }
     
 }

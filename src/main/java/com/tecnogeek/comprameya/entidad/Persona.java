@@ -324,7 +324,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tecnogeek.comprameya.entidades.Persona[ personaId=" + personaId + " ]";
+        return "com.tecnogeek.comprameya.entidad.Persona[ personaId=" + personaId + " ]";
     }
     
 }
