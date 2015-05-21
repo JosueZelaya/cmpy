@@ -130,7 +130,13 @@
     </div>
     
     <div class="col-lg-2" id="main-content">
-        Empresas anunciantes
+        <div class="row">
+            <c:forEach items="${publicaiones}" var="publicacion">     
+                <div class="col-lg-12">
+                  ruta:  ${publicaion.ruta}
+                </div> 
+            </c:forEach>            
+        </div>
     </div>
     
 </div>

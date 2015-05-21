@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -92,7 +93,7 @@ public class Publicacion implements Serializable {
     @Column(name = "sis_fecha_modificacion")
     @Temporal(TemporalType.DATE)
     private Date sisFechaModificacion;
-    @OneToMany(mappedBy = "fkPublicacion")
+    @OneToMany(mappedBy = "fkPublicacion",fetch = FetchType.EAGER)
     private List<Recurso> recursoList;
     @OneToMany(mappedBy = "fkPublicacion")
     private List<Ubicacion> ubicacionList;
