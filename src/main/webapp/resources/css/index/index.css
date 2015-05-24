@@ -20,6 +20,9 @@ body {
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
+.navbar {
+    //margin-bottom: 0;
+}
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
@@ -144,3 +147,20 @@ body {
   }
 }
 
+.min_cont
+{
+   min-height: 1200px;         
+
+}
+
+.min_otros
+{
+    min-height: 100px;     
+    max-height: 100px;
+}
+
+.marcar
+{
+    background-color: white;
+    //border: #000 solid 2px;
+}

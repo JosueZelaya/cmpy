@@ -49,7 +49,7 @@ public class HomeController
         }        
         model.addAttribute("publicaciones", publicaciones);
         model.addAttribute("parametro", "Pagina Inicio");
-        return "index";
+        return "boot";
     }
     
     @RequestMapping(value="/index",method=RequestMethod.GET)
@@ -62,7 +62,7 @@ public class HomeController
         }
         System.out.println("AQUI ESTOY");
         model.addAttribute("parametro", "Hola Mundo");
-        return "index";
+        return "indexCarousel";
     }
     
 }
