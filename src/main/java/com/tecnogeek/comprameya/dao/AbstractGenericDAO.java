@@ -18,7 +18,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.type.Type;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.tecnogeek.comprameya.utils.WriteLogs;
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -44,8 +43,7 @@ public class AbstractGenericDAO {
         try {
             return sessionFactory;
         } catch (Exception e) {
-
-        	logger.error("@AbstractGenericDAO.getSessionFactory():Could not locate SessionFactory in JNDI " + e.getMessage());
+            logger.error("@AbstractGenericDAO.getSessionFactory():Could not locate SessionFactory in JNDI " + e.getMessage());
             WriteLogs.writeLogsLine("@AbstractGenericDAO.getSessionFactory():Could not locate SessionFactory in JNDI " + e.getMessage());
             throw new IllegalStateException("Could not locate SessionFactory in JNDI");
 
@@ -86,7 +84,7 @@ public class AbstractGenericDAO {
     
     public boolean update(final Object obj) {
         try {
-        	 sessionFactory.getCurrentSession().beginTransaction();
+             sessionFactory.getCurrentSession().beginTransaction();
              sessionFactory.getCurrentSession().update(obj);
              sessionFactory.getCurrentSession().getTransaction().commit();            
             return true;
@@ -226,8 +224,7 @@ public class AbstractGenericDAO {
             query.setMaxResults(pageSize);
             objects = query.list();
         } catch (HibernateException e) {
-
-        	logger.error("@AbstractGenericDAO.findAll(): " + e.getMessage());
+            logger.error("@AbstractGenericDAO.findAll(): " + e.getMessage());
             WriteLogs.writeLogsLine("@AbstractGenericDAO.findAll(): " + e.getMessage());
            
 
@@ -909,6 +906,25 @@ public class AbstractGenericDAO {
         	logger.error("@AbstractGenericDAO.getNumberOfRows():find by where statement failed" + re.getMessage());
          	WriteLogs.writeLogsLine("@AbstractGenericDAO.getNumberOfRows():find by where statement failed" + re.getMessage());
 
+            throw re;
+        }    
+    	
+    	return count;
+    }
+    
+    @SuppressWarnings("rawtypes")
+    public int getNumberOfRows(final Class clazz, final String whereStatement){ 
+    	int count;
+        Session session=sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        try {            
+            count = ((Long)session.createQuery("select count(*) from " + clazz.getName() + " where " + whereStatement).uniqueResult()).intValue();
+            System.out.println("Publicaciones encontradas: "+count);
+            session.getTransaction().commit();        	
+        } catch (RuntimeException re) {            
+            session.getTransaction().rollback();
+            logger.error("@AbstractGenericDAO.getNumberOfRows():find by where statement failed" + re.getMessage());
+            WriteLogs.writeLogsLine("@AbstractGenericDAO.getNumberOfRows():find by where statement failed" + re.getMessage());
             throw re;
         }    
     	

@@ -9,6 +9,7 @@ import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.Sistema;
 import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +31,17 @@ public class HomeController
     {
         System.out.println("AQUI ESTOY");
         
-        List<Publicacion> publicaciones = sisdao.findAll(Publicacion.class);
+        //List<Publicacion> publicaciones = sisdao.findAll(Publicacion.class);        
+        int pageZise = 4;
+        int totalPublicaciones = sisdao.getNumberOfRows(Publicacion.class,"fkTipoPublicacion='1'");        
+        int limit = Math.round(totalPublicaciones/pageZise);
+        Random rnd = new Random();
+        int page = (int)(rnd.nextDouble() * limit + 1);
+        System.out.println("Publicaciones devueltas: "+pageZise);
+        List<Publicacion> publicaciones = sisdao.findByWhereStatement(Publicacion.class,"fkTipoPublicacion='1'", page,pageZise);
+        
         for (Publicacion publicacion : publicaciones){
+            System.out.println("titulo: "+publicacion.getTitulo());
             List<Recurso> recursos = publicacion.getRecursoList();
             for(Recurso recurso : recursos){
                 System.out.println("recurso: "+recurso.getRuta());
