@@ -8,13 +8,19 @@ import com.tecnogeek.comprameya.dao.AbstractGenericDAO;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.Sistema;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -63,6 +69,24 @@ public class HomeController
         System.out.println("AQUI ESTOY");
         model.addAttribute("parametro", "Hola Mundo");
         return "indexCarousel";
+    }
+    
+    @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
+    public String agregarAnuncio(@RequestParam("descripcion") String descripcion,@RequestParam("file") MultipartFile file)
+    {   
+        System.out.println("AQUI ESTOY");        
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                System.out.println(bytes.toString());
+                // store the bytes somewhere
+            } catch (IOException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }
+
+        
+        return "index";
     }
     
 }

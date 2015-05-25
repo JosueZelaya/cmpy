@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ComprameYa!</title>
         <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/css/inputFile/fileinput.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
     </head>
     <body>
@@ -47,6 +48,15 @@
                 </li>
               </ul>
             </div>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar Productos...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">BuscarYa!</button>
+                    </span>
+                </div>
+                <!--<button type="submit" class="btn btn-default">Submit</button>-->                
+              </form>
           </div>
         </nav>
         
@@ -67,8 +77,21 @@
                 </div>
             </div>              
             <div class="col-md-8 min_cont marcar">
-                <div class="panel panel-default min_cont">
-                    <div class="panel-heading">Publicaciones</div>
+                <div class="panel panel-default min_cont">                    
+                    <div class="panel-heading">Publicaciones</div>  
+                    
+                    <form method="post" action="/agregarAnuncio" enctype="multipart/form-data">
+                        <textarea name="descripcion" class="form-control" rows="3" placeholder="Agregar Publicación"></textarea>                                        
+                        <br/>
+                        <div class="form-group">
+                            <input name="file" id="file-demo" type="file" class="file" multiple=true data-preview-file-type="any">
+                        </div>                    
+                        <button value="VenderYa!" type="submit" class="btn btn-info pull-right">
+                            VenderYa!
+                        </button>                                                
+                    </form>
+                    
+                    
                     <div class="panel-body">
                       Listado de Publicaciones
                     </div>
@@ -114,5 +137,7 @@
         <!-- Cargamos los scripts --> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/inputFile/fileinput.min.js"/></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js"/></script>
     </body>
 </html>
