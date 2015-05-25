@@ -19,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -71,22 +70,22 @@ public class HomeController
         return "indexCarousel";
     }
     
-    @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
-    public String agregarAnuncio(@RequestParam("descripcion") String descripcion,@RequestParam("file") MultipartFile file)
-    {   
-        System.out.println("AQUI ESTOY");        
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                System.out.println(bytes.toString());
-                // store the bytes somewhere
-            } catch (IOException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }            
-        }
-
-        
-        return "index";
-    }
+//    @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
+//    public String agregarAnuncio(@RequestParam("descripcion") String descripcion,@RequestParam("file") MultipartFile file)
+//    {   
+//        System.out.println("AQUI ESTOY");        
+//        if (!file.isEmpty()) {
+//            try {
+//                byte[] bytes = file.getBytes();
+//                System.out.println(bytes.toString());
+//                // store the bytes somewhere
+//            } catch (IOException ex) {
+//                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+//            }            
+//        }
+//
+//        
+//        return "index";
+//    }
     
 }
