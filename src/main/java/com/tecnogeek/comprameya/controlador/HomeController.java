@@ -12,11 +12,17 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,25 +102,24 @@ public class HomeController
     {   
         String originalName = "";
         String fileExtension = "";
-        String newName = "";        
-        String path = req.getContextPath()+"/resources/publicaciones/";
-        for (MultipartFile file : files ){
-            if (!file.isEmpty()) {                
-                originalName = file.getOriginalFilename();
-                fileExtension = originalName.substring(originalName.lastIndexOf("."));
-                newName = System.currentTimeMillis()+fileExtension;
-                System.out.println("CARGANDO ARCHIVO: "+path+newName);                  
-                try {
-                    byte[] bytes = file.getBytes();
-                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path+newName)));
-                    stream.write(bytes);
-                    stream.close();
-                    return "You successfully uploaded " + originalName + "!";
+        String userDir = System.getProperty("user.home");
+        String fileSeparator = System.getProperty("file.separator");
+        Path directory = Paths.get(userDir+fileSeparator+"src"+fileSeparator+"images"+fileSeparator);        
+        for (MultipartFile multipartFile : files ){
+            if (!multipartFile.isEmpty()) {                                
+                originalName = FilenameUtils.getBaseName(multipartFile.getOriginalFilename());
+                fileExtension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());                
+                try {                                        
+                    Path file = Files.createTempFile(directory,originalName +  "-", "." + fileExtension);                     
+                    System.out.println("CARGANDO ARCHIVO: "+file.getFileName());                  
+                    try (InputStream input = multipartFile.getInputStream()) {
+                        Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
+                    }           
                 } catch (Exception e) {
-                    return "You failed to upload " + originalName + " => " + e.getMessage();
+                    System.out.println("Falla al cargar el archivo " + originalName + " => " + e.getMessage());
                 }
             } else {
-                return "Falla al cargar el archivo: " + originalName + ", porque el archivo está vacío.";
+                System.out.println("Falla al cargar el archivo: " + originalName + ", porque el archivo está vacío.");
             }
         }
         return welcomePage(model);
