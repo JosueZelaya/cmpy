@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -80,16 +81,17 @@
                 <div class="panel panel-default min_cont">                    
                     <div class="panel-heading">Publicaciones</div>  
                     
-                    <form method="post" action="/agregarAnuncio" enctype="multipart/form-data">
+                    <form:form method="post" action="/cmpy/agregarAnuncio" enctype="multipart/form-data">
                         <textarea name="descripcion" class="form-control" rows="3" placeholder="Agregar Publicación"></textarea>                                        
                         <br/>
                         <div class="form-group">
-                            <input name="file" id="file-demo" type="file" class="file" multiple=true data-preview-file-type="any">
+                            <input name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
                         </div>                    
-                        <button value="VenderYa!" type="submit" class="btn btn-info pull-right">
+                        <button value="VenderYa!" type="submit" class="btn btn-success pull-right">
                             VenderYa!
-                        </button>                                                
-                    </form>
+                        </button>     
+                        <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+                    </form:form>
                     
                     
                     <div class="panel-body">
