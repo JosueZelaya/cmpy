@@ -8,6 +8,7 @@ package com.tecnogeek.comprameya.entidad;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -77,7 +78,7 @@ public class Recurso implements Serializable {
     @ManyToOne
     private Perfil fkPerfil;
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Publicacion fkPublicacion;
     @JoinColumn(name = "fk_tipo_recurso", referencedColumnName = "tipo_recuso_id")
     @ManyToOne

@@ -918,8 +918,7 @@ public class AbstractGenericDAO {
         Session session=sessionFactory.getCurrentSession();
         session.beginTransaction();
         try {            
-            count = ((Long)session.createQuery("select count(*) from " + clazz.getName() + " where " + whereStatement).uniqueResult()).intValue();
-            System.out.println("Publicaciones encontradas: "+count);
+            count = ((Long)session.createQuery("select count(*) from " + clazz.getName() + " where " + whereStatement).uniqueResult()).intValue();            
             session.getTransaction().commit();        	
         } catch (RuntimeException re) {            
             session.getTransaction().rollback();

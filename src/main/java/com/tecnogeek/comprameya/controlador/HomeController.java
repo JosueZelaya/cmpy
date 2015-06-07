@@ -8,6 +8,8 @@ import com.tecnogeek.comprameya.dao.AbstractGenericDAO;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.Sistema;
+import com.tecnogeek.comprameya.entidad.TipoPublicacion;
+import com.tecnogeek.comprameya.utils.FileManager;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -50,10 +53,11 @@ public class HomeController
         //List<Publicacion> publicaciones = sisdao.findAll(Publicacion.class);        
         int pageZise = 4;
         int totalPublicaciones = sisdao.getNumberOfRows(Publicacion.class,"fkTipoPublicacion='1'");        
-        int limit = Math.round(totalPublicaciones/pageZise);
+        int limit = Math.round(totalPublicaciones/pageZise);        
         Random rnd = new Random();
-        int page = (int)(rnd.nextDouble() * limit + 1);
-        System.out.println("Publicaciones devueltas: "+pageZise);
+        int page = (int)Math.ceil((rnd.nextDouble() * limit + 1));
+        System.out.println("Total publicaciones: "+totalPublicaciones);
+        System.out.println("Pagina: "+page+" tamaño pagina: "+pageZise);
         List<Publicacion> publicaciones = sisdao.findByWhereStatement(Publicacion.class,"fkTipoPublicacion='1'", page,pageZise);
         
         for (Publicacion publicacion : publicaciones){
@@ -81,47 +85,29 @@ public class HomeController
         return "indexCarousel";
     }
     
-//    @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
-//    public String agregarAnuncio(@RequestParam("descripcion") String descripcion,@RequestParam("file") MultipartFile file)
-//    {   
-//        System.out.println("AQUI ESTOY");        
-//        if (!file.isEmpty()) {
-//            try {
-//                byte[] bytes = file.getBytes();
-//                System.out.println(bytes.toString());
-//                // store the bytes somewhere
-//            } catch (IOException ex) {
-//                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-//            }            
-//        }
-//        return "index";
-//    }
-    
     @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
     public String agregarAnuncio(@RequestParam("descripcion") String descripcion,@RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,Model model,HttpServletRequest req)
-    {   
-        String originalName = "";
-        String fileExtension = "";
+    {           
         String userDir = System.getProperty("user.home");
         String fileSeparator = System.getProperty("file.separator");
-        Path directory = Paths.get(userDir+fileSeparator+"src"+fileSeparator+"images"+fileSeparator);        
+        userDir += fileSeparator+"src"+fileSeparator+"images"+fileSeparator;        
+        Path directory = Paths.get(userDir);        
+        Publicacion publicacion = new Publicacion();
+        publicacion.setTitulo(descripcion);
+        publicacion.setDescripcion(descripcion);
+        List<Recurso> recursos = new ArrayList();
         for (MultipartFile multipartFile : files ){
-            if (!multipartFile.isEmpty()) {                                
-                originalName = FilenameUtils.getBaseName(multipartFile.getOriginalFilename());
-                fileExtension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());                
-                try {                                        
-                    Path file = Files.createTempFile(directory,originalName +  "-", "." + fileExtension);                     
-                    System.out.println("CARGANDO ARCHIVO: "+file.getFileName());                  
-                    try (InputStream input = multipartFile.getInputStream()) {
-                        Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
-                    }           
-                } catch (Exception e) {
-                    System.out.println("Falla al cargar el archivo " + originalName + " => " + e.getMessage());
-                }
-            } else {
-                System.out.println("Falla al cargar el archivo: " + originalName + ", porque el archivo está vacío.");
-            }
+            String fileName = FileManager.saveFile(multipartFile, directory);
+            Recurso recurso = new Recurso();
+            recurso.setNombre(fileName);
+            recurso.setRuta(userDir+fileName);
+            recurso.setFkPublicacion(publicacion);
+            recursos.add(recurso);
+            System.out.println("cargado: "+userDir+fileName);
         }
+        publicacion.setRecursoList(recursos);
+        publicacion.setFkTipoPublicacion(new TipoPublicacion(Integer.toUnsignedLong(1)));
+        sisdao.save(publicacion);
         return welcomePage(model);
     }
 }

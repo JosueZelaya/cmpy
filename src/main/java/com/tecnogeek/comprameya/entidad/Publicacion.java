@@ -93,7 +93,7 @@ public class Publicacion implements Serializable {
     @Column(name = "sis_fecha_modificacion")
     @Temporal(TemporalType.DATE)
     private Date sisFechaModificacion;
-    @OneToMany(mappedBy = "fkPublicacion",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fkPublicacion",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Recurso> recursoList;
     @OneToMany(mappedBy = "fkPublicacion")
     private List<Ubicacion> ubicacionList;
