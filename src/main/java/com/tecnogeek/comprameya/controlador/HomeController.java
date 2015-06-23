@@ -106,7 +106,8 @@ public class HomeController
             System.out.println("cargado: "+userDir+fileName);
         }
         publicacion.setRecursoList(recursos);
-        publicacion.setFkTipoPublicacion(new TipoPublicacion(Integer.toUnsignedLong(1)));
+        Integer tipoPublicacion=1;
+        publicacion.setFkTipoPublicacion(new TipoPublicacion(tipoPublicacion.longValue()));
         sisdao.save(publicacion);
         return welcomePage(model);
     }
