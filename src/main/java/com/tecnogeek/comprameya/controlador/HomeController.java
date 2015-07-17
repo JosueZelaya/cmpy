@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.tecnogeek.comprameya.controlador;
-import com.tecnogeek.comprameya.dao.AbstractGenericDAO;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.Sistema;
@@ -42,73 +41,46 @@ import sun.security.krb5.internal.ktab.KeyTabConstants;
 @Controller
 public class HomeController 
 {
-    @Autowired
-    AbstractGenericDAO sisdao;
+//    @Autowired
+//    AvGenericDAO sisdao;
     
     @RequestMapping(value="/",method=RequestMethod.GET)
     public String welcomePage(Model model)
     {
         System.out.println("AQUI ESTOY");
         
-        //List<Publicacion> publicaciones = sisdao.findAll(Publicacion.class);        
-        int pageZise = 4;
-        int totalPublicaciones = sisdao.getNumberOfRows(Publicacion.class,"fkTipoPublicacion='1'");        
-        int limit = Math.round(totalPublicaciones/pageZise);        
-        Random rnd = new Random();
-        int page = (int)Math.ceil((rnd.nextDouble() * limit + 1));
-        System.out.println("Total publicaciones: "+totalPublicaciones);
-        System.out.println("Pagina: "+page+" tamaño pagina: "+pageZise);
-        List<Publicacion> publicaciones = sisdao.findByWhereStatement(Publicacion.class,"fkTipoPublicacion='1'", page,pageZise);
-        
-        for (Publicacion publicacion : publicaciones){
-            System.out.println("titulo: "+publicacion.getTitulo());
-            List<Recurso> recursos = publicacion.getRecursoList();
-            for(Recurso recurso : recursos){
-                System.out.println("recurso: "+recurso.getRuta());
-            }            
-        }        
-        model.addAttribute("publicaciones", publicaciones);
+//        //List<Publicacion> publicaciones = sisdao.findAll(Publicacion.class);        
+//        int pageZise = 4;
+//        int totalPublicaciones = sisdao.getNumberOfRows(Publicacion.class,"fkTipoPublicacion='1'");        
+//        int limit = Math.round(totalPublicaciones/pageZise);        
+//        Random rnd = new Random();
+//        int page = (int)Math.ceil((rnd.nextDouble() * limit + 1));
+//        System.out.println("Total publicaciones: "+totalPublicaciones);
+//        System.out.println("Pagina: "+page+" tamaño pagina: "+pageZise);
+//        List<Publicacion> publicaciones = sisdao.findByWhereStatement(Publicacion.class,"fkTipoPublicacion='1'", page,pageZise);
+//        
+//        for (Publicacion publicacion : publicaciones){
+//            System.out.println("titulo: "+publicacion.getTitulo());
+//            List<Recurso> recursos = publicacion.getRecursoList();
+//            for(Recurso recurso : recursos){
+//                System.out.println("recurso: "+recurso.getRuta());
+//            }            
+//        }        
+//        model.addAttribute("publicaciones", publicaciones);
         model.addAttribute("parametro", "Pagina Inicio");
         return "boot";
     }
     
-    @RequestMapping(value="/index",method=RequestMethod.GET)
-    public String indexPublico(Model model)
+    @RequestMapping(value="/admin",method=RequestMethod.GET)
+    public String adminPage(Model model)
     {   
-        @SuppressWarnings("unchecked")
-        List<Sistema> sistemas = sisdao.findAll(Sistema.class);
-        for (Sistema sistema : sistemas) {
-                System.out.println("hola, este es mi id: "+sistema.getSistemaId());                
-        }
+//        @SuppressWarnings("unchecked")
+//        List<Sistema> sistemas = sisdao.findAll(Sistema.class);
+//        for (Sistema sistema : sistemas) {
+//                System.out.println("hola, este es mi id: "+sistema.getSistemaId());                
+//        }
         System.out.println("AQUI ESTOY");
         model.addAttribute("parametro", "Hola Mundo");
-        return "indexCarousel";
-    }
-    
-    @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
-    public String agregarAnuncio(@RequestParam("descripcion") String descripcion,@RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,Model model,HttpServletRequest req)
-    {           
-        String userDir = System.getProperty("user.home");
-        String fileSeparator = System.getProperty("file.separator");
-        userDir += fileSeparator+"src"+fileSeparator+"images"+fileSeparator;        
-        Path directory = Paths.get(userDir);        
-        Publicacion publicacion = new Publicacion();
-        publicacion.setTitulo(descripcion);
-        publicacion.setDescripcion(descripcion);
-        List<Recurso> recursos = new ArrayList();
-        for (MultipartFile multipartFile : files ){
-            String fileName = FileManager.saveFile(multipartFile, directory);
-            Recurso recurso = new Recurso();
-            recurso.setNombre(fileName);
-            recurso.setRuta(userDir+fileName);
-            recurso.setFkPublicacion(publicacion);
-            recursos.add(recurso);
-            System.out.println("cargado: "+userDir+fileName);
-        }
-        publicacion.setRecursoList(recursos);
-        Integer tipoPublicacion=1;
-        publicacion.setFkTipoPublicacion(new TipoPublicacion(tipoPublicacion.longValue()));
-        sisdao.save(publicacion);
-        return welcomePage(model);
+        return "admin";
     }
 }

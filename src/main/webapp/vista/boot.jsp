@@ -79,20 +79,14 @@
             </div>              
             <div class="col-md-8 min_cont marcar">
                 <div class="panel panel-default min_cont">                    
-                    <div class="panel-heading">Publicaciones</div>  
-                    
-                    <form:form method="post" action="/cmpy/agregarAnuncio" enctype="multipart/form-data">
-                        <textarea name="descripcion" class="form-control" rows="3" placeholder="Agregar Publicación"></textarea>                                        
-                        <br/>
-                        <div class="form-group">
-                            <input name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
-                        </div>                    
-                        <button value="VenderYa!" type="submit" class="btn btn-success pull-right">
+                    <div class="panel-heading">
+                        <p>                            
+                           Publicaciones
+                           <button value="VenderYa!" type="submit" class="btn btn-success pull-right"  data-toggle="modal" data-target="#venderModal">
                             VenderYa!
-                        </button>     
-                        <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-                    </form:form>
-                    
+                           </button>                            
+                        </p>
+                    </div>  
                     
                     <div class="panel-body">
                       Listado de Publicaciones
@@ -134,7 +128,41 @@
               
         </div>
         
-        
+        <div class="modal fade" id="venderModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Vender producto!</h4>
+                </div>
+                <div class="modal-body">
+
+                  <form:form method="post" action="/cmpy/publicacion/agregarAnuncio" enctype="multipart/form-data">
+                      <label for="titulo">Agregar un título para el anuncio.</label>
+                      <input id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
+                      <br/>
+                      <label for="titulo">Describa el producto a vender</label>
+                      <textarea id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                        
+                      <br/>
+                      <label for="imagenes">Suba imagenes de su producto</label>
+                      <div class="form-group">
+                          <input id="imagenes" name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
+                      </div>                    
+
+                      <div class="modal-footer">                
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button value="VenderYa!" type="submit" class="btn btn-success pull-right">
+                          VenderYa!
+                      </button>
+                    </div>
+                      <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+                  </form:form>          
+
+                </div>      
+
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->        
         
         <!-- Cargamos los scripts --> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-1.10.2.js"></script>

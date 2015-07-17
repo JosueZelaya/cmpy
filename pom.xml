@@ -38,6 +38,7 @@
         <!--<spring-version>4.0.1.RELEASE</spring-version>-->
         <spring-version>4.1.6.RELEASE</spring-version>
         <spring-security-version>4.0.0.RELEASE</spring-security-version>
+        <spring-data-version>1.8.1.RELEASE</spring-data-version>
     </properties>
     
     <dependencies>
@@ -92,7 +93,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring-version}</version>
-        </dependency>                
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-version}</version>
+        </dependency>
         <dependency>
 	<groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -188,13 +194,6 @@
             <version>4.3.1.Final</version>
         </dependency>
         
-        <!-- jsp Servlet -->
-        <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>javax.servlet.jsp.jstl-api</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        
         <!-- Javax -->
         <dependency>
             <groupId>javax</groupId>
@@ -203,26 +202,40 @@
             <scope>provided</scope>
         </dependency>  
         
-        <!-- jetty server core -->
+        <!-- Servlet 3, para configuración del web descriptor mediante codigo java -->
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        
+        <!-- Dependencias para Jetty -->
+<!--        <dependency>
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>jsp-2.1-glassfish</artifactId>
             <version>2.1.v20100127</version>
         </dependency>
-<!--        <dependency>
+        
+        <dependency>
             <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-jsp</artifactId>
-            <version>9.2.1.v20140609</version>
-        </dependency>-->
+            <artifactId>jetty-server</artifactId>
+            <version>9.3.0.v20150612</version>
+        </dependency>        
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
             <version>9.2.1.v20140609</version>
-        </dependency>
+        </dependency>        
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-plus</artifactId>
+            <version>9.3.0.v20150612</version>
+        </dependency>-->
+
  
 
     </dependencies>
-
+    
     <build>
         <plugins>
             <plugin>
@@ -270,8 +283,58 @@
                     </execution>
                 </executions>
             </plugin>
+        </plugins>
+    </build>
+
+<!--    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>7.0</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             
-            <!-- Plugin para usar un servidor web llamado jetty-->
+             Plugin para usar un servidor web llamado jetty
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -287,7 +350,7 @@
                 </configuration>
             </plugin>            
         </plugins>
-    </build>
+    </build>-->
     <repositories>
 <!--        <repository>
             <id>unknown-jars-temp-repo</id>
