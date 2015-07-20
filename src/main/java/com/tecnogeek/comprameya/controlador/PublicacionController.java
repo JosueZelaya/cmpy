@@ -9,6 +9,7 @@ package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.TipoPublicacion;
+import com.tecnogeek.comprameya.repositories.PublicacionService;
 import com.tecnogeek.comprameya.utils.FileManager;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,15 +28,16 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author jzelaya
  */
-@Controller("/publicacion")
+@Controller
+@RequestMapping("/publicacion")
 public class PublicacionController {
  
-//    @Autowired
-//    PublicacionDAO publicacionDAO;
+    @Autowired
+    PublicacionService publicacionService;
     
     @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
-    public String agregarAnuncio(@RequestParam("titulo") String titulo,
-                                 @RequestParam("descripcion") String descripcion,
+    public String agregarAnuncio(@RequestParam(value = "titulo", required = true) String titulo,
+                                 @RequestParam(value = "descripcion", required = true) String descripcion,
                                  @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
                                  Model model,HttpServletRequest req)
     {           
@@ -59,7 +61,7 @@ public class PublicacionController {
         publicacion.setRecursoList(recursos);
         Integer tipoPublicacion=1;
         publicacion.setFkTipoPublicacion(new TipoPublicacion(tipoPublicacion.longValue()));
-//        publicacionDAO.save(publicacion);
+        publicacionService.save(publicacion);
         
         return new HomeController().welcomePage(model);        
     }

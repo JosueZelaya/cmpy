@@ -16,7 +16,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 
 @Configuration
-@ComponentScan(basePackages={"com.tecnogeek.comprameya"})
+@ComponentScan(basePackages={"com.tecnogeek.comprameya.config"})
 @PropertySource(value = {"/WEB-INF/application.properties"})
 public class AppConfig {
     

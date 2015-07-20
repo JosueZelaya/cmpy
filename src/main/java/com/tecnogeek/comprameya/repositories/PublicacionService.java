@@ -10,12 +10,13 @@ import com.tecnogeek.comprameya.entidad.Publicacion;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  *
  * @author jzelaya
  */
-public interface PublicacionService extends CrudRepository<Publicacion, Long> {
+public interface PublicacionService extends PagingAndSortingRepository<Publicacion, Long> {
     
     List<Publicacion> findByTitulo(String titulo);
     
@@ -26,5 +27,8 @@ public interface PublicacionService extends CrudRepository<Publicacion, Long> {
     
     @Query("select p from Publicacion p where p.fkTipoPublicacion='2'")
     List<Publicacion> getPublicacionesGratis();
+    
+    @Query("select count(p) from Publicacion p where p.fkTipoPublicacion='1'")
+    Integer getTotalPublicacionesPagadas();
 
 }
