@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  *
@@ -39,7 +40,7 @@ public class PublicacionController {
     public String agregarAnuncio(@RequestParam(value = "titulo", required = true) String titulo,
                                  @RequestParam(value = "descripcion", required = true) String descripcion,
                                  @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
-                                 Model model,HttpServletRequest req)
+                                 Model model)
     {           
         String userDir = System.getProperty("user.home");
         String fileSeparator = System.getProperty("file.separator");
@@ -63,7 +64,8 @@ public class PublicacionController {
         publicacion.setFkTipoPublicacion(new TipoPublicacion(tipoPublicacion.longValue()));
         publicacionService.save(publicacion);
         
-        return new HomeController().welcomePage(model);        
+        return "redirect:/";
+//        return new HomeController().welcomePage(model);        
     }
     
 }

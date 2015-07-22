@@ -6,15 +6,12 @@
 
 package com.tecnogeek.comprameya.config;
 
-
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
-import javax.servlet.annotation.MultipartConfig;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.filter.DelegatingFilterProxy;
@@ -24,7 +21,6 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  *
  * @author jzelaya
  */
-
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 
     private int maxUploadSizeInMb = 5 * 1024 * 1024; // 5 MB
@@ -68,7 +64,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         String fileSeparator = System.getProperty("file.separator");        
         userDir += fileSeparator+"src"+fileSeparator+"images"+fileSeparator;        
         Path directory = Paths.get(userDir);                
-
+        
         MultipartConfigElement multipartConfigElement = 
             new MultipartConfigElement(directory.toString(),
                 maxUploadSizeInMb, maxUploadSizeInMb * 2, maxUploadSizeInMb / 2);

@@ -103,7 +103,7 @@
 
                             <div class="thumbnail col-lg-12">
                             <c:forEach items="${publicacion.recursoList}" var="recurso"> 
-                            <img src="${pageContext.request.contextPath}/resources/publicaciones/${recurso.ruta}" alt="imagen aqui">
+                            <img src="${recurso.ruta}" alt="imagen aqui">
                             <h3><c:out value='${publicacion.titulo}' /></h3>
                             <p><c:out value='${publicacion.descripcion}' /></p>
                             </c:forEach>                                
@@ -139,14 +139,14 @@
 
                   <form:form method="post" action="/cmpy/publicacion/agregarAnuncio" enctype="multipart/form-data">
                       <label for="titulo">Agregar un título para el anuncio.</label>
-                      <input id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
+                      <input path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
                       <br/>
                       <label for="titulo">Describa el producto a vender</label>
-                      <textarea id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                        
+                      <textarea path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                        
                       <br/>
                       <label for="imagenes">Suba imagenes de su producto</label>
                       <div class="form-group">
-                          <input id="imagenes" name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
+                          <input path="multipleFiles" id="imagenes" name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
                       </div>                    
 
                       <div class="modal-footer">                
