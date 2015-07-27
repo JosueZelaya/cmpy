@@ -36,8 +36,8 @@ public class HomeController
         Random rnd = new Random();
         int page = (int)Math.ceil((rnd.nextDouble() * limit + 1));
 
-//        List<Publicacion> publicaciones = publicacionService.findAll(new PageRequest(page,pageZise)).getContent();
-        List<Publicacion> publicaciones = publicacionService.getPublicacionesPagadas(new PageRequest(page,pageZise));
+        List<Publicacion> publicaciones = publicacionService.findAll(new PageRequest(page,pageZise)).getContent();
+//        List<Publicacion> publicaciones = publicacionService.getPublicacionesPagadas(new PageRequest(page,pageZise));
         
         for (Publicacion publicacion : publicaciones){
             System.out.println("titulo: "+publicacion.getTitulo());

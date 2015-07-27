@@ -103,7 +103,7 @@
 
                             <div class="thumbnail col-lg-12">
                             <c:forEach items="${publicacion.recursoList}" var="recurso"> 
-                            <img src="${recurso.ruta}" alt="imagen aqui">
+                            <img src="/cmpy/images/getImage/${recurso.ruta}" alt="imagen aqui">
                             <h3><c:out value='${publicacion.titulo}' /></h3>
                             <p><c:out value='${publicacion.descripcion}' /></p>
                             </c:forEach>                                
