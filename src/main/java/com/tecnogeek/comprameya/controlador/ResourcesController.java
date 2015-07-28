@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/images")
 public class ResourcesController {
     
-    @RequestMapping(value = "/getImage/{imageId}")
+    @RequestMapping(value = "/getImage/{imageId:.+}")
     @ResponseBody
     public byte[] getImage(@PathVariable String imageId, HttpServletRequest request) throws IOException      {
         System.out.println("serving image: "+imageId);
