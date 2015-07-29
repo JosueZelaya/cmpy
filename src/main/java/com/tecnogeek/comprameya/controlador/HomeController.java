@@ -7,6 +7,7 @@ package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
+import com.tecnogeek.comprameya.utils.Numbers;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,14 @@ public class HomeController
     {
         System.out.println("AQUI ESTOY");        
         int pageZise = 4;
-        int totalPublicaciones = publicacionService.getTotalPublicacionesPagadas();
-        int limit = Math.round(totalPublicaciones/pageZise);        
-        Random rnd = new Random();
-        int page = (int)Math.ceil((rnd.nextDouble() * limit + 1));
-
-        List<Publicacion> publicaciones = publicacionService.findAll(new PageRequest(page,pageZise)).getContent();
-//        List<Publicacion> publicaciones = publicacionService.getPublicacionesPagadas(new PageRequest(page,pageZise));
+        int totalPublicaciones = publicacionService.getTotalPublicacionesPagadas();        
+        int sum = (totalPublicaciones % pageZise == 0) ? 0 : 1;
+        int totalPages = totalPublicaciones / pageZise + sum;
+        int page = Numbers.randomInt(0,totalPages-1); //dado que la primer pagina en la BD es cero.
+        
+        System.out.println("PAGE: "+page+" PAGESIZE: "+pageZise+" totalPublicaciones: "+totalPublicaciones+" totalPages: "+totalPages);
+        
+        List<Publicacion> publicaciones = publicacionService.getPublicacionesPagadas(new PageRequest(page,pageZise));
         
         for (Publicacion publicacion : publicaciones){
             System.out.println("titulo: "+publicacion.getTitulo());
@@ -58,4 +60,5 @@ public class HomeController
         model.addAttribute("parametro", "Hola Mundo");
         return "admin";
     }
+    
 }
