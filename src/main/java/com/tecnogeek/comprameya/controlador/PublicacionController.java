@@ -47,14 +47,14 @@ public class PublicacionController {
         userDir += fileSeparator+"src"+fileSeparator+"images"+fileSeparator;        
         Path directory = Paths.get(userDir);        
         Publicacion publicacion = new Publicacion();
-        publicacion.setTitulo(descripcion);
+        publicacion.setTitulo(titulo);
         publicacion.setDescripcion(descripcion);
         List<Recurso> recursos = new ArrayList();
         for (MultipartFile multipartFile : files ){
             String fileName = FileManager.saveFile(multipartFile, directory);
             Recurso recurso = new Recurso();
             recurso.setNombre(fileName);
-            recurso.setRuta(userDir+fileName);
+            recurso.setRuta(fileName);
             recurso.setFkPublicacion(publicacion);
             recursos.add(recurso);
             System.out.println("cargado: "+userDir+fileName);
