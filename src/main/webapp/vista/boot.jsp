@@ -47,6 +47,9 @@
                     <li><a href="#">One more separated link</a></li>
                   </ul>
                 </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+                </li>                  
               </ul>
             </div>
             <form class="navbar-form navbar-left" role="search">
@@ -162,7 +165,25 @@
 
               </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->        
+        </div><!-- /.modal -->       
+        
+        
+        <div class="modal fade" id="loginModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Iniciar Sesion!</h4>
+                </div>
+                <div class="modal-body">
+
+                  <%@include file="loginForm.jsp" %>
+
+                </div>      
+
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->   
         
         <!-- Cargamos los scripts --> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-1.10.2.js"></script>
