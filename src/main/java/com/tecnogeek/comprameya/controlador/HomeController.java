@@ -32,7 +32,7 @@ public class HomeController
     public String welcomePage(Model model)
     {
         System.out.println("AQUI ESTOY");        
-        int pageZise = 4;
+        int pageZise = 5;
         int totalPublicaciones = publicacionService.getTotalPublicacionesPagadas();        
         int sum = (totalPublicaciones % pageZise == 0) ? 0 : 1;
         int totalPages = totalPublicaciones / pageZise + sum;
@@ -56,7 +56,7 @@ public class HomeController
         model.addAttribute("username", userName);
         model.addAttribute("publicaciones", publicaciones);
         model.addAttribute("parametro", "Pagina Inicio");
-        return "boot";
+        return "index";
     }
     
     @RequestMapping(value="/admin",method=RequestMethod.GET)
