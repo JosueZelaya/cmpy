@@ -6,11 +6,13 @@
 
 package com.tecnogeek.comprameya.controlador;
 
+import com.tecnogeek.comprameya.entidad.Producto;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.TipoPublicacion;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
 import com.tecnogeek.comprameya.utils.FileManager;
+import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -66,6 +68,47 @@ public class PublicacionController {
         
         return "redirect:/";
 //        return new HomeController().welcomePage(model);        
+    }
+    
+    @RequestMapping(value = "/agregarPublicacion", method = RequestMethod.POST)    
+    public String agregarPublicacion(@RequestParam(value = "titulo", required = true) String titulo,
+                                 @RequestParam(value = "precio", required = true) Double precio,
+                                 @RequestParam(value = "descripcion", required = true) String descripcion,
+                                 @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
+                                 Model model)
+    {           
+        String userDir = System.getProperty("user.home");
+        String fileSeparator = System.getProperty("file.separator");
+        userDir += fileSeparator+"src"+fileSeparator+"images"+fileSeparator;        
+        Path directory = Paths.get(userDir);        
+        Publicacion publicacion = new Publicacion();
+        publicacion.setTitulo(titulo);
+        publicacion.setDescripcion(descripcion);
+        List<Recurso> recursos = new ArrayList();
+        for (MultipartFile multipartFile : files ){
+            String fileName = FileManager.saveFile(multipartFile, directory);
+            Recurso recurso = new Recurso();
+            recurso.setNombre(fileName);
+            recurso.setRuta(fileName);
+            recurso.setFkPublicacion(publicacion);
+            recursos.add(recurso);
+            System.out.println("cargado: "+userDir+fileName);
+        }
+        publicacion.setRecursoList(recursos);
+        Integer tipoPublicacion=2;
+        publicacion.setFkTipoPublicacion(new TipoPublicacion(tipoPublicacion.longValue()));  
+        
+        Producto producto = new Producto();
+        producto.setNombre(titulo);
+        producto.setPrecio(BigDecimal.valueOf(precio));
+        producto.setFkPublicacion(publicacion);
+        producto.setDescripcion(descripcion);
+        List<Producto> productos = new ArrayList();
+        productos.add(producto);
+        publicacion.setProductoList(productos);        
+        publicacionService.save(publicacion);
+        
+        return "redirect:/";
     }
     
 }

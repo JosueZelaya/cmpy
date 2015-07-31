@@ -95,9 +95,9 @@ public class Publicacion implements Serializable {
     private Date sisFechaModificacion;
     @OneToMany(mappedBy = "fkPublicacion",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Recurso> recursoList;
-    @OneToMany(mappedBy = "fkPublicacion")
+    @OneToMany(mappedBy = "fkPublicacion",cascade = CascadeType.ALL)
     private List<Ubicacion> ubicacionList;
-    @OneToMany(mappedBy = "fkPublicacion")
+    @OneToMany(mappedBy = "fkPublicacion",cascade = CascadeType.ALL)
     private List<Producto> productoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPublicacion")
     private List<Comentario> comentarioList;

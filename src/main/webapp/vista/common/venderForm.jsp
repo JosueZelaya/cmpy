@@ -1,9 +1,9 @@
 <form:form method="post" action="/cmpy/publicacion/agregarPublicacion" enctype="multipart/form-data">
-    <label for="titulo">Agregar un título para el anuncio.</label>
+    <label for="titulo">Agregue el nombre del producto</label>
     <input path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
     <br/>
-    <label for="titulo">Precio del Producto</label>
-    <input type="number" min="0" max="2000" id="precioSlider" class="form-control">
+    <label for="precio">Precio del Producto</label>
+    <input name="precio" type="number" min="0" max="2000" id="precio" class="form-control">
     <br/>
     <label for="titulo">Describa el producto a vender</label>
     <textarea path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                            
