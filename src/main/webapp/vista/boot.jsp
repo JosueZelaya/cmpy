@@ -33,24 +33,28 @@
             </div>
             <div id="navbar" class="navbar-right navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#loginModal">Login</a>
-                </li>                  
+                <li class="active"><a href="#">Home</a></li>                
+                <c:choose>
+                    <c:when test="${username=='anonymousUser'}">
+                        <li>                    
+                            <a href="#" data-toggle="modal" data-target="#loginModal">Login</a>                      
+                        </li>                           
+                    </c:when>    
+                    <c:otherwise>    
+                        <li class="dropdown">                            
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenido <c:out value='${username}'/><span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Cambiar Clave</a></li>
+                                <li><a href="#">Edita Perfil</a></li>
+                                <li><a href="#">Configuracion</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>                                     
+                                <li><a href="${rootURL}logout">Salir</a></li>                                
+                            </ul>
+                        </li>                        
+                    </c:otherwise>
+                </c:choose>    
+                               
               </ul>
             </div>
             <form class="navbar-form navbar-left" role="search">
@@ -86,9 +90,18 @@
                     <div class="panel-heading">
                         <p>                            
                            Publicaciones
-                           <button value="VenderYa!" type="submit" class="btn btn-success pull-right"  data-toggle="modal" data-target="#venderModal">
-                            VenderYa!
-                           </button>                            
+                           <c:choose>
+                                <c:when test="${username=='anonymousUser'}">
+                                    <button value="VenderYa!" type="submit" class="btn btn-success pull-right"  data-toggle="modal" data-target="#loginModal">
+                                        VenderYa!
+                                    </button>                          
+                                </c:when>    
+                                <c:otherwise>    
+                                    <button value="VenderYa!" type="submit" class="btn btn-success pull-right"  data-toggle="modal" data-target="#venderModal">
+                                        VenderYa!
+                                    </button>
+                                </c:otherwise>
+                            </c:choose>                                                   
                         </p>
                     </div>  
                     
@@ -132,43 +145,48 @@
               
         </div>
         
-        <div class="modal fade" id="venderModal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">Vender producto!</h4>
-                </div>
-                <div class="modal-body">
+        <c:choose>
+            <c:when test="${username=='anonymousUser'}">                                        
+            </c:when>    
+            <c:otherwise>    
+                <div class="modal fade" id="venderModal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Vender producto!</h4>
+                        </div>
+                        <div class="modal-body">
 
-                  <form:form method="post" action="/cmpy/publicacion/agregarAnuncio" enctype="multipart/form-data">
-                      <label for="titulo">Agregar un título para el anuncio.</label>
-                      <input path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
-                      <br/>
-                      <label for="titulo">Describa el producto a vender</label>
-                      <textarea path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                        
-                      <br/>
-                      <label for="imagenes">Suba imagenes de su producto</label>
-                      <div class="form-group">
-                          <input path="multipleFiles" id="imagenes" name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
-                      </div>                    
+                          <form:form method="post" action="/cmpy/publicacion/agregarAnuncio" enctype="multipart/form-data">
+                              <label for="titulo">Agregar un título para el anuncio.</label>
+                              <input path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
+                              <br/>
+                              <label for="titulo">Describa el producto a vender</label>
+                              <textarea path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                        
+                              <br/>
+                              <label for="imagenes">Suba imagenes de su producto</label>
+                              <div class="form-group">
+                                  <input path="multipleFiles" id="imagenes" name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
+                              </div>                    
 
-                      <div class="modal-footer">                
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button value="VenderYa!" type="submit" class="btn btn-success pull-right">
-                          VenderYa!
-                      </button>
-                    </div>
-                      <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-                  </form:form>          
+                              <div class="modal-footer">                
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button value="VenderYa!" type="submit" class="btn btn-success pull-right">
+                                  VenderYa!
+                              </button>
+                            </div>
+                              <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+                          </form:form>          
 
-                </div>      
+                        </div>      
 
-              </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->       
-        
-        
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal --> 
+            </c:otherwise>
+        </c:choose>
+
         <div class="modal fade" id="loginModal">
             <div class="modal-dialog">
               <div class="modal-content">
