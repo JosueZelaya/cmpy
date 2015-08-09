@@ -22,16 +22,14 @@
                         </c:choose>                         
                     </p>                                          
                 </div>
-                <c:forEach items="${publicaciones}" var="publicacion">   
-
-                    <div class="thumbnail col-lg-12">
-                    <c:forEach items="${publicacion.recursoList}" var="recurso"> 
-                    <img src="/cmpy/images/getImage/${recurso.ruta}" alt="imagen aqui">
-                    <h3><c:out value='${publicacion.titulo}' /></h3>
-                    <p><c:out value='${publicacion.descripcion}' /></p>
-                    </c:forEach>                                
+                <c:forEach items="${anuncios}" var="anuncio">   
+                    <c:set var="descripcion" value="${anuncio.descripcion}"/>
+                    <c:set var="descripcionCorta" value="${fn:substring(descripcion, 0, 50)}" />
+                    <div class="publicacion thumbnail col-lg-12">                     
+                        <img src="/cmpy/images/getThumbnail/${anuncio.recursoList[0].ruta}" alt="imagen aqui">
+                        <h3><c:out value='${anuncio.titulo}' /></h3>
+                        <p><c:out value='${descripcionCorta}...' /></p>                    
                     </div>
-
                 </c:forEach>            
 
             </div>

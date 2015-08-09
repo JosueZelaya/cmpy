@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 package com.tecnogeek.comprameya.controlador;
+import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Publicacion;
-import com.tecnogeek.comprameya.entidad.Recurso;
+import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
-import com.tecnogeek.comprameya.utils.Numbers;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,34 +28,22 @@ public class HomeController
 {
     @Autowired
     PublicacionService publicacionService;
+    @Autowired
+    ManejadorPublicacion pManager;
     
     @RequestMapping(value="/",method=RequestMethod.GET)
     public String welcomePage(Model model)
-    {
-        System.out.println("AQUI ESTOY");        
-        int pageZise = 5;
-        int totalPublicaciones = publicacionService.getTotalPublicacionesPagadas();        
-        int sum = (totalPublicaciones % pageZise == 0) ? 0 : 1;
-        int totalPages = totalPublicaciones / pageZise + sum;
-        int page = Numbers.randomInt(0,totalPages-1); //dado que la primer pagina en la BD es cero.
-        
-        System.out.println("PAGE: "+page+" PAGESIZE: "+pageZise+" totalPublicaciones: "+totalPublicaciones+" totalPages: "+totalPages);
-        
-        List<Publicacion> publicaciones = publicacionService.getPublicacionesPagadas(new PageRequest(page,pageZise));
-        
-        for (Publicacion publicacion : publicaciones){
-            System.out.println("titulo: "+publicacion.getTitulo());
-            List<Recurso> recursos = publicacion.getRecursoList();
-            for(Recurso recurso : recursos){
-                System.out.println("recurso: "+recurso.getRuta());
-            }            
-        }        
-        
+    {            
+        List<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR,Constantes.PUBLICACION_PAGADA);
+//        List<Publicacion> publicaciones = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR,Constantes.PUBLICACION_GRATIS);
+        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(0,Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC,"sisFechaCreacion")), Constantes.PUBLICACION_GRATIS);
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName(); //get logged in username
         
         model.addAttribute("username", userName);
-        model.addAttribute("publicaciones", publicaciones);
+        model.addAttribute("anuncios", anuncios);
+        model.addAttribute("publicaciones",publicaciones);
         model.addAttribute("parametro", "Pagina Inicio");
         return "index";
     }

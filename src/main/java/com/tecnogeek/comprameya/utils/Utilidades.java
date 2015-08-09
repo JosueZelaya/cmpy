@@ -11,8 +11,14 @@ import java.util.Random;
  *
  * @author arch
  */
-public class Numbers {
+public class Utilidades {
     
+    public static int calculateTotalPages(int totalPublicaciones,int pageZise)
+    {
+        int sum = (totalPublicaciones % pageZise == 0) ? 0 : 1;
+        int totalPages = totalPublicaciones / pageZise + sum;
+        return totalPages;
+    }
     
     public static int randomInt(int min,int max)
     {

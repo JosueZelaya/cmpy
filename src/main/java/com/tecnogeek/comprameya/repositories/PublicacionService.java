@@ -9,8 +9,8 @@ package com.tecnogeek.comprameya.repositories;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
@@ -27,12 +27,18 @@ public interface PublicacionService extends PagingAndSortingRepository<Publicaci
     List<Publicacion> getPublicacionesPagadas();
     
     @Query("select p from Publicacion p where p.fkTipoPublicacion='1'")
-    List<Publicacion> getPublicacionesPagadas(Pageable pageable);
+    List<Publicacion> getPublicacionesPagadas(Pageable pageable);        
     
     @Query("select p from Publicacion p where p.fkTipoPublicacion='2'")
     List<Publicacion> getPublicacionesGratis();
     
+    @Query("select p from Publicacion p where p.fkTipoPublicacion='2'")
+    List<Publicacion> getPublicacionesGratis(Pageable pageable);        
+    
     @Query("select count(p) from Publicacion p where p.fkTipoPublicacion='1'")
     Integer getTotalPublicacionesPagadas();
+    
+    @Query("select count(p) from Publicacion p where p.fkTipoPublicacion='2'")
+    Integer getTotalPublicacionesGratis();
 
 }
