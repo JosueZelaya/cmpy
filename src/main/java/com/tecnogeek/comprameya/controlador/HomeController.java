@@ -8,9 +8,9 @@ import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
+import com.tecnogeek.comprameya.utils.GridResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,14 +36,17 @@ public class HomeController
     {            
         List<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR,Constantes.PUBLICACION_PAGADA);
 //        List<Publicacion> publicaciones = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR,Constantes.PUBLICACION_GRATIS);
-        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(0,Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC,"sisFechaCreacion")), Constantes.PUBLICACION_GRATIS);
+        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(0,Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC,"sisFechaCreacion"), Constantes.PUBLICACION_GRATIS);
+//        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(0,Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC,"sisFechaCreacion")), Constantes.PUBLICACION_GRATIS);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName(); //get logged in username
         
         model.addAttribute("username", userName);
         model.addAttribute("anuncios", anuncios);
-        model.addAttribute("publicaciones",publicaciones);
+        model.addAttribute("publicaciones",gridPublicaciones.getRows());
+        model.addAttribute("totalPages",gridPublicaciones.getTotalPages());
+        model.addAttribute("tipoPublicacion",Constantes.PUBLICACION_GRATIS);
         model.addAttribute("parametro", "Pagina Inicio");
         return "index";
     }

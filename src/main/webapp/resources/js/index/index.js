@@ -6,13 +6,17 @@
 $(function(){    
     
     $('#publicacionesPager').bootpag({
-        total: $('#publicacionesPager').attr("totalPages")
+        total: $('#publicacionesPager').attr("totalPages"),        
+        maxVisible: 10
     }).on("page", function(event, num){
-//        $(".content").html("Page " + num); // or some ajax content loading...
-
-        // ... after content load -> change total to 10
-        $(this).bootpag({total: 10, maxVisible: 10});
-
+        var tipo = $('#publicacionesPager').attr("tipo");
+        $.ajax({
+            url: '/cmpy/publicacion/getAnuncios/'+tipo+'/'+num,
+            success: function(respuesta){
+                $('#publicacionesProductos').html(respuesta);                    
+            }
+        });
+        $(this).bootpag({total: $('#publicacionesPager').attr("totalPages"), maxVisible: 10});
     });   
    
 });

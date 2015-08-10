@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div class="col-md-2 min_cont marcar">                
     <div class="panel panel-default min_cont">
         <div class="panel-heading">Anuncios Pagados</div>

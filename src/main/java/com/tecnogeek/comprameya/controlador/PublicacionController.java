@@ -22,13 +22,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -45,8 +46,8 @@ public class PublicacionController {
     ManejadorPublicacion pManager;
     
     @RequestMapping(value="/getAnuncios/{tipo}/{page}")
-    @ResponseBody
-    public GridResponse getAnunciosPagados(@PathVariable int tipo,@PathVariable int page)
+//    @ResponseBody
+    public String getAnunciosPagados(@PathVariable int tipo,@PathVariable int page,Model model)
     {                
         int totalAnuncios;
         if(tipo==Constantes.PUBLICACION_GRATIS)
@@ -56,7 +57,12 @@ public class PublicacionController {
         {
             totalAnuncios = Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
         }        
-        return pManager.getPublicacionesGrid(page,totalAnuncios, tipo);
+        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(page,totalAnuncios, tipo);
+
+        model.addAttribute("publicaciones", gridPublicaciones.getRows());        
+        model.addAttribute("tipoPublicacion",tipo);
+        model.addAttribute("totalPages",gridPublicaciones.getTotalPages());        
+        return "common/productos";
     }    
     
     @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    

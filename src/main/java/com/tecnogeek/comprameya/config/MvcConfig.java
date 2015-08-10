@@ -41,6 +41,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         InternalResourceViewResolver url = new InternalResourceViewResolver();
         url.setPrefix("/vista/");
         url.setSuffix(".jsp");
+        url.setContentType("text/html;charset=UTF-8");
         return url;
     }
     

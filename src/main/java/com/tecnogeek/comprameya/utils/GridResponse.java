@@ -15,8 +15,9 @@ import java.util.List;
 public class GridResponse<T> {
     
     private Integer page;
-    private Integer total;
+    private Integer totalPages;
     private Integer records;
+    private Integer total;
     private List<T> objetos;
     
 //    public GridResponse(){}
@@ -52,7 +53,13 @@ public class GridResponse<T> {
     public void setRows(List<T> objetos) {
         this.objetos = objetos;
     }
-    
-    
+
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
+    }
     
 }

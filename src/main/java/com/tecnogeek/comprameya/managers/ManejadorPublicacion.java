@@ -13,6 +13,7 @@ import com.tecnogeek.comprameya.utils.Utilidades;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 /**
  *
@@ -67,6 +68,18 @@ public class ManejadorPublicacion {
         grid.setRecords(pageZise);        
         grid.setRows(getPublicaciones( new PageRequest(page, pageZise), tipo));
         grid.setTotal(getTotalPublicaciones(tipo));
+        return grid;
+    }
+    
+    public GridResponse getPublicacionesGrid(int page,int pageZise,Sort sort,int tipo)
+    { 
+        int totalPublicaiones = getTotalPublicaciones(tipo);
+        GridResponse<Publicacion> grid = new GridResponse<>();
+        grid.setPage(page);
+        grid.setRecords(pageZise);        
+        grid.setRows(getPublicaciones( new PageRequest(page, pageZise,sort), tipo));        
+        grid.setTotal(totalPublicaiones);
+        grid.setTotalPages(Utilidades.calculateTotalPages(totalPublicaiones, pageZise));
         return grid;
     }
     
