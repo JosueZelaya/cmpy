@@ -6,6 +6,7 @@
 
 package com.tecnogeek.comprameya.config;
 
+import com.tecnogeek.comprameya.managers.ManejadorCategoria;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -34,6 +35,11 @@ public class AppConfig {
     @Bean
     public ManejadorPublicacion manejadorPublicacion(){
         return new ManejadorPublicacion();
+    }
+    
+    @Bean
+    public ManejadorCategoria manejadorCategoria(){
+        return new ManejadorCategoria();
     }
     
 }

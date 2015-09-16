@@ -5,8 +5,11 @@
  */
 package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.constantes.Constantes;
+import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.managers.ManejadorCategoria;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
+import com.tecnogeek.comprameya.repositories.CategoriaService;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
 import com.tecnogeek.comprameya.utils.GridResponse;
 import java.util.List;
@@ -31,6 +34,13 @@ public class HomeController
     @Autowired
     ManejadorPublicacion pManager;
     
+    //genaro req categorias
+    @Autowired
+    CategoriaService categoriaService;
+    @Autowired
+    ManejadorCategoria cManager;
+    //fin req categorias
+    
     @RequestMapping(value="/",method=RequestMethod.GET)
     public String welcomePage(Model model)
     {            
@@ -41,6 +51,10 @@ public class HomeController
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName(); //get logged in username
+        //genaro req categorias
+        List<Categoria> categorias = cManager.getCategoria();
+        model.addAttribute("categorias", categorias);
+        //fin req categorias
         
         model.addAttribute("username", userName);
         model.addAttribute("anuncios", anuncios);
