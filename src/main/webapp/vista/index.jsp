@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<html>
+<html ng-app>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ComprameYa!</title>
@@ -98,6 +98,6 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js"/></script>        -->
 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular.min.js"/></script>   
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap-angular/ui-bootstrap-tpls-0.13.3.min"/></script>   
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap-angular/ui-bootstrap-tpls-0.13.3.min.js"/></script>   
     </body>
 </html>
