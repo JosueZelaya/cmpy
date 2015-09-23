@@ -91,10 +91,13 @@
         </c:choose>         
         
         <!-- Cargamos los scripts --> 
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-1.10.2.js"></script>
+<!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/inputFile/fileinput.min.js"/></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/bootpag/jquery.bootpag.min.js"/></script>        
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js"/></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js"/></script>        -->
+
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular.min.js"/></script>   
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap-angular/ui-bootstrap-tpls-0.13.3.min"/></script>   
     </body>
 </html>

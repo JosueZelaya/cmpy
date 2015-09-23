@@ -18,6 +18,7 @@
     <div id="navbar" class="navbar-right navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>                
+        <li class="active"><a href="/cmpy/angular">Angular</a></li> 
         <c:choose>
             <c:when test="${username=='anonymousUser' || username==''}">
                 <li>                    

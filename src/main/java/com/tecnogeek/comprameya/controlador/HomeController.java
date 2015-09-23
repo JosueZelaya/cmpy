@@ -59,4 +59,12 @@ public class HomeController
         return "admin";
     }
     
+    @RequestMapping(value="/angular",method=RequestMethod.GET)
+    public String angularPage(Model model)
+    {   
+        System.out.println("AQUI ESTOY");
+        model.addAttribute("parametro", "Hola Mundo");
+        return "angular";
+    }
+    
 }
