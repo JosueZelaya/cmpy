@@ -16,80 +16,80 @@
         <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/inputFile/fileinput.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">        
-        
+
     </head>
     <body>
-        
+
         <%@include file="common/menuPrincipal.jsp" %>
-        
+
         <div class="container-fluid">
-<!--          <div class="row">
-            <div class="col-md-4 min_otros marcar container">
-                <img src="${pageContext.request.contextPath}/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="imagen aqui">
+            <!--          <div class="row">
+                        <div class="col-md-4 min_otros marcar container">
+                            <img src="${pageContext.request.contextPath}/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="imagen aqui">
+                        </div>
+                        <div class="col-md-8 min_otros marcar">Menu</div>
+                      </div>-->
+            <div class="row">
+                <%@include file="common/menuCategorias.jsp" %>  
+                <%@include file="common/panelPublicacionesProductos.jsp" %>  
+                <%@include file="common/panelPublicacionesEmpresas.jsp" %>  
+
             </div>
-            <div class="col-md-8 min_otros marcar">Menu</div>
-          </div>-->
-          <div class="row">
-            <%@include file="common/menuCategorias.jsp" %>  
-            <%@include file="common/panelPublicacionesProductos.jsp" %>  
-            <%@include file="common/panelPublicacionesEmpresas.jsp" %>  
-            
-          </div>
             <%@include file="common/footer.jsp" %>
         </div>
-        
+
         <c:choose>
             <c:when test="${username=='anonymousUser'}">      
                 <div class="modal fade" id="loginModal">
                     <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Iniciar Sesion!</h4>
-                        </div>
-                        <div class="modal-body">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Iniciar Sesion!</h4>
+                            </div>
+                            <div class="modal-body">
 
-                          <%@include file="common/loginForm.jsp" %>
+                                <%@include file="common/loginForm.jsp" %>
 
-                        </div>      
+                            </div>      
 
-                      </div><!-- /.modal-content -->
+                        </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->  
             </c:when>    
             <c:otherwise>    
                 <div class="modal fade" id="anunciarModal">
                     <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Anunciate y Vende mas!</h4>
-                        </div>
-                        <div class="modal-body">
-                            <%@include file="common/anuncioForm.jsp" %> 
-                        </div>      
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Anunciate y Vende mas!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <%@include file="common/anuncioForm.jsp" %> 
+                            </div>      
 
-                      </div><!-- /.modal-content -->
+                        </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal --> 
-                
+
                 <div class="modal fade" id="venderModal">
                     <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Vende Ya!</h4>
-                        </div>
-                        <div class="modal-body">
-                            <%@include file="common/venderForm.jsp" %> 
-                        </div>      
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Vende Ya!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <%@include file="common/venderForm.jsp" %> 
+                            </div>      
 
-                      </div><!-- /.modal-content -->
+                        </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal --> 
             </c:otherwise>
         </c:choose>         
-        
+
         <!-- Cargamos los scripts --> 
 <!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/></script>
@@ -99,5 +99,5 @@
 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular.min.js"/></script>   
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap-angular/ui-bootstrap-tpls-0.13.3.min.js"/></script>   
-    </body>
+</body>
 </html>
