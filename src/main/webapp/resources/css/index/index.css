@@ -164,3 +164,33 @@ body {
     background-color: white;
     //border: #000 solid 2px;
 }
+
+//categorias
+
+.level3.cat{
+    background-color: #CCC;        
+}
+.level2.cat{
+    background-color: #DDD;        
+}
+
+.level1.cat{
+    background-color: #EEE;        
+}
+
+
+
+a.list-group-item
+{
+    font-size: 10px;
+   
+}
+.list-group.cat
+{
+    margin: 0%;
+    margin-left: 3%;
+    margin-right: -3%;
+    width:97%;
+
+}
+//fin categorias

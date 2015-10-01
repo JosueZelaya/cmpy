@@ -9,13 +9,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<html ng-app>
+<html ng-app="appComprameYa">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ComprameYa!</title>
         <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/inputFile/fileinput.min.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">        
+        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">     
+        
+ 
         
     </head>
     <body>
@@ -91,13 +93,10 @@
         </c:choose>         
         
         <!-- Cargamos los scripts --> 
-<!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/inputFile/fileinput.min.js"/></script>        
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/bootpag/jquery.bootpag.min.js"/></script>        
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js"/></script>        -->
-
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular.min.js"/></script>   
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap-angular/ui-bootstrap-tpls-0.13.3.min.js"/></script>   
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap-angular/ui-bootstrap-tpls-0.13.3.min.js"/></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>
+
     </body>
 </html>

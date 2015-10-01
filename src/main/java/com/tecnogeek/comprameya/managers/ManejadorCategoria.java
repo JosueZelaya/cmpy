@@ -24,6 +24,11 @@ public class ManejadorCategoria {
     
     public List<Categoria> getCategoria()
     {
-        return (List<Categoria>) categoriaService.findAll();
+        return (List<Categoria>) categoriaService.getCategoriaPadres();
+    }
+    
+    public List<Categoria> getHijosCategoria(Categoria categoria)
+    {
+        return (List<Categoria>) categoriaService.findByFkCategoria(categoria);
     }
 }
