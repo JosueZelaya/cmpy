@@ -17,7 +17,12 @@
         <link href="${pageContext.request.contextPath}/resources/css/inputFile/fileinput.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">     
         
- 
+        <%-- css de produccion --%>
+        
+        <%--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/css/inputFile/fileinput.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">--%>     
+        
         
     </head>
     <body>
@@ -93,10 +98,22 @@
         </c:choose>         
         
         <!-- Cargamos los scripts --> 
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular.min.js"/></script>   
+        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular.min1.4.7.js"/></script> 
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular-animate1.4.5.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap-angular/ui-bootstrap-tpls-0.13.3.min.js"/></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>
 
+        <%-- js de produccion --%>
+        
+        <%--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>--%>
+        
+        
+        
     </body>
 </html>
