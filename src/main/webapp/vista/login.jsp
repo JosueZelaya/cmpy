@@ -13,8 +13,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <title>Login - ComprameYa!</title>
-        <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">        
-        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">        
+        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">     
     </head>
     <body>
         
@@ -39,7 +39,6 @@
         </div> 
         
         <!-- Cargamos los scripts --> 
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/></script>                
+        
     </body>
 </html>

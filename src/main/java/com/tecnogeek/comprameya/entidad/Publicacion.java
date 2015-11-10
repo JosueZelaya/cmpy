@@ -18,16 +18,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import lombok.Data;
 
 /**
  *
@@ -35,21 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "publicacion")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Publicacion.findAll", query = "SELECT p FROM Publicacion p"),
-    @NamedQuery(name = "Publicacion.findByPublicacionId", query = "SELECT p FROM Publicacion p WHERE p.publicacionId = :publicacionId"),
-    @NamedQuery(name = "Publicacion.findByTitulo", query = "SELECT p FROM Publicacion p WHERE p.titulo = :titulo"),
-    @NamedQuery(name = "Publicacion.findByDescripcion", query = "SELECT p FROM Publicacion p WHERE p.descripcion = :descripcion"),
-    @NamedQuery(name = "Publicacion.findByConcluido", query = "SELECT p FROM Publicacion p WHERE p.concluido = :concluido"),
-    @NamedQuery(name = "Publicacion.findByFechaVencimiento", query = "SELECT p FROM Publicacion p WHERE p.fechaVencimiento = :fechaVencimiento"),
-    @NamedQuery(name = "Publicacion.findByVisto", query = "SELECT p FROM Publicacion p WHERE p.visto = :visto"),
-    @NamedQuery(name = "Publicacion.findByPuntaje", query = "SELECT p FROM Publicacion p WHERE p.puntaje = :puntaje"),
-    @NamedQuery(name = "Publicacion.findByDenuncias", query = "SELECT p FROM Publicacion p WHERE p.denuncias = :denuncias"),
-    @NamedQuery(name = "Publicacion.findBySisActivo", query = "SELECT p FROM Publicacion p WHERE p.sisActivo = :sisActivo"),
-    @NamedQuery(name = "Publicacion.findBySisFechaCreacion", query = "SELECT p FROM Publicacion p WHERE p.sisFechaCreacion = :sisFechaCreacion"),
-    @NamedQuery(name = "Publicacion.findBySisFechaModificacion", query = "SELECT p FROM Publicacion p WHERE p.sisFechaModificacion = :sisFechaModificacion")})
+@Data
 public class Publicacion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -93,11 +78,11 @@ public class Publicacion implements Serializable {
     @Column(name = "sis_fecha_modificacion")
     @Temporal(TemporalType.DATE)
     private Date sisFechaModificacion;
-    @OneToMany(mappedBy = "fkPublicacion",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Recurso> recursoList;
-    @OneToMany(mappedBy = "fkPublicacion",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
     private List<Ubicacion> ubicacionList;
-    @OneToMany(mappedBy = "fkPublicacion",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
     private List<Producto> productoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPublicacion")
     private List<Comentario> comentarioList;
@@ -108,186 +93,4 @@ public class Publicacion implements Serializable {
     @ManyToOne
     private Usuario fkUsuario;
 
-    public Publicacion() {
-    }
-
-    public Publicacion(Long publicacionId) {
-        this.publicacionId = publicacionId;
-    }
-
-    public Publicacion(Long publicacionId, String titulo, boolean concluido, int visto, int puntaje, int denuncias, boolean sisActivo) {
-        this.publicacionId = publicacionId;
-        this.titulo = titulo;
-        this.concluido = concluido;
-        this.visto = visto;
-        this.puntaje = puntaje;
-        this.denuncias = denuncias;
-        this.sisActivo = sisActivo;
-    }
-
-    public Long getPublicacionId() {
-        return publicacionId;
-    }
-
-    public void setPublicacionId(Long publicacionId) {
-        this.publicacionId = publicacionId;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean getConcluido() {
-        return concluido;
-    }
-
-    public void setConcluido(boolean concluido) {
-        this.concluido = concluido;
-    }
-
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public int getVisto() {
-        return visto;
-    }
-
-    public void setVisto(int visto) {
-        this.visto = visto;
-    }
-
-    public int getPuntaje() {
-        return puntaje;
-    }
-
-    public void setPuntaje(int puntaje) {
-        this.puntaje = puntaje;
-    }
-
-    public int getDenuncias() {
-        return denuncias;
-    }
-
-    public void setDenuncias(int denuncias) {
-        this.denuncias = denuncias;
-    }
-
-    public boolean getSisActivo() {
-        return sisActivo;
-    }
-
-    public void setSisActivo(boolean sisActivo) {
-        this.sisActivo = sisActivo;
-    }
-
-    public Date getSisFechaCreacion() {
-        return sisFechaCreacion;
-    }
-
-    public void setSisFechaCreacion(Date sisFechaCreacion) {
-        this.sisFechaCreacion = sisFechaCreacion;
-    }
-
-    public Date getSisFechaModificacion() {
-        return sisFechaModificacion;
-    }
-
-    public void setSisFechaModificacion(Date sisFechaModificacion) {
-        this.sisFechaModificacion = sisFechaModificacion;
-    }
-
-    @XmlTransient
-    public List<Recurso> getRecursoList() {
-        return recursoList;
-    }
-
-    public void setRecursoList(List<Recurso> recursoList) {
-        this.recursoList = recursoList;
-    }
-
-    @XmlTransient
-    public List<Ubicacion> getUbicacionList() {
-        return ubicacionList;
-    }
-
-    public void setUbicacionList(List<Ubicacion> ubicacionList) {
-        this.ubicacionList = ubicacionList;
-    }
-
-    @XmlTransient
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
-    }
-
-    @XmlTransient
-    public List<Comentario> getComentarioList() {
-        return comentarioList;
-    }
-
-    public void setComentarioList(List<Comentario> comentarioList) {
-        this.comentarioList = comentarioList;
-    }
-
-    public TipoPublicacion getFkTipoPublicacion() {
-        return fkTipoPublicacion;
-    }
-
-    public void setFkTipoPublicacion(TipoPublicacion fkTipoPublicacion) {
-        this.fkTipoPublicacion = fkTipoPublicacion;
-    }
-
-    public Usuario getFkUsuario() {
-        return fkUsuario;
-    }
-
-    public void setFkUsuario(Usuario fkUsuario) {
-        this.fkUsuario = fkUsuario;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (publicacionId != null ? publicacionId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Publicacion)) {
-            return false;
-        }
-        Publicacion other = (Publicacion) object;
-        if ((this.publicacionId == null && other.publicacionId != null) || (this.publicacionId != null && !this.publicacionId.equals(other.publicacionId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.tecnogeek.comprameya.entidad.Publicacion[ publicacionId=" + publicacionId + " ]";
-    }
-    
 }

@@ -78,5 +78,12 @@ public class HomeController {
         model.addAttribute("parametro", "Hola Mundo");
         return "angular";
     }
+    
+    @RequestMapping(value = "/modal", method = RequestMethod.GET)
+    public String modalPage(Model model) {
+        System.out.println("AQUI ESTOY");
+        model.addAttribute("parametro", "Hola Mundo");
+        return "modal";
+    }
 
 }

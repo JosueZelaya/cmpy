@@ -15,13 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
 
 /**
  *
@@ -29,13 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "destinatario")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Destinatario.findAll", query = "SELECT d FROM Destinatario d"),
-    @NamedQuery(name = "Destinatario.findByDestinatarioId", query = "SELECT d FROM Destinatario d WHERE d.destinatarioId = :destinatarioId"),
-    @NamedQuery(name = "Destinatario.findBySisActivo", query = "SELECT d FROM Destinatario d WHERE d.sisActivo = :sisActivo"),
-    @NamedQuery(name = "Destinatario.findBySisFechaCreacion", query = "SELECT d FROM Destinatario d WHERE d.sisFechaCreacion = :sisFechaCreacion"),
-    @NamedQuery(name = "Destinatario.findBySisFechaModificacion", query = "SELECT d FROM Destinatario d WHERE d.sisFechaModificacion = :sisFechaModificacion")})
+@Data
 public class Destinatario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,90 +51,5 @@ public class Destinatario implements Serializable {
     @JoinColumn(name = "fk_usuario_destinatario", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario fkUsuarioDestinatario;
-
-    public Destinatario() {
-    }
-
-    public Destinatario(Long destinatarioId) {
-        this.destinatarioId = destinatarioId;
-    }
-
-    public Destinatario(Long destinatarioId, boolean sisActivo) {
-        this.destinatarioId = destinatarioId;
-        this.sisActivo = sisActivo;
-    }
-
-    public Long getDestinatarioId() {
-        return destinatarioId;
-    }
-
-    public void setDestinatarioId(Long destinatarioId) {
-        this.destinatarioId = destinatarioId;
-    }
-
-    public boolean getSisActivo() {
-        return sisActivo;
-    }
-
-    public void setSisActivo(boolean sisActivo) {
-        this.sisActivo = sisActivo;
-    }
-
-    public Date getSisFechaCreacion() {
-        return sisFechaCreacion;
-    }
-
-    public void setSisFechaCreacion(Date sisFechaCreacion) {
-        this.sisFechaCreacion = sisFechaCreacion;
-    }
-
-    public Date getSisFechaModificacion() {
-        return sisFechaModificacion;
-    }
-
-    public void setSisFechaModificacion(Date sisFechaModificacion) {
-        this.sisFechaModificacion = sisFechaModificacion;
-    }
-
-    public Mensaje getFkMensaje() {
-        return fkMensaje;
-    }
-
-    public void setFkMensaje(Mensaje fkMensaje) {
-        this.fkMensaje = fkMensaje;
-    }
-
-    public Usuario getFkUsuarioDestinatario() {
-        return fkUsuarioDestinatario;
-    }
-
-    public void setFkUsuarioDestinatario(Usuario fkUsuarioDestinatario) {
-        this.fkUsuarioDestinatario = fkUsuarioDestinatario;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (destinatarioId != null ? destinatarioId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Destinatario)) {
-            return false;
-        }
-        Destinatario other = (Destinatario) object;
-        if ((this.destinatarioId == null && other.destinatarioId != null) || (this.destinatarioId != null && !this.destinatarioId.equals(other.destinatarioId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.tecnogeek.comprameya.entidad.Destinatario[ destinatarioId=" + destinatarioId + " ]";
-    }
     
 }

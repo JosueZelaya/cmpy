@@ -50,7 +50,7 @@ public class PersistenceConfig {
         vendorAdapter.setShowSql(true);
         
         Properties jpaProperties = new Properties();
-        //jpaProperties.put("hibernate.hbm2ddl.auto",env.getProperty("hibernate.hbm2ddl.auto"));
+        jpaProperties.put("hibernate.hbm2ddl.auto",env.getProperty("hibernate.hbm2ddl.auto"));
         jpaProperties.put("hibernate.dialect",env.getProperty("hibernate.dialect"));
         jpaProperties.put("hibernate.max_fetch_depth",env.getProperty("hibernate.max_fetch_depth"));
         jpaProperties.put("hibernate.jdbc.fetch_size",env.getProperty("hibernate.jdbc.fetch_size"));

@@ -34,6 +34,7 @@
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.finalName>cmy</project.build.finalName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--<spring-version>4.0.1.RELEASE</spring-version>-->
         <spring-version>4.1.6.RELEASE</spring-version>
@@ -218,6 +219,13 @@
             <scope>compile</scope>
         </dependency>
         
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.6</version>
+        </dependency>
+        
         <!-- Dependencias para Jetty -->
 <!--        <dependency>
             <groupId>org.mortbay.jetty</groupId>
@@ -245,8 +253,200 @@
 
     </dependencies>
     
-    <build>
+<!--    <profiles>
+        <profile>
+             Run with: mvn -Ptomee tomee:run 
+            <id>tomee</id>
+            <properties>
+                <tomee.version>1.7.2</tomee.version>
+                <tomee.classifier>plus</tomee.classifier>
+            </properties>            
+            <build>
+                <plugins>   
+                    <plugin>
+                        <groupId>org.apache.openejb.maven</groupId>
+                        <artifactId>tomee-maven-plugin</artifactId>
+                        <version>${tomee.version}</version>
+                        <configuration>
+                            <tomeeVersion>${tomee.version}</tomeeVersion>
+                            <tomeeClassifier>${tomee.classifier}</tomeeClassifier>
+                            <debugPort>8777</debugPort>  
+                            <tomeeAjpPort>8776</tomeeAjpPort>  
+                            <tomeeHttpPort>8079</tomeeHttpPort>  
+                            <tomeeShutdownPort>8778</tomeeShutdownPort>  
+                            <context>/clasif</context>
+                            <deployOpenEjbApplication>true</deployOpenEjbApplication>
+                            <debug>true</debug>
+                            
+                            <synchronization>
+                                <extensions>
+                                    <extension>.class</extension>
+                                    <extension>.properties</extension>
+                                    <extension>.css</extension>
+                                    <extension>.js</extension>
+                                    <extension>.xhtml</extension>
+                                    <extension>.jsp</extension>
+                                    <extension>.png</extension>
+                                    <extension>.jpg</extension>
+                                    <extension>.gif</extension>
+                                    <extension>.ico</extension>
+                                    <extension>.xml</extension>
+                                </extensions>
+                                <updateInterval>2</updateInterval>
+                            </synchronization>
+                            <reloadOnUpdate>false</reloadOnUpdate>
+                            <warFile>${project.build.directory}/${project.build.finalName}</warFile>
+                            <path>${project.build.directory}/apache-tomee/webapps${project.build.finalName}</path>
+                            <args>-Dspring.profiles.active=local -Dfile.encoding=UTF-8 -server -XX:+DisableExplicitGC</args>
+                            <systemVariables>
+                                <java.security.auth.login.config>${project.build.directory}/apache-tomee/conf/login.config</java.security.auth.login.config>
+                                <org.apache.catalina.STRICT_SERVLET_COMPLIANCE>false</org.apache.catalina.STRICT_SERVLET_COMPLIANCE>
+                            </systemVariables>
+                            <libs>
+                                <lib>com.oracle:ojdbc7:12.1.0.2</lib>
+                                <lib>remove:bval-core-</lib>
+                                <lib>remove:bval-jsr303-</lib>
+                                <lib>remove:commons-lang-</lib>
+                                <lib>remove:openjpa-</lib>
+                                <lib>remove:serp-</lib>
+                                <lib>remove:javassist-</lib>
+
+                                <lib>org.hibernate:hibernate-core:4.3.6.Final</lib>
+                                <lib>org.hibernate:hibernate-entitymanager:4.3.6.Final</lib>
+                                <lib>org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final</lib>
+                                <lib>org.hibernate.common:hibernate-commons-annotations:5.0.0.Final</lib>
+                                <lib>org.hibernate:hibernate-validator:4.3.2.Final</lib>
+                                <lib>org.jboss.logging:jboss-logging:3.3.0.Final</lib>
+                                <lib>org.jboss:jandex:1.2.4.Final</lib>
+                                <lib>com.fasterxml:classmate:1.2.0</lib>
+                                <lib>javassist:javassist:3.12.1.GA</lib>
+                                <lib>dom4j:dom4j:1.6.1</lib>
+                                <lib>antlr:antlr:2.7.7</lib>
+                            </libs>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.openejb</groupId>
+                                <artifactId>apache-tomee</artifactId>
+                                <version>${tomee.version}</version>
+                                <classifier>${tomee.classifier}</classifier>
+                                <type>zip</type>
+                                <scope>runtime</scope>
+                            </dependency>
+                            
+                             Oracle Driver 
+                            <dependency>
+                                <groupId>com.oracle</groupId>
+                                <artifactId>ojdbc7</artifactId>
+                                <version>12.1.0.2 </version>
+                                <scope>runtime</scope>
+                            </dependency>
+                            <dependency>
+                                <groupId>com.fasterxml</groupId>
+                                <artifactId>classmate</artifactId>
+                                <version>1.2.0</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.jboss</groupId>
+                                <artifactId>jandex</artifactId>
+                                <version>1.2.4.Final</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.hibernate.javax.persistence</groupId>
+                                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                                <version>1.0.0.Final</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.hibernate</groupId>
+                                <artifactId>hibernate-entitymanager</artifactId>
+                                <version>4.3.6.Final</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.hibernate.common</groupId>
+                                <artifactId>hibernate-commons-annotations</artifactId>
+                                <version>4.0.5.Final</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.hibernate</groupId>
+                                <artifactId>hibernate-validator</artifactId>
+                                <version>4.3.2.Final</version>
+                            </dependency>
+
+                            <dependency>
+                                <groupId>org.jboss.logging</groupId>
+                                <artifactId>jboss-logging</artifactId>
+                                <version>3.3.0.Final</version>
+                            </dependency>
+                           
+                            
+                            <dependency>
+                                <groupId>dom4j</groupId>
+                                <artifactId>dom4j</artifactId>
+                                <version>1.6.1</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>javassist</groupId>
+                                <artifactId>javassist</artifactId>
+                                <version>3.12.1.GA</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>antlr</groupId>
+                                <artifactId>antlr</artifactId>
+                                <version>2.7.7</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>-->
+    
+    <build>        
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.3.2</version>
+
+                <executions>
+
+                  <execution>
+                    <id>exec-bower-install</id>
+
+                    <phase>generate-sources</phase>
+                    <configuration>
+
+                      <executable>bower</executable>
+
+                      <arguments>
+                        <argument>install</argument>
+                      </arguments>
+                      
+                      <workingDirectory>${basedir}/src/main/webapp/resources/</workingDirectory>
+
+                    </configuration>
+                    <goals>
+                      <goal>exec</goal>
+                    </goals>
+                  </execution>
+
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.openejb.maven</groupId>
+                <artifactId>tomee-maven-plugin</artifactId>
+                <version>1.7.1</version>
+                <configuration>
+                  <tomeeVersion>1.7.1</tomeeVersion>
+                  <tomeeClassifier>plus</tomeeClassifier>
+                  <synchronization>
+                    <extensions>
+                      <extension>.class</extension> <!-- if you want to update each time you build with mvn compile -->
+                    </extensions>
+                  </synchronization>
+                  <reloadOnUpdate>true</reloadOnUpdate>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -361,7 +561,7 @@
         </plugins>
     </build>-->
     <repositories>
-<!--        <repository>
+        <!--        <repository>
             <id>unknown-jars-temp-repo</id>
             <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
             <url>file:${project.basedir}/lib</url>
@@ -372,7 +572,7 @@
             <layout>default</layout>
             <url>http://repo1.maven.org/maven2</url>
             <snapshots>
-              <enabled>false</enabled>
+                <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>

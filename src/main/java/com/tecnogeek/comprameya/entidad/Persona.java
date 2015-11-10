@@ -17,16 +17,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import lombok.Data;
 
 /**
  *
@@ -34,28 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "persona")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p"),
-    @NamedQuery(name = "Persona.findByPersonaId", query = "SELECT p FROM Persona p WHERE p.personaId = :personaId"),
-    @NamedQuery(name = "Persona.findByNombre", query = "SELECT p FROM Persona p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Persona.findByApellido", query = "SELECT p FROM Persona p WHERE p.apellido = :apellido"),
-    @NamedQuery(name = "Persona.findByFechaNacimiento", query = "SELECT p FROM Persona p WHERE p.fechaNacimiento = :fechaNacimiento"),
-    @NamedQuery(name = "Persona.findByGenero", query = "SELECT p FROM Persona p WHERE p.genero = :genero"),
-    @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono"),
-    @NamedQuery(name = "Persona.findByCelular", query = "SELECT p FROM Persona p WHERE p.celular = :celular"),
-    @NamedQuery(name = "Persona.findByCorreo", query = "SELECT p FROM Persona p WHERE p.correo = :correo"),
-    @NamedQuery(name = "Persona.findByDui", query = "SELECT p FROM Persona p WHERE p.dui = :dui"),
-    @NamedQuery(name = "Persona.findByDireccion", query = "SELECT p FROM Persona p WHERE p.direccion = :direccion"),
-    @NamedQuery(name = "Persona.findByFbNombre", query = "SELECT p FROM Persona p WHERE p.fbNombre = :fbNombre"),
-    @NamedQuery(name = "Persona.findByFbApellido", query = "SELECT p FROM Persona p WHERE p.fbApellido = :fbApellido"),
-    @NamedQuery(name = "Persona.findByFbFechaNacimiento", query = "SELECT p FROM Persona p WHERE p.fbFechaNacimiento = :fbFechaNacimiento"),
-    @NamedQuery(name = "Persona.findByFbGenero", query = "SELECT p FROM Persona p WHERE p.fbGenero = :fbGenero"),
-    @NamedQuery(name = "Persona.findByFbCorreo", query = "SELECT p FROM Persona p WHERE p.fbCorreo = :fbCorreo"),
-    @NamedQuery(name = "Persona.findBySisActivo", query = "SELECT p FROM Persona p WHERE p.sisActivo = :sisActivo"),
-    @NamedQuery(name = "Persona.findBySisFechaCreacion", query = "SELECT p FROM Persona p WHERE p.sisFechaCreacion = :sisFechaCreacion"),
-    @NamedQuery(name = "Persona.findBySisFechaModificacion", query = "SELECT p FROM Persona p WHERE p.sisFechaModificacion = :sisFechaModificacion")})
+@Data
 public class Persona implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -119,212 +97,4 @@ public class Persona implements Serializable {
     @OneToMany(mappedBy = "fkPersona")
     private List<Usuario> usuarioList;
 
-    public Persona() {
-    }
-
-    public Persona(Long personaId) {
-        this.personaId = personaId;
-    }
-
-    public Persona(Long personaId, String correo, boolean sisActivo) {
-        this.personaId = personaId;
-        this.correo = correo;
-        this.sisActivo = sisActivo;
-    }
-
-    public Long getPersonaId() {
-        return personaId;
-    }
-
-    public void setPersonaId(Long personaId) {
-        this.personaId = personaId;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Boolean getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Boolean genero) {
-        this.genero = genero;
-    }
-
-    public BigInteger getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(BigInteger telefono) {
-        this.telefono = telefono;
-    }
-
-    public BigInteger getCelular() {
-        return celular;
-    }
-
-    public void setCelular(BigInteger celular) {
-        this.celular = celular;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public BigInteger getDui() {
-        return dui;
-    }
-
-    public void setDui(BigInteger dui) {
-        this.dui = dui;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getFbNombre() {
-        return fbNombre;
-    }
-
-    public void setFbNombre(String fbNombre) {
-        this.fbNombre = fbNombre;
-    }
-
-    public String getFbApellido() {
-        return fbApellido;
-    }
-
-    public void setFbApellido(String fbApellido) {
-        this.fbApellido = fbApellido;
-    }
-
-    public Date getFbFechaNacimiento() {
-        return fbFechaNacimiento;
-    }
-
-    public void setFbFechaNacimiento(Date fbFechaNacimiento) {
-        this.fbFechaNacimiento = fbFechaNacimiento;
-    }
-
-    public Boolean getFbGenero() {
-        return fbGenero;
-    }
-
-    public void setFbGenero(Boolean fbGenero) {
-        this.fbGenero = fbGenero;
-    }
-
-    public String getFbCorreo() {
-        return fbCorreo;
-    }
-
-    public void setFbCorreo(String fbCorreo) {
-        this.fbCorreo = fbCorreo;
-    }
-
-    public boolean getSisActivo() {
-        return sisActivo;
-    }
-
-    public void setSisActivo(boolean sisActivo) {
-        this.sisActivo = sisActivo;
-    }
-
-    public Date getSisFechaCreacion() {
-        return sisFechaCreacion;
-    }
-
-    public void setSisFechaCreacion(Date sisFechaCreacion) {
-        this.sisFechaCreacion = sisFechaCreacion;
-    }
-
-    public Date getSisFechaModificacion() {
-        return sisFechaModificacion;
-    }
-
-    public void setSisFechaModificacion(Date sisFechaModificacion) {
-        this.sisFechaModificacion = sisFechaModificacion;
-    }
-
-    @XmlTransient
-    public List<Empleado> getEmpleadoList() {
-        return empleadoList;
-    }
-
-    public void setEmpleadoList(List<Empleado> empleadoList) {
-        this.empleadoList = empleadoList;
-    }
-
-    public Ubicacion getFkUbicacion() {
-        return fkUbicacion;
-    }
-
-    public void setFkUbicacion(Ubicacion fkUbicacion) {
-        this.fkUbicacion = fkUbicacion;
-    }
-
-    @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (personaId != null ? personaId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Persona)) {
-            return false;
-        }
-        Persona other = (Persona) object;
-        if ((this.personaId == null && other.personaId != null) || (this.personaId != null && !this.personaId.equals(other.personaId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.tecnogeek.comprameya.entidad.Persona[ personaId=" + personaId + " ]";
-    }
-    
 }

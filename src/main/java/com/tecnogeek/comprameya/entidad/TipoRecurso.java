@@ -14,16 +14,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import lombok.Data;
 
 /**
  *
@@ -31,15 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tipo_recurso")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "TipoRecurso.findAll", query = "SELECT t FROM TipoRecurso t"),
-    @NamedQuery(name = "TipoRecurso.findByTipoRecusoId", query = "SELECT t FROM TipoRecurso t WHERE t.tipoRecusoId = :tipoRecusoId"),
-    @NamedQuery(name = "TipoRecurso.findByNombre", query = "SELECT t FROM TipoRecurso t WHERE t.nombre = :nombre"),
-    @NamedQuery(name = "TipoRecurso.findByDescripcion", query = "SELECT t FROM TipoRecurso t WHERE t.descripcion = :descripcion"),
-    @NamedQuery(name = "TipoRecurso.findBySisActivo", query = "SELECT t FROM TipoRecurso t WHERE t.sisActivo = :sisActivo"),
-    @NamedQuery(name = "TipoRecurso.findBySisFechaCreacion", query = "SELECT t FROM TipoRecurso t WHERE t.sisFechaCreacion = :sisFechaCreacion"),
-    @NamedQuery(name = "TipoRecurso.findBySisFechaModificacion", query = "SELECT t FROM TipoRecurso t WHERE t.sisFechaModificacion = :sisFechaModificacion")})
+@Data
 public class TipoRecurso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -70,100 +60,4 @@ public class TipoRecurso implements Serializable {
     @OneToMany(mappedBy = "fkTipoRecurso")
     private List<Recurso> recursoList;
 
-    public TipoRecurso() {
-    }
-
-    public TipoRecurso(Long tipoRecusoId) {
-        this.tipoRecusoId = tipoRecusoId;
-    }
-
-    public TipoRecurso(Long tipoRecusoId, String nombre, String descripcion, boolean sisActivo) {
-        this.tipoRecusoId = tipoRecusoId;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.sisActivo = sisActivo;
-    }
-
-    public Long getTipoRecusoId() {
-        return tipoRecusoId;
-    }
-
-    public void setTipoRecusoId(Long tipoRecusoId) {
-        this.tipoRecusoId = tipoRecusoId;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean getSisActivo() {
-        return sisActivo;
-    }
-
-    public void setSisActivo(boolean sisActivo) {
-        this.sisActivo = sisActivo;
-    }
-
-    public Date getSisFechaCreacion() {
-        return sisFechaCreacion;
-    }
-
-    public void setSisFechaCreacion(Date sisFechaCreacion) {
-        this.sisFechaCreacion = sisFechaCreacion;
-    }
-
-    public Date getSisFechaModificacion() {
-        return sisFechaModificacion;
-    }
-
-    public void setSisFechaModificacion(Date sisFechaModificacion) {
-        this.sisFechaModificacion = sisFechaModificacion;
-    }
-
-    @XmlTransient
-    public List<Recurso> getRecursoList() {
-        return recursoList;
-    }
-
-    public void setRecursoList(List<Recurso> recursoList) {
-        this.recursoList = recursoList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (tipoRecusoId != null ? tipoRecusoId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoRecurso)) {
-            return false;
-        }
-        TipoRecurso other = (TipoRecurso) object;
-        if ((this.tipoRecusoId == null && other.tipoRecusoId != null) || (this.tipoRecusoId != null && !this.tipoRecusoId.equals(other.tipoRecusoId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.tecnogeek.comprameya.entidad.TipoRecurso[ tipoRecusoId=" + tipoRecusoId + " ]";
-    }
-    
 }
