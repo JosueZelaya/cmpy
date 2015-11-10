@@ -41,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             ignoring()
                 .antMatchers("/resources/**")
                 .antMatchers("/images/**")
-                .antMatchers("/categoria/**");
+                .antMatchers("/categoria/**")
+                .antMatchers("/ubicacion/**");
     }
     
     @Override

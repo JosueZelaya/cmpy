@@ -43,6 +43,7 @@
             
           </div>
             <%@include file="common/footer.jsp" %>
+            
         </div>
         
         <c:choose>
@@ -95,16 +96,25 @@
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal --> 
             </c:otherwise>
-        </c:choose>         
+        </c:choose>   
+                
+                <%@include file="common/mapaUbicacion.jsp" %>
         
         <!-- Cargamos los scripts --> 
+<!--        <script type="text/javascript" src="//raw.github.com/lodash/lodash/3.10.1/lodash.min.js"></script>
+        <script type="text/javascript" src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+        <script type="text/javascript" src="//raw.github.com/angular-ui/angular-google-maps/master/dist/angular-google-maps.js"></script>-->
         
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular.min1.4.7.js"/></script> 
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular.min1.4.7.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular-animate1.4.5.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bootstrap-angular/ui-bootstrap-tpls-0.13.3.min.js"/></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js" type="text/javascript"></script>
+        <script src="http://cdn.rawgit.com/nmccready/angular-simple-logger/0.0.1/dist/index.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/frameworks/angular-google-maps-2.2.1.js" type="text/javascript"></script>
+        <script src='https://maps.googleapis.com/maps/api/js?sensor=false'></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>
-
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/mapControllers.js" ></script>
         <%-- js de produccion --%>
         
         <%--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
@@ -112,8 +122,13 @@
         <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>--%>
+
         
-        
+
+
+   <style>
+        .angular-google-map-container { height: 400px }
+    </style>
         
     </body>
 </html>

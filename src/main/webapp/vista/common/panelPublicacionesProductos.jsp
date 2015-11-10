@@ -21,7 +21,7 @@
         <div id="publicacionesProductos" class="panel-body">
             
             <%@include file="productos.jsp" %>  
-            
+           
         </div>
     </div>
 </div>

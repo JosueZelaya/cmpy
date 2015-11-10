@@ -23,6 +23,9 @@ public interface PublicacionService extends PagingAndSortingRepository<Publicaci
     
     List<Publicacion> findBySisActivo(String activo);
     
+    @Query("select p from Publicacion p where p.publicacionId=?1")
+    List<Publicacion> getPublicacion(long PublicacionId);
+    
     @Query("select p from Publicacion p where p.fkTipoPublicacion='1'")
     List<Publicacion> getPublicacionesPagadas();
     
