@@ -92,14 +92,21 @@
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal --> 
             </c:otherwise>
-        </c:choose>         
+        </c:choose>
 
         <!-- Cargamos los scripts --> 
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"/></script>   
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"/></script> 
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-animate/angular-animate.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"/></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/lodash/lodash.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/frameworks/angular-google-maps-2.2.1.js"></script>
+        <script type="text/javascript" src='https://maps.googleapis.com/maps/api/js?sensor=false'></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>        
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/publicacionController.js" ></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/publicacionController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/mapControllers.js" ></script>
+        
 
     </body>
 </html>
