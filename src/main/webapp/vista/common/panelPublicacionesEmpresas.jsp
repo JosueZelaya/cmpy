@@ -27,7 +27,7 @@
                     <c:set var="descripcion" value="${anuncio.descripcion}"/>
                     <c:set var="descripcionCorta" value="${fn:substring(descripcion, 0, 50)}" />
                     <div class="publicacion thumbnail col-lg-12">                     
-                        <img src="/cmpy/images/getThumbnail/${anuncio.recursoList[0].ruta}" alt="imagen aqui">
+                        <img src="/images/getThumbnail/${anuncio.recursoList[0].ruta}" alt="imagen aqui">
                         <h3><c:out value='${anuncio.titulo}' /></h3>
                         <p><c:out value='${descripcionCorta}...' /></p>                    
                     </div>

@@ -16,16 +16,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import lombok.Data;
 
 /**
  *
@@ -33,14 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "estado")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e"),
-    @NamedQuery(name = "Estado.findByEstadoId", query = "SELECT e FROM Estado e WHERE e.estadoId = :estadoId"),
-    @NamedQuery(name = "Estado.findByNombre", query = "SELECT e FROM Estado e WHERE e.nombre = :nombre"),
-    @NamedQuery(name = "Estado.findBySisActivo", query = "SELECT e FROM Estado e WHERE e.sisActivo = :sisActivo"),
-    @NamedQuery(name = "Estado.findBySisFechaCreacion", query = "SELECT e FROM Estado e WHERE e.sisFechaCreacion = :sisFechaCreacion"),
-    @NamedQuery(name = "Estado.findBySisFechaModificacion", query = "SELECT e FROM Estado e WHERE e.sisFechaModificacion = :sisFechaModificacion")})
+@Data
 public class Estado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -68,100 +58,5 @@ public class Estado implements Serializable {
     private Pais fkPais;
     @OneToMany(mappedBy = "fkEstado")
     private List<Ciudad> ciudadList;
-
-    public Estado() {
-    }
-
-    public Estado(Long estadoId) {
-        this.estadoId = estadoId;
-    }
-
-    public Estado(Long estadoId, String nombre, boolean sisActivo) {
-        this.estadoId = estadoId;
-        this.nombre = nombre;
-        this.sisActivo = sisActivo;
-    }
-
-    public Long getEstadoId() {
-        return estadoId;
-    }
-
-    public void setEstadoId(Long estadoId) {
-        this.estadoId = estadoId;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public boolean getSisActivo() {
-        return sisActivo;
-    }
-
-    public void setSisActivo(boolean sisActivo) {
-        this.sisActivo = sisActivo;
-    }
-
-    public Date getSisFechaCreacion() {
-        return sisFechaCreacion;
-    }
-
-    public void setSisFechaCreacion(Date sisFechaCreacion) {
-        this.sisFechaCreacion = sisFechaCreacion;
-    }
-
-    public Date getSisFechaModificacion() {
-        return sisFechaModificacion;
-    }
-
-    public void setSisFechaModificacion(Date sisFechaModificacion) {
-        this.sisFechaModificacion = sisFechaModificacion;
-    }
-
-    public Pais getFkPais() {
-        return fkPais;
-    }
-
-    public void setFkPais(Pais fkPais) {
-        this.fkPais = fkPais;
-    }
-
-    @XmlTransient
-    public List<Ciudad> getCiudadList() {
-        return ciudadList;
-    }
-
-    public void setCiudadList(List<Ciudad> ciudadList) {
-        this.ciudadList = ciudadList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (estadoId != null ? estadoId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Estado)) {
-            return false;
-        }
-        Estado other = (Estado) object;
-        if ((this.estadoId == null && other.estadoId != null) || (this.estadoId != null && !this.estadoId.equals(other.estadoId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.tecnogeek.comprameya.entidad.Estado[ estadoId=" + estadoId + " ]";
-    }
     
 }

@@ -28,9 +28,9 @@ public class SecurityUser extends Usuario implements UserDetails{
             this.setUsuarioId(user.getUsuarioId());
             this.setLogin(user.getLogin());
             this.setPass(user.getPass());
-            this.setPuntaje(user.getPuntaje());
-            this.setSisSesionActiva(user.getSisSesionActiva());
-            this.setSisActivo(user.getSisActivo());            
+            this.setPuntaje(user.getPuntaje());             
+            this.setSisSesionActiva(user.isSisSesionActiva());
+            this.setSisActivo(user.isSisActivo());            
             this.setFkPerfil(user.getFkPerfil());
         }         
     }
@@ -72,7 +72,7 @@ public class SecurityUser extends Usuario implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return super.getSisActivo();
+        return super.isSisActivo();
     }
     
 }

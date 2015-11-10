@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.tecnogeek.comprameya.controlador;
+
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.entidad.Publicacion;
@@ -27,26 +28,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author genaro
  */
 @Controller
-public class HomeController 
-{
+public class HomeController {
+
     @Autowired
     PublicacionService publicacionService;
     @Autowired
     ManejadorPublicacion pManager;
-    
+
     //genaro req categorias
     @Autowired
     CategoriaService categoriaService;
     @Autowired
     ManejadorCategoria cManager;
     //fin req categorias
-    
-    @RequestMapping(value="/",method=RequestMethod.GET)
-    public String welcomePage(Model model)
-    {            
-        List<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR,Constantes.PUBLICACION_PAGADA);
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String welcomePage(Model model) {
+        List<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR, Constantes.PUBLICACION_PAGADA);
 //        List<Publicacion> publicaciones = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR,Constantes.PUBLICACION_GRATIS);
-        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(0,Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC,"sisFechaCreacion"), Constantes.PUBLICACION_GRATIS);
+        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(0, Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC, "sisFechaCreacion"), Constantes.PUBLICACION_GRATIS);
 //        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(0,Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC,"sisFechaCreacion")), Constantes.PUBLICACION_GRATIS);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -55,30 +55,35 @@ public class HomeController
         List<Categoria> categorias = cManager.getCategoria();
         model.addAttribute("categorias", categorias);
         //fin req categorias
-        
+
         model.addAttribute("username", userName);
         model.addAttribute("anuncios", anuncios);
-        model.addAttribute("publicaciones",gridPublicaciones.getRows());
-        model.addAttribute("totalPages",gridPublicaciones.getTotalPages());
-        model.addAttribute("tipoPublicacion",Constantes.PUBLICACION_GRATIS);
+        model.addAttribute("publicaciones", gridPublicaciones.getRows());
+        model.addAttribute("totalPages", gridPublicaciones.getTotalPages());
+        model.addAttribute("tipoPublicacion", Constantes.PUBLICACION_GRATIS);
         model.addAttribute("parametro", "Pagina Inicio");
         return "index";
     }
-    
-    @RequestMapping(value="/admin",method=RequestMethod.GET)
-    public String adminPage(Model model)
-    {   
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String adminPage(Model model) {
         System.out.println("AQUI ESTOY");
         model.addAttribute("parametro", "Hola Mundo");
         return "admin";
     }
-    
-    @RequestMapping(value="/angular",method=RequestMethod.GET)
-    public String angularPage(Model model)
-    {   
+
+    @RequestMapping(value = "/angular", method = RequestMethod.GET)
+    public String angularPage(Model model) {
         System.out.println("AQUI ESTOY");
         model.addAttribute("parametro", "Hola Mundo");
         return "angular";
     }
     
+    @RequestMapping(value = "/modal", method = RequestMethod.GET)
+    public String modalPage(Model model) {
+        System.out.println("AQUI ESTOY");
+        model.addAttribute("parametro", "Hola Mundo");
+        return "modal";
+    }
+
 }

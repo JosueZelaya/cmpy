@@ -164,6 +164,9 @@ body {
     background-color: white;
     //border: #000 solid 2px;
 }
+.modal {
+display: block;
+}
 
 //categorias
 

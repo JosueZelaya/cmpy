@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -121,7 +119,7 @@ public class PublicacionController {
             }
         }
         publicacion.setRecursoList(recursos);
-        Integer tipoPublicacion=2;
+        Integer tipoPublicacion=2;        
         publicacion.setFkTipoPublicacion(new TipoPublicacion(tipoPublicacion.longValue()));  
         
         Producto producto = new Producto();

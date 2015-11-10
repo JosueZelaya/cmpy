@@ -57,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "login/form**",
                             "/register",
                             "/logout",
+                            "/modal",
                             "/angular",
                             "/publicacion/getAnuncios/**").permitAll()
                 .antMatchers("/publicacion","/publicacion/agregarAnuncio").hasRole("USER")

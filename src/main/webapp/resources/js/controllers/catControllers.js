@@ -1,9 +1,8 @@
 
   
 
-
-cmy_ng.controller('catController', function($scope, $http) {
-    $http.get("/cmpy/categoria/todos")
+cmy_ng.controller('catTodoController', function($scope, $http) {
+    $http.get("/categoria/todos")
     .success(function (response) 
     {   
         

@@ -11,6 +11,7 @@ import com.tecnogeek.comprameya.entidad.Perfil;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.PerfilService;
 import com.tecnogeek.comprameya.repositories.UserService;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Log
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -32,16 +34,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("Autenticando usuario: "+username);
+        log.info("Autenticando usuario: "+username);        
         Usuario usuario = userService.findByLogin(username);
-        Perfil perfil = perfilService.getPerfilUsuario(username);
-        usuario.setFkPerfil(perfil);
+        Perfil perfil = perfilService.getPerfilUsuario(username);        
         if(usuario==null)
         {
-            System.out.println("No se encontró al usuario: "+username);
+            log.info("No se encontró al usuario: "+username);
             throw new UsernameNotFoundException("Login "+username+" not found");
         }
-        System.out.println("login: "+usuario.getLogin()+" clave: "+usuario.getPass());
+        usuario.setFkPerfil(perfil);
+        log.info("login: "+usuario.getLogin()+" clave: "+usuario.getPass());
         return new SecurityUser(usuario);
     }
     

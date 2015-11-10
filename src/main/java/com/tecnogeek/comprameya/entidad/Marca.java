@@ -14,16 +14,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import lombok.Data;
 
 /**
  *
@@ -31,15 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "marca")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Marca.findAll", query = "SELECT m FROM Marca m"),
-    @NamedQuery(name = "Marca.findByMarcaId", query = "SELECT m FROM Marca m WHERE m.marcaId = :marcaId"),
-    @NamedQuery(name = "Marca.findByNombre", query = "SELECT m FROM Marca m WHERE m.nombre = :nombre"),
-    @NamedQuery(name = "Marca.findByDescripcion", query = "SELECT m FROM Marca m WHERE m.descripcion = :descripcion"),
-    @NamedQuery(name = "Marca.findBySisActivo", query = "SELECT m FROM Marca m WHERE m.sisActivo = :sisActivo"),
-    @NamedQuery(name = "Marca.findBySisFechaCreacion", query = "SELECT m FROM Marca m WHERE m.sisFechaCreacion = :sisFechaCreacion"),
-    @NamedQuery(name = "Marca.findBySisFechaModificacion", query = "SELECT m FROM Marca m WHERE m.sisFechaModificacion = :sisFechaModificacion")})
+@Data
 public class Marca implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -70,100 +60,4 @@ public class Marca implements Serializable {
     @OneToMany(mappedBy = "fkMarca")
     private List<Modelo> modeloList;
 
-    public Marca() {
-    }
-
-    public Marca(Long marcaId) {
-        this.marcaId = marcaId;
-    }
-
-    public Marca(Long marcaId, String nombre, String descripcion, boolean sisActivo) {
-        this.marcaId = marcaId;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.sisActivo = sisActivo;
-    }
-
-    public Long getMarcaId() {
-        return marcaId;
-    }
-
-    public void setMarcaId(Long marcaId) {
-        this.marcaId = marcaId;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean getSisActivo() {
-        return sisActivo;
-    }
-
-    public void setSisActivo(boolean sisActivo) {
-        this.sisActivo = sisActivo;
-    }
-
-    public Date getSisFechaCreacion() {
-        return sisFechaCreacion;
-    }
-
-    public void setSisFechaCreacion(Date sisFechaCreacion) {
-        this.sisFechaCreacion = sisFechaCreacion;
-    }
-
-    public Date getSisFechaModificacion() {
-        return sisFechaModificacion;
-    }
-
-    public void setSisFechaModificacion(Date sisFechaModificacion) {
-        this.sisFechaModificacion = sisFechaModificacion;
-    }
-
-    @XmlTransient
-    public List<Modelo> getModeloList() {
-        return modeloList;
-    }
-
-    public void setModeloList(List<Modelo> modeloList) {
-        this.modeloList = modeloList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (marcaId != null ? marcaId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Marca)) {
-            return false;
-        }
-        Marca other = (Marca) object;
-        if ((this.marcaId == null && other.marcaId != null) || (this.marcaId != null && !this.marcaId.equals(other.marcaId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.tecnogeek.comprameya.entidad.Marca[ marcaId=" + marcaId + " ]";
-    }
-    
 }

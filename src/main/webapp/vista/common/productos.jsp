@@ -6,7 +6,7 @@
 
         <div class="col-sm-6 col-md-4">
         <div style="height: 400px;" class="thumbnail">                                             
-          <img src="/cmpy/images/getThumbnail/${publicacion.recursoList[0].ruta}" alt="imagen aqui">                                            
+          <img src="/images/getThumbnail/${publicacion.recursoList[0].ruta}" alt="imagen aqui">                                            
           <div class="caption">
             <h3>${publicacion.titulo}</h3>
             <p>${descripcionCorta}...</p>
