@@ -56,6 +56,8 @@ public class TipoPublicacion implements Serializable {
     @OneToMany(mappedBy = "fkTipoPublicacion")
     private List<Publicacion> publicacionList;
 
+    public TipoPublicacion() {
+    }
     public TipoPublicacion(Long tipoPublicacionId) {
         this.tipoPublicacionId = tipoPublicacionId;
     }

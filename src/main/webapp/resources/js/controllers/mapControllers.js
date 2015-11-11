@@ -44,12 +44,12 @@ cmy_ng.controller('mapController', function($scope,$http) {
                 listaUbicacion.push(ubicacion);
         });
         
-        $http.post("/cmpy/ubicacion/publicacion/set/" + publicacion_id.toString(), listaUbicacion);
+        $http.post("/ubicacion/publicacion/set/" + publicacion_id.toString(), listaUbicacion);
     }; 
     
     $scope.getUbicaciones = function(publicacion_id)
     {
-        $http.get("/cmpy/ubicacion/publicacion/get/" + publicacion_id.toString())
+        $http.get("/ubicacion/publicacion/get/" + publicacion_id.toString())
         .success(function (response)
         {
             angular.forEach(response, function(item){
@@ -89,7 +89,7 @@ cmy_ng.controller('mapController', function($scope,$http) {
 
     };
     
-    $http.get("/cmpy/ubicacion/publicacion/get/3")
+    $http.get("/ubicacion/publicacion/get/3")
     .success(function (response)
     {
         angular.forEach(response, function(item){
