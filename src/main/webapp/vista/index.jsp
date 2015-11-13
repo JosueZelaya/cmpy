@@ -23,13 +23,7 @@
 
         <%@include file="common/menuPrincipal.jsp" %>
 
-        <div class="container-fluid">
-            <!--          <div class="row">
-                        <div class="col-md-4 min_otros marcar container">
-                            <img src="${pageContext.request.contextPath}/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="imagen aqui">
-                        </div>
-                        <div class="col-md-8 min_otros marcar">Menu</div>
-                      </div>-->
+        <div class="container-fluid">            
             <div class="row">
                 <%@include file="common/menuCategorias.jsp" %>  
                 <%@include file="common/panelPublicacionesProductos.jsp" %>  
@@ -37,7 +31,7 @@
 
             </div>
             <%@include file="common/footer.jsp" %>
-            
+
         </div>
 
         <c:choose>
@@ -45,35 +39,8 @@
                 <%@include file="common/loginModal.jsp" %>
             </c:when>    
             <c:otherwise>    
-                <div class="modal fade" id="anunciarModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Anunciate y Vende mas!</h4>
-                            </div>
-                            <div class="modal-body">
-                                <%@include file="common/anuncioForm.jsp" %> 
-                            </div>      
-
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal --> 
-
-                <div class="modal fade" id="venderModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Vende Ya!</h4>
-                            </div>
-                            <div class="modal-body">
-                                <%@include file="common/venderForm.jsp" %> 
-                            </div>      
-
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal --> 
+                <%@include file="common/anunciarModal.jsp" %>
+                <%@include file="common/venderModal.jsp" %>
             </c:otherwise>
         </c:choose>
                 
@@ -83,10 +50,10 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/lodash/lodash.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>        
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/publicacionController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/mapControllers.js" ></script>
 
 

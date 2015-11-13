@@ -1,6 +1,6 @@
-<div class="col-md-8 min_cont marcar"  ng-controller="modalLogin">
+<div class="col-md-8 min_cont marcar">
     <div class="panel panel-default min_cont">                    
-        <div class="panel-heading">
+        <div class="panel-heading" ng-controller="modalController">
             <p>                            
                Publicaciones
                <c:choose>
@@ -8,10 +8,10 @@
 <!--                        <button value="VenderYa!" type="submit" class="btn btn-success pull-right" data-toggle="modal" data-target="#loginModal">                            
                             VenderYa!
                         </button>                          -->
-                        <button value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('lg')">VenderYa!</button>
+                        <button value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.jsp','lg')">VenderYa!</button>
                     </c:when>    
                     <c:otherwise>    
-                        <button value="VenderYa!" type="submit" class="btn btn-success pull-right"  data-toggle="modal" data-target="#venderModal">
+                        <button value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.jsp','lg')">
                             VenderYa!
                         </button>
                     </c:otherwise>

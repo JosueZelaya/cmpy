@@ -1,4 +1,4 @@
-<form:form method="post" action="/cmpy/publicacion/agregarPublicacion" enctype="multipart/form-data">
+<form:form method="post" action="/publicacion/agregarPublicacion" enctype="multipart/form-data">
     <label for="titulo">Agregue el nombre del producto</label>
     <input path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
     <br/>

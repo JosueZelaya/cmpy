@@ -19,37 +19,36 @@
     </head>
     <body>
 
-        <div ng-controller="ModalDemoCtrl">
-            <script type="text/ng-template" id="myModalContent.html">
-                <div class="modal-header">
-                <h3 class="modal-title">I'm a modal!</h3>
-                </div>
-                <div class="modal-body">
-                <ul>
-                <li ng-repeat="item in items">
-                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-                </ul>
-                Selected: <b>{{ selected.item }}</b>
-                </div>
-                <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                </div>
-            </script>
+        <%@include file="common/menuPrincipal.jsp" %>
 
-            <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
-            <button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>
-            <button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button>
-            <button type="button" class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled}})</button>
-            <div ng-show="selected">Selection from a modal: {{ selected}}</div>
+        <div class="container-fluid">            
+            <div class="row">
+                <%@include file="common/menuCategorias.jsp" %>  
+                <%@include file="common/panelPublicacionesProductos.jsp" %>  
+                <%@include file="common/panelPublicacionesEmpresas.jsp" %>  
+
+            </div>
+            <%@include file="common/footer.jsp" %>
+
         </div>
+
+        <c:choose>
+            <c:when test="${username=='anonymousUser'}">      
+                <%@include file="common/loginModal.jsp" %>
+            </c:when>    
+            <c:otherwise>    
+                <%@include file="common/anunciarModal.jsp" %>
+                <%@include file="common/venderModal.jsp" %>
+            </c:otherwise>
+        </c:choose>
 
         <!-- Cargamos los scripts --> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/modal.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>
+        
 
     </body>
 </html>

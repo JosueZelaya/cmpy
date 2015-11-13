@@ -1,6 +1,6 @@
 <%-- Usando totalmente angular --%>
 
-<div class="col-md-2 min_cont marcar  panelCategorias" ng-controller="catController">
+<div class="col-md-2 min_cont marcar panelCategorias" ng-controller="catController" uib-collapse="panelCategorias">
     <div class="panel panel-default min_cont" >
         <div class="panel-heading">Categorias</div>
         <div class="panel-body">

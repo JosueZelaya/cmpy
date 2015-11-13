@@ -1,9 +1,10 @@
-<script type="text/ng-template" id="loginModal.jsp">
+<script type="text/ng-template" id="venderModal.jsp">
     <div class="modal-header">
-        <h3 class="modal-title">Iniciar Sesion!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">Vende Ya!</h3>
     </div>
     <div class="modal-body">
-        <%@include file="loginForm.jsp" %>
+        <%@include file="venderForm.jsp" %>
     </div>
     <div class="modal-footer">
         <!--<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>-->
