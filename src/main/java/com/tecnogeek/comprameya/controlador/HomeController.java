@@ -8,11 +8,13 @@ package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.managers.ManejadorCategoria;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
 import com.tecnogeek.comprameya.repositories.CategoriaService;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
 import com.tecnogeek.comprameya.utils.GridResponse;
+import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -78,12 +81,24 @@ public class HomeController {
         model.addAttribute("parametro", "Hola Mundo");
         return "angular";
     }
-    
+
     @RequestMapping(value = "/modal", method = RequestMethod.GET)
     public String modalPage(Model model) {
         System.out.println("AQUI ESTOY");
         model.addAttribute("parametro", "Hola Mundo");
         return "modal";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user")    
+    public Usuario getUsuario() {
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName(); //get logged in username
+        
+        Usuario user = new Usuario();
+        user.setLogin(userName);
+        return user;
     }
 
 }

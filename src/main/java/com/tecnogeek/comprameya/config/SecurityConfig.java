@@ -57,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "login/form**",
                             "/register",
                             "/logout",
+                            "/user",
                             "/modal",
                             "/angular",
                             "/publicacion/getAnuncios/**").permitAll()

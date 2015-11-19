@@ -14,25 +14,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ComprameYa!</title>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">        
-        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">     
+        
+ 
         
     </head>
     <body>
-        
-        <div ui-view="menuPrincipal">
-            
+
+        <%@include file="common/menuPrincipal.jsp" %>
+
+        <div class="container-fluid">            
+            <div class="row">
+                <%@include file="common/menuCategorias.jsp" %>  
+                <%@include file="common/panelPublicacionesProductos.jsp" %>  
+                <%@include file="common/panelPublicacionesEmpresas.jsp" %>  
+
+            </div>
+            <%@include file="common/footer.jsp" %>
+
         </div>
 
-        <div ui-view="menuCategorias">
-            
-        </div>
-        
-<!--        <div ui-view="panelPublicacionesProductos">
-            
-        </div>-->
-        
-        <%@include file="common/panelPublicacionesProductos.jsp" %>  
-        
         <c:choose>
             <c:when test="${username=='anonymousUser'}">      
                 <%@include file="common/loginModal.jsp" %>
@@ -50,12 +51,10 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/lodash/lodash.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>        
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/mapControllers.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/menuPrincipalController.js" ></script>
 
 
     </body>
