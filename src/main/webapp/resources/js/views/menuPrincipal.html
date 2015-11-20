@@ -29,29 +29,29 @@ and open the template in the editor.
                         <img src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
                     </a>
                 </div>            
-                <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">
+                <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed" ng-controller="navigation">
 
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Home</a></li>                
                         <li class="active"><a href="/cmpy/angular">Angular</a></li> 
 
                         <!--<div ng-if="usuario.login === '' || usuario.login === 'anonymousUser'">-->
-                            <li ng-if="usuario.login === '' || usuario.login === 'anonymousUser'">
-                                <a href="#" ng-click="open('lg')">Login <span class="glyphicon glyphicon-user"></a>                      
-                            </li>                           
+                        <li ng-show="!authenticated">
+                            <a href="#" ng-click="open('lg')">Login <span class="glyphicon glyphicon-user"></a>                      
+                        </li>                           
                         <!--</div>-->
                         <!--<div ng-if="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
-                            <li class="dropdown" uib-dropdown="" ng-if="usuario.login !== '' && usuario.login !== 'anonymousUser'">
-                                <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenido {{usuario.login}} <span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Cambiar Clave</a></li>
-                                    <li><a href="#">Edita Perfil</a></li>
-                                    <li><a href="#">Configuracion</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>                                     
-                                    <li><a href="/logout">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
-                                </ul>
-                            </li>                        
+                        <li class="dropdown" uib-dropdown="" ng-show="authenticated">
+                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenido {{username}} <span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Cambiar Clave</a></li>
+                                <li><a href="#">Edita Perfil</a></li>
+                                <li><a href="#">Configuracion</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>                                     
+                                <li><a href="/logout">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
+                            </ul>
+                        </li>                        
                         <!--</div>-->
                     </ul>                    
                 </div>

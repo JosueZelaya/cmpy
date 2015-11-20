@@ -15,8 +15,10 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
             .state('index', {
                 url: "",
                 views: {
-                    "menuPrincipal": {templateUrl: '/resources/js/views/menuPrincipal.html',controller: 'menuPrincipalController'},
-                    "menuCategorias": {templateUrl: '/resources/js/views/menuCategorias.html'}
+                    "menuPrincipal": {templateUrl: '/resources/js/views/menuPrincipal.html', controller: 'menuPrincipalController'},
+                    "menuCategorias": {templateUrl: '/resources/js/views/menuCategorias.html'},
+                    "panelPublicacionesProductos": {templateUrl: '/resources/js/views/panelPublicacionesProductos.html'},
+                    "productos": {templateUrl: '/resources/js/views/productos.html',controller: 'publicacionController'}
                 }
             })
 
