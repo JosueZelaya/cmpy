@@ -1,4 +1,4 @@
-cmy_ng.controller('modalController', function ($scope, $uibModal, $log) {
+utils.controller('modalController', function ($scope, $uibModal, $log) {
 
     $scope.animationsEnabled = true;
 
@@ -33,7 +33,7 @@ cmy_ng.controller('modalController', function ($scope, $uibModal, $log) {
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $uibModal service used above.
 
-cmy_ng.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mensaje) {
+utils.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mensaje) {
 
     $scope.ok = function () {
         $uibModalInstance.close("Cerrando ventana modal");

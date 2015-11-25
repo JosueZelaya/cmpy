@@ -137,6 +137,13 @@
             <version>1.1.6</version>
         </dependency>
         
+        <!-- jackson for json -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.3</version>
+        </dependency>
+        
         <!-- Logging -->
         <dependency>
                 <groupId>org.slf4j</groupId>
@@ -403,7 +410,7 @@
     
     <build>        
         <plugins>
-<!--            <plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
@@ -431,7 +438,7 @@
                   </execution>
 
                 </executions>
-            </plugin>-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.openejb.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>

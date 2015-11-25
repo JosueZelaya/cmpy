@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<html ng-app="appComprameYa">
+<html ng-app="cmpy">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ComprameYa!</title>
@@ -53,13 +53,19 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index/index.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/navigation.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/catControllers.js" ></script>
+        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacion.module.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/categorias/categorias.module.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/categorias/catController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menuPrincipal/menuPrincipal.module.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/productos/productos.module.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/productos/productosService.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/productos/productosController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/maps/maps.module.js" ></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/utils.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/mapControllers.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/controllers/menuPrincipalController.js" ></script>
-
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.module.js" ></script>
 
     </body>
 </html>

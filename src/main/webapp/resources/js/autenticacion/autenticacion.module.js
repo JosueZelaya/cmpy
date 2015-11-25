@@ -1,0 +1,1 @@
+autenticacion = angular.module('cmpy.autenticacion',[]);
