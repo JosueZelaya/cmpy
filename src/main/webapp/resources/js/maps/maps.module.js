@@ -1,0 +1,1 @@
+maps = angular.module('cmpy.maps',[]);

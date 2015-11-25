@@ -1,0 +1,1 @@
+utils = angular.module('cmpy.utils',[]);

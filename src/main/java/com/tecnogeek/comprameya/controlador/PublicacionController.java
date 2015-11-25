@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -44,8 +45,8 @@ public class PublicacionController {
     ManejadorPublicacion pManager;
     
     @RequestMapping(value="/getAnuncios/{tipo}/{page}")
-//    @ResponseBody
-    public String getAnunciosPagados(@PathVariable int tipo,@PathVariable int page,Model model)
+    @ResponseBody
+    public GridResponse getAnuncios(@PathVariable int tipo,@PathVariable int page,Model model)
     {                
         int totalAnuncios;
         if(tipo==Constantes.PUBLICACION_GRATIS)
@@ -60,9 +61,30 @@ public class PublicacionController {
         model.addAttribute("publicaciones", gridPublicaciones.getRows());        
         model.addAttribute("tipoPublicacion",tipo);
         model.addAttribute("totalPages",gridPublicaciones.getTotalPages());        
-        return "common/productos";
+        return gridPublicaciones;
     }    
-    
+
+    @RequestMapping(value="/getAnunciosSinPaginar")
+    @ResponseBody
+    public GridResponse getAnunciosSinPaginar(Model model)
+    {                
+        int totalAnuncios;
+        int tipo = Constantes.PUBLICACION_GRATIS;
+        if(tipo==Constantes.PUBLICACION_GRATIS)
+        {
+            totalAnuncios = Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR;
+        }else
+        {
+            totalAnuncios = Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
+        }        
+        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(1,totalAnuncios, tipo);
+
+        model.addAttribute("publicaciones", gridPublicaciones.getRows());        
+        model.addAttribute("tipoPublicacion",tipo);
+        model.addAttribute("totalPages",gridPublicaciones.getTotalPages());        
+        return gridPublicaciones;
+    }    
+        
     @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
     public String agregarAnuncio(@RequestParam(value = "titulo", required = true) String titulo,
                                  @RequestParam(value = "descripcion", required = true) String descripcion,

@@ -1,4 +1,4 @@
-cmy_ng.controller('navigation',
+autenticacion.controller('autenticacionController',
         function ($rootScope, $scope, $http, $location) {
 
             var authenticate = function (credentials, callback) {
@@ -8,7 +8,7 @@ cmy_ng.controller('navigation',
                 } : {};
 
                 $http.get('/user', {headers: headers}).success(function (data) {
-                    if (data.login!=='' && data.login!=='anonymousUser') {
+                    if (data.login !== '' && data.login !== 'anonymousUser') {
                         $rootScope.authenticated = true;
                         $rootScope.username = data.login;
                     } else {

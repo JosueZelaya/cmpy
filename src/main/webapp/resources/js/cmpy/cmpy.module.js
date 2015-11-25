@@ -3,7 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var cmy_ng = angular.module('appComprameYa', ['ui.router', 'ui.bootstrap']);
+var cmy_ng = angular.module('cmpy', 
+[
+    'ui.router', 
+    'ui.bootstrap', 
+    'cmpy.autenticacion',
+    'cmpy.menuPrincipal',    
+    'cmpy.categorias',
+    'cmpy.maps',
+    'cmpy.productos',    
+    'cmpy.utils'
+]);
 
 cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -15,10 +25,10 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
             .state('index', {
                 url: "",
                 views: {
-                    "menuPrincipal": {templateUrl: '/resources/js/views/menuPrincipal.html', controller: 'menuPrincipalController'},
-                    "menuCategorias": {templateUrl: '/resources/js/views/menuCategorias.html'},
-                    "panelPublicacionesProductos": {templateUrl: '/resources/js/views/panelPublicacionesProductos.html'},
-                    "productos": {templateUrl: '/resources/js/views/productos.html',controller: 'publicacionController'}
+                    "menuPrincipal": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
+                    "menuCategorias": {templateUrl: '/resources/js/categorias/menuCategorias.html'},
+                    "panelPublicacionesProductos": {templateUrl: '/resources/js/productos/panelProductos.html'}
+//                    "productos": {templateUrl: '/resources/js/productos/productos.html'}
                 }
             })
 
