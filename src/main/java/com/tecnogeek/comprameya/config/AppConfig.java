@@ -7,8 +7,11 @@
 package com.tecnogeek.comprameya.config;
 
 import com.tecnogeek.comprameya.managers.ManejadorCategoria;
+import com.tecnogeek.comprameya.managers.ManejadorDestinatario;
+import com.tecnogeek.comprameya.managers.ManejadorMensaje;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
 import com.tecnogeek.comprameya.managers.ManejadorUbicacion;
+import com.tecnogeek.comprameya.managers.ManejadorUsuario;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +49,22 @@ public class AppConfig {
     @Bean
         public ManejadorUbicacion manejadorUbicacion(){
         return new ManejadorUbicacion();
+    }
+        
+        
+    @Bean
+        public ManejadorUsuario manejadorUsuario(){
+        return new ManejadorUsuario();
+    }
+
+    @Bean
+        public ManejadorDestinatario manejadorDestinatario(){
+        return new ManejadorDestinatario();
+    }
+        
+    @Bean
+        public ManejadorMensaje manejadorMensaje(){
+        return new ManejadorMensaje();
     }
     
 }

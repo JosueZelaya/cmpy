@@ -9,7 +9,6 @@ import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.managers.ManejadorUbicacion;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
-import com.tecnogeek.comprameya.repositories.UbicacionService;
 import com.tecnogeek.comprameya.pojo.pojoUbicacion;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/ubicacion")
 public class UbicacionController {
     
-    @Autowired
-    UbicacionService ubicacionService;
+
     @Autowired
     ManejadorUbicacion uManager;
     @Autowired
