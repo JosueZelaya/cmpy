@@ -30,6 +30,16 @@ public class ManejadorMensaje {
        
          return mensajes;
     }
+    
+    public Object setMensajes(Mensaje mensaje)
+    {
+        
+        mensajeService.save(mensaje);
+        
+        return null;
+        
+    }
+    
      
     
 }

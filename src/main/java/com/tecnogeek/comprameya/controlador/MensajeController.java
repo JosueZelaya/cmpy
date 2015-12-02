@@ -16,13 +16,13 @@ import com.tecnogeek.comprameya.pojo.pojoEmisor;
 import com.tecnogeek.comprameya.pojo.pojoMensaje;
 import com.tecnogeek.comprameya.pojo.pojoUsuario;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -70,8 +70,43 @@ public class MensajeController {
     }
     
     
+    @RequestMapping(value = "/set", method = RequestMethod.POST)
+    public @ResponseBody Object setMensaje(@RequestBody pojoMensaje pMensaje)  {          
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        
+        Usuario usr_local = uManager.getUsuarioLogin(userName);
+        
+        Mensaje mensaje = new Mensaje();
+        mensaje.setTitulo(pMensaje.getTitulo());
+        mensaje.setTexto(pMensaje.getMensaje());
+        mensaje.setFkUsuarioEmisor(usr_local);
+        
+        List<Destinatario> ldest = new ArrayList<>();
+        
+        for(pojoDestinatario pdest: pMensaje.destinatarios)
+        {
+            Destinatario dest = new Destinatario();
+            
+            dest.setFkUsuarioDestinatario(uManager.getUsuario(pdest.getId()));
+            dest.setFkMensaje(mensaje);
+            
+            
+            ldest.add(dest);
+        }
+
+        mensaje.setDestinatarioList(ldest);
+        
+        mManager.setMensajes(mensaje);
+              
+        return "exito";   
+    }
+    
+    
+    
+    
     @RequestMapping(value = "/usuarios/get", method = RequestMethod.GET)
-    public @ResponseBody List<pojoUsuario> getUsuarios()  {          
+    public @ResponseBody List<pojoUsuario> getUsuarios() {          
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         
