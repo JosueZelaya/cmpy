@@ -49,7 +49,7 @@ public class HomeController {
     public String welcomePage(Model model) {
         List<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR, Constantes.PUBLICACION_PAGADA);
 //        List<Publicacion> publicaciones = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR,Constantes.PUBLICACION_GRATIS);
-        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(0, Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC, "sisFechaCreacion"), Constantes.PUBLICACION_GRATIS);
+//        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(0, Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC, "sisFechaCreacion"), Constantes.PUBLICACION_GRATIS);
 //        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(0,Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC,"sisFechaCreacion")), Constantes.PUBLICACION_GRATIS);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -61,8 +61,8 @@ public class HomeController {
 
         model.addAttribute("username", userName);
         model.addAttribute("anuncios", anuncios);
-        model.addAttribute("publicaciones", gridPublicaciones.getRows());
-        model.addAttribute("totalPages", gridPublicaciones.getTotalPages());
+//        model.addAttribute("publicaciones", gridPublicaciones.getRows());
+//        model.addAttribute("totalPages", gridPublicaciones.getTotalPages());
         model.addAttribute("tipoPublicacion", Constantes.PUBLICACION_GRATIS);
         model.addAttribute("parametro", "Pagina Inicio");
         return "index";

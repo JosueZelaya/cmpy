@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,13 +64,13 @@ public class PublicacionController {
         model.addAttribute("totalPages",gridPublicaciones.getTotalPages());        
         return gridPublicaciones;
     }    
-
+    
     @ResponseBody
     @RequestMapping(value="/getAnunciosSinPaginar")    
-    public GridResponse<Publicacion> getAnunciosSinPaginar()
+    public List<Publicacion> getAnunciosSinPaginar()
     {                
         int totalAnuncios;
-        int tipo = Constantes.PUBLICACION_PAGADA;
+        int tipo = Constantes.PUBLICACION_GRATIS;
         if(tipo==Constantes.PUBLICACION_GRATIS)
         {
             totalAnuncios = Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR;
@@ -77,12 +78,12 @@ public class PublicacionController {
         {
             totalAnuncios = Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
         }        
-        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(1,totalAnuncios, tipo);
+        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(0, totalAnuncios), tipo);
 
 //        model.addAttribute("publicaciones", gridPublicaciones.getRows());        
 //        model.addAttribute("tipoPublicacion",tipo);
 //        model.addAttribute("totalPages",gridPublicaciones.getTotalPages());        
-        return gridPublicaciones;
+        return publicaciones;
     }    
         
     @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
@@ -107,9 +108,11 @@ public class PublicacionController {
                 Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        publicacion.setRecursoList(recursos);
-        Integer tipoPublicacion=1;
-        publicacion.setFkTipoPublicacion(new TipoPublicacion(tipoPublicacion.longValue()));
+//        publicacion.setRecursoList(recursos);
+        Integer tipo=1;
+        TipoPublicacion tipoPublicacion = new TipoPublicacion();
+        tipoPublicacion.setTipoPublicacionId(tipo.longValue());
+        publicacion.setFkTipoPublicacion(tipoPublicacion);
         publicacionService.save(publicacion);
         
         return "redirect:/";
@@ -140,9 +143,11 @@ public class PublicacionController {
                 Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        publicacion.setRecursoList(recursos);
-        Integer tipoPublicacion=2;        
-        publicacion.setFkTipoPublicacion(new TipoPublicacion(tipoPublicacion.longValue()));  
+//        publicacion.setRecursoList(recursos);        
+        Integer tipo=2;
+        TipoPublicacion tipoPublicacion = new TipoPublicacion();
+        tipoPublicacion.setTipoPublicacionId(tipo.longValue());
+        publicacion.setFkTipoPublicacion(tipoPublicacion);  
         
         Producto producto = new Producto();
         producto.setNombre(titulo);
@@ -151,7 +156,7 @@ public class PublicacionController {
         producto.setDescripcion(descripcion);
         List<Producto> productos = new ArrayList();
         productos.add(producto);
-        publicacion.setProductoList(productos);        
+//        publicacion.setProductoList(productos);        
         publicacionService.save(publicacion);
         
         return "redirect:/";
