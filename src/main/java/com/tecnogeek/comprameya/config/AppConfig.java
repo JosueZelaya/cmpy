@@ -10,6 +10,7 @@ import com.tecnogeek.comprameya.managers.ManejadorCategoria;
 import com.tecnogeek.comprameya.managers.ManejadorDestinatario;
 import com.tecnogeek.comprameya.managers.ManejadorMensaje;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
+import com.tecnogeek.comprameya.managers.ManejadorSuscriptor;
 import com.tecnogeek.comprameya.managers.ManejadorUbicacion;
 import com.tecnogeek.comprameya.managers.ManejadorUsuario;
 import org.springframework.context.annotation.Bean;
@@ -65,6 +66,11 @@ public class AppConfig {
     @Bean
         public ManejadorMensaje manejadorMensaje(){
         return new ManejadorMensaje();
+    }
+
+    @Bean
+    public ManejadorSuscriptor manejadorSuscriptor(){
+        return new ManejadorSuscriptor();
     }
     
 }
