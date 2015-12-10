@@ -143,12 +143,11 @@ public class PublicacionController {
                 Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-//        publicacion.setRecursoList(recursos);        
+        publicacion.setRecursoList(recursos);        
         Integer tipo=2;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setTipoPublicacionId(tipo.longValue());
-        publicacion.setFkTipoPublicacion(tipoPublicacion);  
-        
+        publicacion.setFkTipoPublicacion(tipoPublicacion);        
         Producto producto = new Producto();
         producto.setNombre(titulo);
         producto.setPrecio(BigDecimal.valueOf(precio));
@@ -156,7 +155,7 @@ public class PublicacionController {
         producto.setDescripcion(descripcion);
         List<Producto> productos = new ArrayList();
         productos.add(producto);
-//        publicacion.setProductoList(productos);        
+        publicacion.setProductoList(productos);
         publicacionService.save(publicacion);
         
         return "redirect:/";

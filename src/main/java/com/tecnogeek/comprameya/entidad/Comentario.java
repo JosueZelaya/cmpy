@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -59,6 +60,7 @@ public class Comentario implements Serializable {
     @Column(name = "sis_fecha_modificacion")
     @Temporal(TemporalType.DATE)
     private Date sisFechaModificacion;
+    @JsonBackReference
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
     @ManyToOne(optional = false)
     private Publicacion fkPublicacion;

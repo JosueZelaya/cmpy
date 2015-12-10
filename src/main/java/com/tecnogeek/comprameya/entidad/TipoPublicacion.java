@@ -6,7 +6,6 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -22,8 +21,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -36,10 +33,8 @@ import lombok.ToString;
  */
 @Entity
 @Table(name = "tipo_publicacion")
-//@Data
 @Getter
 @Setter
-//@ToString
 @ToString(exclude={"publicacionList"})
 @EqualsAndHashCode
 @RequiredArgsConstructor 
