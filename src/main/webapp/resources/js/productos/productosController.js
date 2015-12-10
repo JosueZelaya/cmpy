@@ -10,7 +10,7 @@ productos.controller('productosController',function($scope,$http){
             $http.get("/publicacion/getAnunciosSinPaginar")
                     .success(function (response)
                     {
-                        $scope.publicaciones = response.rows;
+                        $scope.publicaciones = response;
                     });
 
 });

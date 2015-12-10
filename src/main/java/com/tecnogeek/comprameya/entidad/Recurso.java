@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -66,6 +67,7 @@ public class Recurso implements Serializable {
     @JoinColumn(name = "fk_perfil", referencedColumnName = "perfil_id")
     @ManyToOne
     private Perfil fkPerfil;
+    @JsonBackReference
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
     @ManyToOne(cascade = CascadeType.ALL)
     private Publicacion fkPublicacion;
