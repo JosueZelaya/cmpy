@@ -57,9 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "login/form**",
                             "/register",
                             "/logout",
+                            "/user",
                             "/modal",
                             "/angular",
-                            "/publicacion/getAnuncios/**").permitAll()
+                            "/publicacion/getAnuncios/**",
+                            "/publicacion/getAnunciosSinPaginar").permitAll()
                 .antMatchers("/publicacion","/publicacion/agregarAnuncio").hasRole("USER")
                     .antMatchers("/admin","/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()

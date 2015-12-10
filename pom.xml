@@ -137,6 +137,19 @@
             <version>1.1.6</version>
         </dependency>
         
+        <!-- jackson for json -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.3</version>
+        </dependency>
+<!--        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>-->
+
+        
         <!-- Logging -->
         <dependency>
                 <groupId>org.slf4j</groupId>
@@ -406,7 +419,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.3.2</version>
+                <version>1.4.0</version>
 
                 <executions>
 

@@ -4,19 +4,19 @@
         <div class="panel-heading">Anuncios Pagados</div>
         <div class="panel-body">
             <div class="row">   
-                <div class="thumbnail col-lg-12">                    
+                <div class="thumbnail col-lg-12" ng-controller="modalController">
                     <!--<img src="/cmpy/images/getImage/${recurso.ruta}" alt="imagen aqui">-->
                     <h3>Empresas</h3>
                     <p>Anunciate en la red mas grande de Negocios.<br/>
                         <!--<a href="#" data-toggle="modal" data-target="#anunciarModal">Anunciate Ya!</a>-->  
                         <c:choose>
                             <c:when test="${username=='anonymousUser'}">
-                                <button value="VenderYa!" type="submit" class="btn btn-default"  data-toggle="modal" data-target="#loginModal">
+                                <button value="VenderYa!" type="submit" class="btn btn-default" ng-click="open('loginModal.jsp','lg')">
                                     Anunciate Ya!
                                 </button>                          
                             </c:when>    
                             <c:otherwise>    
-                                <button value="Anunciate Ya!" type="submit" class="btn btn-default"  data-toggle="modal" data-target="#anunciarModal">
+                                <button value="Anunciate Ya!" type="submit" class="btn btn-default" ng-click="open('anunciarModal.jsp','lg')">
                                     Anunciate Ya!
                                 </button>
                             </c:otherwise>

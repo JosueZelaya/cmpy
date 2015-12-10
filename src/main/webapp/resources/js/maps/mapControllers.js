@@ -1,6 +1,4 @@
-
-
-cmy_ng.controller('mapController', function($scope,$http) {
+maps.controller('mapController', function($scope,$http) {
     
     $scope.center = {
         latitude: 13.7724376,

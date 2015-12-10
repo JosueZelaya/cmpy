@@ -1,4 +1,4 @@
-<form:form method="post" action="/cmpy/publicacion/agregarAnuncio" enctype="multipart/form-data">
+<form:form method="post" action="/publicacion/agregarAnuncio" enctype="multipart/form-data">
     <label for="titulo">Agregar un título para el anuncio.</label>
     <input path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
     <br/>

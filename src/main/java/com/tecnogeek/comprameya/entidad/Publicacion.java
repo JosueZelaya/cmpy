@@ -5,6 +5,8 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +27,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -33,6 +40,11 @@ import lombok.Data;
 @Entity
 @Table(name = "publicacion")
 @Data
+//@Getter
+//@Setter
+//@ToString
+//@EqualsAndHashCode
+//@RequiredArgsConstructor 
 public class Publicacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,20 +84,21 @@ public class Publicacion implements Serializable {
     @NotNull
     @Column(name = "sis_activo")
     private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaModificacion;
-    @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Recurso> recursoList;
-    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
-    private List<Ubicacion> ubicacionList;
-    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
-    private List<Producto> productoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPublicacion")
-    private List<Comentario> comentarioList;
+//    @Column(name = "sis_fecha_creacion")
+//    @Temporal(TemporalType.DATE)
+//    private Date sisFechaCreacion;
+//    @Column(name = "sis_fecha_modificacion")
+//    @Temporal(TemporalType.DATE)
+//    private Date sisFechaModificacion;
+//    @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private List<Recurso> recursoList;
+//    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
+//    private List<Ubicacion> ubicacionList;
+//    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
+//    private List<Producto> productoList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPublicacion")
+//    private List<Comentario> comentarioList;    
+    @JsonManagedReference
     @JoinColumn(name = "fk_tipo_publicacion", referencedColumnName = "tipo_publicacion_id")
     @ManyToOne
     private TipoPublicacion fkTipoPublicacion;
