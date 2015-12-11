@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -71,8 +72,9 @@ public class Ubicacion implements Serializable {
     @JoinColumn(name = "fk_ciudad", referencedColumnName = "ciudad_id")
     @ManyToOne
     private Ciudad fkCiudad;
+    @JsonBackReference
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
-    @ManyToOne
+    @ManyToOne    
     private Publicacion fkPublicacion;
     @JoinColumn(name = "fk_tipo_ubicacion", referencedColumnName = "tipo_ubicacion_id")
     @ManyToOne

@@ -7,9 +7,12 @@ package com.tecnogeek.comprameya.managers;
 
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
+import com.tecnogeek.comprameya.utils.FileManager;
 import com.tecnogeek.comprameya.utils.GridResponse;
 import com.tecnogeek.comprameya.utils.Utilidades;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -52,13 +55,25 @@ public class ManejadorPublicacion {
     
     public List<Publicacion> getPublicaciones(PageRequest pageRequest,int tipo)
     {
+        List<Publicacion> publicaciones = new ArrayList();
         if(tipo==Constantes.PUBLICACION_PAGADA)
         {
-            return publicacionService.getPublicacionesPagadas(pageRequest);
+//            return publicacionService.getPublicacionesPagadas(pageRequest);
+            publicaciones =  publicacionService.getPublicacionesPagadas(pageRequest);
         }else
         {
-            return publicacionService.getPublicacionesGratis(pageRequest);
+//            return publicacionService.getPublicacionesGratis(pageRequest);
+            publicaciones = publicacionService.getPublicacionesGratis(pageRequest);
         }
+        
+        //Replace backslashes by forward slashes in order to work well in firefox.
+        for(Publicacion publicacion : publicaciones){
+            for(Recurso recurso : publicacion.getRecursoList()){                                      
+                recurso.setRuta(recurso.getRuta().replace('\\', '/'));
+            }
+        }
+        
+        return publicaciones;
     }   
     
     public GridResponse getPublicacionesGrid(int page,int pageZise,int tipo)

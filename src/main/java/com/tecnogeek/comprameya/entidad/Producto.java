@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -75,6 +76,7 @@ public class Producto implements Serializable {
     @JoinColumn(name = "fk_modelo", referencedColumnName = "modelo_id")
     @ManyToOne
     private Modelo fkModelo;
+    @JsonBackReference
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
     @ManyToOne
     private Publicacion fkPublicacion;

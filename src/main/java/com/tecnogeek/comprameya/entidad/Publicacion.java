@@ -39,12 +39,11 @@ import lombok.ToString;
  */
 @Entity
 @Table(name = "publicacion")
-@Data
-//@Getter
-//@Setter
-//@ToString
-//@EqualsAndHashCode
-//@RequiredArgsConstructor 
+@Getter
+@Setter
+@ToString(exclude={"publicacionList","recursoList","ubicacionList","productoList","comentarioList"})
+@EqualsAndHashCode
+@RequiredArgsConstructor 
 public class Publicacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -84,20 +83,24 @@ public class Publicacion implements Serializable {
     @NotNull
     @Column(name = "sis_activo")
     private boolean sisActivo;
-//    @Column(name = "sis_fecha_creacion")
-//    @Temporal(TemporalType.DATE)
-//    private Date sisFechaCreacion;
-//    @Column(name = "sis_fecha_modificacion")
-//    @Temporal(TemporalType.DATE)
-//    private Date sisFechaModificacion;
-//    @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    private List<Recurso> recursoList;
-//    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
-//    private List<Ubicacion> ubicacionList;
-//    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
-//    private List<Producto> productoList;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPublicacion")
-//    private List<Comentario> comentarioList;    
+    @Column(name = "sis_fecha_creacion")
+    @Temporal(TemporalType.DATE)
+    private Date sisFechaCreacion;
+    @Column(name = "sis_fecha_modificacion")
+    @Temporal(TemporalType.DATE)
+    private Date sisFechaModificacion;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Recurso> recursoList;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
+    private List<Ubicacion> ubicacionList;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
+    private List<Producto> productoList;
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPublicacion")
+    private List<Comentario> comentarioList;
     @JsonManagedReference
     @JoinColumn(name = "fk_tipo_publicacion", referencedColumnName = "tipo_publicacion_id")
     @ManyToOne

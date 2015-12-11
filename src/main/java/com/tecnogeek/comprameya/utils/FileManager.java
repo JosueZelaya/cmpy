@@ -54,9 +54,10 @@ public abstract class FileManager {
         int año = now.get(Calendar.YEAR);
         
         //Creamos la ruta del directorio raiz
-        String rootDir = System.getProperty("user.home");        
+//        String rootDir = System.getProperty("user.home");        
         String fileSeparator = System.getProperty("file.separator");        
-        rootDir += fileSeparator+"src"+fileSeparator+"images"+fileSeparator;
+//        rootDir += fileSeparator+"src"+fileSeparator+"images"+fileSeparator;
+        String rootDir = getImageBaseDir();
         
         
         //Construir la ruta relativa del archivo
@@ -139,12 +140,18 @@ public abstract class FileManager {
     public static byte[] getFile(String fileId) throws IOException
     {
         byte[] bytes=null;
-        String userDir = System.getProperty("user.home");                
-        String fileSeparator = System.getProperty("file.separator");
-        userDir = userDir+fileSeparator+"src"+fileSeparator+"images"+fileSeparator+fileId;
+        String userDir = getImageBaseDir()+fileId;
         Path path = Paths.get(userDir);
         bytes = Files.readAllBytes(path);     
        return bytes;
+    }
+    
+    public static String getImageBaseDir(){
+        byte[] bytes=null;
+        String userDir = System.getProperty("user.home");                
+        String fileSeparator = System.getProperty("file.separator");
+        userDir = userDir+fileSeparator+"src"+fileSeparator+"images"+fileSeparator;
+        return userDir;        
     }
     
     public static String getThumbnailPrefix()
