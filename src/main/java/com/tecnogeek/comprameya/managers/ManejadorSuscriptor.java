@@ -29,12 +29,17 @@ public class ManejadorSuscriptor {
          return suscriptores;
     }
     
-        public List<Suscriptor> getProveedor(Usuario usuario)
+    public List<Suscriptor> getProveedor(Usuario usuario)
     {
          List<Suscriptor> suscriptores =  suscriptorService.findByfkUsuarioProveedor(usuario);
        
          return suscriptores;
     }
     
+    public String setSuscriptor(Suscriptor sus)
+    {
+        suscriptorService.save(sus);
+        return null;
+    }
     
 }

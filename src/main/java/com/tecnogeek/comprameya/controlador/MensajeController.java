@@ -140,25 +140,9 @@ public class MensajeController {
        
        
               
-        return getUsuarioPojo(lista_usuarios);   
+        return uManager.getUsuarioPojo(lista_usuarios);   
     }
-    
-    private List<pojoUsuario> getUsuarioPojo(List<Usuario> lista)
-    {
-        List<pojoUsuario> lpUsuario = new ArrayList<>();
-        
-        
-        for(Usuario usr : lista)
-        {
-            pojoUsuario p = new pojoUsuario();
-            p.setId(usr.getUsuarioId());
-            p.setLogin(usr.getLogin());
-            
-            lpUsuario.add(p);
-        }
-        
-        return lpUsuario;
-    }
+  
     
     private List<pojoMensaje> getMensajePojo(List<Mensaje> lista)
     {
