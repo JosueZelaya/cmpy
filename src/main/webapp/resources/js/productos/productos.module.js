@@ -1,1 +1,1 @@
-var productos = angular.module('cmpy.productos', []);
+var modulo_productos = angular.module('cmpy.productos', []);

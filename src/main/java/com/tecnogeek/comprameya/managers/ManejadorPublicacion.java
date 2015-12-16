@@ -9,7 +9,6 @@ import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
-import com.tecnogeek.comprameya.utils.FileManager;
 import com.tecnogeek.comprameya.utils.GridResponse;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.util.ArrayList;
@@ -58,11 +57,9 @@ public class ManejadorPublicacion {
         List<Publicacion> publicaciones = new ArrayList();
         if(tipo==Constantes.PUBLICACION_PAGADA)
         {
-//            return publicacionService.getPublicacionesPagadas(pageRequest);
             publicaciones =  publicacionService.getPublicacionesPagadas(pageRequest);
         }else
         {
-//            return publicacionService.getPublicacionesGratis(pageRequest);
             publicaciones = publicacionService.getPublicacionesGratis(pageRequest);
         }
         
