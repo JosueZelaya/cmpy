@@ -11,6 +11,8 @@ import com.tecnogeek.comprameya.repositories.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -25,6 +27,15 @@ public class ManejadorUsuario {
      {
         return userService.findByLogin(login);
      }
+     
+     public Usuario getUsuarioLogin()
+     {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        return getUsuarioLogin(userName);
+     }
+     
+
      
      public Usuario getUsuario(long id)
      {

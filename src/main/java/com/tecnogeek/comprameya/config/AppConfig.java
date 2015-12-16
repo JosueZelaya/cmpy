@@ -7,6 +7,7 @@
 package com.tecnogeek.comprameya.config;
 
 import com.tecnogeek.comprameya.managers.ManejadorCategoria;
+import com.tecnogeek.comprameya.managers.ManejadorComentario;
 import com.tecnogeek.comprameya.managers.ManejadorDestinatario;
 import com.tecnogeek.comprameya.managers.ManejadorMensaje;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
@@ -71,6 +72,11 @@ public class AppConfig {
     @Bean
     public ManejadorSuscriptor manejadorSuscriptor(){
         return new ManejadorSuscriptor();
+    }
+    
+    @Bean
+    public ManejadorComentario manejadorComentario(){
+        return new ManejadorComentario();
     }
     
 }
