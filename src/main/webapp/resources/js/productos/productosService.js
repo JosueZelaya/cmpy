@@ -1,16 +1,13 @@
-productos.factory('productosService', ['$http', function ($http) {
+modulo_productos.service('productosService', ['$http', function ($http) {
+    
+    this.getAnuncios = function (tipo,page) {
+        var req = "/publicacion/getAnuncios/"+tipo+"/"+page;
+        return $http.get(req)            
+           .success(function (response)
+            {
+                return response;
+            });
+    }
+    
 
-        function getAnuncios(tipo,page) {
-            var productos = {};
-            var req = {
-                url: "/publicacion/getAnuncios",
-                data: {tipo: tipo, page: page}
-            };
-            $http.get(req)
-                    .success(function (response)
-                    {
-                        produtos = response.rows;
-                    });
-            return productos;
-        }
-    }]);
+}]);

@@ -60,8 +60,8 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/categorias/catController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menuPrincipal/menuPrincipal.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/productos/productos.module.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/productos/productosService.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/productos/productosController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/productos/productosService.js" ></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/productos/productosController.js" ></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/maps/maps.module.js" ></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/utils.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
