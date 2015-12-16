@@ -45,9 +45,9 @@ public class PublicacionController {
     @Autowired
     ManejadorPublicacion pManager;
     
-    @RequestMapping(value="/getAnuncios/{tipo}/{page}")
+    @RequestMapping(value="/getAnuncios/{tipo}/{page}",method=RequestMethod.GET)
     @ResponseBody
-    public GridResponse getAnuncios(@PathVariable int tipo,@PathVariable int page,Model model)
+    public List<Publicacion> getAnuncios(@PathVariable int tipo,@PathVariable int page,Model model)
     {                
         int totalAnuncios;
         if(tipo==Constantes.PUBLICACION_GRATIS)
@@ -57,34 +57,11 @@ public class PublicacionController {
         {
             totalAnuncios = Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
         }        
-        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(page,totalAnuncios, tipo);
-
-        model.addAttribute("publicaciones", gridPublicaciones.getRows());        
-        model.addAttribute("tipoPublicacion",tipo);
-        model.addAttribute("totalPages",gridPublicaciones.getTotalPages());        
-        return gridPublicaciones;
-    }    
-    
-    @ResponseBody
-    @RequestMapping(value="/getAnunciosSinPaginar")    
-    public List<Publicacion> getAnunciosSinPaginar()
-    {                
-        int totalAnuncios;
-        int tipo = Constantes.PUBLICACION_GRATIS;
-        if(tipo==Constantes.PUBLICACION_GRATIS)
-        {
-            totalAnuncios = Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR;
-        }else
-        {
-            totalAnuncios = Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
-        }        
-        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(0, totalAnuncios), tipo);
-
-//        model.addAttribute("publicaciones", gridPublicaciones.getRows());        
-//        model.addAttribute("tipoPublicacion",tipo);
-//        model.addAttribute("totalPages",gridPublicaciones.getTotalPages());        
+        
+        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(page, totalAnuncios), tipo);   
+        
         return publicaciones;
-    }    
+    }
         
     @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
     public String agregarAnuncio(@RequestParam(value = "titulo", required = true) String titulo,
@@ -108,7 +85,7 @@ public class PublicacionController {
                 Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-//        publicacion.setRecursoList(recursos);
+        publicacion.setRecursoList(recursos);
         Integer tipo=1;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setTipoPublicacionId(tipo.longValue());

@@ -1,1 +1,0 @@
-var productos = angular.module('cmpy.productos', []);

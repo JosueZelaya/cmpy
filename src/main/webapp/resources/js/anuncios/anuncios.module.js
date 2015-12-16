@@ -1,0 +1,1 @@
+var modulo_anuncios = angular.module('cmpy.anuncios', []);

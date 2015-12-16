@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>        
+        
+        <div class="col-md-2 min_cont marcar">                
+            <div class="panel panel-default min_cont">
+                <div class="panel-heading">Anuncios Pagados</div>
+                <div class="panel-body">
+                    <div class="row" ng-app="cmpy.anuncios" ng-controller="anunciosController">   
+                        <div class="thumbnail col-lg-12" ng-controller="modalController">
+                            <!--<img src="/cmpy/images/getImage/${recurso.ruta}" alt="imagen aqui">-->
+                            <h3>Empresas</h3>
+                            <p>Anunciate en la red mas grande de Negocios.<br/>
+                                <!--<a href="#" data-toggle="modal" data-target="#anunciarModal">Anunciate Ya!</a>-->  
+                                <button ng-show="!authenticated" value="Anunciate Ya!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.jsp', 'lg')">
+                                    Anunciate Ya!
+                                </button>
+                                <button ng-show="authenticated" value="Anunciate Ya!" type="submit" class="btn btn-success pull-right" ng-click="open('anunciarModal.jsp', 'lg')">
+                                    Anunciate Ya!
+                                </button>
+                            </p>                                          
+                        </div>
+                        <div ng-repeat="anuncio in anuncios">
+                            <div class="publicacion thumbnail col-lg-12">
+                                <img src="/images/getThumbnail/{{anuncio.recursoList[0].ruta}}" alt="imagen aqui">
+                                <h3>{{anuncio.titulo}}</h3>
+                                <p>{{anuncio.descripcion}}</p>                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        
+    </body>
+</html>
