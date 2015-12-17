@@ -3,21 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.tecnogeek.comprameya.repositories;
 
-import com.tecnogeek.comprameya.entidad.Usuario;
+import com.tecnogeek.comprameya.entidad.Comentario;
+import com.tecnogeek.comprameya.entidad.Publicacion;
 import java.util.List;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author jzelaya
+ * @author genaro
  */
-public interface UserService extends CrudRepository<Usuario,Long>{
+public interface ComentarioService extends CrudRepository<Comentario,Long>{
     
-    @Query("select u from Usuario u where u.login= ?1 and u.sisActivo='t'")
-    Usuario findByLogin(String login);
+    List<Comentario> findByfkPublicacion(Publicacion publicacion);
     
 }

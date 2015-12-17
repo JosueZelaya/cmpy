@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.tecnogeek.comprameya.repositories;
 
+import com.tecnogeek.comprameya.entidad.Suscriptor;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import java.util.List;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author jzelaya
+ * @author genaro
  */
-public interface UserService extends CrudRepository<Usuario,Long>{
+public interface SuscriptorService extends CrudRepository<Suscriptor,Long> {
+ 
+    List<Suscriptor> findByfkUsuarioProveedor(Usuario usuario);
     
-    @Query("select u from Usuario u where u.login= ?1 and u.sisActivo='t'")
-    Usuario findByLogin(String login);
+    List<Suscriptor> findByfkUsuarioSuscriptor(Usuario usuario);
     
 }
