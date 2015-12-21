@@ -29,7 +29,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
                     "menuCategorias": {templateUrl: '/resources/js/categorias/menuCategorias.html'},
                     "panelPublicacionesProductos": {templateUrl: '/resources/js/anuncios/panelProductos.html'},
                     "panelPublicacionesEmpresas": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'}
-//                    "productos": {templateUrl: '/resources/js/productos/productos.html'}
+                    
                 }
             })
 

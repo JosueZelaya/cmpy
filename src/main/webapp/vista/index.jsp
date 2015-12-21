@@ -38,16 +38,21 @@
         <div ui-view="panelPublicacionesEmpresas">
 
         </div>
+        
+        <div ui-view="loginModal.html">
 
-        <c:choose>
-            <c:when test="${username=='anonymousUser'}">      
-                <%@include file="common/loginModal.jsp" %>
-            </c:when>    
-            <c:otherwise>    
-                <%@include file="common/anunciarModal.jsp" %>
-                <%@include file="common/venderModal.jsp" %>
-            </c:otherwise>
-        </c:choose>
+        </div>                  
+        
+        <div ui-view="anunciarModal.html">
+
+        </div>  
+        
+        <div ui-view="venderModal.html">
+
+        </div>  
+        
+        
+        
 
         <!-- Cargamos los scripts --> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 

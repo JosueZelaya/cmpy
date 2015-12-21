@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!--<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body ng-app="cmpy.autenticacion" ng-controller="autenticacionController">-->
+<script type="text/ng-template" id="loginModal.html">
+    
+    <div class="modal-header">
+        <h3 class="modal-title">Iniciar Sesion!</h3>
+        </div>
+        <div class="modal-body">
+            <div class="jumbotron">                        
+<!--                <c:if test="${param.error != null}">
+                    
+                </c:if>
+
+                <c:if test="${param.logout != null}">
+                    <div class="alert alert-success"> 
+                        ¡Se ha cerrado la sessión!
+                    </div>
+                </c:if>-->
+                
+                <div ng-show="error">
+                    <div class="alert alert-danger"> 
+                        ¡Usuario y Clave incorrectas!
+                    </div>
+                </div>                                
+
+                <form id="loginForm" method="post" action="/login">
+                    <label for="username" class="col-sm-2 control-label">Usuario*</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Usuario" />
+                    <label for="password" class="col-sm-2 control-label">Clave*</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Clave" />
+                    <input type="submit" class="btn btn-primary" value="Login">
+                </form>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <!--<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>-->
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    
+</script>        
+        
+        
+<!--    </body>
+</html>-->
