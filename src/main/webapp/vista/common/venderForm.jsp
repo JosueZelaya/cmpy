@@ -9,9 +9,16 @@
     <textarea path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                            
     <br/>
     <label for="imagenes">Suba imagenes de su producto</label>
-    <div class="form-group">
+<!--    <div class="form-group">
         <input path="multipleFiles" id="imagenes" name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
-    </div>                    
+    </div>                    -->
+
+    <div flow-init>
+        <input type="file" flow-btn />
+        <input type="file" flow-btn flow-directory />
+          Input OR Other element as upload button
+        <span flow-btn>Upload File</span>
+    </div>
 
     <div class="modal-footer">                
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -1,4 +1,5 @@
-var modulo_anuncios = angular.module('cmpy.anuncios', []);
+var modulo_anuncios = angular.module('cmpy.anuncios', ['flow']);
+
 
 modulo_anuncios.constant('TIPO_PUBLICACION',{
     PAGADA : "1",
