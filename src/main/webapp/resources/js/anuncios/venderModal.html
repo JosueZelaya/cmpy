@@ -1,0 +1,100 @@
+<script type="text/ng-template" id="venderModal.html">
+        <div class="modal-body">
+
+            <form method="post" action="/publicacion/agregarPublicacion" enctype="multipart/form-data">
+                <label for="titulo">Agregue el nombre del producto</label>
+                <input path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
+                <br/>
+                <label for="precio">Precio del Producto</label>
+                <input name="precio" type="number" min="0" max="2000" id="precio" class="form-control">
+                <br/>
+                <label for="titulo">Describa el producto a vender</label>
+                <textarea path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                            
+                <br/>
+                <label for="imagenes">Suba imagenes de su producto</label>
+                <!--    <div class="form-group">
+                        <input path="multipleFiles" id="imagenes" name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
+                    </div>                    -->
+
+                <div flow-init>
+
+                    <h3>
+                    <a name="gallery-example" class="anchor" href="#gallery-example"><span class="octicon octicon-link"></span></a>Gallery upload</h3>
+                    <div flow-init
+                         flow-files-submitted="$flow.upload()"
+                         flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+                      <div class="drop" flow-drop ng-class="dropClass">
+                        <span class="btn btn-default" flow-btn>Upload Image</span>
+                        <span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder of Images</span>
+                        <b>OR</b>
+                        Drag And Drop your images here
+                      </div>
+
+                      <br/>
+
+                      <div>
+
+                        <div ng-repeat="file in $flow.files" class="gallery-box">
+                          <span class="title">{{file.name}}</span>
+                          <div class="thumbnail" ng-show="$flow.files.length">
+                            <img flow-img="file" />
+                          </div>
+                          <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                            <div class="progress-bar" role="progressbar"
+                                 aria-valuenow="{{file.progress() * 100}}"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 ng-style="{width: (file.progress() * 100) + '%'}">
+                              <span class="sr-only">{{file.progress()}}% Complete</span>
+                            </div>
+                          </div>
+                          <div class="btn-group">
+                            <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+                              Remove
+                            </a>
+                          </div>
+                        </div>
+                        <div class="clear"></div>
+                      </div>
+
+                    </div>
+                </div>
+
+                <div ng-repeat="file in $flow.files" class="gallery-box">
+                    <span class="title">{{file.name}}</span>
+                    <div class="thumbnail" ng-show="$flow.files.length">
+                      <img flow-img="file" />
+                    </div>
+                    <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                      <div class="progress-bar" role="progressbar"
+                           aria-valuenow="{{file.progress() * 100}}"
+                           aria-valuemin="0"
+                           aria-valuemax="100"
+                           ng-style="{width: (file.progress() * 100) + '%'}">
+                        <span class="sr-only">{{file.progress()}}% Complete</span>
+                      </div>
+                    </div>
+                    <div class="btn-group">
+                      <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+                        Remove
+                      </a>
+                    </div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+
+                <div class="modal-footer">                
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button value="VenderYa!" type="submit" class="btn btn-success pull-right">
+                        VenderYa!
+                    </button>
+                </div>
+                <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <!--<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>-->
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div> 
+</script>
