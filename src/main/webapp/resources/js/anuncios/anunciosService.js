@@ -7,7 +7,7 @@ modulo_anuncios.service('anunciosService', ['$http', function ($http) {
             {
                 return response;
             });
-    }
+    };
     
 
 }]);

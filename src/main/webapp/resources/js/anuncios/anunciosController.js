@@ -15,10 +15,15 @@ modulo_anuncios.controller('anunciosController',['$scope','anunciosService','TIP
     });
 
     agregarPublicacion = function(){
-        console.log("AQUI ESTOY");
+        console.log("AQUI ESTOY");        
         
         var formData = new FormData();
-        formData.append("multipleFiles",$scope.existingFlowObject.files);
+        
+        var index;
+        for (index = 0; index < $scope.existingFlowObject.files.length; ++index) {
+            formData.append("multipleFiles",$scope.existingFlowObject.files[index].file);            
+        }
+        
         formData.append("titulo",$scope.titulo);
         formData.append("precio",$scope.precio);
         formData.append("descripcion",$scope.descripcion);
@@ -28,7 +33,6 @@ modulo_anuncios.controller('anunciosController',['$scope','anunciosService','TIP
         request.send(formData);
         
         console.log("FINISHED");
-    }
-    
+    };    
         
 }]);
