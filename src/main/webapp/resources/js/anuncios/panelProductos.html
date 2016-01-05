@@ -17,14 +17,14 @@ and open the template in the editor.
                     <p>                            
                         Publicaciones
                         <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.jsp', 'lg')">VenderYa!</button>
-                        <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.jsp', 'lg')">
+                        <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html', 'lg')">
                             VenderYa!
                         </button>
                     </p>
                 </div>  
 
                 <div id="publicacionesProductos" class="panel-body">
-                    <div class="row" ng-app="cmpy.productos" ng-controller="productosController">
+                    <div class="row" ng-app="cmpy.anuncios" ng-controller="anunciosController">
                         <div class="col-sm-6 col-md-4" ng-repeat="publicacion in publicaciones">
                             <div style="height: 400px;" class="thumbnail">                                             
                                 <img src="/images/getThumbnail/{{publicacion.recursoList[0].ruta}}" alt="imagen aqui">                                            

@@ -6,8 +6,6 @@
 
 package com.tecnogeek.comprameya.config;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -50,9 +48,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         String userDir = System.getProperty("user.home");
         String fileSeparator = System.getProperty("file.separator");                
         userDir = "file:"+userDir+fileSeparator+"src"+fileSeparator+"images"+fileSeparator;
-//        userDir = "file:/"+userDir+fileSeparator+"src"+fileSeparator+"images"+fileSeparator;
-//        userDir = "file:/C:/Users/jzelaya/src/images/";
-        //Path directory = Paths.get(userDir);
         System.out.println("PATH TO IMAGES: "+userDir);
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");               
         registry.addResourceHandler("/images/**").addResourceLocations(userDir);

@@ -6,12 +6,13 @@
 var cmy_ng = angular.module('cmpy', 
 [
     'ui.router', 
-    'ui.bootstrap', 
+    'ui.bootstrap',
+    'flow',
     'cmpy.autenticacion',
     'cmpy.menuPrincipal',    
     'cmpy.categorias',
     'cmpy.maps',
-    'cmpy.productos',    
+    'cmpy.anuncios',
     'cmpy.utils'
 ]);
 
@@ -27,8 +28,9 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
                 views: {
                     "menuPrincipal": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
                     "menuCategorias": {templateUrl: '/resources/js/categorias/menuCategorias.html'},
-                    "panelPublicacionesProductos": {templateUrl: '/resources/js/productos/panelProductos.html'}
-//                    "productos": {templateUrl: '/resources/js/productos/productos.html'}
+                    "panelPublicacionesProductos": {templateUrl: '/resources/js/anuncios/panelProductos.html'},
+                    "panelPublicacionesEmpresas": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'},                    
+                    "venderModal": {templateUrl: '/resources/js/anuncios/venderModal.html'}
                 }
             })
 

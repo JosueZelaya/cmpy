@@ -85,7 +85,7 @@ public class PublicacionController {
                 Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-//        publicacion.setRecursoList(recursos);
+        publicacion.setRecursoList(recursos);
         Integer tipo=1;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setTipoPublicacionId(tipo.longValue());
