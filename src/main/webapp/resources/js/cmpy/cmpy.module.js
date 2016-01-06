@@ -7,6 +7,7 @@ var cmy_ng = angular.module('cmpy',
 [
     'ui.router', 
     'ui.bootstrap',
+    'ngAnimate',
     'flow',
     'cmpy.autenticacion',
     'cmpy.menuPrincipal',    
