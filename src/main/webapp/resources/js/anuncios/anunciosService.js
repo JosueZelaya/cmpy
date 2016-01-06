@@ -28,8 +28,7 @@ modulo_anuncios.service('anunciosService',function ($http) {
         request.send(formData);
     };
 
-}]);
-
+});
 
 modulo_anuncios.service('Publicacion', function(){
     

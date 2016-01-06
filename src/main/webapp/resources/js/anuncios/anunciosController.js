@@ -1,4 +1,4 @@
-modulo_anuncios.controller('anunciosController',['$scope','anunciosService','TIPO_PUBLICACION','flowFactory','Publicacion',function($scope,anunciosService,TIPO_PUBLICACION,flowFactory,Publicacion){
+modulo_anuncios.controller('anunciosController',function($scope,anunciosService,TIPO_PUBLICACION,flowFactory,Publicacion){
     
     // inicializando el componente de carga de imagenes
     $scope.existingFlowObject = flowFactory.create({});
@@ -28,4 +28,4 @@ modulo_anuncios.controller('anunciosController',['$scope','anunciosService','TIP
         
     };    
         
-}]);
+});
