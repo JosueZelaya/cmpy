@@ -20,11 +20,11 @@ and open the template in the editor.
                         <a id="cat_{{categoria.id}}" href="#" class="list-group-item" ng-click="categoria.collapse = !categoria.collapse">
                             {{categoria.nombre}}
                         </a>   
-                        <div id="refcat_{{categoria.id}}" class="list-group cat level2" collapse="categoria.collapse" ng-repeat="sub_categoria in categoria.hijos">
+                        <div id="refcat_{{categoria.id}}" class="list-group cat level2" uib-collapse="categoria.collapse" ng-repeat="sub_categoria in categoria.hijos">
                             <a id="cat_{{sub_categoria.id}}" href="#" class="list-group-item" ng-click="sub_categoria.collapse = !sub_categoria.collapse">
                                 {{sub_categoria.nombre}}
                             </a>
-                            <div id="refcat_{{categoria.id}}" class="list-group cat level3" collapse="sub_categoria.collapse" ng-repeat="sub_sub_categoria in sub_categoria.hijos">
+                            <div id="refcat_{{categoria.id}}" class="list-group cat level3" uib-collapse="sub_categoria.collapse" ng-repeat="sub_sub_categoria in sub_categoria.hijos">
                                 <a id="cat_{{sub_sub_categoria.id}}" href="#" class="list-group-item">
                                     {{sub_sub_categoria.nombre}}
                                 </a>

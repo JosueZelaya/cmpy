@@ -1,5 +1,5 @@
-categorias.controller('catController', function($scope, $http) {
-    $http.get("/categoria/todos")
+categorias.controller('catController', function($scope,catService) {
+    catService.getCategorias()
     .success(function (response) 
     {   
         

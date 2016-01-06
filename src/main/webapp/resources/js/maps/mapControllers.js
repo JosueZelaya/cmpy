@@ -1,4 +1,4 @@
-maps.controller('mapController', function($scope,$http) {
+maps.controller('mapController', function($scope,$http,mapService) {
     
     $scope.center = {
         latitude: 13.7724376,
@@ -42,12 +42,15 @@ maps.controller('mapController', function($scope,$http) {
                 listaUbicacion.push(ubicacion);
         });
         
-        $http.post("/ubicacion/publicacion/set/" + publicacion_id.toString(), listaUbicacion);
+        mapService.setUbicaciones(publicacion_id,listaUbicacion);
+        
+        //$http.post("/ubicacion/publicacion/set/" + publicacion_id.toString(), listaUbicacion);
     }; 
     
     $scope.getUbicaciones = function(publicacion_id)
     {
-        $http.get("/ubicacion/publicacion/get/" + publicacion_id.toString())
+        //$http.get("/ubicacion/publicacion/get/" + publicacion_id.toString())
+        mapService.getUbicaciones(publicacion_id)
         .success(function (response)
         {
             angular.forEach(response, function(item){

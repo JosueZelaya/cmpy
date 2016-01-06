@@ -1,4 +1,4 @@
-modulo_anuncios.controller('anunciosController',['$scope','anunciosService','TIPO_PUBLICACION','flowFactory',function($scope,anunciosService,TIPO_PUBLICACION,flowFactory){
+modulo_anuncios.controller('anunciosController',function($scope,anunciosService,TIPO_PUBLICACION,flowFactory){
     
     anunciosService.getAnuncios(TIPO_PUBLICACION.GRATIS,'0')
         .success(function(publicaciones) {
@@ -28,7 +28,7 @@ modulo_anuncios.controller('anunciosController',['$scope','anunciosService','TIP
         request.send(formData);
         
         console.log("FINISHED");
-    }
+    };
     
         
-}]);
+});
