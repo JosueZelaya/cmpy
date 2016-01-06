@@ -11,7 +11,7 @@ package com.tecnogeek.comprameya.constantes;
  */
 public abstract class Constantes {
     
-    public static int TOTAL_ANUNCIOS_GRATIS_MOSTRAR = 12;
+    public static int TOTAL_ANUNCIOS_GRATIS_MOSTRAR = 100;
     public static int TOTAL_ANUNCIOS_PAGADOS_MOSTRAR = 6;
     public static int PUBLICACION_GRATIS = 2;
     public static int PUBLICACION_PAGADA = 1;
