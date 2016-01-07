@@ -40,6 +40,6 @@ utils.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mensa
     };
 
     $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');        
     };
 });

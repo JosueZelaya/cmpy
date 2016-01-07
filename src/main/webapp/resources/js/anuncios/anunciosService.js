@@ -1,4 +1,4 @@
-modulo_anuncios.service('anunciosService',function ($http) {
+modulo_anuncios.service('anunciosService',function ($http,$log) {
     
     this.getAnuncios = function (tipo,page) {
         var req = "/publicacion/getAnuncios/"+tipo+"/"+page;
@@ -10,7 +10,7 @@ modulo_anuncios.service('anunciosService',function ($http) {
     };
     
     
-    this.agregarPublicacion = function(publicacion){
+    this.agregarPublicacion = function(publicacion,callback){
         
         var formData = new FormData();
         formData.append("titulo",publicacion.titulo);
@@ -22,10 +22,15 @@ modulo_anuncios.service('anunciosService',function ($http) {
         for (var index = 0; index < publicacion.imagenes.length; ++index) {            
             formData.append("multipleFiles",publicacion.imagenes[index]);
         }
-        
+
         var request = new XMLHttpRequest();
         request.open('POST',"/publicacion/agregarPublicacion");
         request.send(formData);
+        
+        if (request.readyState === 4 && request.status === 200) {
+            $log.info("Publicacion agregada!");            
+        }
+        callback();
     };
 
 });
