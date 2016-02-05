@@ -35,7 +35,7 @@ public interface PublicacionService extends PagingAndSortingRepository<Publicaci
     @Query("select p from Publicacion p where p.fkTipoPublicacion='2'")
     List<Publicacion> getPublicacionesGratis();
     
-    @Query("select p from Publicacion p where p.fkTipoPublicacion='2'")
+    @Query("select p from Publicacion p where p.fkTipoPublicacion='2' order by p.publicacionId desc")
     List<Publicacion> getPublicacionesGratis(Pageable pageable);        
     
     @Query("select count(p) from Publicacion p where p.fkTipoPublicacion='1'")

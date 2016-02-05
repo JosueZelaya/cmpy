@@ -25,19 +25,20 @@ modulo_anuncios.controller('anunciosController', function ($scope, anunciosServi
         publicacion.setImagenes(imagenes);
 
         anunciosService.agregarPublicacion(publicacion, function () {
-            $scope.cancel();
-            $scope.getPublicaciones();
+            $scope.cancel();            
+            $scope.getPublicaciones(function(){
+                $scope.$apply();
+            });
         });
 
     };
     
-    $scope.getPublicaciones = function(){
-      anunciosService.getAnuncios(TIPO_PUBLICACION.GRATIS, '0')
-            .success(function (publicaciones) {                
-                $scope.$apply(function(){
-                    $scope.publicaciones = publicaciones;
-                });
-            });  
+    $scope.getPublicaciones = function (callback) {
+            anunciosService.getAnuncios(TIPO_PUBLICACION.GRATIS, '0')
+                    .success(function (publicaciones) {                        
+                            $scope.publicaciones = publicaciones;
+                            callback();
+                        });
     };
 
 });
