@@ -57,10 +57,10 @@ public class ManejadorPublicacion {
         List<Publicacion> publicaciones = new ArrayList();
         if(tipo==Constantes.PUBLICACION_PAGADA)
         {
-            publicaciones =  publicacionService.getPublicacionesPagadas(pageRequest);
+            publicaciones =  publicacionService.getPublicacionesPagadas(pageRequest);            
         }else
         {
-            publicaciones = publicacionService.getPublicacionesGratis(pageRequest);
+            publicaciones = publicacionService.getPublicacionesGratis(pageRequest);            
         }
         
         //Replace backslashes by forward slashes in order to work well in firefox.
