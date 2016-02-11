@@ -1,11 +1,11 @@
-modulo_anuncios.controller('anunciosController', function ($scope, anunciosService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+modulo_anuncios.controller('anunciosController', function ($rootScope,$scope, anunciosService, TIPO_PUBLICACION, flowFactory, Publicacion) {
 
     // inicializando el componente de carga de imagenes
     $scope.existingFlowObject = flowFactory.create({});
 
     anunciosService.getAnuncios(TIPO_PUBLICACION.GRATIS, '0')
             .success(function (publicaciones) {
-                $scope.publicaciones = publicaciones;
+                $rootScope.publicaciones = publicaciones;
             });
 
     anunciosService.getAnuncios(TIPO_PUBLICACION.PAGADA, '0')
@@ -23,22 +23,22 @@ modulo_anuncios.controller('anunciosController', function ($scope, anunciosServi
 
         var publicacion = new Publicacion($scope.titulo, $scope.precio, $scope.descripcion);
         publicacion.setImagenes(imagenes);
-
-        anunciosService.agregarPublicacion(publicacion, function () {
+        
+        anunciosService.agregarPublicacion(publicacion)
+                .success(function(respuesta){
             $scope.cancel();            
-            $scope.getPublicaciones(function(){
-                $scope.$apply();
-            });
+            $scope.getPublicaciones();
         });
 
     };
     
-    $scope.getPublicaciones = function (callback) {
+    $scope.getPublicaciones = function () {
+        $rootScope.$applyAsync(function(){
             anunciosService.getAnuncios(TIPO_PUBLICACION.GRATIS, '0')
                     .success(function (publicaciones) {                        
-                            $scope.publicaciones = publicaciones;
-                            callback();
+                            $rootScope.publicaciones = publicaciones;                            
                         });
+        });            
     };
 
 });

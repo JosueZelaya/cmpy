@@ -10,7 +10,7 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
     };
 
 
-    this.agregarPublicacion = function (publicacion, callback) {
+    this.agregarPublicacion = function (publicacion) {
 
         var formData = new FormData();
         formData.append("titulo", publicacion.titulo);
@@ -23,12 +23,12 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
             formData.append("multipleFiles", publicacion.imagenes[index]);
         }
 
-        $http.post('/publicacion/agregarPublicacion', formData, {
+        return $http.post('/publicacion/agregarPublicacion', formData, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         })
         .success(function(){
-            callback();
+            return "Publiacion Agregada!";
         })
         .error(function(){
         });     

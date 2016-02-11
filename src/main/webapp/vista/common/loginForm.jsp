@@ -1,4 +1,4 @@
-<div class="jumbotron">                        
+<div class="jumbotron"  ng-app="cmpy.autenticacion" ng-controller="autenticacionController">                        
     <c:if test="${param.error != null}">
         <div class="alert alert-danger"> 
             ¡Usuario y Clave incorrectas!
