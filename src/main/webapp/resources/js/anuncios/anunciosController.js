@@ -53,6 +53,10 @@ modulo_anuncios.controller('anunciosController', function ($rootScope,$scope, an
         
     };
     
+    $scope.detallarPublicacion = function(publicacion){
+        $rootScope.publicacion = publicacion;
+    };
+    
     var init = function () {
         
         // inicializando el componente de carga de imagenes
