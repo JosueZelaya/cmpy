@@ -36,12 +36,12 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
             })
             
             .state('vistaProducto', {
-                url: "/detalleProducto",     
+                url: "/vistaProducto",     
                 templateUrl: '/resources/js/anuncios/vistaProducto.html',
                 views: {
                     "menuPrincipal": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
                     "menuCategorias": {templateUrl: '/resources/js/categorias/menuCategorias.html'},     
-                    "detalleProducto": {templateUrl: '/resources/js/anuncios/detalleProducto.html'},     
+                    "panelPublicacionesProductos": {templateUrl: '/resources/js/anuncios/detalleProducto.html'},
                     "panelPublicacionesEmpresas": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'}                    
                 }
             })
