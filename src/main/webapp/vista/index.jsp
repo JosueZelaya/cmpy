@@ -22,7 +22,11 @@
         </style>
     </head>
     <body ng-cloak class="ng-cloak">
+        
+        <div ui-view="">
 
+        </div>        
+        
         <div ui-view="menuPrincipal">
 
         </div>
@@ -32,7 +36,7 @@
         </div>
 
         <div ui-view="panelPublicacionesProductos">
-
+            
         </div>
         
         <div ui-view="panelPublicacionesEmpresas">
