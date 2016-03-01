@@ -36,7 +36,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
             })
             
             .state('vistaProducto', {
-                url: "/vistaProducto",     
+                url: "/vistaProducto/{publicacionId}",     
                 templateUrl: '/resources/js/anuncios/vistaProducto.html',
                 views: {
                     "menuPrincipal": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},

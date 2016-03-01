@@ -1,4 +1,11 @@
-modulo_anuncios.controller('anunciosController', function ($rootScope,$scope, anunciosService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $stateParams, anunciosService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+    
+    var getPublicacion = function(id){
+        return anunciosService.getPublicacionById(id)
+                .success(function (publicacion){
+                   return publicacion; 
+                });
+    }
     
     var getPublicaciones = function(tipo,pagina) {
         return anunciosService.getAnuncios(tipo,pagina)
@@ -18,6 +25,12 @@ modulo_anuncios.controller('anunciosController', function ($rootScope,$scope, an
         getPublicaciones(TIPO_PUBLICACION.PAGADA, '0')
                 .success(function(publicaciones){
             $rootScope.anuncios = publicaciones;
+        });
+    };
+    
+    var cargarDetallePublicacion = function(id){
+        getPublicacion(id).success(function(publicacion){
+            $rootScope.publicacion = publicacion;
         });
     };
     
@@ -53,10 +66,6 @@ modulo_anuncios.controller('anunciosController', function ($rootScope,$scope, an
         
     };
     
-    $scope.detallarPublicacion = function(publicacion){
-        $rootScope.publicacion = publicacion;
-    };
-    
     var init = function () {
         
         // inicializando el componente de carga de imagenes
@@ -66,6 +75,10 @@ modulo_anuncios.controller('anunciosController', function ($rootScope,$scope, an
         
         cargarPublicacionesPagadas();
         
+        var publicacionId = $stateParams.publicacionId;
+        if(publicacionId){
+            cargarDetallePublicacion(publicacionId);   
+        }
     };
     
     init();

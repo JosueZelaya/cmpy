@@ -45,6 +45,12 @@ public class PublicacionController {
     @Autowired
     ManejadorPublicacion pManager;
     
+    @RequestMapping(value="/getPublicacionById/{id}",method=RequestMethod.GET)
+    @ResponseBody
+    public Publicacion getPublicacionById(@PathVariable Long id){
+        return pManager.getPublicacion(id);
+    }
+    
     @RequestMapping(value="/getAnuncios/{tipo}/{page}",method=RequestMethod.GET)
     @ResponseBody
     public List<Publicacion> getAnuncios(@PathVariable int tipo,@PathVariable int page,Model model)

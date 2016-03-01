@@ -97,7 +97,6 @@ public class ManejadorPublicacion {
     
     public Publicacion getPublicacion(long publicacion_id)
     {
-        //return publicacionService.getPublicacion(publicacion_id).get(0);
         return publicacionService.findOne(publicacion_id);
     }
     
