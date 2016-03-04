@@ -16,15 +16,17 @@ and open the template in the editor.
                 <div class="panel-heading" ng-controller="modalController">
                     <p>                            
                         Publicaciones
-                        <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.jsp', 'lg')">VenderYa!</button>
-                        <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html', 'lg')">
-                            VenderYa!
+                        <button ng-show="!authenticated" type="button" class="btn btn-success pull-right">
+                            Compralo Ya!
+                        </button>
+                        <button ng-show="authenticated" value="Compralo Ya!" type="submit" class="btn btn-success pull-right">
+                            Compralo Ya!
                         </button>
                     </p>
                 </div>  
                 
                 <div id="publicacionesProductos" class="panel-body">
-                    <div class="row" ng-app="cmpy.anuncios" ng-controller="anunciosController">
+                    <div class="row" >
                             <div style="height: 305px">
                                 <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
                                   <uib-slide ng-repeat="recurso in publicacion.recursoList" active="slide.active" index="slide.id">

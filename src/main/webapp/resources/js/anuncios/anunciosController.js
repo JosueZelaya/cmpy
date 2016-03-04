@@ -25,6 +25,9 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         getPublicaciones(TIPO_PUBLICACION.PAGADA, '0')
                 .success(function(publicaciones){
             $rootScope.anuncios = publicaciones;
+//            
+//            $location.hash('publicacionesProductos');
+//            $anchorScroll();
         });
     };
     
@@ -76,7 +79,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         cargarPublicacionesPagadas();
         
         var publicacionId = $stateParams.publicacionId;
-        if(publicacionId){
+        if(publicacionId!==null){
             cargarDetallePublicacion(publicacionId);   
         }
     };
