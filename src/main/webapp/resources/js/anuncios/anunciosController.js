@@ -79,7 +79,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         cargarPublicacionesPagadas();
         
         var publicacionId = $stateParams.publicacionId;
-        if(publicacionId!==null){
+        if(publicacionId!==undefined){
             cargarDetallePublicacion(publicacionId);   
         }
     };
