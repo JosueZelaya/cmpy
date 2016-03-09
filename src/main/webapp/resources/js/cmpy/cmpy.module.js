@@ -24,14 +24,16 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
             // HOME STATES AND NESTED VIEWS ========================================
-            .state('index', {
+            .state('home', {
                 url: "",
                 views: {
-                    "menuPrincipal": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
-                    "menuCategorias": {templateUrl: '/resources/js/categorias/menuCategorias.html'},
-                    "panelPublicacionesProductos": {templateUrl: '/resources/js/anuncios/panelProductos.html'},
-                    "panelPublicacionesEmpresas": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'},                    
-                    "venderModal": {templateUrl: '/resources/js/anuncios/venderModal.html'}
+                    '': { templateUrl: '/resources/js/cmpy/home.html' },
+                    
+                    "menuPrincipal@home": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
+                    "menuCategorias@home": {templateUrl: '/resources/js/categorias/menuCategorias.html'},
+                    "panelPublicacionesProductos@home": {templateUrl: '/resources/js/anuncios/panelProductos.html'},
+                    "panelPublicacionesEmpresas@home": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'},                    
+                    "venderModal@home": {templateUrl: '/resources/js/anuncios/venderModal.html'}
                 }
             })
             

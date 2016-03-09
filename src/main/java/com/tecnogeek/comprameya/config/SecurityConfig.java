@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/angular",
                             "/publicacion/getAnuncios/**",
                             "/publicacion/getAnunciosSinPaginar",
-                            "/publicacion/getPublicacionById/*").permitAll()
+                            "/publicacion/getPublicacionById/**").permitAll()
                 .antMatchers("/publicacion","/publicacion/agregarAnuncio").hasRole("USER")
                     .antMatchers("/admin","/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()

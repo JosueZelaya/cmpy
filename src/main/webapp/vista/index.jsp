@@ -23,38 +23,14 @@
     </head>
     <body ng-cloak class="ng-cloak">
         
-        <div ui-view="">
+        <!-- MAIN CONTENT -->
+        <!--<div class="container">-->
 
-        </div>        
+            <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+            <div ui-view></div>
+
+        <!--</div>-->        
         
-        <div ui-view="menuPrincipal">
-
-        </div>
-
-        <div ui-view="menuCategorias">
-
-        </div>
-
-        <div ui-view="panelPublicacionesProductos">
-            
-        </div>
-        
-        <div ui-view="panelPublicacionesEmpresas">
-
-        </div>
-        
-<!--        <div ui-view="loginModal.html">
-
-        </div>                  -->
-        
-        <div ui-view="anunciarModal">
-
-        </div>  
-        
-        <div ui-view="venderModal">
-
-        </div>  
-
         <%@include file="common/loginModal.jsp" %>
 
         <!-- Cargamos los scripts --> 
