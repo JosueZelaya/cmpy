@@ -14,8 +14,8 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
                         });
     };
     
-    var cargarPublicacionesGratis = function(){
-        getPublicaciones(TIPO_PUBLICACION.GRATIS, '0')
+    var cargarPublicacionesGratis = function(page){
+        getPublicaciones(TIPO_PUBLICACION.GRATIS, page)
                 .success(function(publicaciones){
             $rootScope.publicaciones = publicaciones;
         });
@@ -69,12 +69,22 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         
     };
     
+    $scope.paginaSiguiente = function(){
+        $scope.page++;
+        cargarPublicacionesGratis($scope.page);
+    };
+    
+    $scope.paginaAnterior = function(){
+        $scope.page--;
+        cargarPublicacionesGratis($scope.page);
+    };
+    
     var init = function () {
         
         // inicializando el componente de carga de imagenes
-        $scope.existingFlowObject = flowFactory.create({});
-        
-        cargarPublicacionesGratis();
+        $scope.existingFlowObject = flowFactory.create({});        
+        $scope.page = 0;
+        cargarPublicacionesGratis($scope.page);
         
         cargarPublicacionesPagadas();
         
