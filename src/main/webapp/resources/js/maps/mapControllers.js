@@ -1,5 +1,5 @@
 maps.controller('mapController', function($scope,$http,mapService) {
-    
+
     $scope.center = {
         latitude: 13.7724376,
         longitude: -88.7833089
@@ -90,18 +90,20 @@ maps.controller('mapController', function($scope,$http,mapService) {
 
     };
     
-    $http.get("/ubicacion/publicacion/get/3")
-    .success(function (response)
-    {
-        angular.forEach(response, function(item){
-            var marker = {};
-            marker.id = item.id;
-            marker.title = 'ubi'+item.id.toString();
-            marker.latitude = item.latitud;
-            marker.longitude = item.longitud;
-            $scope.markers.push(marker);
-        });
-    });
+  
+    
+//    $http.get("/ubicacion/publicacion/get/8")
+//    .success(function (response)
+//    {
+//        angular.forEach(response, function(item){
+//            var marker = {};
+//            marker.id = item.id;
+//            marker.title = 'ubi'+item.id.toString();
+//            marker.latitude = item.latitud;
+//            marker.longitude = item.longitud;
+//            $scope.markers.push(marker);
+//        });
+//    });
     
 
   });

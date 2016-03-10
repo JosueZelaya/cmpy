@@ -20,6 +20,7 @@
             [ng\:cloak], [ng-cloak], .ng-cloak {
                 display: none !important;
             }
+            .angular-google-map-container { height: 400px; }
         </style>
     </head>
     <body ng-cloak class="ng-cloak">
@@ -58,6 +59,6 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/utils.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.module.js" ></script>
-
+        
     </body>
 </html>

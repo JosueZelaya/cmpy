@@ -9,6 +9,7 @@ var cmy_ng = angular.module('cmpy',
     'ui.bootstrap',
     'ngAnimate',
     'flow',
+    'uiGmapgoogle-maps',
     'cmpy.autenticacion',
     'cmpy.menuPrincipal',    
     'cmpy.categorias',
@@ -44,17 +45,6 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
 //                    $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
 //                }
             })
-            
-//            .state('vistaProducto', {
-//                
-//                
-//                views: {
-//                    "menuPrincipal": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
-//                    "menuCategorias": {templateUrl: '/resources/js/categorias/menuCategorias.html'},     
-//                    "panelPublicacionesProductos": {templateUrl: '/resources/js/anuncios/detalleProducto.html'},
-//                    "panelPublicacionesEmpresas": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'}                    
-//                }
-//            })
 
             // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
             .state('about', {
