@@ -11,20 +11,22 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div ui-view="menuPrincipal">
-
-        </div>
-
-        <div ui-view="menuCategorias">
-
-        </div>
-    
-        <div ui-view="detalleProducto">
-
-        </div>
-        
-        <div ui-view="panelPublicacionesEmpresas">
-
+        <div class="row" >
+            <div style="height: 305px">
+                <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
+                  <uib-slide ng-repeat="recurso in publicacion.recursoList" active="slide.active" index="slide.id">
+                    <img ng-src="/images/getImage/{{recurso.ruta}}" style="margin:auto;">
+                    <div class="carousel-caption">
+                      <h4>Slide {{recurso.nombre}}</h4>
+                      <p>{{recurso.descripcion}}</p>
+                    </div>
+                  </uib-slide>
+                </uib-carousel>
+            </div>
+            
+            
+            
+            
         </div>
     </body>
     

@@ -37,16 +37,24 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
                 }
             })
             
-            .state('vistaProducto', {
+            .state('home.vistaProducto', {
                 url: "/vistaProducto/{publicacionId}",     
                 templateUrl: '/resources/js/anuncios/vistaProducto.html',
-                views: {
-                    "menuPrincipal": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
-                    "menuCategorias": {templateUrl: '/resources/js/categorias/menuCategorias.html'},     
-                    "panelPublicacionesProductos": {templateUrl: '/resources/js/anuncios/detalleProducto.html'},
-                    "panelPublicacionesEmpresas": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'}                    
-                }
+//                controller: function($scope) {
+//                    $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
+//                }
             })
+            
+//            .state('vistaProducto', {
+//                
+//                
+//                views: {
+//                    "menuPrincipal": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
+//                    "menuCategorias": {templateUrl: '/resources/js/categorias/menuCategorias.html'},     
+//                    "panelPublicacionesProductos": {templateUrl: '/resources/js/anuncios/detalleProducto.html'},
+//                    "panelPublicacionesEmpresas": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'}                    
+//                }
+//            })
 
             // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
             .state('about', {
