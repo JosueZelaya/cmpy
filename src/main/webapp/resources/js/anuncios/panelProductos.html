@@ -27,6 +27,22 @@ and open the template in the editor.
 
                     <div ui-view>
                         <div class="row" ng-app="cmpy.anuncios" ng-controller="anunciosController">
+                            
+                            <div class="row center-block">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <pagination 
+                                        ng-model="page"
+                                        total-items="totalAnuncios"
+                                        items-per-page="24"
+                                        ng-change="cargarPagina()"
+                                        boundary-links="true">
+                                    </pagination>
+                                </div>                                
+                                <div class="col-md-2"></div>
+                            </div>
+                            
+                            
                             <div class="col-sm-6 col-md-4" ng-repeat="publicacion in publicaciones">
 
                                 <div style="height: 400px;" class="thumbnail">       
@@ -64,10 +80,21 @@ and open the template in the editor.
 
                                 </div>
                             </div>
-                            <ul class="pager">
-                                <li><a href="#navBar" ng-click="paginaAnterior()">anterior</a></li>
-                                <li><a href="#navBar" ng-click="paginaSiguiente()">Siguiente</a></li>
-                            </ul>
+                            
+                            <div class="row center-block">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <pagination 
+                                        ng-model="page"
+                                        total-items="totalAnuncios"
+                                        items-per-page="24"
+                                        ng-change="cargarPagina()"
+                                        boundary-links="true">
+                                    </pagination>
+                                </div>                                
+                                <div class="col-md-2"></div>
+                            </div>
+                            
                         </div>
                     </div>
                     

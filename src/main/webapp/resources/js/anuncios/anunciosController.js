@@ -37,6 +37,15 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         });
     };
     
+    var cargarPaginacion = function(){
+        
+        anunciosService.getTotalAnuncios(TIPO_PUBLICACION.GRATIS)
+                .success(function (total){
+                    $scope.totalAnuncios = total;
+                });
+        
+    };
+    
     var crearPublicacion = function(){
         //Se recogen los datos de la publicacion        
         var imagenes = new Array();
@@ -79,14 +88,23 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         cargarPublicacionesGratis($scope.page);
     };
     
+    $scope.cargarPagina = function(){
+        cargarPublicacionesGratis($scope.page-1);
+    };
+    
     var init = function () {
         
         // inicializando el componente de carga de imagenes
         $scope.existingFlowObject = flowFactory.create({});        
         $scope.page = 0;
+//        $rootScope.totalPaginas = [];
+        $scope.totalAnuncios = 0;
+        
         cargarPublicacionesGratis($scope.page);
         
         cargarPublicacionesPagadas();
+        
+        cargarPaginacion();
         
         var publicacionId = $stateParams.publicacionId;
         if(publicacionId!==undefined){

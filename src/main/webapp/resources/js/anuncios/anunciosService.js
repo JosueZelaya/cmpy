@@ -1,5 +1,21 @@
 modulo_anuncios.service('anunciosService', function ($http, $log) {
 
+    this.getTotalAnuncios = function(tipo){
+        var req = "/publicacion/getTotalAnuncios/"+tipo;
+        return $http.get(req)
+                .success(function(response){
+                   return response; 
+                });
+    }
+
+    this.getTotalPaginas = function(tipo){
+        var req = "/publicacion/getTotalPaginas/"+tipo;
+        return $http.get(req)
+                .success(function(response){
+                    return response;
+                });
+    }
+
     this.getPublicacionById = function (id){
         var req = "/publicacion/getPublicacionById/"+id;
         return $http.get(req)

@@ -15,6 +15,7 @@ import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
 import com.tecnogeek.comprameya.utils.FileManager;
 import com.tecnogeek.comprameya.utils.GridResponse;
+import com.tecnogeek.comprameya.utils.Utilidades;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 @RequestMapping("/publicacion")
+@ResponseBody
 public class PublicacionController {
  
     @Autowired
@@ -45,14 +47,24 @@ public class PublicacionController {
     @Autowired
     ManejadorPublicacion pManager;
     
-    @RequestMapping(value="/getPublicacionById/{id}",method=RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value="/getTotalAnuncios/{tipo}")
+    public int getTotalAnuncios(@PathVariable int tipo){
+        return pManager.getTotalPublicaciones(tipo);
+    }
+    
+    @RequestMapping(value="/getTotalPaginas/{tipo}")
+    public int getTotalPaginas(@PathVariable int tipo){
+        int totalPublicaciones = pManager.getTotalPublicaciones(tipo);
+        int pageSize = (tipo==Constantes.PUBLICACION_GRATIS)?Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
+        return Utilidades.calculateTotalPages(totalPublicaciones, pageSize);
+    }
+    
+    @RequestMapping(value="/getPublicacionById/{id}",method=RequestMethod.GET)    
     public Publicacion getPublicacionById(@PathVariable Long id){
         return pManager.getPublicacion(id);
     }
     
-    @RequestMapping(value="/getAnuncios/{tipo}/{page}",method=RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value="/getAnuncios/{tipo}/{page}",method=RequestMethod.GET)    
     public List<Publicacion> getAnuncios(@PathVariable int tipo,@PathVariable int page,Model model)
     {                
         int totalAnuncios;
