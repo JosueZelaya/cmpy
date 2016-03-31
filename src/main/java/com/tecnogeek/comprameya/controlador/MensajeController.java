@@ -47,7 +47,7 @@ public class MensajeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         
-        Usuario usr_local = uManager.getUsuarioLogin(userName);
+        Usuario usr_local = uManager.getUserByLogin(userName);
         Usuario usr_remoto = uManager.getUsuario(id);
         
         List<Mensaje> mensajes = new  ArrayList<>();
@@ -75,7 +75,7 @@ public class MensajeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         
-        Usuario usr_local = uManager.getUsuarioLogin(userName);
+        Usuario usr_local = uManager.getUserByLogin(userName);
         
         Mensaje mensaje = new Mensaje();
         mensaje.setTitulo(pMensaje.getTitulo());
@@ -110,7 +110,7 @@ public class MensajeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         
-        Usuario usr_local = uManager.getUsuarioLogin(userName);
+        Usuario usr_local = uManager.getUserByLogin(userName);
         
         List<Usuario> lista_usuarios = new ArrayList<>();
         

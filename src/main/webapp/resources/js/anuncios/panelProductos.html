@@ -56,9 +56,8 @@ and open the template in the editor.
                                             <h4 class="price-text-color">$ {{publicacion.productoList[0].precio}}</h4>
                                         </div>
                                         <div class="rating hidden-sm col-md-4">
-                                            <i class="price-text-color glyphicon glyphicon-star-empty"></i>
-                                            <i class="price-text-color glyphicon glyphicon-star-empty"></i>
-                                            <i class="price-text-color glyphicon glyphicon-star-empty"></i>
+                                            <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.puntaje) track by $index"></i>
+                                            <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.puntaje) track by $index"></i>
                                         </div>
                                     </div>
 

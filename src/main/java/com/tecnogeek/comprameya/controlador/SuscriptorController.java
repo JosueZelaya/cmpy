@@ -42,7 +42,7 @@ public class SuscriptorController {
     public @ResponseBody List<pojoUsuario> getSuscriptores()  {          
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        Usuario usr_local = uManager.getUsuarioLogin(userName);
+        Usuario usr_local = uManager.getUserByLogin(userName);
         
         List<Suscriptor> lsuscriptor = new ArrayList<>();
         lsuscriptor = sManager.getSuscriptor(usr_local);
@@ -62,7 +62,7 @@ public class SuscriptorController {
     public @ResponseBody List<pojoUsuario> getProveedores()  {          
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        Usuario usr_local = uManager.getUsuarioLogin(userName);
+        Usuario usr_local = uManager.getUserByLogin(userName);
         
         List<Suscriptor> lsuscriptor = new ArrayList<>();
         lsuscriptor = sManager.getProveedor(usr_local);
@@ -82,7 +82,7 @@ public class SuscriptorController {
     public @ResponseBody Object setSuscriptor(@PathVariable("id") long id)  {          
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        Usuario usr_local = uManager.getUsuarioLogin(userName);
+        Usuario usr_local = uManager.getUserByLogin(userName);
         
         Usuario usr_pro = uManager.getUsuario(id);
         

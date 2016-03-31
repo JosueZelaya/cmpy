@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -90,6 +91,7 @@ public class Usuario implements Serializable {
     private List<Comentario> comentarioList;
     @OneToMany(mappedBy = "fkUsuario")
     private List<Notificacion> notificacionList;
+    @JsonManagedReference
     @OneToMany(mappedBy = "fkUsuario")
     private List<Publicacion> publicacionList;
     @OneToMany(mappedBy = "fkUsuarioDestinatario")

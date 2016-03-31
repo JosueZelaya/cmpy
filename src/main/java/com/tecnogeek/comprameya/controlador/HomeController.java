@@ -11,13 +11,11 @@ import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.managers.ManejadorCategoria;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
+import com.tecnogeek.comprameya.managers.ManejadorUsuario;
 import com.tecnogeek.comprameya.repositories.CategoriaService;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
-import com.tecnogeek.comprameya.utils.GridResponse;
-import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -35,8 +33,12 @@ public class HomeController {
 
     @Autowired
     PublicacionService publicacionService;
+    
     @Autowired
     ManejadorPublicacion pManager;
+    
+    @Autowired
+    ManejadorUsuario uManager;
 
     //genaro req categorias
     @Autowired
@@ -91,11 +93,9 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping(value = "/user")    
-    public Usuario getUsuario() {
-        
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName(); //get logged in username
-        
+    public Usuario getUsuario() {    
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName(); //get logged in username        
         Usuario user = new Usuario();
         user.setLogin(userName);
         return user;

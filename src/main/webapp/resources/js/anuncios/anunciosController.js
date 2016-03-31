@@ -92,6 +92,10 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         cargarPublicacionesGratis($scope.page-1);
     };
     
+    $scope.getNumbers = function(num) {
+        return new Array(num);   
+    };
+    
     var init = function () {
         
         // inicializando el componente de carga de imagenes

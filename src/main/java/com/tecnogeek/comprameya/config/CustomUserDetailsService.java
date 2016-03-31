@@ -34,16 +34,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("Autenticando usuario: "+username);        
         Usuario usuario = userService.findByLogin(username);
         Perfil perfil = perfilService.getPerfilUsuario(username);        
         if(usuario==null)
         {
-            log.info("No se encontró al usuario: "+username);
             throw new UsernameNotFoundException("Login "+username+" not found");
         }
-        usuario.setFkPerfil(perfil);
-        log.info("login: "+usuario.getLogin()+" clave: "+usuario.getPass());
+        usuario.setFkPerfil(perfil);        
         return new SecurityUser(usuario);
     }
     

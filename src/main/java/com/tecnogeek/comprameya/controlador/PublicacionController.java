@@ -11,10 +11,11 @@ import com.tecnogeek.comprameya.entidad.Producto;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.TipoPublicacion;
+import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
+import com.tecnogeek.comprameya.managers.ManejadorUsuario;
 import com.tecnogeek.comprameya.repositories.PublicacionService;
 import com.tecnogeek.comprameya.utils.FileManager;
-import com.tecnogeek.comprameya.utils.GridResponse;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -44,8 +45,12 @@ public class PublicacionController {
  
     @Autowired
     PublicacionService publicacionService;
+    
     @Autowired
     ManejadorPublicacion pManager;
+    
+    @Autowired
+    ManejadorUsuario uManager;
     
     @RequestMapping(value="/getTotalAnuncios/{tipo}")
     public int getTotalAnuncios(@PathVariable int tipo){
@@ -104,7 +109,7 @@ public class PublicacionController {
             }
         }
         publicacion.setRecursoList(recursos);
-        Integer tipo=1;
+        Integer tipo=Constantes.PUBLICACION_PAGADA;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setTipoPublicacionId(tipo.longValue());
         publicacion.setFkTipoPublicacion(tipoPublicacion);
@@ -139,7 +144,7 @@ public class PublicacionController {
             }
         }
         publicacion.setRecursoList(recursos);        
-        Integer tipo=2;
+        Integer tipo=Constantes.PUBLICACION_GRATIS;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setTipoPublicacionId(tipo.longValue());
         publicacion.setFkTipoPublicacion(tipoPublicacion);        
@@ -151,6 +156,8 @@ public class PublicacionController {
         List<Producto> productos = new ArrayList();
         productos.add(producto);
         publicacion.setProductoList(productos);
+        Usuario usuario = uManager.getLoggedUser();
+        publicacion.setFkUsuario(usuario);
         publicacionService.save(publicacion);
         
         return "redirect:/";

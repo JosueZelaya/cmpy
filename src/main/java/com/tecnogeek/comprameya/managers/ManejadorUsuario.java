@@ -23,16 +23,16 @@ public class ManejadorUsuario {
      @Autowired
      UserService userService;
      
-     public Usuario getUsuarioLogin(String login)
+     public Usuario getUserByLogin(String login)
      {
         return userService.findByLogin(login);
      }
      
-     public Usuario getUsuarioLogin()
+     public Usuario getLoggedUser()
      {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        return getUsuarioLogin(userName);
+        return getUserByLogin(userName);
      }
      
 

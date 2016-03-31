@@ -39,6 +39,9 @@ and open the template in the editor.
                             <i class="price-text-color glyphicon glyphicon-star-empty"></i>
                             <i class="price-text-color glyphicon glyphicon-star-empty"></i>
                             <i class="price-text-color glyphicon glyphicon-star-empty"></i>
+                            Calificacion:
+                            <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.puntaje) track by $index"></i>
+                            <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.puntaje) track by $index"></i>
                         </div>
                     </div>
 

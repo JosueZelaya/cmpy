@@ -26,12 +26,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.Transient;
 
 /**
  *
@@ -105,8 +105,14 @@ public class Publicacion implements Serializable {
     @JoinColumn(name = "fk_tipo_publicacion", referencedColumnName = "tipo_publicacion_id")
     @ManyToOne
     private TipoPublicacion fkTipoPublicacion;
+    @JsonBackReference
     @JoinColumn(name = "fk_usuario", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario fkUsuario;
+    
+    @Transient
+    public int getPuntaje(){
+        return (this.fkUsuario == null)? 0: this.fkUsuario.getPuntaje();
+    }
 
 }

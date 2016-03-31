@@ -44,7 +44,7 @@ public class ComentarioController {
     @RequestMapping(value = "/set/{publicacion_id}", method = RequestMethod.POST)
     public @ResponseBody String setUbicacionPublicacion(@PathVariable("publicacion_id") long publicacion_id, @RequestBody pojoComentario pcomentario )  {
         
-        Usuario u = uManager.getUsuarioLogin();
+        Usuario u = uManager.getLoggedUser();
         
         Publicacion p = pManager.getPublicacion(publicacion_id);
         
