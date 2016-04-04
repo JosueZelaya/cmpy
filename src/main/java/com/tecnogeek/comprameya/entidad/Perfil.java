@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.tecnogeek.comprameya.enums.Role;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -43,7 +44,7 @@ public class Perfil implements Serializable {
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "nombre")
-    private String nombre;
+    private String nombre; //Enum    
     @Size(max = 2147483647)
     @Column(name = "descripcion")
     private String descripcion;
@@ -65,4 +66,12 @@ public class Perfil implements Serializable {
     @OneToMany(mappedBy = "fkPerfil")
     private List<Usuario> usuarioList;
 
+    public Role getRole(){
+        return Role.getRole(this.nombre);
+    }
+    
+    public void setRole(Role role){
+        this.nombre = role.getRoleName();
+    }
+    
 }

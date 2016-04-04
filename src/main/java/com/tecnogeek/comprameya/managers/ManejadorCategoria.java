@@ -9,11 +9,14 @@ import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.repositories.CategoriaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author genaro
  */
+
+@Service
 public class ManejadorCategoria {
     
     

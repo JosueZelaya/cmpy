@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * @author jzelaya
  */
+@Deprecated
 public class SecurityUser extends Usuario implements UserDetails{
 
     private static final long serialVersionUID = 1L;

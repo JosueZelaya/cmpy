@@ -14,10 +14,13 @@ import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
 import com.tecnogeek.comprameya.managers.ManejadorSuscriptor;
 import com.tecnogeek.comprameya.managers.ManejadorUbicacion;
 import com.tecnogeek.comprameya.managers.ManejadorUsuario;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
 /**
  *
@@ -25,58 +28,23 @@ import org.springframework.context.annotation.PropertySource;
  */
 
 @Configuration
-@ComponentScan(basePackages={"com.tecnogeek.comprameya.config"})
+@ComponentScan(basePackages={"com.tecnogeek.comprameya.config","com.tecnogeek.comprameya.managers"})
 @PropertySource(value = {"/WEB-INF/application.properties"})
 public class AppConfig {
     
-//    @Autowired
-//    private Environment env;
-    
-//    @Bean
-//    public static PropertySourcesPlaceholderConfigurer placeHolderConfigurer(){
-//        return new PropertySourcesPlaceholderConfigurer();
-//    }
-    
-    
     @Bean
-    public ManejadorPublicacion manejadorPublicacion(){
-        return new ManejadorPublicacion();
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+ 
+        messageSource.setBasename("i18n/messages");
+        messageSource.setUseCodeAsDefaultMessage(true);
+ 
+        return messageSource;
     }
     
     @Bean
-    public ManejadorCategoria manejadorCategoria(){
-        return new ManejadorCategoria();
-    }
-    
-    @Bean
-        public ManejadorUbicacion manejadorUbicacion(){
-        return new ManejadorUbicacion();
-    }
-        
-        
-    @Bean
-        public ManejadorUsuario manejadorUsuario(){
-        return new ManejadorUsuario();
-    }
-
-    @Bean
-        public ManejadorDestinatario manejadorDestinatario(){
-        return new ManejadorDestinatario();
-    }
-        
-    @Bean
-        public ManejadorMensaje manejadorMensaje(){
-        return new ManejadorMensaje();
-    }
-
-    @Bean
-    public ManejadorSuscriptor manejadorSuscriptor(){
-        return new ManejadorSuscriptor();
-    }
-    
-    @Bean
-    public ManejadorComentario manejadorComentario(){
-        return new ManejadorComentario();
+    public static PropertySourcesPlaceholderConfigurer placeHolderConfigurer(){
+        return new PropertySourcesPlaceholderConfigurer();
     }
     
 }

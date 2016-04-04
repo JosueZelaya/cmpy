@@ -10,11 +10,14 @@ import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.repositories.ComentarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author genaro
  */
+
+@Service
 public class ManejadorComentario {
     public ManejadorComentario(){}
     

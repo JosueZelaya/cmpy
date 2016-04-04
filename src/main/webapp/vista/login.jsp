@@ -19,8 +19,9 @@
     <body>
         
         <%@include file="common/menuPrincipal.jsp" %>
-              
+        
         <div class="container-fluid">
+            
             <div class="row">                          
                 <div class="col-md-12 min_cont marcar">
                     <div class="panel panel-default min_cont">                    

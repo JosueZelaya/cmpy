@@ -6,16 +6,19 @@
 
 package com.tecnogeek.comprameya.config;
 
+import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
@@ -53,9 +56,35 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/images/**").addResourceLocations(userDir);
     }
     
-    @Bean
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable(); //Ensures that requests made to static resources are delegated forward to the container’s default servlet
+    }
+    
+    @Bean    
     public MultipartResolver multipartResolver() {
       return new StandardServletMultipartResolver();
+    }
+    
+    @Bean
+    public SimpleMappingExceptionResolver exceptionResolver() {
+        SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
+ 
+        Properties exceptionMappings = new Properties();
+ 
+        exceptionMappings.put("java.lang.Exception", "error/error");
+        exceptionMappings.put("java.lang.RuntimeException", "error/error");
+ 
+        exceptionResolver.setExceptionMappings(exceptionMappings);
+ 
+        Properties statusCodes = new Properties();
+ 
+        statusCodes.put("error/404", "404");
+        statusCodes.put("error/error", "500");
+ 
+        exceptionResolver.setStatusCodes(statusCodes);
+ 
+        return exceptionResolver;
     }
     
 }

@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tecnogeek.comprameya.enums.SocialMediaService;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -107,5 +110,8 @@ public class Usuario implements Serializable {
     private Ranking fkRanking;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuarioEmisor")
     private List<Mensaje> mensajeList;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sign_in_provider", length = 20)
+    private SocialMediaService signInProvider;
     
 }

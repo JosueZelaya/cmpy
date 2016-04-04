@@ -1,4 +1,25 @@
-<div class="jumbotron"  ng-app="cmpy.autenticacion" ng-controller="autenticacionController">                        
+<div class="jumbotron"  ng-app="cmpy.autenticacion" ng-controller="autenticacionController">    
+    
+    
+     <!-- Social Sign In Buttons -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Social Login</h2>
+                    <div class="row social-button-row">
+                        <div class="col-lg-4">
+                            <!-- Add Facebook sign in button -->
+                            <a href="${pageContext.request.contextPath}/auth/facebook"><button class="btn btn-facebook"><i class="icon-facebook"></i> | sing in with facebook</button></a>
+                        </div>
+                    </div>
+                    <div class="row social-button-row">
+                        <div class="col-lg-4">
+                            <!-- Add Twitter sign in Button -->
+                            <a href="${pageContext.request.contextPath}/auth/twitter"><button class="btn btn-twitter"><i class="icon-twitter"></i> | sing in with twitter</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
     <c:if test="${param.error != null}">
         <div class="alert alert-danger"> 
             ¡Usuario y Clave incorrectas!
