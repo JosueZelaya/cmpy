@@ -277,6 +277,13 @@
             <version>1.16.6</version>
         </dependency>
         
+        <!-- hibernate validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.4.Final</version>
+        </dependency>
+        
         <!-- Dependencias para Jetty -->
 <!--        <dependency>
             <groupId>org.mortbay.jetty</groupId>

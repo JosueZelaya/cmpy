@@ -1,0 +1,67 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecnogeek.comprameya.dto;
+
+import com.tecnogeek.comprameya.cmpyannotations.PasswordsNotEmpty;
+import com.tecnogeek.comprameya.cmpyannotations.PasswordsNotEqual;
+import com.tecnogeek.comprameya.enums.SocialMediaService;
+import javax.validation.constraints.Size;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+/**
+ *
+ * @author josue.zelaya
+ */
+
+@Getter
+@Setter
+@RequiredArgsConstructor 
+
+@PasswordsNotEmpty(
+        triggerFieldName = "signInProvider",
+        passwordFieldName = "password",
+        passwordVerificationFieldName = "passwordVerification"
+)
+@PasswordsNotEqual(
+        passwordFieldName = "password",
+        passwordVerificationFieldName = "passwordVerification"
+)
+public class RegistrationForm {
+
+        @Email
+        @NotEmpty
+        @Size(max = 100)
+        private String email;
+        
+        @NotEmpty
+        @Size(max = 100)
+        private String firstName;
+        
+        @NotEmpty
+        @Size(max = 100)
+        private String lastName;
+
+        private String password;
+
+        private String passwordVerification;
+
+        private SocialMediaService signInProvider;
+
+        //Constructor is omitted for the of clarity.
+
+        public boolean isNormalRegistration() {
+            return signInProvider == null;
+        }
+
+        public boolean isSocialSignIn() {
+            return signInProvider != null;
+        }
+        
+}
