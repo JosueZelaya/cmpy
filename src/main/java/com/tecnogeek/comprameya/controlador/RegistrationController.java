@@ -7,7 +7,8 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
-import com.tecnogeek.comprameya.interfaces.AccountRepository;
+import com.tecnogeek.comprameya.repositories.AccountRepository;
+import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -31,14 +32,11 @@ import org.springframework.web.context.request.WebRequest;
 @SessionAttributes("user")
 public class RegistrationController {
     
-    private AccountRepository accountRepository;
     private ProviderSignInUtils providerSignInUtils;
 
     @Autowired
-    public RegistrationController(AccountRepository accountRepository, 
-                            ConnectionFactoryLocator connectionFactoryLocator,
-                            UsersConnectionRepository connectionRepository) {
-        this.accountRepository = accountRepository;
+    public RegistrationController(ConnectionFactoryLocator connectionFactoryLocator,
+                            UsersConnectionRepository connectionRepository) {        
         this.providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
     }
 
@@ -49,7 +47,7 @@ public class RegistrationController {
         RegistrationForm registration = createRegistrationDTO(connection);
         model.addAttribute("user", registration);
  
-        return "user/registrationForm";
+        return "registrationForm";
     }
     
     private RegistrationForm createRegistrationDTO(Connection<?> connection) {

@@ -117,6 +117,11 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
         
         <!-- Spring Social -->
         <dependency>
@@ -176,11 +181,18 @@
         </dependency>
         
         <!-- jackson for json -->
-        <dependency>
+<!--        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.6.3</version>
+            <version>2.7.4</version>
+        </dependency>-->
+        <!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.7.4</version>
         </dependency>
+
 <!--        <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
