@@ -5,9 +5,8 @@
  */
 package com.tecnogeek.comprameya.repositories;
 
-
-import com.tecnogeek.comprameya.entidad.Publicacion;
-import com.tecnogeek.comprameya.entidad.Ubicacion;
+import com.tecnogeek.comprameya.entidad.Suscriptor;
+import com.tecnogeek.comprameya.entidad.Usuario;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
@@ -15,9 +14,10 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author genaro
  */
-public interface UbicacionService extends CrudRepository<Ubicacion,Long> {
+public interface SuscriptorRepository extends CrudRepository<Suscriptor,Long> {
+ 
+    List<Suscriptor> findByfkUsuarioProveedor(Usuario usuario);
     
-    
-    List<Ubicacion> findByfkPublicacion(Publicacion publicacion);
+    List<Suscriptor> findByfkUsuarioSuscriptor(Usuario usuario);
     
 }

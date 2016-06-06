@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.tecnogeek.comprameya.repositories;
-import com.tecnogeek.comprameya.entidad.Categoria;
+
+import com.tecnogeek.comprameya.entidad.Usuario;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
 /**
  *
- * @author genaro
+ * @author jzelaya
  */
-public interface CategoriaService extends CrudRepository<Categoria,Long> {
-
-    @Query("select c from Categoria c where c.fkCategoria is null")
-    List<Categoria> getCategoriaPadres();
+public interface UserRepository extends CrudRepository<Usuario,Long>{
     
-    List<Categoria> findByFkCategoria(Categoria categoria);
+    @Query("select u from Usuario u where u.login= ?1 and u.sisActivo='t'")
+    Usuario findByLogin(String login);
     
 }

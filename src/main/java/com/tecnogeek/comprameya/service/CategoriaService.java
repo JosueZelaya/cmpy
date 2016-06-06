@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tecnogeek.comprameya.managers;
+package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.Categoria;
-import com.tecnogeek.comprameya.repositories.CategoriaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tecnogeek.comprameya.repositories.CategoriaRepository;
 
 /**
  *
@@ -17,13 +17,13 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ManejadorCategoria {
+public class CategoriaService {
     
     
-    public ManejadorCategoria(){}
+    public CategoriaService(){}
     
     @Autowired
-    CategoriaService categoriaService;
+    CategoriaRepository categoriaService;
     
     public List<Categoria> getCategoria()
     {

@@ -15,7 +15,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author genaro
  */
-public interface DestinatarioService extends CrudRepository<Destinatario,Long> { 
+public interface DestinatarioRepository extends CrudRepository<Destinatario,Long> { 
     
     @Query("select d from Destinatario d where d.fkUsuarioDestinatario= ?1 and d.fkMensaje.fkUsuarioEmisor = ?2")
     List<Destinatario> findByfkUsuarioDesEmi(Usuario usuario1, Usuario usuario2);

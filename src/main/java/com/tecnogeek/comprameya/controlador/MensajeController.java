@@ -8,13 +8,13 @@ package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.entidad.Destinatario;
 import com.tecnogeek.comprameya.entidad.Mensaje;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.managers.ManejadorDestinatario;
-import com.tecnogeek.comprameya.managers.ManejadorMensaje;
-import com.tecnogeek.comprameya.managers.ManejadorUsuario;
-import com.tecnogeek.comprameya.pojo.pojoDestinatario;
-import com.tecnogeek.comprameya.pojo.pojoEmisor;
-import com.tecnogeek.comprameya.pojo.pojoMensaje;
-import com.tecnogeek.comprameya.pojo.pojoUsuario;
+import com.tecnogeek.comprameya.service.DestinatarioService;
+import com.tecnogeek.comprameya.service.MensajeService;
+import com.tecnogeek.comprameya.service.UsuarioService;
+import com.tecnogeek.comprameya.dto.pojoDestinatario;
+import com.tecnogeek.comprameya.dto.pojoEmisor;
+import com.tecnogeek.comprameya.dto.pojoMensaje;
+import com.tecnogeek.comprameya.dto.pojoUsuario;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +35,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/mensaje")
 public class MensajeController {
     @Autowired
-    ManejadorMensaje mManager;
+    MensajeService mManager;
     @Autowired
-    ManejadorDestinatario dManager;
+    DestinatarioService dManager;
     @Autowired
-    ManejadorUsuario uManager;
+    UsuarioService uManager;
     
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public @ResponseBody List<pojoMensaje> getMensajeUsuario(@PathVariable("id") long id)  {          

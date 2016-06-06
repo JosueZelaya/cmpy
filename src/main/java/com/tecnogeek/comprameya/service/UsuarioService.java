@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tecnogeek.comprameya.managers;
+package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.pojo.pojoUsuario;
-import com.tecnogeek.comprameya.repositories.UserService;
+import com.tecnogeek.comprameya.dto.pojoUsuario;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import com.tecnogeek.comprameya.repositories.UserRepository;
 
 /**
  *
@@ -21,10 +21,10 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ManejadorUsuario {
+public class UsuarioService {
     
      @Autowired
-     UserService userService;
+     UserRepository userService;
      
      public Usuario getUserByLogin(String login)
      {

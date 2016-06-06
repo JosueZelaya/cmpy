@@ -7,9 +7,9 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
-import com.tecnogeek.comprameya.managers.ManejadorUbicacion;
-import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
-import com.tecnogeek.comprameya.pojo.pojoUbicacion;
+import com.tecnogeek.comprameya.service.UbicacionService;
+import com.tecnogeek.comprameya.service.PublicacionService;
+import com.tecnogeek.comprameya.dto.pojoUbicacion;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,9 @@ public class UbicacionController {
     
 
     @Autowired
-    ManejadorUbicacion uManager;
+    UbicacionService uManager;
     @Autowired
-    ManejadorPublicacion pManager;
+    PublicacionService pManager;
        
     
     @RequestMapping(value = "/publicacion/get/{id}", method = RequestMethod.GET)

@@ -10,10 +10,10 @@ import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.entidad.Suscriptor;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.managers.ManejadorSuscriptor;
-import com.tecnogeek.comprameya.managers.ManejadorUsuario;
-import com.tecnogeek.comprameya.pojo.pojoUbicacion;
-import com.tecnogeek.comprameya.pojo.pojoUsuario;
+import com.tecnogeek.comprameya.service.SuscriptorService;
+import com.tecnogeek.comprameya.service.UsuarioService;
+import com.tecnogeek.comprameya.dto.pojoUbicacion;
+import com.tecnogeek.comprameya.dto.pojoUsuario;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +34,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/suscripcion")
 public class SuscriptorController {
     @Autowired
-    ManejadorSuscriptor sManager;
+    SuscriptorService sManager;
     @Autowired
-    ManejadorUsuario uManager;
+    UsuarioService uManager;
     
     @RequestMapping(value = "/suscriptor/get", method = RequestMethod.GET)
     public @ResponseBody List<pojoUsuario> getSuscriptores()  {          

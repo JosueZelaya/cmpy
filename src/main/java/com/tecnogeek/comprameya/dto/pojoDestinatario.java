@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tecnogeek.comprameya.pojo;
+package com.tecnogeek.comprameya.dto;
 
 /**
  *
  * @author genaro
  */
-public class pojoEmisor {
+public class pojoDestinatario {
     public long id;
-    public String login;  
+    public String login;
 
     public long getId() {
         return id;
@@ -28,5 +28,4 @@ public class pojoEmisor {
     public void setLogin(String login) {
         this.login = login;
     }
-      
 }

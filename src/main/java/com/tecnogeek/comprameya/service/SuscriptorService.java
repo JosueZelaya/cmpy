@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tecnogeek.comprameya.managers;
+package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.Suscriptor;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.SuscriptorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tecnogeek.comprameya.repositories.SuscriptorRepository;
 
 /**
  *
@@ -18,12 +18,12 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ManejadorSuscriptor {
+public class SuscriptorService {
     
-    public ManejadorSuscriptor(){}
+    public SuscriptorService(){}
     
     @Autowired
-    SuscriptorService suscriptorService;
+    SuscriptorRepository suscriptorService;
     
     public List<Suscriptor> getSuscriptor(Usuario usuario)
     {

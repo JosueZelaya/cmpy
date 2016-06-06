@@ -9,11 +9,9 @@ import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.managers.ManejadorCategoria;
-import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
-import com.tecnogeek.comprameya.managers.ManejadorUsuario;
-import com.tecnogeek.comprameya.repositories.CategoriaService;
-import com.tecnogeek.comprameya.repositories.PublicacionService;
+import com.tecnogeek.comprameya.service.CategoriaService;
+import com.tecnogeek.comprameya.service.PublicacionService;
+import com.tecnogeek.comprameya.service.UsuarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.tecnogeek.comprameya.repositories.CategoriaRepository;
+import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 
 /**
  *
@@ -32,19 +32,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
     @Autowired
-    PublicacionService publicacionService;
+    PublicacionRepository publicacionService;
     
     @Autowired
-    ManejadorPublicacion pManager;
+    PublicacionService pManager;
     
     @Autowired
-    ManejadorUsuario uManager;
+    UsuarioService uManager;
 
     //genaro req categorias
     @Autowired
-    CategoriaService categoriaService;
+    CategoriaRepository categoriaService;
     @Autowired
-    ManejadorCategoria cManager;
+    CategoriaService cManager;
     //fin req categorias
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

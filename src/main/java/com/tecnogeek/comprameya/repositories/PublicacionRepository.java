@@ -17,7 +17,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  *
  * @author jzelaya
  */
-public interface PublicacionService extends PagingAndSortingRepository<Publicacion, Long> {
+public interface PublicacionRepository extends PagingAndSortingRepository<Publicacion, Long> {
     
     List<Publicacion> findByTitulo(String titulo);
     

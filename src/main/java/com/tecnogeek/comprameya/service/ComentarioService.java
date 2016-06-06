@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tecnogeek.comprameya.managers;
+package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.Comentario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
-import com.tecnogeek.comprameya.repositories.ComentarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tecnogeek.comprameya.repositories.ComentarioRepository;
 
 /**
  *
@@ -18,11 +18,11 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ManejadorComentario {
-    public ManejadorComentario(){}
+public class ComentarioService {
+    public ComentarioService(){}
     
     @Autowired
-    ComentarioService comentarioService;
+    ComentarioRepository comentarioService;
     
     public String setComentario(Comentario c)
     {

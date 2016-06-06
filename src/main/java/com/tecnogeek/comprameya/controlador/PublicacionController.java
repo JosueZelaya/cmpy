@@ -12,9 +12,8 @@ import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.TipoPublicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
-import com.tecnogeek.comprameya.managers.ManejadorUsuario;
-import com.tecnogeek.comprameya.repositories.PublicacionService;
+import com.tecnogeek.comprameya.service.PublicacionService;
+import com.tecnogeek.comprameya.service.UsuarioService;
 import com.tecnogeek.comprameya.utils.FileManager;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.io.IOException;
@@ -33,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 
 /**
  *
@@ -44,13 +44,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class PublicacionController {
  
     @Autowired
-    PublicacionService publicacionService;
+    PublicacionRepository publicacionService;
     
     @Autowired
-    ManejadorPublicacion pManager;
+    PublicacionService pManager;
     
     @Autowired
-    ManejadorUsuario uManager;
+    UsuarioService uManager;
     
     @RequestMapping(value="/getTotalAnuncios/{tipo}")
     public int getTotalAnuncios(@PathVariable int tipo){

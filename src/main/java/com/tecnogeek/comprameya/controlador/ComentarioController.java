@@ -9,13 +9,13 @@ import com.tecnogeek.comprameya.entidad.Comentario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.managers.ManejadorComentario;
-import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
-import com.tecnogeek.comprameya.managers.ManejadorUbicacion;
-import com.tecnogeek.comprameya.managers.ManejadorUsuario;
-import com.tecnogeek.comprameya.pojo.pojoComentario;
-import com.tecnogeek.comprameya.pojo.pojoUbicacion;
-import com.tecnogeek.comprameya.pojo.pojoUsuario;
+import com.tecnogeek.comprameya.service.ComentarioService;
+import com.tecnogeek.comprameya.service.PublicacionService;
+import com.tecnogeek.comprameya.service.UbicacionService;
+import com.tecnogeek.comprameya.service.UsuarioService;
+import com.tecnogeek.comprameya.dto.pojoComentario;
+import com.tecnogeek.comprameya.dto.pojoUbicacion;
+import com.tecnogeek.comprameya.dto.pojoUsuario;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +35,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ComentarioController {
     
     @Autowired
-    ManejadorComentario cManager;
+    ComentarioService cManager;
     @Autowired
-    ManejadorPublicacion pManager;
+    PublicacionService pManager;
     @Autowired
-    ManejadorUsuario uManager;
+    UsuarioService uManager;
     
     @RequestMapping(value = "/set/{publicacion_id}", method = RequestMethod.POST)
     public @ResponseBody String setUbicacionPublicacion(@PathVariable("publicacion_id") long publicacion_id, @RequestBody pojoComentario pcomentario )  {

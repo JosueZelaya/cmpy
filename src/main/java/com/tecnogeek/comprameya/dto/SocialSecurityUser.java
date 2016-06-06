@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tecnogeek.comprameya.config;
+package com.tecnogeek.comprameya.dto;
 
 import com.tecnogeek.comprameya.enums.Role;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
@@ -24,7 +24,7 @@ import org.springframework.social.security.SocialUser;
 
 @Getter
 @Setter
-public class SocialSecurityUser extends SocialUser{
+public class SocialSecurityUser extends SocialUser {
 
     private Long id;
     

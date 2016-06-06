@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 
-package com.tecnogeek.comprameya.config;
+package com.tecnogeek.comprameya.service;
 
 
-import com.tecnogeek.comprameya.config.SocialSecurityUser;
+import com.tecnogeek.comprameya.dto.SocialSecurityUser;
 import com.tecnogeek.comprameya.entidad.Perfil;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.PerfilService;
-import com.tecnogeek.comprameya.repositories.UserService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import com.tecnogeek.comprameya.repositories.PerfilRepository;
+import com.tecnogeek.comprameya.repositories.UserRepository;
 
 /**
  *
@@ -30,17 +30,17 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
     @Autowired
-    private PerfilService perfilService;
+    private PerfilRepository perfilRepository;
     
     public CustomUserDetailsService(){}
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        Usuario usuario = userService.findByLogin(username);
-        Perfil perfil = perfilService.getPerfilUsuario(username);        
+        Usuario usuario = userRepository.findByLogin(username);
+        Perfil perfil = perfilRepository.getPerfilUsuario(username);        
         if(usuario==null)
         {
             throw new UsernameNotFoundException("Login "+username+" not found");

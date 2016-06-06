@@ -18,11 +18,11 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author jzelaya
  */
 @Deprecated
-public class SecurityUser extends Usuario implements UserDetails{
+public class SecurityUser_original extends Usuario implements UserDetails{
 
     private static final long serialVersionUID = 1L;
     
-    public SecurityUser(Usuario user)
+    public SecurityUser_original(Usuario user)
     {
         if(user!=null)
         {

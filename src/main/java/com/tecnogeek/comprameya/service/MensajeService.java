@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tecnogeek.comprameya.managers;
+package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.Destinatario;
 import com.tecnogeek.comprameya.entidad.Mensaje;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.MensajeService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tecnogeek.comprameya.repositories.MensajeRepository;
 
 /**
  *
@@ -20,11 +20,11 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ManejadorMensaje {
-    public ManejadorMensaje(){}
+public class MensajeService {
+    public MensajeService(){}
     
     @Autowired
-    MensajeService mensajeService;
+    MensajeRepository mensajeService;
     
         
     public List<Mensaje> getMensajeUsuario(Destinatario destinatario)

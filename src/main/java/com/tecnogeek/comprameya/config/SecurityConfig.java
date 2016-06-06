@@ -7,6 +7,7 @@
 package com.tecnogeek.comprameya.config;
 
 
+import com.tecnogeek.comprameya.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -66,6 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/register",
                             "/logout",
                             "/user",
+                            "/signup/**",
+                            "/user/register",
                             "/modal",
                             "/angular",
                             "/publicacion/getAnuncios/**",
@@ -95,14 +98,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
- 
-//    @Bean
-//    public SocialUserDetailsService socialUserDetailsService() {
-//        return new SocialCustomUserDetailsService();
-//    }
-// 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return new CustomUserDetailsService();
-//    }
+    
 }

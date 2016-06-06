@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tecnogeek.comprameya.managers;
+package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
-import com.tecnogeek.comprameya.repositories.PublicacionService;
-import com.tecnogeek.comprameya.utils.GridResponse;
+import com.tecnogeek.comprameya.dto.GridResponse;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 
 /**
  *
@@ -24,12 +24,12 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ManejadorPublicacion {
+public class PublicacionService {
     
-    public ManejadorPublicacion(){}
+    public PublicacionService(){}
     
     @Autowired
-    PublicacionService publicacionService;
+    PublicacionRepository publicacionRepository;
     
     public List<Publicacion> getAnunciosAleatorios(int total,int tipo)
     {
@@ -47,10 +47,10 @@ public class ManejadorPublicacion {
     {
         if(tipo==Constantes.PUBLICACION_PAGADA)
         {
-            return publicacionService.getTotalPublicacionesPagadas();
+            return publicacionRepository.getTotalPublicacionesPagadas();
         }else
         {
-            return publicacionService.getTotalPublicacionesGratis();
+            return publicacionRepository.getTotalPublicacionesGratis();
         }
     }
     
@@ -59,10 +59,10 @@ public class ManejadorPublicacion {
         List<Publicacion> publicaciones = new ArrayList();
         if(tipo==Constantes.PUBLICACION_PAGADA)
         {
-            publicaciones =  publicacionService.getPublicacionesPagadas(pageRequest);            
+            publicaciones =  publicacionRepository.getPublicacionesPagadas(pageRequest);            
         }else
         {
-            publicaciones = publicacionService.getPublicacionesGratis(pageRequest);            
+            publicaciones = publicacionRepository.getPublicacionesGratis(pageRequest);            
         }
         
         //Replace backslashes by forward slashes in order to work well in firefox.
@@ -102,7 +102,7 @@ public class ManejadorPublicacion {
     
     public Publicacion getPublicacion(long publicacion_id)
     {
-        return publicacionService.findOne(publicacion_id);
+        return publicacionRepository.findOne(publicacion_id);
     }
     
 }

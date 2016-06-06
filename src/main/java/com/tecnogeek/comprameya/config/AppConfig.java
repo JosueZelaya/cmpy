@@ -6,14 +6,14 @@
 
 package com.tecnogeek.comprameya.config;
 
-import com.tecnogeek.comprameya.managers.ManejadorCategoria;
-import com.tecnogeek.comprameya.managers.ManejadorComentario;
-import com.tecnogeek.comprameya.managers.ManejadorDestinatario;
-import com.tecnogeek.comprameya.managers.ManejadorMensaje;
-import com.tecnogeek.comprameya.managers.ManejadorPublicacion;
-import com.tecnogeek.comprameya.managers.ManejadorSuscriptor;
-import com.tecnogeek.comprameya.managers.ManejadorUbicacion;
-import com.tecnogeek.comprameya.managers.ManejadorUsuario;
+import com.tecnogeek.comprameya.service.CategoriaService;
+import com.tecnogeek.comprameya.service.ComentarioService;
+import com.tecnogeek.comprameya.service.DestinatarioService;
+import com.tecnogeek.comprameya.service.MensajeService;
+import com.tecnogeek.comprameya.service.PublicacionService;
+import com.tecnogeek.comprameya.service.SuscriptorService;
+import com.tecnogeek.comprameya.service.UbicacionService;
+import com.tecnogeek.comprameya.service.UsuarioService;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,7 +28,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  */
 
 @Configuration
-@ComponentScan(basePackages={"com.tecnogeek.comprameya.config","com.tecnogeek.comprameya.managers"})
+@ComponentScan(basePackages={"com.tecnogeek.comprameya.config","com.tecnogeek.comprameya.service"})
 @PropertySource(value = {"/WEB-INF/application.properties"})
 public class AppConfig {
     

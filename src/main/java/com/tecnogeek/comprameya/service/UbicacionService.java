@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tecnogeek.comprameya.managers;
+package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
-import com.tecnogeek.comprameya.repositories.UbicacionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tecnogeek.comprameya.repositories.UbicacionRepository;
 
 /**
  *
@@ -18,12 +18,12 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ManejadorUbicacion {
+public class UbicacionService {
     
-    public ManejadorUbicacion(){}
+    public UbicacionService(){}
     
     @Autowired
-    UbicacionService ubicacionService;
+    UbicacionRepository ubicacionService;
     
     public List<Ubicacion> getUbicacionPublicacion(Publicacion publicacion)
     {

@@ -14,7 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author jzelaya
  */
-public interface PerfilService extends CrudRepository<Perfil,Long> {
+public interface PerfilRepository extends CrudRepository<Perfil,Long> {
     
 //    SELECT usr.login,pfl.nombre FROM usuario usr,perfil pfl WHERE usr.fk_perfil=pfl.perfil_id
 //                    AND usr.login= ?
