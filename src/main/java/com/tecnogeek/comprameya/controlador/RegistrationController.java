@@ -49,7 +49,11 @@ public class RegistrationController {
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
         
         RegistrationForm registration = createRegistrationDTO(connection);
-        model.addAttribute("user", registration);
+        if(registration!=null){
+            model.addAttribute("user", registration);
+        }else{
+            model.addAttribute("user", "anonymous");
+        }        
  
         return "registrationForm";
     }

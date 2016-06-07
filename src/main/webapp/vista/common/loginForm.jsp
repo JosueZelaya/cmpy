@@ -9,6 +9,7 @@
                         <div class="col-lg-4">
                             <!-- Add Facebook sign in button -->
                             <a href="${pageContext.request.contextPath}/auth/facebook"><button class="btn btn-facebook"><i class="icon-facebook"></i> | sing in with facebook</button></a>
+                            <!--<a href="${pageContext.request.contextPath}/signup/facebook"><button class="btn btn-facebook"><i class="icon-facebook"></i> | sing in with facebook</button></a>-->
                         </div>
                     </div>
                     <div class="row social-button-row">

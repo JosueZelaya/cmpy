@@ -66,9 +66,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "login/form**",
                             "/register",
                             "/logout",
-                            "/user",
+                            "/auth/**",
+                            "/login",                            
+                            "/signin/**",
                             "/signup/**",
-                            "/user/register",
+                            "/user/register/**",
                             "/modal",
                             "/angular",
                             "/publicacion/getAnuncios/**",
@@ -82,6 +84,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .formLogin()
                     .loginPage("/login")
+                    .loginProcessingUrl("/login/authenticate")
+                    .failureUrl("/login?error=bad_credentials")
                     .permitAll()
                     .and()
                 .logout()                    

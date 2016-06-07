@@ -9,6 +9,7 @@
             </packagings>
             <goals>
                 <goal>package</goal>
+                
             </goals>
         </action>
     </actions>
