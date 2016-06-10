@@ -13,6 +13,8 @@ public class pojoUbicacion {
     private long id;
     private double latitud;
     private double longitud;
+    
+
 
     public long getId() {
         return id;

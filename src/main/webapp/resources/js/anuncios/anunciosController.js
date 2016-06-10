@@ -1,4 +1,6 @@
-modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $stateParams, anunciosService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $stateParams, anunciosService,mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+    
+
     
     var getPublicacion = function(id){
         return anunciosService.getPublicacionById(id)
@@ -34,7 +36,24 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
     var cargarDetallePublicacion = function(id){
         getPublicacion(id).success(function(publicacion){
             $rootScope.publicacion = publicacion;
+        });   
+        
+        
+        mapService.getUbicaciones(id)
+        .success(function (response)
+        {
+            angular.forEach(response, function(item){
+                var marker = {};
+                marker.id = item.id;
+                marker.title = 'ubi'+item.id.toString();
+                marker.latitude = item.latitud;
+                marker.longitude = item.longitud;
+                $rootScope.markers.push(marker);
+            });
+            
         });
+        
+        
     };
     
     var cargarPaginacion = function(){
@@ -53,8 +72,14 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
             imagenes[index] = $scope.existingFlowObject.files[index].file;
         }
 
+   
+
         var publicacion = new Publicacion($scope.titulo, $scope.precio, $scope.descripcion);
         publicacion.setImagenes(imagenes);
+        publicacion.setUbicaciones($rootScope.ubicaciones);
+        
+        //console.log("ubicaciones",$rootScope.ubicaciones);
+
         
         return publicacion;
     };

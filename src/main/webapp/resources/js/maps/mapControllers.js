@@ -1,4 +1,4 @@
-maps.controller('mapController', function($scope,$http,mapService) {
+maps.controller('mapController', function($rootScope,$scope,$http,mapService) {
 
     $scope.center = {
         latitude: 13.7724376,
@@ -6,7 +6,7 @@ maps.controller('mapController', function($scope,$http,mapService) {
     };
     
     $scope.zoom = 9;
-    $scope.markers = [];
+    $rootScope.markers = [];
     
     $scope.marker = {
         options: {
@@ -16,12 +16,12 @@ maps.controller('mapController', function($scope,$http,mapService) {
             rightclick :function(mapModel,MouseEvent,originalEventArgs)
             {
                 var id = originalEventArgs.id;
-                var max = $scope.markers.length;
+                var max = $rootScope.markers.length;
                 for(i = 0; i < max; i++){
-                    if($scope.markers[i] !== undefined){
-                        if(id === $scope.markers[i].id){
-                            $scope.markers.splice(i,1);
-                            $scope.$apply();
+                    if($rootScope.markers[i] !== undefined){
+                        if(id === $rootScope.markers[i].id){
+                            $rootScope.markers.splice(i,1);
+                            $rootScope.$apply();
                         }
                     }
                 }
@@ -30,11 +30,11 @@ maps.controller('mapController', function($scope,$http,mapService) {
       }
     };
     
-    $scope.setUbicaciones = function(publicacion_id)
+    $scope.setUbicaciones = function()//(publicacion_id)
     {
         var listaUbicacion = [];
         
-        angular.forEach($scope.markers, function(item){
+        angular.forEach($rootScope.markers, function(item){
                 var ubicacion = {};
                 ubicacion.id = item.id;
                 ubicacion.latitud = item.latitude;
@@ -42,13 +42,17 @@ maps.controller('mapController', function($scope,$http,mapService) {
                 listaUbicacion.push(ubicacion);
         });
         
-        mapService.setUbicaciones(publicacion_id,listaUbicacion);
+        $rootScope.ubicaciones = listaUbicacion;
+        
+        //mapService.setUbicaciones(publicacion_id,listaUbicacion);
         
         //$http.post("/ubicacion/publicacion/set/" + publicacion_id.toString(), listaUbicacion);
     }; 
     
     $scope.getUbicaciones = function(publicacion_id)
     {
+        $rootScope.markers = [];
+        
         //$http.get("/ubicacion/publicacion/get/" + publicacion_id.toString())
         mapService.getUbicaciones(publicacion_id)
         .success(function (response)
@@ -59,7 +63,7 @@ maps.controller('mapController', function($scope,$http,mapService) {
                 marker.title = 'ubi'+item.id.toString();
                 marker.latitude = item.latitud;
                 marker.longitude = item.longitud;
-                $scope.markers.push(marker);
+                $rootScope.markers.push(marker);
             });
             
         });
@@ -74,8 +78,8 @@ maps.controller('mapController', function($scope,$http,mapService) {
             var lat = e.latLng.lat();
             var lng = e.latLng.lng();
             var id = 0;
-            if($scope.markers[$scope.markers.length -1] !== undefined){
-                var id = $scope.markers[$scope.markers.length -1].id;
+            if($rootScope.markers[$rootScope.markers.length -1] !== undefined){
+                var id = $rootScope.markers[$rootScope.markers.length -1].id;
             }
             id++;
             
@@ -84,13 +88,19 @@ maps.controller('mapController', function($scope,$http,mapService) {
             marker.title = "ubi"+id.toString();
             marker.latitude = lat;//e.latLng.lat;
             marker.longitude = lng;//e.latLng.lng;
-            $scope.markers.push(marker);
-            $scope.$apply();
+            $rootScope.markers.push(marker);
+            $rootScope.$apply();
           }
 
     };
     
+    
+    //$scope.getUbicaciones(19);
+    
+    
   
+    
+    
     
 //    $http.get("/ubicacion/publicacion/get/8")
 //    .success(function (response)

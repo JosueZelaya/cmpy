@@ -34,7 +34,7 @@ public class CategoriaController {
     @RequestMapping(value = "/todos", method = RequestMethod.GET)
     public @ResponseBody List<Object> getTodoCategoria(Model model)  {
          List<Categoria> catTodo = cManager.getCategoria();
-         List<Object> catObject = new ArrayList<>();
+         List < Object > catObject = new ArrayList();
          for(Categoria cat : catTodo)
          {
              catObject.add(getCatMin(cat, getHijos(cat)));

@@ -6,6 +6,8 @@
 
 package com.tecnogeek.comprameya.controlador;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Producto;
 import com.tecnogeek.comprameya.entidad.Publicacion;
@@ -26,7 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,6 +93,7 @@ public class PublicacionController {
     @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
     public String agregarAnuncio(@RequestParam(value = "titulo", required = true) String titulo,
                                  @RequestParam(value = "descripcion", required = true) String descripcion,
+                                 //@RequestParam(value = "ubicaciones", required = true) pojoUbicacionWrapper ubicaciones,
                                  @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
                                  Model model)
     {                  
@@ -113,6 +118,10 @@ public class PublicacionController {
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setTipoPublicacionId(tipo.longValue());
         publicacion.setFkTipoPublicacion(tipoPublicacion);
+        
+        UbicacionController cUbicacion = new UbicacionController();
+        //cUbicacion.setUbicacionPublicacion(publicacion.getPublicacionId(), ubicaciones);
+        
         publicacionService.save(publicacion);
         
         return "redirect:/";
@@ -123,8 +132,10 @@ public class PublicacionController {
     public String agregarPublicacion(@RequestParam(value = "titulo", required = true) String titulo,
                                  @RequestParam(value = "precio", required = true) Double precio,
                                  @RequestParam(value = "descripcion", required = true) String descripcion,
+                                 @RequestParam(value = "ubicaciones", required = false) String ubicaciones,
+                                 //@RequestBody pojoUbicacionWrapper ubicaciones,
                                  @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
-                                 Model model)
+                                 Model model) throws IOException
     {           
         
         Publicacion publicacion = new Publicacion();
@@ -162,5 +173,28 @@ public class PublicacionController {
         
         return "redirect:/";
     }
+    
+    
+     public List<Ubicacion> getUbicacionesI( Publicacion pu, 
+             List<pojoUbicacion> listaUbicacion )  {
+        
+        List<Ubicacion> listaUbicacionTmp = new ArrayList();
+        int num = listaUbicacion.size();
+   
+            for(int i = 0;i<num;i++)
+            {
+                                
+                Ubicacion ubi = new Ubicacion();
+                ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
+                ubi.setGmLongitud(listaUbicacion.get(i).getLongitud());
+                ubi.setFkPublicacion(pu);
+                
+                listaUbicacionTmp.add(ubi);
+            }
+            
+            
+        return listaUbicacionTmp;  
+    }    
+    
     
 }

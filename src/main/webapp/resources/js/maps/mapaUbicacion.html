@@ -13,11 +13,12 @@ and open the template in the editor.
     <body>
         <div ng-controller="mapController">
 
-            <ui-gmap-google-map events="events" center="center" zoom="zoom" draggable="true" options="options" bounds="bounds">
+            <ui-gmap-google-map events="events" center="center" zoom="zoom" draggable="true" options="options" bounds="bounds" ng-click="setUbicaciones()">
                 <ui-gmap-markers models="markers" events="marker.events" coords="'self'" icon="'icon'" options="marker.options">
                 </ui-gmap-markers>
             </ui-gmap-google-map>
 
         </div>
+
     </body>
 </html>
