@@ -8,6 +8,7 @@ package com.tecnogeek.comprameya.dto;
 import com.tecnogeek.comprameya.cmpyannotations.PasswordsNotEmpty;
 import com.tecnogeek.comprameya.cmpyannotations.PasswordsNotEqual;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
+import java.io.Serializable;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,10 @@ import org.hibernate.validator.constraints.NotEmpty;
         passwordFieldName = "password",
         passwordVerificationFieldName = "passwordVerification"
 )
-public class RegistrationForm {
+public class RegistrationForm implements Serializable{
 
+        private static final long serialVersionUID = 1L;
+    
         @Email
         @NotEmpty
         @Size(max = 100)

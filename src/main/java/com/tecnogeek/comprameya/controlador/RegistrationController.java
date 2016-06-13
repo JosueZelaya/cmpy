@@ -7,8 +7,6 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
-import com.tecnogeek.comprameya.repositories.AccountRepository;
-import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
