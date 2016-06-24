@@ -5,8 +5,10 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
+import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -24,11 +28,14 @@ import com.tecnogeek.comprameya.repositories.UserRepository;
 public class UsuarioService {
     
      @Autowired
-     UserRepository userService;
+     UserRepository repository;
+     
+     @Autowired
+     private PasswordEncoder passwordEncoder;
      
      public Usuario getUserByLogin(String login)
      {
-        return userService.findByLogin(login);
+        return repository.findByLogin(login);
      }
      
      public Usuario getLoggedUser()
@@ -42,7 +49,7 @@ public class UsuarioService {
      
      public Usuario getUsuario(long id)
      {
-         return userService.findOne(id);
+         return repository.findOne(id);
      }
      
     public List<pojoUsuario> getUsuarioPojo(List<Usuario> lista)
@@ -60,6 +67,48 @@ public class UsuarioService {
         }
 
         return lpUsuario;
+    }
+
+    @Transactional
+    public Usuario registerNewUserAccount(RegistrationForm userAccountData) throws DuplicateEmailException {
+        if (emailExist(userAccountData.getEmail())) {
+            throw new DuplicateEmailException("The email address: " + userAccountData.getEmail() + " is already in use.");
+        }
+ 
+        String encodedPassword = encodePassword(userAccountData);
+ 
+        Usuario usuario = new Usuario();
+        usuario.getFkPersona().setCorreo(userAccountData.getEmail());
+        usuario.setLogin(userAccountData.getEmail());
+        usuario.getFkPersona().setNombre(userAccountData.getFirstName());
+        usuario.getFkPersona().setApellido(userAccountData.getLastName());
+        usuario.setPass(encodedPassword);
+ 
+        if (userAccountData.isSocialSignIn()) {
+            usuario.setSignInProvider(userAccountData.getSignInProvider());
+        }
+ 
+        return repository.save(usuario);
+    }
+ 
+    private boolean emailExist(String email) {
+        Usuario user = repository.findByLogin(email);
+ 
+        if (user != null) {
+            return true;
+        }
+ 
+        return false;
+    }
+ 
+    private String encodePassword(RegistrationForm dto) {
+        String encodedPassword = null;
+ 
+        if (dto.isNormalRegistration()) {
+            encodedPassword = passwordEncoder.encode(dto.getPassword());
+        }
+ 
+        return encodedPassword;
     }
 
     

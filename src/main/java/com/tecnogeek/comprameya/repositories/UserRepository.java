@@ -7,7 +7,6 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Usuario;
-import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

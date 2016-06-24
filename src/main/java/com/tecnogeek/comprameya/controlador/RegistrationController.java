@@ -6,7 +6,9 @@
 package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.dto.RegistrationForm;
+import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
+import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -20,7 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
-import com.tecnogeek.comprameya.repositories.UserRepository;
+import com.tecnogeek.comprameya.utils.SecurityUtil;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import com.tecnogeek.comprameya.service.UsuarioService;
 
 /**
  *
@@ -32,7 +39,7 @@ import com.tecnogeek.comprameya.repositories.UserRepository;
 public class RegistrationController {
     
     @Autowired
-    private UserRepository service;
+    private UsuarioService service;
     
     private ProviderSignInUtils providerSignInUtils;
 
@@ -47,6 +54,7 @@ public class RegistrationController {
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
         
         RegistrationForm registration = createRegistrationDTO(connection);
+        
         if(registration!=null){
             model.addAttribute("user", registration);
         }else{
@@ -54,6 +62,60 @@ public class RegistrationController {
         }        
  
         return "registrationForm";
+    }
+    
+    @RequestMapping(value ="/user/register", method = RequestMethod.POST)
+    public String registerUserAccount(@Valid @ModelAttribute("user") RegistrationForm userAccountData,
+                                      BindingResult result,
+                                      WebRequest request) throws Exception{
+        
+        if(result.hasErrors()){
+            return "registrationForm";
+        }
+        
+        Usuario registered = createUserAccount(userAccountData,result);
+        
+        if(registered==null){
+            return "registrationForm";
+        }                         
+        
+        SecurityUtil.logInUser(registered);
+        providerSignInUtils.doPostSignUp(registered.getLogin(), request);
+ 
+        return "redirect:/";
+        
+    }
+    
+    private Usuario createUserAccount(RegistrationForm userAccountData, BindingResult result) {
+        Usuario registered = null;
+ 
+        try {
+            registered = service.registerNewUserAccount(userAccountData);
+        }
+        catch (DuplicateEmailException ex) {
+            addFieldError(
+                    "user",
+                    "email",
+                    userAccountData.getEmail(),
+                    "NotExist.user.email",
+                    result);
+        }
+ 
+        return registered;
+    }
+    
+    private void addFieldError(String objectName, String fieldName, String fieldValue,  String errorCode, BindingResult result) {
+        FieldError error = new FieldError(
+                objectName,
+                fieldName,
+                fieldValue,
+                false,
+                new String[]{errorCode},
+                new Object[]{},
+                errorCode
+        );
+ 
+        result.addError(error);
     }
     
     private RegistrationForm createRegistrationDTO(Connection<?> connection) {

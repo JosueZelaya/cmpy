@@ -36,6 +36,10 @@ public class SocialSecurityUser extends SocialUser {
     
     private String login;
     
+    private String firstName;
+    
+    private String lastName;
+    
     public SocialSecurityUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
@@ -51,6 +55,10 @@ public class SocialSecurityUser extends SocialUser {
         private String username;
  
         private String password;
+        
+        private String firstName;
+        
+        private String lastName;
  
         private Role role;
  
@@ -94,6 +102,16 @@ public class SocialSecurityUser extends SocialUser {
             this.username = username;
             return this;
         }
+        
+        public Builder firstName(String firstName){
+            this.firstName = firstName;
+            return this;
+        }
+        
+        public Builder lastName(String lastName){
+            this.lastName = lastName;
+            return this;
+        }
  
         public SocialSecurityUser build() {
             SocialSecurityUser user = new SocialSecurityUser(username, password, authorities);
@@ -102,7 +120,8 @@ public class SocialSecurityUser extends SocialUser {
             user.role = role;
             user.socialSignInProvider = socialSignInProvider;
             user.login = username;            
- 
+            user.firstName = firstName;
+            user.lastName = lastName;
             return user;
         }
     }

@@ -6,14 +6,6 @@
 
 package com.tecnogeek.comprameya.config;
 
-import com.tecnogeek.comprameya.service.CategoriaService;
-import com.tecnogeek.comprameya.service.ComentarioService;
-import com.tecnogeek.comprameya.service.DestinatarioService;
-import com.tecnogeek.comprameya.service.MensajeService;
-import com.tecnogeek.comprameya.service.PublicacionService;
-import com.tecnogeek.comprameya.service.SuscriptorService;
-import com.tecnogeek.comprameya.service.UbicacionService;
-import com.tecnogeek.comprameya.service.UsuarioService;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
