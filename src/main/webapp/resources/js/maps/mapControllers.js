@@ -94,27 +94,83 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService) {
 
     };
     
+//busqueda//
+
+    $scope.searchbox = { 
+          template:'searchbox.tpl.html', 
+          events:{
+            places_changed: function (searchBox) {
+                
+            console.log(searchBox.getPlaces()[0].geometry);    
+            
+            console.log(searchBox.getPlaces()[0].geometry.location.lat());
+            
+            var tmp_lat = searchBox.getPlaces()[0].geometry.location.lat();
+            var tmp_lng = searchBox.getPlaces()[0].geometry.location.lng();
+                
+            $scope.center = {
+              latitude: tmp_lat,
+              longitude: tmp_lng
+            };     
+            
+            $scope.zoom = 17;
+                
+                console.log(searchBox.getPlaces());
+                
+                
+                
+            }
+          }
+    };
     
-    //$scope.getUbicaciones(19);
     
-    
-  
-    
-    
-    
-//    $http.get("/ubicacion/publicacion/get/8")
-//    .success(function (response)
-//    {
-//        angular.forEach(response, function(item){
-//            var marker = {};
-//            marker.id = item.id;
-//            marker.title = 'ubi'+item.id.toString();
-//            marker.latitude = item.latitud;
-//            marker.longitude = item.longitud;
-//            $scope.markers.push(marker);
-//        });
-//    });
-    
+    $scope.getUbicacionGPS = function(){
+            
+
+	if (navigator.geolocation)
+	{
+
+            navigator.geolocation.getCurrentPosition(function(objPosition)
+            {
+                
+                debugger;
+                
+                $scope.center = {
+                    latitude: objPosition.coords.latitude,
+                    longitude: objPosition.coords.longitude
+                };   
+                $scope.zoom = 17;
+
+            }, function(objPositionError)
+            {                    
+                    switch (objPositionError.code)
+                    {
+                            case objPositionError.PERMISSION_DENIED:
+                                    alert("No se ha permitido el acceso a la posición del usuario.");
+                            break;
+                            case objPositionError.POSITION_UNAVAILABLE:
+                                    alert("No se ha podido acceder a la información de su posición.");
+                            break;
+                            case objPositionError.TIMEOUT:
+                                    alert("El servicio ha tardado demasiado tiempo en responder.");
+                            break;
+                            default:
+                                    alert("Error desconocido.");
+                    }
+            }, {
+                maximumAge: 75000,
+                timeout: 30000
+            });
+             
+	}
+	else
+	{
+		alert("Su navegador no soporta la API de geolocalización.");
+	}
+        
+        
+    };
+
 
   });
 

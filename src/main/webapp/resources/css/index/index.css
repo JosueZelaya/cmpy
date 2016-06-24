@@ -202,3 +202,8 @@ a.list-group-item
 
 .angular-google-map-container { height: 400px; }
 
+body > div.pac-container.pac-logo{
+    
+    z-index: 2000;
+}
+
