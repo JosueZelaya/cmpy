@@ -15,7 +15,7 @@ import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.TipoPublicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.pojo.pojoUbicacion;
+import com.tecnogeek.comprameya.dto.pojoUbicacion;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
 import com.tecnogeek.comprameya.utils.FileManager;
@@ -121,7 +121,6 @@ public class PublicacionController {
         tipoPublicacion.setTipoPublicacionId(tipo.longValue());
         publicacion.setFkTipoPublicacion(tipoPublicacion);
         
-        UbicacionController cUbicacion = new UbicacionController();
         //cUbicacion.setUbicacionPublicacion(publicacion.getPublicacionId(), ubicaciones);
         
         publicacionService.save(publicacion);
@@ -171,7 +170,15 @@ public class PublicacionController {
         publicacion.setProductoList(productos);
         Usuario usuario = uManager.getLoggedUser();
         publicacion.setFkUsuario(usuario);
+        
+        ObjectMapper mapper = new ObjectMapper();
+        List<pojoUbicacion> list = mapper.readValue(ubicaciones, new TypeReference<List<pojoUbicacion>>() { });
+        
+        publicacion.setUbicacionList(getUbicacionesI(publicacion, list));
+        
         publicacionService.save(publicacion);
+        
+        
         
         return "redirect:/";
     }

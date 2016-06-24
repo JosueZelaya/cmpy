@@ -6,7 +6,7 @@
 package com.tecnogeek.comprameya.pojo;
 
 import java.util.List;
-
+import com.tecnogeek.comprameya.dto.pojoUbicacion;
 /**
  *
  * @author genaro
