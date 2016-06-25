@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="row" >
+            <div style="height: 305px">
+
+                <div class="thumbnail">
+
+                    <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
+                        <uib-slide ng-repeat="recurso in publicacion.recursoList" active="slide.active" index="slide.id">
+                            <img ng-src="/images/getImage/{{recurso.ruta}}" style="margin:auto;">
+                            <div class="carousel-caption">                                
+                                {{publicacion.titulo}}
+                            </div>
+                        </uib-slide>
+                    </uib-carousel>
+
+                    <div class="titulo-publicacion">
+                        <h3>{{publicacion.titulo}}</h3>
+                    </div>              
+                    
+                    <p>{{publicacion.descripcion}}</p>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="price-text-color">$ {{publicacion.productoList[0].precio}}</h4>
+                        </div>
+                        <div class="rating hidden-sm col-md-4">
+                            <i class="price-text-color glyphicon glyphicon-star-empty"></i>
+                            <i class="price-text-color glyphicon glyphicon-star-empty"></i>
+                            <i class="price-text-color glyphicon glyphicon-star-empty"></i>
+                            Calificacion:
+                            <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.puntaje) track by $index"></i>
+                            <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.puntaje) track by $index"></i>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        
+                    </div>
+                    
+                    <div>
+                    <div ui-view="maps">
+
+                    </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+    </body>
+
+</html>

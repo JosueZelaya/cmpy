@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+    <Resource id="jboss/datasources/SAFICOREV2" type="DataSource">
+        JdbcDriver = oracle.jdbc.OracleDriver
+        JdbcUrl    = jdbc:oracle:thin:@localhost:1521/xe
+        UserName   = SAFI_II_CORE_FINANC
+        Password   = password
+    </Resource>
+</tomee>
