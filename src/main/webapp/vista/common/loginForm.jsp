@@ -8,14 +8,14 @@
                     <div class="row social-button-row">
                         <div class="col-lg-4">
                             <!-- Add Facebook sign in button -->
-                            <a href="${pageContext.request.contextPath}/auth/facebook"><button class="btn btn-facebook"><i class="icon-facebook"></i> | sing in with facebook</button></a>
+                            <a href="${pageContext.request.contextPath}/auth/facebook"><button class="btn btn-facebook"><i class="icon-facebook"></i> | Entrar con facebook</button></a>
                             <!--<a href="${pageContext.request.contextPath}/signup/facebook"><button class="btn btn-facebook"><i class="icon-facebook"></i> | sing in with facebook</button></a>-->
                         </div>
                     </div>
                     <div class="row social-button-row">
                         <div class="col-lg-4">
                             <!-- Add Twitter sign in Button -->
-                            <a href="${pageContext.request.contextPath}/auth/twitter"><button class="btn btn-twitter"><i class="icon-twitter"></i> | sing in with twitter</button></a>
+                            <a href="${pageContext.request.contextPath}/auth/twitter"><button class="btn btn-twitter"><i class="icon-twitter"></i> | Entrar con twitter</button></a>
                         </div>
                     </div>
                 </div>

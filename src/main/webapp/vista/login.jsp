@@ -14,7 +14,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <title>Login - ComprameYa!</title>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">        
-        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">     
+        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-social/bootstrap-social.css"/>
     </head>
     <body>
         
