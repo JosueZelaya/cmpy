@@ -52,8 +52,6 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "login")
     private String login;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "pass")
     private String pass;

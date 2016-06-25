@@ -8,7 +8,12 @@ package com.tecnogeek.comprameya.service;
 import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
+import com.tecnogeek.comprameya.entidad.Perfil;
+import com.tecnogeek.comprameya.entidad.Persona;
+import com.tecnogeek.comprameya.enums.Role;
 import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
+import com.tecnogeek.comprameya.repositories.PerfilRepository;
+import com.tecnogeek.comprameya.repositories.PersonaRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +34,12 @@ public class UsuarioService {
     
      @Autowired
      UserRepository repository;
+     
+     @Autowired
+     PersonaRepository personaRepository;
+     
+     @Autowired
+     PerfilRepository perfilRepository;
      
      @Autowired
      private PasswordEncoder passwordEncoder;
@@ -77,13 +88,20 @@ public class UsuarioService {
  
         String encodedPassword = encodePassword(userAccountData);
  
+        Persona persona = new Persona();
+        persona.setCorreo(userAccountData.getEmail());
+        persona.setNombre(userAccountData.getFirstName());
+        persona.setApellido(userAccountData.getLastName());
+        persona = personaRepository.save(persona);
+        
+        Perfil perfil = perfilRepository.findByNombre(Role.USUARIO.getRoleName());
+        
         Usuario usuario = new Usuario();
-        usuario.getFkPersona().setCorreo(userAccountData.getEmail());
         usuario.setLogin(userAccountData.getEmail());
-        usuario.getFkPersona().setNombre(userAccountData.getFirstName());
-        usuario.getFkPersona().setApellido(userAccountData.getLastName());
         usuario.setPass(encodedPassword);
- 
+        usuario.setFkPersona(persona);
+        usuario.setFkPerfil(perfil);
+        
         if (userAccountData.isSocialSignIn()) {
             usuario.setSignInProvider(userAccountData.getSignInProvider());
         }

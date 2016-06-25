@@ -22,4 +22,7 @@ public interface PerfilRepository extends CrudRepository<Perfil,Long> {
     @Query("select p from Perfil p,Usuario u where u.fkPerfil=p.perfilId and u.login=?1")
     Perfil getPerfilUsuario(String login);
     
+    @Query("select p from Perfil p where p.nombre=?1")
+    Perfil findByNombre(String nombre);
+    
 }

@@ -33,12 +33,19 @@
         </div>
     </c:if>
 
-    <form:form id="loginForm" method="post" action="${rootURL}login">
+    <form:form id="loginForm" method="post" action="${rootURL}login/authenticate">
         <label for="username" class="col-sm-2 control-label">Usuario*</label>
         <input type="text" id="username" name="username" class="form-control" placeholder="Usuario" />
         <label for="password" class="col-sm-2 control-label">Clave*</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="Clave" />
         <input type="submit" class="btn btn-primary" value="Login">
     </form:form>
+        
+    <div class="row">
+        <div class="form-group col-lg-4">
+            <!-- Add create user account link -->
+            <a href="${pageContext.request.contextPath}/user/register">Crear una Cuenta</a>
+        </div>
+    </div>
 
 </div>
