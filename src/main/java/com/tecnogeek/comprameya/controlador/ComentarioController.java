@@ -80,7 +80,7 @@ public class ComentarioController {
             p.setPuntaje(c.getPuntaje());
             
             pojoUsuario pu = new pojoUsuario();
-            pu.setId(c.getFkUsuario().getUsuarioId());
+            pu.setId(c.getFkUsuario().getId());
             pu.setLogin(c.getFkUsuario().getLogin());
             
             p.setUsuario(pu);          

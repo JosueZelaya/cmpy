@@ -26,12 +26,12 @@ public class SecurityUser_original extends Usuario implements UserDetails{
     {
         if(user!=null)
         {
-            this.setUsuarioId(user.getUsuarioId());
+            this.setId(user.getId());
             this.setLogin(user.getLogin());
             this.setPass(user.getPass());
             this.setPuntaje(user.getPuntaje());             
-            this.setSisSesionActiva(user.isSisSesionActiva());
-            this.setSisActivo(user.isSisActivo());            
+//            this.setSisSesionActiva(user.isSisSesionActiva());
+//            this.setSisActivo(user.isSisActivo());            
             this.setFkPerfil(user.getFkPerfil());
         }         
     }
@@ -73,7 +73,7 @@ public class SecurityUser_original extends Usuario implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return super.isSisActivo();
+        return true;
     }
     
 }

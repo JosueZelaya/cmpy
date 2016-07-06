@@ -7,6 +7,7 @@
 package com.tecnogeek.comprameya.config;
 
 
+import com.tecnogeek.comprameya.service.CustomAuthSuccessHandler;
 import com.tecnogeek.comprameya.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+    
+    @Autowired
+    private CustomAuthSuccessHandler customAuthSuccessHandler;
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
@@ -84,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .loginProcessingUrl("/login/authenticate")
                     .failureUrl("/login?error=bad_credentials")
-                    .permitAll()
+//                    .successHandler(customAuthSuccessHandler)
                     .and()
                 .logout()                    
                     .deleteCookies("remove")
@@ -93,7 +97,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .permitAll()
                 .and()
-                    .apply(new SpringSocialConfigurer());
+                    .apply(new SpringSocialConfigurer()
+                            .alwaysUsePostLoginUrl(true)
+                            .postLoginUrl("/")
+                    );
     }
  
     @Bean

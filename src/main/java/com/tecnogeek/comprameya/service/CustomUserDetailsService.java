@@ -48,7 +48,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         usuario.setFkPerfil(perfil);    
         
         SocialSecurityUser socialSecUser = SocialSecurityUser.getBuilder()                
-                .id(usuario.getUsuarioId())                
+                .id(usuario.getId())                
                 .password(usuario.getPass())
                 .role(usuario.getFkPerfil().getRole())                
                 .username(usuario.getLogin())

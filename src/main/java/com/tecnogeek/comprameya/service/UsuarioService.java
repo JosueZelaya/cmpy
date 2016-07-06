@@ -71,7 +71,7 @@ public class UsuarioService {
         for(Usuario usr : lista)
         {
             pojoUsuario p = new pojoUsuario();
-            p.setId(usr.getUsuarioId());
+            p.setId(usr.getId());
             p.setLogin(usr.getLogin());
 
             lpUsuario.add(p);

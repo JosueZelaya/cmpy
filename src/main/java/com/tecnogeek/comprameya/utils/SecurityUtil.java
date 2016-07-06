@@ -20,7 +20,7 @@ public class SecurityUtil {
     public static void logInUser(Usuario user) {
         SocialSecurityUser userDetails = SocialSecurityUser.getBuilder()
                 .firstName(user.getFkPersona().getNombre())
-                .id(user.getUsuarioId())
+                .id(user.getId())
                 .lastName(user.getFkPersona().getApellido())
                 .password(user.getPass())
                 .role(user.getFkPerfil().getRole())

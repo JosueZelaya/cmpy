@@ -156,7 +156,7 @@ public class MensajeController {
             pmensaje.setMensaje(men.getTexto());
             
             pojoEmisor pemisor = new pojoEmisor();
-            pemisor.setId(men.getFkUsuarioEmisor().getUsuarioId());
+            pemisor.setId(men.getFkUsuarioEmisor().getId());
             pemisor.setLogin(men.getFkUsuarioEmisor().getLogin());
            
             pmensaje.setEmisor(pemisor);
@@ -166,7 +166,7 @@ public class MensajeController {
             for(Destinatario des : men.getDestinatarioList())
             {
                 pojoDestinatario pdestinario = new pojoDestinatario();
-                pdestinario.setId(des.getFkUsuarioDestinatario().getUsuarioId());
+                pdestinario.setId(des.getFkUsuarioDestinatario().getId());
                 pdestinario.setLogin(des.getFkUsuarioDestinatario().getLogin());
                 
                 lpdestinario.add(pdestinario);

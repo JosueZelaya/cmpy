@@ -20,6 +20,8 @@ var cmy_ng = angular.module('cmpy',
 
 cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
 
+    
+
     $urlRouterProvider.otherwise('/');
 
     $stateProvider

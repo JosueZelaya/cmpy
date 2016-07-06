@@ -55,11 +55,7 @@ public class RegistrationController {
         
         RegistrationForm registration = createRegistrationDTO(connection);
         
-        if(registration!=null){
-            model.addAttribute("user", registration);
-        }else{
-            model.addAttribute("user", "anonymous");
-        }        
+        model.addAttribute("user", registration);
  
         return "registrationForm";
     }

@@ -8,7 +8,6 @@ package com.tecnogeek.comprameya.entidad;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -23,8 +22,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
@@ -39,14 +36,14 @@ import lombok.Setter;
 @Table(name = "usuario")
 @Getter
 @Setter
-public class Usuario implements Serializable {
+public class Usuario extends BaseEntity<Long> implements Serializable {
     
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "usuario_id")
-    private Long usuarioId;
+    private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
@@ -61,19 +58,7 @@ public class Usuario implements Serializable {
     private int puntaje;
     @Size(max = 2147483647)
     @Column(name = "fb_usuario_id")
-    private String fbUsuarioId;    
-    @NotNull
-    @Column(name = "sis_sesion_activa")
-    private boolean sisSesionActiva;    
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaModificacion;
+    private String fbUsuarioId;        
     @OneToMany(mappedBy = "fkUsuario")
     private List<Compra> compraList;
     @OneToMany(mappedBy = "fkUsuarioEvaluado")
