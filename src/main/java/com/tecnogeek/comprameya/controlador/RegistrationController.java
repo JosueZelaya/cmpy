@@ -48,7 +48,7 @@ public class RegistrationController {
                             UsersConnectionRepository connectionRepository) {        
         this.providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
     }
-
+    
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
     public String showRegistrationForm(WebRequest request,Model model){
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);

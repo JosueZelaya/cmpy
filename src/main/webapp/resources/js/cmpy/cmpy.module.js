@@ -18,17 +18,21 @@ var cmy_ng = angular.module('cmpy',
     'cmpy.utils'
 ]);
 
-cmy_ng.config(function ($stateProvider, $urlRouterProvider) {
+cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false,
+        rewriteLinks: false
+    });
     
-
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
 
             // HOME STATES AND NESTED VIEWS ========================================
             .state('home', {
-                url: "",
+                url: "/",
                 views: {
                     '': { templateUrl: '/resources/js/cmpy/home.html' },
                     
