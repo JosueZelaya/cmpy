@@ -9,6 +9,7 @@ package com.tecnogeek.comprameya.config;
 
 import com.tecnogeek.comprameya.service.CustomAuthSuccessHandler;
 import com.tecnogeek.comprameya.service.CustomUserDetailsService;
+import com.tecnogeek.comprameya.service.SocialCustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
-    
+        
     @Autowired
     private CustomAuthSuccessHandler customAuthSuccessHandler;
     

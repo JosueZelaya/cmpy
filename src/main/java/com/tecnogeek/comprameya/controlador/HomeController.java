@@ -6,7 +6,9 @@
 package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.constantes.Constantes;
+import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.entidad.Categoria;
+import com.tecnogeek.comprameya.entidad.Persona;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.service.CategoriaService;
@@ -23,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.tecnogeek.comprameya.repositories.CategoriaRepository;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import java.security.Principal;
+import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  *
@@ -93,11 +98,12 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping(value = "/user")    
-    public Usuario getUsuario() {    
+    public Usuario getUsuario(Principal principal) {    
          Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName(); //get logged in username        
         Usuario user = new Usuario();
         user.setLogin(userName);
+             
         return user;
     }
 
