@@ -39,6 +39,11 @@
                     <c:if test="${user.signInProvider != null}">
                         <form:hidden path="signInProvider"/>
                     </c:if>
+                    
+                    <c:if test="${user.signInProvider != null}">
+                        <img src="${user.imageUrl}" />
+                    </c:if>
+                    
                     <div class="row">
                         <div id="form-group-firstName" class="form-group col-lg-4">
                             <label class="control-label" for="user-firstName"><spring:message code="label.user.firstName"/>:</label>

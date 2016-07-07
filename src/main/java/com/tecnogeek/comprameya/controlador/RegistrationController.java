@@ -121,10 +121,10 @@ public class RegistrationController {
             UserProfile socialMediaProfile = connection.fetchUserProfile();
             dto.setEmail(socialMediaProfile.getEmail());
             dto.setFirstName(socialMediaProfile.getFirstName());
-            dto.setLastName(socialMediaProfile.getLastName());
- 
+            dto.setLastName(socialMediaProfile.getLastName());            
             ConnectionKey providerKey = connection.getKey();
             dto.setSignInProvider(SocialMediaService.valueOf(providerKey.getProviderId().toUpperCase()));
+            dto.setImageUrl(connection.getImageUrl());
         }
  
         return dto;

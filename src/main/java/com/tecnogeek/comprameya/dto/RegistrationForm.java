@@ -56,6 +56,8 @@ public class RegistrationForm implements Serializable{
         private String passwordVerification;
 
         private SocialMediaService signInProvider;
+        
+        private String imageUrl;
 
         //Constructor is omitted for the of clarity.
 
