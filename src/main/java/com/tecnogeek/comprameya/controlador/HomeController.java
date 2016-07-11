@@ -7,6 +7,7 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.dto.RegistrationForm;
+import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
 import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.entidad.Persona;
 import com.tecnogeek.comprameya.entidad.Publicacion;
@@ -27,7 +28,12 @@ import com.tecnogeek.comprameya.repositories.CategoriaRepository;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import java.security.Principal;
 import javax.servlet.http.HttpSession;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.context.request.WebRequest;
 
 /**
  *
@@ -52,6 +58,14 @@ public class HomeController {
     CategoriaService cManager;
     //fin req categorias
 
+    private ProviderSignInUtils providerSignInUtils;
+    
+    @Autowired
+    public HomeController(ConnectionFactoryLocator connectionFactoryLocator,
+                            UsersConnectionRepository connectionRepository) {        
+        this.providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
+    }
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcomePage(Model model) {
         List<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR, Constantes.PUBLICACION_PAGADA);
@@ -98,12 +112,18 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping(value = "/user")    
-    public Usuario getUsuario(Principal principal) {    
-         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName(); //get logged in username        
-        Usuario user = new Usuario();
-        user.setLogin(userName);
+    public SocialSecurityUserDTO getUsuario(WebRequest request) {    
+        
+        Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
              
+        SocialSecurityUserDTO user = (SocialSecurityUserDTO) auth.getPrincipal();
+        
+        if(connection!=null){
+            user.setRutaImagen(connection.getImageUrl());
+        }
+        
         return user;
     }
 

@@ -7,7 +7,6 @@ package com.tecnogeek.comprameya.dto;
 
 import com.tecnogeek.comprameya.enums.Role;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;

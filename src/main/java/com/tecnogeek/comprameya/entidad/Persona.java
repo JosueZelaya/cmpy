@@ -64,31 +64,7 @@ public class Persona implements Serializable {
     private BigInteger dui;
     @Size(max = 2147483647)
     @Column(name = "direccion")
-    private String direccion;
-    @Size(max = 2147483647)
-    @Column(name = "fb_nombre")
-    private String fbNombre;
-    @Size(max = 2147483647)
-    @Column(name = "fb_apellido")
-    private String fbApellido;
-    @Column(name = "fb_fecha_nacimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fbFechaNacimiento;
-    @Column(name = "fb_genero")
-    private Boolean fbGenero;
-    @Size(max = 2147483647)
-    @Column(name = "fb_correo")
-    private String fbCorreo;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaModificacion;
+    private String direccion;                
     @OneToMany(mappedBy = "fkPersona")
     private List<Empleado> empleadoList;
     @JoinColumn(name = "fk_ubicacion", referencedColumnName = "ubicacion_id")

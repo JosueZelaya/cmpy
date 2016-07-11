@@ -97,4 +97,6 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     @Column(name = "sign_in_provider", length = 20)
     private SocialMediaService signInProvider;
     
+    private String rutaImagen;
+    
 }

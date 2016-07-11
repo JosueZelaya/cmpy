@@ -10,7 +10,7 @@ autenticacion.controller('autenticacionController',
                 $http.get('/user', {headers: headers}).success(function (data) {
                     if (data.login !== '' && data.login !== 'anonymousUser' && data.login !== undefined) {
                         $rootScope.authenticated = true;
-                        $rootScope.username = data.login;
+                        $rootScope.username = data.nombre;
                     } else {
                         $rootScope.authenticated = false;
                     }
