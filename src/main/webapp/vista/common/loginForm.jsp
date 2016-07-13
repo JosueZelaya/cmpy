@@ -1,25 +1,7 @@
-<div class="jumbotron"  ng-app="cmpy.autenticacion" ng-controller="autenticacionController">    
-    
-    
-     <!-- Social Sign In Buttons -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>Social Login</h2>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <!-- Add Facebook sign in button -->                            
-                            <a class="btn btn-block btn-social btn-facebook" href="${pageContext.request.contextPath}/auth/facebook"><span class="fa fa-facebook-official"></span>Entrar con facebook</a>                            
-                        </div>
-                    </div>
-<!--                    <div class="row social-button-row">
-                        <div class="col-lg-4">
-                             Add Twitter sign in Button 
-                            <a href="${pageContext.request.contextPath}/auth/twitter"><button class="btn btn-twitter"><i class="icon-twitter"></i> | Entrar con twitter</button></a>
-                        </div>
-                    </div>-->
-                </div>
-            </div>
-    
+  
+<div ng-app="cmpy.autenticacion" ng-controller="autenticacionController">
+    <br/><br/>
+        
     <c:if test="${param.error != null}">
         <div class="alert alert-danger"> 
             ¡Usuario y Clave incorrectas!
@@ -33,18 +15,40 @@
     </c:if>
 
     <form:form id="loginForm" method="post" action="${rootURL}login/authenticate">
-        <label for="username" class="col-sm-2 control-label">Usuario*</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="Usuario" />
-        <label for="password" class="col-sm-2 control-label">Clave*</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Clave" />
-        <input type="submit" class="btn btn-primary" value="Login">
-    </form:form>
         
-    <div class="row">
-        <div class="form-group col-lg-4">
-            <!-- Add create user account link -->
-            <a href="${pageContext.request.contextPath}/user/register">Crear una Cuenta</a>
+        <div class="row  col-lg-4">
+            Usa tus credenciales o ingresa con tu cuenta de facebook en el enlace de abajo.
         </div>
-    </div>
+        
+        <div class="row  col-lg-4">
+            <label for="username" class="col-sm-2 control-label">Usuario*</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Usuario" />
+        </div>
+        <div class="row  col-lg-4">
+            <label for="password" class="col-sm-2 control-label">Clave*</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Clave" />
+        </div>
+        
+        <br/><br/><br/><br/>
+
+        <div class="row">
+            <div class="form-group col-lg-8">
+                <input type="submit" class="btn btn-primary" value="Entrar">
+            </div>
+            <div class="form-group col-lg-4">
+                <a class="btn btn-block btn-social btn-facebook" href="${pageContext.request.contextPath}/auth/facebook">
+                    <img height="28" width="28" src="${pageContext.request.contextPath}/resources/images/facebook-icon.png" title="Entrar con Facebook">
+                    Usa tu cuenta de Facebook
+                </a>
+                <a href="${pageContext.request.contextPath}/user/register">¿Prefieres crear una cuenta nueva?</a><br/>                
+            </div>
+        </div>
+
+    </form:form>
+
+    <br/>
+
+
+
 
 </div>

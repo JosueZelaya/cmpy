@@ -14,6 +14,7 @@
 <head>
     <title>Registrarse</title>    
     <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
 </head>
 <body>
     
@@ -24,6 +25,12 @@
         <div class="page-header">
             <h1>Registrarse</h1>
         </div>
+        
+        <a class="btn btn-block btn-social btn-facebook" href="${pageContext.request.contextPath}/auth/facebook">
+            <img height="28" width="28" src="${pageContext.request.contextPath}/resources/images/facebook-icon.png" title="Entrar con Facebook">
+            <span class="fa fa-facebook-official"></span>Crear una cuenta usando tu Facebook
+        </a>
+        
         <!--
             If the user is anonymous (not logged in), show the registration form.
         -->
