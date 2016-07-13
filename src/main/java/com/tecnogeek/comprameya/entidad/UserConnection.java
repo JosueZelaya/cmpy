@@ -44,7 +44,7 @@ public class UserConnection {
 @Setter
 class UserConnectionPk implements Serializable{
     
-    private Long userid;
+    private String userid;
 
     private String providerId;
     

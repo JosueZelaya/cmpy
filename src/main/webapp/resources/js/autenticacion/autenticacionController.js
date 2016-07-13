@@ -11,6 +11,7 @@ autenticacion.controller('autenticacionController',
                     if (data.login !== '' && data.login !== 'anonymousUser' && data.login !== undefined) {
                         $rootScope.authenticated = true;
                         $rootScope.username = data.nombre;
+                        $rootScope.imageUrl = data.rutaImagen;
                     } else {
                         $rootScope.authenticated = false;
                     }

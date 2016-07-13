@@ -6,12 +6,9 @@
 package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.constantes.Constantes;
-import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
 import com.tecnogeek.comprameya.entidad.Categoria;
-import com.tecnogeek.comprameya.entidad.Persona;
 import com.tecnogeek.comprameya.entidad.Publicacion;
-import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.service.CategoriaService;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
@@ -26,13 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.tecnogeek.comprameya.repositories.CategoriaRepository;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
-import java.security.Principal;
-import javax.servlet.http.HttpSession;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.request.WebRequest;
 
 /**

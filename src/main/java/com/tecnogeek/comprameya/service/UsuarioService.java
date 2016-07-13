@@ -10,7 +10,6 @@ import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
 import com.tecnogeek.comprameya.entidad.Perfil;
 import com.tecnogeek.comprameya.entidad.Persona;
-import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.enums.Role;
 import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
 import com.tecnogeek.comprameya.repositories.PerfilRepository;
@@ -96,19 +95,18 @@ public class UsuarioService {
         persona = personaRepository.save(persona);
         
         Perfil perfil = perfilRepository.findByNombre(Role.USUARIO.getRoleName());
-        Recurso recurso = new Recurso();
-        recurso.setRuta(userAccountData.getImageUrl());
-        List<Recurso> recursoList = new ArrayList<>();        
-        recursoList.add(recurso);
-        perfil.setRecursoList(recursoList);
+//        Recurso recurso = new Recurso();
+//        recurso.setRuta(userAccountData.getImageUrl());
+//        List<Recurso> recursoList = new ArrayList<>();        
+//        recursoList.add(recurso);
+//        perfil.setRecursoList(recursoList);
         
         Usuario usuario = new Usuario();
         usuario.setLogin(userAccountData.getEmail());
         usuario.setPass(encodedPassword);
         usuario.setFkPersona(persona);
         usuario.setFkPerfil(perfil);
-        
-        
+        usuario.setRutaImagen(userAccountData.getImageUrl());
         
         if (userAccountData.isSocialSignIn()) {
             usuario.setSignInProvider(userAccountData.getSignInProvider());
