@@ -20,26 +20,27 @@
     </head>
     <body>
         
-        <%@include file="common/menuPrincipal.jsp" %>
+        <%@include file="common/menuPrincipal.jsp" %>        
         
-        <div class="container-fluid">
-            
-            <div class="row">                          
-                <div class="col-md-12 min_cont marcar">
-                    <div class="panel panel-default min_cont">                    
-                        <div class="panel-heading">
-                            <p>                            
-                                Para poder realizar compras y ventas primero debe autenticarse.                                                            
-                            </p>
-                        </div>                      
-                        <div class="panel-body">
-                            <%@include file="common/loginForm.jsp" %>
+        <div class="container">
+            <div class="container-fluid">
+                <div class="row">                          
+                    <div class="col-md-12 min_cont marcar">
+                        <div class="panel panel-default min_cont">                    
+                            <div class="panel-heading">
+                                <p>                            
+                                    Para poder realizar compras y ventas primero debe autenticarse.                                                            
+                                </p>
+                            </div>                      
+                            <div class="panel-body">
+                                <%@include file="common/loginForm.jsp" %>
+                            </div>
                         </div>
-                    </div>
-                </div>            
-            </div>          
-            <%@include file="common/footer.jsp" %>              
-        </div> 
+                    </div>            
+                </div>          
+                <%@include file="common/footer.jsp" %>              
+            </div> 
+        </div>
         
         <!-- Cargamos los scripts --> 
         

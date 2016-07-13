@@ -95,11 +95,6 @@ public class UsuarioService {
         persona = personaRepository.save(persona);
         
         Perfil perfil = perfilRepository.findByNombre(Role.USUARIO.getRoleName());
-//        Recurso recurso = new Recurso();
-//        recurso.setRuta(userAccountData.getImageUrl());
-//        List<Recurso> recursoList = new ArrayList<>();        
-//        recursoList.add(recurso);
-//        perfil.setRecursoList(recursoList);
         
         Usuario usuario = new Usuario();
         usuario.setLogin(userAccountData.getEmail());

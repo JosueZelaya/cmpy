@@ -21,26 +21,9 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>                
                 <li class="active"><a href="/cmpy/angular">Angular</a></li> 
-                <c:choose>
-                    <c:when test="${username=='anonymousUser' || username==''}">
-                        <li>                    
-                            <a href="#" ng-click="open('lg')">Login <span class="glyphicon glyphicon-user"></a>                      
-                        </li>                           
-                    </c:when>    
-                    <c:otherwise>    
-                        <li class="dropdown" uib-dropdown="">
-                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenido <c:out value='${username}'/> <span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Cambiar Clave</a></li>
-                                <li><a href="#">Edita Perfil</a></li>
-                                <li><a href="#">Configuracion</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>                                     
-                                <li><a href="${rootURL}logout">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
-                            </ul>
-                        </li>                        
-                    </c:otherwise>
-                </c:choose>    
+                <li>                    
+                    <a href="#" ng-click="open('lg')">Login <span class="glyphicon glyphicon-user"></a>                      
+                </li>                           
 
             </ul>                    
         </div>
