@@ -133,8 +133,6 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService) {
             navigator.geolocation.getCurrentPosition(function(objPosition)
             {
                 
-                debugger;
-                
                 $scope.center = {
                     latitude: objPosition.coords.latitude,
                     longitude: objPosition.coords.longitude
