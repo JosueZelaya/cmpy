@@ -41,20 +41,9 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
         formData.append("titulo", publicacion.titulo);
         formData.append("precio", publicacion.precio);
         formData.append("descripcion", publicacion.descripcion);
-        //formData.append("ubicaciones", publicacion.ubicaciones);
-        //debugger;
         
         var res = angular.toJson(publicacion.ubicaciones);
-        formData.append("ubicaciones", res.toString());
-
-//formData.append("ubicaciones", "Hola");
-        
-        
-        //for (var index = 0; index < publicacion.ubicaciones.length; ++index) {
-          //  formData.append("ubicaciones", publicacion.ubicaciones[index]);
-        //}
-        
-      
+        formData.append("ubicaciones", res.toString());      
 
         //Se agregan todas las imagenes... Cada una debe llamarse: multipleFiles        
         //Para que Spring entienda que están relacionadas y que se trata de una colección o lista
@@ -62,11 +51,10 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
             formData.append("multipleFiles", publicacion.imagenes[index]);
         }
 
-        
-
         return $http.post('/publicacion/agregarPublicacion', formData, {
             transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
+            responseType:'json',
+            headers: {'Content-Type': undefined}            
         })
         .success(function(){
             return "Publicacion Agregada!";

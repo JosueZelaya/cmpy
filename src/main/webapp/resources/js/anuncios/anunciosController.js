@@ -34,6 +34,9 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
     };
     
     var cargarDetallePublicacion = function(id){
+        
+        $rootScope.publicacion = undefined;
+        
         getPublicacion(id).success(function(publicacion){
             $rootScope.publicacion = publicacion;
         });   
@@ -90,7 +93,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
                 .success(function(respuesta){
                     
             $scope.cancel(); //cerrar el dialogo
-            cargarPublicacionesGratis(); //recarga las publicaciones
+            cargarPublicacionesGratis(0); //recarga las publicaciones
         });
         
     };

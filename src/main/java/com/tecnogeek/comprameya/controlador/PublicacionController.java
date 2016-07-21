@@ -125,7 +125,7 @@ public class PublicacionController {
         
         publicacionService.save(publicacion);
         
-        return "redirect:/";
+        return "ok";
 //        return new HomeController().welcomePage(model);        
     }
     
@@ -178,9 +178,7 @@ public class PublicacionController {
         
         publicacionService.save(publicacion);
         
-        
-        
-        return "redirect:/";
+        return "ok";
     }
     
     
