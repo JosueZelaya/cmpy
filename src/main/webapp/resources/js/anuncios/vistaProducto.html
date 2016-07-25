@@ -16,14 +16,37 @@ and open the template in the editor.
 
                 <div class="thumbnail">
 
-                    <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
+<!--                    <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
                         <uib-slide ng-repeat="recurso in publicacion.recursoList" active="slide.active" index="slide.id">
                             <img ng-src="/images/getImage/{{recurso.ruta}}" style="margin:auto;">
                             <div class="carousel-caption">                                
                                 {{publicacion.titulo}}
                             </div>
                         </uib-slide>
-                    </uib-carousel>
+                    </uib-carousel>-->
+                    
+                    <div carousel3d ng-model="arrayOfObjects">
+                        <div carousel3d-slide ng-repeat="recurso in publicacion.recursoList track by $index">
+                            <figure>
+                                <img ng-src="/images/getImage/{{recurso.ruta}}" alt=""/>
+                                <figcaption ng-bind="publicacion.titulo"></figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+
+                    <carousel3d
+                            ng-model="arrayOfObjects"
+                            >
+
+                        <carousel3d-slide ng-repeat="recurso in publicacion.recursoList">
+                            <figure>
+                                <img ng-src="/images/getImage/{{publicacion.recursoList[1].ruta}}" alt=""/>
+                                <figcaption ng-bind="publicacion.titulo"></figcaption>
+                            </figure>
+                        </carousel3d-slide>
+
+                    </carousel3d>
 
                     <div class="titulo-publicacion">
                         <h3>{{publicacion.titulo}}</h3>
