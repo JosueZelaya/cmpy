@@ -5,10 +5,12 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.mysema.query.types.Predicate;
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.dto.GridResponse;
+import com.tecnogeek.comprameya.entidad.QPublicacion;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 public class PublicacionService {
     
     public PublicacionService(){}
+    private QPublicacion qPublicacion = QPublicacion.publicacion;
     
     @Autowired
     PublicacionRepository publicacionRepository;
@@ -44,26 +47,19 @@ public class PublicacionService {
     
     
     public int getTotalPublicaciones(int tipo)
-    {
-        if(tipo==Constantes.PUBLICACION_PAGADA)
-        {
-            return publicacionRepository.getTotalPublicacionesPagadas();
-        }else
-        {
-            return publicacionRepository.getTotalPublicacionesGratis();
-        }
+    {        
+        return (tipo==Constantes.PUBLICACION_PAGADA)?
+                publicacionRepository.getTotalPublicacionesPagadas():
+                publicacionRepository.getTotalPublicacionesGratis();        
     }
     
     public List<Publicacion> getPublicaciones(PageRequest pageRequest,int tipo)
     {
         List<Publicacion> publicaciones = new ArrayList();
-        if(tipo==Constantes.PUBLICACION_PAGADA)
-        {
-            publicaciones =  publicacionRepository.getPublicacionesPagadas(pageRequest);            
-        }else
-        {
-            publicaciones = publicacionRepository.getPublicacionesGratis(pageRequest);            
-        }
+        
+        publicaciones = (tipo==Constantes.PUBLICACION_PAGADA)?
+                publicacionRepository.getPublicacionesPagadas(pageRequest):
+                publicacionRepository.getPublicacionesGratis(pageRequest);
         
         //Replace backslashes by forward slashes in order to work well in firefox.
         for(Publicacion publicacion : publicaciones){
@@ -102,7 +98,9 @@ public class PublicacionService {
     
     public Publicacion getPublicacion(long publicacion_id)
     {
-        return publicacionRepository.findOne(publicacion_id);
+        Predicate porId = qPublicacion.publicacionId.eq(publicacion_id);
+        return publicacionRepository.findOne(porId);
+//        return publicacionRepository.findOne(publicacion_id);
     }
     
 }

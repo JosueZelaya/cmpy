@@ -310,6 +310,14 @@
             <version>5.2.4.Final</version>
         </dependency>
         
+        <!-- https://mvnrepository.com/artifact/com.mysema.querydsl/querydsl-jpa -->
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+            <version>3.7.4</version>
+        </dependency>
+
+        
         <!-- Dependencias para Jetty -->
 <!--        <dependency>
             <groupId>org.mortbay.jetty</groupId>
@@ -607,6 +615,13 @@
                         </configuration>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.mysema.querydsl</groupId>
+                        <artifactId>querydsl-apt</artifactId>
+                        <version>3.7.4</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
         
