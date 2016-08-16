@@ -1,7 +1,5 @@
 modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $stateParams, anunciosService,mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
     
-
-    
     var getPublicacion = function(id){
         return anunciosService.getPublicacionById(id)
                 .success(function (publicacion){

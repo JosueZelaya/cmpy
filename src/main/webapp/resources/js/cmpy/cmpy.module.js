@@ -10,7 +10,6 @@ var cmy_ng = angular.module('cmpy',
     'ngAnimate',
     'flow',
     'uiGmapgoogle-maps',
-    'angular-carousel-3d',
     'cmpy.autenticacion',
     'cmpy.menuPrincipal',    
     'cmpy.categorias',
@@ -21,11 +20,11 @@ var cmy_ng = angular.module('cmpy',
 
 cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-    $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false,
-        rewriteLinks: false
-    });
+//    $locationProvider.html5Mode({
+//        enabled: true,
+//        requireBase: false,
+//        rewriteLinks: false
+//    });
     
     $urlRouterProvider.otherwise('/');
 
