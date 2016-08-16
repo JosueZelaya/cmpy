@@ -12,6 +12,7 @@ import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
+import org.springframework.context.annotation.Import;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.filter.DelegatingFilterProxy;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  *
  * @author jzelaya
  */
+
+@Import({SecurityConfig.class})
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 
     private int maxUploadSizeInMb = 5 * 1024 * 1024; // 5 MB
@@ -34,7 +37,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {MvcConfig.class};
+        return new Class[] {MvcConfig.class, SecurityConfig.class};
     }
 
     @Override
