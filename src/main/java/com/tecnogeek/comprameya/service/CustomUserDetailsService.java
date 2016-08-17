@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.tecnogeek.comprameya.repositories.UserRepository;
 
 /**
  *
@@ -25,39 +24,21 @@ import com.tecnogeek.comprameya.repositories.UserRepository;
 @Service
 @Log
 public class CustomUserDetailsService implements UserDetailsService {
-
+    
     @Autowired
-    private UserRepository userRepository;
-//    @Autowired
-//    private PerfilRepository perfilRepository;
+    private UsuarioService usuarioService;
     
     public CustomUserDetailsService(){}
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        Usuario usuario = userRepository.findByLogin(username);
-//        Perfil perfil = perfilRepository.getPerfilUsuario(username);        
+        Usuario usuario = usuarioService.findActiveUserByLogin(username);
+
         if(usuario==null)
         {
             throw new UsernameNotFoundException("Login "+username+" not found");
         }
-//        usuario.setFkPerfil(perfil);    
-//        Role role = perfil.getRole();
-//        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.toString());
-//        Set<GrantedAuthority> authorities = new HashSet<>();
-//        authorities.add(authority);
-//        SocialSecurityUserDTO socialUser = new SocialSecurityUserDTO(username, usuario.getPass(), authorities);
-//        socialUser.setSocialSignInProvider(usuario.getSignInProvider());
-//        socialUser.setApellido(usuario.getFkPersona().getApellido());
-//        socialUser.setNombre(usuario.getFkPersona().getNombre());
-//        socialUser.setRole(role);
-//        socialUser.setLogin(usuario.getLogin());
-//        socialUser.setCorreo(usuario.getFkPersona().getCorreo());        
-//        socialUser.setRutaImagen(usuario.getRutaImagen());
-//        socialUser.setId(usuario.getId());
-//        socialUser.setUsername(usuario.getLogin());
-//        socialUser.setPassword(usuario.getPass());
         
           SocialSecurityUserDTO socialSecUser = SocialSecurityUserDTO.getBuilder()
                   .id(usuario.getId())
@@ -78,15 +59,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                   .rutaImagen(usuario.getRutaImagen())
                   .socialSignInProvider(usuario.getSignInProvider())
                   .build();
-
-//        SocialSecurityUser socialSecUser = SocialSecurityUser.getBuilder()                
-//                .id(usuario.getId())                
-//                .password(usuario.getPass())
-//                .role(usuario.getFkPerfil().getRole())                
-//                .username(usuario.getLogin())
-//                .socialSignInProvider(usuario.getSignInProvider())
-//                .build();
-        
+          
         return socialSecUser;        
         
     }

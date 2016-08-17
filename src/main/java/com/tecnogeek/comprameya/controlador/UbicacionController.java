@@ -5,12 +5,14 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
+import com.google.common.collect.Iterables;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.service.UbicacionService;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.dto.pojoUbicacion;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,33 +38,41 @@ public class UbicacionController {
        
     
     @RequestMapping(value = "/publicacion/get/{id}", method = RequestMethod.GET)
-    public @ResponseBody List<pojoUbicacion> getUbicacionPublicacion(@PathVariable("id") long id)  {          
-        List<Ubicacion> listaUbicacion;
+    public @ResponseBody Iterable<pojoUbicacion> getUbicacionPublicacion(@PathVariable("id") long id)  {          
+        Iterable<Ubicacion> listaUbicacion;
         listaUbicacion = getUbicacionPublicacionI(id);
          return getUbicacionPojo(listaUbicacion);   
     }
     @RequestMapping(value = "/publicacion/set/{id}", method = RequestMethod.POST)
     public @ResponseBody String setUbicacionPublicacion(@PathVariable("id") long id, @RequestBody List<pojoUbicacion> listaUbicacion )  {
         
-        List<Ubicacion> listaUbicacionTmp;
+        Iterable<Ubicacion> listaUbicacionTmp;
    
         listaUbicacionTmp = getUbicacionPublicacionI(id);
 
         //Actualizar
-        if(listaUbicacion.size() == listaUbicacionTmp.size())
+        if(listaUbicacion.size() == Iterables.size(listaUbicacionTmp))
         {
-            for(int i=0;i < listaUbicacionTmp.size();i++ )
-            {
-                listaUbicacionTmp.get(i).setGmLatitud(listaUbicacion.get(i).getLatitud());
-                listaUbicacionTmp.get(i).setGmLongitud(listaUbicacion.get(i).getLongitud());
+            Iterator it = listaUbicacionTmp.iterator();
+            int i = 0;
+            while (it.hasNext()) {
+              Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
+              Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
+              i++;
             }
+            
+//            for(int i=0;i < Iterables.size(listaUbicacionTmp);i++ )
+//            {
+//                listaUbicacionTmp.get(i).setGmLatitud(listaUbicacion.get(i).getLatitud());
+//                listaUbicacionTmp.get(i).setGmLongitud(listaUbicacion.get(i).getLongitud());
+//            }
             
             uManager.setGuardarTodos(listaUbicacionTmp);
         } 
-        //Agregar
-        else if(!listaUbicacion.isEmpty() && listaUbicacionTmp.isEmpty())
+        //Agregar        
+        else if(!listaUbicacion.isEmpty() && Iterables.isEmpty(listaUbicacionTmp))
         {
-            
+            List<Ubicacion> ubicacionesToSave = new ArrayList<>();
             for(pojoUbicacion p: listaUbicacion)
             {
                 Ubicacion ubi = new Ubicacion();
@@ -70,36 +80,37 @@ public class UbicacionController {
                 ubi.setGmLongitud(p.getLongitud());
                 ubi.setFkPublicacion(pManager.getPublicacion(id));
                 
-                listaUbicacionTmp.add(ubi);
+                ubicacionesToSave.add(ubi);
             }
             
-            uManager.setGuardarTodos(listaUbicacionTmp);
+            uManager.setGuardarTodos(ubicacionesToSave);
             
         }
         //Eliminar y Actualizar
-        else if(listaUbicacion.size() < listaUbicacionTmp.size())
+        else if(listaUbicacion.size() < Iterables.size(listaUbicacionTmp))
         {
             for(int i=0;i<listaUbicacion.size();i++)
             {
-                listaUbicacionTmp.get(i).setGmLatitud(listaUbicacion.get(i).getLatitud());
-                listaUbicacionTmp.get(i).setGmLongitud(listaUbicacion.get(i).getLongitud());
-                uManager.setGuardar(listaUbicacionTmp.get(i));
+                Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
+                Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
+                
+                uManager.setGuardar(Iterables.get(listaUbicacionTmp, i));
             }
-            for(int i =listaUbicacion.size()-1;i<listaUbicacionTmp.size();i++ )
+            for(int i =listaUbicacion.size()-1; i< Iterables.size(listaUbicacionTmp); i++ )
             {
-                uManager.setEliminar(listaUbicacionTmp.get(i));
+                uManager.setEliminar(Iterables.get(listaUbicacionTmp, i));
             }
         }
         //Agregar y Actualizar
-        else if(listaUbicacion.size() > listaUbicacionTmp.size())
+        else if(listaUbicacion.size() > Iterables.size(listaUbicacionTmp))
         {
-            for(int i=0;i<listaUbicacionTmp.size();i++)
+            for(int i=0;i<Iterables.size(listaUbicacionTmp); i++)
             {
-                listaUbicacionTmp.get(i).setGmLatitud(listaUbicacion.get(i).getLatitud());
-                listaUbicacionTmp.get(i).setGmLongitud(listaUbicacion.get(i).getLongitud());
-                uManager.setGuardar(listaUbicacionTmp.get(i));
+                Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
+                Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
+                uManager.setGuardar(Iterables.get(listaUbicacionTmp, i));
             }
-            for(int i =listaUbicacionTmp.size()-1;i<listaUbicacion.size();i++ )
+            for(int i =Iterables.size(listaUbicacionTmp)-1; i<listaUbicacion.size(); i++ )
             {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
@@ -120,62 +131,61 @@ public class UbicacionController {
 
     public String setUbicacionPublicacionI( long id, List<pojoUbicacion> listaUbicacion )  {
         
-        List<Ubicacion> listaUbicacionTmp;
+        Iterable<Ubicacion> listaUbicacionTmp;
    
         listaUbicacionTmp = getUbicacionPublicacionI(id);
 
         //Actualizar
-        if(listaUbicacion.size() == listaUbicacionTmp.size())
+        if(listaUbicacion.size() == Iterables.size(listaUbicacionTmp))
         {
-            for(int i=0;i < listaUbicacionTmp.size();i++ )
+            for(int i=0;i < Iterables.size(listaUbicacionTmp);i++ )
             {
-                listaUbicacionTmp.get(i).setGmLatitud(listaUbicacion.get(i).getLatitud());
-                listaUbicacionTmp.get(i).setGmLongitud(listaUbicacion.get(i).getLongitud());
+                Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
+                Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
             }
             
             uManager.setGuardarTodos(listaUbicacionTmp);
         } 
         //Agregar
-        else if(!listaUbicacion.isEmpty() && listaUbicacionTmp.isEmpty())
+        else if(!listaUbicacion.isEmpty() && Iterables.isEmpty(listaUbicacionTmp))
         {
-            
+            List<Ubicacion> ubicacionesToSave = new ArrayList();
             for(pojoUbicacion p: listaUbicacion)
             {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(p.getLatitud());
                 ubi.setGmLongitud(p.getLongitud());
                 ubi.setFkPublicacion(pManager.getPublicacion(id));
-                
-                listaUbicacionTmp.add(ubi);
+                ubicacionesToSave.add(ubi);
             }
             
-            uManager.setGuardarTodos(listaUbicacionTmp);
+            uManager.setGuardarTodos(ubicacionesToSave);
             
         }
         //Eliminar y Actualizar
-        else if(listaUbicacion.size() < listaUbicacionTmp.size())
+        else if(listaUbicacion.size() < Iterables.size(listaUbicacionTmp))
         {
             for(int i=0;i<listaUbicacion.size();i++)
             {
-                listaUbicacionTmp.get(i).setGmLatitud(listaUbicacion.get(i).getLatitud());
-                listaUbicacionTmp.get(i).setGmLongitud(listaUbicacion.get(i).getLongitud());
-                uManager.setGuardar(listaUbicacionTmp.get(i));
+                Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
+                Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
+                uManager.setGuardar(Iterables.get(listaUbicacionTmp, i));
             }
-            for(int i =listaUbicacion.size()-1;i<listaUbicacionTmp.size();i++ )
+            for(int i =listaUbicacion.size()-1;i<Iterables.size(listaUbicacionTmp);i++ )
             {
-                uManager.setEliminar(listaUbicacionTmp.get(i));
+                uManager.setEliminar(Iterables.get(listaUbicacionTmp, i));
             }
         }
         //Agregar y Actualizar
-        else if(listaUbicacion.size() > listaUbicacionTmp.size())
+        else if(listaUbicacion.size() > Iterables.size(listaUbicacionTmp))
         {
-            for(int i=0;i<listaUbicacionTmp.size();i++)
+            for(int i=0;i<Iterables.size(listaUbicacionTmp);i++)
             {
-                listaUbicacionTmp.get(i).setGmLatitud(listaUbicacion.get(i).getLatitud());
-                listaUbicacionTmp.get(i).setGmLongitud(listaUbicacion.get(i).getLongitud());
-                uManager.setGuardar(listaUbicacionTmp.get(i));
+                Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
+                Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
+                uManager.setGuardar(Iterables.get(listaUbicacionTmp, i));
             }
-            for(int i =listaUbicacionTmp.size()-1;i<listaUbicacion.size();i++ )
+            for(int i =Iterables.size(listaUbicacionTmp)-1;i<listaUbicacion.size();i++ )
             {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
@@ -194,7 +204,7 @@ public class UbicacionController {
         return "";   
     }    
         
-    private List<pojoUbicacion> getUbicacionPojo(List<Ubicacion> ubicaciones)
+    private Iterable<pojoUbicacion> getUbicacionPojo(Iterable<Ubicacion> ubicaciones)
     {
         List<pojoUbicacion> listapojo = new ArrayList<>();
         for(Ubicacion ubi : ubicaciones)
@@ -210,11 +220,11 @@ public class UbicacionController {
         return listapojo;
     }
     
-    private List<Ubicacion> getUbicacionPublicacionI(long publicacion_id)
+    private Iterable<Ubicacion> getUbicacionPublicacionI(long publicacion_id)
     {
         Publicacion publicacion = pManager.getPublicacion(publicacion_id);
         
-        List<Ubicacion> listaUbicacion = new ArrayList<>();
+        Iterable<Ubicacion> listaUbicacion = new ArrayList<>();
         
         if(publicacion != null)
         {

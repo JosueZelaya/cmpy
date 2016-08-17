@@ -6,18 +6,13 @@
 package com.tecnogeek.comprameya.repositories;
 
 
-import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
-import java.util.List;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author genaro
  */
-public interface UbicacionRepository extends CrudRepository<Ubicacion,Long> {
-    
-    
-    List<Ubicacion> findByfkPublicacion(Publicacion publicacion);
-    
-}
+public interface UbicacionRepository extends CrudRepository<Ubicacion,Long>, 
+        QueryDslPredicateExecutor<Ubicacion> {}

@@ -5,9 +5,10 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.mysema.query.types.Predicate;
+import com.tecnogeek.comprameya.entidad.QSuscriptor;
 import com.tecnogeek.comprameya.entidad.Suscriptor;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.SuscriptorRepository;
@@ -23,25 +24,25 @@ public class SuscriptorService {
     public SuscriptorService(){}
     
     @Autowired
-    SuscriptorRepository suscriptorService;
+    SuscriptorRepository suscriptorRepository;
     
-    public List<Suscriptor> getSuscriptor(Usuario usuario)
+    private final QSuscriptor qSuscriptor = QSuscriptor.suscriptor;
+    
+    public Iterable<Suscriptor> getSuscriptor(Usuario usuario)
     {
-         List<Suscriptor> suscriptores =  suscriptorService.findByfkUsuarioSuscriptor(usuario);
-       
-         return suscriptores;
+         Predicate bySuscriptor = qSuscriptor.fkUsuarioSuscriptor.eq(usuario);
+         return suscriptorRepository.findAll(bySuscriptor);
     }
     
-    public List<Suscriptor> getProveedor(Usuario usuario)
+    public Iterable<Suscriptor> getProveedor(Usuario usuario)
     {
-         List<Suscriptor> suscriptores =  suscriptorService.findByfkUsuarioProveedor(usuario);
-       
-         return suscriptores;
+         Predicate byProveedor = qSuscriptor.fkUsuarioProveedor.eq(usuario);
+         return suscriptorRepository.findAll(byProveedor);
     }
     
     public String setSuscriptor(Suscriptor sus)
     {
-        suscriptorService.save(sus);
+        suscriptorRepository.save(sus);
         return null;
     }
     

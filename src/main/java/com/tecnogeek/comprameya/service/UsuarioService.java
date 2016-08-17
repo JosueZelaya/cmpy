@@ -5,14 +5,15 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.mysema.query.types.expr.BooleanExpression;
 import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
 import com.tecnogeek.comprameya.entidad.Perfil;
 import com.tecnogeek.comprameya.entidad.Persona;
+import com.tecnogeek.comprameya.entidad.QUsuario;
 import com.tecnogeek.comprameya.enums.Role;
 import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
-import com.tecnogeek.comprameya.repositories.PerfilRepository;
 import com.tecnogeek.comprameya.repositories.PersonaRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,21 +40,26 @@ public class UsuarioService {
      PersonaRepository personaRepository;
      
      @Autowired
-     PerfilRepository perfilRepository;
+     PerfilService perfilService;
      
      @Autowired
      private PasswordEncoder passwordEncoder;
      
-     public Usuario getUserByLogin(String login)
+     private final QUsuario qUsuario = QUsuario.usuario;
+     
+     public Usuario findActiveUserByLogin(String login)
      {
-        return repository.findByLogin(login);
+        BooleanExpression byLogin = qUsuario.login.eq(login);
+        BooleanExpression isActivo = qUsuario.sisActivo.eq(true);
+        
+        return repository.findOne(byLogin.and(isActivo));
      }
      
      public Usuario getLoggedUser()
      {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        return getUserByLogin(userName);
+        return findActiveUserByLogin(userName);
      }
      
 
@@ -94,7 +100,7 @@ public class UsuarioService {
         persona.setApellido(userAccountData.getLastName());
         persona = personaRepository.save(persona);
         
-        Perfil perfil = perfilRepository.findByNombre(Role.USUARIO.getRoleName());
+        Perfil perfil = perfilService.findByNombre(Role.USUARIO.getRoleName());
         
         Usuario usuario = new Usuario();
         usuario.setLogin(userAccountData.getEmail());
@@ -111,7 +117,7 @@ public class UsuarioService {
     }
  
     private boolean emailExist(String email) {
-        Usuario user = repository.findByLogin(email);
+        Usuario user = findActiveUserByLogin(email);
  
         if (user != null) {
             return true;

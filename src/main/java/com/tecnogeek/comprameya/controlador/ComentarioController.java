@@ -7,14 +7,11 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.entidad.Comentario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
-import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.service.ComentarioService;
 import com.tecnogeek.comprameya.service.PublicacionService;
-import com.tecnogeek.comprameya.service.UbicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
 import com.tecnogeek.comprameya.dto.pojoComentario;
-import com.tecnogeek.comprameya.dto.pojoUbicacion;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,12 +60,12 @@ public class ComentarioController {
           
         Publicacion p = pManager.getPublicacion(publicacion_id);
         
-        List<Comentario> lcomentario = cManager.getComentario(p);
+        Iterable<Comentario> lcomentario = cManager.getComentario(p);
         return  getComentarioPojo(lcomentario);
     }
     
     
-    private List<pojoComentario> getComentarioPojo(List<Comentario> lcomentario)
+    private List<pojoComentario> getComentarioPojo(Iterable<Comentario> lcomentario)
     {
         List<pojoComentario> lpcomentario = new ArrayList<>();
         

@@ -5,18 +5,11 @@
  */
 package com.tecnogeek.comprameya.repositories;
 import com.tecnogeek.comprameya.entidad.Categoria;
-import java.util.List;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 /**
  *
  * @author genaro
  */
-public interface CategoriaRepository extends CrudRepository<Categoria,Long> {
-
-    @Query("select c from Categoria c where c.fkCategoria is null")
-    List<Categoria> getCategoriaPadres();
-    
-    List<Categoria> findByFkCategoria(Categoria categoria);
-    
-}
+public interface CategoriaRepository extends CrudRepository<Categoria,Long>, 
+        QueryDslPredicateExecutor<Categoria> {}

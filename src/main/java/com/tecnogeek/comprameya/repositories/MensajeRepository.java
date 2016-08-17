@@ -5,20 +5,13 @@
  */
 package com.tecnogeek.comprameya.repositories;
 
-import com.tecnogeek.comprameya.entidad.Destinatario;
 import com.tecnogeek.comprameya.entidad.Mensaje;
-import com.tecnogeek.comprameya.entidad.Usuario;
-import java.util.List;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author genaro
  */
-public interface MensajeRepository extends CrudRepository<Mensaje,Long> {
-    
-    List<Mensaje> findByfkUsuarioEmisor(Usuario usuario);
-    
-    List<Mensaje> findBydestinatarioList(Destinatario destinatario);
-    
-}
+public interface MensajeRepository extends CrudRepository<Mensaje,Long>, 
+        QueryDslPredicateExecutor<Mensaje> {}

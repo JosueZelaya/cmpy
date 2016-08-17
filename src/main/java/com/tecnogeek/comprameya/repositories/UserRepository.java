@@ -7,16 +7,12 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Usuario;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author jzelaya
  */
-public interface UserRepository extends CrudRepository<Usuario,Long>{
-    
-    @Query("select u from Usuario u where u.login= ?1 and u.sisActivo='t'")
-    Usuario findByLogin(String login);
-    
-}
+public interface UserRepository extends CrudRepository<Usuario,Long>, 
+        QueryDslPredicateExecutor<Usuario>{}

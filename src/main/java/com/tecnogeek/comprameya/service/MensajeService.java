@@ -7,8 +7,6 @@ package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.Destinatario;
 import com.tecnogeek.comprameya.entidad.Mensaje;
-import com.tecnogeek.comprameya.entidad.Usuario;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,20 +22,18 @@ public class MensajeService {
     public MensajeService(){}
     
     @Autowired
-    MensajeRepository mensajeService;
+    MensajeRepository mensajeRepository;
     
         
     public List<Mensaje> getMensajeUsuario(Destinatario destinatario)
     {
-         List<Mensaje> mensajes =  mensajeService.findBydestinatarioList(destinatario);
-       
-         return mensajes;
+         return null;
     }
     
     public Object setMensajes(Mensaje mensaje)
     {
         
-        mensajeService.save(mensaje);
+        mensajeRepository.save(mensaje);
         
         return null;
         

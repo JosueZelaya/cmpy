@@ -5,7 +5,9 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.mysema.query.types.Predicate;
 import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.entidad.QUbicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,31 +25,34 @@ public class UbicacionService {
     public UbicacionService(){}
     
     @Autowired
-    UbicacionRepository ubicacionService;
+    UbicacionRepository ubicacionRepository;
     
-    public List<Ubicacion> getUbicacionPublicacion(Publicacion publicacion)
+    private final QUbicacion qUbicacion = QUbicacion.ubicacion;
+    
+    public Iterable<Ubicacion> getUbicacionPublicacion(Publicacion publicacion)
     {
-        return (List<Ubicacion>) ubicacionService.findByfkPublicacion(publicacion);
+        Predicate byPublicacion = qUbicacion.fkPublicacion.eq(publicacion);
+        return ubicacionRepository.findAll(byPublicacion);
     }
     
-    public void setGuardarTodos(List<Ubicacion> lista)
+    public void setGuardarTodos(Iterable<Ubicacion> lista)
     {
-        ubicacionService.save(lista);
+        ubicacionRepository.save(lista);
     }
     
     public void setGuardar(Ubicacion ubicacion)
     {
-        ubicacionService.save(ubicacion);
+        ubicacionRepository.save(ubicacion);
     }
     
-    public void setEliminarTodo(List<Ubicacion> lista)
+    public void setEliminarTodo(Iterable<Ubicacion> lista)
     {
-        ubicacionService.delete(lista);
+        ubicacionRepository.delete(lista);
     }
     
     public void setEliminar(Ubicacion ubicacion)
     {
-        ubicacionService.delete(ubicacion);
+        ubicacionRepository.delete(ubicacion);
     }
     
 

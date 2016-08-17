@@ -33,7 +33,7 @@ public class CategoriaController {
 
     @RequestMapping(value = "/todos", method = RequestMethod.GET)
     public @ResponseBody List<Object> getTodoCategoria(Model model)  {
-         List<Categoria> catTodo = cManager.getCategoria();
+         Iterable<Categoria> catTodo = cManager.getCategoriaPadres();
          List < Object > catObject = new ArrayList();
          for(Categoria cat : catTodo)
          {
@@ -44,7 +44,7 @@ public class CategoriaController {
     
     private List<Object> getHijos(Categoria categoria)
     {
-        List<Categoria> catHijos = cManager.getHijosCategoria(categoria);
+        Iterable<Categoria> catHijos = cManager.getHijosCategoria(categoria);
         List<Object> catObject = new ArrayList<>();
         for(Categoria cat : catHijos)
         {

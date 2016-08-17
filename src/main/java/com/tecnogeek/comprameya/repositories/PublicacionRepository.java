@@ -7,7 +7,6 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Publicacion;
-import java.util.List;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -15,10 +14,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  *
  * @author jzelaya
  */
-public interface PublicacionRepository extends PagingAndSortingRepository<Publicacion, Long>, QueryDslPredicateExecutor<Publicacion> {
-    
-    List<Publicacion> findByTitulo(String titulo);
-    
-    List<Publicacion> findBySisActivo(String activo);
-
-}
+public interface PublicacionRepository extends PagingAndSortingRepository<Publicacion, Long>, 
+        QueryDslPredicateExecutor<Publicacion> {}

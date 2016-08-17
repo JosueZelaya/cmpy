@@ -6,16 +6,12 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Comentario;
-import com.tecnogeek.comprameya.entidad.Publicacion;
-import java.util.List;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author genaro
  */
-public interface ComentarioRepository extends CrudRepository<Comentario,Long>{
-    
-    List<Comentario> findByfkPublicacion(Publicacion publicacion);
-    
-}
+public interface ComentarioRepository extends CrudRepository<Comentario,Long>, 
+        QueryDslPredicateExecutor<Comentario> {}

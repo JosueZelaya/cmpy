@@ -5,9 +5,10 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.mysema.query.types.Predicate;
 import com.tecnogeek.comprameya.entidad.Comentario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
-import java.util.List;
+import com.tecnogeek.comprameya.entidad.QComentario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.ComentarioRepository;
@@ -22,17 +23,20 @@ public class ComentarioService {
     public ComentarioService(){}
     
     @Autowired
-    ComentarioRepository comentarioService;
+    ComentarioRepository comentarioRepository;
+    
+    private final QComentario qComentario = QComentario.comentario;
     
     public String setComentario(Comentario c)
     {
-        comentarioService.save(c);
+        comentarioRepository.save(c);
         return "";
     }
     
-    public List<Comentario> getComentario(Publicacion publicacion)
+    public Iterable<Comentario> getComentario(Publicacion publicacion)
     {
-        return comentarioService.findByfkPublicacion(publicacion);
+        Predicate byPublicacion = qComentario.fkPublicacion.eq(publicacion);
+        return comentarioRepository.findAll(byPublicacion);
     }
     
 }

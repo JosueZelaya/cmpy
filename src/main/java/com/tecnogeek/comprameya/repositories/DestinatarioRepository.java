@@ -6,21 +6,12 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Destinatario;
-import com.tecnogeek.comprameya.entidad.Usuario;
-import java.util.List;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author genaro
  */
-public interface DestinatarioRepository extends CrudRepository<Destinatario,Long> { 
-    
-    @Query("select d from Destinatario d where d.fkUsuarioDestinatario= ?1 and d.fkMensaje.fkUsuarioEmisor = ?2")
-    List<Destinatario> findByfkUsuarioDesEmi(Usuario usuario1, Usuario usuario2);
-    
-    @Query("select d from Destinatario d where d.fkUsuarioDestinatario = ?1 or d.fkMensaje.fkUsuarioEmisor = ?1")
-    List<Destinatario> findByfkUsuarioDes(Usuario usuario);
-
-}
+public interface DestinatarioRepository extends CrudRepository<Destinatario, Long>, 
+        QueryDslPredicateExecutor<Destinatario> {}

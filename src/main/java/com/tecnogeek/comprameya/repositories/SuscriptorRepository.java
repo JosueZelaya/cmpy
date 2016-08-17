@@ -6,18 +6,12 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Suscriptor;
-import com.tecnogeek.comprameya.entidad.Usuario;
-import java.util.List;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author genaro
  */
-public interface SuscriptorRepository extends CrudRepository<Suscriptor,Long> {
- 
-    List<Suscriptor> findByfkUsuarioProveedor(Usuario usuario);
-    
-    List<Suscriptor> findByfkUsuarioSuscriptor(Usuario usuario);
-    
-}
+public interface SuscriptorRepository extends CrudRepository<Suscriptor,Long>, 
+        QueryDslPredicateExecutor<Suscriptor> {}

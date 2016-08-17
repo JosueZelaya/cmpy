@@ -5,8 +5,9 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.mysema.query.types.Predicate;
 import com.tecnogeek.comprameya.entidad.Categoria;
-import java.util.List;
+import com.tecnogeek.comprameya.entidad.QCategoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.CategoriaRepository;
@@ -23,15 +24,22 @@ public class CategoriaService {
     public CategoriaService(){}
     
     @Autowired
-    CategoriaRepository categoriaService;
+    CategoriaRepository categoriaRepository;
     
-    public List<Categoria> getCategoria()
-    {
-        return (List<Categoria>) categoriaService.getCategoriaPadres();
+    private final QCategoria qCategoria = QCategoria.categoria;
+    
+    public Iterable<Categoria> getCategoriaPadres(){
+        Predicate esPadre = qCategoria.fkCategoria.isNull();
+        return categoriaRepository.findAll(esPadre);
     }
     
-    public List<Categoria> getHijosCategoria(Categoria categoria)
+    public Iterable<Categoria> findByFkCategoria(Categoria categoria){
+        Predicate byCategoria = qCategoria.fkCategoria.eq(categoria);
+        return categoriaRepository.findAll(byCategoria);
+    }
+    
+    public Iterable<Categoria> getHijosCategoria(Categoria categoria)
     {
-        return (List<Categoria>) categoriaService.findByFkCategoria(categoria);
+        return findByFkCategoria(categoria);
     }
 }

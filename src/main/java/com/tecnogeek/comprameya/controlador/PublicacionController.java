@@ -16,6 +16,7 @@ import com.tecnogeek.comprameya.entidad.TipoPublicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUbicacion;
+import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
 import com.tecnogeek.comprameya.utils.FileManager;
@@ -30,9 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,12 +59,21 @@ public class PublicacionController {
     
     @RequestMapping(value="/getTotalAnuncios/{tipo}")
     public int getTotalAnuncios(@PathVariable int tipo){
-        return pManager.getTotalPublicaciones(tipo).intValue();
+        boolean esPagada = (tipo==Constantes.PUBLICACION_PAGADA);
+        TipoPublicacionEnum tipoPublicacion = (esPagada)?                
+                TipoPublicacionEnum.PAGADA:
+                TipoPublicacionEnum.GRATIS;
+        return pManager.getTotalPublicaciones(tipoPublicacion).intValue();
     }
     
     @RequestMapping(value="/getTotalPaginas/{tipo}")
     public int getTotalPaginas(@PathVariable int tipo){
-        int totalPublicaciones = pManager.getTotalPublicaciones(tipo).intValue();
+        boolean esPagada = (tipo==Constantes.PUBLICACION_PAGADA);
+        TipoPublicacionEnum tipoPublicacion = (esPagada)?                
+                TipoPublicacionEnum.PAGADA:
+                TipoPublicacionEnum.GRATIS;
+        
+        int totalPublicaciones = pManager.getTotalPublicaciones(tipoPublicacion).intValue();
         int pageSize = (tipo==Constantes.PUBLICACION_GRATIS)?
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
                 Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
@@ -82,11 +90,16 @@ public class PublicacionController {
     {                
         int totalAnuncios;
         
+        boolean esPagada = (tipo==Constantes.PUBLICACION_PAGADA);
+        TipoPublicacionEnum tipoPublicacion = (esPagada)?                
+                TipoPublicacionEnum.PAGADA:
+                TipoPublicacionEnum.GRATIS;
+        
         totalAnuncios = (tipo==Constantes.PUBLICACION_GRATIS)?
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
                 Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
         
-        Iterable<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(page, totalAnuncios), tipo);   
+        Iterable<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(page, totalAnuncios), tipoPublicacion);   
         
         return publicaciones;
     }

@@ -7,22 +7,12 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Perfil;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author jzelaya
  */
-public interface PerfilRepository extends CrudRepository<Perfil,Long> {
-    
-//    SELECT usr.login,pfl.nombre FROM usuario usr,perfil pfl WHERE usr.fk_perfil=pfl.perfil_id
-//                    AND usr.login= ?
-    
-    @Query("select p from Perfil p,Usuario u where u.fkPerfil=p.perfilId and u.login=?1")
-    Perfil getPerfilUsuario(String login);
-    
-    @Query("select p from Perfil p where p.nombre=?1")
-    Perfil findByNombre(String nombre);
-    
-}
+public interface PerfilRepository extends CrudRepository<Perfil,Long>, 
+        QueryDslPredicateExecutor<Perfil>  {}

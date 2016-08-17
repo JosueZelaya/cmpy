@@ -6,12 +6,10 @@
 package com.tecnogeek.comprameya.service;
 
 import com.mysema.query.types.Predicate;
-import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.dto.GridResponse;
 import com.tecnogeek.comprameya.entidad.QPublicacion;
-import com.tecnogeek.comprameya.entidad.QTipoPublicacion;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.util.ArrayList;
@@ -20,7 +18,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
-import java.util.List;
 import org.springframework.data.domain.Page;
 
 /**
@@ -31,14 +28,14 @@ import org.springframework.data.domain.Page;
 @Service
 public class PublicacionService {
     
+    private final QPublicacion qPublicacion = QPublicacion.publicacion;
+    
     public PublicacionService(){}
-    private QPublicacion qPublicacion = QPublicacion.publicacion;
-    private QTipoPublicacion qTipoPublicacion = QTipoPublicacion.tipoPublicacion;
     
     @Autowired
     PublicacionRepository publicacionRepository;
     
-    public Iterable<Publicacion> getAnunciosAleatorios(int total,int tipo)
+    public Iterable<Publicacion> getAnunciosAleatorios(int total,TipoPublicacionEnum tipo)
     {
         int pageZise = total;
         Long totalPublicaciones = getTotalPublicaciones(tipo);        
@@ -50,18 +47,22 @@ public class PublicacionService {
     
     
     
-    public Long getTotalPublicaciones(int tipo)
+    public Long getTotalPublicaciones(TipoPublicacionEnum tipo)
     {        
-        return (tipo==Constantes.PUBLICACION_PAGADA)?
+        boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
+        
+        return (esPagada)?
                 getTotalPublicacionesPagadas():
                 getTotalPublicacionesGratis();        
     }
     
-    public Iterable<Publicacion> getPublicaciones(PageRequest pageRequest,int tipo)
+    public Iterable<Publicacion> getPublicaciones(PageRequest pageRequest,TipoPublicacionEnum tipo)
     {
         Iterable<Publicacion> publicaciones = new ArrayList();
         
-        publicaciones = (tipo==Constantes.PUBLICACION_PAGADA)?
+        boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
+        
+        publicaciones = (esPagada)?
                 getPublicacionesPagadas(pageRequest):
                 getPublicacionesGratis(pageRequest);
         
@@ -78,7 +79,7 @@ public class PublicacionService {
         return publicaciones;
     }   
     
-    public GridResponse getPublicacionesGrid(int page,int pageZise,int tipo)
+    public GridResponse getPublicacionesGrid(int page, int pageZise, TipoPublicacionEnum tipo)
     { 
         GridResponse<Publicacion> grid = new GridResponse<>();
         grid.setPage(page);
@@ -88,7 +89,7 @@ public class PublicacionService {
         return grid;
     }
     
-    public GridResponse getPublicacionesGrid(int page,int pageZise,Sort sort,int tipo)
+    public GridResponse getPublicacionesGrid(int page, int pageZise, Sort sort, TipoPublicacionEnum tipo)
     { 
         int totalPublicaiones = getTotalPublicaciones(tipo).intValue();
         GridResponse<Publicacion> grid = new GridResponse<>();

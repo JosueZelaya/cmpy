@@ -47,13 +47,13 @@ public class MensajeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         
-        Usuario usr_local = uManager.getUserByLogin(userName);
+        Usuario usr_local = uManager.findActiveUserByLogin(userName);
         Usuario usr_remoto = uManager.getUsuario(id);
         
         List<Mensaje> mensajes = new  ArrayList<>();
         
-        List<Destinatario> des_local = dManager.getDestinarioUsuario(usr_local,usr_remoto);
-        List<Destinatario> des_remoto = dManager.getDestinarioUsuario(usr_remoto,usr_local);
+        Iterable<Destinatario> des_local = dManager.getDestinarioUsuario(usr_local,usr_remoto);
+        Iterable<Destinatario> des_remoto = dManager.getDestinarioUsuario(usr_remoto,usr_local);
         
         for(Destinatario des : des_local)
         {
@@ -75,7 +75,7 @@ public class MensajeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         
-        Usuario usr_local = uManager.getUserByLogin(userName);
+        Usuario usr_local = uManager.findActiveUserByLogin(userName);
         
         Mensaje mensaje = new Mensaje();
         mensaje.setTitulo(pMensaje.getTitulo());
@@ -110,11 +110,11 @@ public class MensajeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         
-        Usuario usr_local = uManager.getUserByLogin(userName);
+        Usuario usr_local = uManager.findActiveUserByLogin(userName);
         
         List<Usuario> lista_usuarios = new ArrayList<>();
         
-       List<Destinatario> des = new ArrayList<>();
+       Iterable<Destinatario> des = new ArrayList<>();
        
        des = dManager.getDestinario(usr_local);
        

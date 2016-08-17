@@ -5,9 +5,10 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.mysema.query.types.expr.BooleanExpression;
 import com.tecnogeek.comprameya.entidad.Destinatario;
+import com.tecnogeek.comprameya.entidad.QDestinatario;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.DestinatarioRepository;
@@ -21,16 +22,22 @@ import com.tecnogeek.comprameya.repositories.DestinatarioRepository;
 public class DestinatarioService {
     
      @Autowired
-     DestinatarioRepository destinatarioService;
+     DestinatarioRepository destinatarioRepository;
      
-     public List<Destinatario> getDestinarioUsuario(Usuario usuario1, Usuario usuario2)
+     private final QDestinatario qDestinatario = QDestinatario.destinatario;
+     
+     public Iterable<Destinatario> getDestinarioUsuario(Usuario destinatario, Usuario emisor)
      {
-         return destinatarioService.findByfkUsuarioDesEmi(usuario1,usuario2);
+         BooleanExpression byDestinatario = qDestinatario.fkUsuarioDestinatario.eq(destinatario);
+         BooleanExpression byEmisor = qDestinatario.fkMensaje.fkUsuarioEmisor.eq(emisor);
+         return destinatarioRepository.findAll(byDestinatario.and(byEmisor));
      }
      
-     public List<Destinatario> getDestinario(Usuario usuario)
+     public Iterable<Destinatario> getDestinario(Usuario usuario)
      {
-         return destinatarioService.findByfkUsuarioDes(usuario);
+         BooleanExpression byDestinatario = qDestinatario.fkUsuarioDestinatario.eq(usuario);
+         BooleanExpression byEmisor = qDestinatario.fkMensaje.fkUsuarioEmisor.eq(usuario);
+         return destinatarioRepository.findAll(byDestinatario.or(byEmisor));
      }
     
 }
