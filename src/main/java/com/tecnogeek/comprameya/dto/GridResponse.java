@@ -18,7 +18,7 @@ public class GridResponse<T> {
     private Integer totalPages;
     private Integer records;
     private Integer total;
-    private List<T> objetos;
+    private Iterable<T> objetos;
     
 //    public GridResponse(){}
 
@@ -46,11 +46,11 @@ public class GridResponse<T> {
         this.records = records;
     }
 
-    public List<T> getRows() {
+    public Iterable<T> getRows() {
         return objetos;
     }
 
-    public void setRows(List<T> objetos) {
+    public void setRows(Iterable<T> objetos) {
         this.objetos = objetos;
     }
 

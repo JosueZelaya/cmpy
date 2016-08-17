@@ -11,14 +11,17 @@ import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.dto.GridResponse;
 import com.tecnogeek.comprameya.entidad.QPublicacion;
+import com.tecnogeek.comprameya.entidad.QTipoPublicacion;
+import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import java.util.List;
+import org.springframework.data.domain.Page;
 
 /**
  *
@@ -30,36 +33,37 @@ public class PublicacionService {
     
     public PublicacionService(){}
     private QPublicacion qPublicacion = QPublicacion.publicacion;
+    private QTipoPublicacion qTipoPublicacion = QTipoPublicacion.tipoPublicacion;
     
     @Autowired
     PublicacionRepository publicacionRepository;
     
-    public List<Publicacion> getAnunciosAleatorios(int total,int tipo)
+    public Iterable<Publicacion> getAnunciosAleatorios(int total,int tipo)
     {
         int pageZise = total;
-        int totalPublicaciones = getTotalPublicaciones(tipo);        
-        int totalPages = Utilidades.calculateTotalPages(totalPublicaciones, pageZise);
+        Long totalPublicaciones = getTotalPublicaciones(tipo);        
+        int totalPages = Utilidades.calculateTotalPages(totalPublicaciones.intValue(), pageZise);
         int page = Utilidades.randomInt(0,totalPages-1); //dado que la primer pagina en la BD es cero.        
-        List<Publicacion> publicaciones = getPublicaciones(new PageRequest(page, pageZise), tipo);
+        Iterable<Publicacion> publicaciones = getPublicaciones(new PageRequest(page, pageZise), tipo);
         return publicaciones;
     }       
     
     
     
-    public int getTotalPublicaciones(int tipo)
+    public Long getTotalPublicaciones(int tipo)
     {        
         return (tipo==Constantes.PUBLICACION_PAGADA)?
-                publicacionRepository.getTotalPublicacionesPagadas():
-                publicacionRepository.getTotalPublicacionesGratis();        
+                getTotalPublicacionesPagadas():
+                getTotalPublicacionesGratis();        
     }
     
-    public List<Publicacion> getPublicaciones(PageRequest pageRequest,int tipo)
+    public Iterable<Publicacion> getPublicaciones(PageRequest pageRequest,int tipo)
     {
-        List<Publicacion> publicaciones = new ArrayList();
+        Iterable<Publicacion> publicaciones = new ArrayList();
         
         publicaciones = (tipo==Constantes.PUBLICACION_PAGADA)?
-                publicacionRepository.getPublicacionesPagadas(pageRequest):
-                publicacionRepository.getPublicacionesGratis(pageRequest);
+                getPublicacionesPagadas(pageRequest):
+                getPublicacionesGratis(pageRequest);
         
         //Replace backslashes by forward slashes in order to work well in firefox.
         for(Publicacion publicacion : publicaciones){
@@ -80,13 +84,13 @@ public class PublicacionService {
         grid.setPage(page);
         grid.setRecords(pageZise);        
         grid.setRows(getPublicaciones( new PageRequest(page, pageZise), tipo));
-        grid.setTotal(getTotalPublicaciones(tipo));
+        grid.setTotal(getTotalPublicaciones(tipo).intValue());
         return grid;
     }
     
     public GridResponse getPublicacionesGrid(int page,int pageZise,Sort sort,int tipo)
     { 
-        int totalPublicaiones = getTotalPublicaciones(tipo);
+        int totalPublicaiones = getTotalPublicaciones(tipo).intValue();
         GridResponse<Publicacion> grid = new GridResponse<>();
         grid.setPage(page);
         grid.setRecords(pageZise);        
@@ -100,7 +104,42 @@ public class PublicacionService {
     {
         Predicate porId = qPublicacion.publicacionId.eq(publicacion_id);
         return publicacionRepository.findOne(porId);
-//        return publicacionRepository.findOne(publicacion_id);
     }
     
+    public Iterable<Publicacion> getPublicacionesPagadas(){
+        Long id = TipoPublicacionEnum.PAGADA.getCodigo();
+        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        return publicacionRepository.findAll(sonPagadas);
+    }
+    
+    public Iterable<Publicacion> getPublicacionesGratis(){
+        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
+        Predicate sonGratis = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        return publicacionRepository.findAll(sonGratis);
+    }
+    
+    public Iterable<Publicacion> getPublicacionesPagadas(PageRequest pageRequest){
+        Long id = TipoPublicacionEnum.PAGADA.getCodigo();
+        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        Page page = publicacionRepository.findAll(sonPagadas, pageRequest);
+        return page.getContent();
+    }
+    
+    public Iterable<Publicacion> getPublicacionesGratis(PageRequest pageRequest){
+        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
+        Predicate sonGratis = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        return publicacionRepository.findAll(sonGratis, pageRequest).getContent();
+    }
+    
+    public long getTotalPublicacionesPagadas(){
+        Long id = TipoPublicacionEnum.PAGADA.getCodigo();
+        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        return publicacionRepository.count(sonPagadas);
+    }
+    
+    public long getTotalPublicacionesGratis(){
+        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
+        Predicate sonGratis = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        return publicacionRepository.count(sonGratis);
+    }
 }

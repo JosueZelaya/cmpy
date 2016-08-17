@@ -60,12 +60,12 @@ public class PublicacionController {
     
     @RequestMapping(value="/getTotalAnuncios/{tipo}")
     public int getTotalAnuncios(@PathVariable int tipo){
-        return pManager.getTotalPublicaciones(tipo);
+        return pManager.getTotalPublicaciones(tipo).intValue();
     }
     
     @RequestMapping(value="/getTotalPaginas/{tipo}")
     public int getTotalPaginas(@PathVariable int tipo){
-        int totalPublicaciones = pManager.getTotalPublicaciones(tipo);
+        int totalPublicaciones = pManager.getTotalPublicaciones(tipo).intValue();
         int pageSize = (tipo==Constantes.PUBLICACION_GRATIS)?
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
                 Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
@@ -78,7 +78,7 @@ public class PublicacionController {
     }
     
     @RequestMapping(value="/getAnuncios/{tipo}/{page}",method=RequestMethod.GET)    
-    public List<Publicacion> getAnuncios(@PathVariable int tipo,@PathVariable int page,Model model)
+    public Iterable<Publicacion> getAnuncios(@PathVariable int tipo,@PathVariable int page,Model model)
     {                
         int totalAnuncios;
         
@@ -86,7 +86,7 @@ public class PublicacionController {
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
                 Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
         
-        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(page, totalAnuncios), tipo);   
+        Iterable<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(page, totalAnuncios), tipo);   
         
         return publicaciones;
     }
