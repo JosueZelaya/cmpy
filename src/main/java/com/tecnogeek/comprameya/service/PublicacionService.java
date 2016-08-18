@@ -96,46 +96,4 @@ public class PublicacionService {
         return grid;
     }
     
-//    public Publicacion getPublicacion(long publicacion_id)
-//    {
-//        Predicate porId = qPublicacion.id.eq(publicacion_id);
-//        return publicacionRepository.findOne(porId);
-//    }
-//    
-//    public Iterable<Publicacion> getPublicacionesPagadas(){
-//        Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-//        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
-//        return publicacionRepository.findAll(sonPagadas);
-//    }
-//    
-//    public Iterable<Publicacion> getPublicacionesGratis(){
-//        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-//        Predicate sonGratis = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
-//        return publicacionRepository.findAll(sonGratis);
-//    }
-//    
-//    public Iterable<Publicacion> getPublicacionesPagadas(PageRequest pageRequest){
-//        Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-//        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
-//        Page page = publicacionRepository.findAll(sonPagadas, pageRequest);
-//        return page.getContent();
-//    }
-//    
-//    public Iterable<Publicacion> getPublicacionesGratis(PageRequest pageRequest){
-//        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-//        Predicate sonGratis = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
-//        return publicacionRepository.findAll(sonGratis, pageRequest).getContent();
-//    }
-//    
-//    public long getTotalPublicacionesPagadas(){
-//        Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-//        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
-//        return publicacionRepository.count(sonPagadas);
-//    }
-//    
-//    public long getTotalPublicacionesGratis(){
-//        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-//        Predicate sonGratis = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
-//        return publicacionRepository.count(sonGratis);
-//    }
 }
