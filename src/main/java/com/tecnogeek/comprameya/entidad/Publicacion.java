@@ -26,7 +26,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -42,16 +41,15 @@ import org.springframework.data.annotation.Transient;
 @Getter
 @Setter
 @ToString(exclude={"publicacionList","recursoList","ubicacionList","productoList","comentarioList"})
-@EqualsAndHashCode
 @RequiredArgsConstructor 
-public class Publicacion implements Serializable {
+public class Publicacion extends BaseEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "publicacion_id")
-    private Long publicacionId;
+    private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
@@ -78,17 +76,7 @@ public class Publicacion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "denuncias")
-    private int denuncias;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaModificacion;
+    private int denuncias;    
     @JsonManagedReference
     @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Recurso> recursoList;
@@ -112,7 +100,9 @@ public class Publicacion implements Serializable {
     
     @Transient
     public int getPuntaje(){
-        return (this.fkUsuario == null)? 0: this.fkUsuario.getPuntaje();
+        return (this.fkUsuario == null)?
+                0: 
+                this.fkUsuario.getPuntaje();
     }
 
 }

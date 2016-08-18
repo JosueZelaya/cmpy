@@ -103,7 +103,7 @@ public class PublicacionService {
     
     public Publicacion getPublicacion(long publicacion_id)
     {
-        Predicate porId = qPublicacion.publicacionId.eq(publicacion_id);
+        Predicate porId = qPublicacion.id.eq(publicacion_id);
         return publicacionRepository.findOne(porId);
     }
     

@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 /**
  *
  * @author jzelaya
+ * @param <ID>
  */
 @MappedSuperclass
 public abstract class BaseEntity<ID> {

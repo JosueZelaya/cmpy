@@ -33,7 +33,7 @@ import lombok.Setter;
  * @author genaro
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario") 
 @Getter
 @Setter
 public class Usuario extends BaseEntity<Long> implements Serializable {
