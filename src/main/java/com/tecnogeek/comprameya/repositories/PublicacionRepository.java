@@ -7,12 +7,10 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Publicacion;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  *
  * @author jzelaya
  */
-public interface PublicacionRepository extends PagingAndSortingRepository<Publicacion, Long>, 
-        QueryDslPredicateExecutor<Publicacion> {}
+public interface PublicacionRepository 
+        extends BaseRepository<Publicacion, Long> {}
