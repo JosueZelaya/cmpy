@@ -9,10 +9,10 @@ import com.tecnogeek.comprameya.entidad.Comentario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.service.ComentarioService;
-import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
 import com.tecnogeek.comprameya.dto.pojoComentario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
+import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ComentarioController {
     
     @Autowired
-    ComentarioService cManager;
-    @Autowired
-    PublicacionService pManager;
+    ComentarioService cManager;    
+    PublicacionRepository publicacionRepository;
     @Autowired
     UsuarioService uManager;
     
@@ -43,7 +42,7 @@ public class ComentarioController {
         
         Usuario u = uManager.getLoggedUser();
         
-        Publicacion p = pManager.getPublicacion(publicacion_id);
+        Publicacion p = publicacionRepository.getPublicacion(publicacion_id);
         
         Comentario c = new Comentario();
         c.setTexto(pcomentario.getTexto());
@@ -58,7 +57,7 @@ public class ComentarioController {
     @RequestMapping(value = "/get/{publicacion_id}", method = RequestMethod.GET)
     public @ResponseBody List<pojoComentario> setUbicacionPublicacion(@PathVariable("publicacion_id") long publicacion_id)  {
           
-        Publicacion p = pManager.getPublicacion(publicacion_id);
+        Publicacion p = publicacionRepository.getPublicacion(publicacion_id);
         
         Iterable<Comentario> lcomentario = cManager.getComentario(p);
         return  getComentarioPojo(lcomentario);

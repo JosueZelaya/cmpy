@@ -55,6 +55,9 @@ public class PublicacionController {
     PublicacionService pManager;
     
     @Autowired
+    PublicacionRepository publicacionRepository;
+    
+    @Autowired
     UsuarioService uManager;
     
     @RequestMapping(value="/getTotalAnuncios/{tipo}")
@@ -82,7 +85,7 @@ public class PublicacionController {
     
     @RequestMapping(value="/getPublicacionById/{id}",method=RequestMethod.GET)    
     public Publicacion getPublicacionById(@PathVariable Long id){
-        return pManager.getPublicacion(id);
+        return publicacionRepository.getPublicacion(id);
     }
     
     @RequestMapping(value="/getAnuncios/{tipo}/{page}",method=RequestMethod.GET)    

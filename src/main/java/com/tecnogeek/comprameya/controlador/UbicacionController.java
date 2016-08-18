@@ -11,6 +11,7 @@ import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.service.UbicacionService;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.dto.pojoUbicacion;
+import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -34,8 +35,7 @@ public class UbicacionController {
     @Autowired
     UbicacionService uManager;
     @Autowired
-    PublicacionService pManager;
-       
+    PublicacionRepository publicacionRepository;
     
     @RequestMapping(value = "/publicacion/get/{id}", method = RequestMethod.GET)
     public @ResponseBody Iterable<pojoUbicacion> getUbicacionPublicacion(@PathVariable("id") long id)  {          
@@ -78,7 +78,7 @@ public class UbicacionController {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(p.getLatitud());
                 ubi.setGmLongitud(p.getLongitud());
-                ubi.setFkPublicacion(pManager.getPublicacion(id));
+                ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
                 
                 ubicacionesToSave.add(ubi);
             }
@@ -115,7 +115,7 @@ public class UbicacionController {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
                 ubi.setGmLongitud(listaUbicacion.get(i).getLongitud());
-                ubi.setFkPublicacion(pManager.getPublicacion(id));
+                ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
                 uManager.setGuardar(ubi);
             }
         }
@@ -155,7 +155,7 @@ public class UbicacionController {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(p.getLatitud());
                 ubi.setGmLongitud(p.getLongitud());
-                ubi.setFkPublicacion(pManager.getPublicacion(id));
+                ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
                 ubicacionesToSave.add(ubi);
             }
             
@@ -190,7 +190,7 @@ public class UbicacionController {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
                 ubi.setGmLongitud(listaUbicacion.get(i).getLongitud());
-                ubi.setFkPublicacion(pManager.getPublicacion(id));
+                ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
                 uManager.setGuardar(ubi);
             }
         }
@@ -222,7 +222,7 @@ public class UbicacionController {
     
     private Iterable<Ubicacion> getUbicacionPublicacionI(long publicacion_id)
     {
-        Publicacion publicacion = pManager.getPublicacion(publicacion_id);
+        Publicacion publicacion = publicacionRepository.getPublicacion(publicacion_id);
         
         Iterable<Ubicacion> listaUbicacion = new ArrayList<>();
         

@@ -7,10 +7,11 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.repositories.custom.PublicacionRepositoryCustom;
 
 /**
  *
  * @author jzelaya
  */
 public interface PublicacionRepository 
-        extends BaseRepository<Publicacion, Long> {}
+        extends BaseRepository<Publicacion, Long>, PublicacionRepositoryCustom {}

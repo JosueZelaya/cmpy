@@ -21,5 +21,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 @NoRepositoryBean
 public interface BaseRepository<T extends BaseEntity<ID>,ID extends Serializable> 
         extends PagingAndSortingRepository<T, ID>,
-        QueryDslPredicateExecutor<T> {    
+        QueryDslPredicateExecutor<T>, 
+        Serializable {    
 }
