@@ -30,7 +30,7 @@ public class Destinatario extends BaseEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "destinatario_id")
-    private Long Id;    
+    private Long id;    
     @JoinColumn(name = "fk_mensaje", referencedColumnName = "mensaje_id")
     @ManyToOne
     private Mensaje fkMensaje;

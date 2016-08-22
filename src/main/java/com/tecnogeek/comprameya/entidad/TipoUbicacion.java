@@ -6,7 +6,6 @@
 package com.tecnogeek.comprameya.entidad;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,11 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 
 /**
@@ -30,7 +25,7 @@ import lombok.Data;
 @Entity
 @Table(name = "tipo_ubicacion")
 @Data
-public class TipoUbicacion implements Serializable {
+public class TipoUbicacion extends BaseEntity<Long> implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -38,17 +33,7 @@ public class TipoUbicacion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "tipo_ubicacion_id")
-    private Long tipoUbicacionId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date sisFechaModificacion;
+    private Long id;
     @Size(max = 2147483647)
     @Column(name = "nombre")
     private String nombre;

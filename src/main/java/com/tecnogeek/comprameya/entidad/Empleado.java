@@ -7,7 +7,6 @@ package com.tecnogeek.comprameya.entidad;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,9 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -29,13 +25,13 @@ import lombok.Data;
 @Entity
 @Table(name = "empleado")
 @Data
-public class Empleado implements Serializable {
+public class Empleado extends BaseEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "empleado_id")
-    private Long empleadoId;
+    private Long id;
     @Column(name = "telefono")
     private BigInteger telefono;
     @Column(name = "nit")
@@ -44,16 +40,6 @@ public class Empleado implements Serializable {
     private BigInteger afp;
     @Column(name = "isss")
     private BigInteger isss;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaModificacion;
     @JoinColumn(name = "fk_empresa", referencedColumnName = "empresa_id")
     @ManyToOne
     private Empresa fkEmpresa;

@@ -31,7 +31,7 @@ public class Suscriptor extends BaseEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "suscriptor_id")
-    private Long Id;
+    private Long id;
     @JoinColumn(name = "fk_usuario_proveedor", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario fkUsuarioProveedor;

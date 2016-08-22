@@ -35,21 +35,21 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public Iterable<Publicacion> getPublicacionesPagadas() {
         Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.id.eq(id);
         return publicacionRepository.findAll(sonPagadas);
     }
 
     @Override
     public Iterable<Publicacion> getPublicacionesGratis() {
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        Predicate sonGratis = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        Predicate sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
         return publicacionRepository.findAll(sonGratis);
     }
 
     @Override
     public Iterable<Publicacion> getPublicacionesPagadas(PageRequest pageRequest) {
         Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.id.eq(id);
         Page page = publicacionRepository.findAll(sonPagadas, pageRequest);
         return page.getContent();
     }
@@ -57,21 +57,21 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public Iterable<Publicacion> getPublicacionesGratis(PageRequest pageRequest) {
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        Predicate sonGratis = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        Predicate sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
         return publicacionRepository.findAll(sonGratis, pageRequest).getContent();
     }
 
     @Override
     public long getTotalPublicacionesPagadas() {
         Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        Predicate sonPagadas = qPublicacion.fkTipoPublicacion.id.eq(id);
         return publicacionRepository.count(sonPagadas);
     }
 
     @Override
     public long getTotalPublicacionesGratis() {
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        Predicate sonGratis = qPublicacion.fkTipoPublicacion.tipoPublicacionId.eq(id);
+        Predicate sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
         return publicacionRepository.count(sonGratis);
     }
     

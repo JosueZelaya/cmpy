@@ -39,7 +39,7 @@ public class Persona extends BaseEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "persona_id")
-    private Long Id;
+    private Long id;
     @Size(max = 2147483647)
     @Column(name = "nombre")
     private String nombre;

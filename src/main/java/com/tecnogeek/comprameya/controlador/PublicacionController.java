@@ -133,7 +133,7 @@ public class PublicacionController {
         publicacion.setRecursoList(recursos);
         Integer tipo=Constantes.PUBLICACION_PAGADA;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
-        tipoPublicacion.setTipoPublicacionId(tipo.longValue());
+        tipoPublicacion.setId(tipo.longValue());
         publicacion.setFkTipoPublicacion(tipoPublicacion);
         
         //cUbicacion.setUbicacionPublicacion(publicacion.getPublicacionId(), ubicaciones);
@@ -173,7 +173,7 @@ public class PublicacionController {
         publicacion.setRecursoList(recursos);        
         Integer tipo=Constantes.PUBLICACION_GRATIS;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
-        tipoPublicacion.setTipoPublicacionId(tipo.longValue());
+        tipoPublicacion.setId(tipo.longValue());
         publicacion.setFkTipoPublicacion(tipoPublicacion);        
         Producto producto = new Producto();
         producto.setNombre(titulo);
