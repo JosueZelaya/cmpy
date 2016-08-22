@@ -6,7 +6,6 @@
 package com.tecnogeek.comprameya.entidad;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,8 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
@@ -31,14 +28,14 @@ import lombok.Data;
 @Entity
 @Table(name = "categoria")
 @Data
-public class Categoria implements Serializable {
+public class Categoria extends BaseEntity<Long> implements Serializable {
     
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "categoria_id")
-    private Long categoriaId;
+    private Long Id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
@@ -47,16 +44,6 @@ public class Categoria implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "descripcion")
     private String descripcion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date sisFechaModificacion;
     @OneToMany(mappedBy = "fkSubTipoProducto")
     private List<Producto> productoList;
     @OneToMany(mappedBy = "fkCategoria")

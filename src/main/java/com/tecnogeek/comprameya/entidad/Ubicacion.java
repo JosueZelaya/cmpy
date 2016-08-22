@@ -7,7 +7,6 @@ package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,11 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 
 /**
@@ -33,23 +28,13 @@ import lombok.Data;
 @Entity
 @Table(name = "ubicacion")
 @Data
-public class Ubicacion implements Serializable {
+public class Ubicacion extends BaseEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ubicacion_id")
-    private Long ubicacionId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaModificacion;
+    private Long Id;
     @Size(max = 2147483647)
     @Column(name = "poligono")
     private String poligono;

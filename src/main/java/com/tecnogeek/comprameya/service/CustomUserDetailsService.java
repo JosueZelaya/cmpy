@@ -9,6 +9,7 @@ package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
 import com.tecnogeek.comprameya.entidad.Usuario;
+import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,14 +27,14 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
     
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioRepository usuarioRepository;
     
     public CustomUserDetailsService(){}
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        Usuario usuario = usuarioService.findActiveUserByLogin(username);
+        Usuario usuario = usuarioRepository.findActiveUserByLogin(username);
 
         if(usuario==null)
         {

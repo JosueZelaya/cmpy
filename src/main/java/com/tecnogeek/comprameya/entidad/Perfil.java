@@ -32,14 +32,14 @@ import lombok.Data;
 @Entity
 @Table(name = "perfil")
 @Data
-public class Perfil implements Serializable {
+public class Perfil extends BaseEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "perfil_id")
-    private Long perfilId;
+    private Long Id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
@@ -48,16 +48,6 @@ public class Perfil implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "descripcion")
     private String descripcion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaModificacion;
     @OneToMany(mappedBy = "fkPerfil")
     private List<Recurso> recursoList;
     @JoinColumn(name = "fk_grupo", referencedColumnName = "grupo_id")

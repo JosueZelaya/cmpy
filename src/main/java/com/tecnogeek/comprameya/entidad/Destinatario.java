@@ -6,7 +6,6 @@
 package com.tecnogeek.comprameya.entidad;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -28,23 +24,13 @@ import lombok.Data;
 @Entity
 @Table(name = "destinatario")
 @Data
-public class Destinatario implements Serializable {
+public class Destinatario extends BaseEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "destinatario_id")
-    private Long destinatarioId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date sisFechaModificacion;
+    private Long Id;    
     @JoinColumn(name = "fk_mensaje", referencedColumnName = "mensaje_id")
     @ManyToOne
     private Mensaje fkMensaje;

@@ -7,12 +7,12 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Usuario;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
+import com.tecnogeek.comprameya.repositories.custom.UsuarioRepositoryCustom;
 
 /**
  *
  * @author jzelaya
  */
-public interface UserRepository extends CrudRepository<Usuario,Long>, 
-        QueryDslPredicateExecutor<Usuario>{}
+public interface UsuarioRepository 
+        extends BaseRepository<Usuario,Long>, 
+        UsuarioRepositoryCustom{}

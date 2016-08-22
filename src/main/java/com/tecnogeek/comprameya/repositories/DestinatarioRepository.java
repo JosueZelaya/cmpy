@@ -6,12 +6,14 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Destinatario;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
+import com.tecnogeek.comprameya.repositories.custom.DestinatarioRepositoryCustom;
 
 /**
  *
  * @author genaro
  */
-public interface DestinatarioRepository extends CrudRepository<Destinatario, Long>, 
-        QueryDslPredicateExecutor<Destinatario> {}
+public interface DestinatarioRepository 
+        extends BaseRepository<Destinatario, Long>,
+        DestinatarioRepositoryCustom {
+    
+}

@@ -6,12 +6,14 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Mensaje;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
+import com.tecnogeek.comprameya.repositories.custom.MensajeRepositoryCustom;
 
 /**
  *
  * @author genaro
  */
-public interface MensajeRepository extends CrudRepository<Mensaje,Long>, 
-        QueryDslPredicateExecutor<Mensaje> {}
+public interface MensajeRepository 
+        extends BaseRepository<Mensaje, Long>,
+        MensajeRepositoryCustom {
+    
+}

@@ -6,7 +6,6 @@
 package com.tecnogeek.comprameya.entidad;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,16 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 
 /**
@@ -35,14 +28,14 @@ import lombok.Data;
 @Entity
 @Table(name = "mensaje")
 @Data
-public class Mensaje implements Serializable {
+public class Mensaje extends BaseEntity<Long> implements Serializable {
     
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "mensaje_id")
-    private Long mensajeId;
+    private Long Id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
@@ -53,16 +46,6 @@ public class Mensaje implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "texto")
     private String texto;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaModificacion;
     @OneToMany(mappedBy = "fkMensaje")
     private List<Destinatario> destinatarioList;
     @JoinColumn(name = "fk_usuario_emisor", referencedColumnName = "usuario_id")

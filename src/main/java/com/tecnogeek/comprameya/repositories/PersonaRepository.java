@@ -6,12 +6,12 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Persona;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
+import com.tecnogeek.comprameya.repositories.custom.PersonaRepositoryCustom;
 
 /**
  *
  * @author alexander
  */
-public interface PersonaRepository extends CrudRepository<Persona,Long>, 
-        QueryDslPredicateExecutor<Persona>{}
+public interface PersonaRepository 
+        extends BaseRepository<Persona,Long>, 
+        PersonaRepositoryCustom{}

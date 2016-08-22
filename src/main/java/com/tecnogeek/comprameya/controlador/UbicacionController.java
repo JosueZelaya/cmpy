@@ -8,10 +8,9 @@ package com.tecnogeek.comprameya.controlador;
 import com.google.common.collect.Iterables;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
-import com.tecnogeek.comprameya.service.UbicacionService;
-import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.dto.pojoUbicacion;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import com.tecnogeek.comprameya.repositories.UbicacionRepository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +32,7 @@ public class UbicacionController {
     
 
     @Autowired
-    UbicacionService uManager;
+    UbicacionRepository ubicacionRepository;
     @Autowired
     PublicacionRepository publicacionRepository;
     
@@ -67,7 +66,7 @@ public class UbicacionController {
 //                listaUbicacionTmp.get(i).setGmLongitud(listaUbicacion.get(i).getLongitud());
 //            }
             
-            uManager.setGuardarTodos(listaUbicacionTmp);
+            ubicacionRepository.save(listaUbicacionTmp);
         } 
         //Agregar        
         else if(!listaUbicacion.isEmpty() && Iterables.isEmpty(listaUbicacionTmp))
@@ -83,7 +82,7 @@ public class UbicacionController {
                 ubicacionesToSave.add(ubi);
             }
             
-            uManager.setGuardarTodos(ubicacionesToSave);
+            ubicacionRepository.save(ubicacionesToSave);
             
         }
         //Eliminar y Actualizar
@@ -94,11 +93,11 @@ public class UbicacionController {
                 Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
                 Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
                 
-                uManager.setGuardar(Iterables.get(listaUbicacionTmp, i));
+                ubicacionRepository.save(Iterables.get(listaUbicacionTmp, i));
             }
             for(int i =listaUbicacion.size()-1; i< Iterables.size(listaUbicacionTmp); i++ )
             {
-                uManager.setEliminar(Iterables.get(listaUbicacionTmp, i));
+                ubicacionRepository.delete(Iterables.get(listaUbicacionTmp, i));
             }
         }
         //Agregar y Actualizar
@@ -108,7 +107,7 @@ public class UbicacionController {
             {
                 Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
                 Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
-                uManager.setGuardar(Iterables.get(listaUbicacionTmp, i));
+                ubicacionRepository.save(Iterables.get(listaUbicacionTmp, i));
             }
             for(int i =Iterables.size(listaUbicacionTmp)-1; i<listaUbicacion.size(); i++ )
             {
@@ -116,13 +115,13 @@ public class UbicacionController {
                 ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
                 ubi.setGmLongitud(listaUbicacion.get(i).getLongitud());
                 ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
-                uManager.setGuardar(ubi);
+                ubicacionRepository.save(ubi);
             }
         }
         //Eliminar
         else if(listaUbicacion.isEmpty())
         {
-            uManager.setEliminarTodo(listaUbicacionTmp);
+            ubicacionRepository.delete(listaUbicacionTmp);
         }
         
         
@@ -144,7 +143,7 @@ public class UbicacionController {
                 Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
             }
             
-            uManager.setGuardarTodos(listaUbicacionTmp);
+            ubicacionRepository.save(listaUbicacionTmp);
         } 
         //Agregar
         else if(!listaUbicacion.isEmpty() && Iterables.isEmpty(listaUbicacionTmp))
@@ -159,7 +158,7 @@ public class UbicacionController {
                 ubicacionesToSave.add(ubi);
             }
             
-            uManager.setGuardarTodos(ubicacionesToSave);
+            ubicacionRepository.save(ubicacionesToSave);
             
         }
         //Eliminar y Actualizar
@@ -169,11 +168,11 @@ public class UbicacionController {
             {
                 Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
                 Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
-                uManager.setGuardar(Iterables.get(listaUbicacionTmp, i));
+                ubicacionRepository.save(Iterables.get(listaUbicacionTmp, i));
             }
             for(int i =listaUbicacion.size()-1;i<Iterables.size(listaUbicacionTmp);i++ )
             {
-                uManager.setEliminar(Iterables.get(listaUbicacionTmp, i));
+                ubicacionRepository.save(Iterables.get(listaUbicacionTmp, i));
             }
         }
         //Agregar y Actualizar
@@ -183,7 +182,7 @@ public class UbicacionController {
             {
                 Iterables.get(listaUbicacionTmp, i).setGmLatitud(listaUbicacion.get(i).getLatitud());
                 Iterables.get(listaUbicacionTmp, i).setGmLongitud(listaUbicacion.get(i).getLongitud());
-                uManager.setGuardar(Iterables.get(listaUbicacionTmp, i));
+                ubicacionRepository.save(Iterables.get(listaUbicacionTmp, i));
             }
             for(int i =Iterables.size(listaUbicacionTmp)-1;i<listaUbicacion.size();i++ )
             {
@@ -191,13 +190,13 @@ public class UbicacionController {
                 ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
                 ubi.setGmLongitud(listaUbicacion.get(i).getLongitud());
                 ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
-                uManager.setGuardar(ubi);
+                ubicacionRepository.save(ubi);
             }
         }
         //Eliminar
         else if(listaUbicacion.isEmpty())
         {
-            uManager.setEliminarTodo(listaUbicacionTmp);
+            ubicacionRepository.delete(listaUbicacionTmp);
         }
         
         
@@ -210,7 +209,7 @@ public class UbicacionController {
         for(Ubicacion ubi : ubicaciones)
         {
             pojoUbicacion pojo = new pojoUbicacion();
-            pojo.setId(ubi.getUbicacionId());
+            pojo.setId(ubi.getId());
             pojo.setLatitud(ubi.getGmLatitud());
             pojo.setLongitud(ubi.getGmLongitud());
             
@@ -228,7 +227,7 @@ public class UbicacionController {
         
         if(publicacion != null)
         {
-            listaUbicacion = uManager.getUbicacionPublicacion(publicacion);
+            listaUbicacion = ubicacionRepository.getUbicacionPublicacion(publicacion);
         }
         
         return listaUbicacion;

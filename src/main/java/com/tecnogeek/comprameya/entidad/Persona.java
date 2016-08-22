@@ -32,14 +32,14 @@ import lombok.Data;
 @Entity
 @Table(name = "persona")
 @Data
-public class Persona implements Serializable {
+public class Persona extends BaseEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "persona_id")
-    private Long personaId;
+    private Long Id;
     @Size(max = 2147483647)
     @Column(name = "nombre")
     private String nombre;

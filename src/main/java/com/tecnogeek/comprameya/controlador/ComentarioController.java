@@ -12,6 +12,7 @@ import com.tecnogeek.comprameya.service.ComentarioService;
 import com.tecnogeek.comprameya.service.UsuarioService;
 import com.tecnogeek.comprameya.dto.pojoComentario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
+import com.tecnogeek.comprameya.repositories.ComentarioRepository;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ComentarioController {
     
     @Autowired
-    ComentarioService cManager;    
+    ComentarioRepository comentarioRepository;  
     PublicacionRepository publicacionRepository;
     @Autowired
     UsuarioService uManager;
@@ -49,7 +50,7 @@ public class ComentarioController {
         c.setFkPublicacion(p);
         c.setFkUsuario(u);
        
-        cManager.setComentario(c);
+        comentarioRepository.save(c);
         
         return "";   
     }  
@@ -59,7 +60,7 @@ public class ComentarioController {
           
         Publicacion p = publicacionRepository.getPublicacion(publicacion_id);
         
-        Iterable<Comentario> lcomentario = cManager.getComentario(p);
+        Iterable<Comentario> lcomentario = comentarioRepository.getComentario(p);
         return  getComentarioPojo(lcomentario);
     }
     
@@ -71,7 +72,7 @@ public class ComentarioController {
         for(Comentario c : lcomentario)
         {
             pojoComentario p = new pojoComentario();
-            p.setId(c.getComentarioId());
+            p.setId(c.getId());
             p.setTexto(c.getTexto());
             p.setPuntaje(c.getPuntaje());
             

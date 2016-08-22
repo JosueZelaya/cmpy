@@ -24,16 +24,13 @@ import com.tecnogeek.comprameya.repositories.CategoriaRepository;
 @Controller
 @RequestMapping("/categoria")
 public class CategoriaController {
-
-    @Autowired
-    CategoriaRepository categoriaService;
-    @Autowired
-    CategoriaService cManager;
    
-
+    @Autowired
+    CategoriaRepository categoriaRepository;
+    
     @RequestMapping(value = "/todos", method = RequestMethod.GET)
     public @ResponseBody List<Object> getTodoCategoria(Model model)  {
-         Iterable<Categoria> catTodo = cManager.getCategoriaPadres();
+         Iterable<Categoria> catTodo = categoriaRepository.getCategoriaPadres();
          List < Object > catObject = new ArrayList();
          for(Categoria cat : catTodo)
          {
@@ -44,7 +41,7 @@ public class CategoriaController {
     
     private List<Object> getHijos(Categoria categoria)
     {
-        Iterable<Categoria> catHijos = cManager.getHijosCategoria(categoria);
+        Iterable<Categoria> catHijos = categoriaRepository.getHijosCategoria(categoria);
         List<Object> catObject = new ArrayList<>();
         for(Categoria cat : catHijos)
         {
@@ -57,7 +54,7 @@ public class CategoriaController {
     {
             Object obj;
             obj = new Object() {
-               public Long id = catPadre.getCategoriaId();
+               public Long id = catPadre.getId();
                public String nombre = catPadre.getNombre();
                public String descripcion = catPadre.getDescripcion();
                public Object hijos = catHijos;

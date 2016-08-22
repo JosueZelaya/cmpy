@@ -7,12 +7,12 @@ package com.tecnogeek.comprameya.repositories;
 
 
 import com.tecnogeek.comprameya.entidad.Ubicacion;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
+import com.tecnogeek.comprameya.repositories.custom.UbicacionRepositoryCustom;
 
 /**
  *
  * @author genaro
  */
-public interface UbicacionRepository extends CrudRepository<Ubicacion,Long>, 
-        QueryDslPredicateExecutor<Ubicacion> {}
+public interface UbicacionRepository 
+        extends BaseRepository<Ubicacion,Long>, 
+        UbicacionRepositoryCustom {}

@@ -6,12 +6,12 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Suscriptor;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
+import com.tecnogeek.comprameya.repositories.custom.SuscriptorRepositoryCustom;
 
 /**
  *
  * @author genaro
  */
-public interface SuscriptorRepository extends CrudRepository<Suscriptor,Long>, 
-        QueryDslPredicateExecutor<Suscriptor> {}
+public interface SuscriptorRepository 
+        extends BaseRepository<Suscriptor,Long>, 
+        SuscriptorRepositoryCustom {}

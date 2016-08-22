@@ -8,9 +8,9 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.entidad.Suscriptor;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.service.SuscriptorService;
-import com.tecnogeek.comprameya.service.UsuarioService;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
+import com.tecnogeek.comprameya.repositories.SuscriptorRepository;
+import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +30,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/suscripcion")
 public class SuscriptorController {
     @Autowired
-    SuscriptorService sManager;
+    SuscriptorRepository suscriptorRepository;
     @Autowired
-    UsuarioService uManager;
+    UsuarioRepository usuarioRepository;
     
     @RequestMapping(value = "/suscriptor/get", method = RequestMethod.GET)
     public @ResponseBody List<pojoUsuario> getSuscriptores()  {          
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        Usuario usr_local = uManager.findActiveUserByLogin(userName);
+        Usuario usr_local = usuarioRepository.findActiveUserByLogin(userName);
         
         Iterable<Suscriptor> lsuscriptor = new ArrayList<>();
-        lsuscriptor = sManager.getSuscriptor(usr_local);
+        lsuscriptor = suscriptorRepository.getSuscriptor(usr_local);
         
         List<Usuario> lusr  = new ArrayList<>();
         
@@ -50,7 +50,18 @@ public class SuscriptorController {
             lusr.add(sus.getFkUsuarioSuscriptor());
         }
         
-        return uManager.getUsuarioPojo(lusr);
+        List<pojoUsuario> lpUsuario = new ArrayList<>();
+
+        for (Usuario usr : lusr) {
+            pojoUsuario p = new pojoUsuario();
+            p.setId(usr.getId());
+            p.setLogin(usr.getLogin());
+
+            lpUsuario.add(p);
+        }
+
+        return lpUsuario;
+        
         
     }
     
@@ -58,10 +69,10 @@ public class SuscriptorController {
     public @ResponseBody List<pojoUsuario> getProveedores()  {          
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        Usuario usr_local = uManager.findActiveUserByLogin(userName);
+        Usuario usr_local = usuarioRepository.findActiveUserByLogin(userName);
         
         Iterable<Suscriptor> lsuscriptor = new ArrayList<>();
-        lsuscriptor = sManager.getProveedor(usr_local);
+        lsuscriptor = suscriptorRepository.getProveedor(usr_local);
         
         List<Usuario> lusr  = new ArrayList<>();
         
@@ -70,7 +81,18 @@ public class SuscriptorController {
             lusr.add(sus.getFkUsuarioProveedor());
         }
         
-        return uManager.getUsuarioPojo(lusr);
+        List<pojoUsuario> lpUsuario = new ArrayList<>();
+
+        for (Usuario usr : lusr) {
+            pojoUsuario p = new pojoUsuario();
+            p.setId(usr.getId());
+            p.setLogin(usr.getLogin());
+
+            lpUsuario.add(p);
+        }
+
+        return lpUsuario;
+        
     }
     
     
@@ -78,15 +100,15 @@ public class SuscriptorController {
     public @ResponseBody Object setSuscriptor(@PathVariable("id") long id)  {          
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        Usuario usr_local = uManager.findActiveUserByLogin(userName);
+        Usuario usr_local = usuarioRepository.findActiveUserByLogin(userName);
         
-        Usuario usr_pro = uManager.getUsuario(id);
+        Usuario usr_pro = usuarioRepository.findOne(id);
         
         Suscriptor sus = new Suscriptor();
         sus.setFkUsuarioProveedor(usr_pro);
         sus.setFkUsuarioSuscriptor(usr_local);
         
-        sManager.setSuscriptor(sus);
+        suscriptorRepository.setSuscriptor(sus);
         
         return null;
         

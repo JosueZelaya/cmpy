@@ -10,10 +10,8 @@ import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
 import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
-import com.tecnogeek.comprameya.service.CategoriaService;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,14 +44,10 @@ public class HomeController {
     @Autowired
     UsuarioService uManager;
 
-    //genaro req categorias
     @Autowired
-    CategoriaRepository categoriaService;
-    @Autowired
-    CategoriaService cManager;
-    //fin req categorias
+    CategoriaRepository categoriaRepository;
 
-    private ProviderSignInUtils providerSignInUtils;
+    private final ProviderSignInUtils providerSignInUtils;
     
     @Autowired
     public HomeController(ConnectionFactoryLocator connectionFactoryLocator,
@@ -64,21 +58,15 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcomePage(Model model) {
         Iterable<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR, TipoPublicacionEnum.PAGADA);
-//        List<Publicacion> publicaciones = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR,Constantes.PUBLICACION_GRATIS);
-//        GridResponse<Publicacion> gridPublicaciones = pManager.getPublicacionesGrid(0, Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC, "sisFechaCreacion"), Constantes.PUBLICACION_GRATIS);
-//        List<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(0,Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, new Sort(Sort.Direction.DESC,"sisFechaCreacion")), Constantes.PUBLICACION_GRATIS);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName(); //get logged in username
-        //genaro req categorias
-        Iterable<Categoria> categorias = cManager.getCategoriaPadres();
+        String userName = auth.getName(); 
+        
+        Iterable<Categoria> categorias = categoriaRepository.getCategoriaPadres();
         model.addAttribute("categorias", categorias);
-        //fin req categorias
 
         model.addAttribute("username", userName);
         model.addAttribute("anuncios", anuncios);
-//        model.addAttribute("publicaciones", gridPublicaciones.getRows());
-//        model.addAttribute("totalPages", gridPublicaciones.getTotalPages());
         model.addAttribute("tipoPublicacion", Constantes.PUBLICACION_GRATIS);
         model.addAttribute("parametro", "Pagina Inicio");
         return "index";

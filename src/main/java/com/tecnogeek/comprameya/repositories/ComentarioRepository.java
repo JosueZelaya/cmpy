@@ -6,12 +6,11 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Comentario;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
+import com.tecnogeek.comprameya.repositories.custom.ComentarioRepositoryCustom;
 
 /**
  *
  * @author genaro
  */
-public interface ComentarioRepository extends CrudRepository<Comentario,Long>, 
-        QueryDslPredicateExecutor<Comentario> {}
+public interface ComentarioRepository 
+        extends BaseRepository<Comentario, Long>, ComentarioRepositoryCustom {}

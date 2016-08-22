@@ -6,7 +6,6 @@
 package com.tecnogeek.comprameya.entidad;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -28,24 +24,14 @@ import lombok.Data;
 @Entity
 @Table(name = "suscriptor")
 @Data
-public class Suscriptor implements Serializable {
+public class Suscriptor extends BaseEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "suscriptor_id")
-    private Long suscriptorId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sis_activo")
-    private boolean sisActivo;
-    @Column(name = "sis_fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaCreacion;
-    @Column(name = "sis_fecha_modificacion")
-    @Temporal(TemporalType.DATE)
-    private Date sisFechaModificacion;
+    private Long Id;
     @JoinColumn(name = "fk_usuario_proveedor", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario fkUsuarioProveedor;

@@ -5,11 +5,10 @@
  */
 package com.tecnogeek.comprameya.repositories;
 import com.tecnogeek.comprameya.entidad.Categoria;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
+import com.tecnogeek.comprameya.repositories.custom.CategoriaRepositoryCustom;
 /**
  *
  * @author genaro
  */
-public interface CategoriaRepository extends CrudRepository<Categoria,Long>, 
-        QueryDslPredicateExecutor<Categoria> {}
+public interface CategoriaRepository extends 
+        BaseRepository<Categoria, Long>, CategoriaRepositoryCustom {}

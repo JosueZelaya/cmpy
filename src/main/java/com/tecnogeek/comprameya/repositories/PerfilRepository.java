@@ -7,12 +7,13 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.Perfil;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
+import com.tecnogeek.comprameya.repositories.custom.PerfilRepositoryCustom;
 
 /**
  *
  * @author jzelaya
  */
-public interface PerfilRepository extends CrudRepository<Perfil,Long>, 
-        QueryDslPredicateExecutor<Perfil>  {}
+public interface PerfilRepository 
+        extends BaseRepository<Perfil, Long>,
+        PerfilRepositoryCustom {
+}

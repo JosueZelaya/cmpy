@@ -5,8 +5,6 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.mysema.query.types.Predicate;
-import com.tecnogeek.comprameya.entidad.Perfil;
 import com.tecnogeek.comprameya.entidad.QPerfil;
 import com.tecnogeek.comprameya.repositories.PerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +22,5 @@ public class PerfilService {
     private PerfilRepository perfilRepository;
 
     private final QPerfil qPerfil = QPerfil.perfil;
-    
-    public Perfil findByNombre(String name) {
-        Predicate byNombre = qPerfil.nombre.eq(name);
-        return perfilRepository.findOne(byNombre);
-    }
     
 }
