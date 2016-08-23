@@ -20,6 +20,7 @@ and open the template in the editor.
                         <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html', 'lg')">
                             VenderYa!
                         </button>
+                        
                     </p>
                 </div>  
 
@@ -45,7 +46,7 @@ and open the template in the editor.
 
                             <div class="col-sm-6 col-md-4" ng-repeat="publicacion in publicaciones">
 
-                                <div style="height: 400px;" class="thumbnail">       
+                                <div style="height: 450px;" class="thumbnail">       
 
                                     <a href="" ui-sref=".vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})">
 
@@ -70,15 +71,14 @@ and open the template in the editor.
                                         </div>
                                     </a>
 
-                                    <div class="footer-publicacion">
-                                        <a href="#" class="btn btn-success" role="button">
-                                            <span class="glyphicon glyphicon-shopping-cart"/>
-                                            Agregar
+                                    <!--<div class="footer-publicacion">-->
+                                        <a href="#" class="btn btn-success" role="button" tooltip="Agregar al carrito" tooltip-placement="bottom">
+                                            <span class="glyphicon glyphicon-shopping-cart"/>                                            
                                         </a> 
-                                        <a href="" ui-sref=".vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})" class="btn btn-default" role="button">
-                                            Ver Mas...
+                                        <a href="" ui-sref=".vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})" class="btn btn-default" role="button" tooltip="Ver detalles" tooltip-placement="bottom">
+                                            <span class="glyphicon glyphicon-search"/>                                            
                                         </a>                                        
-                                    </div>
+                                    <!--</div>-->
 
                                 </div>
                             </div>

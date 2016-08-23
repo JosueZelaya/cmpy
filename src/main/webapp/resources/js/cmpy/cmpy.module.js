@@ -41,6 +41,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
                     "panelPublicacionesProductos@home": {templateUrl: '/resources/js/anuncios/panelProductos.html'},
                     "panelPublicacionesEmpresas@home": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'},                    
                     "venderModal@home": {templateUrl: '/resources/js/anuncios/venderModal.html'},
+                    "ubicacionesModal@home": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'},
                     "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html'}
                 }
             })
@@ -51,13 +52,9 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
                 url: "/vistaProducto/{publicacionId}",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html'},
-                    "maps@home.vistaProducto": {templateUrl: '/resources/js/maps/mapaUbicacion.html'}
+                    "maps@home.vistaProducto": {templateUrl: '/resources/js/maps/mapaUbicacion.html'},
+                    "ubicacionesModal@home.vistaProducto": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'}
                 }
-                //views:{"maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html'}}
-                
-//                controller: function($scope) {
-//                    $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
-//                }
             })
 
             // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================

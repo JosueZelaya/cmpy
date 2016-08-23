@@ -9,7 +9,6 @@ package com.tecnogeek.comprameya.config;
 
 import com.tecnogeek.comprameya.service.CustomAuthSuccessHandler;
 import com.tecnogeek.comprameya.service.CustomUserDetailsService;
-import com.tecnogeek.comprameya.service.SocialCustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -52,9 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.
             ignoring()
                 .antMatchers("/resources/**")
-                .antMatchers("/images/**")
-                .antMatchers("/categoria/**")
-                .antMatchers("/ubicacion/**");
+                .antMatchers("/images/**");
     }
     
     @Override
@@ -80,7 +77,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/publicacion/getAnunciosSinPaginar",
                             "/publicacion/getPublicacionById/**",
                             "/publicacion/getTotalPaginas/**",
-                            "/publicacion/getTotalAnuncios/**").permitAll()
+                            "/publicacion/getTotalAnuncios/**",
+                            "/categoria/**",
+                            "/ubicacion/**").permitAll()
                 .antMatchers("/publicacion","/publicacion/agregarAnuncio").hasRole("USER")
                     .antMatchers("/admin","/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()

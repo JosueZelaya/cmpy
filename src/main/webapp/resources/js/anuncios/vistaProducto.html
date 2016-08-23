@@ -10,7 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body  ng-controller="anunciosController as app">
+    <body  ng-controller="anunciosController">
         <div class="row" >
             <div style="height: 305px">
 
@@ -50,11 +50,13 @@ and open the template in the editor.
                         
                     </div>
                     
-                    <div>
-                    <div ui-view="maps">
-
-                    </div>
-                    </div>
+                    <div ng-controller="modalController">
+                        
+                        <button value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('ubicacionesModal.html', 'lg')">
+                            Ver Puntos de Entrega
+                        </button>  
+                        
+                    </div>                    
 
                 </div>
 
@@ -62,7 +64,9 @@ and open the template in the editor.
 
             </div>
 
+            <div ui-view="ubicacionesModal">
 
+            </div>  
 
         </div>
     </body>
