@@ -9,6 +9,7 @@ import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.dto.GridResponse;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
+import com.tecnogeek.comprameya.repositories.BaseRepository;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,17 @@ import com.tecnogeek.comprameya.repositories.PublicacionRepository;
  */
 
 @Service
-public class PublicacionService {
+public class PublicacionService extends BaseService<Publicacion , Long>{
     
     public PublicacionService(){}
     
     @Autowired
     PublicacionRepository publicacionRepository;
+    
+    @Override
+    public BaseRepository<Publicacion, Long> getRepository() {
+        return publicacionRepository;
+    }
     
     public Iterable<Publicacion> getAnunciosAleatorios(int total,TipoPublicacionEnum tipo)
     {

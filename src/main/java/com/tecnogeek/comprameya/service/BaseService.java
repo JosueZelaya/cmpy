@@ -6,12 +6,21 @@
 package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.BaseEntity;
+import com.tecnogeek.comprameya.repositories.BaseRepository;
+import java.io.Serializable;
 
 /**
  *
  * @author jzelaya
  * @param <T>
+ * @param <ID>
  */
-public abstract class BaseService <T extends BaseEntity> {
+public abstract class BaseService <T extends BaseEntity<ID>,  ID extends Serializable> {
+    
+    /**
+     *
+     * @return
+     */
+    public abstract BaseRepository<T, ID> getRepository();
     
 }
