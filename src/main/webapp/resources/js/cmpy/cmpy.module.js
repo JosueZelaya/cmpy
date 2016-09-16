@@ -30,9 +30,25 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $stateProvider
 
+            // Facebook redirect url
+            .state('fb', {
+                url: "/",
+                views: {
+                    '': { templateUrl: '/resources/js/cmpy/home.html' },
+                    
+                    "menuPrincipal@fb": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
+                    "menuCategorias@fb": {templateUrl: '/resources/js/categorias/menuCategorias.html'},
+                    "panelPublicacionesProductos@fb": {templateUrl: '/resources/js/anuncios/panelProductos.html'},
+                    "panelPublicacionesEmpresas@fb": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'},                    
+                    "venderModal@fb": {templateUrl: '/resources/js/anuncios/venderModal.html'},
+                    "ubicacionesModal@fb": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'},
+                    "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html'}
+                }
+            })
+
             // HOME STATES AND NESTED VIEWS ========================================
             .state('home', {
-                url: "/",
+                url: "",
                 views: {
                     '': { templateUrl: '/resources/js/cmpy/home.html' },
                     
@@ -58,7 +74,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
             })
 
             // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-            .state('about', {
+            .state('about', { 
                 // we'll get to this in a bit       
             });
 
