@@ -13,7 +13,6 @@ import com.tecnogeek.comprameya.repositories.BaseRepository;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
@@ -42,7 +41,7 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
         Long totalPublicaciones = getTotalPublicaciones(tipo);        
         int totalPages = Utilidades.calculateTotalPages(totalPublicaciones.intValue(), pageZise);
         int page = Utilidades.randomInt(0,totalPages-1); //dado que la primer pagina en la BD es cero.        
-        Iterable<Publicacion> publicaciones = getPublicaciones(new PageRequest(page, pageZise), tipo);
+        Iterable<Publicacion> publicaciones = getPublicaciones(page, pageZise, tipo);
         return publicaciones;
     }       
     
@@ -57,15 +56,15 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
                 publicacionRepository.getTotalPublicacionesGratis();        
     }
     
-    public Iterable<Publicacion> getPublicaciones(PageRequest pageRequest,TipoPublicacionEnum tipo)
+    public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage,TipoPublicacionEnum tipo)
     {
         Iterable<Publicacion> publicaciones = new ArrayList();
         
         boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
         
         publicaciones = (esPagada)?
-                publicacionRepository.getPublicacionesPagadas(pageRequest):
-                publicacionRepository.getPublicacionesGratis(pageRequest);
+                publicacionRepository.getPublicacionesPagadas(page, itemsByPage):
+                publicacionRepository.getPublicacionesGratis(page, itemsByPage);
         
         //Replace backslashes by forward slashes in order to work well in firefox.
         for(Publicacion publicacion : publicaciones){
@@ -85,7 +84,7 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
         GridResponse<Publicacion> grid = new GridResponse<>();
         grid.setPage(page);
         grid.setRecords(pageZise);        
-        grid.setRows(getPublicaciones( new PageRequest(page, pageZise), tipo));
+        grid.setRows(getPublicaciones(page, pageZise, tipo));
         grid.setTotal(getTotalPublicaciones(tipo).intValue());
         return grid;
     }
@@ -96,7 +95,7 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
         GridResponse<Publicacion> grid = new GridResponse<>();
         grid.setPage(page);
         grid.setRecords(pageZise);        
-        grid.setRows(getPublicaciones( new PageRequest(page, pageZise,sort), tipo));        
+//        grid.setRows(getPublicaciones(page, pageZise,sort, tipo));        
         grid.setTotal(totalPublicaiones);
         grid.setTotalPages(Utilidades.calculateTotalPages(totalPublicaiones, pageZise));
         return grid;

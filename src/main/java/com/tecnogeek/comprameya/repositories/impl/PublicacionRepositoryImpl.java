@@ -12,8 +12,9 @@ import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import com.tecnogeek.comprameya.repositories.custom.PublicacionRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.querydsl.QSort;
 
 /**
  *
@@ -47,18 +48,17 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     }
 
     @Override
-    public Iterable<Publicacion> getPublicacionesPagadas(PageRequest pageRequest) {
+    public Iterable<Publicacion> getPublicacionesPagadas(int page, int itemsByPage) {
         Long id = TipoPublicacionEnum.PAGADA.getCodigo();
         Predicate sonPagadas = qPublicacion.fkTipoPublicacion.id.eq(id);
-        Page page = publicacionRepository.findAll(sonPagadas, pageRequest);
-        return page.getContent();
+        return publicacionRepository.findAll(sonPagadas, new PageRequest(page, itemsByPage)).getContent();
     }
 
     @Override
-    public Iterable<Publicacion> getPublicacionesGratis(PageRequest pageRequest) {
+    public Iterable<Publicacion> getPublicacionesGratis(int page, int itemsByPage) {
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
         Predicate sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
-        return publicacionRepository.findAll(sonGratis, pageRequest).getContent();
+        return publicacionRepository.findAll(sonGratis, new PageRequest(page, itemsByPage, new QSort(qPublicacion.id.desc()))).getContent();
     }
 
     @Override

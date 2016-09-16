@@ -32,7 +32,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
     };
     
     var cargarDetallePublicacion = function(id){
-        
+
         $rootScope.publicacion = undefined;
         
         getPublicacion(id).success(function(publicacion){

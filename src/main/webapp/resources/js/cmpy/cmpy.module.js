@@ -68,8 +68,8 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
                 url: "/vistaProducto/{publicacionId}",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html'},
-                    "maps@home.vistaProducto": {templateUrl: '/resources/js/maps/mapaUbicacion.html'},
-                    "ubicacionesModal@home.vistaProducto": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'}
+//                    "maps@home.vistaProducto": {templateUrl: '/resources/js/maps/mapaUbicacion.html'},
+//                    "ubicacionesModal@home.vistaProducto": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'}
                 }
             })
 

@@ -57,7 +57,7 @@ public class HomeController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcomePage(Model model) {
-        Iterable<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR, TipoPublicacionEnum.PAGADA);
+//        Iterable<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR, TipoPublicacionEnum.PAGADA);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName(); 
@@ -66,7 +66,7 @@ public class HomeController {
         model.addAttribute("categorias", categorias);
 
         model.addAttribute("username", userName);
-        model.addAttribute("anuncios", anuncios);
+//        model.addAttribute("anuncios", anuncios);
         model.addAttribute("tipoPublicacion", Constantes.PUBLICACION_GRATIS);
         model.addAttribute("parametro", "Pagina Inicio");
         return "index";

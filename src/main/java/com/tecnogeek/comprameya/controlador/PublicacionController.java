@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -102,7 +101,7 @@ public class PublicacionController {
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
                 Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
         
-        Iterable<Publicacion> publicaciones = pManager.getPublicaciones(new PageRequest(page, totalAnuncios), tipoPublicacion);   
+        Iterable<Publicacion> publicaciones = pManager.getPublicaciones(page, totalAnuncios, tipoPublicacion);   
         
         return publicaciones;
     }
