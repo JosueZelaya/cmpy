@@ -29,7 +29,7 @@
         </div>
         <form class="navbar-form navbar-left" style="width: 100%" role="search">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar Productos...">
+                <input type="text" class="form-control" placeholder="Buscar Productos..." autofocus="autofocus">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit">BuscarYa!</button>
                 </span>

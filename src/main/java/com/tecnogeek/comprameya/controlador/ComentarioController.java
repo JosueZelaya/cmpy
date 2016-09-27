@@ -8,7 +8,6 @@ package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.entidad.Comentario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.service.ComentarioService;
 import com.tecnogeek.comprameya.service.UsuarioService;
 import com.tecnogeek.comprameya.dto.pojoComentario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
@@ -19,9 +18,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -30,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/comentario")
+@ResponseBody
 public class ComentarioController {
     
     @Autowired
@@ -38,25 +38,27 @@ public class ComentarioController {
     @Autowired
     UsuarioService uManager;
     
-    @RequestMapping(value = "/set/{publicacion_id}", method = RequestMethod.POST)
-    public @ResponseBody String setUbicacionPublicacion(@PathVariable("publicacion_id") long publicacion_id, @RequestBody pojoComentario pcomentario )  {
+    @RequestMapping(value = "/agregarComentario", method = RequestMethod.POST)
+    public String setComentario(@RequestParam(value = "publicacion_id", required = true) String publicacion_id, 
+                                              @RequestParam(value = "comentario", required = true) String comentario )  
+    {
         
         Usuario u = uManager.getLoggedUser();
         
-        Publicacion p = publicacionRepository.getPublicacion(publicacion_id);
+        Publicacion p = publicacionRepository.getPublicacion(Long.parseLong(publicacion_id));
         
         Comentario c = new Comentario();
-        c.setTexto(pcomentario.getTexto());
+        c.setTexto(comentario);
         c.setFkPublicacion(p);
         c.setFkUsuario(u);
        
         comentarioRepository.save(c);
         
-        return "";   
+        return "ok";   
     }  
     
     @RequestMapping(value = "/get/{publicacion_id}", method = RequestMethod.GET)
-    public @ResponseBody List<pojoComentario> setUbicacionPublicacion(@PathVariable("publicacion_id") long publicacion_id)  {
+    public List<pojoComentario> setUbicacionPublicacion(@PathVariable("publicacion_id") long publicacion_id)  {
           
         Publicacion p = publicacionRepository.getPublicacion(publicacion_id);
         

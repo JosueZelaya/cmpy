@@ -16,6 +16,7 @@
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
         <style type="text/css">
             [ng\:cloak], [ng-cloak], .ng-cloak {

@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.tecnogeek.comprameya.config;
-
 
 import com.tecnogeek.comprameya.service.CustomAuthSuccessHandler;
 import com.tecnogeek.comprameya.service.CustomUserDetailsService;
@@ -26,86 +24,91 @@ import org.springframework.social.security.SpringSocialConfigurer;
  *
  * @author jzelaya
  */
-
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {    
-    
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
-        
+
     @Autowired
     private CustomAuthSuccessHandler customAuthSuccessHandler;
-    
+
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception
-    {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .userDetailsService(customUserDetailsService)
-            .passwordEncoder(passwordEncoder());
+                .userDetailsService(customUserDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
-    
+
     @Override
-    public void configure(WebSecurity web) throws Exception
-    {
+    public void configure(WebSecurity web) throws Exception {
         web.
-            ignoring()
+                ignoring()
                 .antMatchers("/resources/**")
                 .antMatchers("/images/**");
     }
-    
+
     @Override
-    public void configure(HttpSecurity http) throws Exception
-    {
+    public void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
+                .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/",
-                            "/index",
-                            "/login",
-                            "login/form**",
-                            "/register",
-                            "/logout",
-                            "/auth/**",
-                            "/login",                            
-                            "/signin/**",
-                            "/signup/**",
-                            "/user/register/**",
-                            "/modal",
-                            "/angular",
-                            "/publicacion/getAnuncios/**",
-                            "/publicacion/getAnunciosSinPaginar",
-                            "/publicacion/getPublicacionById/**",
-                            "/publicacion/getTotalPaginas/**",
-                            "/publicacion/getTotalAnuncios/**",
-                            "/categoria/**",
-                            "/ubicacion/**").permitAll()
-                .antMatchers("/publicacion","/publicacion/agregarAnuncio").hasRole("USER")
-                    .antMatchers("/admin","/admin/**").hasRole("ADMIN")
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login/authenticate")
-                    .failureUrl("/login?error=bad_credentials")
-//                    .successHandler(customAuthSuccessHandler)
-                    .and()
-                .logout()                    
-                    .deleteCookies("remove")
-                    .invalidateHttpSession(true)
-                    .logoutSuccessUrl("/")
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .permitAll()
+                .antMatchers("/",
+                        "/index",
+                        "/login",
+                        "login/form**",
+                        "/register",
+                        "/logout",
+                        "/auth/**",
+                        "/login",
+                        "/signin/**",
+                        "/signup/**",
+                        "/user/register/**",
+                        "/modal",
+                        "/angular",
+                        "/publicacion/getAnuncios/**",
+                        "/publicacion/getAnunciosSinPaginar",
+                        "/publicacion/getPublicacionById/**",
+                        "/publicacion/getTotalPaginas/**",
+                        "/publicacion/getTotalAnuncios/**",
+                        "/categoria/**",
+                        "/ubicacion/**"
+                ).permitAll()
+                .antMatchers(
+                        "/publicacion",
+                        "/publicacion/agregarAnuncio",
+                        "/comentario/agregarComentario"
+                ).hasRole("USER")
+                .antMatchers(
+                        "/admin", 
+                        "/admin/**"
+                ).hasRole("ADMIN")
+                .anyRequest()
+                .authenticated()
                 .and()
-                    .apply(new SpringSocialConfigurer()
-                            .alwaysUsePostLoginUrl(true)
-                            .postLoginUrl("/")
-                    );
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login/authenticate")
+                .failureUrl("/login?error=bad_credentials")
+                //                    .successHandler(customAuthSuccessHandler)
+                .and()
+                .logout()
+                .deleteCookies("remove")
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .permitAll()
+                .and()
+                .apply(new SpringSocialConfigurer()
+                        .alwaysUsePostLoginUrl(true)
+                        .postLoginUrl("/")
+                );
     }
- 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
-    
+
 }

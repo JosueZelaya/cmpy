@@ -75,7 +75,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
 
    
 
-        var publicacion = new Publicacion($scope.titulo, $scope.precio, $scope.descripcion);
+        var publicacion = new Publicacion('',$scope.titulo, $scope.precio, $scope.descripcion);
         publicacion.setImagenes(imagenes);
         publicacion.setUbicaciones($rootScope.ubicaciones);
         
@@ -120,6 +120,20 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
     
     $scope.getNumbers = function(num) {
         return new Array(num);   
+    };
+    
+    $scope.agregarComentario = function () {
+        
+        var publicacion_id = $scope.publicacion.id;
+        var comentario = $scope.comentario;
+        
+        anunciosService.agregarComentario(publicacion_id,comentario)
+                .success(function(respuesta){
+                    
+//            $scope.cancel(); //cerrar el dialogo
+//            cargarPublicacionesGratis(0); //recarga las publicaciones
+        });
+        
     };
     
     var init = function () {

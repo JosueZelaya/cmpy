@@ -63,6 +63,18 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
         });     
 
     };
+    
+    this.agregarComentario = function (publicacion_id, comentario){
+        var formData = new FormData();
+        formData.append("publicacion_id", publicacion_id);
+        formData.append("comentario", comentario);
+        
+        return $http.post('/comentario/agregarComentario', formData)
+        .success(function(){
+//            debugger;
+            return "Comentario Agregado!";
+        });
+    };
 
 });
 
@@ -71,8 +83,9 @@ modulo_anuncios.service('Publicacion', function () {
     /**
      * Constructor, with class name
      */
-    function Publicacion(titulo, precio, descripcion) {
+    function Publicacion(id, titulo, precio, descripcion) {
         // Public properties, assigned to the instance ('this')
+        this.id = id;
         this.titulo = titulo;
         this.precio = precio;
         this.descripcion = descripcion;
