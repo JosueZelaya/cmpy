@@ -1,8 +1,9 @@
-categorias.controller('catController', function($scope,catService) {
+categorias.controller('catController', function($scope,$rootScope,catService) {
     catService.getCategorias()
     .success(function (response) 
     {   
-        
+        $rootScope.collapse = false;
+        $rootScope.btnshow= false;
         $scope.categorias = response;
         
         angular.forEach($scope.categorias, function (item) {
