@@ -28,6 +28,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.tecnogeek.comprameya.service.UsuarioService;
+import com.tecnogeek.comprameya.utils.FileManager;
 
 /**
  *
@@ -69,6 +70,8 @@ public class RegistrationController {
             return "registrationForm";
         }
         
+        String rutaImg = FileManager.saveFile(userAccountData.getImage());
+        userAccountData.setImageUrl(rutaImg);
         Usuario registered = createUserAccount(userAccountData,result);
         
         if(registered==null){

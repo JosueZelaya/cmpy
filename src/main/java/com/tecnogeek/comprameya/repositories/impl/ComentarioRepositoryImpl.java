@@ -30,5 +30,11 @@ public class ComentarioRepositoryImpl implements ComentarioRepositoryCustom{
         Predicate byPublicacion = qComentario.fkPublicacion.eq(publicacion);
         return comentarioRepository.findAll(byPublicacion);
     }
+
+    @Override
+    public Iterable<Comentario> getComentario(long publicacionId) {
+        Predicate byPublicacion = qComentario.fkPublicacion.id.eq(publicacionId);
+        return comentarioRepository.findAll(byPublicacion);
+    }
     
 }

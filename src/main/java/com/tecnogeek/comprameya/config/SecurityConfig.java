@@ -78,6 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/publicacion",
                         "/publicacion/agregarAnuncio",
+                        "/comentario",
                         "/comentario/agregarComentario"
                 ).hasRole("USER")
                 .antMatchers(

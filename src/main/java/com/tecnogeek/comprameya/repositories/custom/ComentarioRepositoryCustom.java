@@ -15,5 +15,6 @@ import com.tecnogeek.comprameya.entidad.Publicacion;
 public interface ComentarioRepositoryCustom {
     
     public Iterable<Comentario> getComentario(Publicacion publicacion);
+    public Iterable<Comentario> getComentario(long publicacionId);
     
 }

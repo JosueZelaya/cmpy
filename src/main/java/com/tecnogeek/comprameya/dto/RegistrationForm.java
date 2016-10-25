@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -58,6 +59,8 @@ public class RegistrationForm implements Serializable{
         private SocialMediaService signInProvider;
         
         private String imageUrl;
+        
+        private MultipartFile image;
 
         //Constructor is omitted for the of clarity.
 

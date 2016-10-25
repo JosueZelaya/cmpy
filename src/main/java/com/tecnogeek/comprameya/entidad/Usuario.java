@@ -73,6 +73,7 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     private List<Suscriptor> suscriptorList;
     @OneToMany(mappedBy = "fkUsuarioSuscriptor")
     private List<Suscriptor> suscriptorList1;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuario")
     private List<Comentario> comentarioList;
     @OneToMany(mappedBy = "fkUsuario")

@@ -9,15 +9,10 @@ import com.tecnogeek.comprameya.entidad.Comentario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.service.UsuarioService;
-import com.tecnogeek.comprameya.dto.pojoComentario;
-import com.tecnogeek.comprameya.dto.pojoUsuario;
 import com.tecnogeek.comprameya.repositories.ComentarioRepository;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,18 +29,19 @@ public class ComentarioController {
     
     @Autowired
     ComentarioRepository comentarioRepository;  
+    @Autowired
     PublicacionRepository publicacionRepository;
     @Autowired
     UsuarioService uManager;
     
     @RequestMapping(value = "/agregarComentario", method = RequestMethod.POST)
-    public String setComentario(@RequestParam(value = "publicacion_id", required = true) String publicacion_id, 
+    public String setComentario(@RequestParam(value = "publicacion_id", required = true) long publicacion_id, 
                                               @RequestParam(value = "comentario", required = true) String comentario )  
     {
         
         Usuario u = uManager.getLoggedUser();
         
-        Publicacion p = publicacionRepository.getPublicacion(Long.parseLong(publicacion_id));
+        Publicacion p = publicacionRepository.getPublicacion(publicacion_id);
         
         Comentario c = new Comentario();
         c.setTexto(comentario);
@@ -55,41 +51,6 @@ public class ComentarioController {
         comentarioRepository.save(c);
         
         return "ok";   
-    }  
-    
-    @RequestMapping(value = "/get/{publicacion_id}", method = RequestMethod.GET)
-    public List<pojoComentario> setUbicacionPublicacion(@PathVariable("publicacion_id") long publicacion_id)  {
-          
-        Publicacion p = publicacionRepository.getPublicacion(publicacion_id);
-        
-        Iterable<Comentario> lcomentario = comentarioRepository.getComentario(p);
-        return  getComentarioPojo(lcomentario);
-    }
-    
-    
-    private List<pojoComentario> getComentarioPojo(Iterable<Comentario> lcomentario)
-    {
-        List<pojoComentario> lpcomentario = new ArrayList<>();
-        
-        for(Comentario c : lcomentario)
-        {
-            pojoComentario p = new pojoComentario();
-            p.setId(c.getId());
-            p.setTexto(c.getTexto());
-            p.setPuntaje(c.getPuntaje());
-            
-            pojoUsuario pu = new pojoUsuario();
-            pu.setId(c.getFkUsuario().getId());
-            pu.setLogin(c.getFkUsuario().getLogin());
-            
-            p.setUsuario(pu);          
-            
-            lpcomentario.add(p);
-            
-        }
-        
-        return lpcomentario;
-        
     }
     
 }

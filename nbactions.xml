@@ -11,5 +11,8 @@
                 <goal>package</goal>
                 
             </goals>
+            <properties>
+                <netbeans.deploy>true</netbeans.deploy>
+            </properties>
         </action>
     </actions>

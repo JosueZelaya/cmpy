@@ -184,7 +184,7 @@ public class SocialSecurityUserDTO extends SocialUser {
         public Builder role(Role role) {
             this.role = role;
  
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.toString());
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getRoleName());
             this.authorities.add(authority);
  
             return this;

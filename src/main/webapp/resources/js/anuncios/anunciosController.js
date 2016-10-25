@@ -1,12 +1,5 @@
 modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $stateParams, anunciosService,mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
     
-    var getPublicacion = function(id){
-        return anunciosService.getPublicacionById(id)
-                .success(function (publicacion){
-                   return publicacion; 
-                });
-    }
-    
     var getPublicaciones = function(tipo,pagina) {
         return anunciosService.getAnuncios(tipo,pagina)
                     .success(function (publicaciones) {                        
@@ -19,42 +12,6 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
                 .success(function(publicaciones){
             $rootScope.publicaciones = publicaciones;
         });
-    };
-    
-    var cargarPublicacionesPagadas = function(){
-        getPublicaciones(TIPO_PUBLICACION.PAGADA, '0')
-                .success(function(publicaciones){
-            $rootScope.anuncios = publicaciones;
-//            
-//            $location.hash('publicacionesProductos');
-//            $anchorScroll();
-        });
-    };
-    
-    var cargarDetallePublicacion = function(id){
-
-        $rootScope.publicacion = undefined;
-        
-        getPublicacion(id).success(function(publicacion){
-            $rootScope.publicacion = publicacion;
-        });   
-        
-        
-        mapService.getUbicaciones(id)
-        .success(function (response)
-        {
-            angular.forEach(response, function(item){
-                var marker = {};
-                marker.id = item.id;
-                marker.title = 'ubi'+item.id.toString();
-                marker.latitude = item.latitud;
-                marker.longitude = item.longitud;
-                $rootScope.markers.push(marker);
-            });
-            
-        });
-        
-        
     };
     
     var cargarPaginacion = function(){
@@ -122,21 +79,13 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         return new Array(num);   
     };
     
-    $scope.agregarComentario = function () {
-        
-        var publicacion_id = $scope.publicacion.id;
-        var comentario = $scope.comentario;
-        
-        anunciosService.agregarComentario(publicacion_id,comentario)
-                .success(function(respuesta){
-                    
-//            $scope.cancel(); //cerrar el dialogo
-//            cargarPublicacionesGratis(0); //recarga las publicaciones
-        });
-        
-    };
-    
     var init = function () {
+        
+        var publicacionId = $stateParams.publicacionId;
+        
+        if(publicacionId!==undefined){
+            return;
+        }
         
         // inicializando el componente de carga de imagenes
         $scope.existingFlowObject = flowFactory.create({});        
@@ -146,14 +95,9 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         
         cargarPublicacionesGratis($scope.page);
         
-        cargarPublicacionesPagadas();
-        
         cargarPaginacion();
         
-        var publicacionId = $stateParams.publicacionId;
-        if(publicacionId!==undefined){
-            cargarDetallePublicacion(publicacionId);   
-        }
+        
     };
     
     init();

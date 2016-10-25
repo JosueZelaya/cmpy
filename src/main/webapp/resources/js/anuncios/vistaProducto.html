@@ -1,114 +1,83 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body  ng-controller="anunciosController">
-        <!--<div class="row" >-->
-        <div >
+<!--<div class="row" >-->
+<div ng-controller="productoController">
 
-            <div class="thumbnail">
+    <div class="thumbnail">
 
-                <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
-                    <uib-slide ng-repeat="recurso in publicacion.recursoList" active="slide.active" index="slide.id">
-                        <img ng-style="{'height': 100}" ng-src="/images/getImage/{{recurso.ruta}}" style="margin:auto;">
-                        <div class="carousel-caption">                                
-                            <div class="titulo-publicacion">
-                                <h3>{{publicacion.titulo}}</h3>
-                            </div> 
-                        </div>
-                    </uib-slide>
-                </uib-carousel>
-
-                <div class="row">
-                    <div class="col-md-8">
-                        <h4 class="price-text-color">$ {{publicacion.productoList[0].precio}}</h4>
-                    </div>
-                    <div class="rating hidden-sm col-md-4">
-                        <i class="price-text-color glyphicon glyphicon-star-empty"></i>
-                        <i class="price-text-color glyphicon glyphicon-star-empty"></i>
-                        <i class="price-text-color glyphicon glyphicon-star-empty"></i>
-                        Calificacion:
-                        <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.puntaje) track by $index"></i>
-                        <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.puntaje) track by $index"></i>
-                    </div>
+        <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
+            <uib-slide ng-repeat="recurso in publicacion.recursoList" active="slide.active" index="slide.id">
+                <img ng-style="{'height': 100}" ng-src="/images/getImage/{{recurso.ruta}}" style="margin:auto;">
+                <div class="carousel-caption">                                
+                    <div class="titulo-publicacion">
+                        <h3>{{publicacion.titulo}}</h3>
+                    </div> 
                 </div>
+            </uib-slide>
+        </uib-carousel>
 
-                <div ng-controller="modalController">
-
-                    <button value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('ubicacionesModal.html', 'lg')">
-                        Ver Puntos de Entrega
-                    </button>  
-
-                </div>             
-
-                <p>{{publicacion.descripcion}}</p>      
-
-                <br/>
-
-                <div class="actionBox">
-
-                    <!--<form class="form-inline" role="form">-->
-                        <div class="form-group">
-                            <textarea ng-model="comentario" class="form-control" placeholder="Escribe un comentario" autofocus>
-                            
-                            </textarea>
-                        </div>
-                        <div class="form-group" ng-controller="anunciosController">
-                            <button class="btn btn-default" ng-click="agregarComentario()">Agregar</button>
-                        </div>
-                    <!--</form>-->
-
-                    <ul class="commentList">
-                        <li>
-                            <div class="commenterImage">
-                                <img src="http://placekitten.com/50/50" />
-                            </div>
-                            <div class="commentText">
-                                <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-                            </div>
-                        </li>
-                        <li>
-                            <div class="commenterImage">
-                                <img src="http://placekitten.com/45/45" />
-                            </div>
-                            <div class="commentText">
-                                <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-                            </div>
-                        </li>
-                        <li>
-                            <div class="commenterImage">
-                                <img src="http://placekitten.com/40/40" />
-                            </div>
-                            <div class="commentText">
-                                <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-                            </div>
-                        </li>
-                    </ul>
-
-                </div>
-
+        <div class="row">
+            <div class="col-md-8">
+                <h4 class="price-text-color">$ {{publicacion.productoList[0].precio}}</h4>
             </div>
+            <div class="rating hidden-sm col-md-4">
+                <i class="price-text-color glyphicon glyphicon-star-empty"></i>
+                <i class="price-text-color glyphicon glyphicon-star-empty"></i>
+                <i class="price-text-color glyphicon glyphicon-star-empty"></i>
+                Calificacion:
+                <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.puntaje) track by $index"></i>
+                <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.puntaje) track by $index"></i>
+            </div>
+        </div>
 
+        <div ng-controller="modalController">
 
+            <button value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('ubicacionesModal.html', 'lg')">
+                Ver Puntos de Entrega
+            </button>  
+
+        </div>             
+
+        <p>{{publicacion.descripcion}}</p>      
+
+        <br/>
+
+        <div class="actionBox">
+
+            <!--<form class="form-inline" role="form">-->
+            <div class="form-group">
+                <textarea ng-model="comentario" class="form-control" placeholder="Escribe un comentario" autofocus>
+                            
+                </textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" ng-click="agregarComentario()">Agregar</button>
+            </div>
+            <!--</form>-->
+
+            <ul class="commentList">
+                <li ng-repeat="comentario in publicacion.comentarioList">
+                    <h6>soy {{comentario.fkUsuario.fkPersona.nombre}}</h6>
+                    <div class="commenterImage">
+                        <img ng-show="localAccount" height="28px" width="28px" src="/images/getThumbnail/{{comentario.fkUsuario.rutaImagen}}" alt="..." />
+                        <img ng-show="!localAccount" height="28px" width="28px" src="{{comentario.fkUsuario.rutaImagen}}" alt="..." />                                
+                    </div>
+                    <div class="commentText">
+                        <p class="">{{comentario.texto}}</p> <span class="date sub-text">{{comentario.creationTime}}</span>
+
+                    </div>
+                </li>                        
+            </ul>
 
         </div>
 
+    </div>
 
-        <div ui-view="ubicacionesModal">
 
-        </div>  
 
-    </body>
+</div>
 
-</html>
+
+<div ui-view="ubicacionesModal">
+
+</div>  
+
+

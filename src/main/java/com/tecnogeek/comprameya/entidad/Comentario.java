@@ -51,6 +51,7 @@ public class Comentario extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
     @ManyToOne(optional = false)
     private Publicacion fkPublicacion;
+    @JsonBackReference
     @JoinColumn(name = "fk_usuario", referencedColumnName = "usuario_id")
     @ManyToOne(optional = false)
     private Usuario fkUsuario;

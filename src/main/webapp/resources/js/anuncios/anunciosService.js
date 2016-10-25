@@ -69,8 +69,11 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
         formData.append("publicacion_id", publicacion_id);
         formData.append("comentario", comentario);
         
-        return $http.post('/comentario/agregarComentario', formData)
-        .success(function(){
+        return $http.post('/comentario/agregarComentario', formData, {
+            transformRequest: angular.identity,
+            responseType:'json',
+            headers: {'Content-Type': undefined}            
+        }).success(function(){
 //            debugger;
             return "Comentario Agregado!";
         });

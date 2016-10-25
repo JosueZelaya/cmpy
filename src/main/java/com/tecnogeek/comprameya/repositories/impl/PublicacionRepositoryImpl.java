@@ -5,12 +5,16 @@
  */
 package com.tecnogeek.comprameya.repositories.impl;
 
+import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.Predicate;
 import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.entidad.QComentario;
 import com.tecnogeek.comprameya.entidad.QPublicacion;
+import com.tecnogeek.comprameya.entidad.QUsuario;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import com.tecnogeek.comprameya.repositories.custom.PublicacionRepositoryCustom;
+import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,16 +25,32 @@ import org.springframework.data.querydsl.QSort;
  * @author alexander
  */
 public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
-
+    
+    @Autowired
+    EntityManager em;
+    
     @Autowired
     PublicacionRepository publicacionRepository;
     
     private final QPublicacion qPublicacion = QPublicacion.publicacion;
+    private final QComentario qComentario = QComentario.comentario;
+    private final QUsuario qUsuario = QUsuario.usuario;
+    
+    public JPAQuery newJpaQuery() {
+        return new JPAQuery(em);
+    }
     
     @Override
     public Publicacion getPublicacion(long publicacion_id) {
-        Predicate porId = qPublicacion.id.eq(publicacion_id);
-        return publicacionRepository.findOne(porId);
+        Predicate filtradaPorId = qPublicacion.id.eq(publicacion_id);
+        
+        return newJpaQuery().from(qPublicacion,qComentario,qUsuario)
+                .leftJoin(qPublicacion.comentarioList,qComentario)
+                .fetch()
+                .leftJoin(qComentario.fkUsuario,qUsuario)
+                .fetch()
+                .where(filtradaPorId).uniqueResult(qPublicacion);
+//        return publicacionRepository.findOne(filtradaPorId);
     }
 
     @Override

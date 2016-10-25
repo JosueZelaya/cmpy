@@ -41,7 +41,7 @@
                         Ensure that when the form is submitted, a POST request is send to url
                         '/user/register'.
                     -->
-                    <form:form action="${pageContext.request.contextPath}/user/register" commandName="user" method="POST" enctype="utf8" role="form">
+                    <form:form action="${pageContext.request.contextPath}/user/register" commandName="user" method="POST" enctype="multipart/form-data" role="form">
                         <!-- Add CSRF token to the request. -->
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <!--
@@ -56,6 +56,12 @@
                             <img src="${user.imageUrl}" />
                         </c:if>
 
+                        <c:if test="${user.signInProvider == null}">
+                            <div class="form-group">
+                                <form:input cssClass="form-control" path="image" id="user-image" name="multipleFiles" type="file" class="file" multiple="true" data-preview-file-type="any"/>
+                            </div> 
+                        </c:if>    
+                            
                         <div class="row">
                             <div id="form-group-firstName" class="form-group col-lg-4">
                                 <label class="control-label" for="user-firstName">Nombre: </label>
