@@ -54,7 +54,7 @@
             <!--</form>-->
 
             <ul class="commentList">
-                <li ng-repeat="comentario in publicacion.comentarioList">
+                <li ng-repeat="comentario in comentarioList">
                     <h6>soy {{comentario.fkUsuario.fkPersona.nombre}}</h6>
                     <div class="commenterImage">
                         <img ng-show="localAccount" height="28px" width="28px" src="/images/getThumbnail/{{comentario.fkUsuario.rutaImagen}}" alt="..." />

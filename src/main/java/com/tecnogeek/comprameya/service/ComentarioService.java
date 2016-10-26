@@ -5,10 +5,15 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnogeek.comprameya.entidad.QComentario;
+import com.tecnogeek.comprameya.entidad.Comentario;
+import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.entidad.Usuario;
+import com.tecnogeek.comprameya.repositories.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.ComentarioRepository;
+import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 
 /**
  *
@@ -16,12 +21,38 @@ import com.tecnogeek.comprameya.repositories.ComentarioRepository;
  */
 
 @Service
-public class ComentarioService {
+public class ComentarioService extends BaseService<Comentario, Long>{
     public ComentarioService(){}
     
     @Autowired
     ComentarioRepository comentarioRepository;
     
-    private final QComentario qComentario = QComentario.comentario;
+    @Autowired
+    PublicacionRepository publicacionRepository;
+    
+    @Autowired
+    UsuarioRepository usuarioRepository;
+    
+    @Override
+    public BaseRepository<Comentario, Long> getRepository() {
+        return comentarioRepository;
+    }
+    
+    public Iterable<Comentario> getComentarios(Long publicacionId, int page, int itemsByPage){        
+        return comentarioRepository.getComentarios(publicacionId, page, itemsByPage);
+    }
+    
+    public Comentario save(Long publicacionId, String comentario){
+        Usuario u = usuarioRepository.getLoggedUser();
+        
+        Publicacion p = publicacionRepository.getPublicacion(publicacionId);
+        
+        Comentario c = new Comentario();
+        c.setTexto(comentario);
+        c.setFkPublicacion(p);
+        c.setFkUsuario(u);
+       
+        return comentarioRepository.save(c);
+    }
     
 }

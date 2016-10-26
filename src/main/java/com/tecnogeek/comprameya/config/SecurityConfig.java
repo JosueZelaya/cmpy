@@ -72,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/publicacion/getPublicacionById/**",
                         "/publicacion/getTotalPaginas/**",
                         "/publicacion/getTotalAnuncios/**",
+                        "/comentario/getComentarios/**",
                         "/categoria/**",
                         "/ubicacion/**"
                 ).permitAll()

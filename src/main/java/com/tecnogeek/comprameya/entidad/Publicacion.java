@@ -78,7 +78,7 @@ public class Publicacion extends BaseEntity<Long> implements Serializable {
     @Column(name = "denuncias")
     private int denuncias;    
     @JsonManagedReference
-    @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Recurso> recursoList;
     @JsonManagedReference
     @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)

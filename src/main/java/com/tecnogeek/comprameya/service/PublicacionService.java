@@ -67,14 +67,14 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
                 publicacionRepository.getPublicacionesGratis(page, itemsByPage);
         
         //Replace backslashes by forward slashes in order to work well in firefox.
-        for(Publicacion publicacion : publicaciones){
-            publicacion.getUbicacionList().size();
-            publicacion.getComentarioList().size();
-            publicacion.getProductoList().size();
-            for(Recurso recurso : publicacion.getRecursoList()){                                      
-                recurso.setRuta(recurso.getRuta().replace('\\', '/'));
-            }
-        }
+//        for(Publicacion publicacion : publicaciones){
+//            publicacion.getUbicacionList().size();
+//            publicacion.getComentarioList().size();
+//            publicacion.getProductoList().size();
+//            for(Recurso recurso : publicacion.getRecursoList()){                                      
+//                recurso.setRuta(recurso.getRuta().replace('\\', '/'));
+//            }
+//        }
         
         return publicaciones;
     }   

@@ -5,7 +5,7 @@
  */
 
 
-modulo_anuncios.controller('productoController', function ($rootScope, $scope, $stateParams, anunciosService,mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+modulo_anuncios.controller('productoController', function ($scope, $stateParams, anunciosService, comentariosService) {
     
     var getPublicacion = function(id){
         return anunciosService.getPublicacionById(id)
@@ -14,13 +14,24 @@ modulo_anuncios.controller('productoController', function ($rootScope, $scope, $
                 });
     };
     
-    var cargarDetallePublicacion = function(id){
+    var getComentarios = function(publicacionId){
+        return comentariosService.getComentarios(publicacionId, 0)
+                .success(function (comentarios){
+                   return comentarios; 
+                });
+    };
+    
+    var cargarDetallePublicacion = function(publicacionId){
 
-        $rootScope.publicacion = undefined;
+        $scope.publicacion = undefined;
         
-        getPublicacion(id).success(function(publicacion){
-            $rootScope.publicacion = publicacion;
+        getPublicacion(publicacionId).success(function(publicacion){
+            $scope.publicacion = publicacion;
         });           
+        
+        getComentarios(publicacionId).success(function(comentarios){
+            $scope.comentarioList = comentarios;
+        });
         
     };
     
@@ -29,8 +40,12 @@ modulo_anuncios.controller('productoController', function ($rootScope, $scope, $
         var publicacion_id = $scope.publicacion.id;
         var comentario = $scope.comentario;
         
-        anunciosService.agregarComentario(publicacion_id,comentario)
-                .success(function(respuesta){});
+        comentariosService.agregarComentario(publicacion_id,comentario)
+                .success(function(respuesta){
+                    getComentarios(publicacion_id).success(function(comentarios){
+                        $scope.comentarioList = comentarios;
+                    });
+                });
         
     };
     

@@ -15,4 +15,5 @@ public interface UsuarioRepositoryCustom {
     
     public Usuario findActiveUserByLogin(String login);
     
+    public Usuario getLoggedUser();
 }

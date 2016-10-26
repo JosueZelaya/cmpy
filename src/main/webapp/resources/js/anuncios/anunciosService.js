@@ -63,21 +63,6 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
         });     
 
     };
-    
-    this.agregarComentario = function (publicacion_id, comentario){
-        var formData = new FormData();
-        formData.append("publicacion_id", publicacion_id);
-        formData.append("comentario", comentario);
-        
-        return $http.post('/comentario/agregarComentario', formData, {
-            transformRequest: angular.identity,
-            responseType:'json',
-            headers: {'Content-Type': undefined}            
-        }).success(function(){
-//            debugger;
-            return "Comentario Agregado!";
-        });
-    };
 
 });
 

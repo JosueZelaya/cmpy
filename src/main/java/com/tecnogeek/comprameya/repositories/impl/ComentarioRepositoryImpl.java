@@ -6,12 +6,14 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.Predicate;
+import com.mysema.query.types.expr.BooleanExpression;
 import com.tecnogeek.comprameya.entidad.Comentario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.QComentario;
 import com.tecnogeek.comprameya.repositories.ComentarioRepository;
 import com.tecnogeek.comprameya.repositories.custom.ComentarioRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 
 /**
  *
@@ -35,6 +37,12 @@ public class ComentarioRepositoryImpl implements ComentarioRepositoryCustom{
     public Iterable<Comentario> getComentario(long publicacionId) {
         Predicate byPublicacion = qComentario.fkPublicacion.id.eq(publicacionId);
         return comentarioRepository.findAll(byPublicacion);
+    }
+
+    @Override
+    public Iterable<Comentario> getComentarios(long publicacionId, int page, int itemsByPage) {
+        BooleanExpression byPublicacion = qComentario.fkPublicacion.id.eq(publicacionId);
+        return comentarioRepository.findAll(byPublicacion, new PageRequest(page, itemsByPage)).getContent();
     }
     
 }

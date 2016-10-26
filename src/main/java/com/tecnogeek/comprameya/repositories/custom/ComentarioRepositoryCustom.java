@@ -16,5 +16,6 @@ public interface ComentarioRepositoryCustom {
     
     public Iterable<Comentario> getComentario(Publicacion publicacion);
     public Iterable<Comentario> getComentario(long publicacionId);
+    public Iterable<Comentario> getComentarios(long publicacionId, int page, int itemsByPage);
     
 }

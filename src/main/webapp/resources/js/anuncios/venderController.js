@@ -1,4 +1,4 @@
-modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $stateParams, anunciosService,mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+modulo_anuncios.controller('venderController', function ($rootScope, $scope, $stateParams, anunciosService,mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
     
     var getPublicaciones = function(tipo,pagina) {
         return anunciosService.getAnuncios(tipo,pagina)
@@ -19,6 +19,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         anunciosService.getTotalAnuncios(TIPO_PUBLICACION.GRATIS)
                 .success(function (total){
                     $rootScope.totalAnuncios = total;
+                    $rootScope.page = 1;
                 });
         
     };
@@ -29,15 +30,10 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         for (var index = 0; index < $scope.existingFlowObject.files.length; ++index) {
             imagenes[index] = $scope.existingFlowObject.files[index].file;
         }
-
-   
-
+        
         var publicacion = new Publicacion('',$scope.titulo, $scope.precio, $scope.descripcion);
         publicacion.setImagenes(imagenes);
         publicacion.setUbicaciones($rootScope.ubicaciones);
-        
-        //console.log("ubicaciones",$rootScope.ubicaciones);
-
         
         return publicacion;
     };
@@ -49,6 +45,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
                     
             $scope.cancel(); //cerrar el dialogo
             cargarPublicacionesGratis(0); //recarga las publicaciones
+            cargarPaginacion();
         });
         
     };
@@ -61,42 +58,10 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         
     };
     
-    $scope.paginaSiguiente = function(){
-        $rootScope.page++;
-        cargarPublicacionesGratis($scope.page);
-    };
-    
-    $scope.paginaAnterior = function(){
-        $scope.page--;
-        cargarPublicacionesGratis($scope.page);
-    };
-    
-    $scope.cargarPagina = function(){
-        cargarPublicacionesGratis($scope.page-1);
-    };
-    
-    $scope.getNumbers = function(num) {
-        return new Array(num);   
-    };
-    
     var init = function () {
         
-        var publicacionId = $stateParams.publicacionId;
-        
-        if(publicacionId!==undefined){
-            return;
-        }
-        
         // inicializando el componente de carga de imagenes
-//        $scope.existingFlowObject = flowFactory.create({});        
-        $scope.page = 0;
-//        $rootScope.totalPaginas = [];
-        $rootScope.totalAnuncios = 0;
-        
-        cargarPublicacionesGratis($scope.page);
-        
-        cargarPaginacion();
-        
+        $scope.existingFlowObject = flowFactory.create({});  
         
     };
     

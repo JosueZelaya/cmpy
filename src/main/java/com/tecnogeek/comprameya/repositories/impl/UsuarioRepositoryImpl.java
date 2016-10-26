@@ -13,6 +13,8 @@ import com.tecnogeek.comprameya.repositories.PersonaRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import com.tecnogeek.comprameya.repositories.custom.UsuarioRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -39,4 +41,13 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryCustom {
         return repository.findOne(byLogin.and(isActivo));
     }
 
+    @Override
+    public Usuario getLoggedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        return repository.findActiveUserByLogin(userName);
+    }
+
+    
+    
 }
