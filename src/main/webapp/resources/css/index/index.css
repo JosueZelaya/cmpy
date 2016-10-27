@@ -21,7 +21,7 @@ body {
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 .navbar {
-    //margin-bottom: 0;
+   
 }
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
@@ -63,7 +63,6 @@ body {
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 500px;
-  //background-color: #777;
   background-color: #7B68EE;
 }
 .carousel-inner > .item > img {
@@ -162,13 +161,13 @@ body {
 .marcar
 {
     background-color: white;
-    //border: #000 solid 2px;
+
 }
 .modal {
 display: block;
 }
 
-//categorias
+/*categorias*/
 
 .level3.cat{
     background-color: #CCC;        
@@ -196,9 +195,9 @@ a.list-group-item
     width:97%;
 
 }
-//fin categorias
+/*fin categorias*/
 
-//google maps
+/*google maps*/
 
 .angular-google-map-container { height: 400px; }
 
@@ -206,3 +205,55 @@ body > div.pac-container.pac-logo{
     
     z-index: 2000;
 }
+
+/*ajuste para paneles collapsables*/
+
+.row{
+    margin-top:40px;
+    padding: 0 10px;
+}
+
+.clickable{
+    cursor: pointer;   
+}
+
+.panel-heading span {
+	margin-top: -20px;
+	font-size: 15px;
+}
+
+
+
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+    .panel-flex{display:block;height:3600px;}
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .panel-flex{display:block;height:3600px;}
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+    .panel-flex{display:block;height:3600px;}
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    .panel-flex{display:block;height:38px;}
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .panel-flex{display:block;height:38px;}
+}
+
+/* Portrait LOT*/
+@media (min-width: 0px) {
+    .panel-flex{display:block;height:38px;}
+}
+
+.paneldown{display:block;height:3600px;}
+.panelup{display:block;height:38px;}

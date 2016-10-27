@@ -1,1 +1,1 @@
-categorias = angular.module('cmpy.categorias', []);
+categorias = angular.module('cmpy.categorias', ['matchmedia-ng']);

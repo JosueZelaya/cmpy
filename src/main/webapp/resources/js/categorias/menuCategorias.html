@@ -11,18 +11,16 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-                  <button ng-show="!btnshow" class="hidden-lg" ng-controller="catController" type="button" ng-click="collapse = !collapse">
-                        v
-                 </button>
 
-        <div class="col-md-2 min_cont marcar panelCategorias" ng-controller="catController" uib-collapse="collapse || btnshow">
-            <div class="panel panel-default min_cont" > 
-                <div class="panel-heading">Categorias
-
+        <div class="col-md-2 min_cont marcar panelCategorias" ng-controller="catController">
+            <div class="panel panel-default" ng-class="{paneldown:!isPhoneOrTablet || (isPhoneOrTablet && !btnestado),panelup:isPhoneOrTablet && btnestado}"> 
+                <div class="panel-heading">
+                    <h3 class="panel-title">Categorias</h3>
+                    <span class="pull-right clickable" ng-hide="!isPhoneOrTablet" ng-click="setBtnStyle()"><i ng-class="btnstyle"></i></span>
                 </div>  
 
 
-                <div class="panel-body" >
+                <div class="panel-body">
                     <div id="refcat_ini" class="list-group cat level1" ng-repeat="categoria in categorias">
                         <a id="cat_{{categoria.id}}" href="#" class="list-group-item" ng-click="categoria.collapse = !categoria.collapse">
                             {{categoria.nombre}}
