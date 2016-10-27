@@ -19,6 +19,6 @@
     "commit": "c369690b019b50f831650cd9c73cd05f53ac3f8f"
   },
   "_source": "https://github.com/AnalogJ/matchmedia-ng.git",
-  "_target": "*",
+  "_target": "1.0.8",
   "_originalSource": "matchmedia-ng"
 }
