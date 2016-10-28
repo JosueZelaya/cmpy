@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.math.BigInteger;
 import javax.persistence.Basic;
@@ -43,6 +44,7 @@ public class Empleado extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "fk_empresa", referencedColumnName = "empresa_id")
     @ManyToOne
     private Empresa fkEmpresa;
+    @JsonManagedReference
     @JoinColumn(name = "fk_persona", referencedColumnName = "persona_id")
     @ManyToOne
     private Persona fkPersona;

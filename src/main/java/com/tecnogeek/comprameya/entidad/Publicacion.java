@@ -77,23 +77,23 @@ public class Publicacion extends BaseEntity<Long> implements Serializable {
     @NotNull
     @Column(name = "denuncias")
     private int denuncias;    
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Recurso> recursoList;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
     private List<Ubicacion> ubicacionList;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
     private List<Producto> productoList;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPublicacion")
     private List<Comentario> comentarioList;
     @JsonManagedReference
     @JoinColumn(name = "fk_tipo_publicacion", referencedColumnName = "tipo_publicacion_id")
     @ManyToOne
     private TipoPublicacion fkTipoPublicacion;
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "fk_usuario", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario fkUsuario;
@@ -105,4 +105,12 @@ public class Publicacion extends BaseEntity<Long> implements Serializable {
                 this.fkUsuario.getPuntaje();
     }
 
+    @Transient
+    public String getImgUrl(){
+        return (!this.recursoList.isEmpty())?
+                this.recursoList.get(0).getRuta():
+                "";
+    }
+    
+    
 }

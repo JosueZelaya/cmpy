@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -57,7 +58,7 @@ public class Ubicacion extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "fk_ciudad", referencedColumnName = "ciudad_id")
     @ManyToOne
     private Ciudad fkCiudad;
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
     @ManyToOne    
     private Publicacion fkPublicacion;

@@ -75,6 +75,10 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
 //                recurso.setRuta(recurso.getRuta().replace('\\', '/'));
 //            }
 //        }
+
+//            for(Publicacion publicacion : publicaciones){
+//                publicacion.getRecursoList().size();
+//            }
         
         return publicaciones;
     }   

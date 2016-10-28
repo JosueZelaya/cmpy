@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -54,7 +55,7 @@ public class Recurso extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "fk_perfil", referencedColumnName = "perfil_id")
     @ManyToOne
     private Perfil fkPerfil;
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
     @ManyToOne(cascade = CascadeType.ALL)
     private Publicacion fkPublicacion;

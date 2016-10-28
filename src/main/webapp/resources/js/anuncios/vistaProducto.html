@@ -4,7 +4,7 @@
     <div class="thumbnail">
 
         <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
-            <uib-slide ng-repeat="recurso in publicacion.recursoList" active="slide.active" index="slide.id">
+            <uib-slide ng-repeat="recurso in recursoList" active="slide.active" index="slide.id">
                 <img ng-style="{'height': 100}" ng-src="/images/getImage/{{recurso.ruta}}" style="margin:auto;">
                 <div class="carousel-caption">                                
                     <div class="titulo-publicacion">
@@ -16,7 +16,7 @@
 
         <div class="row">
             <div class="col-md-8">
-                <h4 class="price-text-color">$ {{publicacion.productoList[0].precio}}</h4>
+                <!--<h4 class="price-text-color">$ {{publicacion.productoList[0].precio}}</h4>-->
             </div>
             <div class="rating hidden-sm col-md-4">
                 <i class="price-text-color glyphicon glyphicon-star-empty"></i>
@@ -57,8 +57,9 @@
                 <li ng-repeat="comentario in comentarioList">
                     <h6>soy {{comentario.fkUsuario.fkPersona.nombre}}</h6>
                     <div class="commenterImage">
-                        <img ng-show="localAccount" height="28px" width="28px" src="/images/getThumbnail/{{comentario.fkUsuario.rutaImagen}}" alt="..." />
-                        <img ng-show="!localAccount" height="28px" width="28px" src="{{comentario.fkUsuario.rutaImagen}}" alt="..." />                                
+                        <img height="28px" width="28px" src="/images/getThumbnail/{{comentario.fkUsuario.rutaImagen}}" alt="..." />
+<!--                        <img ng-show="localAccount" height="28px" width="28px" src="/images/getThumbnail/{{comentario.fkUsuario.rutaImagen}}" alt="..." />-->
+                        <!--<img ng-show="!localAccount" height="28px" width="28px" src="{{comentario.fkUsuario.rutaImagen}}" alt="..." />-->                                
                     </div>
                     <div class="commentText">
                         <p class="">{{comentario.texto}}</p> <span class="date sub-text">{{comentario.creationTime}}</span>

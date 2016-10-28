@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
@@ -64,12 +65,14 @@ public class Persona extends BaseEntity<Long> implements Serializable {
     private BigInteger dui;
     @Size(max = 2147483647)
     @Column(name = "direccion")
-    private String direccion;                
+    private String direccion;     
+    @JsonBackReference
     @OneToMany(mappedBy = "fkPersona")
     private List<Empleado> empleadoList;
     @JoinColumn(name = "fk_ubicacion", referencedColumnName = "ubicacion_id")
     @ManyToOne
     private Ubicacion fkUbicacion;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkPersona")
     private List<Usuario> usuarioList;
 

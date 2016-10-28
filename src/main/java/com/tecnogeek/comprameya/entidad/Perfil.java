@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.tecnogeek.comprameya.enums.Role;
 import java.io.Serializable;
 import java.util.List;
@@ -45,11 +46,13 @@ public class Perfil extends BaseEntity<Long> implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "descripcion")
     private String descripcion;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkPerfil")
     private List<Recurso> recursoList;
     @JoinColumn(name = "fk_grupo", referencedColumnName = "grupo_id")
     @ManyToOne
     private Grupo fkGrupo;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkPerfil")
     private List<Usuario> usuarioList;
 

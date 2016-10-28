@@ -5,7 +5,7 @@
  */
 
 
-modulo_anuncios.controller('productoController', function ($scope, $stateParams, anunciosService, comentariosService) {
+modulo_anuncios.controller('productoController', function ($scope, $stateParams, anunciosService, comentariosService, recursoService) {
     
     var getPublicacion = function(id){
         return anunciosService.getPublicacionById(id)
@@ -21,6 +21,13 @@ modulo_anuncios.controller('productoController', function ($scope, $stateParams,
                 });
     };
     
+    var getRecursos = function(publicacionId){
+        return recursoService.getRecursos(publicacionId, 0)
+                .success(function (recursos){
+                   return recursos; 
+                });
+    };
+    
     var cargarDetallePublicacion = function(publicacionId){
 
         $scope.publicacion = undefined;
@@ -31,6 +38,10 @@ modulo_anuncios.controller('productoController', function ($scope, $stateParams,
         
         getComentarios(publicacionId).success(function(comentarios){
             $scope.comentarioList = comentarios;
+        });
+        
+        getRecursos(publicacionId).success(function(recursos){
+            $scope.recursoList = recursos;
         });
         
     };

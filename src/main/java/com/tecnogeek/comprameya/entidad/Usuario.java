@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
 import java.io.Serializable;
@@ -58,34 +59,45 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     private int puntaje;
     @Size(max = 2147483647)
     @Column(name = "fb_usuario_id")
-    private String fbUsuarioId;        
+    private String fbUsuarioId;  
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuario")
     private List<Compra> compraList;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuarioEvaluado")
     private List<Voto> votoList;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuarioVotante")
     private List<Voto> votoList1;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuarioContacto")
     private List<Contacto> contactoList;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuarioDuenio")
     private List<Contacto> contactoList1;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuarioProveedor")
     private List<Suscriptor> suscriptorList;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuarioSuscriptor")
     private List<Suscriptor> suscriptorList1;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuario")
     private List<Comentario> comentarioList;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuario")
     private List<Notificacion> notificacionList;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuario")
     private List<Publicacion> publicacionList;
+    @JsonBackReference
     @OneToMany(mappedBy = "fkUsuarioDestinatario")
     private List<Destinatario> destinatarioList;
+    @JsonManagedReference
     @JoinColumn(name = "fk_perfil", referencedColumnName = "perfil_id")
     @ManyToOne
     private Perfil fkPerfil;
+    @JsonManagedReference
     @JoinColumn(name = "fk_persona", referencedColumnName = "persona_id")
     @ManyToOne
     private Persona fkPersona;

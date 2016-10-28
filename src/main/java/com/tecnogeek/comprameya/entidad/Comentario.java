@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -47,11 +48,11 @@ public class Comentario extends BaseEntity<Long> implements Serializable {
     @NotNull
     @Column(name = "denuncias")
     private int denuncias;    
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
     @ManyToOne(optional = false)
     private Publicacion fkPublicacion;
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "fk_usuario", referencedColumnName = "usuario_id")
     @ManyToOne(optional = false)
     private Usuario fkUsuario;
