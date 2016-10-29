@@ -1,1 +1,1 @@
-utils = angular.module('cmpy.utils',[]);
+utils = angular.module('cmpy.utils',['matchmedia-ng']);

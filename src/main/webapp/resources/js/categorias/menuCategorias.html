@@ -13,7 +13,7 @@ and open the template in the editor.
     <body>
 
         <div class="col-md-2 min_cont marcar panelCategorias" ng-controller="catController">
-            <div class="panel panel-default" ng-class="{paneldown:!isPhoneOrTablet || (isPhoneOrTablet && !btnestado),panelup:isPhoneOrTablet && btnestado}"> 
+            <div class="panel panel-default" ng-controller="panelCollapseController" ng-class="{paneldown:!isPhoneOrTablet || (isPhoneOrTablet && !btnestado),panelup:isPhoneOrTablet && btnestado}"> 
                 <div class="panel-heading">
                     <h3 class="panel-title">Categorias</h3>
                     <span class="pull-right clickable" ng-hide="!isPhoneOrTablet" ng-click="setBtnStyle()"><i ng-class="btnstyle"></i></span>

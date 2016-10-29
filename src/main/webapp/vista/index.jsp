@@ -57,6 +57,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/maps/mapControllers.js" ></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/utils.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/panelCollapseController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.module.js" ></script>
     </head>
     <body ng-cloak class="ng-cloak">
