@@ -60,6 +60,10 @@ modulo_anuncios.controller('productoController', function ($scope, $stateParams,
         
     };
     
+    $scope.getNumbers = function(num) {
+        return new Array(num);   
+    };
+    
     var init = function () {
         
         var publicacionId = $stateParams.publicacionId;

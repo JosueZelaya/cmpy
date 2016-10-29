@@ -21,12 +21,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
+import com.tecnogeek.comprameya.utils.FileManager;
+import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
  * @author genaro
  */
 @Service
+@Slf4j
 public class UsuarioService {
 
     @Autowired
@@ -49,6 +53,20 @@ public class UsuarioService {
         return repository.findActiveUserByLogin(userName);
     }
 
+    private void setImage(RegistrationForm userAccountData, Usuario usuario){
+        try {            
+            
+            if( !userAccountData.isSocialSignIn() ){
+                String rutaImg = FileManager.saveFile(userAccountData.getImage());
+                userAccountData.setImageUrl(rutaImg);
+            }
+            
+            usuario.setRutaImagen(userAccountData.getImageUrl());
+        } catch (IOException ex) {
+            log.error("No se pudo cargar la Imagen");
+        }
+    }
+    
     @Transactional
     public Usuario registerNewUserAccount(RegistrationForm userAccountData) throws DuplicateEmailException {
         if (emailExist(userAccountData.getEmail())) {
@@ -70,7 +88,8 @@ public class UsuarioService {
         usuario.setPass(encodedPassword);
         usuario.setFkPersona(persona);
         usuario.setFkPerfil(perfil);
-        usuario.setRutaImagen(userAccountData.getImageUrl());
+        
+        setImage(userAccountData, usuario);
 
         if (userAccountData.isSocialSignIn()) {
             usuario.setSignInProvider(userAccountData.getSignInProvider());

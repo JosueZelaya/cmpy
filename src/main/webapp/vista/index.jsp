@@ -18,25 +18,13 @@
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
-        <style type="text/css">
+<!--        <style type="text/css">
             [ng\:cloak], [ng-cloak], .ng-cloak {
                 display: none !important;
             }
             .angular-google-map-container { height: 400px; }
-        </style>
-    </head>
-    <body ng-cloak class="ng-cloak">
-        
-        <!-- MAIN CONTENT -->
-        <!--<div class="container">-->
-
-            <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
-            <div ui-view></div>
-
-        <!--</div>-->        
-        
-        <%@include file="common/loginModal.jsp" %>
-
+        </style>-->
+        <style> .ng-cloak { display: none !important; } </style>
         
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-animate/angular-animate.min.js"></script>        
@@ -70,6 +58,21 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/utils.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.module.js" ></script>
+    </head>
+    <body ng-cloak class="ng-cloak">
+        
+        <!-- MAIN CONTENT -->
+        <!--<div class="container">-->
+
+            <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+            <div ui-view></div>
+
+        <!--</div>-->        
+        
+        <%@include file="common/loginModal.jsp" %>
+
+        
+        
         
     </body>
 </html>

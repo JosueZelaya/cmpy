@@ -43,14 +43,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public Publicacion getPublicacion(long publicacion_id) {
         Predicate filtradaPorId = qPublicacion.id.eq(publicacion_id);
-        
-        return newJpaQuery().from(qPublicacion,qComentario,qUsuario)
-                .leftJoin(qPublicacion.comentarioList,qComentario)
-                .fetch()
-                .leftJoin(qComentario.fkUsuario,qUsuario)
-                .fetch()
-                .where(filtradaPorId).uniqueResult(qPublicacion);
-//        return publicacionRepository.findOne(filtradaPorId);
+        return publicacionRepository.findOne(filtradaPorId);
     }
 
     @Override

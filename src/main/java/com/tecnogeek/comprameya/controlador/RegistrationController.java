@@ -70,8 +70,6 @@ public class RegistrationController {
             return "registrationForm";
         }
         
-        String rutaImg = FileManager.saveFile(userAccountData.getImage());
-        userAccountData.setImageUrl(rutaImg);
         Usuario registered = createUserAccount(userAccountData,result);
         
         if(registered==null){

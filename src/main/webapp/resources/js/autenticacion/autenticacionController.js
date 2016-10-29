@@ -19,7 +19,6 @@ autenticacion.controller('autenticacionController',
                             $rootScope.localAccount = true;
                         }
                         
-                        $rootScope.signInProvider = data.rutaImagen;
                     } else {
                         $rootScope.authenticated = false;
                     }

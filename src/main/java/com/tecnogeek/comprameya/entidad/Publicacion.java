@@ -8,6 +8,7 @@ package com.tecnogeek.comprameya.entidad;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -112,5 +113,11 @@ public class Publicacion extends BaseEntity<Long> implements Serializable {
                 "";
     }
     
+    @Transient
+    public BigDecimal getPrecio(){
+        return (!this.productoList.isEmpty())?
+                this.productoList.get(0).getPrecio():
+                new BigDecimal(0);
+    }
     
 }

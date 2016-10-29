@@ -63,13 +63,16 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
             })
             
             .state('home.vistaProducto', {
- //               url: "/vistaProducto/{publicacionId}",  
- //               templateUrl: '/resources/js/anuncios/vistaProducto.html'//,
                 url: "/vistaProducto/{publicacionId}",  
                 views: {
-                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html'},
-//                    "maps@home.vistaProducto": {templateUrl: '/resources/js/maps/mapaUbicacion.html'},
-//                    "ubicacionesModal@home.vistaProducto": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'}
+                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html'}
+                }
+            })
+            
+            .state('fb.vistaProducto', {
+                url: "/vistaProducto/{publicacionId}",  
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html'}
                 }
             })
 
