@@ -35,6 +35,16 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
     };
 
 
+    this.getAnunciosByCat = function (tipo, page, cat) {
+        var req = "/publicacion/getAnunciosByCat/" + tipo + "/" + page + "/" + cat;
+        return $http.get(req)
+                .success(function (response)
+                {
+                    return response;
+                });
+    };
+
+
     this.agregarPublicacion = function (publicacion) {
 
         var formData = new FormData();
