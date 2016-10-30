@@ -255,5 +255,5 @@ body > div.pac-container.pac-logo{
     .panel-flex{display:block;height:38px;}
 }
 
-.paneldown{display:block;height:3600px;}
-.panelup{display:block;height:38px;}
+.paneldown{display:block;height:3600px;overflow:hidden;}
+.panelup{display:block;height:38px;overflow:hidden;}
