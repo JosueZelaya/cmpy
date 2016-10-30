@@ -18,13 +18,13 @@
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
-<!--        <style type="text/css">
+        <style type="text/css">
             [ng\:cloak], [ng-cloak], .ng-cloak {
                 display: none !important;
             }
             .angular-google-map-container { height: 400px; }
-        </style>-->
-        <style> .ng-cloak { display: none !important; } </style>
+        </style>
+        <!--<style> .ng-cloak { display: none !important; } </style>-->
         
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-animate/angular-animate.min.js"></script>        

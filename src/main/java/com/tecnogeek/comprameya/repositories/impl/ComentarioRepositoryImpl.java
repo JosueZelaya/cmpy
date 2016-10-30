@@ -14,6 +14,7 @@ import com.tecnogeek.comprameya.repositories.ComentarioRepository;
 import com.tecnogeek.comprameya.repositories.custom.ComentarioRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.querydsl.QSort;
 
 /**
  *
@@ -42,7 +43,7 @@ public class ComentarioRepositoryImpl implements ComentarioRepositoryCustom{
     @Override
     public Iterable<Comentario> getComentarios(long publicacionId, int page, int itemsByPage) {
         BooleanExpression byPublicacion = qComentario.fkPublicacion.id.eq(publicacionId);
-        return comentarioRepository.findAll(byPublicacion, new PageRequest(page, itemsByPage)).getContent();
+        return comentarioRepository.findAll(byPublicacion, new PageRequest(page, itemsByPage, new QSort(qComentario.id.desc()))).getContent();
     }
     
 }

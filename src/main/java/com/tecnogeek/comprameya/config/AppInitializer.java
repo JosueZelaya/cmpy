@@ -9,12 +9,15 @@ package com.tecnogeek.comprameya.config;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -49,7 +52,15 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected Filter[] getServletFilters() // Hacer que spring security filtre las url
     {
-        return new Filter[]{new DelegatingFilterProxy("springSecurityFilterChain"), new OpenEntityManagerInViewFilter()};
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        
+        return new Filter[]
+        { 
+            characterEncodingFilter,
+            new DelegatingFilterProxy("springSecurityFilterChain"), 
+            new OpenEntityManagerInViewFilter()
+        };
     }
     
     @Override

@@ -1,8 +1,8 @@
-utils.controller('modalController', function ($scope, $uibModal, $log) {
+utils.controller('modalController', function ($rootScope, $scope, $uibModal, $log) {
 
     $scope.animationsEnabled = true;
 
-    $scope.open = function (modalTemplate,size) {
+    $rootScope.open = function (modalTemplate,size) {
 
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,

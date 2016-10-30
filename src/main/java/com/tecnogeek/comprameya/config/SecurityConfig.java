@@ -18,7 +18,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
  *
@@ -94,19 +93,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/login/authenticate")
                 .failureUrl("/login?error=bad_credentials")
-                //                    .successHandler(customAuthSuccessHandler)
+                .successHandler(customAuthSuccessHandler)
                 .and()
                 .logout()
                 .deleteCookies("remove")
                 .invalidateHttpSession(true)
                 .logoutSuccessUrl("/")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .permitAll()
-                .and()
-                .apply(new SpringSocialConfigurer()
-                        .alwaysUsePostLoginUrl(true)
-                        .postLoginUrl("/")
-                );
+                .permitAll();
     }
 
     @Bean

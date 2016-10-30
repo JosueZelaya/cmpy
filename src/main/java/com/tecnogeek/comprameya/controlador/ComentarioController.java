@@ -5,14 +5,7 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Comentario;
-import com.tecnogeek.comprameya.entidad.Publicacion;
-import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
-import com.tecnogeek.comprameya.service.UsuarioService;
-import com.tecnogeek.comprameya.repositories.ComentarioRepository;
-import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import com.tecnogeek.comprameya.service.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +31,7 @@ public class ComentarioController {
     @RequestMapping(value="/getComentarios/{idPublicacion}/{page}",method=RequestMethod.GET)    
     public Iterable<Comentario> getComentarios(@PathVariable Long idPublicacion,@PathVariable int page, Model model)
     {                
-        int commentsByPage = 20;
+        int commentsByPage = 50;
         return comentarioService.getComentarios(idPublicacion, page, commentsByPage);
     }
     
