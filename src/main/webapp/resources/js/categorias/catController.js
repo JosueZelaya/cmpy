@@ -1,4 +1,4 @@
-categorias.controller('catController',['$scope','catService','anunciosService' , function($scope,catService,anunciosService) {
+categorias.controller('catController',['$scope','$rootScope','TIPO_PUBLICACION','catService','anunciosService' , function($scope,$rootScope,TIPO_PUBLICACION,catService,anunciosService) {
     catService.getCategorias()
     .success(function (response) 
     {   
@@ -24,8 +24,11 @@ categorias.controller('catController',['$scope','catService','anunciosService' ,
                         });
     };
     
-    var cargarPublicacionesGratisByCat = function(page,cat){
-        getPublicaciones(TIPO_PUBLICACION.GRATIS, page,cat)
+    $scope.cargarPublicacionesGratisByCat = function(page,cat){
+        
+        debugger;
+        
+        getPublicacionesByCat(TIPO_PUBLICACION.GRATIS, page,cat)
                 .success(function(publicaciones){
             $rootScope.publicaciones = publicaciones;
         });

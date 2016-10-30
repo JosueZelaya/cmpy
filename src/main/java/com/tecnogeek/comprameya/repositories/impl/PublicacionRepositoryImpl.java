@@ -7,8 +7,12 @@ package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.Predicate;
+import com.mysema.query.types.expr.BooleanExpression;
+import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.entidad.QCategoria;
 import com.tecnogeek.comprameya.entidad.QComentario;
+import com.tecnogeek.comprameya.entidad.QProducto;
 import com.tecnogeek.comprameya.entidad.QPublicacion;
 import com.tecnogeek.comprameya.entidad.QUsuario;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
@@ -35,6 +39,8 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     private final QPublicacion qPublicacion = QPublicacion.publicacion;
     private final QComentario qComentario = QComentario.comentario;
     private final QUsuario qUsuario = QUsuario.usuario;
+    private final QCategoria qCategoria = QCategoria.categoria;
+    private final QProducto qProducto = QProducto.producto;
     
     public JPAQuery newJpaQuery() {
         return new JPAQuery(em);
@@ -73,6 +79,33 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
         Predicate sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
         return publicacionRepository.findAll(sonGratis, new PageRequest(page, itemsByPage, new QSort(qPublicacion.id.desc()))).getContent();
     }
+    
+    @Override
+    public Iterable<Publicacion> getPublicacionesPagadas(int page, int itemsByPage,long categoria_id) {
+        Long id = TipoPublicacionEnum.PAGADA.getCodigo();
+        qCategoria.id.eq(categoria_id);
+        BooleanExpression sonPagadas = qPublicacion.fkTipoPublicacion.id.eq(id);
+        BooleanExpression matchCat = qPublicacion.productoList.get(0).fkSubTipoProducto.eq(qCategoria);
+        return publicacionRepository.findAll(sonPagadas.and(matchCat), new PageRequest(page, itemsByPage)).getContent();
+    }
+
+    @Override
+    public Iterable<Publicacion> getPublicacionesGratis(int page, int itemsByPage, long categoria_id) {
+        
+        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
+        BooleanExpression sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
+        BooleanExpression porCategoria = qProducto.fkSubTipoProducto.id.eq(categoria_id);
+        
+        return newJpaQuery().distinct().from(qPublicacion,qProducto)
+            .leftJoin(qPublicacion.productoList,qProducto)
+            .fetch()
+            .where(sonGratis.and(porCategoria)).list(qPublicacion);
+        
+//        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
+//        BooleanExpression sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
+//        BooleanExpression porCategoria = qPublicacion.productoList.get(0).fkSubTipoProducto.id.eq(categoria_id);
+//        return publicacionRepository.findAll(sonGratis.and(porCategoria), new PageRequest(page, itemsByPage, new QSort(qPublicacion.id.desc()))).getContent();
+    }    
 
     @Override
     public long getTotalPublicacionesPagadas() {

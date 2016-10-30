@@ -105,6 +105,25 @@ public class PublicacionController {
         
         return publicaciones;
     }
+    
+    @RequestMapping(value="/getAnunciosByCat/{tipo}/{page}/{cat}",method=RequestMethod.GET)    
+    public Iterable<Publicacion> getAnunciosByCat(@PathVariable int tipo,@PathVariable int page,@PathVariable long cat,Model model)
+    {                
+        int totalAnuncios;
+        
+        boolean esPagada = (tipo==Constantes.PUBLICACION_PAGADA);
+        TipoPublicacionEnum tipoPublicacion = (esPagada)?                
+                TipoPublicacionEnum.PAGADA:
+                TipoPublicacionEnum.GRATIS;
+        
+        totalAnuncios = (tipo==Constantes.PUBLICACION_GRATIS)?
+                Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
+                Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
+        
+        Iterable<Publicacion> publicaciones = pManager.getPublicaciones(page, totalAnuncios, tipoPublicacion,cat);   
+        
+        return publicaciones;
+    }
         
     @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
     public String agregarAnuncio(@RequestParam(value = "titulo", required = true) String titulo,

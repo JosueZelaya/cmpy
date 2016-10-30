@@ -56,6 +56,20 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
                 publicacionRepository.getTotalPublicacionesGratis();        
     }
     
+    public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage,TipoPublicacionEnum tipo, long categoria_id)
+    {
+        Iterable<Publicacion> publicaciones = new ArrayList();
+        
+        boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
+        
+        publicaciones = (esPagada)?
+                publicacionRepository.getPublicacionesPagadas(page, itemsByPage, categoria_id):
+                publicacionRepository.getPublicacionesGratis(page, itemsByPage, categoria_id);
+        
+        
+        return publicaciones;
+    }   
+    
     public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage,TipoPublicacionEnum tipo)
     {
         Iterable<Publicacion> publicaciones = new ArrayList();

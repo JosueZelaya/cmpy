@@ -67,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/modal",
                         "/angular",
                         "/publicacion/getAnuncios/**",
+                        "/publicacion/getAnunciosByCat/**",
                         "/publicacion/getAnunciosSinPaginar",
                         "/publicacion/getPublicacionById/**",
                         "/publicacion/getTotalPaginas/**",

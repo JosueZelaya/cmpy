@@ -29,4 +29,8 @@ public interface PublicacionRepositoryCustom {
     
     public long getTotalPublicacionesGratis();
     
+    public Iterable<Publicacion> getPublicacionesPagadas(int page, int itemsByPage, long categoria_id);
+
+    public Iterable<Publicacion> getPublicacionesGratis(int page, int itemsByPage, long categoria_id);
+    
 }
