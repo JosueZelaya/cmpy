@@ -25,8 +25,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
@@ -45,6 +44,7 @@ import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 @Controller
 @RequestMapping("/publicacion")
 @ResponseBody
+@Slf4j
 public class PublicacionController {
  
     @Autowired
@@ -128,7 +128,6 @@ public class PublicacionController {
     @RequestMapping(value = "/agregarAnuncio", method = RequestMethod.POST)    
     public String agregarAnuncio(@RequestParam(value = "titulo", required = true) String titulo,
                                  @RequestParam(value = "descripcion", required = true) String descripcion,
-                                 //@RequestParam(value = "ubicaciones", required = true) pojoUbicacionWrapper ubicaciones,
                                  @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
                                  Model model)
     {                  
@@ -145,7 +144,7 @@ public class PublicacionController {
                 recurso.setFkPublicacion(publicacion);
                 recursos.add(recurso);                
             } catch (IOException ex) {
-                Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
+                log.error(PublicacionController.class.getName(), "No se pudo cargar imagen", ex);
             }
         }
         publicacion.setRecursoList(recursos);
@@ -154,12 +153,9 @@ public class PublicacionController {
         tipoPublicacion.setId(tipo.longValue());
         publicacion.setFkTipoPublicacion(tipoPublicacion);
         
-        //cUbicacion.setUbicacionPublicacion(publicacion.getPublicacionId(), ubicaciones);
-        
         publicacionService.save(publicacion);
         
         return "ok";
-//        return new HomeController().welcomePage(model);        
     }
     
     @RequestMapping(value = "/agregarPublicacion", method = RequestMethod.POST)    
@@ -167,7 +163,6 @@ public class PublicacionController {
                                  @RequestParam(value = "precio", required = true) Double precio,
                                  @RequestParam(value = "descripcion", required = true) String descripcion,
                                  @RequestParam(value = "ubicaciones", required = false) String ubicaciones,
-                                 //@RequestBody pojoUbicacionWrapper ubicaciones,
                                  @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
                                  Model model) throws IOException
     {           
@@ -185,7 +180,7 @@ public class PublicacionController {
                 recurso.setFkPublicacion(publicacion);
                 recursos.add(recurso);                
             } catch (IOException ex) {
-                Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
+                log.error(PublicacionController.class.getName(), "No se pudo cargar imagen", ex);
             }
         }
         publicacion.setRecursoList(recursos);        

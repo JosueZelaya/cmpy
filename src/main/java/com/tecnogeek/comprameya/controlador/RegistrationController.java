@@ -28,7 +28,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.tecnogeek.comprameya.service.UsuarioService;
-import com.tecnogeek.comprameya.utils.FileManager;
 
 /**
  *

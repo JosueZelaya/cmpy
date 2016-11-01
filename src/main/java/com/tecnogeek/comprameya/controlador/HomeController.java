@@ -8,8 +8,6 @@ package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
 import com.tecnogeek.comprameya.entidad.Categoria;
-import com.tecnogeek.comprameya.entidad.Publicacion;
-import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;

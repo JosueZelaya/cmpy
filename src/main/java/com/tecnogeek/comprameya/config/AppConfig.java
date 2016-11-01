@@ -29,7 +29,6 @@ public class AppConfig {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
  
         messageSource.setBasename("i18n/messages");
-//        messageSource.setDefaultEncoding("UTF-8");
         messageSource.setUseCodeAsDefaultMessage(true);
  
         return messageSource;

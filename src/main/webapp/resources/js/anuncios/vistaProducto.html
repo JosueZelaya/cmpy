@@ -40,7 +40,14 @@
 
             <!--<form class="form-inline" role="form">-->
             <div class="form-group">
-                <textarea ng-model="comentario" class="form-control" placeholder="Escribe un comentario" autofocus>
+                <textarea ng-show="!authenticated" 
+                          ng-click="open('loginModal.jsp', 'lg')"
+                          ng-change="open('loginModal.jsp', 'lg')"
+                          ng-model="comentario" class="form-control" placeholder="Escribe un comentario" autofocus>
+                            
+                </textarea>
+                <textarea ng-show="authenticated"
+                          ng-model="comentario" class="form-control" placeholder="Escribe un comentario" autofocus>
                             
                 </textarea>
             </div>

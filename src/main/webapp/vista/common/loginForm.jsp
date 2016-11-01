@@ -19,6 +19,7 @@
         <div class="row  col-lg-4">
             Usa tus credenciales o ingresa con tu cuenta de facebook en el enlace de abajo.
         </div>
+        <br/>
         
         <div class="row  col-lg-4">
             <label for="username" class="col-sm-2 control-label">Usuario*</label>
@@ -36,6 +37,7 @@
                 <input type="submit" class="btn btn-primary" value="Entrar">
             </div>
             <div class="form-group col-lg-4">
+                
                 <a class="btn btn-block btn-social btn-facebook" href="${pageContext.request.contextPath}/auth/facebook">
                     <img height="28" width="28" src="${pageContext.request.contextPath}/resources/images/facebook-icon.png" title="Entrar con Facebook">
                     Usa tu cuenta de Facebook

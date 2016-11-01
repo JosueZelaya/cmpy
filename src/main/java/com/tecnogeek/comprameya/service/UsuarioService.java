@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.tecnogeek.comprameya.controlador.PublicacionController;
 import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.entidad.Perfil;
@@ -63,7 +64,7 @@ public class UsuarioService {
             
             usuario.setRutaImagen(userAccountData.getImageUrl());
         } catch (IOException ex) {
-            log.error("No se pudo cargar la Imagen");
+            log.error(PublicacionController.class.getName(), "No se pudo cargar imagen", ex);
         }
     }
     
