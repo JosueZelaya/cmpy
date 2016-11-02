@@ -31,7 +31,7 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
             imagenes[index] = $scope.existingFlowObject.files[index].file;
         }
         
-        var publicacion = new Publicacion('',$scope.titulo, $scope.precio, $scope.descripcion);
+        var publicacion = new Publicacion('',$scope.titulo, $scope.precio, $scope.descripcion,$scope.catagoriaId);
         publicacion.setImagenes(imagenes);
         publicacion.setUbicaciones($rootScope.ubicaciones);
         

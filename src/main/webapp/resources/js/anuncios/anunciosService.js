@@ -51,6 +51,7 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
         formData.append("titulo", publicacion.titulo);
         formData.append("precio", publicacion.precio);
         formData.append("descripcion", publicacion.descripcion);
+        formData.append("categoriaId", publicacion.categoriaId);
         
         var res = angular.toJson(publicacion.ubicaciones);
         formData.append("ubicaciones", res.toString());      
@@ -81,12 +82,13 @@ modulo_anuncios.service('Publicacion', function () {
     /**
      * Constructor, with class name
      */
-    function Publicacion(id, titulo, precio, descripcion) {
+    function Publicacion(id, titulo, precio, descripcion,categoriaId) {
         // Public properties, assigned to the instance ('this')
         this.id = id;
         this.titulo = titulo;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.categoriaId = categoriaId;
 //        this.imagenes = imagenes;
     }
 

@@ -16,6 +16,7 @@ import com.tecnogeek.comprameya.entidad.TipoPublicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUbicacion;
+import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import com.tecnogeek.comprameya.service.CategoriaService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -162,6 +164,7 @@ public class PublicacionController {
     public String agregarPublicacion(@RequestParam(value = "titulo", required = true) String titulo,
                                  @RequestParam(value = "precio", required = true) Double precio,
                                  @RequestParam(value = "descripcion", required = true) String descripcion,
+                                 @RequestParam(value = "categoriaId", required = true) long categoriaId,
                                  @RequestParam(value = "ubicaciones", required = false) String ubicaciones,
                                  @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
                                  Model model) throws IOException
@@ -193,6 +196,13 @@ public class PublicacionController {
         producto.setPrecio(BigDecimal.valueOf(precio));
         producto.setFkPublicacion(publicacion);
         producto.setDescripcion(descripcion);
+        
+        
+        Categoria cat = new Categoria();
+        cat.setId(categoriaId);
+        producto.setFkSubTipoProducto(cat);
+                
+                
         List<Producto> productos = new ArrayList();
         productos.add(producto);
         publicacion.setProductoList(productos);
