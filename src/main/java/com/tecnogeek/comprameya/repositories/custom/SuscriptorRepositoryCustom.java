@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.repositories.custom;
 
-import com.tecnogeek.comprameya.entidad.Suscriptor;
+import com.tecnogeek.comprameya.entidad.SuscripcionUsuario;
 import com.tecnogeek.comprameya.entidad.Usuario;
 
 /**
@@ -14,10 +14,10 @@ import com.tecnogeek.comprameya.entidad.Usuario;
  */
 public interface SuscriptorRepositoryCustom {
     
-    public Iterable<Suscriptor> getSuscriptor(Usuario usuario);
+    public Iterable<SuscripcionUsuario> getSuscriptor(Usuario usuario);
     
-    public Iterable<Suscriptor> getProveedor(Usuario usuario);
+    public Iterable<SuscripcionUsuario> getProveedor(Usuario usuario);
     
-    public String setSuscriptor(Suscriptor sus);
+    public String setSuscriptor(SuscripcionUsuario sus);
     
 }

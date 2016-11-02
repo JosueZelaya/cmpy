@@ -30,19 +30,19 @@ public class ComentarioRepositoryImpl implements ComentarioRepositoryCustom{
     @Override
     public Iterable<Comentario> getComentario(Publicacion publicacion)
     {
-        Predicate byPublicacion = qComentario.fkPublicacion.eq(publicacion);
+        Predicate byPublicacion = qComentario.publicacion.eq(publicacion);
         return comentarioRepository.findAll(byPublicacion);
     }
 
     @Override
     public Iterable<Comentario> getComentario(long publicacionId) {
-        Predicate byPublicacion = qComentario.fkPublicacion.id.eq(publicacionId);
+        Predicate byPublicacion = qComentario.publicacion.id.eq(publicacionId);
         return comentarioRepository.findAll(byPublicacion);
     }
 
     @Override
     public Iterable<Comentario> getComentarios(long publicacionId, int page, int itemsByPage) {
-        BooleanExpression byPublicacion = qComentario.fkPublicacion.id.eq(publicacionId);
+        BooleanExpression byPublicacion = qComentario.publicacion.id.eq(publicacionId);
         return comentarioRepository.findAll(byPublicacion, new PageRequest(page, itemsByPage, new QSort(qComentario.id.desc()))).getContent();
     }
     

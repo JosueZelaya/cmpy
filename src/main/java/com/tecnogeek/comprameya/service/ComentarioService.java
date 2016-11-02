@@ -49,8 +49,10 @@ public class ComentarioService extends BaseService<Comentario, Long>{
         
         Comentario c = new Comentario();
         c.setTexto(comentario);
-        c.setFkPublicacion(p);
-        c.setFkUsuario(u);
+        c.setPublicacion(p);
+        c.setUsuario(u);
+        
+        
        
         return comentarioRepository.save(c);
     }

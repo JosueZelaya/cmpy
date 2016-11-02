@@ -39,7 +39,7 @@ public class Persona extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "persona_id")
+    @Column(name = "id")
     private Long id;
     @Size(max = 2147483647)
     @Column(name = "nombre")
@@ -67,13 +67,13 @@ public class Persona extends BaseEntity<Long> implements Serializable {
     @Column(name = "direccion")
     private String direccion;     
     @JsonBackReference
-    @OneToMany(mappedBy = "fkPersona")
+    @OneToMany(mappedBy = "persona")
     private List<Empleado> empleadoList;
-    @JoinColumn(name = "fk_ubicacion", referencedColumnName = "ubicacion_id")
+    @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     @ManyToOne
-    private Ubicacion fkUbicacion;
+    private Ubicacion ubicacion;
     @JsonBackReference
-    @OneToMany(mappedBy = "fkPersona")
+    @OneToMany(mappedBy = "persona")
     private List<Usuario> usuarioList;
 
 }

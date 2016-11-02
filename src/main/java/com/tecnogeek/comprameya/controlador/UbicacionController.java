@@ -77,7 +77,7 @@ public class UbicacionController {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(p.getLatitud());
                 ubi.setGmLongitud(p.getLongitud());
-                ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
+                ubi.setPublicacion(publicacionRepository.getPublicacion(id));
                 
                 ubicacionesToSave.add(ubi);
             }
@@ -114,7 +114,7 @@ public class UbicacionController {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
                 ubi.setGmLongitud(listaUbicacion.get(i).getLongitud());
-                ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
+                ubi.setPublicacion(publicacionRepository.getPublicacion(id));
                 ubicacionRepository.save(ubi);
             }
         }
@@ -154,7 +154,7 @@ public class UbicacionController {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(p.getLatitud());
                 ubi.setGmLongitud(p.getLongitud());
-                ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
+                ubi.setPublicacion(publicacionRepository.getPublicacion(id));
                 ubicacionesToSave.add(ubi);
             }
             
@@ -189,7 +189,7 @@ public class UbicacionController {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
                 ubi.setGmLongitud(listaUbicacion.get(i).getLongitud());
-                ubi.setFkPublicacion(publicacionRepository.getPublicacion(id));
+                ubi.setPublicacion(publicacionRepository.getPublicacion(id));
                 ubicacionRepository.save(ubi);
             }
         }

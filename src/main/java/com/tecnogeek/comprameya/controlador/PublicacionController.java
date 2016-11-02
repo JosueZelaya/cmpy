@@ -143,7 +143,7 @@ public class PublicacionController {
                 Recurso recurso = new Recurso();
                 recurso.setNombre(fileName);
                 recurso.setRuta(fileName);
-                recurso.setFkPublicacion(publicacion);
+                recurso.setPublicacion(publicacion);
                 recursos.add(recurso);                
             } catch (IOException ex) {
                 log.error(PublicacionController.class.getName(), "No se pudo cargar imagen", ex);
@@ -153,7 +153,7 @@ public class PublicacionController {
         Integer tipo=Constantes.PUBLICACION_PAGADA;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setId(tipo.longValue());
-        publicacion.setFkTipoPublicacion(tipoPublicacion);
+        publicacion.setTipoPublicacion(tipoPublicacion);
         
         publicacionService.save(publicacion);
         
@@ -180,7 +180,7 @@ public class PublicacionController {
                 Recurso recurso = new Recurso();
                 recurso.setNombre(fileName);
                 recurso.setRuta(fileName);
-                recurso.setFkPublicacion(publicacion);
+                recurso.setPublicacion(publicacion);
                 recursos.add(recurso);                
             } catch (IOException ex) {
                 log.error(PublicacionController.class.getName(), "No se pudo cargar imagen", ex);
@@ -190,11 +190,11 @@ public class PublicacionController {
         Integer tipo=Constantes.PUBLICACION_GRATIS;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setId(tipo.longValue());
-        publicacion.setFkTipoPublicacion(tipoPublicacion);        
+        publicacion.setTipoPublicacion(tipoPublicacion);        
         Producto producto = new Producto();
         producto.setNombre(titulo);
         producto.setPrecio(BigDecimal.valueOf(precio));
-        producto.setFkPublicacion(publicacion);
+        producto.setPublicacion(publicacion);
         producto.setDescripcion(descripcion);
         
         
@@ -207,7 +207,7 @@ public class PublicacionController {
         productos.add(producto);
         publicacion.setProductoList(productos);
         Usuario usuario = uManager.getLoggedUser();
-        publicacion.setFkUsuario(usuario);
+        publicacion.setUsuario(usuario);
         
         ObjectMapper mapper = new ObjectMapper();
         List<pojoUbicacion> list = mapper.readValue(ubicaciones, new TypeReference<List<pojoUbicacion>>() { });
@@ -232,7 +232,7 @@ public class PublicacionController {
                 Ubicacion ubi = new Ubicacion();
                 ubi.setGmLatitud(listaUbicacion.get(i).getLatitud());
                 ubi.setGmLongitud(listaUbicacion.get(i).getLongitud());
-                ubi.setFkPublicacion(pu);
+                ubi.setPublicacion(pu);
                 
                 listaUbicacionTmp.add(ubi);
             }

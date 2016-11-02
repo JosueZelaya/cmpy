@@ -19,7 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,22 +36,27 @@ public class Categoria extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "categoria_id")
+    @Column(name = "id")
     private Long id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "nombre")
     private String nombre;
+    
     @Size(max = 2147483647)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(mappedBy = "fkSubTipoProducto")
+    
+    @OneToMany(mappedBy = "categoria")
     private List<Producto> productoList;
-    @OneToMany(mappedBy = "fkCategoria")
+    
+    @OneToMany(mappedBy = "categoria")
     private List<Categoria> categoriaList;
-    @JoinColumn(name = "fk_categoria", referencedColumnName = "categoria_id")
+    
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
     @ManyToOne
-    private Categoria fkCategoria;
+    private Categoria categoria;
     
 }

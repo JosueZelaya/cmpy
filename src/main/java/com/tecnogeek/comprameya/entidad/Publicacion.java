@@ -49,7 +49,7 @@ public class Publicacion extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "publicacion_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -77,33 +77,43 @@ public class Publicacion extends BaseEntity<Long> implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "denuncias")
-    private int denuncias;    
+    private int denuncias;  
+    
     @JsonBackReference
-    @OneToMany(mappedBy = "fkPublicacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "publicacion")
+    private List<SuscripcionPublicacion> suscriptoresList;
+    
+    @JsonBackReference
+    @OneToMany(mappedBy = "publicacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Recurso> recursoList;
+    
     @JsonBackReference
-    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL)
     private List<Ubicacion> ubicacionList;
+    
     @JsonBackReference
-    @OneToMany(mappedBy = "fkPublicacion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL)
     private List<Producto> productoList;
+    
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPublicacion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicacion")
     private List<Comentario> comentarioList;
+    
     @JsonManagedReference
-    @JoinColumn(name = "fk_tipo_publicacion", referencedColumnName = "tipo_publicacion_id")
+    @JoinColumn(name = "tipo_publicacion", referencedColumnName = "id")
     @ManyToOne
-    private TipoPublicacion fkTipoPublicacion;
+    private TipoPublicacion tipoPublicacion;
+    
     @JsonManagedReference
-    @JoinColumn(name = "fk_usuario", referencedColumnName = "usuario_id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne
-    private Usuario fkUsuario;
+    private Usuario usuario;
     
     @Transient
     public int getPuntaje(){
-        return (this.fkUsuario == null)?
+        return (this.usuario == null)?
                 0: 
-                this.fkUsuario.getPuntaje();
+                this.usuario.getPuntaje();
     }
 
     @Transient

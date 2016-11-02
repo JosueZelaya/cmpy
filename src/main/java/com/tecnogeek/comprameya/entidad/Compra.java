@@ -31,12 +31,12 @@ public class Compra extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "compra_id")
+    @Column(name = "id")
     private Long id;
-    @JoinColumn(name = "fk_usuario", referencedColumnName = "usuario_id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne
-    private Usuario fkUsuario;
-    @OneToMany(mappedBy = "fkCompra")
+    private Usuario usuario;
+    @OneToMany(mappedBy = "compra")
     private List<Cesta> cestaList;
     
 }

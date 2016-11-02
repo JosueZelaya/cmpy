@@ -31,12 +31,12 @@ public class Continente extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "continente_id")
+    @Column(name = "id")
     private Long id;
     @Size(max = 2147483647)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "fkContinente")
+    @OneToMany(mappedBy = "continente")
     private List<Pais> paisList;
     
 }

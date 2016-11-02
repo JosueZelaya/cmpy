@@ -32,12 +32,12 @@ public class TipoUbicacion extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "tipo_ubicacion_id")
+    @Column(name = "id")
     private Long id;
     @Size(max = 2147483647)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "fkTipoUbicacion")
+    @OneToMany(mappedBy = "tipoUbicacion")
     private List<Ubicacion> ubicacionList;
     
 }

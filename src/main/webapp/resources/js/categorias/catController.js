@@ -17,7 +17,6 @@ categorias.controller('catController',['$scope','$rootScope','TIPO_PUBLICACION',
                 });
             });
         });
-        debugger;
     });
     
       
@@ -29,8 +28,6 @@ categorias.controller('catController',['$scope','$rootScope','TIPO_PUBLICACION',
     };
     
     $scope.cargarPublicacionesGratisByCat = function(page,cat,nivel){
-        
-        debugger;
         
         getPublicacionesByCat(TIPO_PUBLICACION.GRATIS, page,cat,nivel)
                 .success(function(publicaciones){

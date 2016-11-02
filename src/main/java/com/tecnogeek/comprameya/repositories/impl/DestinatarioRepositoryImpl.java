@@ -27,16 +27,16 @@ public class DestinatarioRepositoryImpl implements DestinatarioRepositoryCustom{
      @Override
      public Iterable<Destinatario> getDestinarioUsuario(Usuario destinatario, Usuario emisor)
      {
-         BooleanExpression byDestinatario = qDestinatario.fkUsuarioDestinatario.eq(destinatario);
-         BooleanExpression byEmisor = qDestinatario.fkMensaje.fkUsuarioEmisor.eq(emisor);
+         BooleanExpression byDestinatario = qDestinatario.usuarioDestinatario.eq(destinatario);
+         BooleanExpression byEmisor = qDestinatario.mensaje.usuarioEmisor.eq(emisor);
          return destinatarioRepository.findAll(byDestinatario.and(byEmisor));
      }
      
      @Override
      public Iterable<Destinatario> getDestinario(Usuario usuario)
      {
-         BooleanExpression byDestinatario = qDestinatario.fkUsuarioDestinatario.eq(usuario);
-         BooleanExpression byEmisor = qDestinatario.fkMensaje.fkUsuarioEmisor.eq(usuario);
+         BooleanExpression byDestinatario = qDestinatario.usuarioDestinatario.eq(usuario);
+         BooleanExpression byEmisor = qDestinatario.mensaje.usuarioEmisor.eq(usuario);
          return destinatarioRepository.findAll(byDestinatario.or(byEmisor));
      }
     

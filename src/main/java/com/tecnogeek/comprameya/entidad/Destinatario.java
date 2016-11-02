@@ -29,13 +29,13 @@ public class Destinatario extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "destinatario_id")
+    @Column(name = "id")
     private Long id;    
-    @JoinColumn(name = "fk_mensaje", referencedColumnName = "mensaje_id")
+    @JoinColumn(name = "mensaje_id", referencedColumnName = "id")
     @ManyToOne
-    private Mensaje fkMensaje;
-    @JoinColumn(name = "fk_usuario_destinatario", referencedColumnName = "usuario_id")
+    private Mensaje mensaje;
+    @JoinColumn(name = "usuario_destinatario_id", referencedColumnName = "id")
     @ManyToOne
-    private Usuario fkUsuarioDestinatario;
+    private Usuario usuarioDestinatario;
     
 }

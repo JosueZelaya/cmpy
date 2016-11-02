@@ -34,7 +34,7 @@ public class Empresa extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "empresa_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -48,10 +48,10 @@ public class Empresa extends BaseEntity<Long> implements Serializable {
     private BigInteger nit;
     @Column(name = "nrc")
     private BigInteger nrc;
-    @OneToMany(mappedBy = "fkEmpresa")
+    @OneToMany(mappedBy = "empresa")
     private List<Empleado> empleadoList;
-    @JoinColumn(name = "fk_tipo_empresa", referencedColumnName = "tipo_empresa_id")
+    @JoinColumn(name = "tipo_empresa_id", referencedColumnName = "id")
     @ManyToOne
-    private TipoEmpresa fkTipoEmpresa;
+    private TipoEmpresa tipoEmpresa;
     
 }

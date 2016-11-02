@@ -34,18 +34,18 @@ public class Caracteristica extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "caracteristica_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "valor")
     private String valor;
-    @JoinColumn(name = "fk_producto", referencedColumnName = "producto_id")
+    @JoinColumn(name = "producto_id", referencedColumnName = "id")
     @ManyToOne
-    private Producto fkProducto;
-    @JoinColumn(name = "fk_tipo_caracteristica", referencedColumnName = "tipo_caracteristica_id")
+    private Producto producto;
+    @JoinColumn(name = "tipo_caracteristica_id", referencedColumnName = "id")
     @ManyToOne
-    private TipoCaracteristica fkTipoCaracteristica;
+    private TipoCaracteristica tipoCaracteristica;
     
 }

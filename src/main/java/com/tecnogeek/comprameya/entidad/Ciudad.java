@@ -34,17 +34,17 @@ public class Ciudad extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ciudad_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "fkCiudad")
+    @OneToMany(mappedBy = "ciudad")
     private List<Ubicacion> ubicacionList;
-    @JoinColumn(name = "fk_estado", referencedColumnName = "estado_id")
+    @JoinColumn(name = "estado_id", referencedColumnName = "id")
     @ManyToOne
-    private Estado fkEstado;
+    private Estado estado;
 
 }

@@ -80,7 +80,7 @@ public class MensajeController {
         Mensaje mensaje = new Mensaje();
         mensaje.setTitulo(pMensaje.getTitulo());
         mensaje.setTexto(pMensaje.getMensaje());
-        mensaje.setFkUsuarioEmisor(usr_local);
+        mensaje.setUsuarioEmisor(usr_local);
         
         List<Destinatario> ldest = new ArrayList<>();
         
@@ -88,8 +88,8 @@ public class MensajeController {
         {
             Destinatario dest = new Destinatario();
             
-            dest.setFkUsuarioDestinatario(usuarioRepository.findOne(pdest.getId()));
-            dest.setFkMensaje(mensaje);
+            dest.setUsuarioDestinatario(usuarioRepository.findOne(pdest.getId()));
+            dest.setMensaje(mensaje);
             
             
             ldest.add(dest);
@@ -120,18 +120,18 @@ public class MensajeController {
        
        for(Destinatario d : des)
        {
-           if(!d.getFkUsuarioDestinatario().equals(usr_local))
+           if(!d.getUsuarioDestinatario().equals(usr_local))
            {
               
-               if(!lista_usuarios.contains(d.getFkUsuarioDestinatario())){
-                    lista_usuarios.add(d.getFkUsuarioDestinatario());
+               if(!lista_usuarios.contains(d.getUsuarioDestinatario())){
+                    lista_usuarios.add(d.getUsuarioDestinatario());
                }
 
            }
-           else if (!d.getFkMensaje().getFkUsuarioEmisor().equals(usr_local))
+           else if (!d.getMensaje().getUsuarioEmisor().equals(usr_local))
            {
-                if(!lista_usuarios.contains(d.getFkMensaje().getFkUsuarioEmisor())){
-                    lista_usuarios.add(d.getFkMensaje().getFkUsuarioEmisor());
+                if(!lista_usuarios.contains(d.getMensaje().getUsuarioEmisor())){
+                    lista_usuarios.add(d.getMensaje().getUsuarioEmisor());
                 }
              
            }
@@ -165,8 +165,8 @@ public class MensajeController {
             pmensaje.setMensaje(men.getTexto());
             
             pojoEmisor pemisor = new pojoEmisor();
-            pemisor.setId(men.getFkUsuarioEmisor().getId());
-            pemisor.setLogin(men.getFkUsuarioEmisor().getLogin());
+            pemisor.setId(men.getUsuarioEmisor().getId());
+            pemisor.setLogin(men.getUsuarioEmisor().getLogin());
            
             pmensaje.setEmisor(pemisor);
             
@@ -175,8 +175,8 @@ public class MensajeController {
             for(Destinatario des : men.getDestinatarioList())
             {
                 pojoDestinatario pdestinario = new pojoDestinatario();
-                pdestinario.setId(des.getFkUsuarioDestinatario().getId());
-                pdestinario.setLogin(des.getFkUsuarioDestinatario().getLogin());
+                pdestinario.setId(des.getUsuarioDestinatario().getId());
+                pdestinario.setLogin(des.getUsuarioDestinatario().getLogin());
                 
                 lpdestinario.add(pdestinario);
             }

@@ -31,18 +31,18 @@ public class Voto extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "voto_id")
+    @Column(name = "id")
     private Long id;
     @Column(name = "valor")
     private Integer valor;
     @Size(max = 2147483647)
     @Column(name = "comentario")
     private String comentario;
-    @JoinColumn(name = "fk_usuario_evaluado", referencedColumnName = "usuario_id")
+    @JoinColumn(name = "usuario_evaluado_id", referencedColumnName = "id")
     @ManyToOne
-    private Usuario fkUsuarioEvaluado;
-    @JoinColumn(name = "fk_usuario_votante", referencedColumnName = "usuario_id")
+    private Usuario usuarioEvaluado;
+    @JoinColumn(name = "usuario_votante_id", referencedColumnName = "id")
     @ManyToOne
-    private Usuario fkUsuarioVotante;
+    private Usuario usuarioVotante;
 
 }

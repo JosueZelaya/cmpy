@@ -34,7 +34,7 @@ public class Mensaje extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "mensaje_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -46,10 +46,10 @@ public class Mensaje extends BaseEntity<Long> implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "texto")
     private String texto;
-    @OneToMany(mappedBy = "fkMensaje")
+    @OneToMany(mappedBy = "mensaje")
     private List<Destinatario> destinatarioList;
-    @JoinColumn(name = "fk_usuario_emisor", referencedColumnName = "usuario_id")
+    @JoinColumn(name = "usuario_emisor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Usuario fkUsuarioEmisor;
+    private Usuario usuarioEmisor;
     
 }

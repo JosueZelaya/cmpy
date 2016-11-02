@@ -87,8 +87,8 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setLogin(userAccountData.getEmail());
         usuario.setPass(encodedPassword);
-        usuario.setFkPersona(persona);
-        usuario.setFkPerfil(perfil);
+        usuario.setPersona(persona);
+        usuario.setPerfil(perfil);
         
         setImage(userAccountData, usuario);
 

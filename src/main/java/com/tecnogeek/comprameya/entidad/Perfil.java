@@ -36,7 +36,7 @@ public class Perfil extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "perfil_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -47,13 +47,13 @@ public class Perfil extends BaseEntity<Long> implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     @JsonBackReference
-    @OneToMany(mappedBy = "fkPerfil")
+    @OneToMany(mappedBy = "perfil")
     private List<Recurso> recursoList;
-    @JoinColumn(name = "fk_grupo", referencedColumnName = "grupo_id")
+    @JoinColumn(name = "grupo_id", referencedColumnName = "id")
     @ManyToOne
-    private Grupo fkGrupo;
+    private Grupo grupo;
     @JsonBackReference
-    @OneToMany(mappedBy = "fkPerfil")
+    @OneToMany(mappedBy = "perfil")
     private List<Usuario> usuarioList;
 
     public Role getRole(){

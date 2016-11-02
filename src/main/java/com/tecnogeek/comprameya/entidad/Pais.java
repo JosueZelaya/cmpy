@@ -34,17 +34,17 @@ public class Pais extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pais_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "fkPais")
+    @OneToMany(mappedBy = "pais")
     private List<Estado> estadoList;
-    @JoinColumn(name = "fk_continente", referencedColumnName = "continente_id")
+    @JoinColumn(name = "continente_id", referencedColumnName = "id")
     @ManyToOne
-    private Continente fkContinente;
+    private Continente continente;
 
 }

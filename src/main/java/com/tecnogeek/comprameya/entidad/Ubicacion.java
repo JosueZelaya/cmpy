@@ -5,7 +5,6 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
@@ -34,7 +33,7 @@ public class Ubicacion extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ubicacion_id")
+    @Column(name = "id")
     private Long id;
     @Size(max = 2147483647)
     @Column(name = "poligono")
@@ -55,17 +54,17 @@ public class Ubicacion extends BaseEntity<Long> implements Serializable {
     private Double gmLatitud;
     @Column(name = "gm_longitud")
     private Double gmLongitud;
-    @JoinColumn(name = "fk_ciudad", referencedColumnName = "ciudad_id")
+    @JoinColumn(name = "ciudad_id", referencedColumnName = "id")
     @ManyToOne
-    private Ciudad fkCiudad;
+    private Ciudad ciudad;
     @JsonManagedReference
-    @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
+    @JoinColumn(name = "publicacion_id", referencedColumnName = "id")
     @ManyToOne    
-    private Publicacion fkPublicacion;
-    @JoinColumn(name = "fk_tipo_ubicacion", referencedColumnName = "tipo_ubicacion_id")
+    private Publicacion publicacion;
+    @JoinColumn(name = "tipo_ubicacion", referencedColumnName = "id")
     @ManyToOne
-    private TipoUbicacion fkTipoUbicacion;
-    @OneToMany(mappedBy = "fkUbicacion")
+    private TipoUbicacion tipoUbicacion;
+    @OneToMany(mappedBy = "ubicacion")
     private List<Persona> personaList;
         
 }

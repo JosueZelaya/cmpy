@@ -5,9 +5,6 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.mysema.query.types.Predicate;
-import com.tecnogeek.comprameya.entidad.Categoria;
-import com.tecnogeek.comprameya.entidad.QCategoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.CategoriaRepository;
@@ -25,7 +22,5 @@ public class CategoriaService {
     
     @Autowired
     CategoriaRepository categoriaRepository;
-    
-    private final QCategoria qCategoria = QCategoria.categoria;
         
 }

@@ -6,8 +6,8 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.Predicate;
-import com.tecnogeek.comprameya.entidad.QSuscriptor;
-import com.tecnogeek.comprameya.entidad.Suscriptor;
+import com.tecnogeek.comprameya.entidad.QSuscripcionUsuario;
+import com.tecnogeek.comprameya.entidad.SuscripcionUsuario;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.SuscriptorRepository;
 import com.tecnogeek.comprameya.repositories.custom.SuscriptorRepositoryCustom;
@@ -22,24 +22,24 @@ public class SuscriptorRepositoryImpl implements SuscriptorRepositoryCustom {
     @Autowired
     SuscriptorRepository suscriptorRepository;
     
-    private final QSuscriptor qSuscriptor = QSuscriptor.suscriptor;
+    private final QSuscripcionUsuario qSuscripcionUsuario = QSuscripcionUsuario.suscripcionUsuario;
     
     @Override
-    public Iterable<Suscriptor> getSuscriptor(Usuario usuario)
+    public Iterable<SuscripcionUsuario> getSuscriptor(Usuario usuario)
     {
-         Predicate bySuscriptor = qSuscriptor.fkUsuarioSuscriptor.eq(usuario);
+         Predicate bySuscriptor = qSuscripcionUsuario.usuarioSuscriptor.eq(usuario);
          return suscriptorRepository.findAll(bySuscriptor);
     }
     
     @Override
-    public Iterable<Suscriptor> getProveedor(Usuario usuario)
+    public Iterable<SuscripcionUsuario> getProveedor(Usuario usuario)
     {
-         Predicate byProveedor = qSuscriptor.fkUsuarioProveedor.eq(usuario);
+         Predicate byProveedor = qSuscripcionUsuario.usuarioProveedor.eq(usuario);
          return suscriptorRepository.findAll(byProveedor);
     }
     
     @Override
-    public String setSuscriptor(Suscriptor sus)
+    public String setSuscriptor(SuscripcionUsuario sus)
     {
         suscriptorRepository.save(sus);
         return null;

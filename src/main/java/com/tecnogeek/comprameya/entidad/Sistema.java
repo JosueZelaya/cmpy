@@ -30,7 +30,7 @@ public class Sistema extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "sistema_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull

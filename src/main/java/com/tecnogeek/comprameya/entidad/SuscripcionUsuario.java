@@ -22,21 +22,23 @@ import lombok.Data;
  * @author genaro
  */
 @Entity
-@Table(name = "suscriptor")
+@Table(name = "suscriptor_usuario")
 @Data
-public class Suscriptor extends BaseEntity<Long> implements Serializable {
+public class SuscripcionUsuario extends BaseEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "suscriptor_id")
+    @Column(name = "id")
     private Long id;
-    @JoinColumn(name = "fk_usuario_proveedor", referencedColumnName = "usuario_id")
+    
+    @JoinColumn(name = "usuario_proveedor_id", referencedColumnName = "id")
     @ManyToOne
-    private Usuario fkUsuarioProveedor;
-    @JoinColumn(name = "fk_usuario_suscriptor", referencedColumnName = "usuario_id")
+    private Usuario usuarioProveedor;
+    
+    @JoinColumn(name = "usuario_suscriptor_id", referencedColumnName = "id")
     @ManyToOne
-    private Usuario fkUsuarioSuscriptor;
+    private Usuario usuarioSuscriptor;
 
 }

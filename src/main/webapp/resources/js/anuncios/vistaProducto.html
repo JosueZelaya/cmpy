@@ -59,10 +59,10 @@
 
             <ul class="commentList">
                 <li ng-repeat="comentario in comentarioList">
-                    <h6>{{comentario.fkUsuario.fkPersona.nombre}}</h6>
+                    <h6>{{comentario.usuario.persona.nombre}}</h6>
                     <div class="commenterImage">
-                        <img ng-show="{{comentario.fkUsuario.signInProvider === null}}" height="28px" width="28px" src="/images/getThumbnail/{{comentario.fkUsuario.rutaImagen}}" alt="..." />
-                        <img ng-show="{{comentario.fkUsuario.signInProvider !== null}}" height="28px" width="28px" src="{{comentario.fkUsuario.rutaImagen}}" alt="..." />                                
+                        <img ng-show="{{comentario.usuario.signInProvider === null}}" height="28px" width="28px" src="/images/getThumbnail/{{comentario.usuario.rutaImagen}}" alt="..." />
+                        <img ng-show="{{comentario.usuario.signInProvider !== null}}" height="28px" width="28px" src="{{comentario.usuario.rutaImagen}}" alt="..." />                                
                     </div>
                     <div class="commentText">
                         <p class="">{{comentario.texto}}</p> <span class="date sub-text">{{comentario.creationTime | date:'dd-MM-yyyy HH:mm:ss'}}</span>

@@ -41,7 +41,7 @@ public class TipoPublicacion extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "tipo_publicacion_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -49,7 +49,7 @@ public class TipoPublicacion extends BaseEntity<Long> implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @JsonBackReference
-    @OneToMany(mappedBy = "fkTipoPublicacion")
+    @OneToMany(mappedBy = "tipoPublicacion")
     private List<Publicacion> publicacionList;
 
 //    public TipoPublicacion() {

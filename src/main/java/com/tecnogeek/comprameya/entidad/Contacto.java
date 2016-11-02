@@ -30,13 +30,15 @@ public class Contacto extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "contacto_id")
+    @Column(name = "id")
     private Long id;
-    @JoinColumn(name = "fk_usuario_contacto", referencedColumnName = "usuario_id")
+    
+    @JoinColumn(name = "usuario_contacto_id", referencedColumnName = "id")
     @ManyToOne
-    private Usuario fkUsuarioContacto;
-    @JoinColumn(name = "fk_usuario_duenio", referencedColumnName = "usuario_id")
+    private Usuario usuarioContacto;
+    
+    @JoinColumn(name = "usuario_duenio_id", referencedColumnName = "id")
     @ManyToOne
-    private Usuario fkUsuarioDuenio;
+    private Usuario usuarioDuenio;
     
 }

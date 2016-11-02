@@ -5,7 +5,6 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -34,7 +33,7 @@ public class Recurso extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "recurso_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -49,18 +48,18 @@ public class Recurso extends BaseEntity<Long> implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "ruta")
     private String ruta;
-    @JoinColumn(name = "fk_grupo", referencedColumnName = "grupo_id")
+    @JoinColumn(name = "grupo_id", referencedColumnName = "id")
     @ManyToOne
-    private Grupo fkGrupo;
-    @JoinColumn(name = "fk_perfil", referencedColumnName = "perfil_id")
+    private Grupo grupo;
+    @JoinColumn(name = "perfil_id", referencedColumnName = "id")
     @ManyToOne
-    private Perfil fkPerfil;
+    private Perfil perfil;
     @JsonManagedReference
-    @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
+    @JoinColumn(name = "publicacion_id", referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.ALL)
-    private Publicacion fkPublicacion;
-    @JoinColumn(name = "fk_tipo_recurso", referencedColumnName = "tipo_recuso_id")
+    private Publicacion publicacion;
+    @JoinColumn(name = "tipo_recurso_id", referencedColumnName = "id")
     @ManyToOne
-    private TipoRecurso fkTipoRecurso;
+    private TipoRecurso tipoRecurso;
 
 }

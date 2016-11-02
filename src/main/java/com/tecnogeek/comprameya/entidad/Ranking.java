@@ -32,7 +32,7 @@ public class Ranking extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ranking_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -47,7 +47,7 @@ public class Ranking extends BaseEntity<Long> implements Serializable {
     @NotNull
     @Column(name = "maximo")
     private int maximo;
-    @OneToMany(mappedBy = "fkRanking")
+    @OneToMany(mappedBy = "ranking")
     private List<Usuario> usuarioList;
 
 }

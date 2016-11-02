@@ -32,7 +32,7 @@ public class Grupo extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "grupo_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -42,9 +42,9 @@ public class Grupo extends BaseEntity<Long> implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(mappedBy = "fkGrupo")
+    @OneToMany(mappedBy = "grupo")
     private List<Recurso> recursoList;
-    @OneToMany(mappedBy = "fkGrupo")
+    @OneToMany(mappedBy = "grupo")
     private List<Perfil> perfilList;
     
 }

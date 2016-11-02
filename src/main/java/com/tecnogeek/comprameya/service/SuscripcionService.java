@@ -5,7 +5,8 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnogeek.comprameya.entidad.QSuscriptor;
+import com.tecnogeek.comprameya.entidad.QSuscripcionPublicacion;
+import com.tecnogeek.comprameya.entidad.QSuscripcionUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.SuscriptorRepository;
@@ -16,13 +17,15 @@ import com.tecnogeek.comprameya.repositories.SuscriptorRepository;
  */
 
 @Service
-public class SuscriptorService {
+public class SuscripcionService {
     
-    public SuscriptorService(){}
+    public SuscripcionService(){}
     
     @Autowired
     SuscriptorRepository suscriptorRepository;
     
-    private final QSuscriptor qSuscriptor = QSuscriptor.suscriptor;
+    private final QSuscripcionUsuario qSuscripcionUsuario = QSuscripcionUsuario.suscripcionUsuario;
+    
+    private final QSuscripcionPublicacion qSuscripcionPublicacion = QSuscripcionPublicacion.suscripcionPublicacion;
     
 }

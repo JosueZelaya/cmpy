@@ -31,7 +31,7 @@ public class Empleado extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "empleado_id")
+    @Column(name = "id")
     private Long id;
     @Column(name = "telefono")
     private BigInteger telefono;
@@ -41,15 +41,15 @@ public class Empleado extends BaseEntity<Long> implements Serializable {
     private BigInteger afp;
     @Column(name = "isss")
     private BigInteger isss;
-    @JoinColumn(name = "fk_empresa", referencedColumnName = "empresa_id")
+    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne
-    private Empresa fkEmpresa;
+    private Empresa empresa;
     @JsonManagedReference
-    @JoinColumn(name = "fk_persona", referencedColumnName = "persona_id")
+    @JoinColumn(name = "persona_id", referencedColumnName = "id")
     @ManyToOne
-    private Persona fkPersona;
-    @JoinColumn(name = "fk_puesto", referencedColumnName = "puesto_id")
+    private Persona persona;
+    @JoinColumn(name = "puesto_id", referencedColumnName = "id")
     @ManyToOne
-    private Puesto fkPuesto;
+    private Puesto puesto;
     
 }

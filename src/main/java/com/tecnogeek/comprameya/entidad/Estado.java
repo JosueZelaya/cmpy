@@ -33,17 +33,17 @@ public class Estado extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "estado_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "nombre")
     private String nombre;
-    @JoinColumn(name = "fk_pais", referencedColumnName = "pais_id")
+    @JoinColumn(name = "pais_id", referencedColumnName = "id")
     @ManyToOne
-    private Pais fkPais;
-    @OneToMany(mappedBy = "fkEstado")
+    private Pais pais;
+    @OneToMany(mappedBy = "estado")
     private List<Ciudad> ciudadList;
     
 }

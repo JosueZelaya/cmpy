@@ -30,13 +30,13 @@ public class Cesta extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "cesta_id")
+    @Column(name = "id")
     private Long id;
-    @JoinColumn(name = "fk_compra", referencedColumnName = "compra_id")
+    @JoinColumn(name = "compra_id", referencedColumnName = "id")
     @ManyToOne
-    private Compra fkCompra;
-    @JoinColumn(name = "fk_producto", referencedColumnName = "producto_id")
+    private Compra compra;
+    @JoinColumn(name = "producto_id", referencedColumnName = "id")
     @ManyToOne
-    private Producto fkProducto;
+    private Producto producto;
     
 }

@@ -31,7 +31,7 @@ public class TipoNotificacion extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "tipo_notificacion_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -41,7 +41,7 @@ public class TipoNotificacion extends BaseEntity<Long> implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(mappedBy = "fkTipoNotificacion")
+    @OneToMany(mappedBy = "tipoNotificacion")
     private List<Notificacion> notificacionList;
     
 }

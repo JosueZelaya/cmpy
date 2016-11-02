@@ -37,7 +37,7 @@ public class Producto extends BaseEntity<Long> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "producto_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
@@ -56,19 +56,19 @@ public class Producto extends BaseEntity<Long> implements Serializable {
     @NotNull
     @Column(name = "concluido")
     private boolean concluido;
-    @OneToMany(mappedBy = "fkProducto")
+    @OneToMany(mappedBy = "producto")
     private List<Caracteristica> caracteristicaList;
-    @JoinColumn(name = "fk_sub_tipo_producto", referencedColumnName = "categoria_id")
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
     @ManyToOne
-    private Categoria fkSubTipoProducto;
-    @JoinColumn(name = "fk_modelo", referencedColumnName = "modelo_id")
+    private Categoria categoria;
+    @JoinColumn(name = "modelo_id", referencedColumnName = "id")
     @ManyToOne
-    private Modelo fkModelo;
+    private Modelo modelo;
     @JsonManagedReference
-    @JoinColumn(name = "fk_publicacion", referencedColumnName = "publicacion_id")
+    @JoinColumn(name = "publicacion_id", referencedColumnName = "id")
     @ManyToOne
-    private Publicacion fkPublicacion;
-    @OneToMany(mappedBy = "fkProducto")
+    private Publicacion publicacion;
+    @OneToMany(mappedBy = "producto")
     private List<Cesta> cestaList;
 
 }

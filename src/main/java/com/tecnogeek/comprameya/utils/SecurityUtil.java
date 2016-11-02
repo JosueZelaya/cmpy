@@ -5,7 +5,6 @@
  */
 package com.tecnogeek.comprameya.utils;
 
-import com.tecnogeek.comprameya.dto.SocialSecurityUser;
 import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,20 +21,20 @@ public class SecurityUtil {
         
         SocialSecurityUserDTO socialUser = SocialSecurityUserDTO.getBuilder()
                   .id(usuario.getId())
-                  .nombre(usuario.getFkPersona().getNombre())
-                  .apellido(usuario.getFkPersona().getApellido())
-                  .fechaNacimiento(usuario.getFkPersona().getFechaNacimiento())
-                  .genero(usuario.getFkPersona().getGenero())
-                  .telefono(usuario.getFkPersona().getTelefono())
-                  .celular(usuario.getFkPersona().getCelular())
-                  .correo(usuario.getFkPersona().getCorreo())
-                  .dui(usuario.getFkPersona().getDui())
-                  .direccion(usuario.getFkPersona().getDireccion())
+                  .nombre(usuario.getPersona().getNombre())
+                  .apellido(usuario.getPersona().getApellido())
+                  .fechaNacimiento(usuario.getPersona().getFechaNacimiento())
+                  .genero(usuario.getPersona().getGenero())
+                  .telefono(usuario.getPersona().getTelefono())
+                  .celular(usuario.getPersona().getCelular())
+                  .correo(usuario.getPersona().getCorreo())
+                  .dui(usuario.getPersona().getDui())
+                  .direccion(usuario.getPersona().getDireccion())
                   .login(usuario.getLogin())                  
                   .password(usuario.getPass())
                   .username(usuario.getLogin())
                   .puntaje(usuario.getPuntaje())
-                  .role(usuario.getFkPerfil().getRole())
+                  .role(usuario.getPerfil().getRole())
                   .rutaImagen(usuario.getRutaImagen())
                   .socialSignInProvider(usuario.getSignInProvider())
                   .build();

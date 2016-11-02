@@ -26,7 +26,7 @@ public class RecursoRepositoryImpl implements RecursoRepositoryCustom{
     
     @Override
     public Iterable<Recurso> getRecursos(Long publicacionId, int page, int itemsByPage) {
-        BooleanExpression byPublicacion = qRecurso.fkPublicacion.id.eq(publicacionId);
+        BooleanExpression byPublicacion = qRecurso.publicacion.id.eq(publicacionId);
         return recursoRepository.findAll(byPublicacion, new PageRequest(page, itemsByPage)).getContent();
     }
 

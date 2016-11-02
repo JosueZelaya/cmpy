@@ -31,14 +31,14 @@ public class TipoCaracteristica extends BaseEntity<Long> implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "tipo_caracteristica_id")
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "fkTipoCaracteristica")
+    @OneToMany(mappedBy = "tipoCaracteristica")
     private List<Caracteristica> caracteristicaList;
 
 }

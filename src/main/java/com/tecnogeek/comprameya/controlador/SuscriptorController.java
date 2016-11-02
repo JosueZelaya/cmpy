@@ -6,7 +6,7 @@
 package com.tecnogeek.comprameya.controlador;
 
 
-import com.tecnogeek.comprameya.entidad.Suscriptor;
+import com.tecnogeek.comprameya.entidad.SuscripcionUsuario;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
 import com.tecnogeek.comprameya.repositories.SuscriptorRepository;
@@ -40,14 +40,14 @@ public class SuscriptorController {
         String userName = auth.getName();
         Usuario usr_local = usuarioRepository.findActiveUserByLogin(userName);
         
-        Iterable<Suscriptor> lsuscriptor = new ArrayList<>();
+        Iterable<SuscripcionUsuario> lsuscriptor = new ArrayList<>();
         lsuscriptor = suscriptorRepository.getSuscriptor(usr_local);
         
         List<Usuario> lusr  = new ArrayList<>();
         
-        for(Suscriptor sus : lsuscriptor )
+        for(SuscripcionUsuario sus : lsuscriptor )
         {
-            lusr.add(sus.getFkUsuarioSuscriptor());
+            lusr.add(sus.getUsuarioSuscriptor());
         }
         
         List<pojoUsuario> lpUsuario = new ArrayList<>();
@@ -71,14 +71,14 @@ public class SuscriptorController {
         String userName = auth.getName();
         Usuario usr_local = usuarioRepository.findActiveUserByLogin(userName);
         
-        Iterable<Suscriptor> lsuscriptor = new ArrayList<>();
+        Iterable<SuscripcionUsuario> lsuscriptor = new ArrayList<>();
         lsuscriptor = suscriptorRepository.getProveedor(usr_local);
         
         List<Usuario> lusr  = new ArrayList<>();
         
-        for(Suscriptor sus : lsuscriptor )
+        for(SuscripcionUsuario sus : lsuscriptor )
         {
-            lusr.add(sus.getFkUsuarioProveedor());
+            lusr.add(sus.getUsuarioProveedor());
         }
         
         List<pojoUsuario> lpUsuario = new ArrayList<>();
@@ -104,9 +104,9 @@ public class SuscriptorController {
         
         Usuario usr_pro = usuarioRepository.findOne(id);
         
-        Suscriptor sus = new Suscriptor();
-        sus.setFkUsuarioProveedor(usr_pro);
-        sus.setFkUsuarioSuscriptor(usr_local);
+        SuscripcionUsuario sus = new SuscripcionUsuario();
+        sus.setUsuarioProveedor(usr_pro);
+        sus.setUsuarioSuscriptor(usr_local);
         
         suscriptorRepository.setSuscriptor(sus);
         

@@ -27,7 +27,7 @@ public class UbicacionRepositoryImpl implements UbicacionRepositoryCustom{
     @Override
     public Iterable<Ubicacion> getUbicacionPublicacion(Publicacion publicacion)
     {
-        Predicate byPublicacion = qUbicacion.fkPublicacion.eq(publicacion);
+        Predicate byPublicacion = qUbicacion.publicacion.eq(publicacion);
         return ubicacionRepository.findAll(byPublicacion);
     }
     

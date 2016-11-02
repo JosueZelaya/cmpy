@@ -32,7 +32,7 @@ public class SecurityUser_original extends Usuario implements UserDetails{
             this.setPuntaje(user.getPuntaje());             
 //            this.setSisSesionActiva(user.isSisSesionActiva());
 //            this.setSisActivo(user.isSisActivo());            
-            this.setFkPerfil(user.getFkPerfil());
+            this.setPerfil(user.getPerfil());
         }         
     }
     
@@ -40,7 +40,7 @@ public class SecurityUser_original extends Usuario implements UserDetails{
     public Collection<? extends GrantedAuthority> getAuthorities() {
         
         Collection<GrantedAuthority> authorities = new ArrayList<>(); 
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(super.getFkPerfil().getNombre()); 
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(super.getPerfil().getNombre()); 
         
         authorities.add(authority);
         return authorities;
