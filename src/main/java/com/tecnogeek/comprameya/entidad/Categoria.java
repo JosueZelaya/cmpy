@@ -52,11 +52,11 @@ public class Categoria extends BaseEntity<Long> implements Serializable {
     @OneToMany(mappedBy = "categoria")
     private List<Producto> productoList;
     
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categoriaPadre")
     private List<Categoria> categoriaList;
     
-    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
+    @JoinColumn(name = "categoria_padre_id", referencedColumnName = "id")
     @ManyToOne
-    private Categoria categoria;
+    private Categoria categoriaPadre;
     
 }

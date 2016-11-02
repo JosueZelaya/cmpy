@@ -97,7 +97,7 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
         $scope.categorias_nivel2 = [];
         
         angular.forEach($scope.categorias, function (item) {
-            debugger;
+            
             if(item.id == $scope.select_nivel1)
             {
                 angular.forEach(item.hijos, function (sub_item) {
@@ -112,7 +112,7 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
         $scope.categorias_nivel3 = [];
         
         angular.forEach($scope.categorias, function (item) {
-            debugger;
+            
             if(item.id == $scope.select_nivel1)
             {
                 angular.forEach(item.hijos, function (sub_item) {
@@ -128,8 +128,6 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
     };
     
     $scope.setGlobalcat = function(){
-        
-        debugger;
         
         if(!isNaN($scope.select_nivel3))
         {

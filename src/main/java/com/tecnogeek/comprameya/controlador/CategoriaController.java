@@ -6,7 +6,6 @@
 package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.entidad.Categoria;
-import com.tecnogeek.comprameya.service.CategoriaService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

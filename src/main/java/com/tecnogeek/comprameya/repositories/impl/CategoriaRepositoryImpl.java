@@ -20,17 +20,17 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom{
     
     @Autowired
     CategoriaRepository categoriaRepository;
-    private final QCategoria qCategoria = QCategoria.categoria1;
+    private final QCategoria qCategoria = QCategoria.categoria;
     
     @Override
     public Iterable<Categoria> getCategoriaPadres(){
-        Predicate esPadre = qCategoria.categoria.isNull();
+        Predicate esPadre = qCategoria.categoriaPadre.isNull();
         return categoriaRepository.findAll(esPadre);
     }
     
     @Override
     public Iterable<Categoria> findByFkCategoria(Categoria categoria){
-        Predicate byCategoria = qCategoria.categoria.eq(categoria);
+        Predicate byCategoria = qCategoria.categoriaPadre.eq(categoria);
         return categoriaRepository.findAll(byCategoria);
     }
     

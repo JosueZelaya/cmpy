@@ -36,7 +36,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
-import com.tecnogeek.comprameya.service.CategoriaService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -200,7 +199,7 @@ public class PublicacionController {
         
         Categoria cat = new Categoria();
         cat.setId(categoriaId);
-        producto.setFkSubTipoProducto(cat);
+        producto.setCategoria(cat);
                 
                 
         List<Producto> productos = new ArrayList();
