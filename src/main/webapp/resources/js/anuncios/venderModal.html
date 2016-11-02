@@ -5,6 +5,32 @@
     <label for="titulo">Agregue el nombre del producto</label>
     <input ng-model="titulo" path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
     <br/>
+        <div class='col-md-4'>  
+            <div class="form-group">
+                <label>Categoria 1</label>
+                <select class="form-control" ng-model='select_nivel1' ng-change='getSelectNivel2()'>
+                    <option ng-repeat='cat in categorias_nivel1' value='{{cat.id}}'>{{cat.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div class='col-md-4'>  
+            <div class="form-group">
+                <label>Categoria 2</label>
+                <select class="form-control" ng-model='select_nivel2' ng-change='getSelectNivel3()'>
+                    <option ng-repeat='cat in categorias_nivel2' value='{{cat.id}}'>{{cat.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div class='col-md-4'>  
+            <div class="form-group">
+                <label>Categoria 3</label>
+                <select class="form-control" ng-model='select_nivel3' ng-change='setGlobalcat()'>
+                    <option ng-repeat='cat in categorias_nivel3' value='{{cat.id}}'>{{cat.nombre}}</option>
+                </select>
+            </div>
+        </div>
+    <br/>
+    <br/>
     <label for="precio">Precio del Producto</label>
     <input ng-model="precio" name="precio" type="number" min="0" max="10000000" id="precio" class="form-control">
     <br/>

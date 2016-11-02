@@ -1,4 +1,7 @@
 categorias.controller('catController',['$scope','$rootScope','TIPO_PUBLICACION','catService','anunciosService' , function($scope,$rootScope,TIPO_PUBLICACION,catService,anunciosService) {
+    
+
+        
     catService.getCategorias()
     .success(function (response) 
     {   
@@ -14,9 +17,10 @@ categorias.controller('catController',['$scope','$rootScope','TIPO_PUBLICACION',
                 });
             });
         });
-        
+        debugger;
     });
     
+      
     var getPublicacionesByCat = function(tipo,pagina,cat,nivel) {
         return anunciosService.getAnunciosByCat(tipo,pagina,cat,nivel)
                     .success(function (publicaciones) {                        
@@ -34,5 +38,6 @@ categorias.controller('catController',['$scope','$rootScope','TIPO_PUBLICACION',
         });
     };
     
+
     
 }]);

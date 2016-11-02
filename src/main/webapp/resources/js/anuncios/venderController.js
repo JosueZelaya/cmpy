@@ -1,4 +1,4 @@
-modulo_anuncios.controller('venderController', function ($rootScope, $scope, $stateParams, anunciosService,mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+modulo_anuncios.controller('venderController', function ($rootScope, $scope, $stateParams, anunciosService,mapService,catService, TIPO_PUBLICACION, flowFactory, Publicacion) {
     
     var getPublicaciones = function(tipo,pagina) {
         return anunciosService.getAnuncios(tipo,pagina)
@@ -66,5 +66,77 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
     };
     
     init();
+    
+    //catagorias
+    
+    $scope.categorias_nivel1 = [];
+    $scope.categorias_nivel2 = [];
+    $scope.categorias_nivel3 = [];
+    
+    $scope.select_nivel1;
+    $scope.select_nivel2;
+    $scope.select_nivel3;  
+    
+    catService.getCategorias()
+    .success(function (response) 
+    {   
+        $scope.categorias = response;
+        $scope.getSelectNivel1();
+    });  
+    
+    
+    $scope.getSelectNivel1= function(){
+        
+         angular.forEach($scope.categorias, function (item) {
+            $scope.categorias_nivel1.push(item);
+        });       
+    };
+    
+    $scope.getSelectNivel2 = function(){
+        
+        $scope.categorias_nivel2 = [];
+        
+        angular.forEach($scope.categorias, function (item) {
+            debugger;
+            if(item.id == $scope.select_nivel1)
+            {
+                angular.forEach(item.hijos, function (sub_item) {
+                    $scope.categorias_nivel2.push(sub_item);
+                });
+            }
+        });        
+    };
+    
+    $scope.getSelectNivel3 = function(){
+        
+        $scope.categorias_nivel3 = [];
+        
+        angular.forEach($scope.categorias, function (item) {
+            debugger;
+            if(item.id == $scope.select_nivel1)
+            {
+                angular.forEach(item.hijos, function (sub_item) {
+                     if(sub_item.id == $scope.select_nivel2)
+                    {
+                        angular.forEach(sub_item.hijos, function (sub_sub_item) {
+                            $scope.categorias_nivel3.push(sub_sub_item);
+                        });                       
+                    }
+                });
+            }
+        });        
+    };
+    
+    $scope.setGlobalcat = function(){
+        
+        debugger;
+        
+        if(!isNaN($scope.select_nivel3))
+        {
+            $scope.catagoriaId = parseInt($scope.select_nivel3);  
+        }
+        
+       
+    };   
 
 });
