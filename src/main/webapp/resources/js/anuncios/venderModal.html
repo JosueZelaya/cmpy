@@ -7,7 +7,7 @@
     <br/>
         <div class='col-md-4'>  
             <div class="form-group">
-                <label>Categoria 1</label>
+                <label>Categoria</label>
                 <select class="form-control" ng-model='select_nivel1' ng-change='getSelectNivel2()'>
                     <option ng-repeat='cat in categorias_nivel1' value='{{cat.id}}'>{{cat.nombre}}</option>
                 </select>
@@ -15,7 +15,7 @@
         </div>
         <div class='col-md-4'>  
             <div class="form-group">
-                <label>Categoria 2</label>
+                <label>Sub Categoria</label>
                 <select class="form-control" ng-model='select_nivel2' ng-change='getSelectNivel3()'>
                     <option ng-repeat='cat in categorias_nivel2' value='{{cat.id}}'>{{cat.nombre}}</option>
                 </select>
@@ -23,7 +23,7 @@
         </div>
         <div class='col-md-4'>  
             <div class="form-group">
-                <label>Categoria 3</label>
+                <label>Tipo</label>
                 <select class="form-control" ng-model='select_nivel3' ng-change='setGlobalcat()'>
                     <option ng-repeat='cat in categorias_nivel3' value='{{cat.id}}'>{{cat.nombre}}</option>
                 </select>
