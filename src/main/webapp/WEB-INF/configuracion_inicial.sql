@@ -10,3 +10,12 @@ insert into categoria (nombre,descripcion,modification_time,creation_time,fk_cat
 insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('SONY','...',current_date,current_date,3,true,1);
 insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('RCA','...',current_date,current_date,3,true,1);
 insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('LG','...',current_date,current_date,3,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('LG','...',current_date,current_date,2,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('SONY','...',current_date,current_date,2,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('Fotografia','...',current_date,current_date,null,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('Camara Digital','...',current_date,current_date,9,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('Camara de Accion','...',current_date,current_date,9,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('Nikon','...',current_date,current_date,10,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('Canon','...',current_date,current_date,10,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('Xiaomi','...',current_date,current_date,11,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,fk_categoria,sis_activo,version) values ('GoPro','...',current_date,current_date,11,true,1);

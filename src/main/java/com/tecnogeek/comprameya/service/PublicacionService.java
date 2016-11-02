@@ -56,15 +56,31 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
                 publicacionRepository.getTotalPublicacionesGratis();        
     }
     
-    public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage,TipoPublicacionEnum tipo, long categoria_id)
+    public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage,TipoPublicacionEnum tipo, long categoria_id, int nivel)
     {
         Iterable<Publicacion> publicaciones = new ArrayList();
         
         boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
         
-        publicaciones = (esPagada)?
-                publicacionRepository.getPublicacionesPagadas(page, itemsByPage, categoria_id):
-                publicacionRepository.getPublicacionesGratis(page, itemsByPage, categoria_id);
+        if(esPagada)
+        {
+           publicaciones = publicacionRepository.getPublicacionesPagadas(page, itemsByPage, categoria_id);
+           
+           
+        }
+        else
+        {
+  
+            switch (nivel) {
+                case 1:  publicaciones = publicacionRepository.getPublicacionesGratisCat(page, itemsByPage, categoria_id);
+                         break;
+                case 2:  publicaciones = publicacionRepository.getPublicacionesGratisSubCat(page, itemsByPage, categoria_id);
+                         break;
+                case 3:  publicaciones = publicacionRepository.getPublicacionesGratisSubSubCat(page, itemsByPage, categoria_id);
+                         break;
+            }
+        }
+        
         
         
         return publicaciones;

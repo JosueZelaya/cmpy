@@ -4,21 +4,28 @@
             <h3 class="panel-title">Categorias</h3>
             <span class="pull-right clickable" ng-hide="!isPhoneOrTablet" ng-click="setBtnStyle()"><i ng-class="btnstyle"></i></span>
         </div>  
-
-
         <div class="panel-body">
             <div id="refcat_ini" class="list-group cat level1" ng-repeat="categoria in categorias">
-                <a id="cat_{{categoria.id}}" href="#" class="list-group-item" ng-click="categoria.collapse = !categoria.collapse">
-                    {{categoria.nombre}}
-                </a>   
+                <div id="cat_{{categoria.id}}" class="list-group-item btn-group"  role="group" aria-label="...">
+                    <button class="btn btn-default btn-cat-n" ng-click="categoria.collapse = !categoria.collapse">{{categoria.nombre}}</button>
+                    <button class="btn btn-default btn-cat-l" ng-click="cargarPublicacionesGratisByCat(0,categoria.id,1)">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
                 <div id="refcat_{{categoria.id}}" class="list-group cat level2" uib-collapse="categoria.collapse" ng-repeat="sub_categoria in categoria.hijos">
-                    <a id="cat_{{sub_categoria.id}}" href="#" class="list-group-item" ng-click="sub_categoria.collapse = !sub_categoria.collapse">
-                        {{sub_categoria.nombre}}
-                    </a>
+                    <div id="cat_{{sub_categoria.id}}"  class="list-group-item btn-group" role="group" aria-label="...">
+                        <button class="btn btn-default btn-cat-n" ng-click="sub_categoria.collapse = !sub_categoria.collapse">{{sub_categoria.nombre}}</button>
+                        <button class="btn btn-default btn-cat-l" ng-click="cargarPublicacionesGratisByCat(0,sub_categoria.id,2)">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
                     <div id="refcat_{{categoria.id}}" class="list-group cat level3" uib-collapse="sub_categoria.collapse" ng-repeat="sub_sub_categoria in sub_categoria.hijos">
-                        <a id="cat_{{sub_sub_categoria.id}}" href="#" class="list-group-item" ng-click="cargarPublicacionesGratisByCat(0,sub_sub_categoria.id)">
-                            {{sub_sub_categoria.nombre}}
-                        </a>
+                        <div id="cat_{{sub_sub_categoria.id}}"  class="list-group-item btn-group" role="group" aria-label="...">
+                            <button class="btn btn-default btn-cat-n">{{sub_sub_categoria.nombre}}</button>
+                            <button class="btn btn-default btn-cat-l" ng-click="cargarPublicacionesGratisByCat(0,sub_sub_categoria.id,3)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

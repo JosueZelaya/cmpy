@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.repositories.impl;
 
+import com.mysema.query.jpa.JPASubQuery;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.Predicate;
 import com.mysema.query.types.expr.BooleanExpression;
@@ -40,6 +41,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     private final QComentario qComentario = QComentario.comentario;
     private final QUsuario qUsuario = QUsuario.usuario;
     private final QCategoria qCategoria = QCategoria.categoria;
+    private final QCategoria qCategoriaPadre = QCategoria.categoria;
     private final QProducto qProducto = QProducto.producto;
     
     public JPAQuery newJpaQuery() {
@@ -90,22 +92,52 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     }
 
     @Override
-    public Iterable<Publicacion> getPublicacionesGratis(int page, int itemsByPage, long categoria_id) {
+    public Iterable<Publicacion> getPublicacionesGratisSubSubCat(int page, int itemsByPage, long categoria_id) {
         
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
         BooleanExpression sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
         BooleanExpression porCategoria = qProducto.fkSubTipoProducto.id.eq(categoria_id);
         
-        return newJpaQuery().distinct().from(qPublicacion,qProducto)
+        return newJpaQuery().from(qPublicacion)
             .leftJoin(qPublicacion.productoList,qProducto)
-            .fetch()
             .where(sonGratis.and(porCategoria)).list(qPublicacion);
         
-//        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-//        BooleanExpression sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
-//        BooleanExpression porCategoria = qPublicacion.productoList.get(0).fkSubTipoProducto.id.eq(categoria_id);
-//        return publicacionRepository.findAll(sonGratis.and(porCategoria), new PageRequest(page, itemsByPage, new QSort(qPublicacion.id.desc()))).getContent();
-    }    
+    }
+
+    @Override
+    public Iterable<Publicacion> getPublicacionesGratisSubCat(int page, int itemsByPage, long categoria_id) {
+        
+        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
+        BooleanExpression sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
+       
+        
+        return newJpaQuery().from(qPublicacion)
+            .leftJoin(qPublicacion.productoList,qProducto)
+            .leftJoin(qProducto.fkSubTipoProducto,qCategoria)
+            .where(sonGratis.and(qCategoria.in( newJpaQuery()
+                                                .from(qCategoria)
+                                                    .where(qCategoria.fkCategoria.id.eq(categoria_id)).list(qCategoria))
+            )).list(qPublicacion);
+        
+    }  
+
+    @Override
+    public Iterable<Publicacion> getPublicacionesGratisCat(int page, int itemsByPage, long categoria_id) {
+        
+        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
+        BooleanExpression sonGratis = qPublicacion.fkTipoPublicacion.id.eq(id);
+        
+        
+        return newJpaQuery().from(qPublicacion)
+            .leftJoin(qPublicacion.productoList,qProducto)
+            .leftJoin(qProducto.fkSubTipoProducto,qCategoria)
+            .leftJoin(qCategoria.fkCategoria,qCategoriaPadre)
+            .where(sonGratis.and(qCategoriaPadre.fkCategoria.in(newJpaQuery()
+                                                .from(qCategoria)
+                                                    .where(qCategoria.id.eq(categoria_id)).list(qCategoria))
+            )).list(qPublicacion);
+        
+    }      
 
     @Override
     public long getTotalPublicacionesPagadas() {

@@ -30,7 +30,11 @@ public interface PublicacionRepositoryCustom {
     public long getTotalPublicacionesGratis();
     
     public Iterable<Publicacion> getPublicacionesPagadas(int page, int itemsByPage, long categoria_id);
-
-    public Iterable<Publicacion> getPublicacionesGratis(int page, int itemsByPage, long categoria_id);
+    
+    public Iterable<Publicacion> getPublicacionesGratisSubSubCat(int page, int itemsByPage, long categoria_id);
+    
+    public Iterable<Publicacion> getPublicacionesGratisSubCat(int page, int itemsByPage, long categoria_id);
+    
+    public Iterable<Publicacion> getPublicacionesGratisCat(int page, int itemsByPage, long categoria_id);
     
 }

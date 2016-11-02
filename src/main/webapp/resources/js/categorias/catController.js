@@ -17,18 +17,18 @@ categorias.controller('catController',['$scope','$rootScope','TIPO_PUBLICACION',
         
     });
     
-    var getPublicacionesByCat = function(tipo,pagina,cat) {
-        return anunciosService.getAnunciosByCat(tipo,pagina,cat)
+    var getPublicacionesByCat = function(tipo,pagina,cat,nivel) {
+        return anunciosService.getAnunciosByCat(tipo,pagina,cat,nivel)
                     .success(function (publicaciones) {                        
                             return publicaciones;                            
                         });
     };
     
-    $scope.cargarPublicacionesGratisByCat = function(page,cat){
+    $scope.cargarPublicacionesGratisByCat = function(page,cat,nivel){
         
         debugger;
         
-        getPublicacionesByCat(TIPO_PUBLICACION.GRATIS, page,cat)
+        getPublicacionesByCat(TIPO_PUBLICACION.GRATIS, page,cat,nivel)
                 .success(function(publicaciones){
             $rootScope.publicaciones = publicaciones;
         });
