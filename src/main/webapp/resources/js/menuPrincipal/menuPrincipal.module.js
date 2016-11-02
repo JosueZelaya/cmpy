@@ -1,1 +1,1 @@
-angular.module('cmpy.menuPrincipal', []);
+menuPrincipal = angular.module('cmpy.menuPrincipal', []);
