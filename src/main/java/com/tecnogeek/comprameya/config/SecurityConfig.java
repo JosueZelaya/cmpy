@@ -96,7 +96,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/publicacion",
                         "/publicacion/agregarAnuncio",
                         "/comentario",
-                        "/comentario/agregarComentario"
+                        "/comentario/agregarComentario",
+                        "/notificacion/**"
                 ).hasRole("USER")
                 .antMatchers(
                         "/admin", 

@@ -6,7 +6,7 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
                 .success(function(response){
                    return response; 
                 });
-    }
+    };
 
     this.getTotalPaginas = function(tipo){
         var req = "/publicacion/getTotalPaginas/"+tipo;
@@ -14,7 +14,7 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
                 .success(function(response){
                     return response;
                 });
-    }
+    };
 
     this.getPublicacionById = function (id){
         var req = "/publicacion/getPublicacionById/"+id;
@@ -23,7 +23,7 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
                 {
                     return response;
                 });
-    }
+    };
 
     this.getAnuncios = function (tipo, page) {
         var req = "/publicacion/getAnuncios/" + tipo + "/" + page;

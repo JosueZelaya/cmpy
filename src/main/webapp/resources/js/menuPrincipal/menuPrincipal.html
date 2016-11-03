@@ -1,5 +1,5 @@
 <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation">
-    <div class="container">
+    <div class="container" ng-controller="menuPrincipalController">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
                 <span class="sr-only">Toggle navigation</span>
@@ -19,7 +19,15 @@
 
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>                
-                <li class="active"><a href="/cmpy/angular">Angular</a></li> 
+                <li ng-show="!authenticated" class="active"><a href="/cmpy/angular">Angular</a></li>                 
+                <li class="dropdown" uib-dropdown="" ng-show="authenticated">                    
+                    <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{totalNotificaciones}}                        
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="notificacion in notificaciones"><a href="" ui-sref="{{notificacion.link}}">{{notificacion.mensaje}}</a></li>
+                    </ul>
+                </li>
 
                 <!--<div ng-if="usuario.login === '' || usuario.login === 'anonymousUser'">-->
                 <li ng-show="!authenticated" ng-controller="modalController">
@@ -45,7 +53,7 @@
                 <!--</div>-->
             </ul>                    
         </div>
-        <form class="navbar-form navbar-left" style="width: 100%" role="search" ng-controller="menuPrincipalController">
+        <form class="navbar-form navbar-left" style="width: 100%" role="search">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Buscar Productos..." ng-model="match">
                 <span class="input-group-btn">

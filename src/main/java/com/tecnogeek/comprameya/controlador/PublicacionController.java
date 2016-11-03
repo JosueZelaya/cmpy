@@ -17,6 +17,7 @@ import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUbicacion;
 import com.tecnogeek.comprameya.entidad.Categoria;
+import com.tecnogeek.comprameya.entidad.SuscripcionPublicacion;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
@@ -231,6 +232,14 @@ public class PublicacionController {
         List<pojoUbicacion> list = mapper.readValue(ubicaciones, new TypeReference<List<pojoUbicacion>>() { });
         
         publicacion.setUbicacionList(getUbicacionesI(publicacion, list));
+        
+        SuscripcionPublicacion suscripcionPublicacion = new SuscripcionPublicacion();
+        suscripcionPublicacion.setPublicacion(publicacion);
+        suscripcionPublicacion.setUsuario(usuario);
+        
+        List<SuscripcionPublicacion> suscriptores = new ArrayList<>();
+        suscriptores.add(suscripcionPublicacion);
+        publicacion.setSuscriptoresList(suscriptores);
         
         publicacionService.save(publicacion);
         

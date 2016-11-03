@@ -6,12 +6,12 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.SuscripcionUsuario;
-import com.tecnogeek.comprameya.repositories.custom.SuscriptorRepositoryCustom;
+import com.tecnogeek.comprameya.repositories.custom.SuscripcionUsuarioRepositoryCustom;
 
 /**
  *
  * @author genaro
  */
-public interface SuscriptorRepository 
+public interface SuscripcionUsuarioRepository 
         extends BaseRepository<SuscripcionUsuario,Long>, 
-        SuscriptorRepositoryCustom {}
+        SuscripcionUsuarioRepositoryCustom {}

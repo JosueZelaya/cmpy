@@ -9,7 +9,6 @@ package com.tecnogeek.comprameya.controlador;
 import com.tecnogeek.comprameya.entidad.SuscripcionUsuario;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
-import com.tecnogeek.comprameya.repositories.SuscriptorRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.tecnogeek.comprameya.repositories.SuscripcionUsuarioRepository;
 
 /**
  *
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/suscripcion")
 public class SuscriptorController {
     @Autowired
-    SuscriptorRepository suscriptorRepository;
+    SuscripcionUsuarioRepository suscriptorRepository;
     @Autowired
     UsuarioRepository usuarioRepository;
     

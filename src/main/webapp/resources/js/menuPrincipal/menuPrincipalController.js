@@ -1,4 +1,4 @@
-menuPrincipal.controller('menuPrincipalController',['$scope','$rootScope','anunciosService','TIPO_PUBLICACION' , function($scope,$rootScope,anunciosService,TIPO_PUBLICACION) {
+menuPrincipal.controller('menuPrincipalController',['$scope','$rootScope','anunciosService','notificacionService','TIPO_PUBLICACION' , function($scope,$rootScope,anunciosService,notificacionService,TIPO_PUBLICACION) {
     
 
     $scope.match = "";
@@ -10,6 +10,20 @@ menuPrincipal.controller('menuPrincipalController',['$scope','$rootScope','anunc
                         });
     };
     
+    var getTotalNotificaciones = function(){
+        return notificacionService.getTotalNotificaciones()
+                .success(function(total){
+                    return total;
+                });
+    };
+    
+    var getNotificaciones = function(){
+        return notificacionService.getNotificaciones()
+                .success(function(notificaciones){
+                    return notificaciones;
+                });
+    };
+    
     $scope.cargarPublicacionesGratisByMatch = function(page,match){
         
         getPublicacionesByMatch(TIPO_PUBLICACION.GRATIS, page,match)
@@ -17,7 +31,25 @@ menuPrincipal.controller('menuPrincipalController',['$scope','$rootScope','anunc
             $rootScope.publicaciones = publicaciones;
         });
     };
+    
+    var init = function () {
+        
+//        if($rootScope.authenticated){
+            getTotalNotificaciones()
+                    .success(function(total){
+                        $scope.totalNotificaciones = total;
+                    });
+                    
+            getNotificaciones()
+                    .success(function(notificaciones){
+                        $scope.notificaciones = notificaciones;
+                    });
+//        }
+            
+        
+    };
 
+    init();
 
 
 }]);

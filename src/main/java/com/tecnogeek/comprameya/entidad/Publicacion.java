@@ -80,7 +80,7 @@ public class Publicacion extends BaseEntity<Long> implements Serializable {
     private int denuncias;  
     
     @JsonBackReference
-    @OneToMany(mappedBy = "publicacion")
+    @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL)
     private List<SuscripcionPublicacion> suscriptoresList;
     
     @JsonBackReference

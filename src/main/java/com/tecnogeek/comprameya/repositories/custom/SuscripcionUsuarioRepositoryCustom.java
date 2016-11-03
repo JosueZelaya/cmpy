@@ -12,7 +12,7 @@ import com.tecnogeek.comprameya.entidad.Usuario;
  *
  * @author alexander
  */
-public interface SuscriptorRepositoryCustom {
+public interface SuscripcionUsuarioRepositoryCustom {
     
     public Iterable<SuscripcionUsuario> getSuscriptor(Usuario usuario);
     

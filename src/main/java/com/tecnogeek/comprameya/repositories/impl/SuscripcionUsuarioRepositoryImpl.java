@@ -9,18 +9,18 @@ import com.mysema.query.types.Predicate;
 import com.tecnogeek.comprameya.entidad.QSuscripcionUsuario;
 import com.tecnogeek.comprameya.entidad.SuscripcionUsuario;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.SuscriptorRepository;
-import com.tecnogeek.comprameya.repositories.custom.SuscriptorRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.tecnogeek.comprameya.repositories.SuscripcionUsuarioRepository;
+import com.tecnogeek.comprameya.repositories.custom.SuscripcionUsuarioRepositoryCustom;
 
 /**
  *
  * @author alexander
  */
-public class SuscriptorRepositoryImpl implements SuscriptorRepositoryCustom {
+public class SuscripcionUsuarioRepositoryImpl implements SuscripcionUsuarioRepositoryCustom {
     
     @Autowired
-    SuscriptorRepository suscriptorRepository;
+    SuscripcionUsuarioRepository suscriptorRepository;
     
     private final QSuscripcionUsuario qSuscripcionUsuario = QSuscripcionUsuario.suscripcionUsuario;
     

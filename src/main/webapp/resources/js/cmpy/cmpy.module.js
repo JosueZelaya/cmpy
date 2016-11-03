@@ -11,10 +11,11 @@ var cmy_ng = angular.module('cmpy',
     'flow',
     'uiGmapgoogle-maps',
     'cmpy.autenticacion',
+    'cmpy.notificacion',
     'cmpy.menuPrincipal',    
     'cmpy.categorias',
     'cmpy.maps',
-    'cmpy.anuncios',
+    'cmpy.anuncios',    
     'cmpy.utils'
 ]);
 

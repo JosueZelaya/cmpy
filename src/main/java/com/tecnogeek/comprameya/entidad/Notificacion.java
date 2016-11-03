@@ -5,9 +5,11 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,11 +43,18 @@ public class Notificacion extends BaseEntity<Long> implements Serializable {
     @Column(name = "visto")
     private boolean visto;
     
+    @Column(name = "mensaje")
+    private String mensaje;
+    
+    @Column(name = "link")
+    private String link;
+    
     @JoinColumn(name = "tipo_notificacion_id", referencedColumnName = "id")
     @ManyToOne
     private TipoNotificacion tipoNotificacion;
     
-    @ManyToMany(mappedBy="notificacionesList")
+    @JsonBackReference
+    @ManyToMany(mappedBy="notificacionesList", cascade = CascadeType.ALL)
     private List<Usuario> usuarioList;
     
 }

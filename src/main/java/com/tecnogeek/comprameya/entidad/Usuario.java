@@ -91,12 +91,13 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Comentario> comentarioList;
     
-    
-    @ManyToMany
+    @JsonManagedReference
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
       name="usuario_notificacion",
       joinColumns=@JoinColumn(name="usuario_id", referencedColumnName="ID"),
-      inverseJoinColumns=@JoinColumn(name="notificacion_id", referencedColumnName="ID"))
+      inverseJoinColumns=@JoinColumn(name="notificacion_id", referencedColumnName="ID")
+    )
     private List<Notificacion> notificacionesList;
     
     @JsonBackReference
