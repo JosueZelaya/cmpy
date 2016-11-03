@@ -243,26 +243,36 @@ body > div.pac-container.pac-logo{
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
     .panel-flex{display:block;height:3600px;}
+    .imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
+    #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:25%;}
 }
 
 /* Landscape tablets and medium desktops */
 @media (min-width: 992px) and (max-width: 1199px) {
     .panel-flex{display:block;height:3600px;}
+     imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
+     #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:25%;}
 }
 
 /* Portrait tablets and small desktops */
 @media (min-width: 768px) and (max-width: 991px) {
     .panel-flex{display:block;height:3600px;}
+     .imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
+     #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:25%;}
 }
 
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
     .panel-flex{display:block;height:38px;}
+    .imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
+    #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:100%;}
 }
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
     .panel-flex{display:block;height:38px;}
+    .imgajust{height:auto;width:100%;min-height:auto;min-width:auto;}
+    #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:100%;}
 }
 
 /* Portrait LOT*/
@@ -272,3 +282,16 @@ body > div.pac-container.pac-logo{
 
 .paneldown{display:block;height:3600px;overflow:hidden;}
 .panelup{display:block;height:38px;overflow:hidden;}
+
+#publicacionesProductos > div > div:nth-child(1) > div > div.carousel.ng-isolate-scope > div > div{
+    background-color: white;
+}
+#publicacionesProductos > div > div:nth-child(1) > div > div.carousel.ng-isolate-scope > div > div{
+    height:auto;
+}
+#publicacionesProductos > div > div:nth-child(1) > div > div.carousel.ng-isolate-scope{
+      height:auto;  
+}
+
+
+

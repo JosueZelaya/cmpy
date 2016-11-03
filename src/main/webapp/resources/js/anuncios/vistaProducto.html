@@ -5,7 +5,7 @@
 
         <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
             <uib-slide ng-repeat="recurso in recursoList" active="slide.active" index="slide.id">
-                <img ng-style="{'height': 100}" ng-src="/images/getImage/{{recurso.ruta}}" style="margin:auto;">
+                <a href="#"><img class="imgajust" ng-src="/images/getImage/{{recurso.ruta}}" /></a>
                 <div class="carousel-caption">                                
                     <div class="titulo-publicacion">
                         <h3>{{publicacion.titulo}}</h3>
@@ -52,8 +52,8 @@
                 </textarea>
             </div>
             <div class="form-group" ng-controller="modalController">    
-                <button ng-show="!authenticated" class="btn btn-default" ng-click="open('loginModal.jsp', 'lg')">Agregar</button>
-                <button ng-show="authenticated" class="btn btn-default" ng-click="agregarComentario()">Agregar</button>
+                <button ng-show="!authenticated" type="button" class="btn btn-default" ng-click="open('loginModal.jsp', 'lg')">Agregar</button>
+                <button ng-show="authenticated" type="button" class="btn btn-default" ng-click="agregarComentario()">Agregar</button>
             </div>
             <!--</form>-->
 
