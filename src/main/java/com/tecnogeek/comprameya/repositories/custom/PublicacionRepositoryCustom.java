@@ -37,4 +37,6 @@ public interface PublicacionRepositoryCustom {
     
     public Iterable<Publicacion> getPublicacionesGratisCat(int page, int itemsByPage, long categoria_id);
     
+     public Iterable<Publicacion> getPublicacionesGratisByMatch(int page, int itemsByPage, String match);
+    
 }

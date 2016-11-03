@@ -134,7 +134,23 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
                                                     .where(qCategoria.id.eq(categoria_id)).list(qCategoria))
             )).list(qPublicacion);
         
-    }      
+    }   
+    
+    @Override
+    public Iterable<Publicacion> getPublicacionesGratisByMatch(int page, int itemsByPage, String match) {
+        
+        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
+        BooleanExpression sonGratis = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression Match = qProducto.nombre.toUpperCase().like("%"+match.toUpperCase()+"%");
+
+        return newJpaQuery().from(qPublicacion)
+            .leftJoin(qPublicacion.productoList,qProducto) 
+            .where(sonGratis.and(Match))
+            .list(qPublicacion);
+        
+
+        
+    }  
 
     @Override
     public long getTotalPublicacionesPagadas() {

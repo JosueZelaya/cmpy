@@ -82,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/angular",
                         "/publicacion/getAnuncios/**",
                         "/publicacion/getAnunciosByCat/**",
+                        "/publicacion/getAnunciosByMatch/**",
                         "/publicacion/getAnunciosSinPaginar",
                         "/publicacion/getPublicacionById/**",
                         "/publicacion/getTotalPaginas/**",

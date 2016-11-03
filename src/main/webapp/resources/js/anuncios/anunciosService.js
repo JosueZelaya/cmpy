@@ -43,6 +43,18 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
                     return response;
                 });
     };
+    
+    this.getAnunciosByMatch = function (tipo, page, match) {
+        
+        debugger;
+        var req = "/publicacion/getAnunciosByMatch/" + tipo + "/" + page + "/" + match;
+        return $http.get(req)
+                .success(function (response)
+                {
+                    debugger;
+                    return response;
+                });
+    };
 
 
     this.agregarPublicacion = function (publicacion) {

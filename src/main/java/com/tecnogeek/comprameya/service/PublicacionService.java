@@ -111,7 +111,21 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
 //            }
         
         return publicaciones;
-    }   
+    }  
+    
+    public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage,TipoPublicacionEnum tipo,String match)
+    {
+        Iterable<Publicacion> publicaciones = new ArrayList();
+        
+        boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
+        
+        publicaciones = (esPagada)?
+                publicacionRepository.getPublicacionesPagadas(page, itemsByPage):
+                publicacionRepository.getPublicacionesGratisByMatch(page, itemsByPage,match);
+       
+        
+        return publicaciones;
+    }  
     
     public GridResponse getPublicacionesGrid(int page, int pageZise, TipoPublicacionEnum tipo)
     { 
