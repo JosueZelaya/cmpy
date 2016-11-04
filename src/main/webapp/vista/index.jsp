@@ -26,7 +26,23 @@
             .angular-google-map-container { height: 400px; }
         </style>
         <!--<style> .ng-cloak { display: none !important; } </style>-->
-        
+
+
+    </head>
+    <body ng-cloak class="ng-cloak">
+
+        <!-- MAIN CONTENT -->
+        <!--<div class="container">-->
+
+        <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+        <div ui-view></div>
+
+        <!--</div>-->        
+
+        <%@include file="common/loginModal.jsp" %>
+
+
+
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-animate/angular-animate.min.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>        
@@ -64,21 +80,5 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/panelCollapseController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.module.js" ></script>
-    </head>
-    <body ng-cloak class="ng-cloak">
-        
-        <!-- MAIN CONTENT -->
-        <!--<div class="container">-->
-
-            <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
-            <div ui-view></div>
-
-        <!--</div>-->        
-        
-        <%@include file="common/loginModal.jsp" %>
-
-        
-        
-        
     </body>
 </html>

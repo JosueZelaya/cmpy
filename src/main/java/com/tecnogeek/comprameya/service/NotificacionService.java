@@ -42,7 +42,7 @@ public class NotificacionService {
         notificacion.setUsuarioList(suscriptores);
         notificacion.setVisto(false);
         notificacion.setMensaje(emisor.getPersona().getNombre() + " ha comentado una publicacion que te interesa");
-        notificacion.setLink(".vistaProducto({publicacionId: "+publicacion.getId()+", '#': 'publicacionesProductos'})");
+        notificacion.setLink(publicacion.getId()+"");
         
         notificacionRepository.save(notificacion);            
         

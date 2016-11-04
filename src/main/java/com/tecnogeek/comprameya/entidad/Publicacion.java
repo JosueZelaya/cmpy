@@ -41,7 +41,7 @@ import org.springframework.data.annotation.Transient;
 @Table(name = "publicacion")
 @Getter
 @Setter
-@ToString(exclude={"publicacionList","recursoList","ubicacionList","productoList","comentarioList"})
+@ToString(exclude={"recursoList","ubicacionList","productoList","comentarioList","suscriptoresList"})
 @RequiredArgsConstructor 
 public class Publicacion extends BaseEntity<Long> implements Serializable {
 

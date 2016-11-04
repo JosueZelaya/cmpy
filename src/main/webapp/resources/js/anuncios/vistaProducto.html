@@ -43,12 +43,12 @@
                 <textarea ng-show="!authenticated" 
                           ng-click="open('loginModal.jsp', 'lg')"
                           ng-change="open('loginModal.jsp', 'lg')"
-                          ng-model="comentario" class="form-control" placeholder="Escribe un comentario" autofocus>
-                            
+                          ng-model="comentario" class="form-control" placeholder="Escribe un comentario" >
+
                 </textarea>
                 <textarea ng-show="authenticated"
-                          ng-model="comentario" class="form-control" placeholder="Escribe un comentario" autofocus>
-                            
+                          ng-model="comentario" class="form-control" placeholder="Escribe un comentario" >
+
                 </textarea>
             </div>
             <div class="form-group" ng-controller="modalController">    
@@ -57,19 +57,21 @@
             </div>
             <!--</form>-->
 
-            <ul class="commentList">
-                <li ng-repeat="comentario in comentarioList">
-                    <h6>{{comentario.usuario.persona.nombre}}</h6>
-                    <div class="commenterImage">
-                        <img ng-show="{{comentario.usuario.signInProvider === null}}" height="28px" width="28px" src="/images/getThumbnail/{{comentario.usuario.rutaImagen}}" alt="..." />
-                        <img ng-show="{{comentario.usuario.signInProvider !== null}}" height="28px" width="28px" src="{{comentario.usuario.rutaImagen}}" alt="..." />                                
-                    </div>
-                    <div class="commentText">
-                        <p class="">{{comentario.texto}}</p> <span class="date sub-text">{{comentario.creationTime | date:'dd-MM-yyyy HH:mm:ss'}}</span>
+            <div id="commentBox">
+                <ul class="commentList">
+                    <li ng-repeat="comentario in comentarioList">
+                        <h6>{{comentario.usuario.persona.nombre}}</h6>
+                        <div class="commenterImage">
+                            <img ng-show="{{comentario.usuario.signInProvider === null}}" height="28px" width="28px" src="/images/getThumbnail/{{comentario.usuario.rutaImagen}}" alt="..." />
+                            <img ng-show="{{comentario.usuario.signInProvider !== null}}" height="28px" width="28px" src="{{comentario.usuario.rutaImagen}}" alt="..." />                                
+                        </div>
+                        <div class="commentText">
+                            <p class="">{{comentario.texto}}</p> <span class="date sub-text">{{comentario.creationTime| date:'dd-MM-yyyy HH:mm:ss'}}</span>
 
-                    </div>
-                </li>                        
-            </ul>
+                        </div>
+                    </li>                        
+                </ul>
+            </div>
 
         </div>
 

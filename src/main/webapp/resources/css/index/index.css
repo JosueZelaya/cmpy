@@ -293,5 +293,9 @@ body > div.pac-container.pac-logo{
       height:auto;  
 }
 
-
-
+/* CSS used here will be applied after bootstrap.css */
+span.badge-notify{
+    color: #fff;
+    background-color: #428bca;
+    border-color: #428bca;
+}
