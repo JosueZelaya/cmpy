@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,11 +16,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -28,7 +29,9 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "notificacion")
-@Data
+@Getter
+@Setter
+@ToString(exclude={"usuariosNotificadosList"})
 public class Notificacion extends BaseEntity<Long> implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -37,11 +40,6 @@ public class Notificacion extends BaseEntity<Long> implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "visto")
-    private boolean visto;
     
     @Column(name = "mensaje")
     private String mensaje;
@@ -53,8 +51,8 @@ public class Notificacion extends BaseEntity<Long> implements Serializable {
     @ManyToOne
     private TipoNotificacion tipoNotificacion;
     
-    @JsonBackReference
-    @ManyToMany(mappedBy="notificacionesList", cascade = CascadeType.ALL)
-    private List<Usuario> usuarioList;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notificacion")
+    private List<NotificacionUsuario> usuariosNotificadosList;
     
 }

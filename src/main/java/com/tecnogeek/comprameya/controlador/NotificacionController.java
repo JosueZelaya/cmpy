@@ -5,13 +5,15 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnogeek.comprameya.entidad.Notificacion;
+import com.tecnogeek.comprameya.entidad.NotificacionUsuario;
 import com.tecnogeek.comprameya.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.NotificacionRepository;
+import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
+import com.tecnogeek.comprameya.service.NotificacionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,28 +31,31 @@ public class NotificacionController {
     UsuarioRepository usuarioRepository;
     
     @Autowired
-    NotificacionRepository notificacionRepository;
+    NotificacionUsuarioRepository notificacionUsuarioRepository;
+    
+    @Autowired
+    NotificacionService notificacionService;
     
     @RequestMapping(value="/getNotificaciones/",method=RequestMethod.GET)  
-    public List<Notificacion> getNotificaciones(){
+    public List<NotificacionUsuario> getNotificaciones(){
         Usuario usuario = usuarioRepository.getLoggedUser();
         
         if(usuario==null){
             return null;
         }
         
-        return usuario.getNotificacionesList();
+        return notificacionUsuarioRepository.getNotificaciones(usuario);
     }
     
     @RequestMapping(value="/getTotalNotificaciones/",method=RequestMethod.GET)  
     public Integer getTotalNotificaciones(){
-        Usuario usuario = usuarioRepository.getLoggedUser();
-        
-        if(usuario==null){
-            return null;
-        }
-        
-        return usuario.getNotificacionesList().size();
+        return getNotificaciones().size();
+    }
+    
+    @RequestMapping(value="/quitarVisibilidad/{idNotificacion}") 
+    public List<NotificacionUsuario> setVisto(@PathVariable Long idNotificacion){
+       notificacionService.quitarVisibilidad(idNotificacion);
+       return getNotificaciones();
     }
     
 }

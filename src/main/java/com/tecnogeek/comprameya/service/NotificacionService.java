@@ -6,9 +6,11 @@
 package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.Notificacion;
+import com.tecnogeek.comprameya.entidad.NotificacionUsuario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.NotificacionRepository;
+import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NotificacionService {
+    
+    @Autowired
+    NotificacionUsuarioRepository notificacionUsuarioRepository;
     
     @Autowired
     NotificacionRepository notificacionRepository;
@@ -39,18 +44,20 @@ public class NotificacionService {
         }
         
         Notificacion notificacion = new Notificacion();
-        notificacion.setUsuarioList(suscriptores);
-        notificacion.setVisto(false);
-        notificacion.setMensaje(emisor.getPersona().getNombre() + " ha comentado una publicacion que te interesa");
+        notificacion.setMensaje(emisor.getPersona().getNombre() + " ha comentado tu anuncio: " + publicacion.getTitulo());
         notificacion.setLink(publicacion.getId()+"");
         
-        notificacionRepository.save(notificacion);            
+        notificacion = notificacionRepository.save(notificacion);
         
+        List<NotificacionUsuario> notificaciones = new ArrayList<>();
         for(Usuario usuario : suscriptores){
-            usuario.getNotificacionesList().add(notificacion);
-        }
+            NotificacionUsuario nt = new NotificacionUsuario();
+            nt.setUsuario(usuario);
+            nt.setNotificacion(notificacion);
+            notificaciones.add(nt);
+        }        
         
-        usuarioRepository.save(suscriptores);
+        notificacionUsuarioRepository.save(notificaciones);
     }
     
     public List<Usuario> getUsuariosExeptoUno(List<Usuario> usuarioList, Usuario usuarioExcluido){
@@ -63,6 +70,18 @@ public class NotificacionService {
         }
         
         return newList;
+    }
+    
+    public void quitarVisibilidad(Long idNotificacion){
+        NotificacionUsuario not = notificacionUsuarioRepository.findOne(idNotificacion);
+        
+        List<NotificacionUsuario> notificaciones = notificacionUsuarioRepository.findBy(not.getNotificacion().getLink(), not.getNotificacion().getMensaje());
+        
+        for(NotificacionUsuario noti : notificaciones){
+            noti.setVisto(true);
+        }
+        
+        notificacionUsuarioRepository.save(notificaciones);    
     }
     
 }

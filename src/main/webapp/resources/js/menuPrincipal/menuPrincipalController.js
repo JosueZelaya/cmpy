@@ -23,6 +23,14 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         return notificaciones;
                     });
         };
+        
+        $scope.quitarVisibilidad = function (idNotificacion) {
+            return notificacionService.quitarVisibilidad(idNotificacion)
+                    .success(function (notificaciones) {
+                        $scope.notificaciones = notificaciones;
+                        $scope.totalNotificaciones = notificaciones.length;
+                    });
+        };        
 
         $scope.cargarPublicacionesGratisByMatch = function (page, match) {
 

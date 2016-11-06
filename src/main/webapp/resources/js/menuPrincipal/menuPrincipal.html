@@ -33,7 +33,7 @@
                         <span class="badge badge-notify">{{totalNotificaciones}}</span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li ng-repeat="notificacion in notificaciones"><a href="" ui-sref=".vistaProducto({publicacionId: {{notificacion.link}}, '#': 'commentBox'})">{{notificacion.mensaje}}</a></li>
+                        <li ng-repeat="notificacionUsuario in notificaciones"><a href="" ng-click="quitarVisibilidad(notificacionUsuario.id)" ui-sref=".vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">{{notificacionUsuario.notificacion.mensaje}}</a></li>
                     </ul>
                 </li>
 

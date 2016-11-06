@@ -5,16 +5,10 @@
  */
 package com.tecnogeek.comprameya.repositories.custom;
 
-import com.tecnogeek.comprameya.entidad.Notificacion;
-import com.tecnogeek.comprameya.entidad.Usuario;
-import java.util.List;
-
 /**
  *
  * @author alexander
  */
 public interface NotificacionRepositoryCustom {
-    
-    public List<Notificacion> getNotificaciones(Usuario usuario);
     
 }

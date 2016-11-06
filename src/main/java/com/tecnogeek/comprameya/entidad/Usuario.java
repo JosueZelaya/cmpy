@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
 import java.io.Serializable;
@@ -91,14 +92,9 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Comentario> comentarioList;
     
-    @JsonManagedReference
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-      name="usuario_notificacion",
-      joinColumns=@JoinColumn(name="usuario_id", referencedColumnName="ID"),
-      inverseJoinColumns=@JoinColumn(name="notificacion_id", referencedColumnName="ID")
-    )
-    private List<Notificacion> notificacionesList;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<NotificacionUsuario> notificacionesList;
     
     @JsonBackReference
     @OneToMany(mappedBy = "usuario")
