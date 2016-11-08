@@ -25,3 +25,7 @@ insert into categoria (nombre,descripcion,modification_time,creation_time,catego
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Brazo Mecanico','...',current_date,current_date,16,true,1);
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('vacuum','...',current_date,current_date,16,true,1);
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Phantom II','...',current_date,current_date,17,true,1);
+
+insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Deportes','...',current_date,current_date,null,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Maquinas','...',current_date,current_date,21,true,1);
+insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Bancas','...',current_date,current_date,22,true,1);

@@ -5,6 +5,7 @@
  */
 var cmy_ng = angular.module('cmpy', 
 [
+    'angular-loading-bar',
     'ui.router', 
     'ui.bootstrap',
     'ngAnimate',
@@ -84,3 +85,20 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
 });
 
+cmy_ng.run(['$rootScope', function($rootScope){
+  // Previous code ...
+  $rootScope.ready = false;
+  
+  
+  
+  $rootScope.$on("cfpLoadingBar:loading", function(){
+      $rootScope.ready = false;
+  });
+
+  $rootScope.$on("cfpLoadingBar:loaded", function(){
+      $rootScope.ready = true;
+  });
+
+
+
+}]);

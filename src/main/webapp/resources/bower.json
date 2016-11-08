@@ -10,6 +10,7 @@
         "ng-flow":"2.6.1",
         "angular-carousel-3d":"latest",
         "underscore": "~1.8.3",
-        "matchmedia-ng":"1.0.8"
+        "matchmedia-ng":"1.0.8",
+        "angular-loading-bar":"latest"
     }
 }

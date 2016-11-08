@@ -50,6 +50,11 @@ modulo_anuncios.controller('productoController', function ($scope, $stateParams,
         
         var publicacion_id = $scope.publicacion.id;
         var comentario = $scope.comentario;
+        $scope.comentario = "";
+        
+        if(comentario==="" || comentario===undefined){
+            return;
+        }
         
         comentariosService.agregarComentario(publicacion_id,comentario)
                 .success(function(respuesta){

@@ -14,17 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ComprameYa!</title>
-        <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.css" rel="stylesheet" type="text/css" />
-        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
-        <style type="text/css">
-            [ng\:cloak], [ng-cloak], .ng-cloak {
-                display: none !important;
-            }
-            .angular-google-map-container { height: 400px; }
-        </style>
+        
         <!--<style> .ng-cloak { display: none !important; } </style>-->
 
 
@@ -42,8 +32,9 @@
         <%@include file="common/loginModal.jsp" %>
 
 
-
+        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
+        <script type='text/javascript' src='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-animate/angular-animate.min.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/lodash/lodash.js"></script>
@@ -53,7 +44,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-swipe/dist/angular-swipe.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/matchmedia/matchMedia.js"></script>        
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/matchmedia-ng/matchmedia-ng.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/matchmedia-ng/matchmedia-ng.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacion.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacion.module.js" ></script>
@@ -80,5 +71,18 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/panelCollapseController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.module.js" ></script>
+        
+        <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.css" rel="stylesheet" type="text/css" />
+        <link rel='stylesheet' href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
+        <style type="text/css">
+            [ng\:cloak], [ng-cloak], .ng-cloak {
+                display: none !important;
+            }
+            .angular-google-map-container { height: 400px; }
+        </style>
     </body>
 </html>
