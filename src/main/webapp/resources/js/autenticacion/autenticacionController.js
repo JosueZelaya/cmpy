@@ -12,6 +12,7 @@ autenticacion.controller('autenticacionController',
                         $rootScope.authenticated = true;
                         $rootScope.username = data.nombre;
                         $rootScope.imageUrl = data.rutaImagen;
+                        $rootScope.usuario = data;
                         
                         if(data.socialSignInProvider){
                             $rootScope.localAccount = false;

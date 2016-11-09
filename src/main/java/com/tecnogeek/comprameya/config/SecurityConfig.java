@@ -95,6 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/publicacion",
                         "/publicacion/agregarAnuncio",
+                        "/publicacion/getMisAnuncios",
                         "/comentario",
                         "/comentario/agregarComentario",
                         "/notificacion/**"

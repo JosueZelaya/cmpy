@@ -6,7 +6,8 @@
 package com.tecnogeek.comprameya.repositories.custom;
 
 import com.tecnogeek.comprameya.entidad.Publicacion;
-import org.springframework.data.domain.PageRequest;
+import com.tecnogeek.comprameya.entidad.Usuario;
+import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 
 /**
  *
@@ -24,6 +25,8 @@ public interface PublicacionRepositoryCustom {
     public Iterable<Publicacion> getPublicacionesPagadas(int page, int itemsByPage);
     
     public Iterable<Publicacion> getPublicacionesGratis(int page, int itemsByPage);
+    
+    public Iterable<Publicacion> getPublicacionesByUsuario(int page, int itemsByPage, TipoPublicacionEnum tipo, Usuario usuario);
     
     public long getTotalPublicacionesPagadas();
     

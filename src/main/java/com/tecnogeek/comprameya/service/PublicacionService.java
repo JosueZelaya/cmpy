@@ -6,8 +6,8 @@
 package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.entidad.Publicacion;
-import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.dto.GridResponse;
+import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.repositories.BaseRepository;
 import com.tecnogeek.comprameya.utils.Utilidades;
@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 
 /**
  *
@@ -30,9 +31,24 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
     @Autowired
     PublicacionRepository publicacionRepository;
     
+    @Autowired
+    UsuarioRepository usuarioRepository;
+    
     @Override
     public BaseRepository<Publicacion, Long> getRepository() {
         return publicacionRepository;
+    }
+    
+    public void eliminar(Long publicacionId) throws Exception{
+        Publicacion publicacion = getRepository().findOne(publicacionId);
+        
+        Usuario loggedUser = usuarioRepository.getLoggedUser();
+        if(!loggedUser.equals(publicacion.getUsuario())){
+            throw new Exception("ERROR: No es el propietario de la publicacion");
+        }
+        
+        publicacion.desactivar();
+        getRepository().save(publicacion);
     }
     
     public Iterable<Publicacion> getAnunciosAleatorios(int total,TipoPublicacionEnum tipo)
@@ -96,7 +112,7 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
                 publicacionRepository.getPublicacionesPagadas(page, itemsByPage):
                 publicacionRepository.getPublicacionesGratis(page, itemsByPage);
         
-        //Replace backslashes by forward slashes in order to work well in firefox.
+        //Replace backslashes by forward slashes in order to work well with firefox in windows
 //        for(Publicacion publicacion : publicaciones){
 //            publicacion.getUbicacionList().size();
 //            publicacion.getComentarioList().size();
@@ -111,15 +127,18 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
 //            }
         
         return publicaciones;
-    }  
+    }
+    
+    public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage,TipoPublicacionEnum tipo, Usuario usuario)
+    {        
+        return publicacionRepository.getPublicacionesByUsuario(page, itemsByPage, tipo, usuario);
+    }
     
     public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage,TipoPublicacionEnum tipo,String match)
-    {
-        Iterable<Publicacion> publicaciones = new ArrayList();
-        
+    {        
         boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
         
-        publicaciones = (esPagada)?
+        Iterable<Publicacion> publicaciones = (esPagada)?
                 publicacionRepository.getPublicacionesPagadas(page, itemsByPage):
                 publicacionRepository.getPublicacionesGratisByMatch(page, itemsByPage,match);
        
@@ -143,7 +162,6 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
         GridResponse<Publicacion> grid = new GridResponse<>();
         grid.setPage(page);
         grid.setRecords(pageZise);        
-//        grid.setRows(getPublicaciones(page, pageZise,sort, tipo));        
         grid.setTotal(totalPublicaiones);
         grid.setTotalPages(Utilidades.calculateTotalPages(totalPublicaiones, pageZise));
         return grid;

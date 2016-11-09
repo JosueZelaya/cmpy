@@ -2,6 +2,13 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
 
 
         $scope.match = "";
+        
+        var getMisPublicaciones = function (tipo,pagina) {
+            return anunciosService.getMisAnuncios(tipo,pagina)
+                    .success(function (publicaciones) {
+                        return publicaciones;
+                    });
+        };
 
         var getPublicacionesByMatch = function (tipo, pagina, match) {
             return anunciosService.getAnunciosByMatch(tipo, pagina, match)
@@ -39,9 +46,17 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         $rootScope.publicaciones = publicaciones;
                     });
         };
+        
+        $scope.verMisPublicaciones = function (page) {
+
+            getMisPublicaciones(TIPO_PUBLICACION.GRATIS, page)
+                    .success(function (publicaciones) {
+                        $rootScope.publicaciones = publicaciones;
+                    });
+        };
 
         init = function () {
-
+            $scope.navCollapsed = true;
             $scope.totalMensajes = 0;
             
             getTotalNotificaciones()

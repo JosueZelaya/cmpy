@@ -48,6 +48,18 @@ public abstract class BaseEntity<ID> {
     public long getVersion() {
         return version;
     }
+    
+    public boolean isActive(){
+        return this.sisActivo;
+    }
+    
+    public void desactivar(){
+        this.sisActivo = false;
+    }
+    
+    public void activar(){
+        this.sisActivo = true;
+    }
 
     @PrePersist
     public void prePersist() {

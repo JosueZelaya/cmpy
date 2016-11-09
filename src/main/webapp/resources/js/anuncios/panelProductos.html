@@ -30,25 +30,26 @@
                         <div class="col-md-2"></div>
                     </div>
 
-
                     <div class="col-sm-6 col-md-4" ng-repeat="publicacion in publicaciones">
 
                         <div style="height: 450px;" class="thumbnail">       
+
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <img class="user-image" ng-show="{{publicacion.usuario.signInProvider === null}}" height="28px" width="28px" src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-show="{{publicacion.usuario.signInProvider !== null}}" height="28px" width="28px" src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                </div>
+                                <div class="rating hidden-sm col-md-5">
+                                    <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.usuario.puntaje) track by $index"></i>
+                                    <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.usuario.puntaje) track by $index"></i>
+                                </div>
+                            </div>
 
                             <a href="" ui-sref=".vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})">
 
                                 <div class="titulo-publicacion">
                                     <h3>{{publicacion.titulo}}</h3>
-                                </div>                                    
-
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <h4 class="price-text-color">$ {{publicacion.precio}}</h4>
-                                    </div>
-                                    <div class="rating hidden-sm col-md-4">
-                                        <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.puntaje) track by $index"></i>
-                                        <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(3 - publicacion.puntaje) track by $index"></i>
-                                    </div>
+                                    <h4 class="price-text-color">$ {{publicacion.precio}}</h4>
                                 </div>
 
                                 <img src="/images/getThumbnail/{{publicacion.imgUrl}}" alt="imagen aqui">                                    
@@ -58,14 +59,35 @@
                                 </div>
                             </a>
 
-                            <!--<div class="footer-publicacion">-->
-                            <a href="#" class="btn btn-success" role="button" uib-tooltip="Agregar al carrito" tooltip-placement="bottom">
-                                <span class="glyphicon glyphicon-shopping-cart"/>                                            
-                            </a> 
-                            <a href="" ui-sref=".vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})" class="btn btn-default" role="button" uib-tooltip="Ver detalles" tooltip-placement="bottom">
-                                <span class="glyphicon glyphicon-search"/>                                            
-                            </a>                                        
-                            <!--</div>-->
+                            <div class="footer-publicacion">
+                                <a href="" ui-sref=".vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})" class="btn btn-default" role="button" uib-tooltip="Ver detalles" tooltip-placement="bottom">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </a>  
+                                <a href="#"
+                                   ng-show="{{publicacion.usuario.id !== usuario.id}}"
+                                   class="btn btn-success" 
+                                   role="button" 
+                                   uib-tooltip="Agregar al carrito" 
+                                   tooltip-placement="bottom">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                </a> 
+
+
+<!--                                <button ng-show="{{publicacion.usuario.id === usuario.id}}" class="btn btn-warning" role="button" uib-tooltip="editar" tooltip-placement="top">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>-->
+                                <a ng-show="{{publicacion.usuario.id === usuario.id}}" 
+                                   ng-click="eliminarPublicacion(publicacion.id,$index)" 
+                                   confirm="¿Confirma que desea eliminar la publicacion?" 
+                                   confirm-ok="Sí"
+                                   confirm-cancel="No"
+                                   class="btn btn-danger" role="button" 
+                                   uib-tooltip="eliminar" 
+                                   tooltip-placement="top">
+                                    <span class="glyphicon glyphicon-remove-circle"></span>
+                                </a>                    
+
+                            </div>
 
                         </div>
                     </div>

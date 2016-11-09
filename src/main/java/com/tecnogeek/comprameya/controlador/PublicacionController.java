@@ -10,17 +10,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Producto;
-import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Recurso;
 import com.tecnogeek.comprameya.entidad.TipoPublicacion;
 import com.tecnogeek.comprameya.entidad.Ubicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUbicacion;
 import com.tecnogeek.comprameya.entidad.Categoria;
+import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.SuscripcionPublicacion;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.service.PublicacionService;
-import com.tecnogeek.comprameya.service.UsuarioService;
 import com.tecnogeek.comprameya.utils.FileManager;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.io.IOException;
@@ -37,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -48,18 +48,15 @@ import lombok.extern.slf4j.Slf4j;
 @ResponseBody
 @Slf4j
 public class PublicacionController {
- 
-    @Autowired
-    PublicacionRepository publicacionService;
     
     @Autowired
-    PublicacionService pManager;
+    PublicacionService publicacionService;
     
     @Autowired
     PublicacionRepository publicacionRepository;
     
     @Autowired
-    UsuarioService uManager;
+    UsuarioRepository usuarioRepository;
     
     @RequestMapping(value="/getTotalAnuncios/{tipo}")
     public int getTotalAnuncios(@PathVariable int tipo){
@@ -67,7 +64,7 @@ public class PublicacionController {
         TipoPublicacionEnum tipoPublicacion = (esPagada)?                
                 TipoPublicacionEnum.PAGADA:
                 TipoPublicacionEnum.GRATIS;
-        return pManager.getTotalPublicaciones(tipoPublicacion).intValue();
+        return publicacionService.getTotalPublicaciones(tipoPublicacion).intValue();
     }
     
     @RequestMapping(value="/getTotalPaginas/{tipo}")
@@ -77,7 +74,7 @@ public class PublicacionController {
                 TipoPublicacionEnum.PAGADA:
                 TipoPublicacionEnum.GRATIS;
         
-        int totalPublicaciones = pManager.getTotalPublicaciones(tipoPublicacion).intValue();
+        int totalPublicaciones = publicacionService.getTotalPublicaciones(tipoPublicacion).intValue();
         int pageSize = (tipo==Constantes.PUBLICACION_GRATIS)?
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
                 Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
@@ -87,6 +84,17 @@ public class PublicacionController {
     @RequestMapping(value="/getPublicacionById/{id}",method=RequestMethod.GET)    
     public Publicacion getPublicacionById(@PathVariable Long id){
         return publicacionRepository.getPublicacion(id);
+    }
+    
+    @RequestMapping(value="/eliminar/{id}",method=RequestMethod.GET)    
+    public String eliminarPublicacion(@PathVariable Long id){     
+        try{
+            publicacionService.eliminar(id);
+        }catch(Exception e){
+            return e.getMessage();
+        }
+        
+        return null;
     }
     
     @RequestMapping(value="/getAnuncios/{tipo}/{page}",method=RequestMethod.GET)    
@@ -103,7 +111,28 @@ public class PublicacionController {
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
                 Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
         
-        Iterable<Publicacion> publicaciones = pManager.getPublicaciones(page, totalAnuncios, tipoPublicacion);   
+        Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion);   
+        
+        return publicaciones;
+    }
+    
+    @RequestMapping(value="/getMisAnuncios/{tipo}/{page}",method=RequestMethod.GET)    
+    public Iterable<Publicacion> getMisAnuncios(@PathVariable int tipo,@PathVariable int page,Model model)
+    {                
+        int totalAnuncios;
+        
+        boolean esPagada = (tipo==Constantes.PUBLICACION_PAGADA);
+        TipoPublicacionEnum tipoPublicacion = (esPagada)?                
+                TipoPublicacionEnum.PAGADA:
+                TipoPublicacionEnum.GRATIS;
+        
+        totalAnuncios = (tipo==Constantes.PUBLICACION_GRATIS)?
+                Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
+                Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
+        
+        Usuario loggedUser = usuarioRepository.getLoggedUser();
+        
+        Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion, loggedUser);   
         
         return publicaciones;
     }
@@ -122,7 +151,7 @@ public class PublicacionController {
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
                 Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
         
-        Iterable<Publicacion> publicaciones = pManager.getPublicaciones(page, totalAnuncios, tipoPublicacion,match);   
+        Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion,match);   
         
         return publicaciones;
     }
@@ -141,7 +170,7 @@ public class PublicacionController {
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
                 Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
         
-        Iterable<Publicacion> publicaciones = pManager.getPublicaciones(page, totalAnuncios, tipoPublicacion,cat, nivel);   
+        Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion,cat, nivel);   
         
         return publicaciones;
     }
@@ -174,7 +203,7 @@ public class PublicacionController {
         tipoPublicacion.setId(tipo.longValue());
         publicacion.setTipoPublicacion(tipoPublicacion);
         
-        publicacionService.save(publicacion);
+        publicacionRepository.save(publicacion);
         
         return "ok";
     }
@@ -225,7 +254,7 @@ public class PublicacionController {
         List<Producto> productos = new ArrayList();
         productos.add(producto);
         publicacion.setProductoList(productos);
-        Usuario usuario = uManager.getLoggedUser();
+        Usuario usuario = usuarioRepository.getLoggedUser();
         publicacion.setUsuario(usuario);
         
         ObjectMapper mapper = new ObjectMapper();
@@ -241,7 +270,7 @@ public class PublicacionController {
         suscriptores.add(suscripcionPublicacion);
         publicacion.setSuscriptoresList(suscriptores);
         
-        publicacionService.save(publicacion);
+        publicacionRepository.save(publicacion);
         
         return "ok";
     }

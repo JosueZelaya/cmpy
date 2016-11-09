@@ -56,6 +56,14 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
                 });
     };
 
+    this.getMisAnuncios = function (tipo, page) {
+        var req = "/publicacion/getMisAnuncios/" + tipo + "/" + page;
+        return $http.get(req)
+                .success(function (response)
+                {
+                    return response;
+                });
+    };
 
     this.agregarPublicacion = function (publicacion) {
 
@@ -85,6 +93,15 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
         .error(function(){
         });     
 
+    };
+    
+    this.eliminarPublicacion = function (id){
+        var req = "/publicacion/eliminar/"+id;
+        return $http.get(req)
+                .success(function (response)
+                {
+                    return response;
+                });
     };
 
 });

@@ -299,3 +299,8 @@ span.badge-notify{
     background-color: #428bca;
     border-color: #428bca;
 }
+
+.user-image {
+    float:left;
+    border-radius:50%;
+}

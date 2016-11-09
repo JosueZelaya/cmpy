@@ -2,7 +2,8 @@
 <div ng-controller="productoController">
 
     <div class="thumbnail">
-
+        <img class="user-image" ng-show="{{publicacion.usuario.signInProvider === null|| publicacion.usuario.signInProvider === undefined}}" height="28px" width="28px" src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+        <img class="user-image" ng-show="{{publicacion.usuario.signInProvider !== null && publicacion.usuario.signInProvider !== undefined}}" height="28px" width="28px" src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
         <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
             <uib-slide ng-repeat="recurso in recursoList" active="slide.active" index="slide.id">
                 <a href="#"><img class="imgajust" ng-src="/images/getImage/{{recurso.ruta}}" /></a>
@@ -20,7 +21,7 @@
             </div>
             <div class="rating hidden-sm col-md-4">
                 <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.puntaje) track by $index"></i>
-                <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(3 - publicacion.puntaje) track by $index"></i>
+                <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.puntaje) track by $index"></i>
             </div>
         </div>
 

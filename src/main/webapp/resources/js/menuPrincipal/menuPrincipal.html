@@ -1,12 +1,16 @@
 <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container" ng-controller="menuPrincipalController">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <button ng-show="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.jsp', 'lg')">                
+                Entrar <span class="glyphicon glyphicon-user">
             </button>
+            <button ng-show="authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                Hola! {{username}} 
+                        <img ng-show="localAccount" height="28px" width="28px" src="/images/getThumbnail/{{imageUrl}}" alt="..." />
+                        <img ng-show="!localAccount" height="28px" width="28px" src="{{imageUrl}}" alt="..." />
+            </button>
+            
             <button id="botonMenuCatagorias" class="navbar-toggle navbar-brand" ng-click="panelCategorias = !panelCategorias">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="glyphicon glyphicon-list-alt"></span>
@@ -17,19 +21,24 @@
         </div>            
         <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed" ng-controller="autenticacionController">   
             
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>                
+            <ul class="nav navbar-nav"> 
+                
+                <li ng-show="authenticated">
+                    <a href="#" ng-click="verMisPublicaciones(0)"> 
+                        Mis Publiaciones
+                    </a>
+                </li>
                        
                 <li ng-show="authenticated">
                     <a href="#"> 
-                        mensajes
+                        Mensajes
                         <span class="badge badge-notify">{{totalMensajes}}</span>
                     </a>
                 </li>
                 
                 <li class="dropdown" uib-dropdown="" ng-show="authenticated">
                     <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        notificaciones 
+                        Notificaciones 
                         <span class="badge badge-notify">{{totalNotificaciones}}</span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
@@ -39,13 +48,13 @@
 
                 <!--<div ng-if="usuario.login === '' || usuario.login === 'anonymousUser'">-->
                 <li ng-show="!authenticated" ng-controller="modalController">
-                    <a href="#" ng-click="open('loginModal.jsp', 'lg')">Login <span class="glyphicon glyphicon-user"></a>                      
+                    <a href="#" ng-click="open('loginModal.jsp', 'lg')">Entrar <span class="glyphicon glyphicon-user"></a>
                 </li>                           
                 <!--</div>-->
                 <!--<div ng-if="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
                 <li class="dropdown" uib-dropdown="" ng-show="authenticated">
                     <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Bienvenido {{username}} 
+                        Mi Cuenta
                         <img ng-show="localAccount" height="28px" width="28px" src="/images/getThumbnail/{{imageUrl}}" alt="..." />
                         <img ng-show="!localAccount" height="28px" width="28px" src="{{imageUrl}}" alt="..." />
                     </a>
@@ -54,7 +63,7 @@
                         <li><a href="#">Edita Perfil</a></li>
                         <li><a href="#">Configuracion</a></li>
                         <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>                                     
+                        <li class="dropdown-header">Sesión</li>                                     
                         <li><a href="/logout">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
                     </ul>
                 </li>                        
