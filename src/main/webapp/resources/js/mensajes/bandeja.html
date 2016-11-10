@@ -26,7 +26,7 @@
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="home">
                     <div class="list-group">
-                        <a href="#" class="list-group-item" ng-repeat="mensaje in mensajescontacto" ng-class="">
+                        <a href="#" class="list-group-item" ng-repeat="mensaje in mensajescontacto" ng-class="{read:usuarioactivo==mensaje.usuarioEmisor.id}">
                             <span class="">{{mensaje.texto}}</span>
                             <span class="text-muted" style="font-size: 11px;">- {{mensaje.titulo}}</span> 
                             <span class="badge">{{mensaje.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>

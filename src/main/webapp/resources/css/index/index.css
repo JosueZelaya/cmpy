@@ -313,7 +313,7 @@ body{ margin-top:50px;}
 .tab-pane .list-group input[type="checkbox"]{ margin-top: 2px; }
 .tab-pane .list-group .glyphicon { margin-right:5px; }
 .tab-pane .list-group .glyphicon:hover { color:#FFBC00; }
-button.list-group-item.read { color: #222;background-color: #F3F3F3; }
+a.list-group-item.read { color: #222;background-color: #F3F3F3; }
 hr { margin-top: 5px;margin-bottom: 10px; }
 .nav-pills>li>button {padding: 5px 10px;}
 

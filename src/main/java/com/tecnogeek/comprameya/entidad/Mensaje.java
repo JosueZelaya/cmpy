@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -55,7 +56,7 @@ public class Mensaje extends BaseEntity<Long> implements Serializable {
     @JsonBackReference
     @OneToMany(mappedBy = "mensaje",fetch = FetchType.LAZY)
     private List<Destinatario> destinatarioList;
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "usuario_emisor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Usuario usuarioEmisor;

@@ -120,6 +120,7 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "ranking_id", referencedColumnName = "id")
     @ManyToOne
     private Ranking ranking;
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioEmisor")
     private List<Mensaje> mensajeList;
     @Enumerated(EnumType.STRING)

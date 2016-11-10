@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,10 +34,12 @@ public class Destinatario extends BaseEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;    
+    private Long id;
+    @JsonBackReference    
     @JoinColumn(name = "mensaje_id", referencedColumnName = "id")
     @ManyToOne
     private Mensaje mensaje;
+    @JsonBackReference
     @JoinColumn(name = "usuario_destinatario_id", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuarioDestinatario;
