@@ -23,8 +23,7 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
         $scope.usuarioactivo = usuarioId;
         
         mensajesService.getMensajeUsuario(usuarioId)
-        .success(function(response){
-            debugger;
+        .success(function(response){            
             $scope.mensajescontacto = response;
         });
     }; 

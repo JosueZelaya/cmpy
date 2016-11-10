@@ -37,8 +37,10 @@
 
         <br/>
         
-        <a class="btn btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id})">Enviar Mensaje</a>
-
+        
+        <a ng-show="!authenticated" ng-click="open('loginModal.jsp', 'lg')" class="btn btn-default" href="">Mensaje Privado</a>
+        <a ng-show="authenticated" class="btn btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id})">Mensaje Privado</a>
+        
         <div class="actionBox">
 
             <!--<form class="form-inline" role="form">-->
