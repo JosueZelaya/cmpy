@@ -7,6 +7,7 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
     $scope.nombreactivo;
     $scope.texto;
     $scope.alerta;
+    $scope.asunto = "~";
     
     
     $scope.getUsuarios = function(){
@@ -53,6 +54,8 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
     $scope.iniciar = function(){
          $scope.getUsuarios();   
          $scope.usuarioactivo = $stateParams.usuarioId;
+         $scope.asunto = $stateParams.asunto;
+         $scope.nombreactivo = $stateParams.usuarioNombre;
          $scope.getMensajeUsuario($scope.usuarioactivo);
     };
     

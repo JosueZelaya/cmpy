@@ -39,7 +39,7 @@
         
         
         <a ng-show="!authenticated" ng-click="open('loginModal.jsp', 'lg')" class="btn btn-default" href="">Mensaje Privado</a>
-        <a ng-show="authenticated" class="btn btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id})">Mensaje Privado</a>
+        <a ng-show="authenticated" class="btn btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id,usuarioNombre:publicacion.usuario.persona.nombre,asunto:publicacion.titulo})">Mensaje Privado</a>
         
         <div class="actionBox">
 

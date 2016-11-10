@@ -80,14 +80,14 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
                 }
             })
             .state('home.vistaMensaje', {
-                url: "/vistaMensaje/{usuarioId}",  
+                url: "/vistaMensaje/{usuarioId}/{usuarioNombre}/{asunto}",  
                 views: {
                     '':{templateUrl: '/resources/js/mensajes/bandeja.html'}
                 }
             })
             
             .state('fb.vistaMensaje', {
-                url: "/vistaMensaje/{usuarioId}",  
+                url: "/vistaMensaje/{usuarioId}/{usuarioNombre}/{asunto}",  
                 views: {
                     '':{templateUrl: '/resources/js/mensajes/bandeja.html'}
                 }
