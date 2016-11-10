@@ -47,6 +47,7 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
             var element = elements[0];    
             element.focus();
             $scope.getMensajeUsuario($scope.usuarioactivo);
+            $scope.getUsuarios();
             return response;
         });        
     };   
