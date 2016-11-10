@@ -116,7 +116,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
         
         return newJpaQuery().from(qPublicacion)
             .leftJoin(qPublicacion.productoList,qProducto)
-            .where(sonGratis.and(porCategoria).and(estanActivas)).list(qPublicacion);
+            .where(sonGratis.and(porCategoria).and(estanActivas)).orderBy(qPublicacion.id.desc()).list(qPublicacion);
         
     }
 
@@ -133,7 +133,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
             .where(sonGratis.and(qCategoria.in( newJpaQuery()
                                                 .from(qCategoria)
                                                     .where(qCategoria.categoriaPadre.id.eq(categoria_id)).list(qCategoria))
-            ).and(estanActivas)).list(qPublicacion);
+            ).and(estanActivas)).orderBy(qPublicacion.id.desc()).list(qPublicacion);
         
     }  
 
@@ -151,7 +151,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
             .where(sonGratis.and(qCategoriaPadre.categoriaPadre.in(newJpaQuery()
                                                 .from(qCategoria)
                                                     .where(qCategoria.id.eq(categoria_id)).list(qCategoria))
-            ).and(estanActivas)).list(qPublicacion);
+            ).and(estanActivas)).orderBy(qPublicacion.id.desc()).list(qPublicacion);
         
     }   
     
@@ -166,7 +166,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
         return newJpaQuery().from(qPublicacion)
             .leftJoin(qPublicacion.productoList,qProducto) 
             .where(sonGratis.and(Match).and(estanActivas))
-            .list(qPublicacion);
+            .orderBy(qPublicacion.id.desc()).list(qPublicacion);
         
     }  
 
