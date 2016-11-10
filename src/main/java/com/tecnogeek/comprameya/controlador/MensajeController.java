@@ -9,22 +9,16 @@ import com.tecnogeek.comprameya.entidad.Destinatario;
 import com.tecnogeek.comprameya.entidad.Mensaje;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.service.MensajeService;
-import com.tecnogeek.comprameya.dto.pojoDestinatario;
-import com.tecnogeek.comprameya.dto.pojoEmisor;
-import com.tecnogeek.comprameya.dto.pojoMensaje;
-import com.tecnogeek.comprameya.dto.pojoUsuario;
-import com.tecnogeek.comprameya.repositories.DestinatarioRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -35,160 +29,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/mensaje")
 public class MensajeController {
     @Autowired
-    MensajeService mManager;
-    @Autowired
-     DestinatarioRepository destinatarioRepository;
+    MensajeService mensajeService;
     @Autowired
     UsuarioRepository usuarioRepository;
     
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-    public @ResponseBody List<pojoMensaje> getMensajeUsuario(@PathVariable("id") long id)  {          
+    
+    @RequestMapping(value = "/get/{usuarioId}", method = RequestMethod.GET)
+    public @ResponseBody Iterable<Mensaje> getMensajeUsuario(@PathVariable("usuarioId") long usuarioId)  {          
         
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName();
+        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
         
-        Usuario usr_local = usuarioRepository.findActiveUserByLogin(userName);
-        Usuario usr_remoto = usuarioRepository.findOne(id);
+        Iterable<Mensaje> resul = mensajeService.getMensajeUsuario(usuarioId,usuarioLocal);
         
-        List<Mensaje> mensajes = new  ArrayList<>();
-        
-        Iterable<Destinatario> des_local = destinatarioRepository.getDestinarioUsuario(usr_local,usr_remoto);
-        Iterable<Destinatario> des_remoto = destinatarioRepository.getDestinarioUsuario(usr_remoto,usr_local);
-        
-        for(Destinatario des : des_local)
-        {
-            mensajes.addAll(mManager.getMensajeUsuario(des));
-        }
+        return resul;
 
-        for(Destinatario des : des_remoto)
-        {
-            mensajes.addAll(mManager.getMensajeUsuario(des));
-        }       
-
-        
-        return getMensajePojo(mensajes);   
     }
     
     
     @RequestMapping(value = "/set", method = RequestMethod.POST)
-    public @ResponseBody Object setMensaje(@RequestBody pojoMensaje pMensaje)  {          
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName();
+    public @ResponseBody Boolean setMensaje(@RequestParam(value = "titulo", required = true) String titulo,
+                                @RequestParam(value = "texto", required = true) String texto,
+                                @RequestParam(value = "destinatarios", required = true) List<Long> destinatarios,
+                                Model model)  {
         
-        Usuario usr_local = usuarioRepository.findActiveUserByLogin(userName);
-        
-        Mensaje mensaje = new Mensaje();
-        mensaje.setTitulo(pMensaje.getTitulo());
-        mensaje.setTexto(pMensaje.getMensaje());
-        mensaje.setUsuarioEmisor(usr_local);
-        
-        List<Destinatario> ldest = new ArrayList<>();
-        
-        for(pojoDestinatario pdest: pMensaje.destinatarios)
-        {
-            Destinatario dest = new Destinatario();
-            
-            dest.setUsuarioDestinatario(usuarioRepository.findOne(pdest.getId()));
-            dest.setMensaje(mensaje);
-            
-            
-            ldest.add(dest);
-        }
 
-        mensaje.setDestinatarioList(ldest);
+        mensajeService.setMensaje(titulo, texto, destinatarios);
+
         
-        mManager.setMensajes(mensaje);
-              
-        return "exito";   
+        
+        return true;   
     }
     
-    
-    
-    
+
     @RequestMapping(value = "/usuarios/get", method = RequestMethod.GET)
-    public @ResponseBody List<pojoUsuario> getUsuarios() {          
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName();
-        
-        Usuario usr_local = usuarioRepository.findActiveUserByLogin(userName);
-        
-        List<Usuario> lista_usuarios = new ArrayList<>();
-        
-       Iterable<Destinatario> des = new ArrayList<>();
-       
-       des = destinatarioRepository.getDestinario(usr_local);
-       
-       for(Destinatario d : des)
-       {
-           if(!d.getUsuarioDestinatario().equals(usr_local))
-           {
-              
-               if(!lista_usuarios.contains(d.getUsuarioDestinatario())){
-                    lista_usuarios.add(d.getUsuarioDestinatario());
-               }
+    public @ResponseBody Iterable<Usuario> getUsuarios() {          
 
-           }
-           else if (!d.getMensaje().getUsuarioEmisor().equals(usr_local))
-           {
-                if(!lista_usuarios.contains(d.getMensaje().getUsuarioEmisor())){
-                    lista_usuarios.add(d.getMensaje().getUsuarioEmisor());
-                }
-             
-           }
-           
-       }        
-        
-        List<pojoUsuario> lpUsuario = new ArrayList<>();
-
-        for (Usuario usr : lista_usuarios) {
-            pojoUsuario p = new pojoUsuario();
-            p.setId(usr.getId());
-            p.setLogin(usr.getLogin());
-
-            lpUsuario.add(p);
-        }
-
-        return lpUsuario;
+        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Iterable<Usuario> res = mensajeService.getUsuarios(usuarioLocal);
+        return res;
         
     }
-  
-    
-    private List<pojoMensaje> getMensajePojo(List<Mensaje> lista)
-    {
-        List<pojoMensaje> lista_pojo = new ArrayList<>();
-        
-        for(Mensaje men : lista)
-        {
-            pojoMensaje pmensaje = new pojoMensaje();
-            pmensaje.setId(men.getId());
-            pmensaje.setTitulo(men.getTitulo());
-            pmensaje.setMensaje(men.getTexto());
-            
-            pojoEmisor pemisor = new pojoEmisor();
-            pemisor.setId(men.getUsuarioEmisor().getId());
-            pemisor.setLogin(men.getUsuarioEmisor().getLogin());
-           
-            pmensaje.setEmisor(pemisor);
-            
-            List<pojoDestinatario> lpdestinario = new ArrayList<>();
-            
-            for(Destinatario des : men.getDestinatarioList())
-            {
-                pojoDestinatario pdestinario = new pojoDestinatario();
-                pdestinario.setId(des.getUsuarioDestinatario().getId());
-                pdestinario.setLogin(des.getUsuarioDestinatario().getLogin());
-                
-                lpdestinario.add(pdestinario);
-            }
-            
-            pmensaje.setDestinatarios(lpdestinario);
 
-            lista_pojo.add(pmensaje);
-        }
-        
-        return lista_pojo;
-        
-    }
-    
-    
 }

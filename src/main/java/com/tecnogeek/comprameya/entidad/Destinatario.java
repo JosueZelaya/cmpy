@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -23,7 +25,8 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "destinatario")
-@Data
+@Getter
+@Setter
 public class Destinatario extends BaseEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

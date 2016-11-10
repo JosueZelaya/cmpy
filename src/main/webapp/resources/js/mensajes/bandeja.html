@@ -1,0 +1,53 @@
+<div ng-controller="mensajesController" ng-init="iniciar()">
+  <span>Mensajes</span>
+    <hr>
+
+        <div class="col-sm-3 col-md-2">
+          <span>Conversaciones</span>
+            <hr>
+            <ul class="nav nav-pills nav-stacked">
+                <li ng-repeat="contacto in contactos">
+                    <button  class="btn btn-default col-md-12" ng-click="getMensajeUsuario(contacto.id);setConversacion(contacto.persona.nombre)" style="overflow-x:hidden">
+                        <img  src="" alt="img" class="img-circle" style="width:30px;height:30px;"/> 
+                        {{contacto.persona.nombre}}
+                        <span class="badge pull-right">32</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-md-10">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
+                </span>Conversacion - {{nombreactivo}}</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="home">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item" ng-repeat="mensaje in mensajescontacto" ng-class="">
+                            <span class="">{{mensaje.texto}}</span>
+                            <span class="text-muted" style="font-size: 11px;">- {{mensaje.titulo}}</span> 
+                            <span class="badge">12:00 AM</span>
+                        </a>
+                        <!--<a href="#" class="list-group-item read">
+                            <span class="">This is big title</span>
+                            <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> 
+                            <span class="badge">11:30 PM</span> 
+                        </a>-->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+                
+                <div class="well col-md-12"> 
+                   <textarea class="form-control" rows="3" ng-model="texto" id="textomensaje"></textarea>
+                   <button class="btn btn-default" ng-click="setMensaje('~',texto,usuarioactivo)">Enviar</button>
+                </div>
+
+
+            </div>
+        </div>
+
+</div>

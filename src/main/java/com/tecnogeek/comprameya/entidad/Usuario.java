@@ -53,6 +53,7 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "login")
     private String login;
+    @JsonIgnore
     @Size(min = 1, max = 2147483647)
     @JsonIgnore
     @Column(name = "pass")

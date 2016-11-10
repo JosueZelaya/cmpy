@@ -5,6 +5,9 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService) {
         longitude: -88.7833089
     };
     
+    
+
+    
     $scope.zoom = 9;
     $rootScope.markers = [];
     
@@ -64,6 +67,7 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService) {
                 marker.latitude = item.latitud;
                 marker.longitude = item.longitud;
                 $rootScope.markers.push(marker);
+                $rootScope.$apply();
             });
             
         });

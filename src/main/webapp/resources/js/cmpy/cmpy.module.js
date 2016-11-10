@@ -17,7 +17,8 @@ var cmy_ng = angular.module('cmpy',
     'cmpy.menuPrincipal',    
     'cmpy.categorias',
     'cmpy.maps',
-    'cmpy.anuncios',    
+    'cmpy.anuncios',
+    'cmpy.mensajes',
     'cmpy.utils'
 ]);
 
@@ -76,6 +77,19 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
                 url: "/vistaProducto/{publicacionId}",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html'}
+                }
+            })
+            .state('home.vistaMensaje', {
+                url: "/vistaMensaje/{usuarioId}",  
+                views: {
+                    '':{templateUrl: '/resources/js/mensajes/bandeja.html'}
+                }
+            })
+            
+            .state('fb.vistaMensaje', {
+                url: "/vistaMensaje/{usuarioId}",  
+                views: {
+                    '':{templateUrl: '/resources/js/mensajes/bandeja.html'}
                 }
             })
 

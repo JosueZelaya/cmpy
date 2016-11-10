@@ -5,11 +5,14 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +23,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -27,7 +32,8 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "mensaje")
-@Data
+@Getter
+@Setter
 public class Mensaje extends BaseEntity<Long> implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -46,8 +52,10 @@ public class Mensaje extends BaseEntity<Long> implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "texto")
     private String texto;
-    @OneToMany(mappedBy = "mensaje")
+    @JsonBackReference
+    @OneToMany(mappedBy = "mensaje",fetch = FetchType.LAZY)
     private List<Destinatario> destinatarioList;
+    @JsonBackReference
     @JoinColumn(name = "usuario_emisor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Usuario usuarioEmisor;
