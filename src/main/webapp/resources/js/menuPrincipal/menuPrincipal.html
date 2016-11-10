@@ -1,54 +1,42 @@
 <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container" ng-controller="menuPrincipalController">
         <div class="navbar-header">
+            
             <button ng-show="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.jsp', 'lg')">                
-                Entrar <span class="glyphicon glyphicon-user">
-            </button>
+                Iniciar Sesion <span class="glyphicon glyphicon-user">
+            </button>            
+            
             <button ng-show="authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
                 <span class="sr-only">Toggle navigation</span>
                 Hola! {{username}} 
                         <img ng-show="localAccount" height="28px" width="28px" src="/images/getThumbnail/{{imageUrl}}" alt="..." />
                         <img ng-show="!localAccount" height="28px" width="28px" src="{{imageUrl}}" alt="..." />
-            </button>
+            </button>            
             
-            <button id="botonMenuCatagorias" class="navbar-toggle navbar-brand" ng-click="panelCategorias = !panelCategorias">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="glyphicon glyphicon-list-alt"></span>
-            </button>
-            <a href="/" class="pull-left">
+            <button ng-show="authenticated" id="botonMenuCatagorias" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">
+                <span class="sr-only">Toggle navigation</span>    
+                Avisos
+                <span class="badge badge-notify">{{totalNotificaciones + totalMensajes}}</span>
+            </button>   
+            
+            <a href="/" class="pull-left" ng-click="cargarPublicacionesGratis()">
                 <img src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
             </a>
-        </div>            
+        </div> 
+        
         <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed" ng-controller="autenticacionController">   
             
             <ul class="nav navbar-nav"> 
-                
+
                 <li ng-show="authenticated">
                     <a href="#" ng-click="verMisPublicaciones(0)"> 
                         Mis Publiaciones
                     </a>
                 </li>
-                       
-                <li ng-show="authenticated">
-                    <a href="#"> 
-                        Mensajes
-                        <span class="badge badge-notify">{{totalMensajes}}</span>
-                    </a>
-                </li>
                 
-                <li class="dropdown" uib-dropdown="" ng-show="authenticated">
-                    <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Notificaciones 
-                        <span class="badge badge-notify">{{totalNotificaciones}}</span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li ng-repeat="notificacionUsuario in notificaciones"><a href="" ng-click="quitarVisibilidad(notificacionUsuario.id)" ui-sref=".vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">{{notificacionUsuario.notificacion.mensaje}}</a></li>
-                    </ul>
-                </li>
-
                 <!--<div ng-if="usuario.login === '' || usuario.login === 'anonymousUser'">-->
                 <li ng-show="!authenticated" ng-controller="modalController">
-                    <a href="#" ng-click="open('loginModal.jsp', 'lg')">Entrar <span class="glyphicon glyphicon-user"></a>
+                    <a href="#" ng-click="open('loginModal.jsp', 'lg')">Iniciar Sesion <span class="glyphicon glyphicon-user"></a>
                 </li>                           
                 <!--</div>-->
                 <!--<div ng-if="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
@@ -70,6 +58,29 @@
                 <!--</div>-->
             </ul>                    
         </div>
+        
+        <div class="navbar-right navbar-collapse collapse" uib-collapse="collapseNot">
+            <ul class="nav navbar-nav"> 
+                       
+                <li ng-show="authenticated">
+                    <a href="#"> 
+                        Mensajes
+                        <span class="badge badge-notify">{{totalMensajes}}</span>
+                    </a>
+                </li>
+                
+                <li class="dropdown" uib-dropdown="" ng-show="authenticated">
+                    <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        Notificaciones 
+                        <span class="badge badge-notify">{{totalNotificaciones}}</span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="notificacionUsuario in notificaciones"><a href="" ng-click="quitarVisibilidad(notificacionUsuario.id)" ui-sref=".vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">{{notificacionUsuario.notificacion.mensaje}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
         <form class="navbar-form navbar-left" style="width: 100%" role="search">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Buscar Productos..." ng-model="match">

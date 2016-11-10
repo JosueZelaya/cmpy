@@ -16,20 +16,6 @@
             <div ui-view>
                 <div class="row" ng-app="cmpy.anuncios" ng-controller="anunciosController">
 
-                    <div class="row center-block">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8">
-                            <uib-pagination 
-                                ng-model="page"
-                                total-items="totalAnuncios"
-                                items-per-page="21"
-                                ng-change="cargarPagina()"
-                                boundary-links="true">
-                            </uib-pagination>
-                        </div>                                
-                        <div class="col-md-2"></div>
-                    </div>
-
                     <div class="col-sm-6 col-md-4" ng-repeat="publicacion in publicaciones">
 
                         <div style="height: 450px;" class="thumbnail">       
@@ -55,7 +41,7 @@
                                 <img src="/images/getThumbnail/{{publicacion.imgUrl}}" alt="imagen aqui">                                    
 
                                 <div class="caption">
-                                    <p>{{publicacion.descripcion}}...</p>                                        
+                                    <p>{{publicacion.descripcion.slice(0,100)}}...</p>                                        
                                 </div>
                             </a>
 

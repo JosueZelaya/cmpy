@@ -3,6 +3,20 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
 
         $scope.match = "";
         
+        var getPublicaciones = function (tipo, pagina) {
+            return anunciosService.getAnuncios(tipo, pagina)
+                    .success(function (publicaciones) {
+                        return publicaciones;
+                    });
+        };
+
+        var cargarPublicacionesGratis = function (page) {
+            getPublicaciones(TIPO_PUBLICACION.GRATIS, page)
+                    .success(function (publicaciones) {
+                        $rootScope.publicaciones = publicaciones;
+                    });
+        };
+        
         var getMisPublicaciones = function (tipo,pagina) {
             return anunciosService.getMisAnuncios(tipo,pagina)
                     .success(function (publicaciones) {
@@ -48,15 +62,20 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
         };
         
         $scope.verMisPublicaciones = function (page) {
-
+            $scope.navCollapsed = !$scope.navCollapsed;
             getMisPublicaciones(TIPO_PUBLICACION.GRATIS, page)
                     .success(function (publicaciones) {
                         $rootScope.publicaciones = publicaciones;
                     });
         };
+        
+        $scope.cargarPublicacionesGratis = function () {
+            cargarPublicacionesGratis(0);
+        };
 
         init = function () {
             $scope.navCollapsed = true;
+            $scope.collapseNot = true;
             $scope.totalMensajes = 0;
             
             getTotalNotificaciones()

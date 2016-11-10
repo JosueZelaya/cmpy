@@ -2,7 +2,7 @@
 <div ng-controller="productoController">
 
     <div class="thumbnail">
-        <img class="user-image" ng-show="{{publicacion.usuario.signInProvider === null|| publicacion.usuario.signInProvider === undefined}}" height="28px" width="28px" src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+        <img class="user-image" ng-show="{{publicacion.usuario.signInProvider === null || publicacion.usuario.signInProvider === undefined}}" height="28px" width="28px" src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
         <img class="user-image" ng-show="{{publicacion.usuario.signInProvider !== null && publicacion.usuario.signInProvider !== undefined}}" height="28px" width="28px" src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
         <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
             <uib-slide ng-repeat="recurso in recursoList" active="slide.active" index="slide.id">
