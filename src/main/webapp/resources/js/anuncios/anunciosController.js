@@ -17,7 +17,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
     var cargarPublicacionesGratis = function (page) {
         getPublicaciones(TIPO_PUBLICACION.GRATIS, page)
                 .success(function (publicaciones) {
-                    $rootScope.publicaciones = publicaciones;
+                    $rootScope.publicaciones = $rootScope.publicaciones.concat(publicaciones);
                 });
     };
 
@@ -76,7 +76,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
     };
 
     $scope.paginaSiguiente = function () {
-        $rootScope.page++;
+        $scope.page++;
         cargarPublicacionesGratis($scope.page);
     };
 

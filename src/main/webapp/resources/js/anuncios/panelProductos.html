@@ -64,6 +64,7 @@
                                 </button>-->
                                 <a ng-show="{{publicacion.usuario.id === usuario.id}}" 
                                    ng-click="eliminarPublicacion(publicacion.id,$index)" 
+                                   confirm-title="Eliminar Publicacion"
                                    confirm="¿Confirma que desea eliminar la publicacion?" 
                                    confirm-ok="Sí"
                                    confirm-cancel="No"
@@ -78,19 +79,22 @@
                         </div>
                     </div>
 
-                    <div class="row center-block">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8">
-                            <uib-pagination 
-                                ng-model="page"
-                                total-items="totalAnuncios"
-                                items-per-page="21"
-                                ng-change="cargarPagina()"
-                                boundary-links="true">
-                            </uib-pagination>
-                        </div>                                
-                        <div class="col-md-2"></div>
+                    <div class="col-md-12" style="text-align: center">
+                        <p>
+                            <div class="btn-group">
+                                <a href="#navBar" target="_self" class="btn btn-info" role="button">
+                                    subir
+                                    <span class="glyphicon glyphicon-arrow-up"></span>                              
+                                </a>
+                                
+                                <button class="btn btn-info" ng-click="paginaSiguiente()">
+                                    más
+                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                </button>
+                            </div>                            
+                        </p>
                     </div>
+                    
 
                 </div>
             </div>

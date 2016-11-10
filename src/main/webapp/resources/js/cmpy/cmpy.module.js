@@ -101,6 +101,9 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 });
 
 cmy_ng.run(['$rootScope', function($rootScope){
+        
+  $rootScope.publicaciones = new Array();      
+        
   // Previous code ...
   $rootScope.ready = false;
   
