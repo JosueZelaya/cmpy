@@ -1,14 +1,23 @@
-maps.controller('mapController', function($rootScope,$scope,$http,mapService) {
+maps.controller('mapController', function($rootScope,$scope,$http,mapService,$timeout,$window,matchmedia) {
 
-    $scope.center = {
-        latitude: 13.7724376,
-        longitude: -88.7833089
-    };
-    
-    
 
+
+    $timeout(function() {
+        var evt = $window.document.createEvent('UIEvents'); 
+        evt.initUIEvent('resize', true, false, $window, 100); 
+        $window.dispatchEvent(evt);
+        
+    });
     
     $scope.zoom = 9;
+
+    $scope.center = {
+        latitude: 13.7153719325982,
+        longitude: -88.95217895507812
+    };
+    
+    $scope.render= true;
+
     $rootScope.markers = [];
     
     $scope.marker = {
@@ -172,6 +181,60 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService) {
         
         
     };
+
+    var unsub = {};
+    $scope.isPhoneOrTablet = false;
+    
+    unsub['phone'] = matchmedia.onPhone(function(mediaQueryList){
+                              $scope.isPhone = mediaQueryList.matches;
+                              if($scope.isPhone || $scope.isTablet)
+                              {
+                                  $scope.isPhoneOrTablet = true;
+                                  $scope.zoom = 8;
+                                  $scope.center = {
+                                    latitude: 13.7153719325982,
+                                    longitude: -88.95217895507812
+                                  };
+                              }
+                              else
+                              {
+                                  $scope.isPhoneOrTablet = false;
+                                  $scope.zoom = 9;
+                                  $scope.center = {
+                                    latitude: 13.7153719325982,
+                                    longitude: -88.95217895507812
+                                  };
+                              }
+                          });
+    unsub['tablet'] = matchmedia.onTablet( function(mediaQueryList){
+                              $scope.isTablet = mediaQueryList.matches;
+                              if($scope.isPhone || $scope.isTablet)
+                              {
+                                  $scope.isPhoneOrTablet = true;
+                                  $scope.zoom = 8;
+                                  $scope.center = {
+                                    latitude: 13.7153719325982,
+                                    longitude: -88.95217895507812
+                                  };
+                              }
+                              else
+                              {
+                                  $scope.isPhoneOrTablet = false;
+                                  $scope.zoom = 9;
+                                  $scope.center = {
+                                    latitude: 13.7153719325982,
+                                    longitude: -88.95217895507812
+                                  };
+                              }
+                          });
+                          
+    $scope.$on('$destroy', function () {
+        // say goodbye to your listeners here
+
+        unsub['phone']();
+        unsub['tablet']();
+
+    });    
 
 
   });
