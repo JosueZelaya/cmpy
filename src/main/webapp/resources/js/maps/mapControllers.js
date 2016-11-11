@@ -155,7 +155,7 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
                 $scope.zoom = 17;
                 
                 
-                var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + objPosition.coords.latitude + "," + objPosition.coords.longitude + "&sensor=true";
+                var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + objPosition.coords.latitude + "," + objPosition.coords.longitude + "&sensor=true";
                 $http.get(url)
                 .then(function(result) {
                     var address = result.data.results[0].formatted_address;
