@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-modulo_anuncios.controller('ubicacionesController', function ($rootScope, $scope, $stateParams, anunciosService, mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+modulo_anuncios.controller('ubicacionesController', function ($rootScope, $scope,$http, $stateParams, anunciosService, mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
 
     var init = function () {
 

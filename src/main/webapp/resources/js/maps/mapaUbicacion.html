@@ -23,11 +23,12 @@ and open the template in the editor.
                 </ui-gmap-markers>
                 <ui-gmap-search-box template="searchbox.template" events="searchbox.events">
                 </ui-gmap-search-box>
-                <ui-gmap-map-control template="control.tpl.html" position="top-right" controller="mapController" index="-1">
+                <ui-gmap-map-control  position="top-right" controller="mapController" index="-1">
+                    <button id="btngps" class="form-control" style="margin-right: 18px;width: 109px;margin-top: 9px;"  ng-click="getUbicacionGPS();">Ubicame</button>
                 </ui-gmap-map-control>
             </ui-gmap-google-map>
-            
+            <span ng-hide="address==''">Ubicacion: {{address}}</span>
         </div>
 
-    </body>
+    </body>  
 </html>

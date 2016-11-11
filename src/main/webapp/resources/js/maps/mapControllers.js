@@ -4,7 +4,7 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
 
     $timeout(function() {
         var evt = $window.document.createEvent('UIEvents'); 
-        evt.initUIEvent('resize', true, false, $window, 100); 
+        evt.initUIEvent('resize', true, false, $window, 1000); 
         $window.dispatchEvent(evt);
         
     });
@@ -15,6 +15,8 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
         latitude: 13.7153719325982,
         longitude: -88.95217895507812
     };
+    
+    $scope.address="";
     
     $scope.render= true;
 
@@ -140,10 +142,10 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
     $scope.getUbicacionGPS = function(){
             
 
-	if (navigator.geolocation)
+	if ($window.navigator.geolocation)
 	{
 
-            navigator.geolocation.getCurrentPosition(function(objPosition)
+            $window.navigator.geolocation.getCurrentPosition(function(objPosition)
             {
                 
                 $scope.center = {
@@ -151,6 +153,14 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
                     longitude: objPosition.coords.longitude
                 };   
                 $scope.zoom = 17;
+                
+                
+                var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + objPosition.coords.latitude + "," + objPosition.coords.longitude + "&sensor=true";
+                $http.get(url)
+                .then(function(result) {
+                    var address = result.data.results[0].formatted_address;
+                    $scope.address = address;
+                });
 
             }, function(objPositionError)
             {                    
@@ -168,7 +178,8 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
                             default:
                                     alert("Error desconocido.");
                     }
-            }, {
+            }
+            , {
                 maximumAge: 75000,
                 timeout: 30000
             });
@@ -179,6 +190,12 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
 		alert("Su navegador no soporta la API de geolocalización.");
 	}
         
+        $timeout(function() {
+            var evt = $window.document.createEvent('UIEvents'); 
+            evt.initUIEvent('resize', true, false, $window, 1000); 
+            $window.dispatchEvent(evt);
+        
+        });
         
     };
 
