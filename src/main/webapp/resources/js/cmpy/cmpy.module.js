@@ -79,6 +79,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html'}
                 }
             })
+            
             .state('home.vistaMensaje', {
                 url: "/vistaMensaje", 
                 params: {
@@ -100,6 +101,20 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
                 },
                 views: {
                     '':{templateUrl: '/resources/js/mensajes/bandeja.html'}
+                }
+            })
+            
+            .state('home.vistaNotificaciones', {
+                url: "/vistaNotificaciones",
+                views: {
+                    '':{templateUrl: '/resources/js/notificacion/bandeja.html'}
+                }
+            })
+            
+            .state('fb.vistaNotificaciones', {
+                url: "/vistaNotificaciones",
+                views: {
+                    '':{templateUrl: '/resources/js/notificacion/bandeja.html'}
                 }
             })
 

@@ -15,5 +15,6 @@ import java.util.List;
  */
 public interface NotificacionUsuarioRepositoryCustom {
     public List<NotificacionUsuario> getNotificaciones(Usuario usuario);
+    public List<NotificacionUsuario> getTodasNotificaciones(Usuario usuario);
     public List<NotificacionUsuario> findBy(String link, String mensaje);
 }

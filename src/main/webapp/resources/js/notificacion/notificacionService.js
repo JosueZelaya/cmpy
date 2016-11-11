@@ -17,6 +17,15 @@ modulo_notificacion.service('notificacionService', function ($http, $log) {
                 });
     };
     
+    this.getTodasNotificaciones = function () {
+        var req = "/notificacion/getTodasNotificaciones/";
+        return $http.get(req)
+                .success(function (response)
+                {
+                    return response;
+                });
+    };
+    
     this.quitarVisibilidad = function (notificacionId) {
         var req = "/notificacion/quitarVisibilidad/"+notificacionId;
         return $http.get(req)

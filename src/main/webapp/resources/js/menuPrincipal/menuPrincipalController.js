@@ -51,7 +51,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         $scope.notificaciones = notificaciones;
                         $scope.totalNotificaciones = notificaciones.length;
                     });
-        };        
+        };    
 
         $scope.cargarPublicacionesGratisByMatch = function (page, match) {
 
@@ -82,13 +82,13 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                     .success(function (total) {
                         try {
                             JSON.parse(total);
-                            $scope.totalNotificaciones = total;
+                            $rootScope.totalNotificaciones = total;
                             getNotificaciones()
                                 .success(function (notificaciones) {
-                                    $scope.notificaciones = notificaciones;                        
+                                    $rootScope.notificaciones = notificaciones;                        
                                 });
                         } catch (e) {
-                            $scope.totalNotificaciones = 0;
+                            $rootScope.totalNotificaciones = 0;
                         }                        
                     });
 

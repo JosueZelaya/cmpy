@@ -36,6 +36,17 @@ public class NotificacionController {
     @Autowired
     NotificacionService notificacionService;
     
+    @RequestMapping(value="/getTodasNotificaciones/",method=RequestMethod.GET)  
+    public List<NotificacionUsuario> getTodasNotificaciones(){
+        Usuario usuario = usuarioRepository.getLoggedUser();
+        
+        if(usuario==null){
+            return null;
+        }
+        
+        return notificacionUsuarioRepository.getTodasNotificaciones(usuario);
+    }
+    
     @RequestMapping(value="/getNotificaciones/",method=RequestMethod.GET)  
     public List<NotificacionUsuario> getNotificaciones(){
         Usuario usuario = usuarioRepository.getLoggedUser();

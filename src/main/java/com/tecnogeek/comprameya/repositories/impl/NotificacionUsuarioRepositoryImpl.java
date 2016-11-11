@@ -15,6 +15,7 @@ import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.custom.NotificacionUsuarioRepositoryCustom;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -55,6 +56,33 @@ public class NotificacionUsuarioRepositoryImpl implements NotificacionUsuarioRep
         for(NotificacionUsuario notiUsuario : notificaciones){
             String key = notiUsuario.getNotificacion().getLink();
             key += notiUsuario.getNotificacion().getMensaje();                    
+            notiMap.put(key, notiUsuario);
+        }
+        
+        for(Entry<String, NotificacionUsuario> entry : notiMap.entrySet()){
+            notificacionesFiltradas.add(entry.getValue());
+        }
+        
+        return notificacionesFiltradas;
+    }
+    
+    @Override
+    public List<NotificacionUsuario> getTodasNotificaciones(Usuario usuario) {
+        List<NotificacionUsuario> notificacionesFiltradas = new ArrayList<>();
+        Map<String, NotificacionUsuario> notiMap = new LinkedHashMap<>();
+        
+        BooleanExpression belongsToUser = qNotificacionUsuario.usuario.id.eq(usuario.getId());
+        
+        List<NotificacionUsuario> notificaciones = newJpaQuery().distinct()
+                .from(qNotificacionUsuario)
+                .where(belongsToUser)
+                .orderBy(qNotificacionUsuario.creationTime.desc())
+                .list(qNotificacionUsuario);        
+        
+        for(NotificacionUsuario notiUsuario : notificaciones){
+            String key = notiUsuario.getNotificacion().getLink();
+            key += notiUsuario.getNotificacion().getMensaje();
+            key += notiUsuario.isVisto();
             notiMap.put(key, notiUsuario);
         }
         
