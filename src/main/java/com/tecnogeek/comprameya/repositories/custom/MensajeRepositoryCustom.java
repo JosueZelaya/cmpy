@@ -15,7 +15,7 @@ import com.tecnogeek.comprameya.entidad.Usuario;
  */
 public interface MensajeRepositoryCustom {
     
-    Iterable<Mensaje> getMensajeUsuario(long usuario_id,Usuario usuarioLocal);
+    Iterable<Mensaje> getMensajeUsuario(long usuario_id,Usuario usuarioLocal,int page);
     Iterable<Usuario> getUsuarios(Usuario usuariolocal);
     
 }

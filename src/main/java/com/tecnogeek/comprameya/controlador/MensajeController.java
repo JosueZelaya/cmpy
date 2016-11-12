@@ -34,12 +34,12 @@ public class MensajeController {
     UsuarioRepository usuarioRepository;
     
     
-    @RequestMapping(value = "/get/{usuarioId}", method = RequestMethod.GET)
-    public @ResponseBody Iterable<Mensaje> getMensajeUsuario(@PathVariable("usuarioId") long usuarioId)  {          
+    @RequestMapping(value = "/get/{usuarioId}/{page}", method = RequestMethod.GET)
+    public @ResponseBody Iterable<Mensaje> getMensajeUsuario(@PathVariable("usuarioId") long usuarioId,@PathVariable("page") int page)  {          
         
         Usuario usuarioLocal = usuarioRepository.getLoggedUser();
         
-        Iterable<Mensaje> resul = mensajeService.getMensajeUsuario(usuarioId,usuarioLocal);
+        Iterable<Mensaje> resul = mensajeService.getMensajeUsuario(usuarioId,usuarioLocal,page);
         
         return resul;
 

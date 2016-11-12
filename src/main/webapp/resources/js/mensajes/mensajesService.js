@@ -1,7 +1,7 @@
 mensajes.service('mensajesService',['$http', function ($http) {
     
-    this.getMensajeUsuario = function (usuarioId) {
-        return $http.get("/mensaje/get/"+usuarioId)            
+    this.getMensajeUsuario = function (usuarioId,page) {
+        return $http.get("/mensaje/get/"+usuarioId+"/"+page)            
            .success(function (response)
             {
                 return response;

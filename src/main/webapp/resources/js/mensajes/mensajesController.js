@@ -2,7 +2,7 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
 
     
     $scope.contactos;
-    $scope.mensajescontacto;
+    $scope.mensajescontacto = [];
     $scope.usuarioactivo;
     $scope.nombreactivo;
     $scope.texto;
@@ -10,6 +10,7 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
     $scope.asunto = "~";
     $scope.usuarioParam;
     $scope.asuntoParam="~";
+    $scope.page = 0;
     
     
     $scope.getUsuarios = function(){
@@ -21,7 +22,7 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
     };
     
     
-    $scope.getMensajeUsuario = function(usuarioId){
+    $scope.getMensajeUsuario = function(usuarioId,page){
         
         $scope.usuarioactivo = usuarioId;
         
@@ -34,16 +35,47 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
           $scope.asunto="~"; 
         }
         
-        mensajesService.getMensajeUsuario(usuarioId)
-        .success(function(response){            
-            $scope.mensajescontacto = response;
+        $scope.page = page;
+        
+        mensajesService.getMensajeUsuario(usuarioId,page)
+        .success(function(response){
+            if($scope.page==0){
+                
+                $scope.mensajescontacto = [];
+                
+                response.slice().reverse().forEach(function(item) {
+                    $scope.mensajescontacto.push(item);
+                });
+                
+                
+            }
+            else{
+                
+                var aux = $scope.mensajescontacto;
+                $scope.mensajescontacto = [];
+                
+               response.slice().reverse().forEach(function(item) {
+                    $scope.mensajescontacto.push(item);
+                });
+                angular.forEach(aux, function (item) {
+                    $scope.mensajescontacto.push(item);
+                });
+                
+            }
         });
+        if($scope.page==0)
+        {
           $timeout(function() {
             var id=document.querySelector("#bandeja");
             var elements = angular.element(id);
             var element = elements[0];                
             element.scrollTop = element.scrollHeight-element.clientHeight;            
          },100);
+        }
+        else{
+            page++;
+            
+        }
     }; 
     
     $scope.setConversacion = function(nombre){
@@ -81,7 +113,7 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
          $scope.asunto = $stateParams.asunto;
          $scope.asuntoParam = $stateParams.asunto;
          $scope.nombreactivo = $stateParams.usuarioNombre;
-         $scope.getMensajeUsuario($scope.usuarioactivo);
+         $scope.getMensajeUsuario($scope.usuarioactivo,0);
     };
     
 }]);

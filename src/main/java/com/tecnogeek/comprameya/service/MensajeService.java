@@ -33,9 +33,9 @@ public class MensajeService {
     DestinatarioRepository destinatarioRepository;
     
         
-    public Iterable<Mensaje> getMensajeUsuario(long usuario_id,Usuario usuarioLocal)
+    public Iterable<Mensaje> getMensajeUsuario(long usuario_id,Usuario usuarioLocal,int page)
     {
-         return mensajeRepository.getMensajeUsuario(usuario_id,usuarioLocal);
+         return mensajeRepository.getMensajeUsuario(usuario_id,usuarioLocal,page);
     }
 
     public Iterable<Usuario> getUsuarios(Usuario usuariolocal)

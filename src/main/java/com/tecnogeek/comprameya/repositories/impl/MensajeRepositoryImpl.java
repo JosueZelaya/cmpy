@@ -13,9 +13,11 @@ import com.tecnogeek.comprameya.entidad.QUsuario;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.MensajeRepository;
 import com.tecnogeek.comprameya.repositories.custom.MensajeRepositoryCustom;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Collections;
 
 /**
  *
@@ -38,7 +40,7 @@ public class MensajeRepositoryImpl implements MensajeRepositoryCustom{
     }
     
     @Override
-    public Iterable<Mensaje> getMensajeUsuario(long usuario_id,Usuario usuarioLocal){
+    public Iterable<Mensaje> getMensajeUsuario(long usuario_id,Usuario usuarioLocal,int page){
         return newJpaQuery().from(qMensaje)
                 .leftJoin(qMensaje.destinatarioList,qDestinatario)
                 .where(
@@ -48,7 +50,11 @@ public class MensajeRepositoryImpl implements MensajeRepositoryCustom{
                          (qDestinatario.usuarioDestinatario.eq(usuarioLocal)
                          .and(qMensaje.usuarioEmisor.id.eq(usuario_id)))
                         )
-                ).list(qMensaje);
+                )
+                .orderBy(qMensaje.id.desc())
+                .limit(20)
+                .offset(page * 20)
+                .list(qMensaje);
     }
     
     public Iterable<Usuario> getUsuarios(Usuario usuarioLocal){
