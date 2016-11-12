@@ -7,7 +7,7 @@
             <hr>
             <ul class="nav nav-pills nav-stacked">
                 <li ng-repeat="contacto in contactos">
-                    <button  class="btn btn-default col-md-12" ng-click="getMensajeUsuario(contacto.id);setConversacion(contacto.persona.nombre)" style="overflow-x:hidden">
+                    <button  class="btn btn-default col-md-12" ng-click="getMensajeUsuario(contacto.id);setConversacion(contacto.persona.nombre)" style="overflow-x:hidden" ng-class="{'btn-primary':contacto.id==usuarioactivo}">
                         <img class="user-image" ng-show="{{contacto.signInProvider === null || contacto.signInProvider === undefined}}" height="28px" width="28px" src="/images/getThumbnail/{{contacto.rutaImagen}}" alt="..." uib-tooltip="{{contacto.persona.nombre}}" tooltip-placement="top"/>
                         <img class="user-image" ng-show="{{contacto.signInProvider !== null && contacto.signInProvider !== undefined}}" height="28px" width="28px" src="{{contacto.rutaImagen}}" alt="..."  uib-tooltip="{{contacto.persona.nombre}}" tooltip-placement="top"/>
                         {{contacto.persona.nombre}}
@@ -25,17 +25,13 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="home">
-                    <div class="list-group">
+                    <div class="list-group" id="bandeja">
                         <a href="#" class="list-group-item" ng-repeat="mensaje in mensajescontacto" ng-class="{read:usuarioactivo==mensaje.usuarioEmisor.id}">
+                            <span class="badge pull-right">{{mensaje.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
                             <span class="" style='font-size:16px'>{{mensaje.texto}}</span>
-                            <span class="text-muted" style="font-size: 11px;">- {{mensaje.titulo}}</span> 
-                            <span class="badge">{{mensaje.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
+                            <span class="text-muted" style="font-size: 11px;"> {{mensaje.titulo}}</span> 
+
                         </a>
-                        <!--<a href="#" class="list-group-item read">
-                            <span class="">This is big title</span>
-                            <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> 
-                            <span class="badge">11:30 PM</span> 
-                        </a>-->
                     </div>
                 </div>
             </div>
