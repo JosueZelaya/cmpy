@@ -22,13 +22,15 @@ var cmy_ng = angular.module('cmpy',
     'cmpy.utils'
 ]);
 
-cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
 
 //    $locationProvider.html5Mode({
 //        enabled: true,
 //        requireBase: false,
 //        rewriteLinks: false
 //    });
+    
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     
     $urlRouterProvider.otherwise('/');
 
@@ -121,7 +123,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
             // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
             .state('about', { 
                 // we'll get to this in a bit       
-            });
+            });                        
 
 });
 

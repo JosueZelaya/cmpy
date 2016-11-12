@@ -5,6 +5,9 @@
  */
 package com.tecnogeek.comprameya.config;
 
+import com.tecnogeek.comprameya.components.RestAccessDeniedHandler;
+import com.tecnogeek.comprameya.components.RestAuthenticationFailureHandler;
+import com.tecnogeek.comprameya.components.RestUnauthorizedEntryPoint;
 import com.tecnogeek.comprameya.service.CustomAuthSuccessHandler;
 import com.tecnogeek.comprameya.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +22,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
@@ -31,12 +34,23 @@ import org.springframework.social.security.SpringSocialConfigurer;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    public static final String REMEMBER_ME_KEY = "rememberme_key";
+    
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
-
+    
+    @Autowired
+    private RestUnauthorizedEntryPoint restAuthenticationEntryPoint;
+    
+    @Autowired
+    private RestAccessDeniedHandler restAccessDeniedHandler;
+    
+    @Autowired
+    private RestAuthenticationFailureHandler restAuthenticationFailureHandler;
+    
     @Autowired
     private CustomAuthSuccessHandler customAuthSuccessHandler;
-    
+
     @Autowired
     private Environment environment;
 
@@ -54,15 +68,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**")
                 .antMatchers("/images/**");
     }
-    
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-            auth.inMemoryAuthentication();
+        auth.inMemoryAuthentication();
+        auth.userDetailsService(customUserDetailsService);
     }
-    
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
+                .headers().disable()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/",
@@ -102,29 +118,44 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/notificacion/**"
                 ).hasRole("USER")
                 .antMatchers(
-                        "/admin", 
+                        "/admin",
                         "/admin/**"
                 ).hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login/authenticate")
-                .failureUrl("/login?error=bad_credentials")
-                .successHandler(customAuthSuccessHandler)
+                    .exceptionHandling()
+                    .authenticationEntryPoint(restAuthenticationEntryPoint)
+                    .accessDeniedHandler(restAccessDeniedHandler)
                 .and()
-                .logout()
-                .deleteCookies("remove")
-                .invalidateHttpSession(true)
-                .logoutSuccessUrl("/")
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .permitAll()
+//                    .formLogin()
+//                    .loginPage("/login")
+//                    .loginProcessingUrl("/login/authenticate")
+//                    .failureUrl("/login?error=bad_credentials")
+//                    .usernameParameter("username")
+//                    .passwordParameter("password")
+//                    .successHandler(customAuthSuccessHandler)
+//                    .failureHandler(restAuthenticationFailureHandler)
+//                .and()
+                    .logout()
+                    .deleteCookies("remove")
+                    .invalidateHttpSession(true)
+//                    .logoutSuccessUrl("/")
+//                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+                    .permitAll()
                 .and()
-                .apply(new SpringSocialConfigurer()
-                        .alwaysUsePostLoginUrl(true)
-                        .postLoginUrl("/")
-                );
+                    .httpBasic()
+                .and()
+                    .apply(new SpringSocialConfigurer()
+                            .alwaysUsePostLoginUrl(true)
+                            .postLoginUrl("/")
+                    )
+                .and()
+                    .rememberMe()
+                    .rememberMeServices(rememberMeServices())
+                    .key(REMEMBER_ME_KEY)
+                .and();
     }
 
     @Bean
@@ -134,10 +165,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public RememberMeServices rememberMeServices() {
-            TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices("password", userDetailsService());
-            rememberMeServices.setCookieName(environment.getProperty("local.cookieName"));
-            rememberMeServices.setParameter("rememberMe");
-            return rememberMeServices;
+        TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices("password", userDetailsService());
+        rememberMeServices.setCookieName(environment.getProperty("local.cookieName"));
+        rememberMeServices.setParameter("rememberMe");
+        return rememberMeServices;
     }
-    
+
 }

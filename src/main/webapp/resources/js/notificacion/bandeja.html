@@ -1,0 +1,32 @@
+<div ng-controller="notificacionController" ng-init="init()">
+
+    <ol>
+        <div ng-repeat="notificacionUsuario in notificaciones">
+            <a href="" 
+               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
+               ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
+                <li ng-show="{{!notificacionUsuario.visto}}" class="alert alert-success">
+
+                    {{notificacionUsuario.notificacion.mensaje}}
+                    <br/>
+                    <span class="text-muted" style="font-size: 11px;">- nueva</span> 
+                    <span class="badge">{{notificacionUsuario.notificacion.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
+
+                </li>
+            </a>
+            <a href="" 
+               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
+               ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
+                <li ng-show="{{notificacionUsuario.visto}}" class="alert alert-warning">
+
+                    {{notificacionUsuario.notificacion.mensaje}}
+                    <br/>
+                    <span class="text-muted" style="font-size: 11px;">- visto</span> 
+                    <span class="badge">{{notificacionUsuario.notificacion.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
+
+                </li>
+            </a>
+        </div>        
+    </ol>
+
+</div>

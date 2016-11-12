@@ -24,7 +24,7 @@
             </a>
         </div> 
         
-        <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed" ng-controller="autenticacionController">   
+        <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">   
             
             <ul class="nav navbar-nav"> 
 
@@ -36,7 +36,7 @@
                 
                 <!--<div ng-if="usuario.login === '' || usuario.login === 'anonymousUser'">-->
                 <li ng-show="!authenticated" ng-controller="modalController">
-                    <a href="#" ng-click="open('loginModal.jsp', 'lg')">Iniciar Sesion <span class="glyphicon glyphicon-user"></a>
+                    <a href="#" ng-click="open('loginModal.html', 'lg')">Iniciar Sesion <span class="glyphicon glyphicon-user"></a>
                 </li>                           
                 <!--</div>-->
                 <!--<div ng-if="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
@@ -52,7 +52,7 @@
                         <li><a href="#">Configuracion</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Sesión</li>                                     
-                        <li><a href="/logout">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
+                        <li><a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
                     </ul>
                 </li>                        
                 <!--</div>-->

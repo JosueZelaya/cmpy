@@ -20,7 +20,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  */
 
 @Configuration
-@ComponentScan(basePackages={"com.tecnogeek.comprameya.config","com.tecnogeek.comprameya.service"})
+@ComponentScan(basePackages={"com.tecnogeek.comprameya.config","com.tecnogeek.comprameya.service","com.tecnogeek.comprameya.components"})
 @PropertySource(value = {"/WEB-INF/application.properties"})
 public class AppConfig {
     

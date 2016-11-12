@@ -17,7 +17,12 @@
         
         <!--<style> .ng-cloak { display: none !important; } </style>-->
         <link href="${pageContext.request.contextPath}/resources/images/favicon_trans.png" rel="icon" type="image/png">
-
+        <style type="text/css">
+            [ng\:cloak], [ng-cloak], .ng-cloak {
+                display: none !important;
+            }
+            .angular-google-map-container { height: 400px; }
+        </style>
     </head>
     <body ng-cloak class="ng-cloak">
 
@@ -85,11 +90,5 @@
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
         
-        <style type="text/css">
-            [ng\:cloak], [ng-cloak], .ng-cloak {
-                display: none !important;
-            }
-            .angular-google-map-container { height: 400px; }
-        </style>
     </body>
 </html>
