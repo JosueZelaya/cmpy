@@ -95,7 +95,7 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
             var elements = angular.element(id);
             var element = elements[0];    
             element.focus();
-            $scope.getMensajeUsuario($scope.usuarioactivo);
+            $scope.getMensajeUsuario($scope.usuarioactivo,0);
             $scope.getUsuarios();
             
             id=document.querySelector("#bandeja");
