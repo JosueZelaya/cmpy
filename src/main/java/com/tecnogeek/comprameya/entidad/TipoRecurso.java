@@ -17,7 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -25,7 +27,9 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "tipo_recurso")
-@Data
+@ToString(exclude = {"recursoList"})
+@Getter
+@Setter
 public class TipoRecurso extends BaseEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

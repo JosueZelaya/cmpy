@@ -19,7 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -27,7 +28,8 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "recurso")
-@Data
+@Getter
+@Setter
 public class Recurso extends BaseEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,9 +50,11 @@ public class Recurso extends BaseEntity<Long> implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "ruta")
     private String ruta;
+    @JsonManagedReference
     @JoinColumn(name = "grupo_id", referencedColumnName = "id")
     @ManyToOne
     private Grupo grupo;
+    @JsonManagedReference
     @JoinColumn(name = "perfil_id", referencedColumnName = "id")
     @ManyToOne
     private Perfil perfil;
@@ -58,6 +62,7 @@ public class Recurso extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "publicacion_id", referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.ALL)
     private Publicacion publicacion;
+    @JsonManagedReference
     @JoinColumn(name = "tipo_recurso_id", referencedColumnName = "id")
     @ManyToOne
     private TipoRecurso tipoRecurso;

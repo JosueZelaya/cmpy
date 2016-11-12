@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,7 +51,7 @@ public class Notificacion extends BaseEntity<Long> implements Serializable {
     @ManyToOne
     private TipoNotificacion tipoNotificacion;
     
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "notificacion")
     private List<NotificacionUsuario> usuariosNotificadosList;
     

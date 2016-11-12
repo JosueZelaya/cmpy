@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -19,7 +20,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -27,7 +30,9 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "pais")
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"estadoList"})
 public class Pais extends BaseEntity<Long> implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -43,6 +48,7 @@ public class Pais extends BaseEntity<Long> implements Serializable {
     private String nombre;
     @OneToMany(mappedBy = "pais")
     private List<Estado> estadoList;
+    @JsonManagedReference
     @JoinColumn(name = "continente_id", referencedColumnName = "id")
     @ManyToOne
     private Continente continente;

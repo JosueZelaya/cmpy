@@ -21,8 +21,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 
 /**
@@ -38,6 +37,9 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "usuario") 
+@ToString(exclude = {"compraList","votosDadosList","votosRecibidosList","contactoList","contactoList1",
+                    "suscripcionesList","seguidoresList","comentarioList","notificacionesList",
+                    "publicacionList","publiacionSuscritaList","destinatarioList","mensajeList"})
 @Getter
 @Setter
 public class Usuario extends BaseEntity<Long> implements Serializable {
@@ -93,7 +95,7 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Comentario> comentarioList;
     
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<NotificacionUsuario> notificacionesList;
     

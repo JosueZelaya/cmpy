@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -43,9 +44,11 @@ public class Caracteristica extends BaseEntity<Long> implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "valor")
     private String valor;
+    @JsonManagedReference
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     @ManyToOne
     private Producto producto;
+    @JsonManagedReference
     @JoinColumn(name = "tipo_caracteristica_id", referencedColumnName = "id")
     @ManyToOne
     private TipoCaracteristica tipoCaracteristica;

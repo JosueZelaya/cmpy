@@ -22,7 +22,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -30,7 +32,9 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "producto")
-@Data
+@ToString(exclude = {"caracteristicaList","cestaList"})
+@Getter
+@Setter
 public class Producto extends BaseEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,11 +60,14 @@ public class Producto extends BaseEntity<Long> implements Serializable {
     @NotNull
     @Column(name = "concluido")
     private boolean concluido;
+    @JsonBackReference
     @OneToMany(mappedBy = "producto")
     private List<Caracteristica> caracteristicaList;
+    @JsonManagedReference
     @JoinColumn(name = "categoria_id", referencedColumnName = "id")
     @ManyToOne
     private Categoria categoria;
+    @JsonManagedReference
     @JoinColumn(name = "modelo_id", referencedColumnName = "id")
     @ManyToOne
     private Modelo modelo;
@@ -68,6 +75,7 @@ public class Producto extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "publicacion_id", referencedColumnName = "id")
     @ManyToOne
     private Publicacion publicacion;
+    @JsonBackReference
     @OneToMany(mappedBy = "producto")
     private List<Cesta> cestaList;
 

@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,11 +35,11 @@ public class Destinatario extends BaseEntity<Long> implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @JsonBackReference    
+    @JsonManagedReference    
     @JoinColumn(name = "mensaje_id", referencedColumnName = "id")
     @ManyToOne
     private Mensaje mensaje;
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "usuario_destinatario_id", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuarioDestinatario;

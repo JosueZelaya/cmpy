@@ -5,6 +5,8 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,6 +23,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -28,6 +31,7 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "categoria")
+@ToString(exclude = {"categoriaList","productoList"})
 @Getter
 @Setter
 public class Categoria extends BaseEntity<Long> implements Serializable {
@@ -49,12 +53,15 @@ public class Categoria extends BaseEntity<Long> implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     
+    @JsonBackReference
     @OneToMany(mappedBy = "categoria")
     private List<Producto> productoList;
     
+    @JsonBackReference
     @OneToMany(mappedBy = "categoriaPadre")
-    private List<Categoria> categoriaList;
+    private List<Categoria> categoriaList; 
     
+    @JsonManagedReference
     @JoinColumn(name = "categoria_padre_id", referencedColumnName = "id")
     @ManyToOne
     private Categoria categoriaPadre;

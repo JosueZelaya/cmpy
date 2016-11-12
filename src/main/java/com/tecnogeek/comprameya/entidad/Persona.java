@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
@@ -24,7 +25,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -32,7 +35,9 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "persona")
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"empleadoList","usuarioList"})
 public class Persona extends BaseEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,6 +74,7 @@ public class Persona extends BaseEntity<Long> implements Serializable {
     @JsonBackReference
     @OneToMany(mappedBy = "persona")
     private List<Empleado> empleadoList;
+    @JsonManagedReference
     @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     @ManyToOne
     private Ubicacion ubicacion;

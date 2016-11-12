@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -42,10 +43,12 @@ public class NotificacionUsuario extends BaseEntity<Long> implements Serializabl
         return this.id;
     }
     
+    @JsonManagedReference
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuario;
     
+    @JsonManagedReference
     @JoinColumn(name = "notificacion_id", referencedColumnName = "id")
     @ManyToOne
     private Notificacion notificacion;

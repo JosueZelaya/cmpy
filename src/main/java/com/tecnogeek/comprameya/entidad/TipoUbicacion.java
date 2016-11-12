@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,7 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -24,7 +27,9 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "tipo_ubicacion")
-@Data
+@ToString(exclude = {"ubicacionList"})
+@Getter
+@Setter
 public class TipoUbicacion extends BaseEntity<Long> implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -37,6 +42,7 @@ public class TipoUbicacion extends BaseEntity<Long> implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "nombre")
     private String nombre;
+    @JsonBackReference
     @OneToMany(mappedBy = "tipoUbicacion")
     private List<Ubicacion> ubicacionList;
     

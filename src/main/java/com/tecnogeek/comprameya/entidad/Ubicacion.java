@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +20,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -27,7 +30,9 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "ubicacion")
-@Data
+@ToString (exclude = {"personaList"})
+@Setter
+@Getter
 public class Ubicacion extends BaseEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,6 +59,7 @@ public class Ubicacion extends BaseEntity<Long> implements Serializable {
     private Double gmLatitud;
     @Column(name = "gm_longitud")
     private Double gmLongitud;
+    @JsonManagedReference
     @JoinColumn(name = "ciudad_id", referencedColumnName = "id")
     @ManyToOne
     private Ciudad ciudad;
@@ -61,9 +67,11 @@ public class Ubicacion extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "publicacion_id", referencedColumnName = "id")
     @ManyToOne    
     private Publicacion publicacion;
+    @JsonManagedReference
     @JoinColumn(name = "tipo_ubicacion", referencedColumnName = "id")
     @ManyToOne
     private TipoUbicacion tipoUbicacion;
+    @JsonBackReference
     @OneToMany(mappedBy = "ubicacion")
     private List<Persona> personaList;
         

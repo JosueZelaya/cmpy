@@ -17,7 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -25,7 +26,8 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "empleado")
-@Data
+@Getter
+@Setter
 public class Empleado extends BaseEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,6 +43,7 @@ public class Empleado extends BaseEntity<Long> implements Serializable {
     private BigInteger afp;
     @Column(name = "isss")
     private BigInteger isss;
+    @JsonManagedReference
     @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne
     private Empresa empresa;
@@ -48,6 +51,7 @@ public class Empleado extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
     @ManyToOne
     private Persona persona;
+    @JsonManagedReference
     @JoinColumn(name = "puesto_id", referencedColumnName = "id")
     @ManyToOne
     private Puesto puesto;

@@ -15,7 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -23,7 +24,8 @@ import lombok.Data;
  */
 @Entity
 @Table(name = "suscripcion_publicacion")
-@Data
+@Getter
+@Setter
 public class SuscripcionPublicacion extends BaseEntity<Long> implements Serializable {
      private static final long serialVersionUID = 1L;
     @Id
