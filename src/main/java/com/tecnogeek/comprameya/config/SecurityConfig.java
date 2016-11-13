@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication();
+//        auth.inMemoryAuthentication();
         auth.userDetailsService(customUserDetailsService);
     }
 
@@ -153,10 +153,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             .alwaysUsePostLoginUrl(true)
                             .postLoginUrl("/")
                     )
-                .and()
-                    .rememberMe()
-                    .rememberMeServices(rememberMeServices())
-                    .key(REMEMBER_ME_KEY)
+//                .and()
+//                    .rememberMe()
+//                    .rememberMeServices(rememberMeServices())
+//                    .key(REMEMBER_ME_KEY)
                 .and();
     }
 
@@ -165,12 +165,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(10);
     }
 
-    @Bean
-    public RememberMeServices rememberMeServices() {
-        TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices("password", userDetailsService());
-        rememberMeServices.setCookieName(environment.getProperty("local.cookieName"));
-        rememberMeServices.setParameter("rememberMe");
-        return rememberMeServices;
-    }
+//    @Bean
+//    public RememberMeServices rememberMeServices() {
+//        TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices("password", userDetailsService());
+//        rememberMeServices.setCookieName(environment.getProperty("local.cookieName"));
+//        rememberMeServices.setParameter("rememberMe");
+//        return rememberMeServices;
+//    }
 
 }

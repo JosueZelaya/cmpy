@@ -19,10 +19,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RestAccessDeniedHandler implements AccessDeniedHandler {
- 
- @Override
- public void handle(HttpServletRequest request, HttpServletResponse response,
-  AccessDeniedException exception) throws IOException, ServletException {
-  response.sendError(HttpServletResponse.SC_FORBIDDEN, "Not authorized resources");
- }
+
+    @Override
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+            AccessDeniedException exception) throws IOException, ServletException {
+        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Not authorized resources");
+    }
 }
