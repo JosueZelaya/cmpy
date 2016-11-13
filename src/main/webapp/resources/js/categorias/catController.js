@@ -10,7 +10,7 @@ categorias.controller('catController',['$scope','$rootScope','TIPO_PUBLICACION',
         
         angular.forEach($scope.categorias, function (item) {
             item.collapse = true;
-            angular.forEach(item.hijos, function (sub_item) {
+            angular.forEach(item.categoriaList, function (sub_item) {
                 sub_item.collapse = true;
                 angular.forEach(sub_item, function (sub_sub_item) {
                     sub_sub_item.collapse = true;

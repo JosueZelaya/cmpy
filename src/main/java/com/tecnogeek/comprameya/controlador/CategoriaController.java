@@ -28,40 +28,11 @@ public class CategoriaController {
     CategoriaRepository categoriaRepository;
     
     @RequestMapping(value = "/todos", method = RequestMethod.GET)
-    public @ResponseBody List<Object> getTodoCategoria(Model model)  {
+    public @ResponseBody Iterable<Categoria> getTodoCategoria(Model model)  {
          Iterable<Categoria> catTodo = categoriaRepository.getCategoriaPadres();
-         List < Object > catObject = new ArrayList();
-         for(Categoria cat : catTodo)
-         {
-             catObject.add(getCatMin(cat, getHijos(cat)));
-         }
-         return catObject ;   
+         return catTodo; 
     }
     
-    private List<Object> getHijos(Categoria categoria)
-    {
-        Iterable<Categoria> catHijos = categoriaRepository.getHijosCategoria(categoria);
-        List<Object> catObject = new ArrayList<>();
-        for(Categoria cat : catHijos)
-        {
-            catObject.add(getCatMin(cat, getHijos(cat)));
-        }
-        return catObject;
-    }  
-    
-    private Object getCatMin( final Categoria catPadre, final List<Object> catHijos) 
-    {
-            Object obj;
-            obj = new Object() {
-               public Long id = catPadre.getId();
-               public String nombre = catPadre.getNombre();
-               public String descripcion = catPadre.getDescripcion();
-               public Object hijos = catHijos;
-            };
-     
-         return obj;
-         
-    }
 
 }
 

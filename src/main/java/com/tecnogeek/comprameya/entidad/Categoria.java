@@ -57,11 +57,11 @@ public class Categoria extends BaseEntity<Long> implements Serializable {
     @OneToMany(mappedBy = "categoria")
     private List<Producto> productoList;
     
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "categoriaPadre")
     private List<Categoria> categoriaList; 
     
-    @JsonManagedReference
+    @JsonBackReference
     @JoinColumn(name = "categoria_padre_id", referencedColumnName = "id")
     @ManyToOne
     private Categoria categoriaPadre;
