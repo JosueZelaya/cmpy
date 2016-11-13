@@ -2,12 +2,12 @@
   <span>Mensajes</span>
     <hr>
 
-        <div class="col-sm-3 col-md-2">
+        <div class="col-sm-12 col-md-2">
           <span>Conversaciones</span>
             <hr>
             <ul class="nav nav-pills nav-stacked">
                 <li ng-repeat="contacto in contactos">
-                    <button  class="btn btn-default col-md-12" ng-click="getMensajeUsuario(contacto.id,0);setConversacion(contacto.persona.nombre)" style="overflow-x:hidden" ng-class="{'btn-primary':contacto.id==usuarioactivo}">
+                    <button  class="btn btn-default col-md-12 col-sm-12" style="width:100%" ng-click="getMensajeUsuario(contacto.id,0);setConversacion(contacto.persona.nombre)" style="overflow-x:hidden" ng-class="{'btn-primary':contacto.id==usuarioactivo}">
                         <img class="user-image" ng-show="{{contacto.signInProvider === null || contacto.signInProvider === undefined}}" height="28px" width="28px" src="/images/getThumbnail/{{contacto.rutaImagen}}" alt="..." uib-tooltip="{{contacto.persona.nombre}}" tooltip-placement="top"/>
                         <img class="user-image" ng-show="{{contacto.signInProvider !== null && contacto.signInProvider !== undefined}}" height="28px" width="28px" src="{{contacto.rutaImagen}}" alt="..."  uib-tooltip="{{contacto.persona.nombre}}" tooltip-placement="top"/>
                         {{contacto.persona.nombre}}
@@ -16,7 +16,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-sm-9 col-md-10">
+        <div class="col-sm-12 col-md-10">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
@@ -48,7 +48,6 @@
                    <textarea class="form-control" rows="3" ng-model="texto" id="textomensaje"></textarea>
                    <button class="btn btn-default" ng-click="setMensaje(asunto,texto,usuarioactivo)">Enviar</button>
                 </div>
-
 
             </div>
         </div>

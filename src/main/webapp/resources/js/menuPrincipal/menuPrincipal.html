@@ -67,6 +67,22 @@
                         Mensajes
                         <span class="badge badge-notify">{{totalMensajes}}</span>
                     </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="mensaje in mensajes">
+                            <a href="" 
+                               ng-click="quitarVisibilidadMensajes(mensaje.usuarioEmisor.id)" 
+                               ui-sref=".vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})">
+                                {{mensaje.texto}}
+                            </a>
+                        </li>
+                        <li style="text-align: center">
+                            <a href="" 
+                               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
+                               ui-sref=".vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})">
+                               Ver Bandeja...
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 
                 <li class="dropdown" uib-dropdown="" ng-show="authenticated">
