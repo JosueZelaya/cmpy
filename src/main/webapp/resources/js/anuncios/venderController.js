@@ -100,7 +100,7 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
             
             if(item.id == $scope.select_nivel1)
             {
-                angular.forEach(item.hijos, function (sub_item) {
+                angular.forEach(item.categoriaList, function (sub_item) {
                     $scope.categorias_nivel2.push(sub_item);
                 });
             }
@@ -115,10 +115,10 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
             
             if(item.id == $scope.select_nivel1)
             {
-                angular.forEach(item.hijos, function (sub_item) {
+                angular.forEach(item.categoriaList, function (sub_item) {
                      if(sub_item.id == $scope.select_nivel2)
                     {
-                        angular.forEach(sub_item.hijos, function (sub_sub_item) {
+                        angular.forEach(sub_item.categoriaList, function (sub_sub_item) {
                             $scope.categorias_nivel3.push(sub_sub_item);
                         });                       
                     }
