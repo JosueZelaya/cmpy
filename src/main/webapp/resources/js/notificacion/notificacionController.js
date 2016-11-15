@@ -5,7 +5,7 @@ modulo_notificacion.controller('notificacionController', [
     'PushNotificationService',
     function ($scope, $rootScope, notificacionService, PushNotificationService) {
         
-         $scope.messages = [];
+        $scope.messages = [];
         $scope.message = "";
         $scope.max = 140;
 
@@ -18,6 +18,10 @@ modulo_notificacion.controller('notificacionController', [
           $scope.messages.push(message);
           $rootScope.totalNotificaciones++;
         });
+        
+        $rootScope.desconectar = function (){
+            PushNotificationService.disconnect();
+        };
 
         var getTodasNotificaciones = function () {
             return notificacionService.getTodasNotificaciones()

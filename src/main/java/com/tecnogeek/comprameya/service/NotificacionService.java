@@ -5,6 +5,8 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.tecnogeek.comprameya.dto.Message;
+import com.tecnogeek.comprameya.dto.OutputMessage;
 import com.tecnogeek.comprameya.entidad.Notificacion;
 import com.tecnogeek.comprameya.entidad.NotificacionUsuario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
@@ -13,8 +15,10 @@ import com.tecnogeek.comprameya.repositories.NotificacionRepository;
 import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -33,6 +37,9 @@ public class NotificacionService {
     
     @Autowired
     UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    private SimpMessagingTemplate template;
     
 //    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void informarASuscriptores(List<Usuario> suscriptores, Usuario emisor, Publicacion publicacion){
@@ -55,7 +62,15 @@ public class NotificacionService {
             nt.setUsuario(usuario);
             nt.setNotificacion(notificacion);
             notificaciones.add(nt);
+            Message message = new Message();
+            message.setId(1);
+            message.setMessage("se ha creado una notificacion");
+            template.convertAndSendToUser(usuario.getLogin(), "/queue/greetings",new OutputMessage(message, new Date()));
         }        
+//        Message message = new Message();
+//        message.setId(1);
+//        message.setMessage("se ha creado una notificacion");
+//        template.convertAndSend("/topic/greetings",new OutputMessage(message, new Date()));
         
         notificacionUsuarioRepository.save(notificaciones);
     }

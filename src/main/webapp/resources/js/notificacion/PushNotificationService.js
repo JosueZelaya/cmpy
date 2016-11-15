@@ -8,6 +8,7 @@ modulo_notificacion.service("PushNotificationService", function($q, $timeout) {
     service.RECONNECT_TIMEOUT = 30000;
     service.SOCKET_URL = "/cmpyWebSocket";
     service.CHAT_TOPIC = "/topic/greetings";
+    service.PRIVATE_CHAT = "/user/queue/greetings";
     service.CHAT_BROKER = "/app/greetings";
     
     service.receive = function() {
@@ -23,6 +24,10 @@ modulo_notificacion.service("PushNotificationService", function($q, $timeout) {
         id: id
       }));
       messageIds.push(id);
+    };
+    
+    service.disconnect = function(){
+        socket.stomp.disconnect();
     };
     
     var reconnect = function() {
@@ -46,6 +51,10 @@ modulo_notificacion.service("PushNotificationService", function($q, $timeout) {
       socket.stomp.subscribe(service.CHAT_TOPIC, function(data) {
         listener.notify(getMessage(data.body));
       });
+      socket.stomp.subscribe(service.PRIVATE_CHAT, function(data) {
+        listener.notify(getMessage(data.body));
+      });
+      
     };
     
     var initialize = function() {

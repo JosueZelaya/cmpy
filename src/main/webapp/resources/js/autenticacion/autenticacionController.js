@@ -48,6 +48,7 @@ autenticacion.controller('autenticacionController',
 
 
             $rootScope.logout = function () {
+                $rootScope.desconectar();
                 $http.post('logout', {}).finally(function () {
                     $rootScope.authenticated = false;
                     $location.path("/");

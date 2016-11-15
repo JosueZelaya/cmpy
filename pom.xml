@@ -172,6 +172,13 @@
             <version>${spring-version}</version>
         </dependency>
         
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-messaging -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-messaging</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        
         <!-- Apache Commons FileUpload --> 
 	<dependency>
 		<groupId>commons-fileupload</groupId>
