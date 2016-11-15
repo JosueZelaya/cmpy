@@ -12,6 +12,8 @@
         "underscore": "~1.8.3",
         "matchmedia-ng":"1.0.8",
         "angular-loading-bar":"latest",
-        "angular-confirm-modal":"1.2.6"
+        "angular-confirm-modal":"1.2.6",
+        "sockjs": "0.3.4",
+        "stomp-websocket": "2.3.4"
     }
 }

@@ -109,7 +109,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/recurso/getRecursos/**",
                         "/categoria/**",
                         "/ubicacion/**",
-                        "/mensaje/**"
+                        "/mensaje/**",
+                        "/cmpyWebSocket/**"
                 ).permitAll()
                 .antMatchers(
                         "/publicacion",

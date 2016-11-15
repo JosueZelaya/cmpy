@@ -24,7 +24,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * @author jzelaya
  */
 
-@Import({SecurityConfig.class})
+@Import({SecurityConfig.class, WebSocketConfig.class})
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 
     private int maxUploadSizeInMb = 5 * 1024 * 1024; // 5 MB
@@ -32,13 +32,11 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected Class<?>[] getRootConfigClasses() {        
           return new Class[] {AppConfig.class, SecurityConfig.class};
-//        return new Class[] {AppConfig.class};
-//        return null;
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {MvcConfig.class, SecurityConfig.class};
+        return new Class[] {MvcConfig.class, WebSocketConfig.class};
     }
 
     @Override
