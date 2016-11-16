@@ -30,10 +30,6 @@ modulo_notificacion.service("PushNotificationService", function($q, $timeout) {
         socket.stomp.disconnect();
     };
     
-    service.reconnect = function(){
-        initialize();
-    };
-    
     var reconnect = function() {
       $timeout(function() {
         initialize();
@@ -41,14 +37,14 @@ modulo_notificacion.service("PushNotificationService", function($q, $timeout) {
     };
     
     var getMessage = function(data) {
-//      var message = JSON.parse(data), out = {};
-//      out.message = message.message;
-//      out.time = new Date(message.time);
-////      if (_.contains(messageIds, message.id)) {
-////        out.self = true;
-////        messageIds = _.remove(messageIds, message.id);
-////      }
-      return JSON.parse(data);
+      var message = JSON.parse(data), out = {};
+      out.message = message.message;
+      out.time = new Date(message.time);
+//      if (_.contains(messageIds, message.id)) {
+//        out.self = true;
+//        messageIds = _.remove(messageIds, message.id);
+//      }
+      return out;
     };
     
     var startListener = function() {

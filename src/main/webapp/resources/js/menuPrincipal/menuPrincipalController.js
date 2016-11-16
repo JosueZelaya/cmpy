@@ -1,7 +1,14 @@
-menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION) {
+menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','PushNotificationService', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION, PushNotificationService) {
 
 
         $scope.match = "";
+        $rootScope.notificaciones = [];
+        $rootScope.totalNotificaciones = 0;
+        
+        PushNotificationService.receive().then(null, null, function(notificaciones) {
+            $rootScope.notificaciones.push(notificaciones);
+            $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
+        });
         
         var getPublicaciones = function (tipo, pagina) {
             return anunciosService.getAnuncios(tipo, pagina)
@@ -45,12 +52,16 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                     });
         };
         
-        $scope.quitarVisibilidad = function (idNotificacion) {
-            return notificacionService.quitarVisibilidad(idNotificacion)
-                    .success(function (notificaciones) {
-                        $scope.notificaciones = notificaciones;
-                        $scope.totalNotificaciones = notificaciones.length;
-                    });
+        $scope.quitarVisibilidad = function (idNotificacion,index) {
+//            return notificacionService.quitarVisibilidad(idNotificacion)
+//                    .success(function (notificaciones) {
+//                        $scope.notificaciones = notificaciones;
+//                        $scope.totalNotificaciones = notificaciones.length;
+//                    });
+                    
+            notificacionService.ocultar(idNotificacion);
+            $rootScope.notificaciones.splice(index,1);
+            $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
         };    
 
         $scope.cargarPublicacionesGratisByMatch = function (page, match) {
@@ -79,6 +90,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
             $scope.totalMensajes = 0;
             
             if($rootScope.authenticated){
+//                notificacionService.solicitarNotificacionesPush();
                 getTotalNotificaciones()
                     .success(function (total) {
                         try {

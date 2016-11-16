@@ -34,5 +34,15 @@ modulo_notificacion.service('notificacionService', function ($http, $log) {
                     return response;
                 });
     };
+    
+    this.solicitarNotificacionesPush = function () {
+        var req = "/notificacion/solicitarNotificacionesPush/";
+        $http.get(req);
+    };
+    
+    this.ocultar = function (notificacionId) {
+        var req = "/notificacion/ocultar/"+notificacionId;
+        $http.get(req);
+    };
 
 });

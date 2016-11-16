@@ -69,4 +69,21 @@ public class NotificacionController {
        return getNotificaciones();
     }
     
+    @RequestMapping(value="/solicitarNotificacionesPush/",method=RequestMethod.GET)  
+    public void enviarNotificaciones(){
+        Usuario usuario = usuarioRepository.getLoggedUser();
+        
+        if(usuario==null){
+            return;
+        }
+        List<NotificacionUsuario> ntList = notificacionUsuarioRepository.getNotificaciones(usuario);
+        
+        notificacionService.sendToClient(ntList);
+    }
+    
+    @RequestMapping(value="/ocultar/{idNotificacion}") 
+    public void ocultar(@PathVariable Long idNotificacion){
+       notificacionService.quitarVisibilidad(idNotificacion);
+    }
+    
 }

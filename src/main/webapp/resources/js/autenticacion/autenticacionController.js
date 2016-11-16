@@ -1,5 +1,4 @@
-autenticacion.controller('autenticacionController',
-        function ($rootScope, $scope, $http, $location) {
+autenticacion.controller('autenticacionController',['$rootScope','$scope','$http','$location','PushNotificationService',function ($rootScope, $scope, $http, $location, PushNotificationService) {
             
             $scope.credentials = {};
             $scope.error = false;
@@ -36,6 +35,7 @@ autenticacion.controller('autenticacionController',
             $scope.login = function () {
                 authenticate($scope.credentials, function () {
                     if ($rootScope.authenticated) {
+                        PushNotificationService.reconnect();
                         $location.path("/");
                         $scope.error = false;
                         $scope.cancel(); //cerrar el dialogo
@@ -48,7 +48,7 @@ autenticacion.controller('autenticacionController',
 
 
             $rootScope.logout = function () {
-                $rootScope.desconectar();
+                PushNotificationService.disconnect();
                 $http.post('logout', {}).finally(function () {
                     $rootScope.authenticated = false;
                     $location.path("/");
@@ -56,5 +56,6 @@ autenticacion.controller('autenticacionController',
             };
             
             authenticate();
-        }
+        }]
+        
 );

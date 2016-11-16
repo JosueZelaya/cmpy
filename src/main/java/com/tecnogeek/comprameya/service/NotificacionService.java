@@ -5,8 +5,6 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnogeek.comprameya.dto.Message;
-import com.tecnogeek.comprameya.dto.OutputMessage;
 import com.tecnogeek.comprameya.entidad.Notificacion;
 import com.tecnogeek.comprameya.entidad.NotificacionUsuario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
@@ -15,7 +13,6 @@ import com.tecnogeek.comprameya.repositories.NotificacionRepository;
 import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -61,18 +58,11 @@ public class NotificacionService {
             NotificacionUsuario nt = new NotificacionUsuario();
             nt.setUsuario(usuario);
             nt.setNotificacion(notificacion);
-            notificaciones.add(nt);
-            Message message = new Message();
-            message.setId(1);
-            message.setMessage("se ha creado una notificacion");
-            template.convertAndSendToUser(usuario.getLogin(), "/queue/greetings",new OutputMessage(message, new Date()));
-        }        
-//        Message message = new Message();
-//        message.setId(1);
-//        message.setMessage("se ha creado una notificacion");
-//        template.convertAndSend("/topic/greetings",new OutputMessage(message, new Date()));
+            notificaciones.add(nt);            
+        }  
         
         notificacionUsuarioRepository.save(notificaciones);
+        sendToClient(notificaciones);
     }
     
     public List<Usuario> getUsuariosExeptoUno(List<Usuario> usuarioList, Usuario usuarioExcluido){
@@ -97,6 +87,16 @@ public class NotificacionService {
         }
         
         notificacionUsuarioRepository.save(notificaciones);    
+    }
+    
+    public void sendToClient(List<NotificacionUsuario> ntList){
+        for(NotificacionUsuario nt : ntList){
+            template.convertAndSendToUser(nt.getUsuario().getLogin(), "/queue/greetings",nt);
+        }
+    }
+    
+    public void sendToClient(NotificacionUsuario nt){
+        template.convertAndSendToUser(nt.getUsuario().getLogin(), "/queue/greetings",nt);
     }
     
 }

@@ -61,7 +61,7 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
     };
 
     $scope.eliminarPublicacion = function (publicacionId,index) {        
-        eliminarPublicacion(publicacionId,index)
+        eliminarPublicacion(publicacionId)
                 .success(function (respuesta) {
                     $rootScope.publicaciones.splice(index,1);
                 }); 

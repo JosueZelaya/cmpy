@@ -77,7 +77,6 @@
                         </li>
                         <li style="text-align: center">
                             <a href="" 
-                               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
                                ui-sref=".vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})">
                                Ver Bandeja...
                             </a>
@@ -93,14 +92,13 @@
                     <ul class="dropdown-menu" role="menu">
                         <li ng-repeat="notificacionUsuario in notificaciones">
                             <a href="" 
-                               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
+                               ng-click="quitarVisibilidad(notificacionUsuario.id,$index)" 
                                ui-sref=".vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
                                 {{notificacionUsuario.notificacion.mensaje}}
                             </a>
                         </li>
                         <li style="text-align: center">
-                            <a href="" 
-                               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
+                            <a href=""                                 
                                ui-sref=".vistaNotificaciones({'#': 'publicacionesProductos'})">
                                Ver Todas ...
                             </a>

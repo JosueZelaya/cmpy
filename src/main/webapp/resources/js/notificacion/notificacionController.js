@@ -2,26 +2,10 @@ modulo_notificacion.controller('notificacionController', [
     '$scope',
     '$rootScope',
     'notificacionService',
-    'PushNotificationService',
-    function ($scope, $rootScope, notificacionService, PushNotificationService) {
-        
-        $scope.messages = [];
+    function ($scope, $rootScope, notificacionService) {
+
         $scope.message = "";
         $scope.max = 140;
-
-        $scope.addMessage = function() {
-          PushNotificationService.send($scope.message);
-          $scope.message = "";
-        };
-
-        PushNotificationService.receive().then(null, null, function(message) {
-          $scope.messages.push(message);
-          $rootScope.totalNotificaciones++;
-        });
-        
-        $rootScope.desconectar = function (){
-            PushNotificationService.disconnect();
-        };
 
         var getTodasNotificaciones = function () {
             return notificacionService.getTodasNotificaciones()
@@ -32,17 +16,20 @@ modulo_notificacion.controller('notificacionController', [
 
         $scope.quitarVisibilidad = function (idNotificacion) {
             return notificacionService.quitarVisibilidad(idNotificacion)
-                    .success(function (notificaciones) {
-                        $rootScope.notificaciones = notificaciones;
-                        $rootScope.totalNotificaciones = notificaciones.length;
+                    .success(function () {
+                        $rootScope.totalNotificaciones--;
                     });
         };
 
         $scope.init = function () {
-            getTodasNotificaciones()
-                    .success(function (notificaciones) {
-                        $rootScope.notificaciones = notificaciones;
-                    });
+            if ($rootScope.authenticated) {
+
+                getTodasNotificaciones()
+                        .success(function (notificaciones) {
+                            $rootScope.notificaciones = notificaciones;
+                        });
+
+            }
         };
 
     }
