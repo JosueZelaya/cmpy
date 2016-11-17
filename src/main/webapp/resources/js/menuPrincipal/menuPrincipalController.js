@@ -1,9 +1,14 @@
-menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','PushNotificationService', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION, PushNotificationService) {
-
+menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','PushNotificationService','$log', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION, PushNotificationService, $log) {
 
         $scope.match = "";
-        $rootScope.notificaciones = [];
-        $rootScope.totalNotificaciones = 0;
+        $rootScope.notificaciones = PushNotificationService.notificaciones;
+        $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
+        
+//        $rootScope.$on('$routeChangeStart', function (event, next, current) {
+//            if (!current) {
+//              PushNotificationService.disconnect();
+//            }
+//          });
         
         PushNotificationService.receive().then(null, null, function(notificaciones) {
             $rootScope.notificaciones.push(notificaciones);
