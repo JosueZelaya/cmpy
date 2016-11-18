@@ -1,4 +1,4 @@
-maps.controller('mapController', function($rootScope,$scope,$http,mapService,$timeout,$window,matchmedia) {
+maps.controller('mapController', function($rootScope,$scope,$http,mapService,$timeout,$window,matchmedia, $stateParams) {
 
 
 
@@ -253,6 +253,29 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
 
     });    
 
+    var init = function () {
+
+        var publicacionId = $stateParams.publicacionId;
+
+        if (publicacionId !== undefined) {
+            mapService.getUbicaciones(publicacionId)
+                    .success(function (response)
+                    {
+                        angular.forEach(response, function (item) {
+                            var marker = {};
+                            marker.id = item.id;
+                            marker.title = 'ubi' + item.id.toString();
+                            marker.latitude = item.latitud;
+                            marker.longitude = item.longitud;
+                            $rootScope.markers.push(marker);
+                        });
+
+                    });
+        }
+
+    };
+
+    init();
 
   });
 

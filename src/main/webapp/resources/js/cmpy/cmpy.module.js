@@ -42,13 +42,13 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 views: {
                     '': { templateUrl: '/resources/js/cmpy/home.html' },
                     
-                    "menuPrincipal@fb": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
-                    "menuCategorias@fb": {templateUrl: '/resources/js/categorias/menuCategorias.html'},
-                    "panelPublicacionesProductos@fb": {templateUrl: '/resources/js/anuncios/panelProductos.html'},
-                    "panelPublicacionesEmpresas@fb": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'},                    
+                    "menuPrincipal@fb": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html', controller: 'menuPrincipalController'},
+                    "menuCategorias@fb": {templateUrl: '/resources/js/categorias/menuCategorias.html', controller: 'catController'},
+                    "panelPublicacionesProductos@fb": {templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'anunciosController'},
+                    "panelPublicacionesEmpresas@fb": {templateUrl: '/resources/js/anuncios/panelEmpresas.html', controller: 'empresasController'},                    
                     "venderModal@fb": {templateUrl: '/resources/js/anuncios/venderModal.html'},
                     "ubicacionesModal@fb": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'},
-                    "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html'}
+                    "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html', controller: 'mapController'}
                 }
             })
 
@@ -58,27 +58,41 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 views: {
                     '': { templateUrl: '/resources/js/cmpy/home.html' },
                     
-                    "menuPrincipal@home": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html'},
-                    "menuCategorias@home": {templateUrl: '/resources/js/categorias/menuCategorias.html'},
-                    "panelPublicacionesProductos@home": {templateUrl: '/resources/js/anuncios/panelProductos.html'},
-                    "panelPublicacionesEmpresas@home": {templateUrl: '/resources/js/anuncios/panelEmpresas.html'},                    
+                    "menuPrincipal@home": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html', controller: 'menuPrincipalController'},
+                    "menuCategorias@home": {templateUrl: '/resources/js/categorias/menuCategorias.html', controller: 'catController'},
+                    "panelPublicacionesProductos@home": {templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'anunciosController'},
+                    "panelPublicacionesEmpresas@home": {templateUrl: '/resources/js/anuncios/panelEmpresas.html', controller: 'empresasController'},                    
                     "venderModal@home": {templateUrl: '/resources/js/anuncios/venderModal.html'},
                     "ubicacionesModal@home": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'},
-                    "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html'}
+                    "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html', controller: 'mapController'}
+                }
+            })
+
+            .state('home.misPublicaciones', {
+                url: "/misPublicaciones",  
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html'}
                 }
             })
             
+            .state('fb.misPublicaciones', {
+                url: "/misPublicaciones",  
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html'}
+                }
+            })
+    
             .state('home.vistaProducto', {
                 url: "/vistaProducto/{publicacionId}",  
                 views: {
-                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html'}
+                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
                 }
             })
             
             .state('fb.vistaProducto', {
                 url: "/vistaProducto/{publicacionId}",  
                 views: {
-                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html'}
+                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
                 }
             })
             
@@ -90,7 +104,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     asunto: '~'
                 },
                 views: {
-                    '':{templateUrl: '/resources/js/mensajes/bandeja.html'}
+                    '':{templateUrl: '/resources/js/mensajes/bandeja.html', controller : "mensajesController"}
                 }
             })
             
@@ -102,21 +116,21 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     asunto: '~'
                 },
                 views: {
-                    '':{templateUrl: '/resources/js/mensajes/bandeja.html'}
+                    '':{templateUrl: '/resources/js/mensajes/bandeja.html', controller: "mensajesController"}
                 }
             })
             
             .state('home.vistaNotificaciones', {
                 url: "/vistaNotificaciones",
                 views: {
-                    '':{templateUrl: '/resources/js/notificacion/bandeja.html'}
+                    '':{templateUrl: '/resources/js/notificacion/bandeja.html', controller: "notificacionController"}
                 }
             })
             
             .state('fb.vistaNotificaciones', {
                 url: "/vistaNotificaciones",
                 views: {
-                    '':{templateUrl: '/resources/js/notificacion/bandeja.html'}
+                    '':{templateUrl: '/resources/js/notificacion/bandeja.html', controller: "notificacionController"}
                 }
             })
 

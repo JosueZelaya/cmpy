@@ -1,5 +1,5 @@
 <!--<div class="row" >-->
-<div ng-controller="productoController">
+<div>
 
     <div class="thumbnail">
         <img class="user-image" ng-show="{{publicacion.usuario.signInProvider === null || publicacion.usuario.signInProvider === undefined}}" height="28px" width="28px" src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div ng-controller="modalController">
+        <div>
 
             <button value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('ubicacionesModal.html', 'lg')">
                 Ver Puntos de Entrega
@@ -56,7 +56,7 @@
 
                 </textarea>
             </div>
-            <div class="form-group" ng-controller="modalController">    
+            <div class="form-group">    
                 <button ng-show="!authenticated" type="button" class="btn btn-default" ng-click="open('loginModal.html', 'lg')">Agregar</button>
                 <button ng-disabled="!ready" ng-show="authenticated" type="button" class="btn btn-default" ng-click="agregarComentario()">Agregar</button>
             </div>
