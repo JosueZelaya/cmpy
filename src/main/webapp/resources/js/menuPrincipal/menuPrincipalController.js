@@ -1,7 +1,7 @@
 menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','mensajesService','PushNotificationService','$log', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION,mensajesService, PushNotificationService, $log) {
 
         $scope.match = "";
-        $rootScope.notificaciones = PushNotificationService.notificaciones;
+        $rootScope.notificaciones = {}
         $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
         $scope.pageMensajesNoLeidos = 0;
         $scope.NoLeidosTotal = 0;
@@ -12,14 +12,12 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
 //              PushNotificationService.disconnect();
 //            }
 //          });
-        
-        PushNotificationService.receive().then(null, null, function(notificaciones) {
+
+        PushNotificationService.receive().then(null, null, function (notificaciones) {
             $rootScope.notificaciones.push(notificaciones);
             $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
         });
 
-
-        
         var getPublicaciones = function (tipo, pagina) {
             return anunciosService.getAnuncios(tipo, pagina)
                     .success(function (publicaciones) {
@@ -33,9 +31,9 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         $rootScope.publicaciones = publicaciones;
                     });
         };
-        
-        var getMisPublicaciones = function (tipo,pagina) {
-            return anunciosService.getMisAnuncios(tipo,pagina)
+
+        var getMisPublicaciones = function (tipo, pagina) {
+            return anunciosService.getMisAnuncios(tipo, pagina)
                     .success(function (publicaciones) {
                         return publicaciones;
                     });
@@ -61,18 +59,18 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         return notificaciones;
                     });
         };
-        
-        $scope.quitarVisibilidad = function (idNotificacion,index) {
+
+        $scope.quitarVisibilidad = function (idNotificacion, index) {
 //            return notificacionService.quitarVisibilidad(idNotificacion)
 //                    .success(function (notificaciones) {
 //                        $scope.notificaciones = notificaciones;
 //                        $scope.totalNotificaciones = notificaciones.length;
 //                    });
-                    
+
             notificacionService.ocultar(idNotificacion);
-            $rootScope.notificaciones.splice(index,1);
+            $rootScope.notificaciones.splice(index, 1);
             $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
-        };    
+        };
 
         $scope.cargarPublicacionesGratisByMatch = function (page, match) {
 
@@ -81,7 +79,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         $rootScope.publicaciones = publicaciones;
                     });
         };
-        
+
         $scope.verMisPublicaciones = function (page) {
             $scope.navCollapsed = !$scope.navCollapsed;
             getMisPublicaciones(TIPO_PUBLICACION.GRATIS, page)
@@ -89,7 +87,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         $rootScope.publicaciones = publicaciones;
                     });
         };
-        
+
         $scope.cargarPublicacionesGratis = function () {
             cargarPublicacionesGratis(0);
         };
@@ -136,27 +134,16 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
             $scope.navCollapsed = true;
             $scope.collapseNot = true;
             $scope.totalMensajes = 0;
-            
-            if($rootScope.authenticated){
-//                notificacionService.solicitarNotificacionesPush();
-                getTotalNotificaciones()
-                    .success(function (total) {
-                        try {
-                            JSON.parse(total);
-                            $rootScope.totalNotificaciones = total;
-                            getNotificaciones()
-                                .success(function (notificaciones) {
-                                    $rootScope.notificaciones = notificaciones;                        
-                                });
-                        } catch (e) {
-                            $rootScope.totalNotificaciones = 0;
-                        }                        
-                    });
-                    
-                    $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
-                    $scope.getMensajesNoLeidosTotal();
-                   
-                    
+
+            if ($rootScope.authenticated) {
+                getNotificaciones()
+                        .success(function (notificaciones) {
+                            $rootScope.notificaciones = notificaciones;
+                            $rootScope.totalNotificaciones = notificaciones.length;
+                        });
+
+               $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
+               $scope.getMensajesNoLeidosTotal();
             }
 
 

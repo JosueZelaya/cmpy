@@ -10,7 +10,6 @@ modulo_notificacion.service("PushNotificationService", function ($q, $timeout, $
     service.CHAT_TOPIC = "/topic/greetings";
     service.PRIVATE_CHAT = "/user/queue/greetings";
     service.CHAT_BROKER = "/app/greetings";
-    service.notificaciones = [];
 
     var windowElement = angular.element($window);
     windowElement.on('beforeunload', function (event) {
