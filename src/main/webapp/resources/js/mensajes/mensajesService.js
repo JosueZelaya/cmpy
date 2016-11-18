@@ -41,6 +41,42 @@ mensajes.service('mensajesService',['$http', function ($http) {
             });
     };
     
+    this.getMensajesNoLeidos = function(page){
+        return $http.get("/mensaje/get/noleidos/" + page)
+            .success(function (response)
+            {
+                return response;
+            });
+        
+    };
+    
+    this.getMensajesNoLeidosTotal = function(){
+        return $http.get("/mensaje/get/noleidos/total")
+            .success(function (response)
+            {
+                return response;
+            });        
+        
+    };
+    
+    this.getMensajeUsuarioNoleidoTotal = function(usuarioId){
+         return $http.get("/mensaje/get/usuario/noleidos/total/"+usuarioId)
+            .success(function (response)
+            {
+                return response;
+            });           
+        
+    };
+    
+    this.setMensajeUsuarioLeido = function(usuarioId){
+          return $http.get("/mensaje/set/leido/"+usuarioId)
+            .success(function (response)
+            {
+                return response;
+            });          
+        
+    };
+    
 
 }]);
 

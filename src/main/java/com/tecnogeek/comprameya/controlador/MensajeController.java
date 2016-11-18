@@ -36,10 +36,12 @@ public class MensajeController {
     
     @RequestMapping(value = "/get/{usuarioId}/{page}", method = RequestMethod.GET)
     public @ResponseBody Iterable<Mensaje> getMensajeUsuario(@PathVariable("usuarioId") long usuarioId,@PathVariable("page") int page)  {          
-        
+
         Usuario usuarioLocal = usuarioRepository.getLoggedUser();
         
         Iterable<Mensaje> resul = mensajeService.getMensajeUsuario(usuarioId,usuarioLocal,page);
+        
+       
         
         return resul;
 
@@ -47,14 +49,13 @@ public class MensajeController {
     
     
     @RequestMapping(value = "/set", method = RequestMethod.POST)
-    public @ResponseBody Boolean setMensaje(@RequestParam(value = "titulo", required = true) String titulo,
+    public @ResponseBody  Boolean setMensaje(@RequestParam(value = "titulo", required = true) String titulo,
                                 @RequestParam(value = "texto", required = true) String texto,
                                 @RequestParam(value = "destinatarios", required = true) List<Long> destinatarios,
                                 Model model)  {
         
 
         mensajeService.setMensaje(titulo, texto, destinatarios);
-
         
         
         return true;   
@@ -62,12 +63,41 @@ public class MensajeController {
     
 
     @RequestMapping(value = "/usuarios/get", method = RequestMethod.GET)
-    public @ResponseBody Iterable<Usuario> getUsuarios() {          
+    public @ResponseBody  Iterable<Usuario> getUsuarios() {          
 
         Usuario usuarioLocal = usuarioRepository.getLoggedUser();
         Iterable<Usuario> res = mensajeService.getUsuarios(usuarioLocal);
         return res;
         
     }
+    
+    @RequestMapping(value = "/get/noleidos/{page}", method = RequestMethod.GET)
+    public @ResponseBody  Iterable<Mensaje> getMensajesNoLeidos(@PathVariable("page") int page){
+        
+        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Iterable<Mensaje> res = mensajeService.getMensajeNoLeido(usuarioLocal, page);
+        
+        return res;
+    }
+    
+    @RequestMapping(value = "/get/usuario/noleidos/total/{usuarioId}", method = RequestMethod.GET)
+    public @ResponseBody  Long getMensajeUsuarioNoleidoTotal(@PathVariable("usuarioId") long usuarioId){
+        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Long total = mensajeService.getMensajeUsuarioNoleidoTotal(usuarioId, usuarioLocal);
+        return total;
+    }
+    
+    @RequestMapping(value = "/get/noleidos/total", method = RequestMethod.GET)
+    public @ResponseBody  Long getMensajeNoLeidoTotal(){
+        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        return mensajeService.getMensajeNoLeidoTotal(usuarioLocal);
+    }
+    
+    @RequestMapping(value = "/set/leido/{usuarioId}", method = RequestMethod.GET)
+    public @ResponseBody  Boolean setMensajeUsuarioLeido(@PathVariable("usuarioId") long usuarioId){
+        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        return mensajeService.setMensajeUsuarioLeido(usuarioId, usuarioLocal);
+    }
+    
 
 }

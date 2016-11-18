@@ -60,5 +60,8 @@ public class Mensaje extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "usuario_emisor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Usuario usuarioEmisor;
+    @NotNull
+    @Column(name = "visto")
+    private boolean visto;
     
 }

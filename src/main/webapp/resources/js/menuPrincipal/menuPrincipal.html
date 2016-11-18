@@ -62,19 +62,20 @@
         <div class="navbar-right navbar-collapse collapse" uib-collapse="collapseNot">
             <ul class="nav navbar-nav"> 
                        
-                <li ng-show="authenticated">
-                    <a href="#"> 
+                <li class="dropdown" uib-dropdown="" ng-show="authenticated">
+                    <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
                         Mensajes
-                        <span class="badge badge-notify">{{totalMensajes}}</span>
+                        <span class="badge badge-notify">{{NoLeidosTotal}}</span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li ng-repeat="mensaje in mensajes">
                             <a href="" 
-                               ng-click="quitarVisibilidadMensajes(mensaje.usuarioEmisor.id)" 
+                               ng-click="setMensajeUsuarioLeido(mensaje.usuarioEmisor.id);" 
                                ui-sref=".vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})">
-                                {{mensaje.texto}}
+                                <span class="badge pull-right">{{mensaje.total}}</span>
+                                {{mensaje.texto}}  <span class="text-muted" style="font-size: 11px;float:right;margin-right:10px">{{mensaje.usuarioEmisor.persona.nombre}} </span>
                             </a>
-                        </li>
+                        </li> 
                         <li style="text-align: center">
                             <a href="" 
                                ui-sref=".vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})">

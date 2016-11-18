@@ -1,8 +1,11 @@
-menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','PushNotificationService','$log', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION, PushNotificationService, $log) {
+menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','mensajesService','PushNotificationService','$log', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION,mensajesService, PushNotificationService, $log) {
 
         $scope.match = "";
         $rootScope.notificaciones = PushNotificationService.notificaciones;
         $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
+        $scope.pageMensajesNoLeidos = 0;
+        $scope.NoLeidosTotal = 0;
+        $scope.mensajes = [];
         
 //        $rootScope.$on('$routeChangeStart', function (event, next, current) {
 //            if (!current) {
@@ -14,6 +17,8 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
             $rootScope.notificaciones.push(notificaciones);
             $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
         });
+
+
         
         var getPublicaciones = function (tipo, pagina) {
             return anunciosService.getAnuncios(tipo, pagina)
@@ -88,6 +93,44 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
         $scope.cargarPublicacionesGratis = function () {
             cargarPublicacionesGratis(0);
         };
+        
+        $scope.cargarMensajesNoLeidos = function(page){
+            mensajesService.getMensajesNoLeidos(page)
+            .success(function (response) {
+                        $scope.mensajes = response;
+                 $scope.getMensajeUsuarioNoleidoTotal();
+             });
+        };
+        
+        $scope.getMensajesNoLeidosTotal = function(){
+            mensajesService.getMensajesNoLeidosTotal()
+            .success(function (response) {
+                        $scope.NoLeidosTotal = response;
+             });           
+            
+            
+        };
+        
+        $scope.getMensajeUsuarioNoleidoTotal =function(){
+            angular.forEach($scope.mensajes, function (item) {
+                
+                mensajesService.getMensajeUsuarioNoleidoTotal(item.usuarioEmisor.id)
+                .success(function (response) {
+                            item.total = response;
+                 });  
+            });
+            
+        };
+        
+        
+        $scope.setMensajeUsuarioLeido = function(usuarioId){
+             mensajesService.setMensajeUsuarioLeido(usuarioId)
+            .success(function (response) {
+                    init();
+                     return response;
+             });           
+        };
+        
 
         init = function () {
             $scope.navCollapsed = true;
@@ -109,6 +152,11 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                             $rootScope.totalNotificaciones = 0;
                         }                        
                     });
+                    
+                    $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
+                    $scope.getMensajesNoLeidosTotal();
+                   
+                    
             }
 
 

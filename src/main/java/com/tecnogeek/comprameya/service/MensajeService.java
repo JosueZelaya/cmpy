@@ -53,6 +53,7 @@ public class MensajeService {
         mensaje.setTexto(texto);
         mensaje.setTitulo(titulo);
         mensaje.setUsuarioEmisor(usuarioLocal);
+        mensaje.setVisto(false);
         
         mensajeRepository.save(mensaje);
         
@@ -75,6 +76,31 @@ public class MensajeService {
         return true;
     }
     
+     public Iterable<Mensaje> getMensajeNoLeido(Usuario usuarioLocal,int page) {
      
+         return mensajeRepository.getMensajeNoLeido(usuarioLocal, page);
+     
+     }
+     
+     public Long getMensajeUsuarioNoleidoTotal(Long usuarioId,Usuario usuarioLocal){
+         return mensajeRepository.getMensajeUsuarioNoleidoTotal(usuarioId, usuarioLocal);
+     }
+     
+     public Long getMensajeNoLeidoTotal(Usuario usuarioLocal){
+         return mensajeRepository.getMensajeNoLeidoTotal(usuarioLocal);
+     }
+     
+     public Boolean setMensajeUsuarioLeido(Long usuarioId,Usuario usuarioLocal){
+         Iterable<Mensaje> mensajes = mensajeRepository.getMensajeUsuarioNoleido(usuarioId, usuarioLocal);
+         
+         for(Mensaje m: mensajes)
+         {
+             m.setVisto(true);
+            mensajeRepository.save(m);
+         }
+         
+         return true;
+         
+     }
     
 }

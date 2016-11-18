@@ -107,13 +107,19 @@ mensajes.controller('mensajesController',['$scope','$stateParams','$rootScope','
     };   
     
     $scope.iniciar = function(){
-         $scope.getUsuarios();   
-         $scope.usuarioactivo = $stateParams.usuarioId;
-         $scope.usuarioParam = $stateParams.usuarioId;
-         $scope.asunto = $stateParams.asunto;
-         $scope.asuntoParam = $stateParams.asunto;
-         $scope.nombreactivo = $stateParams.usuarioNombre;
-         $scope.getMensajeUsuario($scope.usuarioactivo,0);
+        
+        if($stateParams.usuarioId!==0){
+            $scope.getUsuarios();   
+            $scope.usuarioactivo = $stateParams.usuarioId;
+            $scope.usuarioParam = $stateParams.usuarioId;
+            $scope.asunto = $stateParams.asunto;
+            $scope.asuntoParam = $stateParams.asunto;
+            $scope.nombreactivo = $stateParams.usuarioNombre;
+            $scope.getMensajeUsuario($scope.usuarioactivo,0);
+        }
+        else{
+            $scope.getUsuarios();            
+        }
     };
     
 }]);

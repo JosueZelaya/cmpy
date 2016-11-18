@@ -18,4 +18,9 @@ public interface MensajeRepositoryCustom {
     Iterable<Mensaje> getMensajeUsuario(long usuario_id,Usuario usuarioLocal,int page);
     Iterable<Usuario> getUsuarios(Usuario usuariolocal);
     
+    Iterable<Mensaje> getMensajeNoLeido(Usuario usuarioLocal,int page);
+    Long getMensajeUsuarioNoleidoTotal(Long usuarioId,Usuario usuarioLocal);
+    Long getMensajeNoLeidoTotal(Usuario usuarioLocal);
+    Iterable<Mensaje> getMensajeUsuarioNoleido(Long usuarioId,Usuario usuarioLocal);
+    
 }

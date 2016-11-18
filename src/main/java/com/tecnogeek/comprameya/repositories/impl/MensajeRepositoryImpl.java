@@ -76,8 +76,59 @@ public class MensajeRepositoryImpl implements MensajeRepositoryCustom{
                        )
                ).list(qUsuario);
               
-               
-                
-
     }
+    
+    public Iterable<Mensaje> getMensajeNoLeido(Usuario usuarioLocal,int page) {
+          
+        return newJpaQuery().from(qMensaje)
+                .where(
+                    qMensaje.id.in(
+                            newJpaQuery().from(qMensaje)
+                                .leftJoin(qMensaje.destinatarioList,qDestinatario)
+                                .where(
+                                qDestinatario.usuarioDestinatario.eq(usuarioLocal)
+                                .and(qMensaje.visto.eq(false)))
+                                .groupBy(qMensaje.usuarioEmisor).list(qMensaje.id.max())
+                        )
+                )
+                .orderBy(qMensaje.id.desc())
+                .limit(20)
+                .offset(page * 20)
+                .list(qMensaje);
+    }
+    
+    public Long getMensajeUsuarioNoleidoTotal(Long usuarioId,Usuario usuarioLocal){
+    
+        return newJpaQuery().from(qMensaje)
+                .leftJoin(qMensaje.destinatarioList,qDestinatario)
+                .where(
+                  qDestinatario.usuarioDestinatario.eq(usuarioLocal)
+                   .and(qMensaje.usuarioEmisor.id.eq(usuarioId))
+                   .and(qMensaje.visto.eq(false))
+                )
+                .count();
+    }
+    
+    public Long getMensajeNoLeidoTotal(Usuario usuarioLocal){
+    
+        return newJpaQuery().from(qMensaje)
+                .leftJoin(qMensaje.destinatarioList,qDestinatario)
+                .where(
+                  qDestinatario.usuarioDestinatario.eq(usuarioLocal).and(qMensaje.visto.eq(false))
+                )
+                .count();
+    }
+    
+    public Iterable<Mensaje> getMensajeUsuarioNoleido(Long usuarioId,Usuario usuarioLocal){
+    
+        return newJpaQuery().from(qMensaje)
+                .leftJoin(qMensaje.destinatarioList,qDestinatario)
+                .where(
+                  qDestinatario.usuarioDestinatario.eq(usuarioLocal)
+                   .and(qMensaje.usuarioEmisor.id.eq(usuarioId))
+                   .and(qMensaje.visto.eq(false))
+                )
+                .list(qMensaje);
+    }
+    
 }
