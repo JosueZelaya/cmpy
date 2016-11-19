@@ -34,10 +34,10 @@ modulo_notificacion.service("PushNotificationService", function ($q, $timeout, $
         socket.stomp.unsubscribe(service.PRIVATE_CHAT);
         socket.stomp.disconnect();
 
-        socket = {
+        var service = {}, listener = $q.defer(), socket = {
             client: null,
             stomp: null
-        };
+        }, messageIds = [];
         // the following line of code will prevent reload or navigating away.
 //        event.preventDefault();
     });

@@ -13,24 +13,13 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
         
         return publicacion;
     };
-    
-    var guardarPublicacion = function(publicacion){
-        
-        anunciosService.agregarPublicacion(publicacion)
-                .success(function(respuesta){
-                    
-            $scope.cancel(); //cerrar el dialogo
-            $rootScope.cargarPublicacionesGratis(0); //recarga las publicaciones
-        });
-        
-    };
 
     $scope.agregarPublicacion = function () {
 
         var publicacion = crearPublicacion();
         
-        guardarPublicacion(publicacion);
-        
+        $rootScope.guardarPublicacion(publicacion);
+        $scope.cancel(); //cerrar el dialogo
     };
     
     var init = function () {

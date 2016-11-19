@@ -36,13 +36,11 @@ public class ComentarioController {
     }
     
     @RequestMapping(value = "/agregarComentario", method = RequestMethod.POST)
-    public String setComentario(@RequestParam(value = "publicacion_id", required = true) long publicacion_id, 
+    public Comentario setComentario(@RequestParam(value = "publicacion_id", required = true) long publicacion_id, 
                                               @RequestParam(value = "comentario", required = true) String comentario )  
     {
         
-        comentarioService.save(publicacion_id, comentario);
-        
-        return "ok";   
+        return comentarioService.save(publicacion_id, comentario);   
     }
     
 }

@@ -51,6 +51,16 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         return new Array(num);
     };
     
+    $rootScope.guardarPublicacion = function(publicacion){
+        
+        anunciosService.agregarPublicacion(publicacion)
+                .success(function(publicacion){        
+            
+            $scope.publicaciones.unshift(publicacion);
+        });
+        
+    };
+    
     $rootScope.verMisPublicaciones = function (page) {
             $scope.navCollapsed = !$scope.navCollapsed;
             getMisPublicaciones(TIPO_PUBLICACION.GRATIS, page)

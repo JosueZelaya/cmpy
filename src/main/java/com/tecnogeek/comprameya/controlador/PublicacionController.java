@@ -209,7 +209,7 @@ public class PublicacionController {
     }
     
     @RequestMapping(value = "/agregarPublicacion", method = RequestMethod.POST)    
-    public String agregarPublicacion(@RequestParam(value = "titulo", required = true) String titulo,
+    public Publicacion agregarPublicacion(@RequestParam(value = "titulo", required = true) String titulo,
                                  @RequestParam(value = "precio", required = true) Double precio,
                                  @RequestParam(value = "descripcion", required = true) String descripcion,
                                  @RequestParam(value = "categoriaId", required = true) long categoriaId,
@@ -270,9 +270,7 @@ public class PublicacionController {
         suscriptores.add(suscripcionPublicacion);
         publicacion.setSuscriptoresList(suscriptores);
         
-        publicacionRepository.save(publicacion);
-        
-        return "ok";
+        return publicacionRepository.save(publicacion);
     }
     
     

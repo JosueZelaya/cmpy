@@ -57,10 +57,8 @@ modulo_anuncios.controller('productoController', function ($scope, $stateParams,
         }
         
         comentariosService.agregarComentario(publicacion_id,comentario)
-                .success(function(respuesta){
-                    getComentarios(publicacion_id).success(function(comentarios){
-                        $scope.comentarioList = comentarios;
-                    });
+                .success(function(comentario){                    
+                    $scope.comentarioList.unshift(comentario);
                 });
         
     };

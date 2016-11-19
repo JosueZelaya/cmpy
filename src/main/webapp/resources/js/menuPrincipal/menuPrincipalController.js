@@ -14,8 +14,8 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
 //          });
 
         PushNotificationService.receive().then(null, null, function (notificaciones) {
-            $rootScope.notificaciones.push(notificaciones);
-            $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
+            $rootScope.totalNotificaciones = 
+                    $rootScope.notificaciones.unshift(notificaciones);
         });
 
         var getNotificaciones = function () {
@@ -26,11 +26,6 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
         };
 
         $scope.quitarVisibilidad = function (idNotificacion, index) {
-//            return notificacionService.quitarVisibilidad(idNotificacion)
-//                    .success(function (notificaciones) {
-//                        $scope.notificaciones = notificaciones;
-//                        $scope.totalNotificaciones = notificaciones.length;
-//                    });
 
             notificacionService.ocultar(idNotificacion);
             $rootScope.notificaciones.splice(index, 1);
