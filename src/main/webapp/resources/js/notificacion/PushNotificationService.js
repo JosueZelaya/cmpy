@@ -1,10 +1,10 @@
-modulo_notificacion.service("PushNotificationService", function ($q, $timeout, $log, $window) {
+modulo_notificacion.service("PushNotificationService", function ($q, $timeout, $log, $window, localStorageService ) {
 
     var service = {}, listener = $q.defer(), socket = {
         client: null,
         stomp: null
     }, messageIds = [];
-
+    
     service.RECONNECT_TIMEOUT = 2000;
     service.SOCKET_URL = "/cmpyWebSocket";
     service.CHAT_TOPIC = "/topic/greetings";
@@ -116,7 +116,7 @@ modulo_notificacion.service("PushNotificationService", function ($q, $timeout, $
         listener = $q.defer();
 
         socket.client = new SockJS(service.SOCKET_URL);
-        socket.stomp = Stomp.over(socket.client);
+        socket.stomp = Stomp.over(socket.client);        
         socket.stomp.connect({}, startListener);
         socket.stomp.onclose = reconnect;
     };
