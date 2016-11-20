@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.dto.GridResponse;
 import com.tecnogeek.comprameya.entidad.Usuario;
@@ -17,6 +18,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -51,6 +54,36 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
         getRepository().save(publicacion);
     }
     
+    public List<Publicacion> getPublicacionesMixtas(int page){
+        Iterable<Publicacion> publicacionesGratis = 
+                getPublicaciones(page, 
+                                Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR, 
+                                TipoPublicacionEnum.GRATIS);
+        
+        Iterable<Publicacion> publicacionesPagadas = 
+                getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR, 
+                                TipoPublicacionEnum.PAGADA);   
+        
+        return mezclarPublicaciones(publicacionesGratis, publicacionesPagadas);
+    }
+    
+    public List<Publicacion> mezclarPublicaciones(Iterable<Publicacion> pubPrioritarias, Iterable<Publicacion> pubSecundarias){
+        List<Publicacion> publicaciones = new ArrayList<>();
+        int cont=0;
+        Iterator itr = pubSecundarias.iterator();
+        for(Publicacion pubPrioritaria : pubPrioritarias){
+            cont++;
+            if(cont % (Constantes.PRIORITARIA + 1) == 0){
+                if(itr.hasNext()){
+                    publicaciones.add((Publicacion) itr.next());
+                }                                
+            }else{
+                publicaciones.add(pubPrioritaria);
+            }            
+        }
+        return publicaciones;
+    }
+    
     public Iterable<Publicacion> getAnunciosAleatorios(int total,TipoPublicacionEnum tipo)
     {
         int pageZise = total;
@@ -59,9 +92,7 @@ public class PublicacionService extends BaseService<Publicacion , Long>{
         int page = Utilidades.randomInt(0,totalPages-1); //dado que la primer pagina en la BD es cero.        
         Iterable<Publicacion> publicaciones = getPublicaciones(page, pageZise, tipo);
         return publicaciones;
-    }       
-    
-    
+    }     
     
     public Long getTotalPublicaciones(TipoPublicacionEnum tipo)
     {        

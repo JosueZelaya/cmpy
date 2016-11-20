@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -47,6 +48,7 @@ public class Notificacion extends BaseEntity<Long> implements Serializable {
     @Column(name = "link")
     private String link;
     
+    @JsonManagedReference
     @JoinColumn(name = "tipo_notificacion_id", referencedColumnName = "id")
     @ManyToOne
     private TipoNotificacion tipoNotificacion;

@@ -40,7 +40,7 @@ import lombok.ToString;
 @Table(name = "usuario") 
 @ToString(exclude = {"compraList","votosDadosList","votosRecibidosList","contactoList","contactoList1",
                     "suscripcionesList","seguidoresList","comentarioList","notificacionesList",
-                    "publicacionList","publiacionSuscritaList","destinatarioList","mensajeList"})
+                    "publicacionList","publiacionSuscritaList","destinatarioList","mensajeList", "tiendaList"})
 @Getter
 @Setter
 public class Usuario extends BaseEntity<Long> implements Serializable {
@@ -111,6 +111,10 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     @JsonBackReference
     @OneToMany(mappedBy = "usuarioDestinatario")
     private List<Destinatario> destinatarioList;
+    
+    @JsonBackReference
+    @OneToMany(mappedBy = "usuario")
+    private List<TiendaPS> tiendaList;
     
     @JsonManagedReference
     @JoinColumn(name = "perfil_id", referencedColumnName = "id")

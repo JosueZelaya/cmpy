@@ -25,6 +25,15 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
                 });
     };
 
+    this.getAnunciosMezclados = function (page) {
+        var req = "/publicacion/getAnuncios/" + page;
+        return $http.get(req)
+                .success(function (response)
+                {
+                    return response;
+                });
+    };
+
     this.getAnuncios = function (tipo, page) {
         var req = "/publicacion/getAnuncios/" + tipo + "/" + page;
         return $http.get(req)

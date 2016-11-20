@@ -31,3 +31,37 @@ and open the template in the editor.
    margin-right:auto;
    display:center;
 }
+
+.PUBLICACION_PAGADA {
+    display: block;
+    padding: 1px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: aliceblue;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    height: 450px;
+    overflow: hidden;
+    padding-left: -20%;
+}
+
+.PUBLICACION_GRATIS {
+    display: block;
+    padding: 1px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    height: 450px;
+    overflow: hidden;
+    padding-left: -20%;
+}
+
+div.anunciosImg{
+    margin-left: -20%; margin-right: -20%;
+}

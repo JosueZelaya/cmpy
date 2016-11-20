@@ -28,8 +28,15 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
                 });
     };
 
+    var getAnunciosMezclados = function (tipo, pagina) {
+        return anunciosService.getAnunciosMezclados(tipo, pagina)
+                .success(function (publicaciones) {
+                    return publicaciones;
+                });
+    };
+
     var cargarPublicacionesGratis = function (page) {
-        getPublicaciones(TIPO_PUBLICACION.GRATIS, page)
+        getAnunciosMezclados(page)
                 .success(function (publicaciones) {
                     $scope.publicaciones = $scope.publicaciones.concat(publicaciones);
                 });

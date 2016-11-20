@@ -15,5 +15,7 @@ public abstract class Constantes {
     public static int TOTAL_ANUNCIOS_PAGADOS_MOSTRAR = 6;
     public static int PUBLICACION_GRATIS = 2;
     public static int PUBLICACION_PAGADA = 1;
+    public static int PRIORITARIA = 3;
+    public static int SECUNDARIA = 1;
     
 }

@@ -97,6 +97,12 @@ public class PublicacionController {
         return null;
     }
     
+    @RequestMapping(value="/getAnuncios/{page}",method=RequestMethod.GET)    
+    public Iterable<Publicacion> getAnuncios(@PathVariable int page,Model model)
+    {           
+        return publicacionService.getPublicacionesMixtas(page);        
+    }
+    
     @RequestMapping(value="/getAnuncios/{tipo}/{page}",method=RequestMethod.GET)    
     public Iterable<Publicacion> getAnuncios(@PathVariable int tipo,@PathVariable int page,Model model)
     {                

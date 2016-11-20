@@ -1,4 +1,4 @@
-modulo_notificacion.service("PushNotificationService", function ($q, $timeout, $log, $window, localStorageService ) {
+modulo_notificacion.service("PushNotificationService", function ($q, $timeout, $log, $window) {
 
     var service = {}, listener = $q.defer(), socket = {
         client: null,

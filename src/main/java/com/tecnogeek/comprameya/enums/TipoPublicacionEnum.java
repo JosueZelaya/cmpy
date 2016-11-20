@@ -14,7 +14,9 @@ import lombok.Getter;
 public enum TipoPublicacionEnum {
     
     PAGADA(1L, "PUBLICACION_PAGADA"),
-    GRATIS(2L, "PUBLICACION_GRATIS");
+    GRATIS(2L, "PUBLICACION_GRATIS"),
+    TIENDA(3L, "PUBLICACION_TIENDA"),
+    EXTERNA(4L, "PUBLICACION_EXTERNA");
     
     @Getter
     Long codigo;
