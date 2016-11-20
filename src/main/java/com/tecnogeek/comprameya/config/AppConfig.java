@@ -10,7 +10,9 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableLoadTimeWeaving;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
@@ -22,6 +24,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 @Configuration
 @ComponentScan(basePackages={"com.tecnogeek.comprameya.config","com.tecnogeek.comprameya.service","com.tecnogeek.comprameya.components"})
 @PropertySource(value = {"/WEB-INF/application.properties"})
+@EnableSpringConfigured
+@EnableLoadTimeWeaving
 public class AppConfig {
     
     @Bean

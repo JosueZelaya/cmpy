@@ -29,7 +29,8 @@ public class SpiderWebService {
     @WebMethod(operationName = "indexTiendasProductos")
     public boolean indexTiendasProductos() {
         
-        LogicSpider.indexTiendasProductos();
+        LogicSpider logic = new LogicSpider();
+        logic.indexTiendasProductos();
         
         return true;
     }    

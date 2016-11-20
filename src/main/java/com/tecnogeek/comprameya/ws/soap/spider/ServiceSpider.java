@@ -67,15 +67,60 @@ public class ServiceSpider {
          
     }
     
-    public static Dictionary<Integer,Dictionary<String,String>> getTiendaProducto(String url,String key){
+    public static Dictionary<String,String> getTiendaProducto(String url,String key,String dominio){
         
-        Dictionary<Integer,Dictionary<String,String>> listaDetalleProducto = new Hashtable<>();
+        Dictionary<String,String> listaDetalleProducto = new Hashtable<>();
         try {
-        
-            String StrResponse = GenericClient.getRequest(url);
+            String[] stringProductoInfo = new String[]
+            {
+                "id",
+                "id_category_default",
+                "price",
+                "name",
+                "description_short",
+                "id_default_image"
+            };
+            
+            String StrResponse = GenericClient.getRequest(url+"?ws_key="+key);
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(StrResponse.getBytes()));
-            NodeList e = doc.getElementsByTagName("id");
-            return null;
+            
+            for(String infoKey : stringProductoInfo)
+            {
+                NodeList tmp = doc.getElementsByTagName(infoKey);
+                String infoValue =  tmp.item(0).getTextContent();
+                
+                if(infoKey.equals("id_default_image") && !infoValue.equals(""))
+                {
+                   String urlImage = tmp.item(0).getAttributes().getNamedItem("xlink:href").getNodeValue();
+                   listaDetalleProducto.put("url_image", urlImage);
+                }
+                
+                listaDetalleProducto.put(infoKey, infoValue);
+            
+            }
+            
+            NodeList tmp = doc.getElementsByTagName("id_category_default");
+            String linkcat =  tmp.item(0).getAttributes().getNamedItem("xlink:href").getNodeValue();
+            
+            String StrResponseCat = GenericClient.getRequest(linkcat+"?ws_key="+key);
+            Document doccat = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(StrResponseCat.getBytes())); 
+            
+            NodeList tmpcat = doccat.getElementsByTagName("name");
+            String category_name =  tmpcat.item(0).getTextContent();
+            
+            listaDetalleProducto.put("category_name", category_name);
+            
+            String urlProducto = "http://"
+                                 +dominio
+                                 +"/"+listaDetalleProducto.get("category_name").replace(" ", "-")
+                                 +"/"+listaDetalleProducto.get("id")
+                                 +"-"
+                                 +listaDetalleProducto.get("name").replace(" ", "-")
+                                 +".html" ;
+            
+            listaDetalleProducto.put("url_producto", urlProducto);
+           
+            return listaDetalleProducto;
             
         } catch (IOException | ParserConfigurationException | SAXException | DOMException | NumberFormatException ex) {
             Logger.getLogger(ServiceSpider.class.getName()).log(Level.SEVERE, null, ex);

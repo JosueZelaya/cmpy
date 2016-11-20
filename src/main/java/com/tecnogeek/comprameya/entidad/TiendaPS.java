@@ -5,6 +5,7 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -48,6 +49,7 @@ public class TiendaPS extends BaseEntity<Long> implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "key")
     private String key;
+    @JsonManagedReference
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuario;

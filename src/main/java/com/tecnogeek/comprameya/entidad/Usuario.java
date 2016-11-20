@@ -17,6 +17,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -130,5 +131,9 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     private SocialMediaService signInProvider;
     
     private String rutaImagen;
+    
+    @JsonBackReference
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<TiendaPS> tiendaPSList;
     
 }
