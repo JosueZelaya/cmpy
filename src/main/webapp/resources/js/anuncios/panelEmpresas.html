@@ -4,7 +4,7 @@
         <div class="panel-body">
             <div class="row">   
                 <div class="thumbnail col-lg-12">
-                    <!--<img src="/cmpy/images/getImage/${recurso.ruta}" alt="imagen aqui">-->
+                    <!--<img ng-src="/cmpy/images/getImage/${recurso.ruta}" alt="imagen aqui">-->
                     <h3>Empresas</h3>
                     <p>Anunciate en la red mas grande de Negocios.<br/>
                         <!--<a href="#" data-toggle="modal" data-target="#anunciarModal">Anunciate Ya!</a>-->  
@@ -18,7 +18,7 @@
                 </div>
                 <div ng-repeat="anuncio in anuncios">
                     <div class="publicacion thumbnail col-lg-12">
-                        <img src="/images/getThumbnail/{{anuncio.imgUrl}}" alt="imagen aqui">
+                        <img ng-src="/images/getThumbnail/{{anuncio.imgUrl}}" alt="imagen aqui">
                         <h3>{{anuncio.titulo}}</h3>
                         <p>{{anuncio.descripcion}}</p>                    
                     </div>

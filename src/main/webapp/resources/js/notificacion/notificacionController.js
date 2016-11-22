@@ -2,7 +2,6 @@ modulo_notificacion.controller('notificacionController', [
     '$scope',
     '$rootScope',
     'notificacionService',
-    'localStorageService',
     function ($scope, $rootScope, notificacionService) {
 
         $scope.message = "";

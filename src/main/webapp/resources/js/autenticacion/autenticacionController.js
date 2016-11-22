@@ -2,6 +2,7 @@ autenticacion.controller('autenticacionController',['$rootScope','$scope','$http
             
             $scope.credentials = {};
             $scope.error = false;
+            $rootScope.authenticated = false;
 
             var authenticate = function (credentials, callback) {
 

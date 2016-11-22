@@ -10,7 +10,9 @@ import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import com.tecnogeek.comprameya.service.NotificacionService;
+import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/notificacion")
 @ResponseBody
+@Slf4j
 public class NotificacionController {
     @Autowired
     UsuarioRepository usuarioRepository;
@@ -49,13 +52,7 @@ public class NotificacionController {
     
     @RequestMapping(value="/getNotificaciones/",method=RequestMethod.GET)  
     public List<NotificacionUsuario> getNotificaciones(){
-        Usuario usuario = usuarioRepository.getLoggedUser();
-        
-        if(usuario==null){
-            return null;
-        }
-        
-        return notificacionUsuarioRepository.getNotificaciones(usuario);
+        return notificacionService.getNotificaciones();
     }
     
     @RequestMapping(value="/getTotalNotificaciones/",method=RequestMethod.GET)  

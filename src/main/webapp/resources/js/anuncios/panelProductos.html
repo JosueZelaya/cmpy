@@ -22,8 +22,8 @@
 
                             <div class="row">
                                 <div class="col-md-7">
-                                    <img class="user-image" ng-show="{{publicacion.usuario.signInProvider === null}}" height="28px" width="28px" src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
-                                    <img class="user-image" ng-show="{{publicacion.usuario.signInProvider !== null}}" height="28px" width="28px" src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="publicacion.usuario.signInProvider === null" height="28px" width="28px" ng-src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
                                 </div>
                                 <div class="rating hidden-sm col-md-5">
                                     <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.usuario.puntaje) track by $index"></i>
@@ -38,7 +38,7 @@
                                     <h4 class="price-text-color">$ {{publicacion.precio}}</h4>
                                 </div>
 
-                                <img src="/images/getThumbnail/{{publicacion.imgUrl}}" alt="imagen aqui">                                    
+                                <img ng-src="/images/getThumbnail/{{publicacion.imgUrl}}" alt="imagen aqui">                                    
 
                                 <div class="caption">
                                     <p>{{publicacion.descripcion.slice(0,75)}}...</p>                                        

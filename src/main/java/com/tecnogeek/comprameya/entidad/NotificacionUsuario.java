@@ -53,8 +53,6 @@ public class NotificacionUsuario extends BaseEntity<Long> implements Serializabl
     @ManyToOne
     private Notificacion notificacion;
     
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "visto")
     private boolean visto;
     

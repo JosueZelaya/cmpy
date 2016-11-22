@@ -1,7 +1,7 @@
 menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','mensajesService','PushNotificationService','$log', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION,mensajesService, PushNotificationService, $log) {
 
         $scope.match = "";
-        $rootScope.notificaciones = {}
+        $rootScope.notificaciones = {};
         $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
         $scope.pageMensajesNoLeidos = 0;
         $scope.NoLeidosTotal = 0;

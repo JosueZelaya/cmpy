@@ -38,6 +38,16 @@ public class NotificacionService {
     @Autowired
     private SimpMessagingTemplate template;
     
+    public List<NotificacionUsuario> getNotificaciones(){
+        Usuario usuario = usuarioRepository.getLoggedUser();
+        
+        if(usuario==null){
+            return null;
+        }
+        
+        return notificacionUsuarioRepository.getNotificaciones(usuario);
+    }
+    
 //    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void informarASuscriptores(List<Usuario> suscriptores, Usuario emisor, Publicacion publicacion){
         

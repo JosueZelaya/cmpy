@@ -120,16 +120,20 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     @JoinColumn(name = "perfil_id", referencedColumnName = "id")
     @ManyToOne
     private Perfil perfil;
+    
     @JsonManagedReference
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
     @ManyToOne
     private Persona persona;
+    
     @JoinColumn(name = "ranking_id", referencedColumnName = "id")
     @ManyToOne
     private Ranking ranking;
+    
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioEmisor")
     private List<Mensaje> mensajeList;
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "sign_in_provider", length = 20)
     private SocialMediaService signInProvider;

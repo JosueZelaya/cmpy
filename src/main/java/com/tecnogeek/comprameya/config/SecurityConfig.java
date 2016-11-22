@@ -107,8 +107,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/comentario/getComentarios/**",
                         "/recurso/getRecursos/**",
                         "/categoria/**",
-                        "/ubicacion/**",
-                        "/mensaje/**",
+                        "/ubicacion/**",                        
                         "/cmpyWebSocket/**"
                 ).permitAll()
                 .antMatchers(
@@ -117,7 +116,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/publicacion/getMisAnuncios",
                         "/comentario",
                         "/comentario/agregarComentario",
-                        "/notificacion/**"
+                        "/notificacion/**",
+                        "/mensaje/**"
                 ).hasRole("USER")
                 .antMatchers(
                         "/admin",
