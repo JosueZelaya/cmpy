@@ -15,6 +15,7 @@
     "angular-confirm-modal": "1.2.6",
     "sockjs": "0.3.4",
     "stomp-websocket": "2.3.4",
-    "angular-local-storage": "^0.5.2"
+    "angular-local-storage": "^0.5.2",
+    "angular-toastr": "^2.1.1"
   }
 }

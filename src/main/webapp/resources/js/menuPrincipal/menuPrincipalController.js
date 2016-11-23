@@ -1,4 +1,4 @@
-menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','mensajesService','PushNotificationService','$log', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION,mensajesService, PushNotificationService, $log) {
+menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','mensajesService','PushNotificationService','$log', 'toastr', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION,mensajesService, PushNotificationService, $log, toastr) {
 
         $scope.match = "";
         $rootScope.notificaciones = {};
@@ -13,9 +13,20 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
 //            }
 //          });
 
-        PushNotificationService.receive().then(null, null, function (notificaciones) {
+        PushNotificationService.receive().then(null, null, function (notificacionUsuario) {
+            
+//            var link =  "<a href='' ui-sref='.vistaProducto({publicacionId: "+ notificacionUsuario.notificacion.link + "})'>"+
+//                        notificacionUsuario.notificacion.mensaje + "</a>";
+                
+            var link =  "<a href='#/vistaProducto/"+ notificacionUsuario.notificacion.link +"#publicacionesProductos' >" +
+                        notificacionUsuario.notificacion.mensaje + "</a>";
+            
+            toastr.info( link ,{
+                allowHtml: true
+            });
+            
             $rootScope.totalNotificaciones = 
-                    $rootScope.notificaciones.unshift(notificaciones);
+                    $rootScope.notificaciones.unshift(notificacionUsuario);
         });
 
         var getNotificaciones = function () {

@@ -9,6 +9,7 @@ var cmy_ng = angular.module('cmpy',
     'ui.router', 
     'ui.bootstrap',
     'ngAnimate',
+    'toastr',
     'flow',
     'uiGmapgoogle-maps',
     'angular-confirm',
@@ -22,13 +23,27 @@ var cmy_ng = angular.module('cmpy',
     'cmpy.utils'
 ]);
 
-cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, toastrConfig) {
 
 //    $locationProvider.html5Mode({
 //        enabled: true,
 //        requireBase: false,
 //        rewriteLinks: false
 //    });
+
+    angular.extend(toastrConfig, {
+        autoDismiss: true,
+        containerId: 'toast-container',
+        maxOpened: 3,    
+        newestOnTop: true,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: false,
+        preventOpenDuplicates: false,
+        target: 'body',
+        closeButton: true,
+        progressBar: true,
+        tapToDismiss: true
+      });
     
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     
