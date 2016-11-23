@@ -140,8 +140,6 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     
     private String rutaImagen;
     
-    @JsonBackReference
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-    private List<TiendaPS> tiendaPSList;
+
     
 }
