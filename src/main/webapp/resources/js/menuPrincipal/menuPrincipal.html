@@ -1,6 +1,6 @@
 <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header"> 
             
             <button ng-show="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.html', 'lg')">                
                 Iniciar Sesion <span class="glyphicon glyphicon-user">
@@ -62,7 +62,7 @@
         <div class="navbar-right navbar-collapse collapse" uib-collapse="collapseNot">
             <ul class="nav navbar-nav"> 
                        
-                <li class="dropdown" uib-dropdown="" ng-show="{{authenticated}}">
+                <li class="dropdown" uib-dropdown="" ng-show="authenticated">
                     <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
                         Mensajes
                         <span class="badge badge-notify">{{NoLeidosTotal}}</span>
@@ -85,7 +85,7 @@
                     </ul>
                 </li>
                 
-                <li class="dropdown" uib-dropdown="" ng-show="{{authenticated}}">
+                <li class="dropdown" uib-dropdown="" ng-show="authenticated">
                     <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         Notificaciones 
                         <span class="badge badge-notify">{{totalNotificaciones}}</span>
