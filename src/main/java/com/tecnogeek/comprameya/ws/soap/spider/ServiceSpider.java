@@ -108,7 +108,7 @@ public class ServiceSpider {
                                 +listaDetalleProducto.get("id") 
                                 + "-home_default"
                                 +"/"
-                                +listaDetalleProducto.get("name").replace(" ", "-")
+                                +listaDetalleProducto.get("link_rewrite")
                                 +".jpg";
            
             listaDetalleProducto.put("url_image", urlImage);
