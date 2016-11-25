@@ -75,14 +75,7 @@ public class ServiceSpider {
             for(String infoKey : stringProductoInfo)
             {
                 NodeList tmp = doc.getElementsByTagName(infoKey);
-                String infoValue =  tmp.item(0).getTextContent();
-                
-                if(infoKey.equals("id_default_image") && !infoValue.equals(""))
-                {
-                   String urlImage = tmp.item(0).getAttributes().getNamedItem("xlink:href").getNodeValue();
-                   listaDetalleProducto.put("url_image", urlImage);
-                }
-                
+                String infoValue =  tmp.item(0).getTextContent();                
                 listaDetalleProducto.put(infoKey, infoValue);
             
             }
@@ -107,6 +100,17 @@ public class ServiceSpider {
                                  +".html" ;
             
             listaDetalleProducto.put("url_producto", urlProducto);
+            
+            String urlImage = "http://"
+                                +dominio
+                                +"/"
+                                +listaDetalleProducto.get("id") 
+                                + "-home_default"
+                                +"/"
+                                +listaDetalleProducto.get("name").replace(" ", "-")
+                                +".jpg";
+           
+            listaDetalleProducto.put("url_image", urlImage);
            
             return listaDetalleProducto;
             
