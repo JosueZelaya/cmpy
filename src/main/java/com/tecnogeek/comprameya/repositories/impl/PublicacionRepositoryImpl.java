@@ -55,7 +55,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public Iterable<Publicacion> getPublicacionesPagadas() {
         Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-        BooleanExpression sonPagadas = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonPagadas = qPublicacion.tipo.id.eq(id);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         return publicacionRepository.findAll(sonPagadas.and(estanActivas));
     }
@@ -63,7 +63,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public Iterable<Publicacion> getPublicacionesGratis() {
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        BooleanExpression sonGratis = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         return publicacionRepository.findAll(sonGratis.and(estanActivas));
     }
@@ -71,7 +71,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public Iterable<Publicacion> getPublicacionesPagadas(int page, int itemsByPage) {
         Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-        BooleanExpression sonPagadas = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonPagadas = qPublicacion.tipo.id.eq(id);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         return publicacionRepository.findAll(sonPagadas.and(estanActivas), new PageRequest(page, itemsByPage)).getContent();
     }
@@ -79,7 +79,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public Iterable<Publicacion> getPublicacionesGratis(int page, int itemsByPage) {
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        BooleanExpression sonGratis = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         return publicacionRepository.findAll(sonGratis.and(estanActivas), new PageRequest(page, itemsByPage, new QSort(qPublicacion.id.desc()))).getContent();
     }
@@ -87,10 +87,10 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public Iterable<Publicacion> getPublicacionesByUsuario(int page, int itemsByPage, TipoPublicacionEnum tipo, Usuario usuario){
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        BooleanExpression sonGratis = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         BooleanExpression lePertenecen = qPublicacion.usuario.id.eq(usuario.getId());
-        BooleanExpression filtradasPorTipo = qPublicacion.tipoPublicacion.id.eq(tipo.getCodigo());
+        BooleanExpression filtradasPorTipo = qPublicacion.tipo.id.eq(tipo.getCodigo());
         BooleanExpression cumpleTodasCondiciones = sonGratis.and(estanActivas).and(lePertenecen).and(filtradasPorTipo);
         PageRequest paginacion = new PageRequest(page, itemsByPage, new QSort(qPublicacion.id.desc()));
         return publicacionRepository.findAll(cumpleTodasCondiciones, paginacion).getContent();
@@ -100,7 +100,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     public Iterable<Publicacion> getPublicacionesPagadas(int page, int itemsByPage,long categoria_id) {
         Long id = TipoPublicacionEnum.PAGADA.getCodigo();
         qCategoria.id.eq(categoria_id);
-        BooleanExpression sonPagadas = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonPagadas = qPublicacion.tipo.id.eq(id);
         BooleanExpression matchCat = qPublicacion.productoList.get(0).categoria.eq(qCategoria);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         return publicacionRepository.findAll(sonPagadas.and(matchCat).and(estanActivas), new PageRequest(page, itemsByPage)).getContent();
@@ -110,7 +110,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     public Iterable<Publicacion> getPublicacionesGratisSubSubCat(int page, int itemsByPage, long categoria_id) {
         
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        BooleanExpression sonGratis = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);
         BooleanExpression porCategoria = qProducto.categoria.id.eq(categoria_id);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         
@@ -124,7 +124,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     public Iterable<Publicacion> getPublicacionesGratisSubCat(int page, int itemsByPage, long categoria_id) {
         
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        BooleanExpression sonGratis = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);
        BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         
         return newJpaQuery().from(qPublicacion)
@@ -141,7 +141,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     public Iterable<Publicacion> getPublicacionesGratisCat(int page, int itemsByPage, long categoria_id) {
         
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        BooleanExpression sonGratis = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         
         return newJpaQuery().from(qPublicacion)
@@ -159,7 +159,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     public Iterable<Publicacion> getPublicacionesGratisByMatch(int page, int itemsByPage, String match) {
         
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        BooleanExpression sonGratis = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);
         BooleanExpression Match = qProducto.nombre.toUpperCase().like("%"+match.toUpperCase()+"%");
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         
@@ -173,7 +173,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public long getTotalPublicacionesPagadas() {
         Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-        BooleanExpression sonPagadas = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonPagadas = qPublicacion.tipo.id.eq(id);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         return publicacionRepository.count(sonPagadas.and(estanActivas));
     }
@@ -181,7 +181,7 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public long getTotalPublicacionesGratis() {
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
-        BooleanExpression sonGratis = qPublicacion.tipoPublicacion.id.eq(id);
+        BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         return publicacionRepository.count(sonGratis.and(estanActivas));
     }

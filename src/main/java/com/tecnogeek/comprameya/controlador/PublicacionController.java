@@ -207,7 +207,7 @@ public class PublicacionController {
         Integer tipo=Constantes.PUBLICACION_PAGADA;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setId(tipo.longValue());
-        publicacion.setTipoPublicacion(tipoPublicacion);
+        publicacion.setTipo(tipoPublicacion);
         
         publicacionRepository.save(publicacion);
         
@@ -244,7 +244,7 @@ public class PublicacionController {
         Integer tipo=Constantes.PUBLICACION_GRATIS;
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setId(tipo.longValue());
-        publicacion.setTipoPublicacion(tipoPublicacion);        
+        publicacion.setTipo(tipoPublicacion);        
         Producto producto = new Producto();
         producto.setNombre(titulo);
         producto.setPrecio(BigDecimal.valueOf(precio));

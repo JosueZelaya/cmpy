@@ -49,7 +49,7 @@ public class TipoPublicacion extends BaseEntity<Long> implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @JsonBackReference
-    @OneToMany(mappedBy = "tipoPublicacion")
+    @OneToMany(mappedBy = "tipo")
     private List<Publicacion> publicacionList;
 
 //    public TipoPublicacion() {

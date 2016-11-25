@@ -19,7 +19,7 @@
                 <span class="badge badge-notify">{{totalNotificaciones + totalMensajes}}</span>
             </button>   
             
-            <a href="/" class="pull-left" ng-click="cargarPublicacionesGratis()">
+            <a href="/" class="pull-left" ui-sref='.'>
                 <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
             </a>
         </div> 
@@ -29,7 +29,7 @@
             <ul class="nav navbar-nav"> 
 
                 <li ng-show="authenticated">
-                    <a href="#" ng-click="verMisPublicaciones(0)"> 
+                    <a href="#" ui-sref=".misPublicaciones"> 
                         Mis Publiaciones
                     </a>
                 </li>

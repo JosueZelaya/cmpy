@@ -29,3 +29,7 @@ insert into categoria (nombre,descripcion,modification_time,creation_time,catego
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Deportes','...',current_date,current_date,null,true,1);
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Maquinas','...',current_date,current_date,21,true,1);
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Bancas','...',current_date,current_date,22,true,1);
+
+-- para insertar este registro primero debe crearse un usuario
+insert into tiendaps(id, creation_time, modification_time, sis_activo, version, dominio, key, usuario_id) values (1, current_date, current_date, true, 1, 'prestashop/prestashop/','E87JLYRTFHVTHQAIYB4FKRVZ8J8KGZP9',1);
+insert into tiendaps(id, creation_time, modification_time, sis_activo, version, dominio, key, usuario_id) values (2, current_date, current_date, true, 1, 'prestashop/prestashop/','E87JLYRTFHVTHQAIYB4FKRVZ8J8KGZP9',1);

@@ -29,7 +29,16 @@ public enum TipoPublicacionEnum {
         this.descripcion = descripcion;
     }
     
-    public TipoPublicacionEnum getTipo(final Long codigo){
+    public static TipoPublicacionEnum getTipo(final Long codigo, final String descripcion){
+        for(TipoPublicacionEnum tipo : values()){
+            if(tipo.getCodigo().equals(codigo) && tipo.getDescripcion().equals(descripcion)){
+                return tipo;
+            }
+        }
+        return null;
+    }
+    
+    public static TipoPublicacionEnum getTipo(final Long codigo){
         for(TipoPublicacionEnum tipo : values()){
             if(tipo.getCodigo().equals(codigo)){
                 return tipo;

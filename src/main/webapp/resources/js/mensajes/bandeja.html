@@ -1,55 +1,78 @@
-<div ng-init="iniciar()">
-  <span>Mensajes</span>
-    <hr>
+<div class="col-md-8 min_cont marcar">
+    <div class="panel panel-default min_cont">                    
+        <div class="panel-heading">
+            <p>                            
+                Publicaciones
+                <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html', 'lg')">VenderYa!</button>
+                <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html', 'lg')">
+                    VenderYa!
+                </button>
 
-        <div class="col-sm-12 col-md-2">
-          <span>Conversaciones</span>
-            <hr>
-            <ul class="nav nav-pills nav-stacked">
-                <li ng-repeat="contacto in contactos">
-                    <button  class="btn btn-default col-md-12 col-sm-12" style="width:100%" ng-click="getMensajeUsuario(contacto.id,0);setConversacion(contacto.persona.nombre)" style="overflow-x:hidden" ng-class="{'btn-primary':contacto.id==usuarioactivo}">
-                        <img class="user-image" ng-if="contacto.signInProvider === null || contacto.signInProvider === undefined" height="28px" width="28px" ng-src="/images/getThumbnail/{{contacto.rutaImagen}}" alt="..." uib-tooltip="{{contacto.persona.nombre}}" tooltip-placement="top"/>
-                        <img class="user-image" ng-if="contacto.signInProvider !== null && contacto.signInProvider !== undefined" height="28px" width="28px" ng-src="{{contacto.rutaImagen}}" alt="..."  uib-tooltip="{{contacto.persona.nombre}}" tooltip-placement="top"/>
-                        {{contacto.persona.nombre}}
-                        <!--<span class="badge pull-right">32</span>-->
-                    </button>
-                </li>
-            </ul>
-        </div>
-        <div class="col-sm-12 col-md-10">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
-                </span>Conversacion - {{nombreactivo}}</a></li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="home">
-                    <div class="list-group" id="bandeja">
-                        <div class="list-group-item" style="text-align: center;">
-                            <a class="btn btn-info" role="button" ng-click="getMensajeUsuario(usuarioactivo,page+1)">
-                                  cargar antiguos
-                                  <span class="glyphicon glyphicon-arrow-up"></span>                              
-                            </a>
-                        </div>
-                        <a href="#" class="list-group-item" ng-repeat="mensaje in mensajescontacto" ng-class="{read:usuarioactivo==mensaje.usuarioEmisor.id}">
-                            <span class="badge pull-right">{{mensaje.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
-                            <span class="" style='font-size:16px'>{{mensaje.texto}}</span>
-                            <span class="text-muted" style="font-size: 11px;"> {{mensaje.titulo}}</span> 
+            </p>
+        </div>  
 
-                        </a>
+        <div id="publicacionesProductos" class="panel-body">
+
+            <div class="row">
+
+                <div ng-init="iniciar()">
+                    <span>Mensajes</span>
+                    <hr>
+
+                    <div class="col-sm-12 col-md-2">
+                        <span>Conversaciones</span>
+                        <hr>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li ng-repeat="contacto in contactos">
+                                <button  class="btn btn-default col-md-12 col-sm-12" style="width:100%" ng-click="getMensajeUsuario(contacto.id, 0);setConversacion(contacto.persona.nombre)" style="overflow-x:hidden" ng-class="{'btn-primary':contacto.id == usuarioactivo}">
+                                    <img class="user-image" ng-if="contacto.signInProvider === null || contacto.signInProvider === undefined" height="28px" width="28px" ng-src="/images/getThumbnail/{{contacto.rutaImagen}}" alt="..." uib-tooltip="{{contacto.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="contacto.signInProvider !== null && contacto.signInProvider !== undefined" height="28px" width="28px" ng-src="{{contacto.rutaImagen}}" alt="..."  uib-tooltip="{{contacto.persona.nombre}}" tooltip-placement="top"/>
+                                    {{contacto.persona.nombre}}
+                                    <!--<span class="badge pull-right">32</span>-->
+                                </button>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-            
-            <div class="col-md-12">
-                
-                <div class="well col-md-12"> 
-                   <textarea class="form-control" rows="3" ng-model="texto" id="textomensaje"></textarea>
-                   <button class="btn btn-default" ng-click="setMensaje(asunto,texto,usuarioactivo)">Enviar</button>
-                </div>
+                    <div class="col-sm-12 col-md-10">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
+                                    </span>Conversacion - {{nombreactivo}}</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="home">
+                                <div class="list-group" id="bandeja">
+                                    <div class="list-group-item" style="text-align: center;">
+                                        <a class="btn btn-info" role="button" ng-click="getMensajeUsuario(usuarioactivo, page + 1)">
+                                            cargar antiguos
+                                            <span class="glyphicon glyphicon-arrow-up"></span>                              
+                                        </a>
+                                    </div>
+                                    <a href="#" class="list-group-item" ng-repeat="mensaje in mensajescontacto" ng-class="{read:usuarioactivo == mensaje.usuarioEmisor.id}">
+                                        <span class="badge pull-right">{{mensaje.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
+                                        <span class="" style='font-size:16px'>{{mensaje.texto}}</span>
+                                        <span class="text-muted" style="font-size: 11px;"> {{mensaje.titulo}}</span> 
 
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+
+                            <div class="well col-md-12"> 
+                                <textarea class="form-control" rows="3" ng-model="texto" id="textomensaje"></textarea>
+                                <button class="btn btn-default" ng-click="setMensaje(asunto, texto, usuarioactivo)">Enviar</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
         </div>
 
+    </div>
 </div>

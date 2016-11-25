@@ -61,6 +61,14 @@ public class LogicSpider {
                 producto.setImagen_id(Long.parseLong(!detalleProducto.get("id_default_image").equals("")?detalleProducto.get("id_default_image"):"0"));
                 producto.setRutaimagen(detalleProducto.get("url_image")!=null?detalleProducto.get("url_image"):" ");
                 producto.setDescripcion(!detalleProducto.get("description_short").equals("")?detalleProducto.get("description_short"):" ");
+                
+                if(producto.getDescripcion().length()>255){
+                    producto.setDescripcion(producto.getDescripcion().substring(0, 254));
+                }                
+                
+                producto.setDescripcion(producto.getDescripcion().replaceAll("<p>", ""));
+                producto.setDescripcion(producto.getDescripcion().replaceAll("</p>", ""));
+                
                 producto.setUrl(detalleProducto.get("url_producto"));
                 producto.setCategoria(detalleProducto.get("category_name"));
                 producto.setCategoria_id(Long.parseLong(detalleProducto.get("id_category_default")));              

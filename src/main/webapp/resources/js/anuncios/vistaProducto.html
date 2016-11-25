@@ -1,94 +1,111 @@
-<!--<div class="row" >-->
-<div>
+<div class="col-md-8 min_cont marcar">
+    <div class="panel panel-default min_cont">                    
+        <div class="panel-heading">
+            <p>                            
+                Publicaciones
+                <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html', 'lg')">VenderYa!</button>
+                <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html', 'lg')">
+                    VenderYa!
+                </button>
 
-    <div class="thumbnail">
-        <img class="user-image" ng-if="publicacion.usuario.signInProvider === null || publicacion.usuario.signInProvider === undefined" height="28px" width="28px" ng-src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
-        <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null && publicacion.usuario.signInProvider !== undefined" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
-        <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
-            <uib-slide ng-repeat="recurso in recursoList" active="slide.active" index="slide.id">
-                <a href="#"><img class="imgajust" ng-src="/images/getImage/{{recurso.ruta}}" /></a>
-                <div class="carousel-caption">                                
-                    <div class="titulo-publicacion">
-                        <h3>{{publicacion.titulo}}</h3>
-                    </div> 
+            </p>
+        </div>  
+
+        <div id="publicacionesProductos" class="panel-body">
+            <div>
+
+                <div class="thumbnail">
+                    <img class="user-image" ng-if="publicacion.usuario.signInProvider === null || publicacion.usuario.signInProvider === undefined" height="28px" width="28px" ng-src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                    <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null && publicacion.usuario.signInProvider !== undefined" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                    <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
+                        <uib-slide ng-repeat="recurso in recursoList" active="slide.active" index="slide.id">
+                            <a href="#"><img class="imgajust" ng-src="/images/getImage/{{recurso.ruta}}" /></a>
+                            <div class="carousel-caption">                                
+                                <div class="titulo-publicacion">
+                                    <h3>{{publicacion.titulo}}</h3>
+                                </div> 
+                            </div>
+                        </uib-slide>
+                    </uib-carousel>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="price-text-color">$ {{publicacion.precio}}</h4>
+                        </div>
+                        <div class="rating hidden-sm col-md-4">
+                            <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.puntaje) track by $index"></i>
+                            <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.puntaje) track by $index"></i>
+                        </div>
+                    </div>
+
+                    <div>
+
+                        <button value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('ubicacionesModal.html', 'lg')">
+                            Ver Puntos de Entrega
+                        </button>  
+
+                    </div>             
+
+                    <p>{{publicacion.descripcion}}</p>      
+
+                    <br/>
+
+
+                    <a ng-show="!authenticated" ng-click="open('loginModal.html', 'lg')" class="btn btn-default" href="">Mensaje Privado</a>
+                    <a ng-show="authenticated" class="btn btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id,usuarioNombre:publicacion.usuario.persona.nombre,asunto:publicacion.titulo})">Mensaje Privado</a>
+
+                    <div class="actionBox">
+
+                        <!--<form class="form-inline" role="form">-->
+                        <div class="form-group">
+                            <textarea ng-show="!authenticated" 
+                                      ng-click="open('loginModal.html', 'lg')"
+                                      ng-change="open('loginModal.html', 'lg')"
+                                      ng-model="comentario" class="form-control" placeholder="Escribe un comentario" >
+
+                            </textarea>
+                            <textarea ng-show="authenticated"
+                                      ng-model="comentario" class="form-control" placeholder="Escribe un comentario" >
+
+                            </textarea>
+                        </div>
+                        <div class="form-group">    
+                            <button ng-show="!authenticated" type="button" class="btn btn-default" ng-click="open('loginModal.html', 'lg')">Agregar</button>
+                            <button ng-disabled="!ready" ng-show="authenticated" type="button" class="btn btn-default" ng-click="agregarComentario()">Agregar</button>
+                        </div>
+                        <!--</form>-->
+
+                        <div id="commentBox">
+                            <ul class="commentList">
+                                <li ng-repeat="comentario in comentarioList">
+                                    <h6>{{comentario.usuario.persona.nombre}}</h6>
+                                    <div class="commenterImage">
+                                        <img ng-if="comentario.usuario.signInProvider === null" height="28px" width="28px" ng-src="/images/getThumbnail/{{comentario.usuario.rutaImagen}}" alt="..." />
+                                        <img ng-if="comentario.usuario.signInProvider !== null" height="28px" width="28px" ng-src="{{comentario.usuario.rutaImagen}}" alt="..." />                                
+                                    </div>
+                                    <div class="commentText">
+                                        <p class="">{{comentario.texto}}</p> <span class="date sub-text">{{comentario.creationTime| date:'dd-MM-yyyy HH:mm:ss'}}</span>
+
+                                    </div>
+                                </li>                        
+                            </ul>
+                        </div>
+
+                    </div>
+
                 </div>
-            </uib-slide>
-        </uib-carousel>
 
-        <div class="row">
-            <div class="col-md-8">
-                <h4 class="price-text-color">$ {{publicacion.precio}}</h4>
+
+
             </div>
-            <div class="rating hidden-sm col-md-4">
-                <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.puntaje) track by $index"></i>
-                <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.puntaje) track by $index"></i>
-            </div>
-        </div>
 
-        <div>
 
-            <button value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('ubicacionesModal.html', 'lg')">
-                Ver Puntos de Entrega
-            </button>  
+            <div ui-view="ubicacionesModal">
 
-        </div>             
+            </div>  
 
-        <p>{{publicacion.descripcion}}</p>      
-
-        <br/>
-        
-        
-        <a ng-show="!authenticated" ng-click="open('loginModal.html', 'lg')" class="btn btn-default" href="">Mensaje Privado</a>
-        <a ng-show="authenticated" class="btn btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id,usuarioNombre:publicacion.usuario.persona.nombre,asunto:publicacion.titulo})">Mensaje Privado</a>
-        
-        <div class="actionBox">
-
-            <!--<form class="form-inline" role="form">-->
-            <div class="form-group">
-                <textarea ng-show="!authenticated" 
-                          ng-click="open('loginModal.html', 'lg')"
-                          ng-change="open('loginModal.html', 'lg')"
-                          ng-model="comentario" class="form-control" placeholder="Escribe un comentario" >
-
-                </textarea>
-                <textarea ng-show="authenticated"
-                          ng-model="comentario" class="form-control" placeholder="Escribe un comentario" >
-
-                </textarea>
-            </div>
-            <div class="form-group">    
-                <button ng-show="!authenticated" type="button" class="btn btn-default" ng-click="open('loginModal.html', 'lg')">Agregar</button>
-                <button ng-disabled="!ready" ng-show="authenticated" type="button" class="btn btn-default" ng-click="agregarComentario()">Agregar</button>
-            </div>
-            <!--</form>-->
-
-            <div id="commentBox">
-                <ul class="commentList">
-                    <li ng-repeat="comentario in comentarioList">
-                        <h6>{{comentario.usuario.persona.nombre}}</h6>
-                        <div class="commenterImage">
-                            <img ng-if="comentario.usuario.signInProvider === null" height="28px" width="28px" ng-src="/images/getThumbnail/{{comentario.usuario.rutaImagen}}" alt="..." />
-                            <img ng-if="comentario.usuario.signInProvider !== null" height="28px" width="28px" ng-src="{{comentario.usuario.rutaImagen}}" alt="..." />                                
-                        </div>
-                        <div class="commentText">
-                            <p class="">{{comentario.texto}}</p> <span class="date sub-text">{{comentario.creationTime| date:'dd-MM-yyyy HH:mm:ss'}}</span>
-
-                        </div>
-                    </li>                        
-                </ul>
-            </div>
 
         </div>
 
     </div>
-
-
-
 </div>
-
-
-<div ui-view="ubicacionesModal">
-
-</div>  
-
-

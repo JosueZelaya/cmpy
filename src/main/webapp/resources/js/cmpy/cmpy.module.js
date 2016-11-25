@@ -86,14 +86,28 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             .state('home.misPublicaciones', {
                 url: "/misPublicaciones",  
                 views: {
-                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html'}
+                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'misPublicacionesController'}
                 }
             })
             
             .state('fb.misPublicaciones', {
-                url: "/misPublicaciones",  
+                url: "/misPublicaciones",
                 views: {
-                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html'}
+                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'misPublicacionesController'}
+                }
+            })
+    
+            .state('home.porCategoria', {
+                url: "/porCategoria/{cat}/{nivel}",
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'publicacionesFiltradasController'}
+                }
+            })
+            
+            .state('fb.porCategoria', {
+                url: "/porCategoria/{cat}/{nivel}",
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'publicacionesFiltradasController'}
                 }
             })
     
@@ -105,6 +119,34 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             })
             
             .state('fb.vistaProducto', {
+                url: "/vistaProducto/{publicacionId}",  
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
+                }
+            })
+            
+            .state('home.misPublicaciones.vistaProducto', {
+                url: "/vistaProducto/{publicacionId}",  
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
+                }
+            })
+            
+            .state('fb.misPublicaciones.vistaProducto', {
+                url: "/vistaProducto/{publicacionId}",  
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
+                }
+            })
+            
+            .state('home.porCategoria.vistaProducto', {
+                url: "/vistaProducto/{publicacionId}",  
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
+                }
+            })
+            
+            .state('fb.porCategoria.vistaProducto', {
                 url: "/vistaProducto/{publicacionId}",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}

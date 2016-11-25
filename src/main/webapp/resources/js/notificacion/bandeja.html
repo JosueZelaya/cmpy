@@ -1,32 +1,58 @@
-<div ng-init="init()">
+<div class="col-md-8 min_cont marcar">
+    <div class="panel panel-default min_cont">                    
+        <div class="panel-heading">
+            <p>                            
+                Publicaciones
+                <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html', 'lg')">VenderYa!</button>
+                <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html', 'lg')">
+                    VenderYa!
+                </button>
 
-    <ol>
-        <div ng-repeat="notificacionUsuario in notificaciones">
-            <a href="" 
-               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
-               ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
-                <li ng-show="{{!notificacionUsuario.visto}}" class="alert alert-success">
+            </p>
+        </div>  
 
-                    {{notificacionUsuario.notificacion.mensaje}}
-                    <br/>
-                    <span class="text-muted" style="font-size: 11px;">- nueva</span> 
-                    <span class="badge">{{notificacionUsuario.notificacion.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
+        <div id="publicacionesProductos" class="panel-body">
 
-                </li>
-            </a>
-            <a href="" 
-               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
-               ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
-                <li ng-show="{{notificacionUsuario.visto}}" class="alert alert-warning">
+            <div class="row">
 
-                    {{notificacionUsuario.notificacion.mensaje}}
-                    <br/>
-                    <span class="text-muted" style="font-size: 11px;">- visto</span> 
-                    <span class="badge">{{notificacionUsuario.notificacion.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
 
-                </li>
-            </a>
-        </div>        
-    </ol>
 
+                <div ng-init="init()">
+
+                    <ol>
+                        <div ng-repeat="notificacionUsuario in notificaciones">
+                            <a href="" 
+                               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
+                               ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
+                                <li ng-show="{{!notificacionUsuario.visto}}" class="alert alert-success">
+
+                                    {{notificacionUsuario.notificacion.mensaje}}
+                                    <br/>
+                                    <span class="text-muted" style="font-size: 11px;">- nueva</span> 
+                                    <span class="badge">{{notificacionUsuario.notificacion.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
+
+                                </li>
+                            </a>
+                            <a href="" 
+                               ng-click="quitarVisibilidad(notificacionUsuario.id)" 
+                               ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
+                                <li ng-show="{{notificacionUsuario.visto}}" class="alert alert-warning">
+
+                                    {{notificacionUsuario.notificacion.mensaje}}
+                                    <br/>
+                                    <span class="text-muted" style="font-size: 11px;">- visto</span> 
+                                    <span class="badge">{{notificacionUsuario.notificacion.creationTime| date:'dd-MM-yyyy HH:mm'}}</span>
+
+                                </li>
+                            </a>
+                        </div>        
+                    </ol>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 </div>

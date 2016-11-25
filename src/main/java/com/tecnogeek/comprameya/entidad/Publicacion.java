@@ -7,6 +7,7 @@ package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -102,12 +103,29 @@ public class Publicacion extends BaseEntity<Long> implements Serializable {
     @JsonManagedReference
     @JoinColumn(name = "tipo_publicacion", referencedColumnName = "id")
     @ManyToOne
-    private TipoPublicacion tipoPublicacion;
+    private TipoPublicacion tipo;
     
     @JsonManagedReference
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuario;
+    
+    public TipoPublicacionEnum getTipo(){
+        return TipoPublicacionEnum.getTipo(tipo.getId(),tipo.getNombre());
+    }
+    
+    public void setTipo(TipoPublicacionEnum tipo){
+        this.tipo = new TipoPublicacion();
+        this.tipo.setId(tipo.getCodigo());
+        this.tipo.setNombre(tipo.getDescripcion());
+    }
+    
+    public void setTipo(TipoPublicacion tipo){
+        this.tipo = tipo;
+    }
+    
+    @Transient
+    private String link;
     
     @Transient
     public int getPuntaje(){

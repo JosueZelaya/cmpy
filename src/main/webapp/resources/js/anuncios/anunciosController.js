@@ -1,4 +1,4 @@
-modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $stateParams, anunciosService, mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $stateParams, anunciosService, mapService, TIPO_PUBLICACION, flowFactory, Publicacion, $window) {
 
     var getPublicacionesByCat = function(tipo,pagina,cat,nivel) {
         return anunciosService.getAnunciosByCat(tipo,pagina,cat,nivel)
@@ -57,6 +57,10 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
     $scope.getNumbers = function (num) {
         return new Array(num);
     };
+    
+    $scope.goExternal = function (url){
+        $window.open(url);
+      };
     
     $rootScope.guardarPublicacion = function(publicacion){
         
