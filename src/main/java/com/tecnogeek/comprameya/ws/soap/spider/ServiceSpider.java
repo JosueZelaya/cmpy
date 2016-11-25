@@ -105,7 +105,7 @@ public class ServiceSpider {
             String urlImage = "http://"
                                 +dominio
                                 +"/"
-                                +listaDetalleProducto.get("id") 
+                                +listaDetalleProducto.get("id_default_image") 
                                 + "-home_default"
                                 +"/"
                                 +listaDetalleProducto.get("link_rewrite")
