@@ -66,7 +66,8 @@ public class ServiceSpider {
                 "price",
                 "name",
                 "description_short",
-                "id_default_image"
+                "id_default_image",
+                "link_rewrite"
             };
             
             String StrResponse = GenericClient.getRequest(url+"?ws_key="+key);
@@ -93,10 +94,10 @@ public class ServiceSpider {
             
             String urlProducto = "http://"
                                  +dominio
-                                 +"/"+listaDetalleProducto.get("category_name")
+                                 +listaDetalleProducto.get("category_name")
                                  +"/"+listaDetalleProducto.get("id")
                                  +"-"
-                                 +listaDetalleProducto.get("name").replace(" ", "-")
+                                 +listaDetalleProducto.get("link_rewrite")
                                  +".html" ;
             
             listaDetalleProducto.put("url_producto", urlProducto);
