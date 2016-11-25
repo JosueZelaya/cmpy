@@ -86,14 +86,14 @@ public class ServiceSpider {
             String StrResponseCat = GenericClient.getRequest(linkcat+"?ws_key="+key);
             Document doccat = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(StrResponseCat.getBytes())); 
             
-            NodeList tmpcat = doccat.getElementsByTagName("name");
+            NodeList tmpcat = doccat.getElementsByTagName("link_rewrite");
             String category_name =  tmpcat.item(0).getTextContent();
             
             listaDetalleProducto.put("category_name", category_name);
             
             String urlProducto = "http://"
                                  +dominio
-                                 +"/"+listaDetalleProducto.get("category_name").replace(" ", "-")
+                                 +"/"+listaDetalleProducto.get("category_name")
                                  +"/"+listaDetalleProducto.get("id")
                                  +"-"
                                  +listaDetalleProducto.get("name").replace(" ", "-")
