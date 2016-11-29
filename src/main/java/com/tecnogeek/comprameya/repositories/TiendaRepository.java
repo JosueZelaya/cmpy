@@ -5,12 +5,12 @@
  */
 package com.tecnogeek.comprameya.repositories;
 
-import com.tecnogeek.comprameya.entidad.TiendaPS;
-import com.tecnogeek.comprameya.repositories.custom.TiendaPSRepositoryCustom;
+import com.tecnogeek.comprameya.entidad.Tienda;
+import com.tecnogeek.comprameya.repositories.custom.TiendaRepositoryCustom;
 
 /**
  *
  * @author genaro
  */
-public interface TiendaPSRepository extends 
-        BaseRepository<TiendaPS, Long>, TiendaPSRepositoryCustom {}
+public interface TiendaRepository extends 
+        BaseRepository<Tienda, Long>, TiendaRepositoryCustom {}

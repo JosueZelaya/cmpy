@@ -5,15 +5,16 @@
  */
 package com.tecnogeek.comprameya.repositories.custom;
 
-import com.tecnogeek.comprameya.entidad.TiendaPS;
+import com.tecnogeek.comprameya.entidad.Tienda;
 import java.util.List;
 
 /**
  *
  * @author genaro
  */
-public interface TiendaPSRepositoryCustom {
+public interface TiendaRepositoryCustom {
     
-    public List<TiendaPS> findTiendas(int page, int itemsByPage);
+    public List<Tienda> findTiendas(int page, int itemsByPage);
+    public List<Tienda> findTiendasAleatorias(int cantidad);
     
 }

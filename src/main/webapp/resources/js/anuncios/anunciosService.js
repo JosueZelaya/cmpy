@@ -43,7 +43,6 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
                 });
     };
 
-
     this.getAnunciosByCat = function (tipo, page, cat, nivel) {
         var req = "/publicacion/getAnunciosByCat/" + tipo + "/" + page + "/" + cat + "/" + nivel;
         return $http.get(req)

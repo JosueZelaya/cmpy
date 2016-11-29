@@ -91,6 +91,6 @@ public class ProductoPS extends BaseEntity<Long> implements Serializable{
     @JsonManagedReference
     @JoinColumn(name = "tiendaps_id", referencedColumnName = "id")
     @ManyToOne
-    private TiendaPS tiendaps;
+    private Tienda tienda;
     
 }

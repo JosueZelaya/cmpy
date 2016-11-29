@@ -114,7 +114,7 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
     
     @JsonBackReference
     @OneToMany(mappedBy = "usuario")
-    private List<TiendaPS> tiendaList;
+    private List<Tienda> tiendaList;
     
     @JsonManagedReference
     @JoinColumn(name = "perfil_id", referencedColumnName = "id")

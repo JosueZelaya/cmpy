@@ -6,19 +6,19 @@
 package com.tecnogeek.comprameya.ws.soap.spider;
 
 import com.tecnogeek.comprameya.entidad.ProductoPS;
-import com.tecnogeek.comprameya.entidad.TiendaPS;
+import com.tecnogeek.comprameya.entidad.Tienda;
 import com.tecnogeek.comprameya.repositories.ProductoPSRepository;
-import com.tecnogeek.comprameya.repositories.TiendaPSRepository;
 import com.tecnogeek.comprameya.service.ProductoPSService;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
-import com.tecnogeek.comprameya.service.TiendaPSService;
+import com.tecnogeek.comprameya.service.TiendaService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import com.tecnogeek.comprameya.repositories.TiendaRepository;
 
 /**
  *
@@ -29,16 +29,16 @@ public class LogicSpider {
     
     
     @Autowired
-    TiendaPSRepository tiendaPSRepository;
+    TiendaRepository tiendaPSRepository;
     
     @Autowired
     ProductoPSRepository productoPSRepository;
     
     public boolean indexTiendasProductos() {
                  
-        Iterable<TiendaPS> tiendas = tiendaPSRepository.findAll();
+        Iterable<Tienda> tiendas = tiendaPSRepository.findAll();
         
-        for(TiendaPS tienda : tiendas){
+        for(Tienda tienda : tiendas){
             
             List<ProductoPS> listaProductoPS = new ArrayList<>();
             String dominio = tienda.getDominio();
@@ -72,7 +72,7 @@ public class LogicSpider {
                 producto.setUrl(detalleProducto.get("url_producto"));
                 producto.setCategoria(detalleProducto.get("category_name"));
                 producto.setCategoria_id(Long.parseLong(detalleProducto.get("id_category_default")));              
-                producto.setTiendaps(tienda);
+                producto.setTienda(tienda);
                 
                 
                 listaProductoPS.add(producto);

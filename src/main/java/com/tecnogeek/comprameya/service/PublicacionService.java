@@ -12,7 +12,7 @@ import com.tecnogeek.comprameya.dto.GridResponse;
 import com.tecnogeek.comprameya.entidad.Producto;
 import com.tecnogeek.comprameya.entidad.ProductoPS;
 import com.tecnogeek.comprameya.entidad.Recurso;
-import com.tecnogeek.comprameya.entidad.TiendaPS;
+import com.tecnogeek.comprameya.entidad.Tienda;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.enums.TipoPublicacionEnum;
 import com.tecnogeek.comprameya.repositories.BaseRepository;
@@ -23,10 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
-import com.tecnogeek.comprameya.repositories.TiendaPSRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.Iterator;
 import java.util.List;
+import com.tecnogeek.comprameya.repositories.TiendaRepository;
 
 /**
  *
@@ -42,7 +42,7 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
     PublicacionRepository publicacionRepository;
 
     @Autowired
-    TiendaPSRepository tiendaRepository;
+    TiendaRepository tiendaRepository;
 
     @Autowired
     ProductoPSRepository productoPSRepository;
@@ -135,11 +135,11 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         if (null != tipo) {
             switch (tipo) {
                 case TIENDA:
-                    List<TiendaPS> tiendas = tiendaRepository.findTiendas(page, pageZise);
+                    List<Tienda> tiendas = tiendaRepository.findTiendas(page, pageZise);
                     publicaciones = convertTienda(tiendas);
                     break;
                 case EXTERNA:
-                    List<TiendaPS> tiendasAletorias = tiendaRepository.findTiendas(page, pageZise);
+                    List<Tienda> tiendasAletorias = tiendaRepository.findTiendas(page, pageZise);
                     publicaciones = getPublicacionesExternas(tiendasAletorias);
                     break;
                 default:
@@ -151,7 +151,7 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         return publicaciones;
     }
 
-    private List<Publicacion> getPublicacionesExternas(List<TiendaPS> tiendasAletorias) {
+    private List<Publicacion> getPublicacionesExternas(List<Tienda> tiendasAletorias) {
         List<ProductoPS> productos = new ArrayList<>();
         if(tiendasAletorias.isEmpty()){
             return convertProducto(productos);
@@ -159,7 +159,7 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         
         boolean salir=false;
         while (productos.size() < Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR) {
-            for (TiendaPS tienda : tiendasAletorias) {                
+            for (Tienda tienda : tiendasAletorias) {                
                 if (productos.size() < Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR) {
                     ProductoPS producto = productoPSRepository.findAleatorioByTienda(tienda.getId());
                     if(producto == null){
@@ -179,9 +179,9 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         return convertProducto(productos);
     }
 
-    public List<Publicacion> convertTienda(List<TiendaPS> tiendaList) {
+    public List<Publicacion> convertTienda(List<Tienda> tiendaList) {
         List<Publicacion> publicaciones = new ArrayList<>();
-        for (TiendaPS tienda : tiendaList) {
+        for (Tienda tienda : tiendaList) {
             Publicacion publicacion = new Publicacion();
             publicacion.setTitulo(tienda.getDominio());
             publicacion.setDescripcion(tienda.getDominio());

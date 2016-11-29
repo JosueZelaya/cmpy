@@ -21,9 +21,12 @@
                         <div style="height: 450px;" class="thumbnail">       
 
                             <div class="row">
-                                <div class="col-md-7">
+                                <div ng-if="publicacion.tipo!=='EXTERNA'" class="col-md-7">
                                     <img class="user-image" ng-if="publicacion.usuario.signInProvider === null" height="28px" width="28px" ng-src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
                                     <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                </div>
+                                <div ng-if="publicacion.tipo==='EXTERNA'" class="col-md-7">                                    
+                                    <img class="user-image" height="28px" width="28px" ng-src="/resources/images/logo.jpg" alt="..."  uib-tooltip="{{publicacion.link}}" tooltip-placement="top"/>
                                 </div>
                                 <div class="rating hidden-sm col-md-5">
                                     <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.usuario.puntaje) track by $index"></i>
@@ -34,7 +37,7 @@
                             <a ng-if="publicacion.tipo==='GRATIS'" href="" ui-sref=".vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})">
 
                                 <div class="titulo-publicacion">
-                                    <h3>{{publicacion.titulo}}</h3>
+                                    <h3>{{publicacion.titulo.slice(0,15)}}...</h3>
                                     <h4 class="price-text-color">$ {{publicacion.precio}}</h4>
                                 </div>
 
@@ -48,7 +51,7 @@
                             <a ng-if="publicacion.tipo==='EXTERNA'" ng-href="{{publicacion.link}}" target="_blank">
 
                                 <div class="titulo-publicacion">
-                                    <h3>{{publicacion.titulo}}</h3>
+                                    <h3>{{publicacion.titulo.slice(0,15)}}...</h3>
                                     <h4 class="price-text-color">$ {{publicacion.precio}}</h4>
                                 </div>
                                 

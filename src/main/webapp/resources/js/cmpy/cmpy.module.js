@@ -91,7 +91,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             })
             
             .state('fb.misPublicaciones', {
-                url: "/misPublicaciones",
+                url: "misPublicaciones",
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'misPublicacionesController'}
                 }
@@ -105,7 +105,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             })
             
             .state('fb.porCategoria', {
-                url: "/porCategoria/{cat}/{nivel}",
+                url: "porCategoria/{cat}/{nivel}",
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'publicacionesFiltradasController'}
                 }
@@ -119,7 +119,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             })
             
             .state('fb.vistaProducto', {
-                url: "/vistaProducto/{publicacionId}",  
+                url: "vistaProducto/{publicacionId}",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
                 }
@@ -133,7 +133,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             })
             
             .state('fb.misPublicaciones.vistaProducto', {
-                url: "/vistaProducto/{publicacionId}",  
+                url: "vistaProducto/{publicacionId}",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
                 }
@@ -147,7 +147,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             })
             
             .state('fb.porCategoria.vistaProducto', {
-                url: "/vistaProducto/{publicacionId}",  
+                url: "vistaProducto/{publicacionId}",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
                 }
@@ -166,7 +166,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             })
             
             .state('fb.vistaMensaje', {
-                url: "/vistaMensaje",
+                url: "vistaMensaje",
                 params: {
                     usuarioId: 0,
                     usuarioNombre: '',
@@ -185,7 +185,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             })
             
             .state('fb.vistaNotificaciones', {
-                url: "/vistaNotificaciones",
+                url: "vistaNotificaciones",
                 views: {
                     '':{templateUrl: '/resources/js/notificacion/bandeja.html', controller: "notificacionController"}
                 }

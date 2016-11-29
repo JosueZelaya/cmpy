@@ -35,7 +35,7 @@ import lombok.ToString;
 @ToString(exclude = {"productoPSList"})
 @Getter
 @Setter
-public class TiendaPS extends BaseEntity<Long> implements Serializable {
+public class Tienda extends BaseEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,6 +59,6 @@ public class TiendaPS extends BaseEntity<Long> implements Serializable {
     private Usuario usuario;
     
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tiendaps")
-    private List<ProductoPS> productoPSList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tienda")
+    private List<ProductoPS> productoList;
 }

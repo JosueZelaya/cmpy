@@ -4,25 +4,18 @@
  * and open the template in the editor.
  */
 
-modulo_anuncios.controller('empresasController', function ($rootScope, $scope, $stateParams, anunciosService,mapService, TIPO_PUBLICACION, flowFactory, Publicacion) {
+modulo_anuncios.controller('empresasController', function ($scope, tiendaService) {
     
-    var getPublicaciones = function(tipo,pagina) {
-        return anunciosService.getAnuncios(tipo,pagina)
-                    .success(function (publicaciones) {                        
-                            return publicaciones;                            
+    var getTiendasAleatorias = function() {
+        return tiendaService.getTiendasAleatorias()
+                    .success(function (tiendas) {                        
+                            return tiendas;                            
                         });
-    };
-    
-    var cargarPublicacionesPagadas = function(){
-        getPublicaciones(TIPO_PUBLICACION.PAGADA, '0')
-                .success(function(publicaciones){
-            $rootScope.anuncios = publicaciones;
-        });
     };
     
     var init = function () {       
         
-        cargarPublicacionesPagadas();
+        getTiendasAleatorias();
         
     };
     
