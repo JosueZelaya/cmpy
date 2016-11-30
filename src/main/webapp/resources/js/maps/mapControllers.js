@@ -104,7 +104,7 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
             marker.latitude = lat;//e.latLng.lat;
             marker.longitude = lng;//e.latLng.lng;
             $rootScope.markers.push(marker);
-            $rootScope.$apply();
+            $rootScope.$apply(); 
           }
 
     };
@@ -155,8 +155,8 @@ maps.controller('mapController', function($rootScope,$scope,$http,mapService,$ti
                 $scope.zoom = 17;
                 
                 
-                var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + objPosition.coords.latitude + "," + objPosition.coords.longitude + "&sensor=true";
-                $http.get(url)
+                var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + objPosition.coords.latitude + "," + objPosition.coords.longitude + "&sensor=true&key=AIzaSyCUv4YsbHpTGv3j5PkAl2x4guWokqIuEEM";
+                $http.get(url,{ headers: {'X-Requested-With': undefined}})
                 .then(function(result) {
                     var address = result.data.results[0].formatted_address;
                     $scope.address = address;

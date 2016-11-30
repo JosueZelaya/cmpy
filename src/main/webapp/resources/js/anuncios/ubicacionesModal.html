@@ -4,7 +4,16 @@
 
         <div ui-view="maps">
 
-        </div>  
+        </div> 
+
+        <div class="panel panel-default" style="margin-top:10px" ng-show="alladdress!=undefined">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Ubicaciones</div>
+            <!-- List group -->
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="dir in alladdress">{{dir}}</li>
+            </ul>
+        </div>
 
         <br/>
         <button class="btn btn-success" type="button" ng-click="cancel()">Listo</button>
