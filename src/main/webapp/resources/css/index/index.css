@@ -283,14 +283,26 @@ body > div.pac-container.pac-logo{
 .paneldown{display:block;height:3600px;overflow:hidden;}
 .panelup{display:block;height:38px;overflow:hidden;}
 
-#publicacionesProductos > div > div:nth-child(1) > div > div.carousel.ng-isolate-scope > div > div{
+/*#publicacionesProductos > div > div:nth-child(1) > div > div.carousel.ng-isolate-scope > div > div*/
+#publicacionesProductos > div:nth-child(1) > div > div.carousel.ng-isolate-scope > div > div
+{
     background-color: white;
 }
-#publicacionesProductos > div > div:nth-child(1) > div > div.carousel.ng-isolate-scope > div > div{
+/*#publicacionesProductos > div:nth-child(1) > div > div.carousel.ng-isolate-scope > div > div*/
+#publicacionesProductos > div > div:nth-child(1) > div > div.carousel.ng-isolate-scope > div > div
+{
     height:auto;
 }
-#publicacionesProductos > div > div:nth-child(1) > div > div.carousel.ng-isolate-scope{
+/*#publicacionesProductos > div > div:nth-child(1) > div > div.carousel.ng-isolate-scope*/
+#publicacionesProductos > div:nth-child(1) > div > div.carousel.ng-isolate-scope
+{
       height:auto;  
+}
+
+#publicacionesProductos > div:nth-child(1) > div > div.carousel.ng-isolate-scope > div > div
+{
+    height:auto;
+    
 }
 
 /* CSS used here will be applied after bootstrap.css */
