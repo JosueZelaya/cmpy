@@ -58,7 +58,7 @@ public class NotificacionService {
         }
         
         Notificacion notificacion = new Notificacion();
-        notificacion.setMensaje(emisor.getPersona().getNombre() + " ha comentado tu anuncio: " + publicacion.getTitulo());
+        notificacion.setMensaje(emisor.getPersona().getNombre() + " ha comentado el anuncio: " + publicacion.getTitulo());
         notificacion.setLink(publicacion.getId()+"");
         
         notificacion = notificacionRepository.save(notificacion);

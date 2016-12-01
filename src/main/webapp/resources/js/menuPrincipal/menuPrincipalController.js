@@ -6,34 +6,35 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
         $scope.pageMensajesNoLeidos = 0;
         $scope.NoLeidosTotal = 0;
         $scope.mensajes = [];
-        
-//        $rootScope.$on('$routeChangeStart', function (event, next, current) {
-//            if (!current) {
-//              PushNotificationService.disconnect();
-//            }
-//          });
 
-        PushNotificationService.receive().then(null, null, function (notificacionUsuario) {
-            
-//            var link =  "<a href='' ui-sref='.vistaProducto({publicacionId: "+ notificacionUsuario.notificacion.link + "})'>"+
-//                        notificacionUsuario.notificacion.mensaje + "</a>";
+        $rootScope.activarNotificacionesPush = function(){
+            PushNotificationService.receive().then(null, null, function (notificacionUsuario) {
                 
-            var link =  "<a href='#/vistaProducto/"+ notificacionUsuario.notificacion.link +"#publicacionesProductos' >" +
-                        notificacionUsuario.notificacion.mensaje + "</a>";
-            
-            toastr.info( link ,{
-                allowHtml: true
+                var link =  "<a href='#/vistaProducto/"+ notificacionUsuario.notificacion.link +"#publicacionesProductos' >" +
+                            notificacionUsuario.notificacion.mensaje + "</a>";
+
+                toastr.info( link ,{
+                    allowHtml: true
+                });
+
+                $rootScope.totalNotificaciones = 
+                        $rootScope.notificaciones.unshift(notificacionUsuario);
             });
-            
-            $rootScope.totalNotificaciones = 
-                    $rootScope.notificaciones.unshift(notificacionUsuario);
-        });
+        };
 
         var getNotificaciones = function () {
             return notificacionService.getNotificaciones()
                     .success(function (notificaciones) {
                         return notificaciones;
                     });
+        };
+        
+        $rootScope.getNotificaciones = function(){
+          getNotificaciones()
+                        .success(function (notificaciones) {
+                            $rootScope.notificaciones = notificaciones;
+                            $rootScope.totalNotificaciones = notificaciones.length;
+                        });  
         };
 
         $scope.quitarVisibilidad = function (idNotificacion, index) {
@@ -85,17 +86,17 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
             $scope.navCollapsed = true;
             $scope.collapseNot = true;
             $scope.totalMensajes = 0;
-
-//            if ($rootScope.authenticated) {
+            
                 getNotificaciones()
                         .success(function (notificaciones) {
                             $rootScope.notificaciones = notificaciones;
                             $rootScope.totalNotificaciones = notificaciones.length;
-                        });
+                        });  
+               
+               $rootScope.activarNotificacionesPush();
 
                $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
-               $scope.getMensajesNoLeidosTotal();
-//            }
+               $scope.getMensajesNoLeidosTotal();            
 
 
         };

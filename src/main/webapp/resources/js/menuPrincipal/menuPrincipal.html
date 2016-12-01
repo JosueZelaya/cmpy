@@ -19,7 +19,7 @@
                 <span class="badge badge-notify">{{totalNotificaciones + totalMensajes}}</span>
             </button>   
             
-            <a href="/" class="pull-left" ui-sref='.'>
+            <a href="/" class="pull-left" ui-sref='home'>
                 <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
             </a>
         </div> 
@@ -71,14 +71,14 @@
                         <li ng-repeat="mensaje in mensajes">
                             <a href="" 
                                ng-click="setMensajeUsuarioLeido(mensaje.usuarioEmisor.id);" 
-                               ui-sref=".vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})">
+                               ui-sref="home.vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})">
                                 <span class="badge pull-right">{{mensaje.total}}</span>
                                 {{mensaje.texto}}  <span class="text-muted" style="font-size: 11px;float:right;margin-right:10px">{{mensaje.usuarioEmisor.persona.nombre}} </span>
                             </a>
                         </li> 
                         <li style="text-align: center">
                             <a href="" 
-                               ui-sref=".vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})">
+                               ui-sref="home.vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})">
                                Ver Bandeja...
                             </a>
                         </li>
@@ -94,13 +94,13 @@
                         <li ng-repeat="notificacionUsuario in notificaciones">
                             <a href="" 
                                ng-click="quitarVisibilidad(notificacionUsuario.id,$index)" 
-                               ui-sref=".vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
+                               ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
                                 {{notificacionUsuario.notificacion.mensaje}}
                             </a>
                         </li>
                         <li style="text-align: center">
                             <a href=""  
-                               ui-sref=".vistaNotificaciones({'#': 'publicacionesProductos'})">
+                               ui-sref="home.vistaNotificaciones({'#': 'publicacionesProductos'})">
                                Ver Todas ...
                             </a>
                         </li>

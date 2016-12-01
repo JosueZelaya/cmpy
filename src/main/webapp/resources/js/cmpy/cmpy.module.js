@@ -55,9 +55,8 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             .state('fb', {
                 url: "/",
                 views: {
-                    '': { templateUrl: '/resources/js/cmpy/home.html' },
-                    
-                    "menuPrincipal@fb": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html', controller: 'menuPrincipalController'},
+                    '': { templateUrl: '/resources/js/cmpy/home.html' },                    
+//                    "menuPrincipal@fb": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html', controller: 'menuPrincipalController'},
                     "menuCategorias@fb": {templateUrl: '/resources/js/categorias/menuCategorias.html', controller: 'catController'},
                     "panelPublicacionesProductos@fb": {templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'anunciosController'},
                     "panelPublicacionesEmpresas@fb": {templateUrl: '/resources/js/anuncios/panelEmpresas.html', controller: 'empresasController'},                    
@@ -73,7 +72,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 views: {
                     '': { templateUrl: '/resources/js/cmpy/home.html' },
                     
-                    "menuPrincipal@home": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html', controller: 'menuPrincipalController'},
+//                    "menuPrincipal@home": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html', controller: 'menuPrincipalController'},
                     "menuCategorias@home": {templateUrl: '/resources/js/categorias/menuCategorias.html', controller: 'catController'},
                     "panelPublicacionesProductos@home": {templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'anunciosController'},
                     "panelPublicacionesEmpresas@home": {templateUrl: '/resources/js/anuncios/panelEmpresas.html', controller: 'empresasController'},                    
@@ -90,12 +89,12 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-            .state('fb.misPublicaciones', {
-                url: "misPublicaciones",
-                views: {
-                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'misPublicacionesController'}
-                }
-            })
+//            .state('fb.misPublicaciones', {
+//                url: "misPublicaciones",
+//                views: {
+//                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'misPublicacionesController'}
+//                }
+//            })
     
             .state('home.porCategoria', {
                 url: "/porCategoria/{cat}/{nivel}",
@@ -104,12 +103,12 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-            .state('fb.porCategoria', {
-                url: "porCategoria/{cat}/{nivel}",
-                views: {
-                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'publicacionesFiltradasController'}
-                }
-            })
+//            .state('fb.porCategoria', {
+//                url: "porCategoria/{cat}/{nivel}",
+//                views: {
+//                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'publicacionesFiltradasController'}
+//                }
+//            })
     
             .state('home.vistaProducto', {
                 url: "/vistaProducto/{publicacionId}",  
@@ -118,12 +117,12 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-            .state('fb.vistaProducto', {
-                url: "vistaProducto/{publicacionId}",  
-                views: {
-                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
-                }
-            })
+//            .state('fb.vistaProducto', {
+//                url: "vistaProducto/{publicacionId}",  
+//                views: {
+//                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
+//                }
+//            })
             
             .state('home.misPublicaciones.vistaProducto', {
                 url: "/vistaProducto/{publicacionId}",  
@@ -132,12 +131,12 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-            .state('fb.misPublicaciones.vistaProducto', {
-                url: "vistaProducto/{publicacionId}",  
-                views: {
-                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
-                }
-            })
+//            .state('fb.misPublicaciones.vistaProducto', {
+//                url: "vistaProducto/{publicacionId}",  
+//                views: {
+//                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
+//                }
+//            })
             
             .state('home.porCategoria.vistaProducto', {
                 url: "/vistaProducto/{publicacionId}",  
@@ -146,12 +145,12 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-            .state('fb.porCategoria.vistaProducto', {
-                url: "vistaProducto/{publicacionId}",  
-                views: {
-                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
-                }
-            })
+//            .state('fb.porCategoria.vistaProducto', {
+//                url: "vistaProducto/{publicacionId}",  
+//                views: {
+//                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
+//                }
+//            })
             
             .state('home.vistaMensaje', {
                 url: "/vistaMensaje", 
@@ -165,17 +164,17 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-            .state('fb.vistaMensaje', {
-                url: "vistaMensaje",
-                params: {
-                    usuarioId: 0,
-                    usuarioNombre: '',
-                    asunto: '~'
-                },
-                views: {
-                    '':{templateUrl: '/resources/js/mensajes/bandeja.html', controller: "mensajesController"}
-                }
-            })
+//            .state('fb.vistaMensaje', {
+//                url: "vistaMensaje",
+//                params: {
+//                    usuarioId: 0,
+//                    usuarioNombre: '',
+//                    asunto: '~'
+//                },
+//                views: {
+//                    '':{templateUrl: '/resources/js/mensajes/bandeja.html', controller: "mensajesController"}
+//                }
+//            })
             
             .state('home.vistaNotificaciones', {
                 url: "/vistaNotificaciones",
@@ -184,12 +183,12 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-            .state('fb.vistaNotificaciones', {
-                url: "vistaNotificaciones",
-                views: {
-                    '':{templateUrl: '/resources/js/notificacion/bandeja.html', controller: "notificacionController"}
-                }
-            })
+//            .state('fb.vistaNotificaciones', {
+//                url: "vistaNotificaciones",
+//                views: {
+//                    '':{templateUrl: '/resources/js/notificacion/bandeja.html', controller: "notificacionController"}
+//                }
+//            })
 
             // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
             .state('about', { 

@@ -40,6 +40,8 @@ autenticacion.controller('autenticacionController',['$rootScope','$scope','$http
                         $location.path("/");
                         $scope.error = false;
                         $scope.cancel(); //cerrar el dialogo
+                        $rootScope.activarNotificacionesPush();
+                        $rootScope.getNotificaciones();
                     } else {
                         $location.path("/login");
                         $scope.error = true;

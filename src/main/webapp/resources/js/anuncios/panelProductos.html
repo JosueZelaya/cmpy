@@ -34,7 +34,7 @@
                                 </div>
                             </div>
 
-                            <a ng-if="publicacion.tipo==='GRATIS'" href="" ui-sref=".vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})">
+                            <a ng-if="publicacion.tipo==='GRATIS'" href="" ui-sref="home.vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})">
 
                                 <div class="titulo-publicacion">
                                     <h3>{{publicacion.titulo.slice(0,15)}}...</h3>
@@ -63,7 +63,7 @@
                             </a>
 
                             <div class="footer-publicacion">
-                                <a href="" ui-sref=".vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})" class="btn btn-default" role="button" uib-tooltip="Ver detalles" tooltip-placement="bottom">
+                                <a href="" ui-sref="home.vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})" class="btn btn-default" role="button" uib-tooltip="Ver detalles" tooltip-placement="bottom">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </a>  
                                 <a href="#"
