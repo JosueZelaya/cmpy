@@ -117,13 +117,14 @@ modulo_anuncios.service('Publicacion', function () {
     /**
      * Constructor, with class name
      */
-    function Publicacion(id, titulo, precio, descripcion,categoriaId) {
+    function Publicacion(id, titulo, precio, descripcion,categoriaId, tipo) {
         // Public properties, assigned to the instance ('this')
         this.id = id;
         this.titulo = titulo;
         this.precio = precio;
         this.descripcion = descripcion;
         this.categoriaId = categoriaId;
+        this.tipo = tipo;
 //        this.imagenes = imagenes;
     }
 

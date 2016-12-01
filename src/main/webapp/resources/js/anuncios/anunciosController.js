@@ -62,14 +62,8 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
         $window.open(url);
       };
     
-    $rootScope.guardarPublicacion = function(publicacion){
-        
-        anunciosService.agregarPublicacion(publicacion)
-                .success(function(publicacion){        
-            
-            $scope.publicaciones.unshift(publicacion);
-        });
-        
+    $rootScope.agregarPublicacion = function(publicacion){
+        $scope.publicaciones.unshift(publicacion);
     };
     
     $rootScope.verMisPublicaciones = function (page) {

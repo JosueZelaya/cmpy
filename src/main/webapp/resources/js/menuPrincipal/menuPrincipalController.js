@@ -86,7 +86,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
             $scope.collapseNot = true;
             $scope.totalMensajes = 0;
 
-            if ($rootScope.authenticated) {
+//            if ($rootScope.authenticated) {
                 getNotificaciones()
                         .success(function (notificaciones) {
                             $rootScope.notificaciones = notificaciones;
@@ -95,7 +95,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
 
                $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
                $scope.getMensajesNoLeidosTotal();
-            }
+//            }
 
 
         };

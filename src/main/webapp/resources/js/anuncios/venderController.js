@@ -7,7 +7,7 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
             imagenes[index] = $scope.existingFlowObject.files[index].file;
         }
         
-        var publicacion = new Publicacion('',$scope.titulo, $scope.precio, $scope.descripcion,$scope.catagoriaId);
+        var publicacion = new Publicacion('',$scope.titulo, $scope.precio, $scope.descripcion,$scope.catagoriaId, 'GRATIS');
         publicacion.setImagenes(imagenes);
         publicacion.setUbicaciones($rootScope.ubicaciones);
         
@@ -18,8 +18,19 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
 
         var publicacion = crearPublicacion();
         
-        $rootScope.guardarPublicacion(publicacion);
+        guardarPublicacion(publicacion);
+        
         $scope.cancel(); //cerrar el dialogo
+    };
+    
+    var guardarPublicacion = function(publicacion){
+        
+        anunciosService.agregarPublicacion(publicacion)
+                .success(function(publicacion){        
+            
+            $rootScope.agregarPublicacion(publicacion);
+        });
+        
     };
     
     var init = function () {

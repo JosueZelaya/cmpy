@@ -240,11 +240,8 @@ public class PublicacionController {
                 log.error(PublicacionController.class.getName(), "No se pudo cargar imagen", ex);
             }
         }
-        publicacion.setRecursoList(recursos);        
-        Integer tipo=Constantes.PUBLICACION_GRATIS;
-        TipoPublicacion tipoPublicacion = new TipoPublicacion();
-        tipoPublicacion.setId(tipo.longValue());
-        publicacion.setTipo(tipoPublicacion);        
+        publicacion.setRecursoList(recursos);   
+        publicacion.setTipo(TipoPublicacionEnum.GRATIS);        
         Producto producto = new Producto();
         producto.setNombre(titulo);
         producto.setPrecio(BigDecimal.valueOf(precio));
