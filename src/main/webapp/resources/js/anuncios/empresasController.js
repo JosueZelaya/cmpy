@@ -13,9 +13,15 @@ modulo_anuncios.controller('empresasController', function ($scope, tiendaService
                         });
     };
     
+    $scope.getNumbers = function (num) {
+        return new Array(num);
+    };
+    
     var init = function () {       
         
-        getTiendasAleatorias();
+        getTiendasAleatorias().success(function (tiendas) {
+                    $scope.tiendas = tiendas;
+                });
         
     };
     
