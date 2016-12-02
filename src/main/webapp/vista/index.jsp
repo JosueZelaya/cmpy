@@ -49,7 +49,7 @@
                         <span class="badge badge-notify">{{totalNotificaciones + totalMensajes}}</span>
                     </button>   
 
-                    <a href="/" class="pull-left" ui-sref='home'>
+                    <a href="/" class="pull-left" ui-sref='home' ui-sref-opts="{reload:true}">
                         <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
                     </a>
                 </div> 
@@ -124,6 +124,7 @@
                                 <li ng-repeat="notificacionUsuario in notificaciones">
                                     <a href="" 
                                        ng-click="quitarVisibilidad(notificacionUsuario.id, $index)" 
+                                       ui-sref-opts="{reload:true}"
                                        ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
                                         {{notificacionUsuario.notificacion.mensaje}}
                                     </a>

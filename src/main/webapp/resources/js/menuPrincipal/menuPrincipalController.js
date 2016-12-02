@@ -14,12 +14,23 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                             notificacionUsuario.notificacion.mensaje + "</a>";
 
                 toastr.info( link ,{
-                    allowHtml: true
+                    allowHtml: true,
+                    onHidden: function(clicked) {
+                    if (clicked) {
+                        quitarVisibilidad(notificacionUsuario.id,undefined);
+                    }
+                  }
                 });
 
                 $rootScope.totalNotificaciones = 
                         $rootScope.notificaciones.unshift(notificacionUsuario);
             });
+        };
+        
+        var quitarVisibilidad = function (idNotificacion, index) {
+            notificacionService.ocultar(idNotificacion);
+            $rootScope.notificaciones.splice(index, 1);
+            $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
         };
 
         var getNotificaciones = function () {
@@ -37,8 +48,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         });  
         };
 
-        $scope.quitarVisibilidad = function (idNotificacion, index) {
-
+        $rootScope.quitarVisibilidad = function (idNotificacion, index) {
             notificacionService.ocultar(idNotificacion);
             $rootScope.notificaciones.splice(index, 1);
             $rootScope.totalNotificaciones = $rootScope.notificaciones.length;

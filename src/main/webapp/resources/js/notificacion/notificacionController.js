@@ -14,19 +14,12 @@ modulo_notificacion.controller('notificacionController', [
                     });
         };
 
-        $scope.quitarVisibilidad = function (idNotificacion) {
-            return notificacionService.quitarVisibilidad(idNotificacion)
-                    .success(function () {
-                        $rootScope.totalNotificaciones--;
-                    });
-        };
-
         $scope.init = function () {
             if ($rootScope.authenticated) {
 
                 getTodasNotificaciones()
                         .success(function (notificaciones) {
-                            $rootScope.notificaciones = notificaciones;
+                            $scope.notificaciones = notificaciones;
                         });
 
             }
