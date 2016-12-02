@@ -42,7 +42,7 @@ public class ServiceSpider {
     }
   
   
-    public static Dictionary<Integer,String> getTiendaProductos(String dominioTienda, String key) throws NoSuchAlgorithmException, KeyManagementException {
+    public  Dictionary<Integer,String> getTiendaProductos(String dominioTienda, String key) throws NoSuchAlgorithmException, KeyManagementException {
         
         Dictionary<Integer,String> listaProductos = new Hashtable<>();
         try {
@@ -69,7 +69,7 @@ public class ServiceSpider {
          
     }
     
-    public static Dictionary<String,String> getTiendaProducto(String url,String key,String dominio) throws NoSuchAlgorithmException, KeyManagementException{
+    public  Dictionary<String,String> getTiendaProducto(String url,String key,String dominio) throws NoSuchAlgorithmException, KeyManagementException{
         
         Dictionary<String,String> listaDetalleProducto = new Hashtable<>();
         try {
