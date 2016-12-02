@@ -15,6 +15,8 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
     };
 
     $scope.agregarPublicacion = function () {
+        
+        $scope.setGlobalcat();
 
         var publicacion = crearPublicacion();
         
@@ -44,69 +46,49 @@ modulo_anuncios.controller('venderController', function ($rootScope, $scope, $st
     
     //catagorias
     
-    $scope.categorias_nivel1 = [];
-    $scope.categorias_nivel2 = [];
-    $scope.categorias_nivel3 = [];
-    
-    $scope.select_nivel1;
-    $scope.select_nivel2;
-    $scope.select_nivel3;  
+    //$scope.categoriaSelected = "";
+    $scope.categoriasAu = [];
     
     catService.getCategorias()
     .success(function (response) 
     {   
         $scope.categorias = response;
-        $scope.getSelectNivel1();
+        formarCatAu();
+        
     });  
     
-    
-    $scope.getSelectNivel1= function(){
-        
-         angular.forEach($scope.categorias, function (item) {
-            $scope.categorias_nivel1.push(item);
-        });       
-    };
-    
-    $scope.getSelectNivel2 = function(){
-        
-        $scope.categorias_nivel2 = [];
+    var formarCatAu = function(){
+        $scope.categoriasAu = [];
         
         angular.forEach($scope.categorias, function (item) {
-            
-            if(item.id == $scope.select_nivel1)
-            {
-                angular.forEach(item.categoriaList, function (sub_item) {
-                    $scope.categorias_nivel2.push(sub_item);
+            $scope.categoriasAu.push({
+                name:item.nombre,
+                simple:item.nombre,
+                id:item.id
+            });
+            angular.forEach(item.categoriaList, function (sub_item) {
+                $scope.categoriasAu.push({
+                    name:item.nombre + " / " + sub_item.nombre,
+                    simple:sub_item.nombre,
+                    id:sub_item.id
                 });
-            }
-        });        
-    };
-    
-    $scope.getSelectNivel3 = function(){
-        
-        $scope.categorias_nivel3 = [];
-        
-        angular.forEach($scope.categorias, function (item) {
-            
-            if(item.id == $scope.select_nivel1)
-            {
-                angular.forEach(item.categoriaList, function (sub_item) {
-                     if(sub_item.id == $scope.select_nivel2)
-                    {
-                        angular.forEach(sub_item.categoriaList, function (sub_sub_item) {
-                            $scope.categorias_nivel3.push(sub_sub_item);
-                        });                       
-                    }
+                angular.forEach(sub_item.categoriaList, function (sub_sub_item) {
+                    $scope.categoriasAu.push({
+                        name:item.nombre + " / " + sub_item.nombre + " / " + sub_sub_item.nombre,
+                        simple:sub_sub_item.nombre,
+                        id:sub_sub_item.id
+                    });
                 });
-            }
+            });
         });        
+        
     };
     
     $scope.setGlobalcat = function(){
         
-        if(!isNaN($scope.select_nivel3))
+        if($scope.categoriaSelected!==undefined)
         {
-            $scope.catagoriaId = parseInt($scope.select_nivel3);  
+            $scope.catagoriaId = parseInt($scope.categoriaSelected.id);  
         }
         
        
