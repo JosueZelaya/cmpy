@@ -9,6 +9,7 @@ import com.tecnogeek.comprameya.entidad.Notificacion;
 import com.tecnogeek.comprameya.entidad.NotificacionUsuario;
 import com.tecnogeek.comprameya.entidad.Publicacion;
 import com.tecnogeek.comprameya.entidad.Usuario;
+import com.tecnogeek.comprameya.enums.TipoNotificacionEnum;
 import com.tecnogeek.comprameya.repositories.NotificacionRepository;
 import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
@@ -38,6 +39,16 @@ public class NotificacionService {
     @Autowired
     private SimpMessagingTemplate template;
     
+    public List<NotificacionUsuario> getTodasNotificaciones(){
+        Usuario usuario = usuarioRepository.getLoggedUser();
+        
+        if(usuario==null){
+            return null;
+        }
+        
+        return notificacionUsuarioRepository.getTodasNotificaciones(usuario);
+    }
+    
     public List<NotificacionUsuario> getNotificaciones(){
         Usuario usuario = usuarioRepository.getLoggedUser();
         
@@ -60,7 +71,7 @@ public class NotificacionService {
         Notificacion notificacion = new Notificacion();
         notificacion.setMensaje(emisor.getPersona().getNombre() + " ha comentado el anuncio: " + publicacion.getTitulo());
         notificacion.setLink(publicacion.getId()+"");
-        
+        notificacion.setTipo(TipoNotificacionEnum.COMENTARIO);
         notificacion = notificacionRepository.save(notificacion);
         
         List<NotificacionUsuario> notificaciones = new ArrayList<>();

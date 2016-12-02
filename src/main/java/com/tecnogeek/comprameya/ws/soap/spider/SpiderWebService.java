@@ -36,7 +36,7 @@ public class SpiderWebService {
         
         LogicSpider logic = new LogicSpider();
 
-            logic.indexTiendasProductos();
+            logic.indexTiendasProductos(false);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(SpiderWebService.class.getName()).log(Level.SEVERE, null, ex);
             return false;

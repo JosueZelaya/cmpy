@@ -47,7 +47,7 @@ public class TipoNotificacion extends BaseEntity<Long> implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     @JsonBackReference
-    @OneToMany(mappedBy = "tipoNotificacion")
+    @OneToMany(mappedBy = "tipo")
     private List<Notificacion> notificacionList;
     
 }

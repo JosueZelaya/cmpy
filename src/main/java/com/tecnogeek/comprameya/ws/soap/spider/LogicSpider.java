@@ -33,7 +33,7 @@ public class LogicSpider {
     @Autowired
     ProductoPSRepository productoPSRepository;
     
-    public boolean indexTiendasProductos() throws NoSuchAlgorithmException, KeyManagementException {
+    public boolean indexTiendasProductos(Boolean overSSL) throws NoSuchAlgorithmException, KeyManagementException {
                  
         Iterable<Tienda> tiendas = tiendaPSRepository.findAll();
         
@@ -42,7 +42,6 @@ public class LogicSpider {
             List<ProductoPS> listaProductoPS = new ArrayList<>();
             String dominio = tienda.getDominio();
             String key = tienda.getKey();
-            Boolean overSSL=true;
             ServiceSpider serviceSpicer = new ServiceSpider(overSSL);
             
             Dictionary<Integer,String> listaProductos  = serviceSpicer.getTiendaProductos(dominio,key);

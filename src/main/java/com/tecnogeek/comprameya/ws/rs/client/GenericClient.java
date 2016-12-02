@@ -9,18 +9,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.MediaType;
 import org.apache.commons.io.IOUtils;
-import org.springframework.http.HttpStatus;
 
 
 

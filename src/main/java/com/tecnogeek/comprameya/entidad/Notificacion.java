@@ -7,6 +7,7 @@ package com.tecnogeek.comprameya.entidad;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tecnogeek.comprameya.enums.TipoNotificacionEnum;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,10 +52,24 @@ public class Notificacion extends BaseEntity<Long> implements Serializable {
     @JsonManagedReference
     @JoinColumn(name = "tipo_notificacion_id", referencedColumnName = "id")
     @ManyToOne
-    private TipoNotificacion tipoNotificacion;
+    private TipoNotificacion tipo;
     
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "notificacion")
     private List<NotificacionUsuario> usuariosNotificadosList;
+    
+    public TipoNotificacionEnum getTipo(){
+        return TipoNotificacionEnum.getTipo(this.tipo.getId(), this.tipo.getNombre());
+    }
+    
+    public void setTipo(TipoNotificacion tipo){
+        this.tipo = tipo;
+    }
+    
+    public void setTipo(TipoNotificacionEnum tipo){
+        this.tipo = new TipoNotificacion();
+        this.tipo.setId(tipo.getCodigo());
+        this.tipo.setNombre(tipo.getNombre());
+    }
     
 }
