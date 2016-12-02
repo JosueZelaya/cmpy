@@ -37,23 +37,28 @@
                             <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.puntaje) track by $index"></i>
                         </div>
                     </div>
-
-                    <div>
-
-                        <button value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('ubicacionesModal.html', 'lg')">
-                            Ver Puntos de Entrega
-                        </button>  
-
-                    </div>             
-
+                    
                     <p>{{publicacion.descripcion}}</p>      
 
                     <br/>
+                    <div style="text-align:center">
+                            <div class="btn-group" role="group" aria-label="..." style="margin-bottom:20px">
+
+                                <button value="VenderYa!" type="submit" class="btn btn-success" ng-click="open('ubicacionesModal.html', 'lg')" uib-tooltip="Ver Puntos de Entrega">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                </button>  
 
 
-                    <a ng-show="!authenticated" ng-click="open('loginModal.html', 'lg')" class="btn btn-default" href="">Mensaje Privado</a>
-                    <a ng-show="authenticated" class="btn btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id,usuarioNombre:publicacion.usuario.persona.nombre,asunto:publicacion.titulo})">Mensaje Privado</a>
+                                <a ng-show="!authenticated" ng-click="open('loginModal.html', 'lg')" class="btn btn-primary btn-default" href="" uib-tooltip="Mensaje Privado">
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                </a>
+                                <a ng-show="authenticated" class="btn btn-primary btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id,usuarioNombre:publicacion.usuario.persona.nombre,asunto:publicacion.titulo})" uib-tooltip="Mensaje Privado">
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                </a>
 
+                            </div>
+                    <div>
+                    
                     <div class="actionBox">
 
                         <!--<form class="form-inline" role="form">-->

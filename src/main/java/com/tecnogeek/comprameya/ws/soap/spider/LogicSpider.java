@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import com.tecnogeek.comprameya.repositories.TiendaRepository;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -31,7 +33,7 @@ public class LogicSpider {
     @Autowired
     ProductoPSRepository productoPSRepository;
     
-    public boolean indexTiendasProductos(Boolean overSSL) {
+    public boolean indexTiendasProductos() throws NoSuchAlgorithmException, KeyManagementException {
                  
         Iterable<Tienda> tiendas = tiendaPSRepository.findAll();
         

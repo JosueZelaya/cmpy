@@ -16,6 +16,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import com.tecnogeek.comprameya.ws.rs.client.GenericClient;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import lombok.Getter;
@@ -39,7 +41,8 @@ public class ServiceSpider {
         }
     }
   
-    public Dictionary<Integer,String> getTiendaProductos(String dominioTienda, String key) {
+  
+    public static Dictionary<Integer,String> getTiendaProductos(String dominioTienda, String key) throws NoSuchAlgorithmException, KeyManagementException {
         
         Dictionary<Integer,String> listaProductos = new Hashtable<>();
         try {
@@ -66,7 +69,7 @@ public class ServiceSpider {
          
     }
     
-    public Dictionary<String,String> getTiendaProducto(String url,String key,String dominio){
+    public static Dictionary<String,String> getTiendaProducto(String url,String key,String dominio) throws NoSuchAlgorithmException, KeyManagementException{
         
         Dictionary<String,String> listaDetalleProducto = new Hashtable<>();
         try {

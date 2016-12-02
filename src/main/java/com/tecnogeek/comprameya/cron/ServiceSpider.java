@@ -16,6 +16,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import com.tecnogeek.comprameya.ws.rs.client.GenericClient;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -34,7 +36,10 @@ public class ServiceSpider {
         try {
             
             String url = "http://"+dominioTienda+"/api/products?ws_key=" + key;
-            String StrResponse = GenericClient.getRequest(url);
+            String StrResponse;
+
+                StrResponse = GenericClient.getRequest(url);
+            
 
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(StrResponse.getBytes()));
             NodeList e = doc.getElementsByTagName("product");
@@ -50,7 +55,13 @@ public class ServiceSpider {
         } catch (IOException | ParserConfigurationException | SAXException | DOMException | NumberFormatException ex) {
             Logger.getLogger(ServiceSpider.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        }
+        } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ServiceSpider.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } catch (KeyManagementException ex) {
+                Logger.getLogger(ServiceSpider.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
         
          
     }
@@ -84,7 +95,10 @@ public class ServiceSpider {
             NodeList tmp = doc.getElementsByTagName("id_category_default");
             String linkcat =  tmp.item(0).getAttributes().getNamedItem("xlink:href").getNodeValue();
             
-            String StrResponseCat = GenericClient.getRequest(linkcat+"?ws_key="+key);
+            String StrResponseCat;
+
+                StrResponseCat = GenericClient.getRequest(linkcat+"?ws_key="+key);
+
             Document doccat = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(StrResponseCat.getBytes())); 
             
             NodeList tmpcat = doccat.getElementsByTagName("link_rewrite");
@@ -119,6 +133,13 @@ public class ServiceSpider {
             Logger.getLogger(ServiceSpider.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+        catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ServiceSpider.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } catch (KeyManagementException ex) {
+                Logger.getLogger(ServiceSpider.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
     }
     
 }

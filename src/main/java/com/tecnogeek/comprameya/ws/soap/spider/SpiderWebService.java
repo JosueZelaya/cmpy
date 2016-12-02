@@ -5,6 +5,10 @@
  */
 package com.tecnogeek.comprameya.ws.soap.spider;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -28,9 +32,18 @@ public class SpiderWebService {
     
     @WebMethod(operationName = "indexTiendasProductos")
     public boolean indexTiendasProductos() {
+          try {
         
         LogicSpider logic = new LogicSpider();
-        logic.indexTiendasProductos(false);
+
+            logic.indexTiendasProductos();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(SpiderWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (KeyManagementException ex) {
+            Logger.getLogger(SpiderWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         
         return true;
     }    
