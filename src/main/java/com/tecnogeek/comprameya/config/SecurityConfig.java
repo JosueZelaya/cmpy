@@ -123,7 +123,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 ).hasRole("USER")
                 .antMatchers(
                         "/admin",
-                        "/admin/**"
+                        "/admin/**",
+                        "/Spider/scanearTiendasOverSSL",
+                        "/Spider/scanearTiendasInsecure"
                 ).hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

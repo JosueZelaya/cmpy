@@ -18,6 +18,8 @@ import org.xml.sax.SAXException;
 import com.tecnogeek.comprameya.ws.rs.client.GenericClient;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import lombok.Getter;
+import lombok.Setter;
 
 
 
@@ -25,15 +27,24 @@ import java.util.Hashtable;
  *
  * @author genaro
  */
+@Getter
+@Setter
 public class ServiceSpider {
     
+    private String urlPrefix = "http://";
+    
+    public ServiceSpider(Boolean overSSL){
+        if(overSSL){
+            urlPrefix = "https://";
+        }
+    }
   
-    public static Dictionary<Integer,String> getTiendaProductos(String dominioTienda, String key) {
+    public Dictionary<Integer,String> getTiendaProductos(String dominioTienda, String key) {
         
         Dictionary<Integer,String> listaProductos = new Hashtable<>();
         try {
             
-            String url = "http://"+dominioTienda+"/api/products?ws_key=" + key;
+            String url = urlPrefix+dominioTienda+"/api/products?ws_key=" + key;
             String StrResponse = GenericClient.getRequest(url);
 
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(StrResponse.getBytes()));
@@ -55,7 +66,7 @@ public class ServiceSpider {
          
     }
     
-    public static Dictionary<String,String> getTiendaProducto(String url,String key,String dominio){
+    public Dictionary<String,String> getTiendaProducto(String url,String key,String dominio){
         
         Dictionary<String,String> listaDetalleProducto = new Hashtable<>();
         try {
@@ -92,7 +103,7 @@ public class ServiceSpider {
             
             listaDetalleProducto.put("category_name", category_name);
             
-            String urlProducto = "http://"
+            String urlProducto = urlPrefix
                                  +dominio
                                  +listaDetalleProducto.get("category_name")
                                  +"/"+listaDetalleProducto.get("id")
@@ -102,7 +113,7 @@ public class ServiceSpider {
             
             listaDetalleProducto.put("url_producto", urlProducto);
             
-            String urlImage = "http://"
+            String urlImage = urlPrefix
                                 +dominio
                                 +"/"
                                 +listaDetalleProducto.get("id_default_image") 

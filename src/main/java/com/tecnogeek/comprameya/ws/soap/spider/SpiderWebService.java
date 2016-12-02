@@ -30,7 +30,7 @@ public class SpiderWebService {
     public boolean indexTiendasProductos() {
         
         LogicSpider logic = new LogicSpider();
-        logic.indexTiendasProductos();
+        logic.indexTiendasProductos(false);
         
         return true;
     }    

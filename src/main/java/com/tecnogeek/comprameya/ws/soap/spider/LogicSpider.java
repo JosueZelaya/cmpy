@@ -8,12 +8,9 @@ package com.tecnogeek.comprameya.ws.soap.spider;
 import com.tecnogeek.comprameya.entidad.ProductoPS;
 import com.tecnogeek.comprameya.entidad.Tienda;
 import com.tecnogeek.comprameya.repositories.ProductoPSRepository;
-import com.tecnogeek.comprameya.service.ProductoPSService;
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.List;
-import com.tecnogeek.comprameya.service.TiendaService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +31,7 @@ public class LogicSpider {
     @Autowired
     ProductoPSRepository productoPSRepository;
     
-    public boolean indexTiendasProductos() {
+    public boolean indexTiendasProductos(Boolean overSSL) {
                  
         Iterable<Tienda> tiendas = tiendaPSRepository.findAll();
         
@@ -43,8 +40,9 @@ public class LogicSpider {
             List<ProductoPS> listaProductoPS = new ArrayList<>();
             String dominio = tienda.getDominio();
             String key = tienda.getKey();
-
-            Dictionary<Integer,String> listaProductos  = ServiceSpider.getTiendaProductos(dominio,key);
+            ServiceSpider serviceSpicer = new ServiceSpider(overSSL);
+            
+            Dictionary<Integer,String> listaProductos  = serviceSpicer.getTiendaProductos(dominio,key);
             Enumeration<Integer> k = listaProductos.keys();
 
             while(k.hasMoreElements())
@@ -52,7 +50,7 @@ public class LogicSpider {
                 int id = k.nextElement();
                 String linkProducto = listaProductos.get(id);
 
-                Dictionary<String,String> detalleProducto = ServiceSpider.getTiendaProducto(linkProducto, key,dominio);
+                Dictionary<String,String> detalleProducto = serviceSpicer.getTiendaProducto(linkProducto, key,dominio);
                 
                 ProductoPS producto = new ProductoPS();
                 producto.setIdps(Long.parseLong(detalleProducto.get("id")));
