@@ -8,6 +8,7 @@ package com.tecnogeek.comprameya.service;
 import com.tecnogeek.comprameya.entidad.Destinatario;
 import com.tecnogeek.comprameya.entidad.Mensaje;
 import com.tecnogeek.comprameya.entidad.Usuario;
+import com.tecnogeek.comprameya.enums.TipoNotificacionEnum;
 import com.tecnogeek.comprameya.repositories.DestinatarioRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,8 @@ public class MensajeService {
     UsuarioRepository usuarioRepository;
     @Autowired 
     DestinatarioRepository destinatarioRepository;
-    
+    @Autowired
+    NotificacionService notificacionService;
         
     public Iterable<Mensaje> getMensajeUsuario(long usuario_id,Usuario usuarioLocal,int page)
     {
@@ -45,25 +47,25 @@ public class MensajeService {
         
     }
     
-    public Boolean setMensaje(String titulo,String texto,List<Long> destinatarios){
+    public Boolean setMensaje(String titulo, String texto, List<Long> destinatarios){
            
-        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Usuario emisor = usuarioRepository.getLoggedUser();
         
         Mensaje mensaje = new Mensaje();
         mensaje.setTexto(texto);
         mensaje.setTitulo(titulo);
-        mensaje.setUsuarioEmisor(usuarioLocal);
+        mensaje.setUsuarioEmisor(emisor);
         mensaje.setVisto(false);
         
         mensajeRepository.save(mensaje);
         
         List<Destinatario> listades = new ArrayList();
+        List<Usuario> usuariosNotificar = new ArrayList();
         
         for(Long id : destinatarios)
         {
-            Usuario usrdes = new Usuario();
-            usrdes.setId(id);
-            
+            Usuario usrdes = usuarioRepository.findOne(id);
+            usuariosNotificar.add(usrdes);
             Destinatario destinatario = new  Destinatario(); 
             destinatario.setUsuarioDestinatario(usrdes);
             destinatario.setMensaje(mensaje);
@@ -72,6 +74,16 @@ public class MensajeService {
         
         destinatarioRepository.save(listades);
         
+        String strMensaje = mensaje.getUsuarioEmisor().getPersona().getNombre() + ": " + texto;
+        
+        strMensaje = (strMensaje.length() > 50 )?
+                strMensaje.substring(0, 45) + "...":
+                strMensaje;
+        
+        String link = "{\"usuarioId\": \""+mensaje.getUsuarioEmisor().getId()
+                +"\" ,\"usuarioNombre\": \""+mensaje.getUsuarioEmisor().getPersona().getNombre()
+                +"\" ,\"asunto\": \""+mensaje.getTitulo() + "\"}";
+        notificacionService.enviarNotificaciones(emisor, usuariosNotificar, strMensaje, link, TipoNotificacionEnum.MENSAJE);
         
         return true;
     }

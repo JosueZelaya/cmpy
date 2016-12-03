@@ -12,6 +12,7 @@ import com.tecnogeek.comprameya.entidad.QNotificacion;
 import com.tecnogeek.comprameya.entidad.QNotificacionUsuario;
 import com.tecnogeek.comprameya.entidad.QUsuario;
 import com.tecnogeek.comprameya.entidad.Usuario;
+import com.tecnogeek.comprameya.enums.TipoNotificacionEnum;
 import com.tecnogeek.comprameya.repositories.custom.NotificacionUsuarioRepositoryCustom;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,11 +46,12 @@ public class NotificacionUsuarioRepositoryImpl implements NotificacionUsuarioRep
         Map<String, NotificacionUsuario> notiMap = new HashMap<>();
         
         BooleanExpression belongsToUser = qNotificacionUsuario.usuario.id.eq(usuario.getId());
-        BooleanExpression notSeen = qNotificacionUsuario.visto.eq(false);        
+        BooleanExpression notSeen = qNotificacionUsuario.visto.eq(false);   
+        BooleanExpression tipoComentario = qNotificacionUsuario.notificacion.tipo.id.eq(TipoNotificacionEnum.COMENTARIO.getCodigo());
         
         List<NotificacionUsuario> notificaciones = newJpaQuery().distinct()
                 .from(qNotificacionUsuario)
-                .where(belongsToUser.and(notSeen))
+                .where(belongsToUser.and(notSeen).and(tipoComentario))
                 .orderBy(qNotificacionUsuario.id.desc())
                 .list(qNotificacionUsuario);        
         
@@ -72,10 +74,11 @@ public class NotificacionUsuarioRepositoryImpl implements NotificacionUsuarioRep
         Map<String, NotificacionUsuario> notiMap = new LinkedHashMap<>();
         
         BooleanExpression belongsToUser = qNotificacionUsuario.usuario.id.eq(usuario.getId());
+        BooleanExpression tipoComentario = qNotificacionUsuario.notificacion.tipo.id.eq(TipoNotificacionEnum.COMENTARIO.getCodigo());
         
         List<NotificacionUsuario> notificaciones = newJpaQuery().distinct()
                 .from(qNotificacionUsuario)
-                .where(belongsToUser)
+                .where(belongsToUser.and(tipoComentario))
                 .orderBy(qNotificacionUsuario.creationTime.desc())
                 .list(qNotificacionUsuario);        
         

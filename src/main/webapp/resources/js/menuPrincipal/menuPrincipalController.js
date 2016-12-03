@@ -1,4 +1,4 @@
-menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','mensajesService','PushNotificationService','$log', 'toastr', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION,mensajesService, PushNotificationService, $log, toastr) {
+menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'anunciosService', 'notificacionService', 'TIPO_PUBLICACION','mensajesService','PushNotificationService','$log', 'toastr', '$state', function ($scope, $rootScope, anunciosService, notificacionService, TIPO_PUBLICACION,mensajesService, PushNotificationService, $log, toastr, $state) {
 
         $scope.match = "";
         $rootScope.notificaciones = {};
@@ -10,20 +10,32 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
         $rootScope.activarNotificacionesPush = function(){
             PushNotificationService.receive().then(null, null, function (notificacionUsuario) {
                 
-                var link =  "<a href='#/vistaProducto/"+ notificacionUsuario.notificacion.link +"#publicacionesProductos' >" +
-                            notificacionUsuario.notificacion.mensaje + "</a>";
+                if(notificacionUsuario.notificacion.tipo==='COMENTARIO'){
 
-                toastr.info( link ,{
-                    allowHtml: true,
-                    onHidden: function(clicked) {
-                    if (clicked) {
-                        quitarVisibilidad(notificacionUsuario.id,undefined);
-                    }
-                  }
-                });
+                    toastr.info( notificacionUsuario.notificacion.mensaje ,{
+                        allowHtml: true,
+                        onHidden: function(clicked) {
+                        if (clicked) {
+                            quitarVisibilidad(notificacionUsuario.id,undefined);
+                            $state.go("home.vistaProducto", JSON.parse("{\"publicacionId\" : \" "+ notificacionUsuario.notificacion.link + " \" }"));
+                        }
+                      }
+                    });
 
-                $rootScope.totalNotificaciones = 
-                        $rootScope.notificaciones.unshift(notificacionUsuario);
+                    $rootScope.totalNotificaciones = $rootScope.notificaciones.unshift(notificacionUsuario);
+                }else{
+
+                    toastr.success( notificacionUsuario.notificacion.mensaje ,{
+                        allowHtml: true,
+                        onHidden: function(clicked) {
+                        if (clicked) {
+                            setMensajeUsuarioLeido(notificacionUsuario.emisor.id);
+                            $state.go("home.vistaMensaje", JSON.parse(notificacionUsuario.notificacion.link));
+                        }
+                      }
+                    });
+                }
+                
             });
         };
         
@@ -91,6 +103,13 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
              });           
         };
         
+        var setMensajeUsuarioLeido = function(usuarioId){
+             mensajesService.setMensajeUsuarioLeido(usuarioId)
+            .success(function (response) {
+                    init();
+                     return response;
+             });           
+        };
 
         init = function () {
             $scope.navCollapsed = true;

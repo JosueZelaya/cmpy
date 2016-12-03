@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Transient;
 
 /**
  *
@@ -54,5 +55,8 @@ public class NotificacionUsuario extends BaseEntity<Long> implements Serializabl
     
     @Column(name = "visto")
     private boolean visto;
+    
+    @Transient
+    private Usuario emisor;
     
 }

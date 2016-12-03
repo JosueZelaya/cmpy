@@ -59,6 +59,26 @@ public class NotificacionService {
         return notificacionUsuarioRepository.getNotificaciones(usuario);
     }
     
+    public void enviarNotificaciones(Usuario emisor, List<Usuario> destinatarios, String mensaje, String link, TipoNotificacionEnum tipo){
+        Notificacion notificacion = new Notificacion();
+        notificacion.setMensaje(mensaje);
+        notificacion.setLink(link);
+        notificacion.setTipo(tipo);        
+        notificacion = notificacionRepository.save(notificacion);
+        
+        List<NotificacionUsuario> notificaciones = new ArrayList<>();
+        for(Usuario usuario : destinatarios){
+            NotificacionUsuario nt = new NotificacionUsuario();
+            nt.setUsuario(usuario);
+            nt.setNotificacion(notificacion);
+            nt.setEmisor(emisor);
+            notificaciones.add(nt);            
+        }  
+        
+        notificacionUsuarioRepository.save(notificaciones);
+        sendToClient(notificaciones);
+    }
+    
 //    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void informarASuscriptores(List<Usuario> suscriptores, Usuario emisor, Publicacion publicacion){
         
@@ -68,22 +88,10 @@ public class NotificacionService {
             return;
         }
         
-        Notificacion notificacion = new Notificacion();
-        notificacion.setMensaje(emisor.getPersona().getNombre() + " ha comentado el anuncio: " + publicacion.getTitulo());
-        notificacion.setLink(publicacion.getId()+"");
-        notificacion.setTipo(TipoNotificacionEnum.COMENTARIO);
-        notificacion = notificacionRepository.save(notificacion);
+        String mensaje = emisor.getPersona().getNombre() + " ha comentado el anuncio: " + publicacion.getTitulo();
+        String link = publicacion.getId()+"";
         
-        List<NotificacionUsuario> notificaciones = new ArrayList<>();
-        for(Usuario usuario : suscriptores){
-            NotificacionUsuario nt = new NotificacionUsuario();
-            nt.setUsuario(usuario);
-            nt.setNotificacion(notificacion);
-            notificaciones.add(nt);            
-        }  
-        
-        notificacionUsuarioRepository.save(notificaciones);
-        sendToClient(notificaciones);
+        enviarNotificaciones(emisor, suscriptores, mensaje, link, TipoNotificacionEnum.COMENTARIO);        
     }
     
     public List<Usuario> getUsuariosExeptoUno(List<Usuario> usuarioList, Usuario usuarioExcluido){
