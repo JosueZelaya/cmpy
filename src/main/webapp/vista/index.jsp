@@ -46,7 +46,7 @@
                     <button ng-show="authenticated" id="botonAvisos" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">
                         <span class="sr-only">Toggle navigation</span>    
                         Avisos
-                        <span class="badge badge-notify">{{totalNotificaciones + totalMensajes}}</span>
+                        <span class="badge badge-notify">{{totalNotificaciones + NoLeidosTotal}}</span>
                     </button>   
 
                     <a href="/" class="pull-left" ui-sref='home' ui-sref-opts="{reload:true}">

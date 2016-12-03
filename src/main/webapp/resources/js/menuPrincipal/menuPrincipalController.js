@@ -2,7 +2,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
 
         $scope.match = "";
         $rootScope.notificaciones = {};
-        $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
+        $rootScope.totalNotificaciones = 0;
         $scope.pageMensajesNoLeidos = 0;
         $scope.NoLeidosTotal = 0;
         $scope.mensajes = [];
@@ -25,6 +25,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                     });
 
                     $rootScope.totalNotificaciones = $rootScope.notificaciones.unshift(notificacionUsuario);
+                    updatePageTitle();
                 }else{
 
                     toastr.success( notificacionUsuario.notificacion.mensaje ,{
@@ -38,6 +39,8 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         }
                       }
                     });
+                    $scope.NoLeidosTotal++;
+                    updatePageTitle();
                 }
                 
             });
@@ -47,6 +50,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
             notificacionService.ocultar(idNotificacion);
             $rootScope.notificaciones.splice(index, 1);
             $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
+            updatePageTitle();
         };
 
         var getNotificaciones = function () {
@@ -68,6 +72,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
             notificacionService.ocultar(idNotificacion);
             $rootScope.notificaciones.splice(index, 1);
             $rootScope.totalNotificaciones = $rootScope.notificaciones.length;
+            updatePageTitle();
         };
         
         $scope.cargarMensajesNoLeidos = function(page){
@@ -81,10 +86,8 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
         $scope.getMensajesNoLeidosTotal = function(){
             mensajesService.getMensajesNoLeidosTotal()
             .success(function (response) {
-                        $scope.NoLeidosTotal = response;
-             });           
-            
-            
+                $scope.NoLeidosTotal = response;
+             });                                   
         };
         
         $scope.getMensajeUsuarioNoleidoTotal =function(){
@@ -102,17 +105,29 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
         $scope.setMensajeUsuarioLeido = function(usuarioId){
              mensajesService.setMensajeUsuarioLeido(usuarioId)
             .success(function (response) {
-                    init();
-                     return response;
+                $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
+                $scope.getMensajesNoLeidosTotal();
+                updatePageTitle();
+                return response;
              });           
+        };
+        
+        var updatePageTitle = function(){
+            var total = $rootScope.totalNotificaciones + $scope.NoLeidosTotal;
+            if(total > 0){
+                document.title = "(" + total + ") ComprameYa!";
+            }else{
+                document.title = "ComprameYa!";
+            }            
         };
         
         var setMensajeUsuarioLeido = function(usuarioId){
              mensajesService.setMensajeUsuarioLeido(usuarioId)
             .success(function (response) {
-                    $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
-                    $scope.getMensajesNoLeidosTotal();
-                    return response;
+                $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
+                $scope.getMensajesNoLeidosTotal();
+                updatePageTitle();
+                return response;
              });           
         };
 
@@ -132,6 +147,7 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
                $scope.getMensajesNoLeidosTotal();            
 
+               updatePageTitle();
 
         };
 
