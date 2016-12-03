@@ -1,8 +1,9 @@
 insert into perfil (id, nombre, sis_activo,creation_time,modification_time,version) values (1,'ROLE_USER',true,current_date,current_date,1);
 
 insert into tipo_publicacion (id,nombre,sis_activo,creation_time,modification_time,version) values (1,'PUBLICACION_PAGADA',true,current_date,current_date,1);
-
 insert into tipo_publicacion (id,nombre,sis_activo,creation_time,modification_time,version) values (2,'PUBLICACION_GRATIS',true,current_date,current_date,1);
+insert into tipo_notificacion(id,creation_time,modification_time,sis_activo,version,nombre) values (1,current_date,current_date,true,1,'COMENTARIO_RECIBIDO');
+insert into tipo_notificacion(id,creation_time,modification_time,sis_activo,version,nombre) values (2,current_date,current_date,true,1,'MENSAJE_RECIBIDO');
 
 --primer nivel productos
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Multimedia','...',current_date,current_date,null,true,1);--1
@@ -255,11 +256,6 @@ insert into categoria (nombre,descripcion,modification_time,creation_time,catego
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Audifonos','...',current_date,current_date,60,true,1);--223
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Repuestos','...',current_date,current_date,60,true,1);--224
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Otros','...',current_date,current_date,60,true,1);--225
-
-
-
-
-
 
 -- para insertar este registro primero debe crearse un usuario
 insert into tiendaps(id, creation_time, modification_time, sis_activo, version, dominio, key, usuario_id) values (1, current_date, current_date, true, 1, 'prestashop/prestashop/','E87JLYRTFHVTHQAIYB4FKRVZ8J8KGZP9',1);

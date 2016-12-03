@@ -103,7 +103,7 @@
                                        ng-click="setMensajeUsuarioLeido(mensaje.usuarioEmisor.id);" 
                                        ui-sref="home.vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})">
                                         <span class="badge pull-right">{{mensaje.total}}</span>
-                                        {{mensaje.texto}}  <span class="text-muted" style="font-size: 11px;float:right;margin-right:10px">{{mensaje.usuarioEmisor.persona.nombre}} </span>
+                                        {{mensaje.texto.slice(0, 50)}}...  <span class="text-muted" style="font-size: 11px;float:right;margin-right:10px">{{mensaje.usuarioEmisor.persona.nombre}} </span>
                                     </a>
                                 </li> 
                                 <li style="text-align: center">
@@ -126,7 +126,7 @@
                                        ng-click="quitarVisibilidad(notificacionUsuario.id, $index)" 
                                        ui-sref-opts="{reload:true}"
                                        ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
-                                        {{notificacionUsuario.notificacion.mensaje}}
+                                        {{notificacionUsuario.notificacion.mensaje.slice(0, 50)}}...
                                     </a>
                                 </li>
                                 <li style="text-align: center">
