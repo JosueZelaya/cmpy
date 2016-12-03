@@ -17,7 +17,9 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         onHidden: function(clicked) {
                         if (clicked) {
                             quitarVisibilidad(notificacionUsuario.id,undefined);
-                            $state.go("home.vistaProducto", JSON.parse("{\"publicacionId\" : \" "+ notificacionUsuario.notificacion.link + " \" }"));
+                            $state.go("home.vistaProducto", 
+                            JSON.parse("{\"publicacionId\" : \" "+ notificacionUsuario.notificacion.link + " \" }"),
+                            {reload: true});
                         }
                       }
                     });
@@ -30,7 +32,9 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
                         onHidden: function(clicked) {
                         if (clicked) {
                             setMensajeUsuarioLeido(notificacionUsuario.emisor.id);
-                            $state.go("home.vistaMensaje", JSON.parse(notificacionUsuario.notificacion.link));
+                            $state.go("home.vistaMensaje", 
+                            JSON.parse(notificacionUsuario.notificacion.link),
+                            {reload: true});
                         }
                       }
                     });
@@ -106,8 +110,9 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
         var setMensajeUsuarioLeido = function(usuarioId){
              mensajesService.setMensajeUsuarioLeido(usuarioId)
             .success(function (response) {
-                    init();
-                     return response;
+                    $scope.cargarMensajesNoLeidos($scope.pageMensajesNoLeidos);
+                    $scope.getMensajesNoLeidosTotal();
+                    return response;
              });           
         };
 
