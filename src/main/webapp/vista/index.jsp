@@ -36,14 +36,14 @@
                         Iniciar Sesion <span class="glyphicon glyphicon-user">
                     </button>            
 
-                    <button ng-if="authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
+                    <button ng-show="authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
                         <span class="sr-only">Toggle navigation</span>
                         Hola! {{username}} 
                         <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
                         <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
                     </button>            
 
-                    <button ng-if="authenticated" id="botonAvisos" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">
+                    <button ng-show="authenticated" id="botonAvisos" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">
                         <span class="sr-only">Toggle navigation</span>    
                         Avisos
                         <span class="badge badge-notify">{{totalNotificaciones + totalMensajes}}</span>
