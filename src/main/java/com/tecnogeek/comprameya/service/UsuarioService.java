@@ -80,6 +80,7 @@ public class UsuarioService {
         persona.setCorreo(userAccountData.getEmail());
         persona.setNombre(userAccountData.getFirstName());
         persona.setApellido(userAccountData.getLastName());
+        persona.setTelefono(userAccountData.getTelephone());
         persona = personaRepository.save(persona);
 
         Perfil perfil = perfilRepository.findByNombre(Role.USUARIO.getRoleName());

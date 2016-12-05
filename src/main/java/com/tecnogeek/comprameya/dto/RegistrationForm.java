@@ -9,6 +9,7 @@ import com.tecnogeek.comprameya.cmpyannotations.PasswordsNotEmpty;
 import com.tecnogeek.comprameya.cmpyannotations.PasswordsNotEqual;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
 import java.io.Serializable;
+import java.math.BigInteger;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -61,6 +62,8 @@ public class RegistrationForm implements Serializable{
         private String imageUrl;
         
         private MultipartFile image;
+        
+        private BigInteger telephone;
 
         //Constructor is omitted for the of clarity.
 

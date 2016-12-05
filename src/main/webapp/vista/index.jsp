@@ -59,7 +59,7 @@
                     <ul class="nav navbar-nav"> 
 
                         <li ng-if="authenticated">
-                            <a href="#" ui-sref=".misPublicaciones"> 
+                            <a href="#" ui-sref="home.misPublicaciones"> 
                                 Mis Publiaciones
                             </a>
                         </li>

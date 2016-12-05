@@ -338,3 +338,8 @@ div.list-group#bandeja{
     overflow-y: scroll; 
     padding-bottom: 50px;
 }
+
+a  
+{  
+ text-decoration:none !important;  
+}  
