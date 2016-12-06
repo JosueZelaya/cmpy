@@ -17,7 +17,7 @@
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
     </head>
-    <body>
+    <body style="margin-top:0px;">
 
         <%@ include file="common/menuPrincipal.jsp" %>
 
