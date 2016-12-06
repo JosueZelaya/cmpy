@@ -8,7 +8,7 @@
 <!--                        <button value="VenderYa!" type="submit" class="btn btn-success pull-right" data-toggle="modal" data-target="#loginModal">                            
                             VenderYa!
                         </button>                          -->
-                        <button value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.jsp','sm')">VenderYa!</button>
+                        <button value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.jsp')">VenderYa!</button>
                     </c:when>    
                     <c:otherwise>    
                         <button value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.jsp','lg')">

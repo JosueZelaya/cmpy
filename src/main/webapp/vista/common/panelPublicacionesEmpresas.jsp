@@ -11,7 +11,7 @@
                         <!--<a href="#" data-toggle="modal" data-target="#anunciarModal">Anunciate Ya!</a>-->  
                         <c:choose>
                             <c:when test="${username=='anonymousUser'}">
-                                <button value="VenderYa!" type="submit" class="btn btn-default" ng-click="open('loginModal.jsp','lg')">
+                                <button value="VenderYa!" type="submit" class="btn btn-default" ng-click="open('loginModal.jsp')">
                                     Anunciate Ya!
                                 </button>                          
                             </c:when>    
