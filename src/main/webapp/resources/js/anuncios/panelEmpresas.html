@@ -18,12 +18,14 @@
                 </div>
                 <div ng-repeat="tienda in tiendas">
                     <div class="publicacion thumbnail col-lg-12">
-                        <img ng-src="/resources/images/logo.jpg" alt="imagen aqui">
-                        <div class="rating hidden-sm col-md-12">
-                            <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(tienda.usuario.puntaje) track by $index"></i>
-                            <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - tienda.usuario.puntaje) track by $index"></i>
-                        </div>
-                        <p>{{tienda.dominio}}</p>                    
+                        <a href="http://{{tienda.dominio}}">
+                            <img ng-src="/resources/images/logo.jpg" alt="imagen aqui">
+                            <div class="rating hidden-sm col-md-12">
+                                <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(tienda.usuario.puntaje) track by $index"></i>
+                                <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - tienda.usuario.puntaje) track by $index"></i>
+                            </div>
+                            <p>{{tienda.dominio}}</p>
+                        </a>                        
                     </div>
                 </div>
             </div>
