@@ -61,4 +61,8 @@ public class Tienda extends BaseEntity<Long> implements Serializable {
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tienda")
     private List<ProductoPS> productoList;
+    
+    @Column(name = "image_url")
+    @Size(min = 1, max = 2147483647)
+    private String imageUrl;
 }
