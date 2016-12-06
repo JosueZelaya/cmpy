@@ -3,8 +3,8 @@
         <div class="panel-heading">
             <p>                            
                 Publicaciones
-                <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html', 'lg')">VenderYa!</button>
-                <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html', 'lg')">
+                <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')">VenderYa!</button>
+                <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html')">
                     VenderYa!
                 </button>
 
@@ -49,7 +49,7 @@
                                 </button>  
 
 
-                                <a ng-show="!authenticated" ng-click="open('loginModal.html', 'lg')" class="btn btn-primary btn-default" href="" uib-tooltip="Mensaje Privado">
+                                <a ng-show="!authenticated" ng-click="open('loginModal.html')" class="btn btn-primary btn-default" href="" uib-tooltip="Mensaje Privado">
                                     <span class="glyphicon glyphicon-envelope"></span>
                                 </a>
                                 <a ng-show="authenticated" class="btn btn-primary btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id,usuarioNombre:publicacion.usuario.persona.nombre,asunto:publicacion.titulo})" uib-tooltip="Mensaje Privado">
@@ -64,8 +64,8 @@
                         <!--<form class="form-inline" role="form">-->
                         <div class="form-group">
                             <textarea ng-show="!authenticated" 
-                                      ng-click="open('loginModal.html', 'lg')"
-                                      ng-change="open('loginModal.html', 'lg')"
+                                      ng-click="open('loginModal.html')"
+                                      ng-change="open('loginModal.html')"
                                       ng-model="comentario" class="form-control" placeholder="Escribe un comentario" >
 
                             </textarea>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="row" style="width: 100%;margin-top:10px;">
                             <div class="col-md-4 col-sm-12 col-lg-4">
-                                <button ng-show="!authenticated" type="button" class="btn btn-default" ng-click="open('loginModal.html', 'lg')" style="width: 100%">Agregar</button>
+                                <button ng-show="!authenticated" type="button" class="btn btn-default" ng-click="open('loginModal.html')" style="width: 100%">Agregar</button>
                                 <button ng-disabled="!ready" ng-show="authenticated" type="button" class="btn btn-default" ng-click="agregarComentario()" style="width: 100%">Agregar</button>
                             </div>
                         </div> 
