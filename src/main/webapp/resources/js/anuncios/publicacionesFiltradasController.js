@@ -29,21 +29,20 @@ modulo_anuncios.controller('publicacionesFiltradasController', function ($rootSc
     $scope.getNumbers = function (num) {
         return new Array(num);
     };
-    
-    var cargarPublicacionesGratisByCat = function(page,cat,nivel){
-        
-        getPublicacionesByCat(TIPO_PUBLICACION.GRATIS, page,cat,nivel)
+
+    var cargarPublicacionesGratisByCat = function(page){        
+        getPublicacionesByCat(TIPO_PUBLICACION.GRATIS, page,$scope.cat,$scope.nivel)
                 .success(function(publicaciones){
             $scope.publicaciones = publicaciones;
         });
     };
 
     var init = function () {
-        var cat = $stateParams.cat;
-        var nivel = $stateParams.nivel;
+        $scope.cat = $stateParams.cat;
+        $scope.nivel = $stateParams.nivel;
         $scope.publicaciones = [];
         $scope.page = 0;
-        cargarPublicacionesGratisByCat($scope.page, cat, nivel);
+        cargarPublicacionesGratisByCat($scope.page);
 
     };
 

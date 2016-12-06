@@ -142,9 +142,9 @@
 
                 <form class="navbar-form navbar-left" style="width: 100%" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar Productos..." ng-model="match">
+                        <input type="text" class="form-control" placeholder="Buscar Productos..." ng-model="terminoBusqueda">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="cargarPublicacionesGratisByMatch(0, match)">BuscarYa!</button>
+                            <button class="btn btn-default" type="button" ui-sref="home.busqueda({terminoBusqueda: terminoBusqueda, reload: true})">BuscarYa!</button>
                         </span>
                     </div>                    
                 </form>
@@ -193,7 +193,8 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/tiendaService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/anunciosController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/misPublicacionesController.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/publicacionesFiltradasController.js" ></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/publicacionesFiltradasController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/busquedaController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/venderController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/empresasController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/productoController.js" ></script>        

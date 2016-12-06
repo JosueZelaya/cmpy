@@ -88,27 +88,20 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'misPublicacionesController'}
                 }
             })
-            
-//            .state('fb.misPublicaciones', {
-//                url: "misPublicaciones",
-//                views: {
-//                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'misPublicacionesController'}
-//                }
-//            })
     
             .state('home.porCategoria', {
-                url: "/porCategoria/{cat}/{nivel}",
+                url: "/categoria/{cat}/{nivel}",
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'publicacionesFiltradasController'}
                 }
             })
             
-//            .state('fb.porCategoria', {
-//                url: "porCategoria/{cat}/{nivel}",
-//                views: {
-//                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'publicacionesFiltradasController'}
-//                }
-//            })
+            .state('home.busqueda', {
+                url: "/busqueda/{terminoBusqueda}",
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'busquedaController'}
+                }
+            })
     
             .state('home.vistaProducto', {
                 url: "/vistaProducto/{publicacionId}",  
@@ -117,13 +110,6 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-//            .state('fb.vistaProducto', {
-//                url: "vistaProducto/{publicacionId}",  
-//                views: {
-//                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
-//                }
-//            })
-            
             .state('home.misPublicaciones.vistaProducto', {
                 url: "/vistaProducto/{publicacionId}",  
                 views: {
@@ -131,26 +117,6 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-//            .state('fb.misPublicaciones.vistaProducto', {
-//                url: "vistaProducto/{publicacionId}",  
-//                views: {
-//                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
-//                }
-//            })
-            
-            .state('home.porCategoria.vistaProducto', {
-                url: "/vistaProducto/{publicacionId}",  
-                views: {
-                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
-                }
-            })
-            
-//            .state('fb.porCategoria.vistaProducto', {
-//                url: "vistaProducto/{publicacionId}",  
-//                views: {
-//                    '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
-//                }
-//            })
             
             .state('home.vistaMensaje', {
                 url: "/vistaMensaje", 
@@ -164,31 +130,12 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
             
-//            .state('fb.vistaMensaje', {
-//                url: "vistaMensaje",
-//                params: {
-//                    usuarioId: 0,
-//                    usuarioNombre: '',
-//                    asunto: '~'
-//                },
-//                views: {
-//                    '':{templateUrl: '/resources/js/mensajes/bandeja.html', controller: "mensajesController"}
-//                }
-//            })
-            
             .state('home.vistaNotificaciones', {
                 url: "/vistaNotificaciones",
                 views: {
                     '':{templateUrl: '/resources/js/notificacion/bandeja.html', controller: "notificacionController"}
                 }
             })
-            
-//            .state('fb.vistaNotificaciones', {
-//                url: "vistaNotificaciones",
-//                views: {
-//                    '':{templateUrl: '/resources/js/notificacion/bandeja.html', controller: "notificacionController"}
-//                }
-//            })
 
             // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
             .state('about', { 

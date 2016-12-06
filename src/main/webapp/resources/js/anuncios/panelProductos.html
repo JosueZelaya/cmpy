@@ -62,18 +62,18 @@
                                 </div>
                             </a>
 
-                            <div class="footer-publicacion">
-                                <a href="" ui-sref="home.vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})" class="btn btn-default" role="button" uib-tooltip="Ver detalles" tooltip-placement="bottom">
+                            <div class="footer-publicacion" ng-if="publicacion.tipo!=='EXTERNA'">
+<!--                                <a href="" ui-sref="home.vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})" class="btn btn-default" role="button" uib-tooltip="Ver detalles" tooltip-placement="bottom">
                                     <span class="glyphicon glyphicon-search"></span>
-                                </a>  
-                                <a href="#"
+                                </a>  -->
+<!--                                <a href="#"
                                    ng-show="{{publicacion.usuario.id !== usuario.id}}"
                                    class="btn btn-success" 
                                    role="button" 
                                    uib-tooltip="Agregar al carrito" 
                                    tooltip-placement="bottom">
                                     <span class="glyphicon glyphicon-shopping-cart"></span>
-                                </a> 
+                                </a>-->
 
 
                                 <!--                                <button ng-show="{{publicacion.usuario.id === usuario.id}}" class="btn btn-warning" role="button" uib-tooltip="editar" tooltip-placement="top">
