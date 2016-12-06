@@ -20,11 +20,11 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
                     return respuesta;
                 });
     };
-
-    var getPublicaciones = function (tipo, pagina) {
-        return anunciosService.getAnuncios(tipo, pagina)
-                .success(function (publicaciones) {
-                    return publicaciones;
+    
+    var setVendido = function (publicacionId) {
+        return anunciosService.setVendido(publicacionId)
+                .success(function (respuesta) {
+                    return respuesta;
                 });
     };
 
@@ -44,6 +44,13 @@ modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $
     
     $scope.eliminarPublicacion = function (publicacionId,index) {        
         eliminarPublicacion(publicacionId)
+                .success(function (respuesta) {
+                    $scope.publicaciones.splice(index,1);
+                }); 
+    };
+    
+    $scope.setVendido = function (publicacionId,index) {        
+        setVendido(publicacionId)
                 .success(function (respuesta) {
                     $scope.publicaciones.splice(index,1);
                 }); 

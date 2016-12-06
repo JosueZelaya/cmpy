@@ -66,6 +66,18 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         publicacion.desactivar();
         getRepository().save(publicacion);
     }
+    
+    public void marcarVendida(Long publicacionId) throws Exception {
+        Publicacion publicacion = getRepository().findOne(publicacionId);
+
+        Usuario loggedUser = usuarioRepository.getLoggedUser();
+        if (!loggedUser.equals(publicacion.getUsuario())) {
+            throw new Exception("ERROR: No es el propietario de la publicacion");
+        }
+
+        publicacion.setVendido(true);
+        getRepository().save(publicacion);
+    }
 
     public List<Publicacion> getPublicacionesMixtas(int page) {
         Iterable<Publicacion> publicacionesGratis
@@ -280,8 +292,8 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         return publicaciones;
     }
 
-    public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage, TipoPublicacionEnum tipo, Usuario usuario) {
-        return publicacionRepository.getPublicacionesByUsuario(page, itemsByPage, tipo, usuario);
+    public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage, TipoPublicacionEnum tipo, Boolean vendidas , Usuario usuario) {
+        return publicacionRepository.getPublicacionesByUsuario(page, itemsByPage, tipo, vendidas, usuario);
     }
 
     public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage, TipoPublicacionEnum tipo, String match) {

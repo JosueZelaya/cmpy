@@ -62,8 +62,8 @@ public class Publicacion extends BaseEntity<Long> implements Serializable {
     private String descripcion;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "concluido")
-    private boolean concluido;
+    @Column(name = "vendido")
+    private boolean vendido;
     @Column(name = "fecha_vencimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaVencimiento;

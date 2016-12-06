@@ -1,4 +1,6 @@
-insert into perfil (id, nombre, sis_activo,creation_time,modification_time,version) values (1,'ROLE_USER',true,current_date,current_date,1);
+insert into perfil (id, nombre, sis_activo,creation_time,modification_time,version) values (1,'ROLE_ADMIN',true,current_date,current_date,1);
+insert into perfil (id, nombre, sis_activo,creation_time,modification_time,version) values (2,'ROLE_USER',true,current_date,current_date,1);
+insert into usuario(id, creation_time, modification_time, sis_activo, version, login, pass, perfil_id, puntaje) values (1, current_date, current_date, true, 1, 'admin@tecnobitz.com', 'zionBitsTgk$', 1, 5);
 
 insert into tipo_publicacion (id,nombre,sis_activo,creation_time,modification_time,version) values (1,'PUBLICACION_PAGADA',true,current_date,current_date,1);
 insert into tipo_publicacion (id,nombre,sis_activo,creation_time,modification_time,version) values (2,'PUBLICACION_GRATIS',true,current_date,current_date,1);
@@ -257,6 +259,6 @@ insert into categoria (nombre,descripcion,modification_time,creation_time,catego
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Repuestos','...',current_date,current_date,60,true,1);--224
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Otros','...',current_date,current_date,60,true,1);--225
 
--- para insertar este registro primero debe crearse un usuario
+-- insertando registros para las tiendas
 insert into tiendaps(id, creation_time, modification_time, sis_activo, version, dominio, key, usuario_id) values (1, current_date, current_date, true, 1, 'prestashop/prestashop/','E87JLYRTFHVTHQAIYB4FKRVZ8J8KGZP9',1);
-insert into tiendaps(id, creation_time, modification_time, sis_activo, version, dominio, key, usuario_id) values (2, current_date, current_date, true, 1, 'prestashop/prestashop/','E87JLYRTFHVTHQAIYB4FKRVZ8J8KGZP9',1);
+insert into tiendaps(id, creation_time, modification_time, sis_activo, version, dominio, key, usuario_id) values (2, current_date, current_date, true, 1, 'store2/prestashop/','E87JLYRTFHVTHQAIYB4FKRVZ8J8KGZP9',1);

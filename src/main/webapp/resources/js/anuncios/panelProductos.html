@@ -89,7 +89,19 @@
                                    uib-tooltip="eliminar" 
                                    tooltip-placement="top">
                                     <span class="glyphicon glyphicon-remove-circle"></span>
-                                </a>                    
+                                </a>
+                                
+                                <a ng-show="{{publicacion.usuario.id === usuario.id}}" 
+                                   ng-click="setVendido(publicacion.id, $index)" 
+                                   confirm-title="Producto vendido"
+                                   confirm="¿Este producto ya fue vendido?" 
+                                   confirm-ok="Sí"
+                                   confirm-cancel="No"
+                                   class="btn btn-success" role="button" 
+                                   uib-tooltip="Marcar como vendido" 
+                                   tooltip-placement="top">
+                                    <span class="glyphicon glyphicon-usd"></span>
+                                </a>
 
                             </div>
 

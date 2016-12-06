@@ -30,7 +30,7 @@ public class PublicacionDTO implements Serializable{
     private Long id;
     private String titulo;
     private String descripcion;
-    private boolean concluido;
+    private boolean vendido;
     private Date fechaVencimiento;
     private int visto;
     private int puntaje;
@@ -46,7 +46,7 @@ public class PublicacionDTO implements Serializable{
         this.id = p.getId();
         this.titulo = p.getTitulo();
         this.descripcion = p.getDescripcion();
-        this.concluido = p.isConcluido();
+        this.vendido = p.isVendido();
         this.fechaVencimiento = p.getFechaVencimiento();
         this.visto = p.getVisto();
         this.puntaje = p.getPuntaje();        

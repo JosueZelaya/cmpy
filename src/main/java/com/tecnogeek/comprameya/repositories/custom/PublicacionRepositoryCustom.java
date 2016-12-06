@@ -26,7 +26,7 @@ public interface PublicacionRepositoryCustom {
     
     public Iterable<Publicacion> getPublicacionesGratis(int page, int itemsByPage);
     
-    public Iterable<Publicacion> getPublicacionesByUsuario(int page, int itemsByPage, TipoPublicacionEnum tipo, Usuario usuario);
+    public Iterable<Publicacion> getPublicacionesByUsuario(int page, int itemsByPage, TipoPublicacionEnum tipo, Boolean vendaidas, Usuario usuario);
     
     public long getTotalPublicacionesPagadas();
     

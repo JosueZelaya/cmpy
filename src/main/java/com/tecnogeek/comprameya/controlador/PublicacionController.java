@@ -97,6 +97,17 @@ public class PublicacionController {
         return null;
     }
     
+    @RequestMapping(value="/vendida/{id}",method=RequestMethod.GET)    
+    public String setVendida(@PathVariable Long id){     
+        try{
+            publicacionService.marcarVendida(id);
+        }catch(Exception e){
+            return e.getMessage();
+        }
+        
+        return null;
+    }
+    
     @RequestMapping(value="/getAnuncios/{page}",method=RequestMethod.GET)    
     public Iterable<Publicacion> getAnuncios(@PathVariable int page,Model model)
     {           
@@ -138,7 +149,7 @@ public class PublicacionController {
         
         Usuario loggedUser = usuarioRepository.getLoggedUser();
         
-        Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion, loggedUser);   
+        Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion, true, loggedUser);   
         
         return publicaciones;
     }

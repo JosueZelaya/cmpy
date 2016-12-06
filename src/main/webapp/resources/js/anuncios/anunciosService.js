@@ -109,6 +109,15 @@ modulo_anuncios.service('anunciosService', function ($http, $log) {
                     return response;
                 });
     };
+    
+    this.setVendido = function (id){
+        var req = "/publicacion/vendida/"+id;
+        return $http.get(req)
+                .success(function (response)
+                {
+                    return response;
+                });
+    };
 
 });
 

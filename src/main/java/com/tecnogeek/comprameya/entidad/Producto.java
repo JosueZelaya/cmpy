@@ -58,8 +58,8 @@ public class Producto extends BaseEntity<Long> implements Serializable {
     private String descripcion;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "concluido")
-    private boolean concluido;
+    @Column(name = "vendido")
+    private boolean vendido;
     @JsonBackReference
     @OneToMany(mappedBy = "producto")
     private List<Caracteristica> caracteristicaList;

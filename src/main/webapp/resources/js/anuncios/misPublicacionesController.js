@@ -14,8 +14,22 @@ modulo_anuncios.controller('misPublicacionesController', function ($rootScope, $
                 });
     };
     
+    var setVendido = function (publicacionId) {
+        return anunciosService.setVendido(publicacionId)
+                .success(function (respuesta) {
+                    return respuesta;
+                });
+    };
+    
     $scope.eliminarPublicacion = function (publicacionId,index) {        
         eliminarPublicacion(publicacionId)
+                .success(function (respuesta) {
+                    $scope.publicaciones.splice(index,1);
+                }); 
+    };
+    
+    $scope.setVendido = function (publicacionId,index) {        
+        setVendido(publicacionId)
                 .success(function (respuesta) {
                     $scope.publicaciones.splice(index,1);
                 }); 
