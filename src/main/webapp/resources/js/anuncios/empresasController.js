@@ -4,27 +4,30 @@
  * and open the template in the editor.
  */
 
-modulo_anuncios.controller('empresasController', function ($scope, tiendaService) {
-    
-    var getTiendasAleatorias = function() {
-        return tiendaService.getTiendasAleatorias()
-                    .success(function (tiendas) {                        
-                            return tiendas;                            
-                        });
-    };
-    
-    $scope.getNumbers = function (num) {
-        return new Array(num);
-    };
-    
-    var init = function () {       
-        
-        getTiendasAleatorias().success(function (tiendas) {
-                    $scope.tiendas = tiendas;
-                });
-        
-    };
-    
-    init();
+modulo_anuncios.controller('empresasController',
+        ['$scope',
+            'tiendaService',
+            function ($scope, tiendaService) {
 
-});
+                var getTiendasAleatorias = function () {
+                    return tiendaService.getTiendasAleatorias()
+                            .success(function (tiendas) {
+                                return tiendas;
+                            });
+                };
+
+                $scope.getNumbers = function (num) {
+                    return new Array(num);
+                };
+
+                var init = function () {
+
+                    getTiendasAleatorias().success(function (tiendas) {
+                        $scope.tiendas = tiendas;
+                    });
+
+                };
+
+                init();
+
+            }]);

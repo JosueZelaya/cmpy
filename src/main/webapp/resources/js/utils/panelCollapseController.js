@@ -1,5 +1,6 @@
-utils.controller('panelCollapseController',['$scope' ,'matchmedia', function($scope,matchmedia) {
-        
-       
-     
-}]);
+utils.controller('panelCollapseController',
+        ['$scope',
+            'matchmedia',
+            function ($scope, matchmedia) {
+                
+            }]);

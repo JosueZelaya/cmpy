@@ -1,106 +1,112 @@
-modulo_anuncios.controller('anunciosController', function ($rootScope, $scope, $stateParams, anunciosService, mapService, TIPO_PUBLICACION, flowFactory, Publicacion, $window) {
+modulo_anuncios.controller('anunciosController',
+        ['$rootScope',
+            '$scope',
+            'anunciosService',
+            'TIPO_PUBLICACION',
+            '$window',
+            function ($rootScope, $scope, anunciosService, TIPO_PUBLICACION, $window) {
 
-    var getPublicacionesByCat = function(tipo,pagina,cat,nivel) {
-        return anunciosService.getAnunciosByCat(tipo,pagina,cat,nivel)
-                    .success(function (publicaciones) {                        
-                            return publicaciones;                            
-                        });
-    };
+                var getPublicacionesByCat = function (tipo, pagina, cat, nivel) {
+                    return anunciosService.getAnunciosByCat(tipo, pagina, cat, nivel)
+                            .success(function (publicaciones) {
+                                return publicaciones;
+                            });
+                };
 
-    var getMisPublicaciones = function (tipo, pagina) {
-            return anunciosService.getMisAnuncios(tipo, pagina)
-                    .success(function (publicaciones) {
-                        return publicaciones;
-                    });
-        };
+                var getMisPublicaciones = function (tipo, pagina) {
+                    return anunciosService.getMisAnuncios(tipo, pagina)
+                            .success(function (publicaciones) {
+                                return publicaciones;
+                            });
+                };
 
-    var eliminarPublicacion = function (publicacionId) {
-        return anunciosService.eliminarPublicacion(publicacionId)
-                .success(function (respuesta) {
-                    return respuesta;
-                });
-    };
-    
-    var setVendido = function (publicacionId) {
-        return anunciosService.setVendido(publicacionId)
-                .success(function (respuesta) {
-                    return respuesta;
-                });
-    };
+                var eliminarPublicacion = function (publicacionId) {
+                    return anunciosService.eliminarPublicacion(publicacionId)
+                            .success(function (respuesta) {
+                                return respuesta;
+                            });
+                };
 
-    var getAnunciosMezclados = function (tipo, pagina) {
-        return anunciosService.getAnunciosMezclados(tipo, pagina)
-                .success(function (publicaciones) {
-                    return publicaciones;
-                });
-    };
+                var setVendido = function (publicacionId) {
+                    return anunciosService.setVendido(publicacionId)
+                            .success(function (respuesta) {
+                                return respuesta;
+                            });
+                };
 
-    var cargarPublicacionesGratis = function (page) {
-        getAnunciosMezclados(page)
-                .success(function (publicaciones) {
-                    $scope.publicaciones = $scope.publicaciones.concat(publicaciones);
-                });
-    };
-    
-    $scope.eliminarPublicacion = function (publicacionId,index) {        
-        eliminarPublicacion(publicacionId)
-                .success(function (respuesta) {
-                    $scope.publicaciones.splice(index,1);
-                }); 
-    };
-    
-    $scope.setVendido = function (publicacionId,index) {        
-        setVendido(publicacionId)
-                .success(function (respuesta) {
-                    $scope.publicaciones.splice(index,1);
-                }); 
-    };
+                var getAnunciosMezclados = function (tipo, pagina) {
+                    return anunciosService.getAnunciosMezclados(tipo, pagina)
+                            .success(function (publicaciones) {
+                                return publicaciones;
+                            });
+                };
 
-    $scope.paginaSiguiente = function () {
-        $scope.page++;
-        cargarPublicacionesGratis($scope.page);
-    };
+                var cargarPublicacionesGratis = function (page) {
+                    getAnunciosMezclados(page)
+                            .success(function (publicaciones) {
+                                $scope.publicaciones = $scope.publicaciones.concat(publicaciones);
+                            });
+                };
 
-    $scope.getNumbers = function (num) {
-        return new Array(num);
-    };
-    
-    $scope.goExternal = function (url){
-        $window.open(url);
-      };
-    
-    $rootScope.agregarPublicacion = function(publicacion){
-        $scope.publicaciones.unshift(publicacion);
-    };
-    
-    $rootScope.verMisPublicaciones = function (page) {
-            $scope.navCollapsed = !$scope.navCollapsed;
-            getMisPublicaciones(TIPO_PUBLICACION.GRATIS, page)
-                    .success(function (publicaciones) {
-                        $scope.publicaciones = publicaciones;
-                    });
-        };
-    
-    $rootScope.cargarPublicacionesGratisByCat = function(page,cat,nivel){
-        
-        getPublicacionesByCat(TIPO_PUBLICACION.GRATIS, page,cat,nivel)
-                .success(function(publicaciones){
-            $scope.publicaciones = publicaciones;
-        });
-    };
-    
-    $rootScope.cargarPublicacionesGratis = function(){
-        $scope.publicaciones = [];
-        cargarPublicacionesGratis(0);
-    };
+                $scope.eliminarPublicacion = function (publicacionId, index) {
+                    eliminarPublicacion(publicacionId)
+                            .success(function (respuesta) {
+                                $scope.publicaciones.splice(index, 1);
+                            });
+                };
 
-    var init = function () {
-        $scope.publicaciones = [];
-        $scope.page = 0;
-        cargarPublicacionesGratis($scope.page);
+                $scope.setVendido = function (publicacionId, index) {
+                    setVendido(publicacionId)
+                            .success(function (respuesta) {
+                                $scope.publicaciones.splice(index, 1);
+                            });
+                };
 
-    };
+                $scope.paginaSiguiente = function () {
+                    $scope.page++;
+                    cargarPublicacionesGratis($scope.page);
+                };
 
-    init();
+                $scope.getNumbers = function (num) {
+                    return new Array(num);
+                };
 
-});
+                $scope.goExternal = function (url) {
+                    $window.open(url);
+                };
+
+                $rootScope.agregarPublicacion = function (publicacion) {
+                    $scope.publicaciones.unshift(publicacion);
+                };
+
+                $rootScope.verMisPublicaciones = function (page) {
+                    $scope.navCollapsed = !$scope.navCollapsed;
+                    getMisPublicaciones(TIPO_PUBLICACION.GRATIS, page)
+                            .success(function (publicaciones) {
+                                $scope.publicaciones = publicaciones;
+                            });
+                };
+
+                $rootScope.cargarPublicacionesGratisByCat = function (page, cat, nivel) {
+
+                    getPublicacionesByCat(TIPO_PUBLICACION.GRATIS, page, cat, nivel)
+                            .success(function (publicaciones) {
+                                $scope.publicaciones = publicaciones;
+                            });
+                };
+
+                $rootScope.cargarPublicacionesGratis = function () {
+                    $scope.publicaciones = [];
+                    cargarPublicacionesGratis(0);
+                };
+
+                var init = function () {
+                    $scope.publicaciones = [];
+                    $scope.page = 0;
+                    cargarPublicacionesGratis($scope.page);
+
+                };
+
+                init();
+
+            }]);
