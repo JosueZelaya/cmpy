@@ -223,10 +223,6 @@ body > div.pac-container.pac-logo{
 
 /*ajuste para paneles collapsables*/
 
-.row{
-    margin-top:40px;
-    padding: 0 10px;
-}
 
 .clickable{
     cursor: pointer;   

@@ -32,7 +32,7 @@
             <div class="container">
                 <div class="navbar-header"> 
 
-                    <button ng-if="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.html', 'lg')">                
+                    <button ng-if="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.html', 'sm')">                
                         Iniciar Sesion <span class="glyphicon glyphicon-user">
                     </button>            
 
@@ -66,7 +66,7 @@
 
                         <!--<div ng-show="usuario.login === '' || usuario.login === 'anonymousUser'">-->
                         <li ng-if="!authenticated">
-                            <a href="#" ng-click="open('loginModal.html', 'lg')">Iniciar Sesion <span class="glyphicon glyphicon-user"></a>
+                            <a href="#" ng-click="open('loginModal.html', 'sm')">Iniciar Sesion <span class="glyphicon glyphicon-user"></a>
                         </li>                           
                         <!--</div>-->
                         <!--<div ng-show="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
