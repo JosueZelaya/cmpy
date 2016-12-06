@@ -57,7 +57,7 @@
                                 </a>
 
                             </div>
-                    <div>
+                    </div>
                     
                     <div class="actionBox">
 
@@ -74,26 +74,21 @@
 
                             </textarea>
                         </div>
-                        <div class="form-group">    
-                            <button ng-show="!authenticated" type="button" class="btn btn-default" ng-click="open('loginModal.html', 'lg')">Agregar</button>
-                            <button ng-disabled="!ready" ng-show="authenticated" type="button" class="btn btn-default" ng-click="agregarComentario()">Agregar</button>
-                        </div>
+                        <div class="row" style="width: 100%;margin-top:10px;">
+                            <div class="col-md-4 col-sm-12 col-lg-4">
+                                <button ng-show="!authenticated" type="button" class="btn btn-default" ng-click="open('loginModal.html', 'lg')" style="width: 100%">Agregar</button>
+                                <button ng-disabled="!ready" ng-show="authenticated" type="button" class="btn btn-default" ng-click="agregarComentario()" style="width: 100%">Agregar</button>
+                            </div>
+                        </div> 
+                        
                         <!--</form>-->
 
-                        <div id="commentBox">
-                            <ul class="commentList">
-                                <li ng-repeat="comentario in comentarioList">
-                                    <h6>{{comentario.usuario.persona.nombre}}</h6>
-                                    <div class="commenterImage">
-                                        <img ng-if="comentario.usuario.signInProvider === null" height="28px" width="28px" ng-src="/images/getThumbnail/{{comentario.usuario.rutaImagen}}" alt="..." />
-                                        <img ng-if="comentario.usuario.signInProvider !== null" height="28px" width="28px" ng-src="{{comentario.usuario.rutaImagen}}" alt="..." />                                
-                                    </div>
-                                    <div class="commentText">
-                                        <p class="">{{comentario.texto}}</p> <span class="date sub-text">{{comentario.creationTime| date:'dd-MM-yyyy HH:mm:ss'}}</span>
-
-                                    </div>
-                                </li>                        
-                            </ul>
+                        <div class="bs-callout bs-callout-primary" ng-repeat="comentario in comentarioList">
+                            <h4>{{comentario.usuario.persona.nombre}}</h4>
+                            <img ng-if="comentario.usuario.signInProvider === null" height="28px" width="28px" ng-src="/images/getThumbnail/{{comentario.usuario.rutaImagen}}" alt="..." />
+                            <img ng-if="comentario.usuario.signInProvider !== null" height="28px" width="28px" ng-src="{{comentario.usuario.rutaImagen}}" alt="..." />                      
+                            {{comentario.texto}}
+                            <span class="date sub-text pull-right">{{comentario.creationTime| date:'dd-MM-yyyy HH:mm:ss'}}</span>
                         </div>
 
                     </div>
