@@ -112,6 +112,11 @@ menuPrincipal.controller('menuPrincipalController', ['$scope', '$rootScope', 'an
              });           
         };
         
+        $scope.buscar = function(criterio){            
+            $state.go("home.busqueda", 
+            {terminoBusqueda: criterio}, {reload: true});
+        };
+        
         var updatePageTitle = function(){
             var total = $rootScope.totalNotificaciones + $scope.NoLeidosTotal;
             if(total > 0){

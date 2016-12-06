@@ -33,7 +33,7 @@ modulo_anuncios.controller('busquedaController', function ($rootScope, $scope, $
     var cargarPublicacionesGratisByMatch = function (page) {
         getPublicacionesByMatch(TIPO_PUBLICACION.GRATIS, page, $scope.terminoBusqueda)
                 .success(function (publicaciones) {
-                    $rootScope.publicaciones = publicaciones;
+                    $scope.publicaciones = publicaciones;
                 });
     };
 
