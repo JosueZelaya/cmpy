@@ -104,26 +104,42 @@ modulo_anuncios.controller('venderController',
 
                 };
                 
+                $scope.esValidoTitulo = function(){
+                    $scope.valtitulo = ($scope.titulo !== undefined) && ($scope.titulo !== '') ? "has-success" : "has-error";
+                };
+                
+                $scope.esValidoCat = function(){
+                    $scope.valcat = ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) ? "has-success" : "has-error";
+                };
+                
+                $scope.esValidoPrecio = function(){
+                    $scope.valprecio = ($scope.precio !== undefined) && ($scope.precio > 0) ? "has-success" : "has-error";
+                };
+                
+                $scope.esValidoDes = function(){
+                    $scope.valdes = ($scope.descripcion !== undefined) && ($scope.descripcion !== '')  ? "has-success" : "has-error";
+                };
+                
                 var esValido = function(){
                     
-                    $scope.valtitulo = $scope.titulo !== undefined ? "has-success" : "has-error";
-                    $scope.valcat = $scope.categoriaSelected !== undefined ? "has-success" : "has-error";
-                    $scope.valprecio = $scope.precio !== undefined ? "has-success" : "has-error";
-                    $scope.valdes = $scope.descripcion !== undefined ? "has-success" : "has-error";
-                    $scope.valimg = $scope.existingFlowObject.files.length === 0 ? true:false;
-                    $scope.valubi = $rootScope.ubicaciones=== undefined?true:false;
+                    $scope.valtitulo = ($scope.titulo !== undefined) && ($scope.titulo !== '') ? "has-success" : "has-error";
+                    $scope.valcat = ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) ? "has-success" : "has-error";
+                    $scope.valprecio = ($scope.precio !== undefined) && ($scope.precio > 0) ? "has-success" : "has-error";
+                    $scope.valdes = ($scope.descripcion !== undefined) && ($scope.descripcion !== '') ? "has-success" : "has-error";
+                    $scope.valimg = ($scope.existingFlowObject.files.length === 0 )? true:false;
+                    $scope.valubi = ($rootScope.ubicaciones === undefined)?true:false;
                     
-                    $scope.valglobal = !($scope.titulo !== undefined
-                            && $scope.categoriaSelected !== undefined
-                            && $scope.precio !== undefined
-                            && $scope.descripcion !== undefined
+                    $scope.valglobal = !(($scope.titulo !== undefined) && ($scope.titulo !== '')
+                            && ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) 
+                            && ($scope.precio !== undefined) && ($scope.precio > 0)
+                            && ($scope.descripcion !== undefined) && ($scope.descripcion !== '')
                             && !$scope.valimg
                             && !$scope.valubi);
 
-                    return $scope.titulo !== undefined
-                            && $scope.categoriaSelected !== undefined
-                            && $scope.precio !== undefined
-                            && $scope.descripcion !== undefined
+                    return ($scope.titulo !== undefined) && ($scope.titulo !== '')
+                            && ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) 
+                            && ($scope.precio !== undefined) && ($scope.precio > 0)
+                            && ($scope.descripcion !== undefined) && ($scope.descripcion !== '')
                             && !$scope.valimg
                             && !$scope.valubi;
 

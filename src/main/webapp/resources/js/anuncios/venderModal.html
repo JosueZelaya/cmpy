@@ -8,12 +8,12 @@
 <div class="modal-body" ng-app="cmpy.anuncios" ng-controller="venderController">
     <div ng-class="valtitulo">
         <label for="titulo" class="control-label">Agregue el nombre del producto</label>
-        <input ng-model="titulo" path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio" />
+        <input ng-model="titulo" ng-change="esValidoTitulo()" path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio" />
     </div> 
     <br/>    
     <div class="form-group" ng-class="valcat">
         <label class="control-label">Categoria</label>
-        <input type="text" ng-model="categoriaSelected" 
+        <input type="text" ng-model="categoriaSelected" ng-blur="esValidoCat()" ng-change= "esValidoCat()"
         placeholder="Selecciones una categoria" 
         uib-typeahead="cat as cat.name for cat in categoriasAu | filter:{name:$viewValue} | limitTo:20" 
         typeahead-template-url="categoriasAu.html" class="form-control" 
@@ -22,12 +22,12 @@
     <br/>
     <div ng-class="valprecio">
         <label for="precio" class="control-label">Precio del Producto</label>
-        <input ng-model="precio" name="precio" type="number" min="0" max="10000000" id="precio" class="form-control" >
+        <input ng-model="precio" ng-change="esValidoPrecio()" name="precio" type="number" min="0" max="10000000" id="precio" class="form-control" >
     </div>
     <br/>
     <div ng-class="valdes">
         <label for="titulo" class="control-label">Describa el producto a vender</label>
-        <textarea ng-model="descripcion" path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                            
+        <textarea ng-model="descripcion" ng-change="esValidoDes()" path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                            
     </div>
     <br/>                
     <!--    <div class="form-group">
