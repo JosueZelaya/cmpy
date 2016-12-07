@@ -529,6 +529,24 @@
     <build>        
         <plugins>
             <plugin>
+                <groupId>pl.allegro</groupId>
+                <artifactId>grunt-maven-plugin</artifactId>
+                <version>1.4.1</version>
+                <configuration>
+                    <sourceDirectory>${basedir}/src/main/webapp/resources/</sourceDirectory>
+                    <warTargetDirectory>${basedir}/src/main/webapp/resources/</warTargetDirectory>
+                    <gruntBuildDirectory>${basedir}/src/main/webapp/resources/</gruntBuildDirectory>
+                </configuration>
+                <executions>
+                  <execution>
+                    <goals>
+                      <goal>npm</goal>
+                      <goal>grunt</goal>
+                    </goals>
+                  </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
