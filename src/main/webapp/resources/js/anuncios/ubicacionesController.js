@@ -15,6 +15,7 @@ modulo_anuncios.controller('ubicacionesController',
                 var init = function () {
 
                     var publicacionId = $stateParams.publicacionId;
+                    $rootScope.markers =[];
 
 
                     if (publicacionId !== undefined) {

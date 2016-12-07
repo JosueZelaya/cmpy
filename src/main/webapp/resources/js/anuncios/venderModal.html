@@ -6,29 +6,32 @@
 
 <script type="text/ng-template" id="venderModal.html">
 <div class="modal-body" ng-app="cmpy.anuncios" ng-controller="venderController">
-    <label for="titulo">Agregue el nombre del producto</label>
-    <input ng-model="titulo" path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio"/>
+    <div ng-class="valtitulo">
+        <label for="titulo" class="control-label">Agregue el nombre del producto</label>
+        <input ng-model="titulo" path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio" />
+    </div> 
+    <br/>    
+    <div class="form-group" ng-class="valcat">
+        <label class="control-label">Categoria</label>
+        <input type="text" ng-model="categoriaSelected" 
+        placeholder="Selecciones una categoria" 
+        uib-typeahead="cat as cat.name for cat in categoriasAu | filter:{name:$viewValue} | limitTo:20" 
+        typeahead-template-url="categoriasAu.html" class="form-control" 
+        typeahead-show-hint="true" typeahead-min-length="2"/>
+    </div>
     <br/>
-        <div class='col-md-12'>  
-            <div class="form-group">
-                <label>Categoria</label>
-                <input type="text" ng-model="categoriaSelected" 
-                placeholder="Selecciones una categoria" 
-                uib-typeahead="cat as cat.name for cat in categoriasAu | filter:{name:$viewValue} | limitTo:8" 
-                typeahead-template-url="categoriasAu.html" class="form-control" 
-                typeahead-show-hint="true" typeahead-min-length="2"/>
-            </div>
-        </div>
+    <div ng-class="valprecio">
+        <label for="precio" class="control-label">Precio del Producto</label>
+        <input ng-model="precio" name="precio" type="number" min="0" max="10000000" id="precio" class="form-control" >
+    </div>
     <br/>
-    <br/>
-    <label for="precio">Precio del Producto</label>
-    <input ng-model="precio" name="precio" type="number" min="0" max="10000000" id="precio" class="form-control">
-    <br/>
-    <label for="titulo">Describa el producto a vender</label>
-    <textarea ng-model="descripcion" path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                            
+    <div ng-class="valdes">
+        <label for="titulo" class="control-label">Describa el producto a vender</label>
+        <textarea ng-model="descripcion" path="descripcion" id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Agrege una descripcion de su producto"></textarea>                                            
+    </div>
     <br/>                
     <!--    <div class="form-group">
-            <input path="multipleFiles" id="imagenes" name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
+            <input path="multipleFiles" ng-class="valimg" id="imagenes" name="multipleFiles" type="file" class="file" multiple=true data-preview-file-type="any"/>
         </div>                    -->
 
     <h3>
@@ -72,6 +75,18 @@
 
     </div>
     <div>
+    
+    <div>
+        <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="valimg">
+            Debe subir al menos una imagen
+        </div>
+        <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="valubi">
+            Debe seleccionar una ubicacion
+        </div>
+        <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="valglobal">
+            Complete la informacion
+        </div>
+    </div>
         
 <div>
                         

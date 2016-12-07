@@ -8,7 +8,7 @@ modulo_anuncios.controller('venderController',
             function ($rootScope, $scope, anunciosService, catService, flowFactory, Publicacion) {
 
                 var crearPublicacion = function () {
-                    //Se recogen los datos de la publicacion        
+                    //Se recogen los datos de la publicacion 
                     var imagenes = new Array();
                     for (var index = 0; index < $scope.existingFlowObject.files.length; ++index) {
                         imagenes[index] = $scope.existingFlowObject.files[index].file;
@@ -22,14 +22,17 @@ modulo_anuncios.controller('venderController',
                 };
 
                 $scope.agregarPublicacion = function () {
+                    
+                    if(esValido()){
+                    
+                        $scope.setGlobalcat();
 
-                    $scope.setGlobalcat();
+                        var publicacion = crearPublicacion();
 
-                    var publicacion = crearPublicacion();
+                        guardarPublicacion(publicacion);
 
-                    guardarPublicacion(publicacion);
-
-                    $scope.cancel(); //cerrar el dialogo
+                        $scope.cancel(); //cerrar el dialogo
+                    }
                 };
 
                 var guardarPublicacion = function (publicacion) {
@@ -100,5 +103,38 @@ modulo_anuncios.controller('venderController',
 
 
                 };
+                
+                var esValido = function(){
+                    
+                    $scope.valtitulo = $scope.titulo !== undefined ? "has-success" : "has-error";
+                    $scope.valcat = $scope.categoriaSelected !== undefined ? "has-success" : "has-error";
+                    $scope.valprecio = $scope.precio !== undefined ? "has-success" : "has-error";
+                    $scope.valdes = $scope.descripcion !== undefined ? "has-success" : "has-error";
+                    $scope.valimg = $scope.existingFlowObject.files.length === 0 ? true:false;
+                    $scope.valubi = $rootScope.ubicaciones=== undefined?true:false;
+                    
+                    $scope.valglobal = !($scope.titulo !== undefined
+                            && $scope.categoriaSelected !== undefined
+                            && $scope.precio !== undefined
+                            && $scope.descripcion !== undefined
+                            && !$scope.valimg
+                            && !$scope.valubi);
 
+                    return $scope.titulo !== undefined
+                            && $scope.categoriaSelected !== undefined
+                            && $scope.precio !== undefined
+                            && $scope.descripcion !== undefined
+                            && !$scope.valimg
+                            && !$scope.valubi;
+
+                };
+                
+                $scope.valtitulo = "";
+                $scope.valcat = "";
+                $scope.valprecio = "";
+                $scope.valdes = "";
+                $scope.valimg = false;
+                $scope.valubi = false;
+                $scope.valglobal = false;
+                
             }]);
