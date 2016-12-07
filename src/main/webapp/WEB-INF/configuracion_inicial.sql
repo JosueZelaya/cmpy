@@ -1,6 +1,6 @@
 insert into perfil (id, nombre, sis_activo,creation_time,modification_time,version) values (1,'ROLE_ADMIN',true,current_date,current_date,1);
 insert into perfil (id, nombre, sis_activo,creation_time,modification_time,version) values (2,'ROLE_USER',true,current_date,current_date,1);
-insert into usuario(id, creation_time, modification_time, sis_activo, version, login, pass, perfil_id, puntaje) values (1, current_date, current_date, true, 1, 'admin@tecnobitz.com', 'zionBitsTgk$', 1, 5);
+--insert into usuario(id, creation_time, modification_time, sis_activo, version, login, pass, perfil_id, puntaje) values (1, current_date, current_date, true, 1, 'admin@tecnobitz.com', 'zionBitsTgk$', 1, 5);
 
 insert into tipo_publicacion (id,nombre,sis_activo,creation_time,modification_time,version) values (1,'PUBLICACION_PAGADA',true,current_date,current_date,1);
 insert into tipo_publicacion (id,nombre,sis_activo,creation_time,modification_time,version) values (2,'PUBLICACION_GRATIS',true,current_date,current_date,1);
