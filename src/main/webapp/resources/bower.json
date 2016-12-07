@@ -8,15 +8,15 @@
     "angular-animate": "1.4.5",
     "angular-ui-router": "0.3.1",
     "ng-flow": "2.6.1",
-    "angular-carousel-3d": "latest",
     "underscore": "~1.8.3",
     "matchmedia-ng": "1.0.8",
-    "angular-loading-bar": "latest",
     "angular-confirm-modal": "1.2.6",
     "sockjs": "0.3.4",
     "stomp-websocket": "2.3.4",
     "angular-local-storage": "^0.5.2",
     "angular-toastr": "^2.1.1",
-    "angular-sanitize":"1.4.5"
+    "angular-sanitize": "1.4.5",
+    "angular-carousel-3d": "*",
+    "angular-loading-bar": "^0.9.0"
   }
 }

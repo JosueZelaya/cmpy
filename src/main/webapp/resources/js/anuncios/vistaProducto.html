@@ -19,7 +19,7 @@
                     <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null && publicacion.usuario.signInProvider !== undefined" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
                     <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
                         <uib-slide ng-repeat="recurso in recursoList" active="slide.active" index="slide.id">
-                            <a href="#"><img class="imgajust" ng-src="/images/getImage/{{recurso.ruta}}" /></a>
+                            <a href=""><img class="imgajust" ng-src="/images/getImage/{{recurso.ruta}}" /></a>
                             <div class="carousel-caption">                                
                                 <div class="titulo-publicacion">
                                     <h3>{{publicacion.titulo}}</h3>

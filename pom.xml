@@ -541,12 +541,13 @@
                   <execution>
                     <goals>
                       <goal>npm</goal>
-                      <goal>grunt</goal>
+                      <goal>bower</goal>
+                      <goal>grunt</goal>                      
                     </goals>
                   </execution>
                 </executions>
             </plugin>
-            <plugin>
+<!--            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
@@ -574,7 +575,7 @@
                   </execution>
 
                 </executions>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.openejb.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
