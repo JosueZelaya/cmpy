@@ -7,7 +7,7 @@
         <div class="panel-body">
             <div id="refcat_ini" class="list-group cat level1" ng-repeat="categoria in categorias">
                 <div id="cat_{{categoria.id}}" class="list-group-item btn-group"  role="group" aria-label="...">
-                    <button class="btn btn-default btn-cat-n cat-gradient" ng-click="categoria.collapse = !categoria.collapse" uib-tooltip="{{categoria.nombre}}">
+                    <button class="btn btn-default btn-cat-n" ng-click="categoria.collapse = !categoria.collapse" uib-tooltip="{{categoria.nombre}}">
                         <span class="pull-left glyphicon glyphicon-plus" ng-show="categoria.collapse && categoria.categoriaList.length>0"></span>
                         <span class="pull-left glyphicon glyphicon-minus" ng-show="!categoria.collapse && categoria.categoriaList.length>0"></span>
                         {{categoria.nombre}}
