@@ -51,6 +51,17 @@ public class ProductoPSRepositoryImpl implements ProductoPSRepositoryCustom{
     }
     
     @Override
+    public List<ProductoPS> findAleatoriosByTienda(long tiendaId, int cantidad, String match) {
+        BooleanExpression filteredByTienda = qProducto.tienda.id.eq(tiendaId);
+        BooleanExpression matchName = qProducto.titulo.toUpperCase().like("%"+match.toUpperCase()+"%");
+        return newJpaQuery().from(qProducto)
+                .where(filteredByTienda.and(matchName))
+                .orderBy(NumberExpression.random().asc())
+                .limit(cantidad)
+                .list(qProducto);
+    }
+    
+    @Override
     public ProductoPS findAleatorioByTienda(long tiendaId) {
         BooleanExpression filteredByTienda = qProducto.tienda.id.eq(tiendaId);
         return newJpaQuery().from(qProducto)
@@ -58,6 +69,21 @@ public class ProductoPSRepositoryImpl implements ProductoPSRepositoryCustom{
                 .orderBy(NumberExpression.random().asc())
                 .limit(1)
                 .singleResult(qProducto);
+    }
+
+    @Override
+    public Long getTotal() {
+        return repository.count();
+    }
+
+    @Override
+    public List<ProductoPS> findAleatorios(String match, int cantidad) {
+        BooleanExpression matchDescripcion = qProducto.titulo.toUpperCase().like("%"+match.toUpperCase()+"%");
+        return newJpaQuery().from(qProducto)
+                .where(matchDescripcion)
+                .orderBy(NumberExpression.random().asc())
+                .limit(cantidad)
+                .list(qProducto);
     }
     
 }

@@ -157,8 +157,7 @@ public class PublicacionController {
     @RequestMapping(value="/getAnunciosByMatch/{match}/{page}",method=RequestMethod.GET)    
     public Iterable<Publicacion> getAnunciosByMatch(@PathVariable String match, @PathVariable int page)
     {                
-        Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, match);        
-        return publicaciones;
+        return publicacionService.getPublicaciones(page, match);
     }
     
     @RequestMapping(value="/getAnunciosByCat/{tipo}/{page}/{cat}/{nivel}",method=RequestMethod.GET)    

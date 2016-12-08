@@ -46,5 +46,10 @@ public class TiendaRepositoryImpl implements TiendaRepositoryCustom {
                 .limit(cantidad)
                 .list(qTienda);      
     }
+
+    @Override
+    public Long getTotal() {
+        return repository.count();
+    }
     
 }

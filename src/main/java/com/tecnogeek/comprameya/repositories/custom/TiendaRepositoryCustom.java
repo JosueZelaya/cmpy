@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface TiendaRepositoryCustom {
     
+    public Long getTotal();
     public List<Tienda> findTiendas(int page, int itemsByPage);
     public List<Tienda> findTiendasAleatorias(int cantidad);
     

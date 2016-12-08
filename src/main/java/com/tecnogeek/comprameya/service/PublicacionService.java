@@ -172,22 +172,22 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
      */
     public Iterable<Publicacion> getAnunciosAleatorios(int total, TipoPublicacionEnum tipo) {
         int pageZise = total;
-        Long totalPublicaciones = getTotalPublicaciones(tipo);
-        int totalPages = Utilidades.calculateTotalPages(totalPublicaciones.intValue(), pageZise);
-        int page = Utilidades.randomInt(0, totalPages - 1); //dado que la primer pagina en la BD es cero. 
-
         Iterable<Publicacion> publicaciones = new ArrayList<>();
+        
         if (null != tipo) {
             switch (tipo) {
                 case TIENDA:
-                    List<Tienda> tiendas = tiendaRepository.findTiendas(page, pageZise);
+                    List<Tienda> tiendas = tiendaRepository.findTiendasAleatorias(pageZise);
                     publicaciones = convertTienda(tiendas);
                     break;
                 case EXTERNA:
-                    List<Tienda> tiendasAletorias = tiendaRepository.findTiendas(page, pageZise);
+                    List<Tienda> tiendasAletorias = tiendaRepository.findTiendasAleatorias(pageZise);
                     publicaciones = getPublicacionesExternas(tiendasAletorias);
                     break;
                 default:
+                    Long totalPublicaciones = getTotalPublicaciones(tipo);
+                    int totalPages = Utilidades.calculateTotalPages(totalPublicaciones.intValue(), pageZise);
+                    int page = Utilidades.randomInt(0, totalPages - 1); //dado que la primer pagina en la BD es cero.
                     publicaciones = getPublicaciones(page, pageZise, tipo);
                     break;
             }
@@ -294,11 +294,24 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
      * @return 
      */
     public Long getTotalPublicaciones(TipoPublicacionEnum tipo) {
-        boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
-
-        return (esPagada)
-                ? publicacionRepository.getTotalPublicacionesPagadas()
-                : publicacionRepository.getTotalPublicacionesGratis();
+        Long total = 0l;
+        if (null != tipo) {
+            switch (tipo) {
+                case PAGADA:
+                    total = publicacionRepository.getTotalPublicacionesPagadas();
+                    break;
+                case TIENDA:                    
+                    total = tiendaRepository.getTotal();
+                    break;
+                case EXTERNA:
+                    total = productoPSRepository.getTotal();
+                    break;
+                default:
+                    total = publicacionRepository.getTotalPublicacionesGratis();
+                    break;
+            }
+        }
+        return total;
     }
 
     public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage, TipoPublicacionEnum tipo, long categoria_id, int nivel) {
@@ -363,9 +376,10 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
      * @return 
      */
     public Iterable<Publicacion> getPublicaciones(int page, String match) {
-        int totalAnuncios = Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR;                
-        Iterable<Publicacion> publicaciones = publicacionRepository.getPublicacionesGratisByMatch(page, totalAnuncios, match);                
-        return publicaciones;
+        int totalAnuncios = Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR;
+        Iterable<Publicacion> publicacionesPrioritarias = publicacionRepository.getPublicacionesGratisByMatch(page, totalAnuncios, match);
+        Iterable<Publicacion> publicacionesSecundarias = convertProducto(productoPSRepository.findAleatorios(match, Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR));
+        return mezclarPublicaciones(publicacionesPrioritarias, publicacionesSecundarias);
     }
 
     public GridResponse getPublicacionesGrid(int page, int pageZise, TipoPublicacionEnum tipo) {
