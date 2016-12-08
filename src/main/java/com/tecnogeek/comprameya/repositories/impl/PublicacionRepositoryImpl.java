@@ -137,10 +137,12 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
         return newJpaQuery().from(qPublicacion)
             .leftJoin(qPublicacion.productoList,qProducto)
             .leftJoin(qProducto.categoria,qCategoria)
-            .where(sonGratis.and(disponibles).and(qCategoria.in( newJpaQuery()
-                                                .from(qCategoria)
-                                                    .where(qCategoria.categoriaPadre.id.eq(categoria_id)).list(qCategoria))
-            ).and(estanActivas)).orderBy(qPublicacion.id.desc()).list(qPublicacion);
+            .where(sonGratis.and(disponibles)
+            .and(qCategoria.in(newJpaQuery()
+                                    .from(qCategoria)
+                                        .where(qCategoria.categoriaPadre.id.eq(categoria_id)).list(qCategoria)).or(qCategoria.id.eq(categoria_id))
+            )
+            .and(estanActivas)).orderBy(qPublicacion.id.desc()).list(qPublicacion);
         
     }  
 
@@ -159,6 +161,10 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
             .where(sonGratis.and(disponibles).and(qCategoriaPadre.categoriaPadre.in(newJpaQuery()
                                                 .from(qCategoria)
                                                     .where(qCategoria.id.eq(categoria_id)).list(qCategoria))
+                                                .or(qCategoriaPadre.in(newJpaQuery()
+                                                .from(qCategoria)
+                                                    .where(qCategoria.id.eq(categoria_id)).list(qCategoria)))
+                                                .or(qCategoria.id.eq(categoria_id))
             ).and(estanActivas)).orderBy(qPublicacion.id.desc()).list(qPublicacion);
         
     }   
