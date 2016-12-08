@@ -146,6 +146,7 @@ menuPrincipal.controller('menuPrincipalController',
 
                 init = function () {
                     $scope.navCollapsed = true;
+                    $scope.infoCollapsed = true;
                     $scope.collapseNot = true;
                     $scope.totalMensajes = 0;
 

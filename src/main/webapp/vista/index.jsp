@@ -48,34 +48,22 @@
                         Avisos
                         <span class="badge badge-notify">{{totalNotificaciones + NoLeidosTotal}}</span>
                     </button>   
+                    
+                    <button id="botonInfo" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">
+                        <span class="sr-only">Toggle navigation</span>    
+                        Info
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </button>
 
                     <a href="/" class="pull-left" ui-sref='home' ui-sref-opts="{reload:true}">
                         <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
                     </a>
-                </div> 
 
-                <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">   
+                </div>                 
+                <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">
 
                     <ul class="nav navbar-nav"> 
-                        
-                        <li>
-                            <a href="#" ui-sref="home.about"> 
-                                Acerca de
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="#" ui-sref="home.terminosServicio"> 
-                                Terminos de Servicio
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="#" ui-sref="home.crearTienda"> 
-                                Negocios
-                            </a>
-                        </li>
-                        
+
                         <li ng-if="authenticated">
                             <a href="#" ui-sref="home.misPublicaciones"> 
                                 Mis Publiaciones
@@ -106,7 +94,6 @@
                         <!--</div>-->
                     </ul>                    
                 </div>
-
                 <div class="navbar-right navbar-collapse collapse" uib-collapse="collapseNot">
                     <ul class="nav navbar-nav"> 
 
@@ -119,14 +106,16 @@
                                 <li ng-repeat="mensaje in mensajes">
                                     <a href="" 
                                        ng-click="setMensajeUsuarioLeido(mensaje.usuarioEmisor.id);" 
-                                       ui-sref="home.vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})">
+                                       ui-sref="home.vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})"
+                                       ng-click="collapseNot = !collapseNot">
                                         <span class="badge pull-right">{{mensaje.total}}</span>
                                         {{mensaje.texto.slice(0, 50)}}...  <span class="text-muted" style="font-size: 11px;float:right;margin-right:10px">{{mensaje.usuarioEmisor.persona.nombre}} </span>
                                     </a>
                                 </li> 
                                 <li style="text-align: center">
                                     <a href="" 
-                                       ui-sref="home.vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})">
+                                       ui-sref="home.vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})"
+                                       ng-click="collapseNot = !collapseNot">
                                         Ver Bandeja...
                                     </a>
                                 </li>
@@ -143,13 +132,15 @@
                                     <a href="" 
                                        ng-click="quitarVisibilidad(notificacionUsuario.id, $index)" 
                                        ui-sref-opts="{reload:true}"
-                                       ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})">
+                                       ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})"
+                                       ng-click="collapseNot = !collapseNot">
                                         {{notificacionUsuario.notificacion.mensaje.slice(0, 50)}}...
                                     </a>
                                 </li>
                                 <li style="text-align: center">
                                     <a href=""  
-                                       ui-sref="home.vistaNotificaciones({'#': 'publicacionesProductos'})">
+                                       ui-sref="home.vistaNotificaciones({'#': 'publicacionesProductos'})"
+                                       ng-click="collapseNot = !collapseNot">
                                         Ver Todas ...
                                     </a>
                                 </li>
@@ -157,7 +148,27 @@
                         </li>
                     </ul>
                 </div>
+                <div class="navbar-right navbar-collapse collapse" uib-collapse="infoCollapsed">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#" ui-sref="home.about({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                Nosotros
+                            </a>
+                        </li>
 
+                        <li>
+                            <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                Terminos
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" ui-sref="home.crearTienda({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                Negocios
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <form class="navbar-form navbar-left" style="width: 100%" role="search">
                     <div class="input-group">
                         <input ng-keyup="$event.keyCode == 13 && buscar(terminoBusqueda)" type="text" class="form-control" placeholder="Buscar producto..." ng-model="terminoBusqueda">
@@ -173,7 +184,7 @@
         <div ui-view></div>
 
         <%@include file="common/loginModal.jsp" %>
-        
+
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js" ></script>
         <link href="${pageContext.request.contextPath}/resources/min/css/style.min.css" rel="stylesheet" type="text/css" media='all'>
 

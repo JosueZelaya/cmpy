@@ -8,10 +8,13 @@
                     <h3>Empresas</h3>
                     <p>Anunciate en la red mas grande de Negocios.<br/>
                         <!--<a href="#" data-toggle="modal" data-target="#anunciarModal">Anunciate Ya!</a>-->  
-                        <button ng-show="!authenticated" value="Anunciate Ya!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')" ui-sref="home.crearTienda">
-                            Anunciate Ya!
-                        </button>
-                        <button ng-show="authenticated" value="Anunciate Ya!" type="submit" class="btn btn-success pull-right" ng-click="open('anunciarModal.html')" ui-sref="home.crearTienda">
+                        <!--                        <button ng-show="!authenticated" value="Anunciate Ya!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')" ui-sref="home.crearTienda">
+                                                    Anunciate Ya!
+                                                </button>
+                                                <button ng-show="authenticated" value="Anunciate Ya!" type="submit" class="btn btn-success pull-right" ng-click="open('anunciarModal.html')" ui-sref="home.crearTienda">
+                                                    Anunciate Ya!
+                                                </button>-->
+                        <button value="Anunciate Ya!" type="submit" class="btn btn-success pull-right" ui-sref="home.crearTienda({'#': 'publicacionesProductos'})">
                             Anunciate Ya!
                         </button>
                     </p>                                          
