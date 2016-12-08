@@ -1,0 +1,33 @@
+<div ui-view>
+    <div class="col-md-8 min_cont marcar">
+        <div class="panel panel-default min_cont">                    
+            <div class="panel-heading">
+                <p>                            
+                    Publicaciones
+                    <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')">VenderYa!</button>
+                    <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html')">
+                        VenderYa!
+                    </button>
+                </p>
+            </div>  
+            <div id="publicacionesProductos" class="panel-body">
+                <h3>Tiendas virtuales para negocios</h3><br/>
+                <p>
+                    ComprameYa puede ayudarle a poner su negocio online, con nuestro servicio
+                    de tiendas virtuales usted recibirá una tienda online completamente
+                    vinculada al portal de ComprameYa desde la cual podrá ofertar sus productos
+                    a nivel nacional e internacional.
+                </p>
+                <p>
+                    Si desea solicitar una tienda virtual de ComprameYa puede hacerlo
+                    escribiendo un correo a: tiendas@comprameya.com. Un técnico
+                    se pondrá en contacto con usted para brindarle mayor información
+                    del servicio.            
+                </p>
+                <p>
+                    Los precios de las tiendas van desde $50 en adelante...
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

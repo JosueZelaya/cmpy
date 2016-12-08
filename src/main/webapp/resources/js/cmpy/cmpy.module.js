@@ -25,12 +25,6 @@ var cmy_ng = angular.module('cmpy',
 
 cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, toastrConfig) {
 
-//    $locationProvider.html5Mode({
-//        enabled: true,
-//        requireBase: false,
-//        rewriteLinks: false
-//    });
-
     angular.extend(toastrConfig, {
         autoDismiss: true,
         containerId: 'toast-container',
@@ -56,7 +50,6 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 url: "/",
                 views: {
                     '': { templateUrl: '/resources/js/cmpy/home.html' },                    
-//                    "menuPrincipal@fb": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html', controller: 'menuPrincipalController'},
                     "menuCategorias@fb": {templateUrl: '/resources/js/categorias/menuCategorias.html', controller: 'catController'},
                     "panelPublicacionesProductos@fb": {templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'anunciosController'},
                     "panelPublicacionesEmpresas@fb": {templateUrl: '/resources/js/anuncios/panelEmpresas.html', controller: 'empresasController'},                    
@@ -71,8 +64,6 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 url: "",
                 views: {
                     '': { templateUrl: '/resources/js/cmpy/home.html' },
-                    
-//                    "menuPrincipal@home": {templateUrl: '/resources/js/menuPrincipal/menuPrincipal.html', controller: 'menuPrincipalController'},
                     "menuCategorias@home": {templateUrl: '/resources/js/categorias/menuCategorias.html', controller: 'catController'},
                     "panelPublicacionesProductos@home": {templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'anunciosController'},
                     "panelPublicacionesEmpresas@home": {templateUrl: '/resources/js/anuncios/panelEmpresas.html', controller: 'empresasController'},                    
@@ -137,10 +128,31 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
 
-            // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-            .state('about', { 
-                // we'll get to this in a bit       
-            });                        
+            .state('home.terminosServicio', {
+                url: "/terminos",
+                views: {
+                    '':{templateUrl: '/resources/js/partials/terminos_servicio.html'}
+                }
+            })
+            
+            .state('home.about', {
+                url: "/about",
+                views: {
+                    '':{templateUrl: '/resources/js/partials/about.html'}
+                }
+            })
+    
+            .state('home.crearTienda', {
+                url: "/contratar_tienda",
+                views: {
+                    '':{templateUrl: '/resources/js/anuncios/crearTienda.html'}
+                }
+            })
+
+//            // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+//            .state('about', { 
+//                // we'll get to this in a bit       
+//            });                        
 
 });
 

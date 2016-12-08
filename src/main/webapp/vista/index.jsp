@@ -57,7 +57,25 @@
                 <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">   
 
                     <ul class="nav navbar-nav"> 
-
+                        
+                        <li>
+                            <a href="#" ui-sref="home.about"> 
+                                Acerca de
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#" ui-sref="home.terminosServicio"> 
+                                Terminos de Servicio
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#" ui-sref="home.crearTienda"> 
+                                Negocios
+                            </a>
+                        </li>
+                        
                         <li ng-if="authenticated">
                             <a href="#" ui-sref="home.misPublicaciones"> 
                                 Mis Publiaciones
