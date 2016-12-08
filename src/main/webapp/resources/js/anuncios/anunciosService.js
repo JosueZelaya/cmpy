@@ -52,9 +52,9 @@ modulo_anuncios.service('anunciosService', ['$http', '$log', function ($http, $l
                     });
         };
 
-        this.getAnunciosByMatch = function (tipo, page, match) {
+        this.getAnunciosByMatch = function (page, match) {
 
-            var req = "/publicacion/getAnunciosByMatch/" + tipo + "/" + page + "/" + match;
+            var req = "/publicacion/getAnunciosByMatch/" + match + "/" + page;
             return $http.get(req)
                     .success(function (response)
                     {

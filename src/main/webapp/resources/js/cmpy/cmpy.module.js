@@ -45,23 +45,9 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
 
     $stateProvider
 
-            // Facebook redirect url
-            .state('fb', {
-                url: "/",
-                views: {
-                    '': { templateUrl: '/resources/js/cmpy/home.html' },                    
-                    "menuCategorias@fb": {templateUrl: '/resources/js/categorias/menuCategorias.html', controller: 'catController'},
-                    "panelPublicacionesProductos@fb": {templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'anunciosController'},
-                    "panelPublicacionesEmpresas@fb": {templateUrl: '/resources/js/anuncios/panelEmpresas.html', controller: 'empresasController'},                    
-                    "venderModal@fb": {templateUrl: '/resources/js/anuncios/venderModal.html'},
-                    "ubicacionesModal@fb": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'},
-                    "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html', controller: 'mapController'}
-                }
-            })
-
             // HOME STATES AND NESTED VIEWS ========================================
             .state('home', {
-                url: "",
+                url: "/",
                 views: {
                     '': { templateUrl: '/resources/js/cmpy/home.html' },
                     "menuCategorias@home": {templateUrl: '/resources/js/categorias/menuCategorias.html', controller: 'catController'},
@@ -70,39 +56,41 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     "venderModal@home": {templateUrl: '/resources/js/anuncios/venderModal.html'},
                     "ubicacionesModal@home": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'},
                     "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html', controller: 'mapController'}
-                }
+                },
+                sticky: true,
+                dsr: true
             })
 
             .state('home.misPublicaciones', {
-                url: "/misPublicaciones",  
+                url: "misPublicaciones",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'misPublicacionesController'}
                 }
             })
     
             .state('home.porCategoria', {
-                url: "/categoria/{cat}/{nivel}",
+                url: "categoria/{cat}/{nivel}",
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'publicacionesFiltradasController'}
                 }
             })
             
             .state('home.busqueda', {
-                url: "/busqueda/{terminoBusqueda}",
+                url: "busqueda/{terminoBusqueda}",
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'busquedaController'}
                 }
             })
     
             .state('home.vistaProducto', {
-                url: "/vistaProducto/{publicacionId}",  
+                url: "vistaProducto/{publicacionId}",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
                 }
             })
             
             .state('home.misPublicaciones.vistaProducto', {
-                url: "/vistaProducto/{publicacionId}",  
+                url: "vistaProducto/{publicacionId}",  
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/vistaProducto.html', controller: "productoController"}
                 }
@@ -110,7 +98,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             
             
             .state('home.vistaMensaje', {
-                url: "/vistaMensaje", 
+                url: "vistaMensaje", 
                 params: {
                     usuarioId: 0,
                     usuarioNombre: '',
@@ -122,28 +110,28 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
             })
             
             .state('home.vistaNotificaciones', {
-                url: "/vistaNotificaciones",
+                url: "vistaNotificaciones",
                 views: {
                     '':{templateUrl: '/resources/js/notificacion/bandeja.html', controller: "notificacionController"}
                 }
             })
 
             .state('home.terminosServicio', {
-                url: "/terminos",
+                url: "terminos",
                 views: {
                     '':{templateUrl: '/resources/js/partials/terminos_servicio.html'}
                 }
             })
             
             .state('home.about', {
-                url: "/about",
+                url: "about",
                 views: {
                     '':{templateUrl: '/resources/js/partials/about.html'}
                 }
             })
     
             .state('home.crearTienda', {
-                url: "/contratar_tienda",
+                url: "contratar_tienda",
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/crearTienda.html'}
                 }

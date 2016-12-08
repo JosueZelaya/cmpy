@@ -55,6 +55,12 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         return publicacionRepository;
     }
 
+    /**
+     * Elimina la publicación por medio de su id
+     * 
+     * @param publicacionId
+     * @throws Exception 
+     */
     public void eliminar(Long publicacionId) throws Exception {
         Publicacion publicacion = getRepository().findOne(publicacionId);
 
@@ -67,6 +73,12 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         getRepository().save(publicacion);
     }
     
+    /**
+     * Establece que una pubicación ya fue vendida por medio de su ID
+     * 
+     * @param publicacionId
+     * @throws Exception 
+     */
     public void marcarVendida(Long publicacionId) throws Exception {
         Publicacion publicacion = getRepository().findOne(publicacionId);
 
@@ -79,19 +91,33 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         getRepository().save(publicacion);
     }
 
+    /**
+     * Devuelve un listado de publicaciones tanto gratis como externas
+     * el total de cada tipo se calcula basandose en las configuraciones
+     * definidas en la clase: Constantes
+     * @param page
+     * @return 
+     */
     public List<Publicacion> getPublicacionesMixtas(int page) {
+        int total = Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR;
         Iterable<Publicacion> publicacionesGratis
-                = getPublicaciones(page,
-                        Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR,
-                        TipoPublicacionEnum.GRATIS);
+                = getPublicaciones(page, total, TipoPublicacionEnum.GRATIS);
 
-        Iterable<Publicacion> publicacionesPagadas
-                = getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR,
-                        TipoPublicacionEnum.EXTERNA);
+        total = Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR;
+        Iterable<Publicacion> publicacionesExternas
+                = getAnunciosAleatorios(total, TipoPublicacionEnum.EXTERNA);
 
-        return mezclarPublicaciones(publicacionesGratis, publicacionesPagadas);
+        return mezclarPublicaciones(publicacionesGratis, publicacionesExternas);
     }
 
+    /**
+     * Se encarga de mezclar las publicaciones prioritarias y secundarias en una sola lista
+     * intercalada de acuerdo a las reglas definidas.
+     * 
+     * @param pubPrioritarias
+     * @param pubSecundarias
+     * @return 
+     */
     public List<Publicacion> mezclarPublicaciones(Iterable<Publicacion> pubPrioritarias, Iterable<Publicacion> pubSecundarias) {
         List<Publicacion> publicaciones = new ArrayList<>();
         int prioritariasAgregadas = 0;
@@ -124,7 +150,7 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
     }
     
     /**
-     * Las publicaciones prioritarias se van agregando en multiples del valor Constante.PRIORITARIA
+     * Las publicaciones prioritarias se van agregando en multiplos del valor Constante.PRIORITARIA
      * 
      * @param prioritariasAgregadas
      * @return 
@@ -137,6 +163,13 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         }
     }
 
+    /**
+     * Devuelve un listado de anuncios aleatorios del tipo especificado
+     * 
+     * @param total
+     * @param tipo
+     * @return 
+     */
     public Iterable<Publicacion> getAnunciosAleatorios(int total, TipoPublicacionEnum tipo) {
         int pageZise = total;
         Long totalPublicaciones = getTotalPublicaciones(tipo);
@@ -163,16 +196,24 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         return publicaciones;
     }
 
+    /**
+     * Devuelve un listado de publicaciones externas por cada tienda y su tamaño
+     * no debe exeder al especificado en Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR
+     * 
+     * @param tiendasAletorias
+     * @return 
+     */
     private List<Publicacion> getPublicacionesExternas(List<Tienda> tiendasAletorias) {
+        int totalAnuncios = Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR;
         List<ProductoPS> productos = new ArrayList<>();
         if(tiendasAletorias.isEmpty()){
             return convertProducto(productos);
         }
         
         boolean salir=false;
-        while (productos.size() < Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR) {
+        while (productos.size() < totalAnuncios) {
             for (Tienda tienda : tiendasAletorias) {                
-                if (productos.size() < Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR) {
+                if (productos.size() < totalAnuncios) {
                     ProductoPS producto = productoPSRepository.findAleatorioByTienda(tienda.getId());
                     if(producto == null){
                         salir=true;
@@ -191,6 +232,12 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         return convertProducto(productos);
     }
 
+    /**
+     * Recibe una lista de tiendas que convierte en objetos de tipo publicación.
+     * 
+     * @param tiendaList
+     * @return 
+     */
     public List<Publicacion> convertTienda(List<Tienda> tiendaList) {
         List<Publicacion> publicaciones = new ArrayList<>();
         for (Tienda tienda : tiendaList) {
@@ -203,6 +250,12 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         return publicaciones;
     }
 
+    /**
+     * Recibe una lista de productos que convierte a objetos de tipo publicación.
+     * 
+     * @param productoPSList
+     * @return 
+     */
     public List<Publicacion> convertProducto(List<ProductoPS> productoPSList) {
         List<Publicacion> publicaciones = new ArrayList<>();
         for (ProductoPS productoPS : productoPSList) {
@@ -234,6 +287,12 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         return publicaciones;
     }
 
+    /**
+     * Devuelve el total de publicaciones que existen del tipo especificado.
+     * 
+     * @param tipo
+     * @return 
+     */
     public Long getTotalPublicaciones(TipoPublicacionEnum tipo) {
         boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
 
@@ -296,13 +355,16 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
         return publicacionRepository.getPublicacionesByUsuario(page, itemsByPage, tipo, vendidas, usuario);
     }
 
-    public Iterable<Publicacion> getPublicaciones(int page, int itemsByPage, TipoPublicacionEnum tipo, String match) {
-        boolean esPagada = TipoPublicacionEnum.PAGADA.equals(tipo);
-
-        Iterable<Publicacion> publicaciones = (esPagada)
-                ? publicacionRepository.getPublicacionesPagadas(page, itemsByPage)
-                : publicacionRepository.getPublicacionesGratisByMatch(page, itemsByPage, match);
-
+    /**
+     * Devuelve las publicaciones que concuerden con el termino de búsqueda
+     * 
+     * @param page
+     * @param match
+     * @return 
+     */
+    public Iterable<Publicacion> getPublicaciones(int page, String match) {
+        int totalAnuncios = Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR;                
+        Iterable<Publicacion> publicaciones = publicacionRepository.getPublicacionesGratisByMatch(page, totalAnuncios, match);                
         return publicaciones;
     }
 

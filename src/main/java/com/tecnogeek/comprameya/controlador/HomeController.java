@@ -55,7 +55,7 @@ public class HomeController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcomePage(Model model) {
-//        Iterable<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR, TipoPublicacionEnum.PAGADA);
+//        Iterable<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR, TipoPublicacionEnum.PAGADA);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName(); 

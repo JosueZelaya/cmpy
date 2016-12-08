@@ -77,7 +77,7 @@ public class PublicacionController {
         int totalPublicaciones = publicacionService.getTotalPublicaciones(tipoPublicacion).intValue();
         int pageSize = (tipo==Constantes.PUBLICACION_GRATIS)?
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
-                Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;
+                Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR;
         return Utilidades.calculateTotalPages(totalPublicaciones, pageSize);
     }
     
@@ -109,7 +109,7 @@ public class PublicacionController {
     }
     
     @RequestMapping(value="/getAnuncios/{page}",method=RequestMethod.GET)    
-    public Iterable<Publicacion> getAnuncios(@PathVariable int page,Model model)
+    public Iterable<Publicacion> getAnuncios(@PathVariable int page)
     {           
         return publicacionService.getPublicacionesMixtas(page);        
     }
@@ -126,7 +126,7 @@ public class PublicacionController {
         
         totalAnuncios = (tipo==Constantes.PUBLICACION_GRATIS)?
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
-                Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
+                Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR;        
         
         Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion);   
         
@@ -145,7 +145,7 @@ public class PublicacionController {
         
         totalAnuncios = (tipo==Constantes.PUBLICACION_GRATIS)?
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
-                Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
+                Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR;        
         
         Usuario loggedUser = usuarioRepository.getLoggedUser();
         
@@ -154,22 +154,10 @@ public class PublicacionController {
         return publicaciones;
     }
     
-    @RequestMapping(value="/getAnunciosByMatch/{tipo}/{page}/{match}",method=RequestMethod.GET)    
-    public Iterable<Publicacion> getAnunciosByMatch(@PathVariable int tipo,@PathVariable int page,@PathVariable String match,Model model)
+    @RequestMapping(value="/getAnunciosByMatch/{match}/{page}",method=RequestMethod.GET)    
+    public Iterable<Publicacion> getAnunciosByMatch(@PathVariable String match, @PathVariable int page)
     {                
-        int totalAnuncios;
-        
-        boolean esPagada = (tipo==Constantes.PUBLICACION_PAGADA);
-        TipoPublicacionEnum tipoPublicacion = (esPagada)?                
-                TipoPublicacionEnum.PAGADA:
-                TipoPublicacionEnum.GRATIS;
-        
-        totalAnuncios = (tipo==Constantes.PUBLICACION_GRATIS)?
-                Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
-                Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
-        
-        Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion,match);   
-        
+        Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, match);        
         return publicaciones;
     }
     
@@ -185,7 +173,7 @@ public class PublicacionController {
         
         totalAnuncios = (tipo==Constantes.PUBLICACION_GRATIS)?
                 Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR:
-                Constantes.TOTAL_ANUNCIOS_PAGADOS_MOSTRAR;        
+                Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR;        
         
         Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion,cat, nivel);   
         

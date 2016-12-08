@@ -42,15 +42,15 @@ modulo_anuncios.controller('busquedaController',
                     return new Array(num);
                 };
 
-                var getPublicacionesByMatch = function (tipo, pagina, match) {
-                    return anunciosService.getAnunciosByMatch(tipo, pagina, match)
+                var getPublicacionesByMatch = function (pagina, match) {
+                    return anunciosService.getAnunciosByMatch(pagina, match)
                             .success(function (publicaciones) {
                                 return publicaciones;
                             });
                 };
 
                 var cargarPublicacionesGratisByMatch = function (page) {
-                    getPublicacionesByMatch(TIPO_PUBLICACION.GRATIS, page, $scope.terminoBusqueda)
+                    getPublicacionesByMatch(page, $scope.terminoBusqueda)
                             .success(function (publicaciones) {
                                 $scope.publicaciones = publicaciones;
                             });
