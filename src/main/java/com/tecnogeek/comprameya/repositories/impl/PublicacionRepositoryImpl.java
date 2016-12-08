@@ -157,13 +157,15 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
             .leftJoin(qPublicacion.productoList,qProducto)
             .leftJoin(qProducto.categoria,qCategoria)
             .leftJoin(qCategoria.categoriaPadre,qCategoriaPadre)
-            .where(sonGratis.and(disponibles).and(qCategoriaPadre.categoriaPadre.in(newJpaQuery()
+            .where(sonGratis.and(disponibles).and(
+                    (qProducto.categoria.id.eq(categoria_id).and(qProducto.categoria.categoriaPadre.isNull())).or(
+                    qCategoriaPadre.categoriaPadre.in(newJpaQuery()
                                                 .from(qCategoria)
-                                                    .where(qCategoria.id.eq(categoria_id)).list(qCategoria))
+                                                    .where(qCategoria.id.eq(categoria_id)).list(qCategoria)))
                                                 .or(qCategoriaPadre.in(newJpaQuery()
                                                 .from(qCategoria)
                                                     .where(qCategoria.id.eq(categoria_id)).list(qCategoria)))
-                                                .or(qCategoria.id.eq(categoria_id))
+                                                   
             ).and(estanActivas)).orderBy(qPublicacion.id.desc()).list(qPublicacion);
         
     }   
