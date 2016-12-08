@@ -103,7 +103,6 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
     @Override
     public Iterable<Publicacion> getPublicacionesPagadas(int page, int itemsByPage,long categoria_id) {
         Long id = TipoPublicacionEnum.PAGADA.getCodigo();
-        qCategoria.id.eq(categoria_id);
         BooleanExpression sonPagadas = qPublicacion.tipo.id.eq(id);
         BooleanExpression matchCat = qPublicacion.productoList.get(0).categoria.eq(qCategoria);
         BooleanExpression disponibles = qPublicacion.vendido.eq(false);
@@ -174,13 +173,15 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
         
         Long id = TipoPublicacionEnum.GRATIS.getCodigo();
         BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);
-        BooleanExpression Match = qProducto.nombre.toUpperCase().like("%"+match.toUpperCase()+"%");
+        BooleanExpression matchProducto = qProducto.nombre.toUpperCase().like("%"+match.toUpperCase()+"%");
+        BooleanExpression matchCategoria = qCategoria.nombre.toUpperCase().like("%"+match.toUpperCase()+"%");
         BooleanExpression disponibles = qPublicacion.vendido.eq(false);
         BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
         
         return newJpaQuery().from(qPublicacion)
-            .leftJoin(qPublicacion.productoList,qProducto) 
-            .where(sonGratis.and(disponibles).and(Match).and(estanActivas))
+            .leftJoin(qPublicacion.productoList,qProducto)
+            .leftJoin(qProducto.categoria, qCategoria)
+            .where(sonGratis.and(disponibles).and(estanActivas).and(matchProducto.or(matchCategoria)))
             .orderBy(qPublicacion.id.desc()).list(qPublicacion);
         
     }  
