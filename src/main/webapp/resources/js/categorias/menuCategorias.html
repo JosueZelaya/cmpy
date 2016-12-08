@@ -10,12 +10,12 @@
                     <button class="btn btn-default btn-cat-n" ng-click="categoria.collapse = !categoria.collapse" uib-tooltip="{{categoria.nombre}}" ng-show="!categoria.categoriaList.length>0" ui-sref="home.porCategoria({cat:categoria.id,nivel:1})" >
                         <span class="pull-left glyphicon glyphicon-plus" ng-show="categoria.collapse && categoria.categoriaList.length>0"></span>
                         <span class="pull-left glyphicon glyphicon-minus" ng-show="!categoria.collapse && categoria.categoriaList.length>0"></span>
-                        {{categoria.nombre}}
+                        &nbsp;&nbsp;{{categoria.nombre}}
                     </button>
                     <button class="btn btn-default btn-cat-n" ng-click="categoria.collapse = !categoria.collapse" uib-tooltip="{{categoria.nombre}}" ng-show="categoria.categoriaList.length>0">
                         <span class="pull-left glyphicon glyphicon-plus" ng-show="categoria.collapse && categoria.categoriaList.length>0"></span>
                         <span class="pull-left glyphicon glyphicon-minus" ng-show="!categoria.collapse && categoria.categoriaList.length>0"></span>
-                        {{categoria.nombre}}
+                        &nbsp;&nbsp;{{categoria.nombre}}
                     </button>
                     <button class="btn btn-default btn-cat-l" ng-click="setBtnStyle()" ui-sref="home.porCategoria({cat:categoria.id,nivel:1})">
                         <span class="glyphicon glyphicon-search"></span>
@@ -26,12 +26,12 @@
                         <button class="btn btn-primary btn-default btn-cat-n cat-gradient" ng-click="sub_categoria.collapse = !sub_categoria.collapse" uib-tooltip="{{sub_categoria.nombre}}" ng-show="!sub_categoria.categoriaList.length>0" ui-sref="home.porCategoria({cat:sub_categoria.id,nivel:2})">
                             <span class="pull-left glyphicon glyphicon-plus" ng-show="sub_categoria.collapse && sub_categoria.categoriaList.length>0"></span>
                             <span class="pull-left glyphicon glyphicon-minus" ng-show="!sub_categoria.collapse && sub_categoria.categoriaList.length>0"></span>
-                            {{sub_categoria.nombre}}
+                            &nbsp;&nbsp;{{sub_categoria.nombre}}
                         </button>
                         <button class="btn btn-primary btn-default btn-cat-n cat-gradient" ng-click="sub_categoria.collapse = !sub_categoria.collapse" uib-tooltip="{{sub_categoria.nombre}}" ng-show="sub_categoria.categoriaList.length>0">
                             <span class="pull-left glyphicon glyphicon-plus" ng-show="sub_categoria.collapse && sub_categoria.categoriaList.length>0"></span>
                             <span class="pull-left glyphicon glyphicon-minus" ng-show="!sub_categoria.collapse && sub_categoria.categoriaList.length>0"></span>
-                            {{sub_categoria.nombre}}
+                            &nbsp;&nbsp;{{sub_categoria.nombre}}
                         </button>
                         <button class="btn btn-primary btn-default btn-cat-l" ng-click="setBtnStyle()" ui-sref="home.porCategoria({cat:sub_categoria.id,nivel:2})">
                             <span class="glyphicon glyphicon-search"></span>
@@ -40,7 +40,7 @@
                     <div id="refcat_{{categoria.id}}" class="list-group cat level3" uib-collapse="sub_categoria.collapse" ng-repeat="sub_sub_categoria in sub_categoria.categoriaList">
                         <div id="cat_{{sub_sub_categoria.id}}"  class="list-group-item btn-group" role="group" aria-label="...">
                             <button class="btn btn-warning btn-default btn-cat-n cat-gradient" uib-tooltip="{{sub_sub_categoria.nombre}}" ui-sref="home.porCategoria({cat:sub_sub_categoria.id,nivel:3})">
-                                {{sub_sub_categoria.nombre}}
+                             &nbsp;&nbsp;{{sub_sub_categoria.nombre}}
                             </button>
                             <button class="btn btn-warning btn-default btn-cat-l" ng-click="setBtnStyle()" ui-sref="home.porCategoria({cat:sub_sub_categoria.id,nivel:3})">
                                 <span class="glyphicon glyphicon-search"></span>
