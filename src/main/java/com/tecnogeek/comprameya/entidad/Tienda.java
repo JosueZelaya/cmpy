@@ -59,7 +59,7 @@ public class Tienda extends BaseEntity<Long> implements Serializable {
     private Usuario usuario;
     
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tienda")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id.tienda")
     private List<ProductoPS> productoList;
     
     @Column(name = "image_url")

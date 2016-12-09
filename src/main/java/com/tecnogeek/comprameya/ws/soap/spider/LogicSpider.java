@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.ws.soap.spider;
 
 import com.tecnogeek.comprameya.entidad.ProductoPS;
+import com.tecnogeek.comprameya.entidad.ProductoPsKey;
 import com.tecnogeek.comprameya.entidad.Tienda;
 import com.tecnogeek.comprameya.repositories.ProductoPSRepository;
 import java.util.Dictionary;
@@ -55,7 +56,8 @@ public class LogicSpider {
                 Dictionary<String,String> detalleProducto = serviceSpicer.getTiendaProducto(linkProducto, key,dominio);
                 
                 ProductoPS producto = new ProductoPS();
-                producto.setId(Long.parseLong(detalleProducto.get("id")));
+                ProductoPsKey idProducto = new ProductoPsKey(Long.parseLong(detalleProducto.get("id")), tienda);
+                producto.setId(idProducto);
                 producto.setTitulo(!detalleProducto.get("name").equals("")?detalleProducto.get("name"):" ");
                 producto.setPrecio(BigDecimal.valueOf(Double.parseDouble(detalleProducto.get("price"))));
                 producto.setImagen_id(Long.parseLong(!detalleProducto.get("id_default_image").equals("")?detalleProducto.get("id_default_image"):"0"));
@@ -71,9 +73,7 @@ public class LogicSpider {
                 
                 producto.setUrl(detalleProducto.get("url_producto"));
                 producto.setCategoria(detalleProducto.get("category_name"));
-                producto.setCategoria_id(Long.parseLong(detalleProducto.get("id_category_default"))); 
-                producto.setTienda(tienda);
-                
+                producto.setCategoria_id(Long.parseLong(detalleProducto.get("id_category_default")));
                 
                 listaProductoPS.add(producto);
 
@@ -82,9 +82,6 @@ public class LogicSpider {
             productoPSRepository.save(listaProductoPS);
         
         }
-
-        
-        
         return true;
     } 
     

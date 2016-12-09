@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package com.tecnogeek.comprameya.cron;
+
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author genaro
@@ -19,8 +25,14 @@ public class CronSpider {
     }
     
     public static void indexTiendasProductos(){
-        LogicSpider logic = new LogicSpider();
-        logic.indexTiendasProductos();
+        try {
+            LogicSpider logic = new LogicSpider();
+            logic.indexTiendasProductos(true);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(CronSpider.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (KeyManagementException ex) {
+            Logger.getLogger(CronSpider.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

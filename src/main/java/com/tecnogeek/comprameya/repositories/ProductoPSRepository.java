@@ -6,6 +6,7 @@
 package com.tecnogeek.comprameya.repositories;
 
 import com.tecnogeek.comprameya.entidad.ProductoPS;
+import com.tecnogeek.comprameya.entidad.ProductoPsKey;
 import com.tecnogeek.comprameya.repositories.custom.ProductoPSRepositoryCustom;
 
 /**
@@ -13,6 +14,6 @@ import com.tecnogeek.comprameya.repositories.custom.ProductoPSRepositoryCustom;
  * @author genaro
  */
 public interface ProductoPSRepository extends 
-        BaseRepository<ProductoPS, Long>, ProductoPSRepositoryCustom {
+        BaseRepository<ProductoPS, ProductoPsKey>, ProductoPSRepositoryCustom {
     
 }

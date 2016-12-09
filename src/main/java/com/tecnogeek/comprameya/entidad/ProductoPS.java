@@ -5,17 +5,12 @@
  */
 package com.tecnogeek.comprameya.entidad;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,12 +25,12 @@ import lombok.Setter;
 @Table(name = "productops")
 @Getter
 @Setter
-public class ProductoPS extends BaseEntity<Long> implements Serializable{
+
+public class ProductoPS extends BaseEntity<ProductoPsKey> implements Serializable{
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Long id;
+    
+    @EmbeddedId
+    private ProductoPsKey id;
  
     @Basic(optional = false)
     @NotNull
@@ -80,11 +75,6 @@ public class ProductoPS extends BaseEntity<Long> implements Serializable{
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "rutaimagen")
-    private String rutaimagen;
-    
-    @JsonManagedReference
-    @JoinColumn(name = "tiendaps_id", referencedColumnName = "id")
-    @ManyToOne
-    private Tienda tienda;
+    private String rutaimagen;    
     
 }
