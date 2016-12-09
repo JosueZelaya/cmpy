@@ -33,15 +33,9 @@ import lombok.Setter;
 public class ProductoPS extends BaseEntity<Long> implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "idps")
-    private Long idps;
-
  
     @Basic(optional = false)
     @NotNull

@@ -260,5 +260,5 @@ insert into categoria (nombre,descripcion,modification_time,creation_time,catego
 insert into categoria (nombre,descripcion,modification_time,creation_time,categoria_padre_id,sis_activo,version) values ('Otros','...',current_date,current_date,60,true,1);--225
 
 -- insertando registros para las tiendas
-insert into tiendaps(id, creation_time, modification_time, sis_activo, version, dominio, key, usuario_id) values (1, current_date, current_date, true, 1, 'prestashop/prestashop/','E87JLYRTFHVTHQAIYB4FKRVZ8J8KGZP9',1);
+insert into tiendaps(id, creation_time, modification_time, sis_activo, version, dominio, key, usuario_id) values (1, current_date, current_date, true, 1, 'tienda.comprameya.com','VMVEPZ8DZACHLRK4VHTPT8VD56SYJMHA',1);
 insert into tiendaps(id, creation_time, modification_time, sis_activo, version, dominio, key, usuario_id) values (2, current_date, current_date, true, 1, 'store2/prestashop/','E87JLYRTFHVTHQAIYB4FKRVZ8J8KGZP9',1);

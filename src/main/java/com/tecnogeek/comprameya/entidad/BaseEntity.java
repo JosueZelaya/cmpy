@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 @MappedSuperclass
 public abstract class BaseEntity<ID> {
 
-    @Column(name = "creation_time", nullable = false)
+    @Column(name = "creation_time", nullable = false,updatable=false)
     private Date creationTime;
 
     @Column(name = "modification_time", nullable = false)

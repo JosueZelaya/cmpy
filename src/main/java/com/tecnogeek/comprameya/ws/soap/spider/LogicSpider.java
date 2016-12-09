@@ -55,7 +55,7 @@ public class LogicSpider {
                 Dictionary<String,String> detalleProducto = serviceSpicer.getTiendaProducto(linkProducto, key,dominio);
                 
                 ProductoPS producto = new ProductoPS();
-                producto.setIdps(Long.parseLong(detalleProducto.get("id")));
+                producto.setId(Long.parseLong(detalleProducto.get("id")));
                 producto.setTitulo(!detalleProducto.get("name").equals("")?detalleProducto.get("name"):" ");
                 producto.setPrecio(BigDecimal.valueOf(Double.parseDouble(detalleProducto.get("price"))));
                 producto.setImagen_id(Long.parseLong(!detalleProducto.get("id_default_image").equals("")?detalleProducto.get("id_default_image"):"0"));
@@ -71,7 +71,7 @@ public class LogicSpider {
                 
                 producto.setUrl(detalleProducto.get("url_producto"));
                 producto.setCategoria(detalleProducto.get("category_name"));
-                producto.setCategoria_id(Long.parseLong(detalleProducto.get("id_category_default")));              
+                producto.setCategoria_id(Long.parseLong(detalleProducto.get("id_category_default"))); 
                 producto.setTienda(tienda);
                 
                 
