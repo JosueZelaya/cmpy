@@ -100,7 +100,8 @@
 
                             <div class="row">
                                 <div id="form-group-telephone" class="form-group col-lg-4">
-                                    <label class="control-label" for="user-telephone">Telefono:</label>
+                                    <label class="control-label" for="user-telephone">Telefono: </label>
+                                    <span class="text-muted" style="font-size: 11px;">Se mostrara en las publicaciones - Opcional</span>
                                     <form:input id="user-telephone" path="telephone" cssClass="form-control"/>
                                 </div>
                             </div>

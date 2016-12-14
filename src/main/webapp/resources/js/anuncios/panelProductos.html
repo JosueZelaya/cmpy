@@ -43,7 +43,7 @@
 
                                 <img ng-if="publicacion.tipo==='GRATIS'" ng-src="/images/getThumbnail/{{publicacion.imgUrl}}" alt="imagen aqui">
 
-                                <div class="caption">
+                                <div class="caption" style="overflow-x:hidden">
                                     <p>{{publicacion.descripcion.slice(0, 75)}}...</p>                                        
                                 </div>
                             </a>
@@ -57,7 +57,7 @@
                                 
                                 <img ng-if="publicacion.tipo==='EXTERNA'" ng-src="{{publicacion.imgUrl}}" alt="imagen aqui">
 
-                                <div class="caption">
+                                <div class="caption" style="overflow-x:hidden">
                                     <p>{{publicacion.descripcion.slice(0, 75)}}...</p>                                        
                                 </div>
                             </a>
