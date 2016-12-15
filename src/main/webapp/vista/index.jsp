@@ -52,7 +52,7 @@
                         Avisos
                         <span class="badge badge-notify">{{totalNotificaciones + NoLeidosTotal}}</span>
                     </button>   
-                    
+
                     <button id="botonInfo" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">
                         <span class="sr-only">Toggle navigation</span>    
                         Info
@@ -70,7 +70,14 @@
 
                         <li ng-if="authenticated">
                             <a href="#" ui-sref="home.misPublicaciones"> 
-                                Mis Publiaciones
+                                Mis Anuncios
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                            </a>
+                        </li>
+
+                        <li ng-if="!authenticated">
+                            <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
+                                <span class="glyphicon glyphicon-facetime-video"></span>
                             </a>
                         </li>
 
@@ -156,16 +163,50 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar-right navbar-collapse collapse" uib-collapse="infoCollapsed">
-                    <ul class="nav navbar-nav">
+                <div uib-dropdown="" class="dropdown navbar-right navbar-collapse collapse" uib-collapse="infoCollapsed">                    
+                    <ul ng-if="infoCollapsed" class="nav navbar-nav">
+                        <li class="dropdown" uib-dropdown="">
+                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
+                                Información
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
+                                        <span class="glyphicon glyphicon-facetime-video"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" ui-sref="home.about({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                        Nosotros
+                                    </a>
+                                </li>                                
+
+                                <li>
+                                    <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                        Terminos
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" ui-sref="home.crearTienda({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                        Negocios
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul ng-if="!infoCollapsed" class="nav navbar-nav">
+                        <li>
+                            <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
+                                <span class="glyphicon glyphicon-facetime-video"></span>
+                            </a>
+                        </li>
                         <li>
                             <a href="#" ui-sref="home.about({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
                                 Nosotros
                             </a>
-                        </li>
-                        <li ng-if="!authenticated">
-                            <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda</a>
-                        </li>
+                        </li>                                
 
                         <li>
                             <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
@@ -257,8 +298,8 @@
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">-->
-        
-        
+
+
         <!-- PARA PASAR A PRODUCCIÓN USAR ESTOS SCRIPTS Y COMENTAR LOS ANTERIORES -->
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js" ></script>
         <link href="${pageContext.request.contextPath}/resources/min/css/style.min.css" rel="stylesheet" type="text/css" media='all'>
