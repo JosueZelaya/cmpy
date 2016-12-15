@@ -5,6 +5,13 @@
         <div ui-view="maps">
 
         </div> 
+        <div class="alert alert-info alert-dismissible fade in" role="alert" ng-show="alladdress==undefined">
+            <strong>Agrega</strong> un marcador haciendo click
+             <br/>
+             <strong>Elimina</strong> un marcador con click derecho
+             <br/>
+             <strong>Puedes agregar mas de un marcador</strong>
+        </div>
 
         <div class="panel panel-default" style="margin-top:10px" ng-show="alladdress!=undefined">
             <!-- Default panel contents -->

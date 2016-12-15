@@ -6,6 +6,9 @@
 
 <script type="text/ng-template" id="venderModal.html">
 <div class="modal-body" ng-app="cmpy.anuncios" ng-controller="venderController">
+    <div class="alert alert-warning" role="alert">
+       Si tienes dudas puesdes ver el video de ayuda <a href="https://youtu.be/cmfOtIizd70" target="_blank">Click aqui para ver video</a>
+    </div>
     <div ng-class="valtitulo">
         <label for="titulo" class="control-label">Agregue el nombre del producto</label>
         <input ng-model="titulo" ng-change="esValidoTitulo()" path="titulo" id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo del anuncio" />

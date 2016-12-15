@@ -155,6 +155,9 @@
                                 Nosotros
                             </a>
                         </li>
+                        <li>
+                            <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda</a>
+                        </li>
 
                         <li>
                             <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 

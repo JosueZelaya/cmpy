@@ -129,6 +129,13 @@ modulo_anuncios.controller('venderController',
                     $scope.valimg = ($scope.existingFlowObject.files.length === 0 )? true:false;
                     $scope.valubi = ($rootScope.ubicaciones === undefined)?true:false;
                     
+                    if($rootScope.ubicaciones !== undefined)
+                    {
+                        
+                       $scope.valubi = $rootScope.ubicaciones.length===0?true:false;
+                    }
+                    
+                    
                     $scope.valglobal = !(($scope.titulo !== undefined) && ($scope.titulo !== '')
                             && ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) 
                             && ($scope.precio !== undefined) && ($scope.precio > 0)
