@@ -7,3 +7,9 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+nbactions.xml
+nb-configuration.xml
+src/main/webapp/resources/bower_components
+src/main/webapp/resources/js-min-safe
+src/main/webapp/resources/min
+src/main/webapp/resources/node_modules
