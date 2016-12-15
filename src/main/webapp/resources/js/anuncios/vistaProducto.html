@@ -1,36 +1,26 @@
 <div class="col-md-8 min_cont marcar">
     <div class="panel panel-default min_cont">                    
         <div class="panel-heading">
-            <p>                            
-                Publicaciones
-                <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')">VenderYa!</button>
-                <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html')">
-                    VenderYa!
-                </button>
-
-            </p>
+            {{publicacion.titulo}}
         </div>  
 
         <div id="publicacionesProductos" class="panel-body">
-            <div>
-
+            <div>                
                 <div class="thumbnail">
                     &nbsp;&nbsp;{{publicacion.usuario.persona.nombre}}
                     <img class="user-image" ng-if="!publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
                     <img class="user-image" ng-if="(publicacion.usuario.signInProvider === null || publicacion.usuario.signInProvider === undefined) && publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
                     <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null && publicacion.usuario.signInProvider !== undefined && publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                    <p style="text-align: center; font-size: 18px; font-weight: bold; overflow-x: hidden">
+                        {{publicacion.titulo}}
+                    </p>                    
                     <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
                         <uib-slide ng-repeat="recurso in recursoList" active="slide.active" index="slide.id">
-                            <a href=""><img class="imgajust" ng-src="/images/getImage/{{recurso.ruta}}" /></a>
-                            <div class="carousel-caption">                                
-                                <div class="titulo-publicacion">
-                                    <h3>{{publicacion.titulo}}</h3>
-                                </div> 
-                            </div>
+                            <a href=""><img class="imgajust" ng-src="/images/getImage/{{recurso.ruta}}" /></a>                            
                         </uib-slide>
                     </uib-carousel>
                     <div class="bs-callout bs-callout-primary">
- 
+
                         <div class="row">
                             <div class="col-md-8">
                                 <h3 class="price-text-color">$ {{publicacion.precio}}</h3>
@@ -45,27 +35,27 @@
                         <br/>
                         <p style="text-align:right;font-size:24px;color:red">Tel. {{publicacion.usuario.persona.telefono}}</p>
                         <br/>
-                    
+
                     </div>
-                    
+
                     <div style="text-align:center">
-                            <div class="btn-group" role="group" aria-label="..." style="margin-bottom:20px">
+                        <div class="btn-group" role="group" aria-label="..." style="margin-bottom:20px">
 
-                                <button value="VenderYa!" type="submit" class="btn btn-success" ng-click="open('ubicacionesModal.html', 'lg')" uib-tooltip="Ver Puntos de Entrega">
-                                    <span class="glyphicon glyphicon-map-marker"></span>
-                                </button>  
+                            <button value="VenderYa!" type="submit" class="btn btn-success" ng-click="open('ubicacionesModal.html', 'lg')" uib-tooltip="Ver Puntos de Entrega">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                            </button>  
 
 
-                                <a ng-show="!authenticated" ng-click="open('loginModal.html')" class="btn btn-primary btn-default" href="" uib-tooltip="Mensaje Privado">
-                                    <span class="glyphicon glyphicon-envelope"></span>
-                                </a>
-                                <a ng-show="authenticated" class="btn btn-primary btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id,usuarioNombre:publicacion.usuario.persona.nombre,asunto:publicacion.titulo})" uib-tooltip="Mensaje Privado">
-                                    <span class="glyphicon glyphicon-envelope"></span>
-                                </a>
+                            <a ng-show="!authenticated" ng-click="open('loginModal.html')" class="btn btn-primary btn-default" href="" uib-tooltip="Mensaje Privado">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </a>
+                            <a ng-show="authenticated" class="btn btn-primary btn-default" href="" ui-sref="home.vistaMensaje({usuarioId:publicacion.usuario.id,usuarioNombre:publicacion.usuario.persona.nombre,asunto:publicacion.titulo})" uib-tooltip="Mensaje Privado">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </a>
 
-                            </div>
+                        </div>
                     </div>
-                    
+
                     <div class="actionBox">
 
                         <!--<form class="form-inline" role="form">-->
@@ -87,7 +77,7 @@
                                 <button ng-disabled="!ready" ng-show="authenticated" type="button" class="btn btn-default" ng-click="agregarComentario()" style="width: 100%">Agregar</button>
                             </div>
                         </div> 
-                        
+
                         <!--</form>-->
 
                         <div class="bs-callout bs-callout-primary" ng-repeat="comentario in comentarioList">
