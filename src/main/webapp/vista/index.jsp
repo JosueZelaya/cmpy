@@ -155,7 +155,7 @@
                                 Nosotros
                             </a>
                         </li>
-                        <li>
+                        <li ng-if="!authenticated">
                             <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda</a>
                         </li>
 
