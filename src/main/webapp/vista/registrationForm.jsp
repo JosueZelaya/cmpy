@@ -135,7 +135,7 @@
                                 </div>
                             </c:if>
 
-                            <p>
+<!--                            <p>
                                 <b>
                                     Al registrarse en $ComprameYa! usted está indicando que acepta los términos de servicio
                                     establecidos para el uso de esta herramienta de comercio electrónico.
@@ -207,7 +207,7 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- Add the submit button to the form. -->
                             <button type="submit" class="btn btn-default">Registrarse</button>
                         </form:form>
