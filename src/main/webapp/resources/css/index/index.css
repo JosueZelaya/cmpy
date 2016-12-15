@@ -242,6 +242,7 @@ body > div.pac-container.pac-logo{
     .panel-flex{display:block;height:3600px;}
     .imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
     #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:25%;}
+    .macro{font-size:24px}
 }
 
 /* Landscape tablets and medium desktops */
@@ -249,6 +250,7 @@ body > div.pac-container.pac-logo{
     .panel-flex{display:block;height:3600px;}
      imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
      #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:25%;}
+     .macro{font-size:24px}
 }
 
 /* Portrait tablets and small desktops */
@@ -256,6 +258,7 @@ body > div.pac-container.pac-logo{
     .panel-flex{display:block;height:3600px;}
      .imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
      #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:25%;}
+     .macro{font-size:24px}
 }
 
 /* Landscape phones and portrait tablets */
@@ -263,6 +266,7 @@ body > div.pac-container.pac-logo{
     .panel-flex{display:block;height:38px;}
     .imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
     #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:100%;}
+    .macro{font-size:24px}
 }
 
 /* Portrait phones and smaller */
@@ -270,6 +274,7 @@ body > div.pac-container.pac-logo{
     .panel-flex{display:block;height:38px;}
     .imgajust{height:auto;width:100%;min-height:auto;min-width:auto;}
     #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:100%;}
+    .macro{font-size:11px}
 }
 
 /* Portrait LOT*/
