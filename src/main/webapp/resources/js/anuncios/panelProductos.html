@@ -20,12 +20,15 @@
 
                         <div style="height: 450px;" class="thumbnail">       
 
-                            <div class="row">
+                            <div class="row">                                
                                 <div ng-if="publicacion.tipo!=='EXTERNA'" class="col-lg-7 col-md-4 col-sm-2">
-                                    <img class="user-image" ng-if="publicacion.usuario.signInProvider === null" height="28px" width="28px" ng-src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
-                                    <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                    &nbsp;&nbsp;{{publicacion.usuario.persona.nombre}}
+                                    <img class="user-image" ng-if="!publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="publicacion.usuario.signInProvider === null && publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null && publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
                                 </div>
-                                <div ng-if="publicacion.tipo==='EXTERNA'" class="col-lg-7 col-md-4 col-sm-2">                                    
+                                <div ng-if="publicacion.tipo==='EXTERNA'" class="col-lg-7 col-md-4 col-sm-2">
+                                    {{publicacion.usuario.persona.nombre}}
                                     <img class="user-image" height="28px" width="28px" ng-src="/resources/images/logo.jpg" alt="..."  uib-tooltip="{{publicacion.link}}" tooltip-placement="top"/>
                                 </div>
                                 <div class="rating col-lg-5 col-md-8 col-sm-10">

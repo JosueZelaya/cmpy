@@ -58,11 +58,16 @@ public class UsuarioService {
         try {            
             
             if( !userAccountData.isSocialSignIn() ){
-                String rutaImg = FileManager.saveFile(userAccountData.getImage());
-                userAccountData.setImageUrl(rutaImg);
-            }
-            
-            usuario.setRutaImagen(userAccountData.getImageUrl());
+                
+                if(userAccountData.getImage() != null){
+                    String rutaImg = FileManager.saveFile(userAccountData.getImage());
+                    userAccountData.setImageUrl(rutaImg);
+                }else{
+                    userAccountData.setImageUrl(null);
+                }
+            }else{
+                usuario.setRutaImagen(userAccountData.getImageUrl());
+            }                        
         } catch (IOException ex) {
             log.error(PublicacionController.class.getName(), "No se pudo cargar imagen", ex);
         }
@@ -71,7 +76,7 @@ public class UsuarioService {
     @Transactional
     public Usuario registerNewUserAccount(RegistrationForm userAccountData) throws DuplicateEmailException {
         if (emailExist(userAccountData.getEmail())) {
-            throw new DuplicateEmailException("The email address: " + userAccountData.getEmail() + " is already in use.");
+            throw new DuplicateEmailException("El correo: " + userAccountData.getEmail() + " ya está siendo usado.");
         }
 
         String encodedPassword = encodePassword(userAccountData);

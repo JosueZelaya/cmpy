@@ -25,7 +25,7 @@ import javax.validation.Payload;
 @Documented
 public @interface PasswordsNotEmpty {
     
-    String message() default "PasswordNotEmpty";
+    String message() default "Escriba una contraseña";
     
     Class<?>[] groups() default {};
     

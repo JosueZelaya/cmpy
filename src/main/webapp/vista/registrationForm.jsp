@@ -60,6 +60,7 @@
 
                             <c:if test="${user.signInProvider == null}">
                                 <div class="form-group">
+                                    <label class="control-label" for="user-image">Sube una foto: </label>
                                     <form:input cssClass="form-control" path="image" id="user-image" name="multipleFiles" type="file" class="file" multiple="true" data-preview-file-type="any"/>
                                 </div> 
                             </c:if>    
@@ -102,7 +103,7 @@
                                 <div id="form-group-telephone" class="form-group col-lg-4">
                                     <label class="control-label" for="user-telephone">Telefono: </label>
                                     <span class="text-muted" style="font-size: 11px;">Se mostrara en las publicaciones - Opcional</span>
-                                    <form:input id="user-telephone" path="telephone" cssClass="form-control"/>
+                                    <form:input type="number" id="user-telephone" path="telephone" cssClass="form-control"/>
                                 </div>
                             </div>
                             <!--
@@ -112,7 +113,7 @@
                             <c:if test="${user.signInProvider == null}">
                                 <div class="row">
                                     <div id="form-group-password" class="form-group col-lg-4">
-                                        <label class="control-label" for="user-password">password: </label>
+                                        <label class="control-label" for="user-password">Contraseña </label>
                                         <!--
                                             Add the password field to the form and ensure 
                                             that validation errors are shown.
@@ -123,7 +124,7 @@
                                 </div>
                                 <div class="row">
                                     <div id="form-group-passwordVerification" class="form-group col-lg-4">
-                                        <label class="control-label" for="user-passwordVerification">comprobacion password: </label>
+                                        <label class="control-label" for="user-passwordVerification">Comprobación contraseña: </label>
                                         <!-- 
                                             Add the passwordVerification field to the form and ensure
                                             that validation errors are shown.

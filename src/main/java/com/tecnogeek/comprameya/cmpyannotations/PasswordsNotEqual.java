@@ -25,7 +25,7 @@ import javax.validation.Payload;
 @Documented
 public @interface PasswordsNotEqual {
     
-    String message() default "PasswordNotEqual";
+    String message() default "Las contraseñas no son iguales";
     
     Class<?>[] groups() default {};
     

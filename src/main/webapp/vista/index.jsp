@@ -38,9 +38,13 @@
 
                     <button ng-show="authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
                         <span class="sr-only">Toggle navigation</span>
-                        Hola! {{username}} 
-                        <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
-                        <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
+                        <div ng-if="!imageUrl">
+                            <img ng-show="localAccount" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
+                        </div>
+                        <div ng-if="imageUrl">
+                            <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
+                            <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
+                        </div>                        
                     </button>            
 
                     <button ng-show="authenticated" id="botonAvisos" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">
@@ -77,10 +81,14 @@
                         <!--</div>-->
                         <!--<div ng-show="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
                         <li class="dropdown" uib-dropdown="" ng-if="authenticated">
-                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                Mi Cuenta
+                            <a ng-if="imageUrl" href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
+                                Yo
                                 <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
                                 <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
+                            </a>
+                            <a ng-if="!imageUrl" href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                                                
+                                Yo
+                                <img ng-show="localAccount" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Cambiar Clave</a></li>

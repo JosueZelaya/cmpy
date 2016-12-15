@@ -93,7 +93,7 @@ public class RegistrationController {
                     "user",
                     "email",
                     userAccountData.getEmail(),
-                    "NotExist.user.email",
+                    ex.getLocalizedMessage(),
                     result);
         }
  
