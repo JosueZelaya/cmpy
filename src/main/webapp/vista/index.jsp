@@ -55,7 +55,7 @@
 
                     <button id="botonInfo" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">
                         <span class="sr-only">Toggle navigation</span>    
-                        Info
+                        Ayuda
                         <span class="glyphicon glyphicon-info-sign"></span>
                     </button>
 
@@ -67,13 +67,6 @@
                 <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">
 
                     <ul class="nav navbar-nav"> 
-
-                        <li ng-if="authenticated">
-                            <a href="#" ui-sref="home.misPublicaciones"> 
-                                Mis Anuncios
-                                <span class="glyphicon glyphicon-shopping-cart"></span>
-                            </a>
-                        </li>
 
                         <li ng-if="!authenticated">
                             <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
@@ -87,7 +80,7 @@
                         </li>                           
                         <!--</div>-->
                         <!--<div ng-show="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
-                        <li class="dropdown" uib-dropdown="" ng-if="authenticated">
+                        <li class="dropdown" uib-dropdown="" ng-if="authenticated && navCollapsed">
                             <a ng-if="imageUrl" href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
                                 Yo
                                 <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
@@ -98,6 +91,12 @@
                                 <img ng-show="localAccount" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
                             </a>
                             <ul class="dropdown-menu" role="menu">
+                                <li ng-if="authenticated">
+                                    <a href="#" ui-sref="home.misPublicaciones"> 
+                                        Mis Anuncios
+                                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                                    </a>
+                                </li>
                                 <li><a href="#">Cambiar Clave</a></li>
                                 <li><a href="#">Edita Perfil</a></li>
                                 <li><a href="#">Configuracion</a></li>
@@ -105,7 +104,22 @@
                                 <li class="dropdown-header">Sesión</li>                                     
                                 <li><a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
                             </ul>
-                        </li>                        
+                        </li>
+
+
+                        <li ng-if="authenticated && !navCollapsed">
+                            <a href="#" ui-sref="home.misPublicaciones"> 
+                                Mis Anuncios
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                            </a>
+                        </li>
+                        <li ng-if="authenticated && !navCollapsed"><a href="#">Cambiar Clave</a></li>
+                        <li ng-if="authenticated && !navCollapsed"><a href="#">Edita Perfil</a></li>
+                        <li ng-if="authenticated && !navCollapsed"><a href="#">Configuracion</a></li>
+                        <li ng-if="authenticated && !navCollapsed" class="divider"></li>
+                        <li ng-if="authenticated && !navCollapsed" class="dropdown-header">Sesión</li>                                     
+                        <li ng-if="authenticated && !navCollapsed"><a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
+
                         <!--</div>-->
                     </ul>                    
                 </div>
@@ -114,7 +128,7 @@
 
                         <li class="dropdown" uib-dropdown="" ng-if="authenticated">
                             <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
-                                Mensajes
+                                <span class="glyphicon glyphicon-envelope"></span>
                                 <span class="badge badge-notify">{{NoLeidosTotal}}</span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
@@ -139,7 +153,7 @@
 
                         <li class="dropdown" uib-dropdown="" ng-if="authenticated">
                             <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                Notificaciones 
+                                <span class="glyphicon glyphicon-comment"></span>
                                 <span class="badge badge-notify">{{totalNotificaciones}}</span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
