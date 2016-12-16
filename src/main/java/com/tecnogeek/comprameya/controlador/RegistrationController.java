@@ -28,67 +28,101 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.tecnogeek.comprameya.service.UsuarioService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
  * @author josue.zelaya
  */
-
 @Controller
 @SessionAttributes("user")
 public class RegistrationController {
-    
+
     @Autowired
     private UsuarioService service;
-    
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private ProviderSignInUtils providerSignInUtils;
 
     @Autowired
     public RegistrationController(ConnectionFactoryLocator connectionFactoryLocator,
-                            UsersConnectionRepository connectionRepository) {        
+            UsersConnectionRepository connectionRepository) {
         this.providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
     }
-    
+
+    @RequestMapping(value = "/user/update", method = RequestMethod.GET)
+    public String updateUser() {
+        return "";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/updatePass", method = RequestMethod.POST)
+    public ResponseEntity<String> updateUserPass(@RequestParam(value = "passActual", required = true) String passActual,
+            @RequestParam(value = "passNuevo", required = true) String passNuevo,
+            @RequestParam(value = "passConfirmacion", required = true) String passConfirmacion) {
+
+        Usuario u = service.getLoggedUser();
+
+        if (!passNuevo.equals(passConfirmacion)) {
+            return new ResponseEntity<>("Las contraseñas no son iguales", new HttpHeaders(), HttpStatus.PRECONDITION_FAILED);
+        }
+
+        if (!passwordEncoder.matches(passActual, u.getPass())) {
+            return new ResponseEntity<>("Contraseña incorrecta", new HttpHeaders(), HttpStatus.PRECONDITION_FAILED);
+        }
+
+        String encodedPass = passwordEncoder.encode(passNuevo);
+        u.setPass(encodedPass);
+        service.getRepository().save(u);
+        return ResponseEntity.ok("ok");
+    }
+
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
-    public String showRegistrationForm(WebRequest request,Model model){
+    public String showRegistrationForm(WebRequest request, Model model) {
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
-        
+
         RegistrationForm registration = createRegistrationDTO(connection);
-        
+
         model.addAttribute("user", registration);
- 
+
         return "registrationForm";
     }
-    
-    @RequestMapping(value ="/user/register", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
     public String registerUserAccount(@Valid @ModelAttribute("user") RegistrationForm userAccountData,
-                                      BindingResult result,
-                                      WebRequest request) throws Exception{
-        
-        if(result.hasErrors()){
+            BindingResult result,
+            WebRequest request) throws Exception {
+
+        if (result.hasErrors()) {
             return "registrationForm";
         }
-        
-        Usuario registered = createUserAccount(userAccountData,result);
-        
-        if(registered==null){
+
+        Usuario registered = createUserAccount(userAccountData, result);
+
+        if (registered == null) {
             return "registrationForm";
-        }                         
-        
+        }
+
         SecurityUtil.logInUser(registered);
         providerSignInUtils.doPostSignUp(registered.getLogin(), request);
- 
+
         return "redirect:/";
-        
+
     }
-    
+
     private Usuario createUserAccount(RegistrationForm userAccountData, BindingResult result) {
         Usuario registered = null;
- 
+
         try {
             registered = service.registerNewUserAccount(userAccountData);
-        }
-        catch (DuplicateEmailException ex) {
+        } catch (DuplicateEmailException ex) {
             addFieldError(
                     "user",
                     "email",
@@ -96,11 +130,11 @@ public class RegistrationController {
                     ex.getLocalizedMessage(),
                     result);
         }
- 
+
         return registered;
     }
-    
-    private void addFieldError(String objectName, String fieldName, String fieldValue,  String errorCode, BindingResult result) {
+
+    private void addFieldError(String objectName, String fieldName, String fieldValue, String errorCode, BindingResult result) {
         FieldError error = new FieldError(
                 objectName,
                 fieldName,
@@ -110,24 +144,24 @@ public class RegistrationController {
                 new Object[]{},
                 errorCode
         );
- 
+
         result.addError(error);
     }
-    
+
     private RegistrationForm createRegistrationDTO(Connection<?> connection) {
         RegistrationForm dto = new RegistrationForm();
- 
+
         if (connection != null) {
             UserProfile socialMediaProfile = connection.fetchUserProfile();
             dto.setEmail(socialMediaProfile.getEmail());
             dto.setFirstName(socialMediaProfile.getFirstName());
-            dto.setLastName(socialMediaProfile.getLastName());            
+            dto.setLastName(socialMediaProfile.getLastName());
             ConnectionKey providerKey = connection.getKey();
             dto.setSignInProvider(SocialMediaService.valueOf(providerKey.getProviderId().toUpperCase()));
             dto.setImageUrl(connection.getImageUrl());
         }
- 
+
         return dto;
     }
-    
+
 }

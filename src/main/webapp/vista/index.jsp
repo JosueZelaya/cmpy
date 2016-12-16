@@ -97,8 +97,8 @@
                                         <span class="glyphicon glyphicon-shopping-cart"></span>
                                     </a>
                                 </li>
-                                <li><a href="#">Cambiar Clave</a></li>
-                                <li><a href="#">Edita Perfil</a></li>
+                                <li ng-if="localAccount" ng-click="open('changePassModal.html')"><a href="#">Cambiar Clave</a></li>
+                                <li><a href="#">Editar Perfil</a></li>
                                 <li><a href="#">Configuracion</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Sesión</li>                                     
@@ -113,8 +113,8 @@
                                 <span class="glyphicon glyphicon-shopping-cart"></span>
                             </a>
                         </li>
-                        <li ng-if="authenticated && !navCollapsed"><a href="#">Cambiar Clave</a></li>
-                        <li ng-if="authenticated && !navCollapsed"><a href="#">Edita Perfil</a></li>
+                        <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('changePassModal.html')">Cambiar Clave</a></li>
+                        <li ng-if="authenticated && !navCollapsed"><a href="#">Editar Perfil</a></li>
                         <li ng-if="authenticated && !navCollapsed"><a href="#">Configuracion</a></li>
                         <li ng-if="authenticated && !navCollapsed" class="divider"></li>
                         <li ng-if="authenticated && !navCollapsed" class="dropdown-header">Sesión</li>                                     
@@ -251,8 +251,41 @@
 
         <%@include file="common/loginModal.jsp" %>
 
+        <script type="text/ng-template" id="changePassModal.html">
+            <div class="modal-body" ng-app="cmpy.autenticacion" ng-controller="changePassController">
+                <div ng-class="valtitulo">
+                    <label for="passActual" class="control-label">Ingrese contraseña actual</label>
+                    <input ng-model="passActual" id="passActual" type="password" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="wrongPass">
+                        {{wrongPassMsj}}
+                    </div>
+                </div>
+                <div ng-class="valtitulo">
+                    <label for="passNuevo" class="control-label">Ingrese contraseña nueva</label>
+                    <input ng-model="passNuevo" id="passNuevo" type="password" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
+                        {{msjPasswordNotEqual}}
+                    </div>
+                </div>
+                <div ng-class="valtitulo">
+                    <label for="passConfirmacion" class="control-label">Confirme la nueva contraseña</label>
+                    <input ng-model="passConfirmacion" id="passConfirmacion" type="password" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
+                        {{msjPasswordNotEqual}}
+                    </div>
+                </div>
+                <br/>
+                <button ng-click="changePass()" type="button" class="btn btn-success" uib-tooltip="Aplicar el cambio de contraseña" tooltip-placement="bottom">
+                    Aplicar Cambio
+                </button>
+                <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar cambio de contraseña" tooltip-placement="bottom">
+                    Cancelar
+                </button>                
+            </div>
+        </script>
+
         <!-- PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS -->
-<!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-sanitize/angular-sanitize.min.js"></script> 
         <script type='text/javascript' src='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-animate/angular-animate.min.js"></script>        
@@ -272,6 +305,8 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacion.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/changePassController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacion.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacionService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/PushNotificationService.js" ></script>
@@ -311,16 +346,16 @@
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">-->
+        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
 
 
         <!-- PARA PASAR A PRODUCCIÓN USAR ESTOS SCRIPTS Y COMENTAR LOS ANTERIORES -->
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js" ></script>
+<!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js" ></script>
         <link href="${pageContext.request.contextPath}/resources/min/css/style.min.css" rel="stylesheet" type="text/css" media='all'>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
         <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
-        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />-->
 
     </body>
 </html>

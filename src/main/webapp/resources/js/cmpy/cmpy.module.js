@@ -55,7 +55,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     "panelPublicacionesEmpresas@home": {templateUrl: '/resources/js/anuncios/panelEmpresas.html', controller: 'empresasController'},                    
                     "venderModal@home": {templateUrl: '/resources/js/anuncios/venderModal.html'},
                     "ubicacionesModal@home": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'},
-                    "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html', controller: 'mapController'}
+                    "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html', controller: 'mapController'}                    
                 },
                 sticky: true,
                 dsr: true

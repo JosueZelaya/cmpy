@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import com.tecnogeek.comprameya.utils.FileManager;
 import java.io.IOException;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -34,6 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UsuarioService {
 
+    @Getter
     @Autowired
     UsuarioRepository repository;
 

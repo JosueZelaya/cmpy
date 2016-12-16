@@ -41,6 +41,8 @@ module.exports = function (grunt) {
                     './js-min-safe/bower/angular-toastr/dist/angular-toastr.tpls.min.js': ['./bower_components/angular-toastr/dist/angular-toastr.tpls.min.js'],
                     './js-min-safe/autenticacion/autenticacion.module.js': ['./js/autenticacion/autenticacion.module.js'],
                     './js-min-safe/autenticacion/autenticacionController.js': ['./js/autenticacion/autenticacionController.js'],
+                    './js-min-safe/autenticacion/changePassController.js': ['./js/autenticacion/changePassController.js'],
+                    './js-min-safe/autenticacion/autenticacionService.js': ['./js/autenticacion/autenticacionService.js'],
                     './js-min-safe/notificacion/notificacion.module.js': ['./js/notificacion/notificacion.module.js'],
                     './js-min-safe/notificacion/notificacionService.js': ['./js/notificacion/notificacionService.js'],
                     './js-min-safe/notificacion/PushNotificationService.js': ['./js/notificacion/PushNotificationService.js'],
