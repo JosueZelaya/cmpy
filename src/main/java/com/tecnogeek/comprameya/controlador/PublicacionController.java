@@ -83,6 +83,7 @@ public class PublicacionController {
     
     @RequestMapping(value="/getPublicacionById/{id}",method=RequestMethod.GET)    
     public Publicacion getPublicacionById(@PathVariable Long id){
+        log.info("Se muestra publicacion con id {}",id);
         return publicacionRepository.getPublicacion(id);
     }
     
@@ -94,6 +95,7 @@ public class PublicacionController {
             return e.getMessage();
         }
         
+        log.info("Se ha eliminado la publicacion con id {}",id);
         return null;
     }
     
@@ -105,6 +107,7 @@ public class PublicacionController {
             return e.getMessage();
         }
         
+        log.info("Se ha marcado como vendida la publicacion con id {}",id);
         return null;
     }
     
@@ -151,12 +154,14 @@ public class PublicacionController {
         
         Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion, true, loggedUser);   
         
+        log.info("{} ha solicitado ver sus anuncios",loggedUser.getLogin());
         return publicaciones;
     }
     
     @RequestMapping(value="/getAnunciosByMatch/{match}/{page}",method=RequestMethod.GET)    
     public Iterable<Publicacion> getAnunciosByMatch(@PathVariable String match, @PathVariable int page)
     {                
+        log.info("Se busca {}",match);
         return publicacionService.getPublicaciones(page, match);
     }
     
@@ -176,6 +181,7 @@ public class PublicacionController {
         
         Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion,cat, nivel);   
         
+        log.info("Se filtra por cateogoria id {}",cat);
         return publicaciones;
     }
         
@@ -185,6 +191,7 @@ public class PublicacionController {
                                  @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
                                  Model model)
     {                  
+        Usuario loggedUser = usuarioRepository.getLoggedUser();
         Publicacion publicacion = new Publicacion();
         publicacion.setTitulo(titulo);
         publicacion.setDescripcion(descripcion);
@@ -206,9 +213,10 @@ public class PublicacionController {
         TipoPublicacion tipoPublicacion = new TipoPublicacion();
         tipoPublicacion.setId(tipo.longValue());
         publicacion.setTipo(tipoPublicacion);
-        
+        publicacion.setUsuario(loggedUser);
         publicacionRepository.save(publicacion);
         
+        log.info("{} ha agregado el anuncio pagado: ", loggedUser.getLogin());
         return "ok";
     }
     
@@ -271,7 +279,10 @@ public class PublicacionController {
         suscriptores.add(suscripcionPublicacion);
         publicacion.setSuscriptoresList(suscriptores);
         
-        return publicacionRepository.save(publicacion);
+        publicacion = publicacionRepository.save(publicacion);
+        
+        log.info("{} ha agregado la publicacion: {}, con id {} ", usuario.getLogin(), publicacion.getTitulo(), publicacion.getId());
+        return publicacion;
     }
     
     
@@ -292,7 +303,7 @@ public class PublicacionController {
                 listaUbicacionTmp.add(ubi);
             }
             
-            
+        log.info("Se muestran las ubicaciones de la publicacion {}, con id {} ", pu.getTitulo(), pu.getId());
         return listaUbicacionTmp;  
     }    
     
