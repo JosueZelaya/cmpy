@@ -1,7 +1,14 @@
 <div class="col-md-8 min_cont marcar">
     <div class="panel panel-default min_cont">                    
         <div class="panel-heading">
-            {{publicacion.titulo}}
+            <p>
+                {{publicacion.titulo}}
+                <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')">VenderYa! - Crear Anuncio</button>
+                <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html')">
+                    VenderYa! - Crear Anuncio
+                </button>
+            </p>
+
         </div>  
 
         <div id="publicacionesProductos" class="panel-body">
