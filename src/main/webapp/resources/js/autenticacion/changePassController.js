@@ -1,4 +1,4 @@
-autenticacion.controller('changePassController', function ($scope, autenticacionService, $state) {
+autenticacion.controller('changePassController', function ($scope, autenticacionService, $state, toastr) {
     $scope.changePass = function () {
         $scope.passNotEqual = false;
         $scope.wrongPass = false;
@@ -7,7 +7,8 @@ autenticacion.controller('changePassController', function ($scope, autenticacion
                 .then(function (response) {
                     if(response === "ok"){
                         $scope.wrongPass = false;
-                        $scope.cancel(); //cerrar el dialogo                   
+                        $scope.cancel(); //cerrar el dialogo
+                        toastr.success("Se ha cambiado la contraseña", {});
                     }else{
                        $scope.wrongPass = true;
                        $scope.wrongPassMsj = response;
@@ -27,7 +28,8 @@ autenticacion.controller('changePassController', function ($scope, autenticacion
             autenticacionService.updatePass($scope.passNuevo)
                 .then(function (response) {
                     if(response === "ok"){
-                        $state.go("home");                 
+                        $state.go("home");
+                        toastr.success("Se ha actualizado su contraseña, por favor inicie sesion nuevamente", {});
                     }else{
                        $scope.wrongPass = true;
                        $scope.wrongPassMsj = response;

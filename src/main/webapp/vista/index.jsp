@@ -113,7 +113,7 @@
                                 <span class="glyphicon glyphicon-shopping-cart"></span>
                             </a>
                         </li>
-                        <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('changePassModal.html')">Cambiar Clave</a></li>
+                        <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('changePassModal.html'); cancel()">Cambiar Clave</a></li>
                         <li ng-if="authenticated && !navCollapsed"><a href="#">Editar Perfil</a></li>
                         <li ng-if="authenticated && !navCollapsed"><a href="#">Configuracion</a></li>
                         <li ng-if="authenticated && !navCollapsed" class="divider"></li>
