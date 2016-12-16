@@ -5,7 +5,6 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnogeek.comprameya.dto.GenericResponse;
 import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.entidad.PasswordResetToken;
 import com.tecnogeek.comprameya.entidad.Usuario;
@@ -43,7 +42,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -105,6 +103,8 @@ public class RegistrationController {
         String encodedPass = passwordEncoder.encode(passNuevo);
         u.setPass(encodedPass);
         service.getRepository().save(u);
+        
+        log.info("{} ha cambiado su password", u.getLogin());
         return ResponseEntity.ok("ok");
     }
 
@@ -116,6 +116,7 @@ public class RegistrationController {
 
         model.addAttribute("user", registration);
 
+        log.info("Se muestra formulario de registro");
         return "registrationForm";
     }
 
@@ -131,12 +132,14 @@ public class RegistrationController {
         Usuario registered = createUserAccount(userAccountData, result);
 
         if (registered == null) {
+            log.info("Se muestra formulario de registro");
             return "registrationForm";
         }
 
         SecurityUtil.logInUser(registered);
         providerSignInUtils.doPostSignUp(registered.getLogin(), request);
 
+        log.info("Nuevo usuario creado: {} ", registered.getLogin());
         return "redirect:/";
 
     }
@@ -161,6 +164,7 @@ public class RegistrationController {
         SimpleMailMessage email = constructResetTokenEmail(appUrl, request.getLocale(), token, user);
         mailSender.send(email);
 
+        log.info("{} ha solicitado resetear su password", user.getLogin());
         return ResponseEntity.ok("ok");
     }
 
@@ -193,6 +197,7 @@ public class RegistrationController {
         Authentication auth = new UsernamePasswordAuthenticationToken(user, null, authoritiesList);
         SecurityContextHolder.getContext().setAuthentication(auth);
 
+        log.info("{} pretende resetear su password", user.getLogin());
         return "redirect:/#/update_pass";
     }
 
@@ -210,6 +215,7 @@ public class RegistrationController {
             log.error(e.getMessage());
         }
         
+        log.info("{} ha reseteado su password", user.getLogin());        
         return ResponseEntity.ok("ok");
     }
 
@@ -222,6 +228,7 @@ public class RegistrationController {
         email.setSubject("Reset Password");
         email.setText(message + ": " + url);
         email.setFrom(env.getProperty("support.email"));
+        log.info("Se enviará un email {} para resetear su password", user.getLogin());
         return email;
     }
 

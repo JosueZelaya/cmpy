@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.tecnogeek.comprameya.repositories.CategoriaRepository;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
@@ -31,6 +32,7 @@ import org.springframework.web.context.request.WebRequest;
  * @author genaro
  */
 @Controller
+@Slf4j
 public class HomeController {
 
     @Autowired
@@ -55,8 +57,7 @@ public class HomeController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcomePage(Model model) {
-//        Iterable<Publicacion> anuncios = pManager.getAnunciosAleatorios(Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR, TipoPublicacionEnum.PAGADA);
-
+        
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName(); 
         
@@ -64,16 +65,17 @@ public class HomeController {
         model.addAttribute("categorias", categorias);
 
         model.addAttribute("username", userName);
-//        model.addAttribute("anuncios", anuncios);
         model.addAttribute("tipoPublicacion", Constantes.PUBLICACION_GRATIS);
         model.addAttribute("parametro", "Pagina Inicio");
+        
+        log.info("Se muestra home page");
         return "index";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String adminPage(Model model) {
-        System.out.println("AQUI ESTOY");
+    public String adminPage(Model model) {        
         model.addAttribute("parametro", "Hola Mundo");
+        log.info("Se muestra admin page");
         return "admin";
     }
 
@@ -105,6 +107,7 @@ public class HomeController {
             user.setRutaImagen(connection.getImageUrl());
         }
         
+        log.info("El usuario {} se ha autenticado", user.getLogin());
         return user;
     }
 
