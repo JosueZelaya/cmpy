@@ -164,7 +164,7 @@ public class RegistrationController {
         SimpleMailMessage email = constructResetTokenEmail(appUrl, request.getLocale(), token, user);
         mailSender.send(email);
 
-        log.info("{} ha solicitado resetear su password", user.getLogin());
+        log.info("{} desea resetear su password y se le ha enviado un email con un token para que pueda hacerlo.", user.getLogin());
         return ResponseEntity.ok("ok");
     }
 
