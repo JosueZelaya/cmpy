@@ -4,7 +4,8 @@ modulo_anuncios.controller('anunciosController',
             'anunciosService',
             'TIPO_PUBLICACION',
             '$window',
-            function ($rootScope, $scope, anunciosService, TIPO_PUBLICACION, $window) {
+            'toastr',
+            function ($rootScope, $scope, anunciosService, TIPO_PUBLICACION, $window, toastr) {
 
                 var getPublicacionesByCat = function (tipo, pagina, cat, nivel) {
                     return anunciosService.getAnunciosByCat(tipo, pagina, cat, nivel)
@@ -77,6 +78,7 @@ modulo_anuncios.controller('anunciosController',
 
                 $rootScope.agregarPublicacion = function (publicacion) {
                     $scope.publicaciones.unshift(publicacion);
+                    toastr.success("Se agregado tu publicacion", {});
                 };
 
                 $rootScope.verMisPublicaciones = function (page) {
