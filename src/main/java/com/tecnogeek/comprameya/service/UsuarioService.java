@@ -7,12 +7,14 @@ package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.controlador.PublicacionController;
 import com.tecnogeek.comprameya.dto.RegistrationForm;
+import com.tecnogeek.comprameya.entidad.PasswordResetToken;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.entidad.Perfil;
 import com.tecnogeek.comprameya.entidad.Persona;
 import com.tecnogeek.comprameya.entidad.QUsuario;
 import com.tecnogeek.comprameya.enums.Role;
 import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
+import com.tecnogeek.comprameya.repositories.PasswordResetTokenRepository;
 import com.tecnogeek.comprameya.repositories.PerfilRepository;
 import com.tecnogeek.comprameya.repositories.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,9 @@ public class UsuarioService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private PasswordResetTokenRepository passwordTokenRepository;
 
     private final QUsuario qUsuario = QUsuario.usuario;
 
@@ -125,6 +130,15 @@ public class UsuarioService {
         }
 
         return encodedPassword;
+    }
+    
+    public void createPasswordResetTokenForUser(final Usuario user, final String token) {
+        final PasswordResetToken myToken = new PasswordResetToken(token, user);
+        passwordTokenRepository.save(myToken);
+    }    
+    
+    public PasswordResetToken getPasswordResetToken(final String token) {
+        return passwordTokenRepository.findByToken(token);
     }
 
 }

@@ -283,6 +283,25 @@
                 </button>                
             </div>
         </script>
+        
+        <script type="text/ng-template" id="resetPassModal.html">
+            <div class="modal-body" ng-app="cmpy.autenticacion" ng-controller="resetPassController">
+                <div ng-class="valtitulo">
+                    <label for="emailReset" class="control-label">Ingrese su dirección de correo:</label>
+                    <input ng-model="emailReset" id="emailReset" type="text" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="wrongEmail">
+                        {{wrongEmailMsj}}
+                    </div>
+                </div>        
+                <br/>
+                <button ng-click="resetPass()" type="button" class="btn btn-success" uib-tooltip="Envia un email a tu correo para resetear la contraseña" tooltip-placement="bottom">
+                    Resetear Password
+                </button>
+                <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar cambio de contraseña" tooltip-placement="bottom">
+                    Cancelar
+                </button>                
+            </div>
+        </script>
 
         <!-- PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS -->
 <!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
@@ -306,6 +325,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacion.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/changePassController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/resetPassController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacion.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacionService.js" ></script>

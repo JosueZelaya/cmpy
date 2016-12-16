@@ -6,6 +6,12 @@
 
 package com.tecnogeek.comprameya.config;
 
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +21,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /**
  *
@@ -26,7 +34,11 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 @PropertySource(value = {"/WEB-INF/application.properties"})
 @EnableSpringConfigured
 @EnableLoadTimeWeaving
+@Slf4j
 public class AppConfig {
+    
+    @Autowired
+    private Environment env;
     
     @Bean
     public MessageSource messageSource() {
@@ -41,6 +53,34 @@ public class AppConfig {
     @Bean
     public static PropertySourcesPlaceholderConfigurer placeHolderConfigurer(){
         return new PropertySourcesPlaceholderConfigurer();
+    }
+    
+    @Bean
+    public JavaMailSenderImpl javaMailSenderImpl() {
+        final JavaMailSenderImpl mailSenderImpl = new JavaMailSenderImpl();
+
+        try {
+            mailSenderImpl.setHost(env.getRequiredProperty("smtp.host"));
+            mailSenderImpl.setPort(env.getRequiredProperty("smtp.port", Integer.class));
+            mailSenderImpl.setProtocol(env.getRequiredProperty("smtp.protocol"));
+            mailSenderImpl.setUsername(env.getRequiredProperty("smtp.username"));
+            mailSenderImpl.setPassword(env.getRequiredProperty("smtp.password"));
+        } catch (IllegalStateException ise) {
+            log.error("Could not resolve email.properties.  See email.properties.sample");
+            throw ise;
+        }
+        final Properties javaMailProps = new Properties();
+        javaMailProps.put("mail.smtp.auth", true);
+        javaMailProps.put("mail.smtp.starttls.enable", true);
+        mailSenderImpl.setJavaMailProperties(javaMailProps);
+        
+        try {
+            mailSenderImpl.testConnection();
+        } catch (MessagingException ex) {
+            log.error(ex.getMessage());
+        }
+        
+        return mailSenderImpl;
     }
     
 }

@@ -1,0 +1,37 @@
+<div class="col-md-8 min_cont marcar">
+    <div class="panel panel-default min_cont">                    
+        <div class="panel-heading">
+            {{publicacion.titulo}}
+        </div>  
+
+        <div id="publicacionesProductos" class="panel-body">
+
+            <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="wrongPass">
+                {{wrongPassMsj}}
+            </div>
+            <div ng-class="valtitulo">
+                <label for="passNuevo" class="control-label">Ingrese contraseña nueva</label>
+                <input ng-model="passNuevo" id="passNuevo" type="password" class="form-control"/>
+                <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
+                    {{msjPasswordNotEqual}}
+                </div>
+            </div>
+            <div ng-class="valtitulo">
+                <label for="passConfirmacion" class="control-label">Confirme la nueva contraseña</label>
+                <input ng-model="passConfirmacion" id="passConfirmacion" type="password" class="form-control"/>
+                <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
+                    {{msjPasswordNotEqual}}
+                </div>
+            </div>
+            <br/>
+            <button ng-click="resetPass()" type="button" class="btn btn-success" uib-tooltip="Aplicar el cambio de contraseña" tooltip-placement="bottom">
+                Aplicar Cambio
+            </button>
+            <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar cambio de contraseña" tooltip-placement="bottom">
+                Cancelar
+            </button>
+
+        </div>
+
+    </div>
+</div>  

@@ -5,7 +5,9 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
+import com.tecnogeek.comprameya.dto.GenericResponse;
 import com.tecnogeek.comprameya.dto.RegistrationForm;
+import com.tecnogeek.comprameya.entidad.PasswordResetToken;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
 import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
@@ -28,9 +30,24 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.tecnogeek.comprameya.service.UsuarioService;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,6 +58,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @SessionAttributes("user")
+@Slf4j
 public class RegistrationController {
 
     @Autowired
@@ -48,6 +66,12 @@ public class RegistrationController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private Environment env;
 
     private ProviderSignInUtils providerSignInUtils;
 
@@ -115,6 +139,90 @@ public class RegistrationController {
 
         return "redirect:/";
 
+    }
+
+    @RequestMapping(value = "/user/resetPassword", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> resetPassword(
+            HttpServletRequest request, @RequestParam("email") String userEmail) {
+
+        Usuario user = service.getRepository().findActiveUserByLogin(userEmail);
+        if (user == null) {
+            return new ResponseEntity<>("Usuario no encontrado", new HttpHeaders(), HttpStatus.BAD_REQUEST);
+        }
+
+        String token = UUID.randomUUID().toString();
+        service.createPasswordResetTokenForUser(user, token);
+        String appUrl
+                = "https://" + request.getServerName()
+                + ":" + request.getServerPort()
+                + request.getContextPath();
+
+        SimpleMailMessage email = constructResetTokenEmail(appUrl, request.getLocale(), token, user);
+        mailSender.send(email);
+
+        return ResponseEntity.ok("ok");
+    }
+
+    @RequestMapping(value = "/user/changePassword", method = RequestMethod.GET)
+    public String showChangePasswordPage(
+            Locale locale, Model model, @RequestParam("id") long id, @RequestParam("token") String token) {
+
+        PasswordResetToken passToken = service.getPasswordResetToken(token);
+        
+        if(passToken == null){
+            model.addAttribute("mensaje", "El token no es valido");
+            return "invalidToken";
+        }
+        
+        Usuario user = passToken.getUser();
+        if (user.getId() != id) {
+            model.addAttribute("mensaje", "El token no es valido");
+            return "invalidToken";
+        }
+
+        Calendar cal = Calendar.getInstance();
+        if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+            model.addAttribute("mensaje", "El token ha expirado");
+            return "invalidToken";
+        }
+
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getPerfil().getRole().getRoleName());
+        List<SimpleGrantedAuthority> authoritiesList = new ArrayList<>();
+        authoritiesList.add(authority);
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, authoritiesList);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
+        return "redirect:/#/update_pass";
+    }
+
+    @RequestMapping(value = "/user/savePassword", method = RequestMethod.POST)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    @ResponseBody
+    public ResponseEntity<String> savePassword(Locale locale, @RequestParam("password") String password) {
+        Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user = service.getRepository().findActiveUserByLogin(user.getLogin());
+        String encodedPass = passwordEncoder.encode(password);
+        user.setPass(encodedPass);
+        try{
+            service.getRepository().save(user);        
+        }catch(Exception e){
+            log.error(e.getMessage());
+        }
+        
+        return ResponseEntity.ok("ok");
+    }
+
+    private SimpleMailMessage constructResetTokenEmail(
+            String contextPath, Locale locale, String token, Usuario user) {
+        String url = contextPath + "/user/changePassword?id=" + user.getId() + "&token=" + token;
+        String message = "Cambio de Contraseña";
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(user.getLogin());
+        email.setSubject("Reset Password");
+        email.setText(message + ": " + url);
+        email.setFrom(env.getProperty("support.email"));
+        return email;
     }
 
     private Usuario createUserAccount(RegistrationForm userAccountData, BindingResult result) {

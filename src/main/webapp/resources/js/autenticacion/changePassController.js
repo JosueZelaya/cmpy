@@ -1,4 +1,4 @@
-autenticacion.controller('changePassController', function ($scope, autenticacionService) {
+autenticacion.controller('changePassController', function ($scope, autenticacionService, $state) {
     $scope.changePass = function () {
         $scope.passNotEqual = false;
         $scope.wrongPass = false;
@@ -13,6 +13,25 @@ autenticacion.controller('changePassController', function ($scope, autenticacion
                        $scope.wrongPassMsj = response;
                     }
                    
+                });
+        } else {
+            $scope.passNotEqual = true;
+            $scope.msjPasswordNotEqual = "No coinciden";
+        }
+    };
+    
+    $scope.resetPass = function () {
+        $scope.passNotEqual = false;
+        $scope.wrongPass = false;
+        if ($scope.passNuevo === $scope.passConfirmacion) {
+            autenticacionService.updatePass($scope.passNuevo)
+                .then(function (response) {
+                    if(response === "ok"){
+                        $state.go("home");                 
+                    }else{
+                       $scope.wrongPass = true;
+                       $scope.wrongPassMsj = response;
+                    }                   
                 });
         } else {
             $scope.passNotEqual = true;

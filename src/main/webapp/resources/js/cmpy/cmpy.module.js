@@ -136,6 +136,13 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     '':{templateUrl: '/resources/js/anuncios/crearTienda.html'}
                 }
             })
+            
+            .state('home.updatePass', {
+                url: "update_pass",
+                views: {
+                    '':{templateUrl: '/resources/js/autenticacion/changePass.html', controller: 'changePassController'}
+                }
+            })
 
 //            // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
 //            .state('about', { 

@@ -110,7 +110,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/ubicacion/**",                        
                         "/cmpyWebSocket/**",
                         "/SpiderWebService/**",
-                        "/tiendas/aleatorias/"
+                        "/tiendas/aleatorias/",
+                        "/user/resetPassword",
+                        "/user/changePassword"
                 ).permitAll()
                 .antMatchers(
                         "/publicacion",
@@ -119,7 +121,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/comentario",
                         "/comentario/agregarComentario",
                         "/notificacion/**",
-                        "/mensaje/**"                        
+                        "/mensaje/**",
+                        "/user/updatePass",
+                        "/user/update"
                 ).hasRole("USER")
                 .antMatchers(
                         "/admin",
