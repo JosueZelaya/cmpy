@@ -25,6 +25,8 @@ var cmy_ng = angular.module('cmpy',
 
 cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, toastrConfig) {
 
+    $locationProvider.html5Mode(true);
+
     angular.extend(toastrConfig, {
         autoDismiss: true,
         containerId: 'toast-container',

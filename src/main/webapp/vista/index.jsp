@@ -24,6 +24,7 @@
             }
             .angular-google-map-container { height: 400px; }
         </style>
+        <base href="/">
     </head>
     <body ng-cloak class="ng-cloak">
 
