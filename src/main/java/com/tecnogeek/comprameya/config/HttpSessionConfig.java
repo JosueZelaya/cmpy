@@ -22,9 +22,9 @@ public class HttpSessionConfig {
             return new LettuceConnectionFactory(); 
     }
     
-//    @Bean
-//    public static ConfigureRedisAction configureRedisAction() {
-//        return ConfigureRedisAction.NO_OP;
-//    }
+    @Bean
+    public static ConfigureRedisAction configureRedisAction() {
+        return ConfigureRedisAction.NO_OP;
+    }
     
 }

@@ -23,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
@@ -31,7 +32,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
  */
 @Configuration
 @EnableWebSecurity
-//@EnableRedisHttpSession
+@EnableRedisHttpSession
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String REMEMBER_ME_KEY = "rememberme_key";
