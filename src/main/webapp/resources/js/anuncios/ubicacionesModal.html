@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="ubicacionesModal.html">
     
-    <div class="modal-body" ng-app="cmpy.anuncios" ng-controller="ubicacionesController">
+    <div class="modal-body" ng-app="cmpy.anuncios">
 
         <div ui-view="maps">
 
@@ -13,6 +13,29 @@
              <strong>Puedes agregar mas de un marcador</strong>
         </div>
 
+        <div class="panel panel-default" style="margin-top:10px" ng-show="alladdress!=undefined">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Ubicaciones</div>
+            <!-- List group -->
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="dir in alladdress">{{dir}}</li>
+            </ul>
+        </div>
+
+        <br/>
+        <button class="btn btn-success" type="button" ng-click="cancel()">Listo</button>
+
+    </div>
+
+</script>
+
+<script type="text/ng-template" id="ubicacionesModalLectura.html">
+    
+    <div class="modal-body" ng-app="cmpy.anuncios" ng-controller="ubicacionesController">
+
+        <div ui-view="mapslectura">
+
+        </div> 
         <div class="panel panel-default" style="margin-top:10px" ng-show="alladdress!=undefined">
             <!-- Default panel contents -->
             <div class="panel-heading">Ubicaciones</div>

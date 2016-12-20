@@ -10,21 +10,6 @@ maps.controller('mapController',
             function ($rootScope, $scope, $http, mapService, $timeout, $window, matchmedia, $stateParams) {
 
 
-
-                $timeout(function () {
-                    var evt = $window.document.createEvent('UIEvents');
-                    evt.initUIEvent('resize', true, false, $window, 1000);
-                    $window.dispatchEvent(evt);
-
-                });
-
-                $scope.zoom = 9;
-
-                $scope.center = {
-                    latitude: 13.7153719325982,
-                    longitude: -88.95217895507812
-                };
-
                 $scope.address = "";
 
                 $scope.render = true;
@@ -200,7 +185,7 @@ maps.controller('mapController',
 
                     $timeout(function () {
                         var evt = $window.document.createEvent('UIEvents');
-                        evt.initUIEvent('resize', true, false, $window, 1000);
+                        evt.initUIEvent('resize', true, false, $window, 3000);
                         $window.dispatchEvent(evt);
 
                     });
@@ -282,6 +267,27 @@ maps.controller('mapController',
                 };
 
                 init();
+                
+                $timeout(function () {
+                    var evt = $window.document.createEvent('UIEvents');
+                    evt.initUIEvent('resize', true, false, $window, 3000);
+                    $window.dispatchEvent(evt);
+                    
+                    if($scope.isPhoneOrTablet == false){
+                        
+                        $scope.zoom = 9;
+                    }
+                    else{
+                        $scope.zoom = 8;
+                        
+                    }
+
+                    $scope.center = {
+                        latitude: 13.71537193259822,
+                        longitude: -88.952178955078122
+                    };
+
+                });
 
             }]);
 
