@@ -37,7 +37,7 @@
                         </a>         
                     </div>
                 </div>
-                <a href="${pageContext.request.contextPath}/user/register">¿Prefieres crear una cuenta nueva?</a>
+                <a href="#" ng-click="register()">¿Prefieres crear una cuenta nueva?</a>
                 <a href="#" ng-click="open('resetPassModal.html')">¿Olvidaste tu contraseña?</a>
 
             </form>

@@ -8,7 +8,7 @@
             </div>
         </div>        
         <br/>
-        <button ng-click="resetPass()" type="button" class="btn btn-success" uib-tooltip="Envia un email a tu correo para resetear la contraseña" tooltip-placement="bottom">
+        <button ng-disabled="!ready" ng-click="resetPass()" type="button" class="btn btn-success" uib-tooltip="Envia un email a tu correo para resetear la contraseña" tooltip-placement="bottom">
             Resetear Password
         </button>
         <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar cambio de contraseña" tooltip-placement="bottom">

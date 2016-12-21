@@ -91,6 +91,11 @@ public class RegistrationController {
             @RequestParam(value = "passConfirmacion", required = true) String passConfirmacion) {
 
         Usuario u = service.getLoggedUser();
+        
+        if(passNuevo.equals("")){
+            log.info("{} ha intentado asignar un password vacío", u.getLogin());
+            return new ResponseEntity<>("Asigne un password", new HttpHeaders(), HttpStatus.PRECONDITION_FAILED);
+        }
 
         if (!passNuevo.equals(passConfirmacion)) {
             return new ResponseEntity<>("Las contraseñas no son iguales", new HttpHeaders(), HttpStatus.PRECONDITION_FAILED);
@@ -205,8 +210,15 @@ public class RegistrationController {
 //    @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseBody
     public ResponseEntity<String> savePassword(Locale locale, @RequestParam("password") String password) {
+        
         Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         user = service.getRepository().findActiveUserByLogin(user.getLogin());
+        
+        if(password.equals("")){
+            log.info("{} ha intentado asignar un password vacío", user.getLogin());
+            return new ResponseEntity<>("Asigne un password", new HttpHeaders(), HttpStatus.PRECONDITION_FAILED);
+        }
+        
         String encodedPass = passwordEncoder.encode(password);
         user.setPass(encodedPass);
         try{
@@ -215,7 +227,7 @@ public class RegistrationController {
             log.error(e.getMessage());
         }
         
-        log.info("{} ha reseteado su password", user.getLogin());        
+        log.info("{} ha reseteado su password", user.getLogin());
         return ResponseEntity.ok("ok");
     }
 

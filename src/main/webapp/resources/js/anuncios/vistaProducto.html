@@ -87,9 +87,10 @@
                         <!--</form>-->
 
                         <div class="bs-callout bs-callout-primary" ng-repeat="comentario in comentarioList">
-                            <h4>{{comentario.usuario.persona.nombre}}</h4>
-                            <img ng-if="comentario.usuario.signInProvider === null" height="28px" width="28px" ng-src="/images/getThumbnail/{{comentario.usuario.rutaImagen}}" alt="..." />
-                            <img ng-if="comentario.usuario.signInProvider !== null" height="28px" width="28px" ng-src="{{comentario.usuario.rutaImagen}}" alt="..." />                      
+                            <h4>{{comentario.usuario.persona.nombre}}</h4>                                               
+                            <img ng-if="!comentario.usuario.rutaImagen" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
+                            <img ng-if="comentario.usuario.signInProvider === null && comentario.usuario.rutaImagen" height="28px" width="28px" ng-src="/images/getThumbnail/{{comentario.usuario.rutaImagen}}" alt="..." />
+                            <img ng-if="comentario.usuario.signInProvider !== null && comentario.usuario.rutaImagen" height="28px" width="28px" ng-src="{{comentario.usuario.rutaImagen}}" alt="..." />                      
                             {{comentario.texto}}
                             <span class="date sub-text pull-right">{{comentario.creationTime| date:'dd-MM-yyyy HH:mm:ss'}}</span>
                         </div>

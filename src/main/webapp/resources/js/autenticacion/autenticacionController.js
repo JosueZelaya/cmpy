@@ -3,8 +3,9 @@ autenticacion.controller('autenticacionController',
             '$scope',
             '$http',
             '$location',
+            '$window',
             'PushNotificationService',
-            function ($rootScope, $scope, $http, $location, PushNotificationService) {
+            function ($rootScope, $scope, $http, $location, $window, PushNotificationService) {
 
                 $scope.credentials = {};
                 $scope.error = false;
@@ -55,7 +56,6 @@ autenticacion.controller('autenticacionController',
                     });
                 };
 
-
                 $rootScope.logout = function () {
                     PushNotificationService.disconnect();
                     $http.post('logout', {}).finally(function () {
@@ -63,8 +63,10 @@ autenticacion.controller('autenticacionController',
                         $location.path("/");
                     });
                 };
+                
+                $scope.register = function(){
+                    $window.location.href = '/user/register';
+                };
 
                 authenticate();
-            }]
-
-        );
+            }]);

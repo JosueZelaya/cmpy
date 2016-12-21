@@ -11,14 +11,14 @@
             </div>
             <div ng-class="valtitulo">
                 <label for="passNuevo" class="control-label">Ingrese contraseña nueva</label>
-                <input ng-model="passNuevo" id="passNuevo" type="password" class="form-control"/>
+                <input ng-keyup="$event.keyCode == 13 && resetPass()" ng-model="passNuevo" id="passNuevo" type="password" class="form-control"/>
                 <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
                     {{msjPasswordNotEqual}}
                 </div>
             </div>
             <div ng-class="valtitulo">
                 <label for="passConfirmacion" class="control-label">Confirme la nueva contraseña</label>
-                <input ng-model="passConfirmacion" id="passConfirmacion" type="password" class="form-control"/>
+                <input ng-keyup="$event.keyCode == 13 && resetPass()" ng-model="passConfirmacion" id="passConfirmacion" type="password" class="form-control"/>
                 <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
                     {{msjPasswordNotEqual}}
                 </div>

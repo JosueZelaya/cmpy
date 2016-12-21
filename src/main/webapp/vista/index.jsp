@@ -256,21 +256,21 @@
             <div class="modal-body" ng-app="cmpy.autenticacion" ng-controller="changePassController">
                 <div ng-class="valtitulo">
                     <label for="passActual" class="control-label">Ingrese contraseña actual</label>
-                    <input ng-model="passActual" id="passActual" type="password" class="form-control"/>
+                    <input ng-keyup="$event.keyCode == 13 && changePass()" ng-model="passActual" id="passActual" type="password" class="form-control"/>
                     <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="wrongPass">
                         {{wrongPassMsj}}
                     </div>
                 </div>
                 <div ng-class="valtitulo">
                     <label for="passNuevo" class="control-label">Ingrese contraseña nueva</label>
-                    <input ng-model="passNuevo" id="passNuevo" type="password" class="form-control"/>
+                    <input ng-keyup="$event.keyCode == 13 && changePass()" ng-model="passNuevo" id="passNuevo" type="password" class="form-control"/>
                     <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
                         {{msjPasswordNotEqual}}
                     </div>
                 </div>
                 <div ng-class="valtitulo">
                     <label for="passConfirmacion" class="control-label">Confirme la nueva contraseña</label>
-                    <input ng-model="passConfirmacion" id="passConfirmacion" type="password" class="form-control"/>
+                    <input ng-keyup="$event.keyCode == 13 && changePass()" ng-model="passConfirmacion" id="passConfirmacion" type="password" class="form-control"/>
                     <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
                         {{msjPasswordNotEqual}}
                     </div>
@@ -289,13 +289,13 @@
             <div class="modal-body" ng-app="cmpy.autenticacion" ng-controller="resetPassController">
                 <div ng-class="valtitulo">
                     <label for="emailReset" class="control-label">Ingrese su dirección de correo:</label>
-                    <input ng-model="emailReset" id="emailReset" type="text" class="form-control"/>
+                    <input ng-keyup="$event.keyCode == 13 && resetPass()" ng-model="emailReset" id="emailReset" type="text" class="form-control"/>
                     <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="wrongEmail">
                         {{wrongEmailMsj}}
                     </div>
                 </div>        
                 <br/>
-                <button ng-click="resetPass()" type="button" class="btn btn-success" uib-tooltip="Envia un email a tu correo para resetear la contraseña" tooltip-placement="bottom">
+                <button ng-disabled="!ready" ng-click="resetPass()" type="button" class="btn btn-success" uib-tooltip="Envia un email a tu correo para resetear la contraseña" tooltip-placement="bottom">
                     Resetear Password
                 </button>
                 <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar cambio de contraseña" tooltip-placement="bottom">

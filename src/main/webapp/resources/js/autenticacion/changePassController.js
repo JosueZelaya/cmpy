@@ -2,7 +2,10 @@ autenticacion.controller('changePassController', function ($scope, autenticacion
     $scope.changePass = function () {
         $scope.passNotEqual = false;
         $scope.wrongPass = false;
-        if ($scope.passNuevo === $scope.passConfirmacion) {
+        if($scope.passNuevo === ""){
+            $scope.passNotEqual = true;
+            $scope.msjPasswordNotEqual = "Asigne un password";
+        }else if($scope.passNuevo === $scope.passConfirmacion) {
             autenticacionService.changePass($scope.passActual, $scope.passNuevo, $scope.passConfirmacion)
                 .then(function (response) {
                     if(response === "ok"){
