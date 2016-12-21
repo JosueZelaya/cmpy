@@ -5,9 +5,7 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
-import com.tecnogeek.comprameya.entidad.Categoria;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.tecnogeek.comprameya.repositories.CategoriaRepository;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import com.tecnogeek.comprameya.service.VisitaService;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -46,6 +46,9 @@ public class HomeController {
 
     @Autowired
     CategoriaRepository categoriaRepository;
+    
+    @Autowired
+    VisitaService visitaService;
 
     private final ProviderSignInUtils providerSignInUtils;
     
@@ -55,20 +58,22 @@ public class HomeController {
         this.providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
     }
     
+    @RequestMapping(value="/visitas",method=RequestMethod.GET) 
+    @ResponseBody
+    public long getTotalVisitas()
+    {           
+        return visitaService.getVisitas();
+    }
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String welcomePage(Model model) {
+    public String welcomePage(Model model, HttpServletRequest request) {
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName(); 
         
-        Iterable<Categoria> categorias = categoriaRepository.getCategoriaPadres();
-        model.addAttribute("categorias", categorias);
-
-        model.addAttribute("username", userName);
-        model.addAttribute("tipoPublicacion", Constantes.PUBLICACION_GRATIS);
-        model.addAttribute("parametro", "Pagina Inicio");
-        
-        log.info("Se muestra home page");
+        String ip = request.getRemoteAddr();
+        visitaService.nuevaVisita(ip);
+        log.info("{} accedió a homepage desde {}",userName,ip);
         return "index";
     }
 
@@ -86,19 +91,14 @@ public class HomeController {
             "/update_pass"
 	}, method = RequestMethod.GET)    
 //    @RequestMapping(value = {"/{[path:(?!resources).*}/**"}, method = RequestMethod.GET)
-    public String angularRoutes(Model model) {
+    public String angularRoutes(Model model, HttpServletRequest request) {
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName(); 
         
-        Iterable<Categoria> categorias = categoriaRepository.getCategoriaPadres();
-        model.addAttribute("categorias", categorias);
-
-        model.addAttribute("username", userName);
-        model.addAttribute("tipoPublicacion", Constantes.PUBLICACION_GRATIS);
-        model.addAttribute("parametro", "Pagina Inicio");
-        
-        log.info("Se muestra home page");
+        String ip = request.getRemoteAddr();
+        visitaService.nuevaVisita(ip);
+        log.info("{} accedió a homepage desde {}",userName,ip);
         return "index";
     }
     

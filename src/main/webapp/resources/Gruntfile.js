@@ -73,6 +73,7 @@ module.exports = function (grunt) {
                     './js-min-safe/utils/utils.module.js': ['./js/utils/utils.module.js'],
                     './js-min-safe/utils/loadingDirective.js': ['./js/utils/loadingDirective.js'],
                     './js-min-safe/utils/modalController.js': ['./js/utils/modalController.js'],
+                    './js-min-safe/utils/utilsService.js': ['./js/utils/utilsService.js'],
                     './js-min-safe/mensajes/mensajes.module.js': ['./js/mensajes/mensajes.module.js'],
                     './js-min-safe/mensajes/mensajesService.js': ['./js/mensajes/mensajesService.js'],
                     './js-min-safe/mensajes/mensajesController.js': ['./js/mensajes/mensajesController.js'],

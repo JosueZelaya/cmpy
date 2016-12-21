@@ -59,6 +59,12 @@
                         Ayuda
                         <span class="glyphicon glyphicon-info-sign"></span>
                     </button>
+                    
+                    <button id="botonInfo" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">
+<!--                        <span class="sr-only">Toggle navigation</span>    -->
+                        Visitas {{visitas}}
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </button>
 
                     <a href="/" class="pull-left" ui-sref='home' ui-sref-opts="{reload:true}">
                         <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
@@ -180,11 +186,16 @@
                 </div>
                 <div uib-dropdown="" class="dropdown navbar-right navbar-collapse collapse" uib-collapse="infoCollapsed">                    
                     <ul ng-if="infoCollapsed" class="nav navbar-nav">
+                        <li>
+                            <a>visitas {{visitas}}
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </a>                            
+                        </li>
                         <li class="dropdown" uib-dropdown="">
                             <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
                                 Información
                                 <span class="glyphicon glyphicon-info-sign"></span>
-                            </a>
+                            </a>                            
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
@@ -305,7 +316,7 @@
         </script>
 
         <!-- PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS -->
-<!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-sanitize/angular-sanitize.min.js"></script> 
         <script type='text/javascript' src='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-animate/angular-animate.min.js"></script>        
@@ -357,6 +368,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/utils.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/loadingDirective.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/utilsService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mensajes/mensajes.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mensajes/mensajesService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mensajes/mensajesController.js" ></script>
@@ -367,16 +379,16 @@
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">-->
+        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
 
 
         <!-- PARA PASAR A PRODUCCIÓN USAR ESTOS SCRIPTS Y COMENTAR LOS ANTERIORES -->
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js" ></script>
+<!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js" ></script>
         <link href="${pageContext.request.contextPath}/resources/min/css/style.min.css" rel="stylesheet" type="text/css" media='all'>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
         <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
-        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />-->
 
     </body>
 </html>

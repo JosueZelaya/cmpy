@@ -6,7 +6,8 @@ menuPrincipal.controller('menuPrincipalController',
             'PushNotificationService',
             '$log',
             'toastr',
-            '$state', function ($scope, $rootScope, notificacionService, mensajesService, PushNotificationService, $log, toastr, $state) {
+            '$state',
+            'utilsService', function ($scope, $rootScope, notificacionService, mensajesService, PushNotificationService, $log, toastr, $state, utilsService) {
 
                 $scope.match = "";
                 $rootScope.notificaciones = {};
@@ -149,11 +150,17 @@ menuPrincipal.controller('menuPrincipalController',
                     $scope.infoCollapsed = true;
                     $scope.collapseNot = true;
                     $scope.totalMensajes = 0;
+                    $scope.visitas = 0;
 
                     getNotificaciones()
                             .success(function (notificaciones) {
                                 $rootScope.notificaciones = notificaciones;
                                 $rootScope.totalNotificaciones = notificaciones.length;
+                            });
+                    
+                    utilsService.getTotalVisitas()
+                            .success(function (total) {
+                                $scope.visitas = total;
                             });
 
                     $rootScope.activarNotificacionesPush();
