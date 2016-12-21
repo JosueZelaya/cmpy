@@ -67,6 +67,10 @@ autenticacion.controller('autenticacionController',
                 $scope.register = function(){
                     $window.location.href = '/user/register';
                 };
+                
+                $scope.facebookAuth = function(){
+                    $window.location.href = '/auth/facebook';
+                };
 
                 authenticate();
             }]);

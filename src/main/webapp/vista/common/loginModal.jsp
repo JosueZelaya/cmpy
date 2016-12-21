@@ -31,7 +31,7 @@
                         <input type="submit" class="btn btn-primary" style="width:50%" value="Entrar">
                     </div>
                     <div class="col-lg-6" style="border: 1px solid #eee">
-                        <a class="btn btn-block btn-social btn-facebook" href="${pageContext.request.contextPath}/auth/facebook">
+                        <a class="btn btn-block btn-social btn-facebook" href="#" ng-click="facebookAuth()">
                             <img height="28" width="28" src="${pageContext.request.contextPath}/resources/images/facebook-icon.png" title="Entrar con Facebook">
                             Usa tu cuenta de Facebook
                         </a>         
