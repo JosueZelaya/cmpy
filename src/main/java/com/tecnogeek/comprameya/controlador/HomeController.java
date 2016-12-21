@@ -72,6 +72,36 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping(value = {
+	    "/misPublicaciones",
+	    "/categoria/{cat}/{nivel}",
+	    "/busqueda/{terminoBusqueda}",
+	    "/vistaProducto/{publicacionId}",
+	    "/vistaProducto/{publicacionId}",
+	    "/vistaMensaje",
+            "/vistaNotificaciones",
+            "/terminos",
+            "/about",
+            "/contratar_tienda",
+            "/update_pass"
+	}, method = RequestMethod.GET)    
+//    @RequestMapping(value = {"/{[path:(?!resources).*}/**"}, method = RequestMethod.GET)
+    public String angularRoutes(Model model) {
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName(); 
+        
+        Iterable<Categoria> categorias = categoriaRepository.getCategoriaPadres();
+        model.addAttribute("categorias", categorias);
+
+        model.addAttribute("username", userName);
+        model.addAttribute("tipoPublicacion", Constantes.PUBLICACION_GRATIS);
+        model.addAttribute("parametro", "Pagina Inicio");
+        
+        log.info("Se muestra home page");
+        return "index";
+    }
+    
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model) {        
         model.addAttribute("parametro", "Hola Mundo");
@@ -101,6 +131,10 @@ public class HomeController {
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
              
+        if(auth.getPrincipal().equals("anonymousUser")){
+            return null;
+        }        
+        
         SocialSecurityUserDTO user = (SocialSecurityUserDTO) auth.getPrincipal();
         
         if(connection!=null){

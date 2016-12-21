@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -82,38 +83,53 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .authorizeRequests()                
-                .antMatchers("/",
-                        "/index",
-                        "/login",
-                        "login/form**",
-                        "/register",
-                        "/logout",
-                        "/auth/**",
-                        "/connect/**",
-                        "/signin/**",
-                        "/login",
-                        "/signin/**",
-                        "/signup/**",
-                        "/user/register/**",
-                        "/modal",
-                        "/angular",
-                        "/publicacion/getAnuncios/**",
-                        "/publicacion/getAnunciosByCat/**",
-                        "/publicacion/getAnunciosByMatch/**",
-                        "/publicacion/getAnunciosSinPaginar",
-                        "/publicacion/getPublicacionById/**",
-                        "/publicacion/getTotalPaginas/**",
-                        "/publicacion/getTotalAnuncios/**",
-                        "/comentario/getComentarios/**",
-                        "/recurso/getRecursos/**",
-                        "/categoria/**",
-                        "/ubicacion/**",                        
-                        "/cmpyWebSocket/**",
-                        "/SpiderWebService/**",
-                        "/tiendas/aleatorias/",
-                        "/user/resetPassword",
-                        "/user/changePassword"
-                ).permitAll()
+//                .antMatchers("/",
+//                        "/index",
+//                        "/login",
+//                        "login/form**",
+//                        "/register",
+//                        "/logout",
+//                        "/auth/**",
+//                        "/connect/**",
+//                        "/signin/**",
+//                        "/login",
+//                        "/signin/**",
+//                        "/signup/**",
+//                        "/user/register/**",
+//                        "/modal",
+//                        "/angular",
+//                        "/publicacion/getAnuncios/**",
+//                        "/publicacion/getAnunciosByCat/**",
+//                        "/publicacion/getAnunciosByMatch/**",
+//                        "/publicacion/getAnunciosSinPaginar",
+//                        "/publicacion/getPublicacionById/**",
+//                        "/publicacion/getTotalPaginas/**",
+//                        "/publicacion/getTotalAnuncios/**",
+//                        "/comentario/getComentarios/**",
+//                        "/recurso/getRecursos/**",
+//                        "/categoria/**",
+//                        "/ubicacion/**",                        
+//                        "/cmpyWebSocket/**",
+//                        "/SpiderWebService/**",
+//                        "/tiendas/aleatorias/",
+//                        "/user/resetPassword",
+//                        "/user/changePassword"                        
+//                )                
+//                .permitAll()
+//                //Rutas de angular que apuntan a la pagina de inicio
+//                .antMatchers("/misPublicaciones",
+//                        "/categoria/{cat}/{nivel}",
+//                        "/busqueda/{terminoBusqueda}",
+//                        "/vistaProducto/{publicacionId}",
+//                        "/vistaProducto/{publicacionId}",
+//                        "/vistaMensaje",
+//                        "/vistaNotificaciones",
+//                        "/terminos",
+//                        "/about",
+//                        "/contratar_tienda",
+//                        "/update_pass"
+//                )                
+//                .permitAll()
                 .antMatchers(
                         "/publicacion",
                         "/publicacion/agregarAnuncio",
@@ -131,6 +147,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/Spider/scanearTiendasOverSSL",
                         "/Spider/scanearTiendasInsecure"
                 ).hasRole("ADMIN")
+                .antMatchers("/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
