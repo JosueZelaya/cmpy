@@ -12,26 +12,27 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <title>Registrarse</title>    
         <link href="${pageContext.request.contextPath}/resources/images/favicon_trans.png" rel="icon" type="image/png">
-        <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/css/registration/index.css" rel="stylesheet">
     </head>
     <body style="margin-top:0px;">
 
         <%@ include file="common/menuPrincipal.jsp" %>
 
         <div class="container">
-
+            
+            <c:if test="${user.signInProvider == null}">
+                <a class="btn btn-block btn-social btn-facebook btn-default" href="${pageContext.request.contextPath}/auth/facebook">
+                    <img height="28" width="28" src="${pageContext.request.contextPath}/resources/images/facebook-icon.png" title="Entrar con Facebook">
+                    <span class="fa fa-facebook-official"></span>Crear una cuenta usando tu Facebook
+                </a>
+            </c:if>
+            
             <div class="page-header">
-                <h1>Registrarse</h1>
+                <h3>Registrarse</h3>
             </div>
-
-            <a class="btn btn-block btn-social btn-facebook" href="${pageContext.request.contextPath}/auth/facebook">
-                <img height="28" width="28" src="${pageContext.request.contextPath}/resources/images/facebook-icon.png" title="Entrar con Facebook">
-                <span class="fa fa-facebook-official"></span>Crear una cuenta usando tu Facebook
-            </a>
 
             <!--
                 If the user is anonymous (not logged in), show the registration form.
@@ -73,7 +74,7 @@
                                         that validation errors are shown.
                                     -->
                                     <form:input id="user-firstName" path="firstName" cssClass="form-control"/>
-                                    <form:errors id="error-firstName" path="firstName" cssClass="help-block"/>
+                                    <form:errors id="error-firstName" path="firstName" cssClass="help-block alert alert-danger"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -84,7 +85,7 @@
                                         that validation errors are shown.
                                     -->
                                     <form:input id="user-lastName" path="lastName" cssClass="form-control"/>
-                                    <form:errors id="error-lastName" path="lastName" cssClass="help-block"/>
+                                    <form:errors id="error-lastName" path="lastName" cssClass="help-block alert alert-danger"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -95,7 +96,7 @@
                                         that validation errors are shown.
                                     -->
                                     <form:input id="user-email" path="email" cssClass="form-control"/>
-                                    <form:errors id="error-email" path="email" cssClass="help-block"/>
+                                    <form:errors id="error-email" path="email" cssClass="help-block alert alert-danger"/>
                                 </div>
                             </div>
 
@@ -119,7 +120,7 @@
                                             that validation errors are shown.
                                         -->
                                         <form:password id="user-password" path="password" cssClass="form-control"/>
-                                        <form:errors id="error-password" path="password" cssClass="help-block"/>
+                                        <form:errors id="error-password" path="password" cssClass="help-block alert alert-danger"/>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -130,7 +131,7 @@
                                             that validation errors are shown.
                                         -->
                                         <form:password id="user-passwordVerification" path="passwordVerification" cssClass="form-control"/>
-                                        <form:errors id="error-passwordVerification" path="passwordVerification" cssClass="help-block"/>
+                                        <form:errors id="error-passwordVerification" path="passwordVerification" cssClass="help-block alert alert-danger"/>
                                     </div>
                                 </div>
                             </c:if>
@@ -223,6 +224,7 @@
             </sec:authorize>
 
         </div>
+        <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
 
     </body>
 </html>
