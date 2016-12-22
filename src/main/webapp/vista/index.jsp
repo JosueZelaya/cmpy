@@ -34,7 +34,7 @@
                 <div class="navbar-header"> 
 
                     <button ng-if="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.html')">                
-                        Iniciar Sesion <span class="glyphicon glyphicon-user">
+                        Entrar <span class="glyphicon glyphicon-user">
                     </button>            
 
                     <button ng-show="authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
@@ -48,22 +48,19 @@
                         </div>                        
                     </button>            
 
-                    <button ng-show="authenticated" id="botonAvisos" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">
-                        <span class="sr-only">Toggle navigation</span>    
+                    <button ng-show="authenticated" id="botonAvisos" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">                                
+                        </span> <span class="badge badge-notify">{{totalNotificaciones + NoLeidosTotal}}</span>
                         Avisos
-                        <span class="badge badge-notify">{{totalNotificaciones + NoLeidosTotal}}</span>
                     </button>   
 
-                    <button id="botonInfo" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">
-                        <span class="sr-only">Toggle navigation</span>    
-                        Ayuda
+                    <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">                                                   
                         <span class="glyphicon glyphicon-info-sign"></span>
+                        Info 
                     </button>
                     
-                    <button id="botonInfo" class="navbar-toggle navbar-brand" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">
-<!--                        <span class="sr-only">Toggle navigation</span>    -->
-                        Visitas {{visitas}}
+                    <button id="botonVisitas" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" uib-tooltip="visitas recibidas" tooltip-placement="bottom">
                         <span class="glyphicon glyphicon-eye-open"></span>
+                        {{visitas}}                        
                     </button>
 
                     <a href="/" class="pull-left" ui-sref='home' ui-sref-opts="{reload:true}">
@@ -187,13 +184,13 @@
                 <div uib-dropdown="" class="dropdown navbar-right navbar-collapse collapse" uib-collapse="infoCollapsed">                    
                     <ul ng-if="infoCollapsed" class="nav navbar-nav">
                         <li>
-                            <a>visitas {{visitas}}
+                            <a uib-tooltip="visitas recibidas" tooltip-placement="bottom">{{visitas}}
                                 <span class="glyphicon glyphicon-eye-open"></span>
                             </a>                            
                         </li>
                         <li class="dropdown" uib-dropdown="">
                             <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
-                                Información
+                                Info
                                 <span class="glyphicon glyphicon-info-sign"></span>
                             </a>                            
                             <ul class="dropdown-menu" role="menu">
