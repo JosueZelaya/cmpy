@@ -1,4 +1,4 @@
-<script type="text/ng-template" id="loginModal.html">
+<script type="text/ng-template" id="loginModal.html" ng-app="cmpy.autenticacion" ng-controller="autenticacionController">
     
     <div ng-app="cmpy.autenticacion" ng-controller="autenticacionController">
         <div class="modal-header">
