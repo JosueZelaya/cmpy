@@ -209,7 +209,9 @@ public class RegistrationController {
     @RequestMapping(value = "/user/savePassword", method = RequestMethod.POST)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseBody
-    public ResponseEntity<String> savePassword(Locale locale, @RequestParam("password") String password) {
+    public ResponseEntity<String> savePassword(Locale locale, 
+                                                @RequestParam("password") String password, 
+                                                WebRequest request) {
         
         Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         user = service.getRepository().findActiveUserByLogin(user.getLogin());
@@ -226,6 +228,9 @@ public class RegistrationController {
         }catch(Exception e){
             log.error(e.getMessage());
         }
+        
+        SecurityUtil.logInUser(user);
+        providerSignInUtils.doPostSignUp(user.getLogin(), request);        
         
         log.info("{} ha reseteado su password", user.getLogin());
         return ResponseEntity.ok("ok");
