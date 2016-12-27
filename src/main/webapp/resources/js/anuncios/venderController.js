@@ -6,6 +6,35 @@ modulo_anuncios.controller('venderController',
             'flowFactory',
             'Publicacion',
             function ($rootScope, $scope, anunciosService, catService, flowFactory, Publicacion) {
+                
+//                $scope.on('flow::fileAdded', function(files) {
+//                        alert("uploading imges");
+//                //                 angular.forEach(files, function(file) {
+//                //                     var nativeFile = file.file; // instance of File, same as here: https://github.com/flowjs/ng-flow/blob/master/src/directives/img.js#L13
+//                //                     //file.file = null;// do not display it
+//                //                     var deferred = $q.defer();
+//                //                     file.promise = deferred.promise;
+//                //
+//                //                     loadImage(
+//                //                         nativeFile,
+//                //                         function(canvas) {
+//                //                             canvas.toBlob(function(blob) {
+//                //                                 file.file = blob;
+//                //                                 file.size = blob.size;
+//                //                                 file.name = nativeFile.name;
+//                //                                 console.debug("resized image to " + imgWidth + "x" + imgHeight);
+//                //                                 deferred.resolve();
+//                //                                 scope.$digest();
+//                //                             });
+//                //                         }, {
+//                //                             canvas: true,
+//                //                             crop: true,
+//                //                             maxWidth: imgWidth,
+//                //                             maxHeight: imgHeight
+//                //                         }
+//                //                     );
+//                //                 });
+//                             });
 
                 var crearPublicacion = function () {
                     //Se recogen los datos de la publicacion 
