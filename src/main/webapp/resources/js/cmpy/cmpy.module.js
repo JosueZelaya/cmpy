@@ -73,6 +73,9 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
     
             .state('home.porCategoria', {
                 url: "categoria/{cat}/{nivel}",
+                params: {
+                    terminoBusqueda: ''
+                },
                 views: {
                     '':{templateUrl: '/resources/js/anuncios/panelProductos.html', controller: 'publicacionesFiltradasController'}
                 }

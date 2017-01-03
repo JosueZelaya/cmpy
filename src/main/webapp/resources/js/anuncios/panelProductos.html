@@ -15,9 +15,13 @@
             <div id="publicacionesProductos" class="panel-body">
 
                 <div class="row">
+                    
+                    <div ng-if="publicaciones.length===0">                        
+                        <h1>No se encontraron resultados para: "{{terminoBusqueda}}" </h1>                        
+                    </div>
 
-                    <div class="col-sm-6 col-md-4" ng-repeat="publicacion in publicaciones">
-
+                    <div class="col-sm-6 col-md-4" ng-repeat="publicacion in publicaciones" ng-if="publicaciones">
+                        
                         <div style="height: 450px;" class="thumbnail">       
 
                             <div class="row">                                

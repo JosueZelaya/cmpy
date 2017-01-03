@@ -59,6 +59,7 @@ modulo_anuncios.controller('publicacionesFiltradasController',
                 var init = function () {
                     $scope.cat = $stateParams.cat;
                     $scope.nivel = $stateParams.nivel;
+                    $scope.terminoBusqueda = $stateParams.terminoBusqueda;
                     $scope.publicaciones = [];
                     $scope.page = 0;
                     cargarPublicacionesGratisByCat($scope.page);
