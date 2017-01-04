@@ -76,6 +76,17 @@ public class HomeController {
         log.info("{} accedió a homepage desde {}",userName,ip);
         return "index";
     }
+    
+    @ResponseBody
+    @RequestMapping(value = "/uploadImg", method = RequestMethod.GET)
+    public String uploadImg(Model model, HttpServletRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName(); 
+        
+        String ip = request.getRemoteAddr();
+        log.info("{} intenta cargar una foto desde {}",userName,ip);
+        return "ok";
+    }
 
     @RequestMapping(value = {
 	    "/misPublicaciones",
