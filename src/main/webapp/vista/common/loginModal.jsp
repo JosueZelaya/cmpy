@@ -2,7 +2,7 @@
     
     <div ng-app="cmpy.autenticacion" ng-controller="autenticacionController">
         <div class="modal-header">
-            <a class="btn btn-block btn-default" href="#" ng-click="facebookAuth()">
+            <a class="btn btn-block btn-default alert alert-warning" href="#" ng-click="facebookAuth()">
                 <img height="28" width="28" src="${pageContext.request.contextPath}/resources/images/facebook-icon.png" title="Entrar con Facebook">
                 Ingresa con tu cuenta de Facebook
             </a>        
