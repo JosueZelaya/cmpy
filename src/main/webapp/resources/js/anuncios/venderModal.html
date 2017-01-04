@@ -41,9 +41,14 @@
         <a name="gallery-example" class="anchor" href="#gallery-example"><span class="octicon octicon-link"></span></a>Suba imagenes de su producto</h3>
         
     <div flow-object="existingFlowObject" flow-init
-         flow-files-submitted="$flow.upload()"
+         flow-files-submitted="$flow.upload()"         
          flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
-        <div class="drop" flow-drop ng-class="dropClass">
+        <div class="drop" 
+            flow-drop 
+            flow-drag-enter="style={border:'4px dashed green'}" 
+            flow-drag-leave="style={}"
+            ng-style="style"
+            ng-class="dropClass">
             <span class="btn btn-default" flow-btn>Buscar Imagenes</span>                        
             <b>O</b>
             Arrastre y suelte sus imágenes aquí.

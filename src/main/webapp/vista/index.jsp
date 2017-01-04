@@ -26,7 +26,7 @@
         </style>
         <base href="/">
     </head>
-    <body ng-cloak class="ng-cloak">
+    <body ng-cloak class="ng-cloak" flow-prevent-drop>
 
         <!-- MAIN CONTENT -->
         <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="menuPrincipalController">
