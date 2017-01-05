@@ -6,35 +6,40 @@ modulo_anuncios.controller('venderController',
             'flowFactory',
             'Publicacion',
             function ($rootScope, $scope, anunciosService, catService, flowFactory, Publicacion) {
-                
-//                $scope.on('flow::fileAdded', function(files) {
-//                        alert("uploading imges");
-//                //                 angular.forEach(files, function(file) {
-//                //                     var nativeFile = file.file; // instance of File, same as here: https://github.com/flowjs/ng-flow/blob/master/src/directives/img.js#L13
-//                //                     //file.file = null;// do not display it
-//                //                     var deferred = $q.defer();
-//                //                     file.promise = deferred.promise;
-//                //
-//                //                     loadImage(
-//                //                         nativeFile,
-//                //                         function(canvas) {
-//                //                             canvas.toBlob(function(blob) {
-//                //                                 file.file = blob;
-//                //                                 file.size = blob.size;
-//                //                                 file.name = nativeFile.name;
-//                //                                 console.debug("resized image to " + imgWidth + "x" + imgHeight);
-//                //                                 deferred.resolve();
-//                //                                 scope.$digest();
-//                //                             });
-//                //                         }, {
-//                //                             canvas: true,
-//                //                             crop: true,
-//                //                             maxWidth: imgWidth,
-//                //                             maxHeight: imgHeight
-//                //                         }
-//                //                     );
-//                //                 });
-//                             });
+
+                $scope.obj = {};
+
+                $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
+                    console.log('This works');
+//                    var that = flowFile;
+//                    if (!{png: 1, gif: 1, jpg: 1, jpeg: 1}[that.getExtension()])
+//                        return false;
+//                    if (!(that.file.hasOwnProperty('alreadyResized') && that.file.alreadyResized)) {
+//                        loadImage(that.file,
+//                                function (canvas) {
+//                                    canvas.toBlob(
+//                                            function (blob) {
+//                                                blob.alreadyResized = true;
+//                                                for (var key in that.file)
+//                                                    blob[key] = that.file[key];
+//                                                that.flowObj.addFile(blob);
+//                                            }
+//                                    )
+//                                },
+//                                {
+//                                    canvas: true,
+//                                    crop: true,
+//                                    maxWidth: 300,
+//                                    maxHeight: 300
+//                                }
+//                        );
+//                        return false;
+//                    } else
+//                    {
+//                        return true;
+//                    }
+
+                });
 
                 var crearPublicacion = function () {
                     //Se recogen los datos de la publicacion 
@@ -51,9 +56,9 @@ modulo_anuncios.controller('venderController',
                 };
 
                 $scope.agregarPublicacion = function () {
-                    
-                    if(esValido()){
-                    
+
+                    if (esValido()) {
+
                         $scope.setGlobalcat();
 
                         var publicacion = crearPublicacion();
@@ -132,55 +137,55 @@ modulo_anuncios.controller('venderController',
 
 
                 };
-                
-                $scope.esValidoTitulo = function(){
+
+                $scope.esValidoTitulo = function () {
                     $scope.valtitulo = ($scope.titulo !== undefined) && ($scope.titulo !== '') ? "has-success" : "has-error";
                 };
-                
-                $scope.esValidoCat = function(){
+
+                $scope.esValidoCat = function () {
                     $scope.valcat = ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) ? "has-success" : "has-error";
                 };
-                
-                $scope.esValidoPrecio = function(){
+
+                $scope.esValidoPrecio = function () {
                     $scope.valprecio = ($scope.precio !== undefined) && ($scope.precio > 0) ? "has-success" : "has-error";
                 };
-                
-                $scope.esValidoDes = function(){
-                    $scope.valdes = ($scope.descripcion !== undefined) && ($scope.descripcion !== '')  ? "has-success" : "has-error";
+
+                $scope.esValidoDes = function () {
+                    $scope.valdes = ($scope.descripcion !== undefined) && ($scope.descripcion !== '') ? "has-success" : "has-error";
                 };
-                
-                var esValido = function(){
-                    
+
+                var esValido = function () {
+
                     $scope.valtitulo = ($scope.titulo !== undefined) && ($scope.titulo !== '') ? "has-success" : "has-error";
                     $scope.valcat = ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) ? "has-success" : "has-error";
                     $scope.valprecio = ($scope.precio !== undefined) && ($scope.precio > 0) ? "has-success" : "has-error";
                     $scope.valdes = ($scope.descripcion !== undefined) && ($scope.descripcion !== '') ? "has-success" : "has-error";
-                    $scope.valimg = ($scope.existingFlowObject.files.length === 0 )? true:false;
-                    $scope.valubi = ($rootScope.ubicaciones === undefined)?true:false;
-                    
-                    if($rootScope.ubicaciones !== undefined)
+                    $scope.valimg = ($scope.existingFlowObject.files.length === 0) ? true : false;
+                    $scope.valubi = ($rootScope.ubicaciones === undefined) ? true : false;
+
+                    if ($rootScope.ubicaciones !== undefined)
                     {
-                        
-                       $scope.valubi = $rootScope.ubicaciones.length===0?true:false;
+
+                        $scope.valubi = $rootScope.ubicaciones.length === 0 ? true : false;
                     }
-                    
-                    
+
+
                     $scope.valglobal = !(($scope.titulo !== undefined) && ($scope.titulo !== '')
-                            && ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) 
+                            && ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined)
                             && ($scope.precio !== undefined) && ($scope.precio > 0)
                             && ($scope.descripcion !== undefined) && ($scope.descripcion !== '')
                             && !$scope.valimg
                             && !$scope.valubi);
 
                     return ($scope.titulo !== undefined) && ($scope.titulo !== '')
-                            && ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) 
+                            && ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined)
                             && ($scope.precio !== undefined) && ($scope.precio > 0)
                             && ($scope.descripcion !== undefined) && ($scope.descripcion !== '')
                             && !$scope.valimg
                             && !$scope.valubi;
 
                 };
-                
+
                 $scope.valtitulo = "";
                 $scope.valcat = "";
                 $scope.valprecio = "";
@@ -188,5 +193,5 @@ modulo_anuncios.controller('venderController',
                 $scope.valimg = false;
                 $scope.valubi = false;
                 $scope.valglobal = false;
-                
+
             }]);

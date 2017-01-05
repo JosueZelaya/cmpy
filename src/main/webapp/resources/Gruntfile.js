@@ -21,6 +21,7 @@ module.exports = function (grunt) {
 //                    dest: './js-min-safe'
 //                }
                 files: {
+                    './js-min-safe/bower/blueimp-load-image/js/load-image.js': ['./bower_components/blueimp-load-image/js/load-image.js'],
                     './js-min-safe/bower/angular/angular.min.js': ['./bower_components/angular/angular.min.js'],
                     './js-min-safe/bower/angular-sanitize/angular-sanitize.min.js': ['./bower_components/angular-sanitize/angular-sanitize.min.js'],
                     './js-min-safe/bower/angular-loading-bar/build/loading-bar.min.js': ['./bower_components/angular-loading-bar/build/loading-bar.min.js'],
