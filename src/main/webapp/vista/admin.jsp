@@ -24,34 +24,302 @@
             }
             .angular-google-map-container { height: 400px; }
         </style>
+        <base href="/">
     </head>
-    <body ng-cloak class="ng-cloak">
+    <body ng-cloak class="ng-cloak" flow-prevent-drop>
 
+        <!-- MAIN CONTENT -->
         <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="menuPrincipalController">
             <div class="container">
                 <div class="navbar-header"> 
+
+                    <button ng-if="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.html')">                
+                        Entrar <span class="glyphicon glyphicon-user">
+                    </button>            
+
+                    <button ng-show="authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
+                        <span class="sr-only">Toggle navigation</span>
+                        <div ng-if="!imageUrl">
+                            <img ng-show="localAccount" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
+                        </div>
+                        <div ng-if="imageUrl">
+                            <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
+                            <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
+                        </div>                        
+                    </button>            
+
+                    <button ng-show="authenticated" id="botonAvisos" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">                                
+                        </span> <span class="badge badge-notify">{{totalNotificaciones + NoLeidosTotal}}</span>
+                        Avisos
+                    </button>   
+
+                    <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">                                                   
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        Info 
+                    </button>
+                    
+                    <button id="botonVisitas" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" uib-tooltip="visitas recibidas" tooltip-placement="bottom">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        {{visitas}}                        
+                    </button>
+
                     <a href="/" class="pull-left" ui-sref='home' ui-sref-opts="{reload:true}">
                         <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
                     </a>
-                </div> 
-                <a href="/Spider/scanearTiendasOverSSL">Run Spider Secure Scanner</a>
-                <a href="/Spider/scanearTiendasInsecure">Run Spider Insecure Scanner</a>
-                <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">   
+
+                </div>                 
+                <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">
 
                     <ul class="nav navbar-nav"> 
-                        <a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a>
+
+                        <li ng-if="!authenticated">
+                            <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
+                                <span class="glyphicon glyphicon-facetime-video"></span>
+                            </a>
+                        </li>
+
+                        <!--<div ng-show="usuario.login === '' || usuario.login === 'anonymousUser'">-->
+                        <li ng-if="!authenticated">
+                            <a href="#" ng-click="open('loginModal.html')">Iniciar Sesion <span class="glyphicon glyphicon-user"></a>
+                        </li>                           
+                        <!--</div>-->
+                        <!--<div ng-show="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
+                        <li class="dropdown" uib-dropdown="" ng-if="authenticated && navCollapsed">
+                            <a ng-if="imageUrl" href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
+                                Yo
+                                <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
+                                <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
+                            </a>
+                            <a ng-if="!imageUrl" href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                                                
+                                Yo
+                                <img ng-show="localAccount" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-if="authenticated">
+                                    <a href="#" ui-sref="home.misPublicaciones"> 
+                                        Mis Anuncios
+                                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                                    </a>
+                                </li>
+                                <li ng-if="localAccount" ng-click="open('changePassModal.html')"><a href="#">Cambiar Clave</a></li>
+                                <li><a href="#">Editar Perfil</a></li>
+                                <li><a href="#">Configuracion</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Sesión</li>                                     
+                                <li><a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
+                            </ul>
+                        </li>
+
+
+                        <li ng-if="authenticated && !navCollapsed">
+                            <a href="#" ui-sref="home.misPublicaciones"> 
+                                Mis Anuncios
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                            </a>
+                        </li>
+                        <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('changePassModal.html'); cancel()">Cambiar Clave</a></li>
+                        <li ng-if="authenticated && !navCollapsed"><a href="#">Editar Perfil</a></li>
+                        <li ng-if="authenticated && !navCollapsed"><a href="#">Configuracion</a></li>
+                        <li ng-if="authenticated && !navCollapsed" class="divider"></li>
+                        <li ng-if="authenticated && !navCollapsed" class="dropdown-header">Sesión</li>                                     
+                        <li ng-if="authenticated && !navCollapsed"><a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
+
+                        <!--</div>-->
                     </ul>                    
                 </div>
+                <div class="navbar-right navbar-collapse collapse" uib-collapse="collapseNot">
+                    <ul class="nav navbar-nav"> 
+
+                        <li class="dropdown" uib-dropdown="" ng-if="authenticated">
+                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
+                                <span class="glyphicon glyphicon-envelope"></span>
+                                <span class="badge badge-notify">{{NoLeidosTotal}}</span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="mensaje in mensajes">
+                                    <a href="" 
+                                       ng-click="setMensajeUsuarioLeido(mensaje.usuarioEmisor.id);" 
+                                       ui-sref="home.vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})"
+                                       ng-click="collapseNot = !collapseNot">
+                                        <span class="badge pull-right">{{mensaje.total}}</span>
+                                        {{mensaje.texto.slice(0, 50)}}...  <span class="text-muted" style="font-size: 11px;float:right;margin-right:10px">{{mensaje.usuarioEmisor.persona.nombre}} </span>
+                                    </a>
+                                </li> 
+                                <li style="text-align: center">
+                                    <a href="" 
+                                       ui-sref="home.vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})"
+                                       ng-click="collapseNot = !collapseNot">
+                                        Ver Bandeja...
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown" uib-dropdown="" ng-if="authenticated">
+                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <span class="glyphicon glyphicon-comment"></span>
+                                <span class="badge badge-notify">{{totalNotificaciones}}</span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="notificacionUsuario in notificaciones">
+                                    <a href="" 
+                                       ng-click="quitarVisibilidad(notificacionUsuario.id, $index)" 
+                                       ui-sref-opts="{reload:true}"
+                                       ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})"
+                                       ng-click="collapseNot = !collapseNot">
+                                        {{notificacionUsuario.notificacion.mensaje.slice(0, 50)}}...
+                                    </a>
+                                </li>
+                                <li style="text-align: center">
+                                    <a href=""  
+                                       ui-sref="home.vistaNotificaciones({'#': 'publicacionesProductos'})"
+                                       ng-click="collapseNot = !collapseNot">
+                                        Ver Todas ...
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div uib-dropdown="" class="dropdown navbar-right navbar-collapse collapse" uib-collapse="infoCollapsed">                    
+                    <ul ng-if="infoCollapsed" class="nav navbar-nav">
+                        <li>
+                            <a uib-tooltip="visitas recibidas" tooltip-placement="bottom">{{visitas}}
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </a>                            
+                        </li>
+                        <li class="dropdown" uib-dropdown="">
+                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
+                                Info
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                            </a>                            
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
+                                        <span class="glyphicon glyphicon-facetime-video"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" ui-sref="home.about({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                        Nosotros
+                                    </a>
+                                </li>                                
+
+                                <li>
+                                    <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                        Terminos
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" ui-sref="home.crearTienda({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                        Negocios
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul ng-if="!infoCollapsed" class="nav navbar-nav">
+                        <li>
+                            <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
+                                <span class="glyphicon glyphicon-facetime-video"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" ui-sref="home.about({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                Nosotros
+                            </a>
+                        </li>                                
+
+                        <li>
+                            <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                Terminos
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" ui-sref="home.crearTienda({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                Negocios
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <form class="navbar-form navbar-left" style="width: 100%" role="search">
+                    <div class="input-group">
+                        <input ng-keyup="$event.keyCode == 13 && buscar(terminoBusqueda)" type="text" class="form-control" placeholder="Buscar producto..." ng-model="terminoBusqueda">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ui-sref-opts="{reload:true}" ui-sref="home.busqueda({terminoBusqueda: terminoBusqueda})">BuscarYa!</button>
+                        </span>
+                    </div>                    
+                </form>
             </div>
         </nav>
-        Saludo: ${parametro}
-        Resultado: ${name}
 
+        <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+        <div ui-view></div>
+
+        <%@include file="common/loginModal.jsp" %>
+
+        <script type="text/ng-template" id="changePassModal.html">
+            <div class="modal-body" ng-app="cmpy.autenticacion" ng-controller="changePassController">
+                <div ng-class="valtitulo">
+                    <label for="passActual" class="control-label">Ingrese contraseña actual</label>
+                    <input ng-keyup="$event.keyCode == 13 && changePass()" ng-model="passActual" id="passActual" type="password" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="wrongPass">
+                        {{wrongPassMsj}}
+                    </div>
+                </div>
+                <div ng-class="valtitulo">
+                    <label for="passNuevo" class="control-label">Ingrese contraseña nueva</label>
+                    <input ng-keyup="$event.keyCode == 13 && changePass()" ng-model="passNuevo" id="passNuevo" type="password" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
+                        {{msjPasswordNotEqual}}
+                    </div>
+                </div>
+                <div ng-class="valtitulo">
+                    <label for="passConfirmacion" class="control-label">Confirme la nueva contraseña</label>
+                    <input ng-keyup="$event.keyCode == 13 && changePass()" ng-model="passConfirmacion" id="passConfirmacion" type="password" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="passNotEqual">
+                        {{msjPasswordNotEqual}}
+                    </div>
+                </div>
+                <br/>
+                <button ng-click="changePass()" type="button" class="btn btn-success" uib-tooltip="Aplicar el cambio de contraseña" tooltip-placement="bottom">
+                    Aplicar Cambio
+                </button>
+                <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar cambio de contraseña" tooltip-placement="bottom">
+                    Cancelar
+                </button>                
+            </div>
+        </script>
+        
+        <script type="text/ng-template" id="resetPassModal.html">
+            <div class="modal-body" ng-app="cmpy.autenticacion" ng-controller="resetPassController">
+                <div ng-class="valtitulo">
+                    <label for="emailReset" class="control-label">Ingrese su dirección de correo:</label>
+                    <input ng-keyup="$event.keyCode == 13 && resetPass()" ng-model="emailReset" id="emailReset" type="text" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="wrongEmail">
+                        {{wrongEmailMsj}}
+                    </div>
+                </div>        
+                <br/>
+                <button ng-disabled="!ready" ng-click="resetPass()" type="button" class="btn btn-success" uib-tooltip="Envia un email a tu correo para resetear la contraseña" tooltip-placement="bottom">
+                    Resetear Password
+                </button>
+                <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar cambio de contraseña" tooltip-placement="bottom">
+                    Cancelar
+                </button>                
+            </div>
+        </script>
+
+        <!-- PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS -->
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-sanitize/angular-sanitize.min.js"></script> 
         <script type='text/javascript' src='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-animate/angular-animate.min.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>        
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/lodash/lodash.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/lodash/dist/lodash.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/underscore/underscore-min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>        
@@ -65,7 +333,10 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/stomp-websocket/lib/stomp.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacion.module.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/adminAutenticacionController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/changePassController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/resetPassController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacion.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacionService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/PushNotificationService.js" ></script>
@@ -83,7 +354,8 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/tiendaService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/anunciosController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/misPublicacionesController.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/publicacionesFiltradasController.js" ></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/publicacionesFiltradasController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/busquedaController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/venderController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/empresasController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/productoController.js" ></script>        
@@ -94,18 +366,27 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/utils.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/modalController.js" ></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/loadingDirective.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils/utilsService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mensajes/mensajes.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mensajes/mensajesService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mensajes/mensajesController.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.module.js" ></script>
-
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.admin.module.js" ></script>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
         <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
+
+
+        <!-- PARA PASAR A PRODUCCIÓN USAR ESTOS SCRIPTS Y COMENTAR LOS ANTERIORES -->
+<!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js" ></script>
+        <link href="${pageContext.request.contextPath}/resources/min/css/style.min.css" rel="stylesheet" type="text/css" media='all'>
+        <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
+        <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
+        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />-->
 
     </body>
 </html>

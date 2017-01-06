@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -142,8 +141,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/user/update"
                 ).hasRole("USER")
                 .antMatchers(
-                        "/admin",
-                        "/admin/**",
+                        "/spider",
                         "/Spider/scanearTiendasOverSSL",
                         "/Spider/scanearTiendasInsecure"
                 ).hasRole("ADMIN")

@@ -5,41 +5,37 @@ modulo_anuncios.controller('venderController',
             'catService',
             'flowFactory',
             'Publicacion',
-            function ($rootScope, $scope, anunciosService, catService, flowFactory, Publicacion) {
-
+            '$q',
+            function ($rootScope, $scope, anunciosService, catService, flowFactory, Publicacion, $q) {
+                
                 $scope.obj = {};
 
-                $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
-                    console.log('This works');
-//                    var that = flowFile;
-//                    if (!{png: 1, gif: 1, jpg: 1, jpeg: 1}[that.getExtension()])
-//                        return false;
-//                    if (!(that.file.hasOwnProperty('alreadyResized') && that.file.alreadyResized)) {
-//                        loadImage(that.file,
-//                                function (canvas) {
-//                                    canvas.toBlob(
-//                                            function (blob) {
-//                                                blob.alreadyResized = true;
-//                                                for (var key in that.file)
-//                                                    blob[key] = that.file[key];
-//                                                that.flowObj.addFile(blob);
-//                                            }
-//                                    )
-//                                },
-//                                {
-//                                    canvas: true,
-//                                    crop: true,
-//                                    maxWidth: 300,
-//                                    maxHeight: 300
-//                                }
-//                        );
-//                        return false;
-//                    } else
-//                    {
-//                        return true;
-//                    }
-
-                });
+//                $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
+//                    console.log('This works');
+//                    var nativeFile = flowFile; // instance of File, same as here: https://github.com/flowjs/ng-flow/blob/master/src/directives/img.js#L13
+//                     //file.file = null;// do not display it
+//                     var deferred = $q.defer();
+//                     flowFile.promise = deferred.promise;
+//
+//                     loadImage(
+//                         nativeFile,
+//                         function(canvas) {
+//                             canvas.toBlob(function(blob) {
+//                                 flowFile.file = blob;
+//                                 flowFile.size = blob.size;
+//                                 flowFile.name = nativeFile.name;
+//                                 console.debug("resized image to " + 300 + "xX");
+//                                 deferred.resolve();
+//                                 $scope.$digest();
+//                             });
+//                         }, {
+//                             canvas: true,
+//                             crop: true,
+//                             maxWidth: 300
+//                         }
+//                     );
+//
+//                });
 
                 var crearPublicacion = function () {
                     //Se recogen los datos de la publicacion 

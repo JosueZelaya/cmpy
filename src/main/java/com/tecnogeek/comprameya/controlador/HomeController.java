@@ -119,6 +119,13 @@ public class HomeController {
         log.info("Se muestra admin page");
         return "admin";
     }
+    
+    @RequestMapping(value = "/spider", method = RequestMethod.GET)
+    public String spiderPage(Model model) {        
+        model.addAttribute("parametro", "Hola Mundo");
+        log.info("Se muestra admin page");
+        return "spider";
+    }
 
     @RequestMapping(value = "/angular", method = RequestMethod.GET)
     public String angularPage(Model model) {
