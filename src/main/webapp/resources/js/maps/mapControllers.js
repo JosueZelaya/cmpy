@@ -134,7 +134,7 @@ maps.controller('mapController',
                 
                 $scope.searchbox2 = {
                     template: 'searchbox2.tpl.html',
-                    position:'bottom-center',
+                    position:'top-center',
                     events: {
                         places_changed: function (searchBox) {
 
