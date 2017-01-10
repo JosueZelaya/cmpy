@@ -131,6 +131,34 @@ maps.controller('mapController',
                         }
                     }
                 };
+                
+                $scope.searchbox2 = {
+                    template: 'searchbox2.tpl.html',
+                    position:'bottom-center',
+                    events: {
+                        places_changed: function (searchBox) {
+
+                            console.log(searchBox.getPlaces()[0].geometry);
+
+                            console.log(searchBox.getPlaces()[0].geometry.location.lat());
+
+                            var tmp_lat = searchBox.getPlaces()[0].geometry.location.lat();
+                            var tmp_lng = searchBox.getPlaces()[0].geometry.location.lng();
+
+                            $scope.center = {
+                                latitude: tmp_lat,
+                                longitude: tmp_lng
+                            };
+
+                            $scope.zoom = 17;
+
+                            console.log(searchBox.getPlaces());
+
+
+
+                        }
+                    }
+                };                
 
 
                 $scope.getUbicacionGPS = function () {

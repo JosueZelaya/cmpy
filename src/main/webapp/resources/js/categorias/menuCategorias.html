@@ -52,3 +52,132 @@
         </div>
     </div>
 </div>
+
+
+<div class="panel panel-primary" style="position: fixed;top:3%;left:3%;z-index:1000;width:93%;height:93%;opacity:0.97;display:none">
+  <div class="panel-heading" style="height:50px">
+        <h3 class="panel-title"><div class="col-md-1" style="padding-top:5px">Categorias</div> <div class="col-md-3"><input type="text" class="form-control" placeholder="Buscar..."/></div></h3>
+  </div>
+  <div class="panel-body" style="overflow-y:scroll;height:93%">
+    <!--Paneles internos-->
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-2" style="padding-right:3px;padding-left:3px ">
+        <div class="panel panel-default" style="padding-left:0;padding-right:0;margin-left:3px;margin-right:3px;margin-bottom:5px" ng-repeat="categoria in categorias" ng-show="categoria.id >=1 && categoria.id <=1">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="">{{categoria.nombre}}</a></h3>
+            </div>
+            <div style="overflow-x: hidden" ng-class="{panelclear:categoria.categoriaList.length==0,'panel-body':categoria.categoriaList.length>0}">
+                <ul>
+                    <li ng-repeat="sub_categoria in categoria.categoriaList">
+                        <h4 style="margin:3px"><a href="">{{sub_categoria.nombre}}</a></h4>
+                        <ul>
+                            <li ng-repeat="sub_sub_categoria in sub_categoria.categoriaList"><a href="">{{sub_sub_categoria.nombre}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> 
+        </div>        
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-2" style="padding-right:3px;padding-left:3px ">
+        <div class="panel panel-default" style="padding-left:0;padding-right:0;margin-left:3px;margin-right:3px;margin-bottom:5px" ng-repeat="categoria in categorias" ng-show="categoria.id >=2 && categoria.id <=3">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="">{{categoria.nombre}}</a></h3>
+            </div>
+            <div ng-class="{panelclear:categoria.categoriaList.length==0,'panel-body':categoria.categoriaList.length>0}">
+                <ul>
+                    <li ng-repeat="sub_categoria in categoria.categoriaList">
+                        <h4 style="margin:3px"><a href="">{{sub_categoria.nombre}}</a></h4>
+                        <ul>
+                            <li ng-repeat="sub_sub_categoria in sub_categoria.categoriaList"><a href="">{{sub_sub_categoria.nombre}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> 
+        </div>         
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-2" style="padding-right:3px;padding-left:3px ">
+        <div class="panel panel-default" style="padding-left:0;padding-right:0;margin-left:3px;margin-right:3px;margin-bottom:5px" ng-repeat="categoria in categorias" ng-show="categoria.id >=4 && categoria.id <=6">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="">{{categoria.nombre}}</a></h3>
+            </div>
+            <div ng-class="{panelclear:categoria.categoriaList.length==0,'panel-body':categoria.categoriaList.length>0}">
+                <ul>
+                    <li ng-repeat="sub_categoria in categoria.categoriaList">
+                        <h4 style="margin:3px"><a href="">{{sub_categoria.nombre}}</a></h4>
+                        <ul>
+                            <li ng-repeat="sub_sub_categoria in sub_categoria.categoriaList"><a href="">{{sub_sub_categoria.nombre}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> 
+        </div>         
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-2" style="padding-right:3px;padding-left:3px ">
+        <div class="panel panel-default" style="padding-left:0;padding-right:0;margin-left:3px;margin-right:3px;margin-bottom:5px" ng-repeat="categoria in categorias" ng-show="categoria.id >=7 && categoria.id <=11">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="">{{categoria.nombre}}</a></h3>
+            </div>
+            <div ng-class="{panelclear:categoria.categoriaList.length==0,'panel-body':categoria.categoriaList.length>0}">
+                <ul ng-show="categoria.categoriaList.length>0">
+                    <li ng-repeat="sub_categoria in categoria.categoriaList">
+                        <h4 style="margin:3px"><a href="">{{sub_categoria.nombre}}</a></h4>
+                        <ul>
+                            <li ng-repeat="sub_sub_categoria in sub_categoria.categoriaList"><a href="">{{sub_sub_categoria.nombre}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> 
+        </div>           
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-2" style="padding-right:3px;padding-left:3px ">
+        <div class="panel panel-default" style="padding-left:0;padding-right:0;margin-left:3px;margin-right:3px;margin-bottom:5px" ng-repeat="categoria in categorias" ng-show="categoria.id >=12 && categoria.id <=14">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="">{{categoria.nombre}}</a></h3>
+            </div>
+            <div ng-class="{panelclear:categoria.categoriaList.length==0,'panel-body':categoria.categoriaList.length>0}">
+                <ul ng-show="categoria.categoriaList.length>0">
+                    <li ng-repeat="sub_categoria in categoria.categoriaList">
+                        <h4 style="margin:3px"><a href="">{{sub_categoria.nombre}}</a></h4>
+                        <ul>
+                            <li ng-repeat="sub_sub_categoria in sub_categoria.categoriaList"><a href="">{{sub_sub_categoria.nombre}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> 
+        </div>         
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-2" style="padding-right:3px;padding-left:3px ">
+         <div class="panel panel-default" style="padding-left:0;padding-right:0;margin-left:3px;margin-right:3px;margin-bottom:5px" ng-repeat="categoria in categorias" ng-show="categoria.id >=15 && categoria.id <=27">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a href="">{{categoria.nombre}}</a></h3>
+            </div>
+            <div ng-class="{panelclear:categoria.categoriaList.length==0,'panel-body':categoria.categoriaList.length>0}">
+                <ul ng-show="categoria.categoriaList.length>0">
+                    <li ng-repeat="sub_categoria in categoria.categoriaList">
+                        <h4 style="margin:3px"><a href="">{{sub_categoria.nombre}}</a></h4>
+                        <ul>
+                            <li ng-repeat="sub_sub_categoria in sub_categoria.categoriaList"><a href="">{{sub_sub_categoria.nombre}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> 
+        </div>        
+    </div>
+    
+<!--    <div class="panel panel-default col-md-2" style="padding-left:0;padding-right:0;margin-left:10px;margin-right:10px;max-height:200px;" ng-repeat="categoria in categorias">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="">{{categoria.nombre}}</a></h3>
+        </div>
+        <div class="panel-body" style="max-height:150px;overflow-y:scroll">
+            <ul>
+                <li ng-repeat="sub_categoria in categoria.categoriaList">
+                    <h4><a href="">{{sub_categoria.nombre}}</a></h4>
+                    <ul>
+                        <li ng-repeat="sub_sub_categoria in sub_categoria.categoriaList"><a href="">{{sub_sub_categoria.nombre}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div> 
+    </div>-->
+
+  </div>
+</div>

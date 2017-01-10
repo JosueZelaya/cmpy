@@ -1,6 +1,9 @@
 <div>
     <script id="searchbox.tpl.html" type="text/ng-template">
-        <input class="form-control" style="width:40%;margin:9px" type="text" placeholder="Buscar ubicacion...">
+        <input class="form-control hidden-xs" style="width:40%;margin:9px" type="text" placeholder="Buscar ubicacion...">
+    </script>
+    <script id="searchbox2.tpl.html" type="text/ng-template">
+        <input class="form-control visible-xs" style="width:65%;margin:20px" type="text" placeholder="Buscar ubicacion...">
     </script>
     <script type="text/ng-template" id="control.tpl.html">
         <button class="form-control" style="width:15%;margin:9px"  ng-click="getUbicacionGPS()">Ubicame</button>
@@ -8,8 +11,14 @@
     <ui-gmap-google-map events="events" center="center" zoom="zoom" draggable="true" options="options" bounds="bounds" ng-click="setUbicaciones()" ng-if="render">
         <ui-gmap-markers models="markers" events="marker.events" coords="'self'" icon="'icon'" options="marker.options">
         </ui-gmap-markers>
+        
         <ui-gmap-search-box template="searchbox.template" events="searchbox.events">
         </ui-gmap-search-box>
+        
+        <ui-gmap-search-box  position="searchbox2.position" template="searchbox2.template" events="searchbox2.events">
+        </ui-gmap-search-box>
+        
+        
         <ui-gmap-map-control  position="top-right" controller="mapController" index="-1">
             <button id="btngps" class="form-control" style="margin-right: 18px;width: 109px;margin-top: 9px;"  ng-click="getUbicacionGPS();">Ubicame</button>
         </ui-gmap-map-control>
