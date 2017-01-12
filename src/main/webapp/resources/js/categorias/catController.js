@@ -2,7 +2,8 @@ categorias.controller('catController',
         ['$scope',
             'catService',
             'matchmedia',
-            function ($scope, catService, matchmedia) {
+            '$rootScope',
+            function ($scope, catService, matchmedia,$rootScope) {
 
                 catService.getCategorias()
                         .success(function (response)
@@ -24,6 +25,18 @@ categorias.controller('catController',
                 $scope.btnestado = true;
                 $scope.btnstyle = "glyphicon glyphicon-chevron-down";
                 $scope.isPhoneOrTablet = false;
+                $rootScope.menustyle = {'display':'none'};
+                $rootScope.cambiarmenustylecat = function(){
+                    
+                    if($rootScope.menustyle.display==='none'){
+                        $rootScope.menustyle = {'display':'block'};
+                    }
+                    else{
+                        $rootScope.menustyle = {'display':'none'};
+                    }
+                };
+                
+                
                 var unsub = {};
 
 

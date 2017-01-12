@@ -1,12 +1,17 @@
 <div ui-view>
-    <div class="col-md-8 min_cont marcar">
+    <div class="col-md-10 min_cont marcar">
         <div class="panel panel-default min_cont">                    
-            <div class="panel-heading">
-                <p>                            
-                    Publicaciones
-                    <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')">VenderYa! - Crear Anuncio</button>
+            <div class="panel-heading" style="height:60px">
+                <p>
+                    <button type="button" class="btn btn-default hidden-xs pull-left" aria-label="Menu categorias" ng-click="cambiarmenustylecat()">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Categorias
+                    </button>
+                    <button type="button" class="btn btn-default visible-xs pull-left" aria-label="Menu categorias" onclick="openNav()">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Categorias
+                    </button>
+                    <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')">Crear Anuncio</button>
                     <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html')">
-                        VenderYa! - Crear Anuncio
+                        Crear Anuncio
                     </button>
 
                 </p>
@@ -20,7 +25,7 @@
                         <h1>No se encontraron resultados para: "{{terminoBusqueda}}" </h1>                        
                     </div>
 
-                    <div class="col-sm-6 col-md-4" ng-repeat="publicacion in publicaciones" ng-if="publicaciones">
+                    <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="publicacion in publicaciones" ng-if="publicaciones">
                         
                         <div style="height: 450px;" class="thumbnail">       
 
