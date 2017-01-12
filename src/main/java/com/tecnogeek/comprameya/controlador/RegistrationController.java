@@ -155,6 +155,7 @@ public class RegistrationController {
         } catch (DuplicateEmailException ex) {
             model.addAttribute("user", userAccountData);
             model.addAttribute("emailErrorMsg", ex.getMessage());
+            log.info(ex.getMessage());
             return "duplicateEmail";
         }
         
