@@ -82,8 +82,13 @@ public class UsuarioService {
     
     @Transactional
     public Usuario registerNewUserAccount(RegistrationForm userAccountData) throws DuplicateEmailException {
+        
+        if(userAccountData.getEmail()==null) {
+            throw new DuplicateEmailException("Para completar el proceso de registro por favor agregue su dirección de correo");
+        }
+        
         if (emailExist(userAccountData.getEmail())) {
-            throw new DuplicateEmailException("El correo: " + userAccountData.getEmail() + " ya está siendo usado.");
+            throw new DuplicateEmailException("El correo: " + userAccountData.getEmail() + " ya está siendo usado. Por favor use otro para completar el registro.");
         }
 
         String encodedPassword = encodePassword(userAccountData);

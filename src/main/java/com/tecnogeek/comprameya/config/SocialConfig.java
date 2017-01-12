@@ -38,15 +38,19 @@ public class SocialConfig implements SocialConfigurer{
     
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer cfc, Environment e) {
+        
+        final FacebookConnectionFactory fbcf = new FacebookConnectionFactory(
+                e.getProperty("facebook.app.id"),
+                e.getProperty("facebook.app.secret")
+        );
+        fbcf.setScope("public_profile,email");      
+        
         cfc.addConnectionFactory(new TwitterConnectionFactory(
                 e.getProperty("twitter.consumer.key"),
                 e.getProperty("twitter.consumer.secret")
         ));
         
-        cfc.addConnectionFactory(new FacebookConnectionFactory(
-                e.getProperty("facebook.app.id"),
-                e.getProperty("facebook.app.secret")
-        ));
+        cfc.addConnectionFactory(fbcf);
         
     }
 

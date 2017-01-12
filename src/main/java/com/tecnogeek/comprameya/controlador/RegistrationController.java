@@ -124,29 +124,78 @@ public class RegistrationController {
         log.info("Se muestra formulario de registro");
         return "registrationForm";
     }
+    
+    @RequestMapping(value = "/signin", method = RequestMethod.GET)
+    public String redirectRequestToRegistrationPageSignin(WebRequest request, Model model) {
+        log.info("Se registra por medio de facebook");
+        Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
+
+        RegistrationForm userAccountData = createRegistrationDTO(connection);
+        
+        try{
+            registerAndLoggedUser(userAccountData, request);
+        } catch (DuplicateEmailException ex) {                   
+            model.addAttribute("user", userAccountData);
+            model.addAttribute("emailErrorMsg", ex.getMessage());
+            return "duplicateEmail";
+        }
+        
+        return "redirect:/";
+    }
+    
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String redirectRequestToRegistrationPage(WebRequest request, Model model) {
+        log.info("Se registra por medio de facebook");
+        Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
+
+        RegistrationForm userAccountData = createRegistrationDTO(connection);
+        
+        try{
+            registerAndLoggedUser(userAccountData, request);
+        } catch (DuplicateEmailException ex) {
+            model.addAttribute("user", userAccountData);
+            model.addAttribute("emailErrorMsg", ex.getMessage());
+            return "duplicateEmail";
+        }
+        
+        return "redirect:/";
+    }
 
     @RequestMapping(value = "/user/register", method = RequestMethod.POST)
     public String registerUserAccount(@Valid @ModelAttribute("user") RegistrationForm userAccountData,
             BindingResult result,
-            WebRequest request) throws Exception {
-
-        if (result.hasErrors()) {
+            WebRequest request) {
+        
+        if(result.hasErrors()){
             return "registrationForm";
         }
-
-        Usuario registered = createUserAccount(userAccountData, result);
-
-        if (registered == null) {
-            log.info("Se muestra formulario de registro");
+        
+        try{
+            registerAndLoggedUser(userAccountData, request);
+        } catch (DuplicateEmailException ex) {
+            addFieldError(
+                    "user",
+                    "email",
+                    userAccountData.getEmail(),
+                    ex.getLocalizedMessage(),
+                    result);
             return "registrationForm";
         }
+        
+        return "redirect:/";
+
+    }
+    
+    private Usuario registerAndLoggedUser(RegistrationForm userAccountData,
+            WebRequest request) throws DuplicateEmailException{
+        
+        Usuario registered =  service.registerNewUserAccount(userAccountData);
 
         SecurityUtil.logInUser(registered);
         providerSignInUtils.doPostSignUp(registered.getLogin(), request);
-
+        
         log.info("Nuevo usuario creado: {} ", registered.getLogin());
-        return "redirect:/";
-
+        return registered;
     }
 
     @RequestMapping(value = "/user/resetPassword", method = RequestMethod.POST)
