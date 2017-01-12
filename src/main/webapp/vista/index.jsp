@@ -28,6 +28,25 @@
     </head>
     <body ng-cloak class="ng-cloak" flow-prevent-drop>
 
+        <script>
+            window.fbAsyncInit = function() {
+              FB.init({
+                appId      : '1838688259678608',
+                xfbml      : true,
+                version    : 'v2.8'
+              });
+              FB.AppEvents.logPageView();
+            };
+
+            (function(d, s, id){
+               var js, fjs = d.getElementsByTagName(s)[0];
+               if (d.getElementById(id)) {return;}
+               js = d.createElement(s); js.id = id;
+               js.src = "//connect.facebook.net/en_US/sdk.js";
+               fjs.parentNode.insertBefore(js, fjs);
+             }(document, 'script', 'facebook-jssdk'));
+        </script>
+        
         <!-- MAIN CONTENT -->
         <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="menuPrincipalController">
             <div class="container">
@@ -253,6 +272,12 @@
                         </span>
                     </div>                    
                 </form>
+            </div>
+            <div
+                class="fb-like"
+                data-share="true"
+                data-width="450"
+                data-show-faces="true">
             </div>
         </nav>
 
