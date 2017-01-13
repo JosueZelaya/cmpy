@@ -82,61 +82,36 @@ public class UsuarioService {
     
     @Transactional
     public Usuario registerNewUserAccount(RegistrationForm userAccountData) throws DuplicateEmailException {
+        
+         if(userAccountData.getEmail()==null) {
+            throw new DuplicateEmailException("Para completar el proceso de registro por favor agregue su dirección de correo");
+        }
+        
+        if (emailExist(userAccountData.getEmail())) {
+            throw new DuplicateEmailException("El correo: " + userAccountData.getEmail() + " ya está siendo usado. Por favor use otro para completar el registro.");
+        }
+
+        String encodedPassword = encodePassword(userAccountData);
+
+        Persona persona = new Persona();
+        persona.setCorreo(userAccountData.getEmail());
+        persona.setNombre(userAccountData.getFirstName());
+        persona.setApellido(userAccountData.getLastName());
+        persona.setTelefono(userAccountData.getTelephone());
+        persona = personaRepository.save(persona);
+
+        Perfil perfil = perfilRepository.findByNombre(Role.USUARIO.getRoleName());
+
         Usuario usuario = new Usuario();
+        usuario.setLogin(userAccountData.getEmail());
+        usuario.setPass(encodedPassword);
+        usuario.setPersona(persona);
+        usuario.setPerfil(perfil);
         
-        if(userAccountData.getEmail()==null && userAccountData.isNormalRegistration()) {
-            throw new DuplicateEmailException("Debe ingresar su dirección de correo");
-        }
-        
-        if (emailExist(userAccountData.getEmail()) && userAccountData.isNormalRegistration()) {
-            throw new DuplicateEmailException("El correo: " + userAccountData.getEmail() + " ya está siendo usado con otra cuenta.");
-        }
-        
-        if(userAccountData.isSocialSignIn() && emailExist(userAccountData.getEmail())){
-            usuario = repository.findActiveUserByLogin(userAccountData.getEmail());
-            
-            String encodedPassword = encodePassword(userAccountData);
-            Persona persona = usuario.getPersona();
-            persona.setCorreo(userAccountData.getEmail());
-            persona.setNombre(userAccountData.getFirstName());
-            persona.setApellido(userAccountData.getLastName());
-            persona.setTelefono(userAccountData.getTelephone());
-            persona = personaRepository.save(persona);
-            
-            Perfil perfil = perfilRepository.findByNombre(Role.USUARIO.getRoleName());
+        setImage(userAccountData, usuario);
 
-            usuario.setLogin(userAccountData.getEmail());
-            usuario.setPass(encodedPassword);
-            usuario.setPersona(persona);
-            usuario.setPerfil(perfil);
-
-            setImage(userAccountData, usuario);
-
-            if (userAccountData.isSocialSignIn()) {
-                usuario.setSignInProvider(userAccountData.getSignInProvider());
-            }
-        }else{
-            String encodedPassword = encodePassword(userAccountData);
-
-            Persona persona = new Persona();
-            persona.setCorreo(userAccountData.getEmail());
-            persona.setNombre(userAccountData.getFirstName());
-            persona.setApellido(userAccountData.getLastName());
-            persona.setTelefono(userAccountData.getTelephone());
-            persona = personaRepository.save(persona);
-
-            Perfil perfil = perfilRepository.findByNombre(Role.USUARIO.getRoleName());
-
-            usuario.setLogin(userAccountData.getEmail());
-            usuario.setPass(encodedPassword);
-            usuario.setPersona(persona);
-            usuario.setPerfil(perfil);
-
-            setImage(userAccountData, usuario);
-
-            if (userAccountData.isSocialSignIn()) {
-                usuario.setSignInProvider(userAccountData.getSignInProvider());
-            }
+        if (userAccountData.isSocialSignIn()) {
+            usuario.setSignInProvider(userAccountData.getSignInProvider());
         }
 
         return repository.save(usuario);
