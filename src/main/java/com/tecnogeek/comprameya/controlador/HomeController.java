@@ -74,7 +74,7 @@ public class HomeController {
         String ip = request.getRemoteAddr();
         visitaService.nuevaVisita(ip);
         log.info("{} accedió a homepage desde {}",userName,ip);
-        return "index";
+        return "newIndex";
     }
     
     @ResponseBody
