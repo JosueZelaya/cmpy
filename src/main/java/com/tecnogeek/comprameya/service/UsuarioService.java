@@ -83,7 +83,7 @@ public class UsuarioService {
     @Transactional
     public Usuario registerNewUserAccount(RegistrationForm userAccountData) throws DuplicateEmailException {
         
-        if(userAccountData.getEmail()==null) {
+         if(userAccountData.getEmail()==null) {
             throw new DuplicateEmailException("Para completar el proceso de registro por favor agregue su dirección de correo");
         }
         
@@ -118,13 +118,14 @@ public class UsuarioService {
     }
 
     private boolean emailExist(String email) {
+        
+        if(email == null){
+            return false;
+        }
+        
         Usuario user = repository.findActiveUserByLogin(email);
 
-        if (user != null) {
-            return true;
-        }
-
-        return false;
+        return user != null;
     }
 
     private String encodePassword(RegistrationForm dto) {
