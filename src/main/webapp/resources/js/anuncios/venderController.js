@@ -189,5 +189,20 @@ modulo_anuncios.controller('venderController',
                 $scope.valimg = false;
                 $scope.valubi = false;
                 $scope.valglobal = false;
+                $scope.imgs = [];
+                
+                $scope.cloudinary = function() {
+                    cloudinary.openUploadWidget({
+                       cloud_name: 'jzelaya',
+                       upload_preset: 'o49xiwsz'
+                    }, function (error, result) {
+                        if(!error) {
+                            var tmp = '';
+                            result.forEach(function (entry) {
+                                $scope.imgs.push(entry.url);
+                            });
+                        }
+                    });
+                };
 
             }]);
