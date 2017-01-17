@@ -105,6 +105,8 @@ modulo_anuncios.controller('anunciosController',
                 };
 
                 var init = function () {
+                    $scope.baseImgUrl = "http://res.cloudinary.com/jzelaya/image/upload/";
+                    $scope.thumbSize = "h_150/";
                     $scope.publicaciones = [];
                     $scope.page = 0;
                     cargarPublicacionesGratis($scope.page);

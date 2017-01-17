@@ -39,13 +39,9 @@ modulo_anuncios.controller('venderController',
 
                 var crearPublicacion = function () {
                     //Se recogen los datos de la publicacion 
-                    var imagenes = new Array();
-                    for (var index = 0; index < $scope.existingFlowObject.files.length; ++index) {
-                        imagenes[index] = $scope.existingFlowObject.files[index].file;
-                    }
 
                     var publicacion = new Publicacion('', $scope.titulo, $scope.precio, $scope.descripcion, $scope.catagoriaId, 'GRATIS');
-                    publicacion.setImagenes(imagenes);
+                    publicacion.setImagenes($scope.imgs);
                     publicacion.setUbicaciones($rootScope.ubicaciones);
 
                     return publicacion;
@@ -156,7 +152,7 @@ modulo_anuncios.controller('venderController',
                     $scope.valcat = ($scope.categoriaSelected !== undefined) && ($scope.categoriaSelected.id !== undefined) ? "has-success" : "has-error";
                     $scope.valprecio = ($scope.precio !== undefined) && ($scope.precio > 0) ? "has-success" : "has-error";
                     $scope.valdes = ($scope.descripcion !== undefined) && ($scope.descripcion !== '') ? "has-success" : "has-error";
-                    $scope.valimg = ($scope.existingFlowObject.files.length === 0) ? true : false;
+                    $scope.valimg = ($scope.imgs.length === 0) ? true : false;
                     $scope.valubi = ($rootScope.ubicaciones === undefined) ? true : false;
 
                     if ($rootScope.ubicaciones !== undefined)
@@ -189,18 +185,53 @@ modulo_anuncios.controller('venderController',
                 $scope.valimg = false;
                 $scope.valubi = false;
                 $scope.valglobal = false;
+                $scope.baseImgUrl = "http://res.cloudinary.com/jzelaya/image/upload/";
+                $scope.thumbSize = "h_60,w_90/";
                 $scope.imgs = [];
                 
-                $scope.cloudinary = function() {
+                $scope.cloudinary = function() {                    
                     cloudinary.openUploadWidget({
-                       cloud_name: 'jzelaya',
-                       upload_preset: 'o49xiwsz'
+                        cloud_name: 'jzelaya',
+                        upload_preset: 'o49xiwsz',
+                        max_image_width: '600',
+                        max_image_height: '600',
+                        show_powered_by: false,
+                        max_files: 7,       
+                        stylesheet: 'white',
+                        max_file_size: '500000',
+//                        max_chunk_size: '9000',
+                        text: {
+                            "powered_by_cloudinary": "comprameya.com",
+                            "sources.local.title": "Mis Imágenes",
+                            "sources.local.drop_file": "Arrastre una imágen aquí",
+                            "sources.local.drop_files": "Arrastre imágenes aquí",
+                            "sources.local.drop_or": "O",
+                            "sources.local.select_file": "Seleccione Imágen",
+                            "sources.local.select_files": "Seleccione Imágenes",
+                            "sources.url.title": "Link",
+                            "sources.url.note": "URL de una imágen pública:",
+                            "sources.url.upload": "Subir",
+                            "sources.url.error": "Por favor, digite una URL válida",
+                            "sources.camera.title": "Cámara",
+                            "sources.camera.note": "Podrá tomar una foto si su navegador tiene acceso a la cámara:",
+                            "sources.camera.capture": "Capturar",
+                            "progress.uploading": "Subiendo...",
+                            "progress.upload_cropped": "Subir",
+                            "progress.processing": "Procesando...",
+                            "progress.retry_upload": "Intente de nuevo",
+                            "progress.use_succeeded": "OK",
+                            "progress.failed_note": "Algunas imágenes no pudieron cargarse."
+                        }
                     }, function (error, result) {
                         if(!error) {
                             var tmp = '';
-                            result.forEach(function (entry) {
-                                $scope.imgs.push(entry.url);
-                            });
+                            $scope.$apply(function () {
+                                result.forEach(function (entry) {
+                                    $scope.imgs.push(entry.path);
+                                });
+                            });                            
+                        }else {
+                            alert(error);
                         }
                     });
                 };

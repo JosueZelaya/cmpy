@@ -26,7 +26,7 @@
                     </p>                    
                     <uib-carousel interval="myInterval" no-wrap="noWrapSlides">                                    
                         <uib-slide ng-repeat="recurso in recursoList" active="slide.active" index="slide.id">
-                            <a href=""><img class="imgajust" ng-src="/images/getImage/{{recurso.ruta}}" /></a>                            
+                            <a href=""><img class="imgajust" ng-src="{{baseImgUrl + recurso.ruta}}" /></a>                            
                         </uib-slide>
                     </uib-carousel>
                     <div class="bs-callout bs-callout-primary">
