@@ -185,16 +185,16 @@ modulo_anuncios.controller('venderController',
                 $scope.valimg = false;
                 $scope.valubi = false;
                 $scope.valglobal = false;
-                $scope.baseImgUrl = "http://res.cloudinary.com/jzelaya/image/upload/";
+                $scope.baseImgUrl = "http://res.cloudinary.com/dm8oxzlpb/image/upload/";
                 $scope.thumbSize = "h_60,w_90/";
                 $scope.imgs = [];
                 
                 $scope.cloudinary = function() {                    
                     cloudinary.openUploadWidget({
-                        cloud_name: 'jzelaya',
-                        upload_preset: 'o49xiwsz',
-                        max_image_width: '600',
-                        max_image_height: '600',
+                        cloud_name: 'dm8oxzlpb',
+                        upload_preset: 'my0sfy04',
+                        max_image_width: '1024',
+                        max_image_height: '1024',
                         show_powered_by: false,
                         max_files: 7,       
                         stylesheet: 'white',
