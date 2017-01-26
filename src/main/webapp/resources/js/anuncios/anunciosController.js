@@ -105,7 +105,7 @@ modulo_anuncios.controller('anunciosController',
                 };
 
                 var init = function () {
-                    $scope.baseImgUrl = "http://res.cloudinary.com/dm8oxzlpb/image/upload/";
+                    $scope.baseImgUrl = "https://res.cloudinary.com/dm8oxzlpb/image/upload/";
                     $scope.thumbSize = "h_150/";
                     $scope.publicaciones = [];
                     $scope.page = 0;

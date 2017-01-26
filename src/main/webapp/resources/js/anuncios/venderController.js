@@ -185,7 +185,7 @@ modulo_anuncios.controller('venderController',
                 $scope.valimg = false;
                 $scope.valubi = false;
                 $scope.valglobal = false;
-                $scope.baseImgUrl = "http://res.cloudinary.com/dm8oxzlpb/image/upload/";
+                $scope.baseImgUrl = "https://res.cloudinary.com/dm8oxzlpb/image/upload/";
                 $scope.thumbSize = "h_60,w_90/";
                 $scope.imgs = [];
                 
