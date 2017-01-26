@@ -224,14 +224,13 @@ modulo_anuncios.controller('venderController',
                         }
                     }, function (error, result) {
                         if(!error) {
-                            var tmp = '';
                             $scope.$apply(function () {
                                 result.forEach(function (entry) {
                                     $scope.imgs.push(entry.path);
                                 });
                             });                            
                         }else {
-                            alert(error);
+//                            alert(error);
                         }
                     });
                 };
