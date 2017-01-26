@@ -50,7 +50,7 @@
                                     <h4 class="price-text-color">$ {{publicacion.precio}}</h4>
                                 </div>
 
-                                <img ng-if="publicacion.tipo==='GRATIS'" ng-src="/images/getThumbnail/{{publicacion.imgUrl}}" alt="imagen aqui">
+                                <img ng-if="publicacion.tipo==='GRATIS'" ng-src="{{baseImgUrl + thumbSize + publicacion.imgUrl}}" alt="imagen aqui">
 
                                 <div class="caption" style="overflow-x:hidden">
                                     <p>{{publicacion.descripcion.slice(0, 75)}}...</p>                                        

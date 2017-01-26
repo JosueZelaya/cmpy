@@ -84,9 +84,9 @@ modulo_anuncios.service('anunciosService', ['$http', '$log', function ($http, $l
 
             //Se agregan todas las imagenes... Cada una debe llamarse: multipleFiles        
             //Para que Spring entienda que están relacionadas y que se trata de una colección o lista
-            for (var index = 0; index < publicacion.imagenes.length; ++index) {
-                formData.append("multipleFiles", publicacion.imagenes[index]);
-            }
+            publicacion.imagenes.forEach(function (img) {
+                formData.append("urls", img);
+            });
 
             return $http.post('/publicacion/agregarPublicacion', formData, {
                 transformRequest: angular.identity,
