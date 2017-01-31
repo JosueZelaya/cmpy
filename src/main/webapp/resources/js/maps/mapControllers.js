@@ -38,7 +38,7 @@ maps.controller('mapController',
                     }
                 };
 
-                $scope.setUbicaciones = function ()//(publicacion_id)
+                $rootScope.setUbicaciones = function ()//(publicacion_id)
                 {
                     var listaUbicacion = [];
 

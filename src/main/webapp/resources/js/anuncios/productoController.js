@@ -74,6 +74,8 @@ modulo_anuncios.controller('productoController',
                 };
 
                 var init = function () {
+                    
+                    $scope.baseImgUrl = "https://res.cloudinary.com/dm8oxzlpb/image/upload/";
 
                     var publicacionId = $stateParams.publicacionId;
 

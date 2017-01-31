@@ -334,11 +334,12 @@ public class RegistrationController {
         RegistrationForm dto = new RegistrationForm();
 
         if (connection != null) {
+            ConnectionKey providerKey = connection.getKey();
             UserProfile socialMediaProfile = connection.fetchUserProfile();
             dto.setEmail(socialMediaProfile.getEmail());
+            dto.setProfileUrl(connection.getProfileUrl());
             dto.setFirstName(socialMediaProfile.getFirstName());
-            dto.setLastName(socialMediaProfile.getLastName());
-            ConnectionKey providerKey = connection.getKey();
+            dto.setLastName(socialMediaProfile.getLastName());            
             dto.setSignInProvider(SocialMediaService.valueOf(providerKey.getProviderId().toUpperCase()));
             dto.setImageUrl(connection.getImageUrl());
         }
@@ -346,4 +347,7 @@ public class RegistrationController {
         return dto;
     }
 
+    private boolean isSocialUser(ConnectionKey providerKey){
+        return SocialMediaService.valueOf(providerKey.getProviderId().toUpperCase())!=null;
+    }
 }

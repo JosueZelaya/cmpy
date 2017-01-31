@@ -6,6 +6,8 @@ modulo_anuncios.controller('anunciosController',
             '$window',
             'toastr',
             function ($rootScope, $scope, anunciosService, TIPO_PUBLICACION, $window, toastr) {
+                
+                $rootScope.rendercat = false;
 
                 var getPublicacionesByCat = function (tipo, pagina, cat, nivel) {
                     return anunciosService.getAnunciosByCat(tipo, pagina, cat, nivel)
@@ -103,10 +105,12 @@ modulo_anuncios.controller('anunciosController',
                 };
 
                 var init = function () {
+                    $scope.baseImgUrl = "https://res.cloudinary.com/dm8oxzlpb/image/upload/";
+                    $scope.thumbSize = "h_150/";
                     $scope.publicaciones = [];
                     $scope.page = 0;
                     cargarPublicacionesGratis($scope.page);
-
+                    $rootScope.rendercat=true;
                 };
 
                 init();

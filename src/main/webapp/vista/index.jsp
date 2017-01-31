@@ -338,6 +338,7 @@
             </div>
         </script>
 
+        <script type="text/javascript" src="https://widget.cloudinary.com/global/all.js"></script>
         <!-- PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS -->
 <!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
@@ -413,18 +414,16 @@
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
         <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
-   
+        
     </body>
 </html>
 
 <script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
 
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-</script>        
-        
-     
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
