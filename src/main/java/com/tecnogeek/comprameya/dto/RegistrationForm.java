@@ -61,6 +61,8 @@ public class RegistrationForm implements Serializable{
         
         private String imageUrl;
         
+        private String profileUrl;
+        
         private MultipartFile image;
         
         private BigInteger telephone;
