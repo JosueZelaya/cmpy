@@ -221,6 +221,15 @@ public class PublicacionController {
             @RequestParam(value = "ubicaciones", required = false) String ubicaciones,
             @RequestParam(value = "urls", required = false) List<String> urls,
             Model model) throws IOException {
+        
+        Usuario usuario = usuarioRepository.getLoggedUser();
+        log.info("{} intenta agregar la publicacion: {}", usuario.getLogin(), titulo);
+        log.info("titulo {}", titulo);
+        log.info("precio {}", precio);
+        log.info("descripcion {}", descripcion);
+        log.info("categoriaId {}", categoriaId);
+        log.info("ubicaciones {}", ubicaciones);
+        log.info("urls {}", urls.toString());
 
         Publicacion publicacion = new Publicacion();
         publicacion.setTitulo(titulo);
@@ -247,8 +256,7 @@ public class PublicacionController {
 
         List<Producto> productos = new ArrayList();
         productos.add(producto);
-        publicacion.setProductoList(productos);
-        Usuario usuario = usuarioRepository.getLoggedUser();
+        publicacion.setProductoList(productos);        
         publicacion.setUsuario(usuario);
 
         ObjectMapper mapper = new ObjectMapper();
