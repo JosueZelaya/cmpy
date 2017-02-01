@@ -157,8 +157,14 @@ modulo_anuncios.controller('venderController',
 
                     if ($rootScope.ubicaciones !== undefined)
                     {
-
+                        
                         $scope.valubi = $rootScope.ubicaciones.length === 0 ? true : false;
+                        $scope.valubi=false;
+                    }
+                    else{
+                        
+                        $rootScope.ubicaciones=[];
+                        $scope.valubi=false;
                     }
 
 
