@@ -14,6 +14,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="fragment" content="!">
+        <meta name="description" content="Compra y Vende lo que deseas, crea tu propia tienda y más...">
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript,compra,compras,venta,ventas,vender,comprar,articulos,el salvador,ahuchapan,
+              santa ana,sonsonate,la libertad,san salvador,chalatenango,cuscatlan,cabañas,san miguel,san francisco,la union,morazán,
+              san vicente,la paz,503,telefonos,celulares,laptops,juegos,carros,civic,toyota,nissan,play,playstation,ps3,ps4,lcd,pantallas,
+              vivienda,ropa,calzado,deportes">
+        <meta name="author" content="TecnoBitz">
         <title>ComprameYa!</title>
 
         <!--<style> .ng-cloak { display: none !important; } </style>-->
