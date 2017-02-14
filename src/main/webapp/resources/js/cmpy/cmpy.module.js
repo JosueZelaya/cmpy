@@ -58,7 +58,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     "venderModal@home": {templateUrl: '/resources/js/anuncios/venderModal.html'},
                     "ubicacionesModal@home": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'},
                     "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html', controller: 'mapController'},
-                    "mapslectura": {templateUrl: '/resources/js/maps/mapaUbicacionLectura.html', controller: 'ubicacionesController'}
+                    "mapslectura": {templateUrl: '/resources/js/maps/mapaUbicacionLectura.html', controller: 'ubicacionesController'}  
                 },
                 sticky: true,
                 dsr: true
@@ -149,6 +149,13 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     '':{templateUrl: '/resources/js/autenticacion/changePass.html', controller: 'changePassController'}
                 }
             })
+            .state('home.Editar', {
+                url: "editar_perfil",
+                views: {
+                    '':{templateUrl: '/resources/js/autenticacion/updateProfile.html', controller: 'editController'}
+                }
+            });            
+            
 
 //            // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
 //            .state('about', { 
