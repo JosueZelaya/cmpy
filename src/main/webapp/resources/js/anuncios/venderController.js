@@ -157,8 +157,14 @@ modulo_anuncios.controller('venderController',
 
                     if ($rootScope.ubicaciones !== undefined)
                     {
-
+                        
                         $scope.valubi = $rootScope.ubicaciones.length === 0 ? true : false;
+                        $scope.valubi=false;
+                    }
+                    else{
+                        
+                        $rootScope.ubicaciones=[];
+                        $scope.valubi=false;
                     }
 
 
@@ -193,8 +199,7 @@ modulo_anuncios.controller('venderController',
                     cloudinary.openUploadWidget({
                         cloud_name: 'dm8oxzlpb',
                         upload_preset: 'my0sfy04',
-                        max_image_width: '1024',
-                        max_image_height: '1024',
+                        max_image_height: '575',
                         show_powered_by: false,
                         max_files: 7,       
                         stylesheet: 'white',
