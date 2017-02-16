@@ -13,6 +13,7 @@ import javax.servlet.Filter;
 import javax.servlet.FilterRegistration;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
@@ -32,11 +33,12 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     private int maxUploadSizeInMb = 5 * 1024 * 1024; // 5 MB
     
     @Override
-    public void onStartup(ServletContext servletContext) {
+    public void onStartup(ServletContext servletContext) throws ServletException {
         com.github.greengerong.PreRenderSEOFilter seoFilter = new com.github.greengerong.PreRenderSEOFilter();
         FilterRegistration.Dynamic filter =  servletContext.addFilter("prerender", seoFilter);
-        filter.setInitParameter("prerenderToken", "<YOU TOKEN>");
+        filter.setInitParameter("prerenderToken", "bWTX3wnGG43lSldWSr09");
         filter.addMappingForUrlPatterns(null , true, "/*");
+        super.onStartup(servletContext);
     }
     
     @Override
