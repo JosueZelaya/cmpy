@@ -44,6 +44,7 @@ module.exports = function (grunt) {
                     './js-min-safe/autenticacion/autenticacionController.js': ['./js/autenticacion/autenticacionController.js'],
                     './js-min-safe/autenticacion/changePassController.js': ['./js/autenticacion/resetPassController.js'],
                     './js-min-safe/autenticacion/resetPassController.js': ['./js/autenticacion/changePassController.js'],
+                    './js-min-safe/autenticacion/updateCellController.js': ['./js/autenticacion/updateCellController.js'],
                     './js-min-safe/autenticacion/autenticacionService.js': ['./js/autenticacion/autenticacionService.js'],
                     './js-min-safe/notificacion/notificacion.module.js': ['./js/notificacion/notificacion.module.js'],
                     './js-min-safe/notificacion/notificacionService.js': ['./js/notificacion/notificacionService.js'],

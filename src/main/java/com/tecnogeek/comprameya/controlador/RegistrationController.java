@@ -7,6 +7,7 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.entidad.PasswordResetToken;
+import com.tecnogeek.comprameya.entidad.Persona;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
 import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
@@ -29,6 +30,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.tecnogeek.comprameya.service.UsuarioService;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -82,6 +84,18 @@ public class RegistrationController {
     @RequestMapping(value = "/user/update", method = RequestMethod.GET)
     public String updateUser() {
         return "";
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/user/updateCell", method = RequestMethod.POST)
+    public ResponseEntity<String> updateCell(
+            @RequestParam(value = "newCell", required = true) BigInteger newCell){
+        Usuario u = service.getLoggedUser();
+        Persona p = u.getPersona();
+        p.setCelular(newCell);
+        p.setTelefono(newCell);        
+        service.getRepository().save(u);
+        return ResponseEntity.ok("ok");
     }
 
     @ResponseBody

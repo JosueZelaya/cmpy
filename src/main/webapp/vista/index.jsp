@@ -111,6 +111,7 @@
                                     </a>
                                 </li>
                                 <li ng-if="localAccount" ng-click="open('changePassModal.html')"><a href="#">Cambiar Clave</a></li>
+                                <li ng-if="authenticated" ng-click="open('updateCellModal.html')"><a href="#">Actualizar Teléfono</a></li>
                                 <li><a href="#">Editar Perfil</a></li>
                                 <li><a href="#">Configuracion</a></li>
                                 <li class="divider"></li>
@@ -127,6 +128,7 @@
                             </a>
                         </li>
                         <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('changePassModal.html'); cancel()">Cambiar Clave</a></li>
+                        <li ng-if="authenticated && !navCollapsed"><a href="#" ng-click="open('updateCellModal.html'); cancel()">Actualizar Teléfono</a></li>
                         <li ng-if="authenticated && !navCollapsed"><a href="#">Editar Perfil</a></li>
                         <li ng-if="authenticated && !navCollapsed"><a href="#">Configuracion</a></li>
                         <li ng-if="authenticated && !navCollapsed" class="divider"></li>
@@ -321,6 +323,25 @@
                 </button>                
             </div>
         </script>
+        
+        <script type="text/ng-template" id="updateCellModal.html">
+            <div class="modal-body" ng-app="cmpy.autenticacion" ng-controller="updateCellController">
+                <div ng-class="valtitulo">
+                    <label for="updatedCell" class="control-label">Ingrese su nuevo número telefónico:</label>
+                    <input ng-keyup="$event.keyCode == 13 && updateCell()" ng-model="updatedCell" id="updatedCell" type="text" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="wrongCell">
+                        {{wrongCellMsj}}
+                    </div>
+                </div>        
+                <br/>
+                <button ng-disabled="!ready" ng-click="updateCell()" type="button" class="btn btn-success" uib-tooltip="Actualiza tu teléfono ahora" tooltip-placement="bottom">
+                    Actualizar Teléfono
+                </button>
+                <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar actualizacion de teléfono" tooltip-placement="bottom">
+                    Cancelar
+                </button>                
+            </div>
+        </script>
 
         <script type="text/javascript" src="https://widget.cloudinary.com/global/all.js"></script>
         <%--PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS --%>
@@ -347,6 +368,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/changePassController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/resetPassController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/updateCellController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacion.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacionService.js" ></script>
