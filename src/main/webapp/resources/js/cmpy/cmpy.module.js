@@ -164,8 +164,6 @@ cmy_ng.run(['$rootScope', function($rootScope){
   // Previous code ...
   $rootScope.ready = false;
   
-  
-  
   $rootScope.$on("cfpLoadingBar:loading", function(){
       $rootScope.ready = false;
   });
@@ -174,6 +172,9 @@ cmy_ng.run(['$rootScope', function($rootScope){
       $rootScope.ready = true;
   });
 
+  $rootScope.$on("cfpLoadingBar:completed", function(){
+      window.prerenderReady = true;
+  });
 
 
 }]);
