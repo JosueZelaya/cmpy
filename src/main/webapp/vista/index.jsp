@@ -21,6 +21,7 @@
               san vicente,la paz,503,telefonos,celulares,laptops,juegos,carros,civic,toyota,nissan,play,playstation,ps3,ps4,lcd,pantallas,
               vivienda,ropa,calzado,deportes">
         <meta name="author" content="TecnoBitz">
+        <meta name="fragment" content="!">
         <script> window.prerenderReady = false; </script>
         <title>ComprameYa!</title>
 
