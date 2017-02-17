@@ -6,11 +6,14 @@
 
 package com.tecnogeek.comprameya.config;
 
+import com.github.greengerong.PreRenderSEOFilter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
@@ -28,6 +31,16 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 
     private int maxUploadSizeInMb = 5 * 1024 * 1024; // 5 MB
+    
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        com.github.greengerong.PreRenderSEOFilter seoFilter = new com.github.greengerong.PreRenderSEOFilter();
+        FilterRegistration.Dynamic filter =  servletContext.addFilter("prerender", seoFilter);
+        //filter.setInitParameter("prerenderToken", "bWTX3wnGG43lSldWSr09");
+        filter.setInitParameter("prerenderServiceUrl", "http://localhost:3000/");
+        filter.addMappingForUrlPatterns(null , true, "/");        
+        super.onStartup(servletContext);
+    }
     
     @Override
     protected Class<?>[] getRootConfigClasses() {        
