@@ -346,6 +346,12 @@
             <artifactId>mail</artifactId>
             <version>1.5.0-b01</version>
         </dependency>
+        
+        <dependency>
+            <groupId>com.github.greengerong</groupId>
+            <artifactId>prerender-java</artifactId>
+            <version>1.6.4</version>
+          </dependency>
 
         
         <!-- Dependencias para Jetty -->
