@@ -149,14 +149,8 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     '':{templateUrl: '/resources/js/autenticacion/changePass.html', controller: 'changePassController'}
                 }
             })
-            .state('home.Editar', {
-                url: "editar_perfil",
-                views: {
-                    '':{templateUrl: '/resources/js/autenticacion/updateProfile.html', controller: 'editController'}
-                }
-            });            
             
-
+            
 //            // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
 //            .state('about', { 
 //                // we'll get to this in a bit       

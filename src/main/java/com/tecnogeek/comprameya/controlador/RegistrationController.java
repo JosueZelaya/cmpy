@@ -31,8 +31,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.tecnogeek.comprameya.service.UsuarioService;
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -86,6 +89,12 @@ public class RegistrationController {
         return "";
     }
     
+    @RequestMapping(value = "/user/getProfile", method = RequestMethod.GET)
+    public @ResponseBody Usuario getProfile(Model model)  {
+         Usuario usuario = service.getLoggedUser();
+         return usuario; 
+    }
+    
     @ResponseBody
     @RequestMapping(value = "/user/updateCell", method = RequestMethod.POST)
     public ResponseEntity<String> updateCell(
@@ -97,6 +106,40 @@ public class RegistrationController {
         service.getRepository().save(u);
         return ResponseEntity.ok("ok");
     }
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "/user/updateProfile", method = RequestMethod.POST)
+    public ResponseEntity<String> updateProfile
+    (
+        @RequestParam(value = "nombre", required = true) String nombre,
+        @RequestParam(value = "apellido", required = true) String apellido,
+        @RequestParam(value = "telefono", required = true) String telefono,
+        @RequestParam(value = "sexo", required = true) boolean sexo,
+        @RequestParam(value = "dia", required = true) int dia,
+        @RequestParam(value = "mes", required = true) int mes,
+        @RequestParam(value = "anio", required = true) int anio
+    ) throws ParseException 
+    {
+        Usuario u = service.getLoggedUser();
+        Persona p = u.getPersona();
+        
+        p.setNombre(nombre);
+        p.setApellido(apellido);
+        p.setTelefono(BigInteger.valueOf(Long.parseLong(telefono)));
+        
+        p.setGenero(sexo);
+         
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateInString = Integer.toString(dia) + "/" + Integer.toString(mes) + "/" + Integer.toString(anio);
+        Date date = formatter.parse(dateInString);
+        p.setFechaNacimiento(date);
+        
+        service.getRepository().save(u);
+        
+        log.info("{} se actualizo el perfil", u.getLogin());
+        return ResponseEntity.ok("ok");
+    }    
 
     @ResponseBody
     @RequestMapping(value = "/user/updatePass", method = RequestMethod.POST)
