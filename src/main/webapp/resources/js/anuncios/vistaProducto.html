@@ -1,8 +1,15 @@
+<script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.2&appId=703643202980040";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 <div class="col-md-10 min_cont marcar">
     <div class="panel panel-default min_cont">                    
             <div class="panel-heading" style="height:60px">
-                <p>
-
+                <p>                   
+                    <div class="fb-share-button" data-href="https://www.comprameya.com/vistaProducto/{{publicacion.id}}" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.comprameya.com%2F&amp;src=sdkpreparse">Compartir</a></div>
                     <button type="button" class="btn btn-default pull-left" aria-label="Menu categorias" onclick="openNav()">
                         <span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Categorias
                     </button>

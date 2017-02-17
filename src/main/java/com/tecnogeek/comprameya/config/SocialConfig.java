@@ -20,6 +20,7 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
+import org.springframework.social.facebook.config.support.FacebookApiHelper;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
@@ -74,5 +75,10 @@ public class SocialConfig implements SocialConfigurer{
     public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
         return new ConnectController(connectionFactoryLocator, connectionRepository);
     }    
+    
+    @Bean
+    public FacebookApiHelper facebookApiHelper(ConnectionFactoryLocator cfl){
+        return new FacebookApiHelper(getUsersConnectionRepository(cfl), getUserIdSource());
+    }
     
 }
