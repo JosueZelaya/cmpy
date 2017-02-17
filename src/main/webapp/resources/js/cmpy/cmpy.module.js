@@ -169,7 +169,7 @@ cmy_ng.run(['$rootScope', function($rootScope){
   });
 
   $rootScope.$on("cfpLoadingBar:loaded", function(){
-      $rootScope.ready = true;
+      $rootScope.ready = true;      
   });
 
   $rootScope.$on("cfpLoadingBar:completed", function(){

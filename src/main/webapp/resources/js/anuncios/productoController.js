@@ -40,6 +40,7 @@ modulo_anuncios.controller('productoController',
 
                     getPublicacion(publicacionId).success(function (publicacion) {
                         $scope.publicacion = publicacion;
+                        setTimeout(function(){ FB.XFBML.parse(); }, 100);
                     });
 
                     getComentarios(publicacionId).success(function (comentarios) {
