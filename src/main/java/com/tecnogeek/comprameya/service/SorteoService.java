@@ -5,7 +5,9 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.tecnogeek.comprameya.entidad.Notificacion;
 import com.tecnogeek.comprameya.entidad.Publicacion;
+import com.tecnogeek.comprameya.enums.TipoNotificacionEnum;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import java.util.List;
 import java.util.logging.Level;
@@ -47,17 +49,23 @@ public class SorteoService extends BaseService<Publicacion, Long>{
                     try {
                         Thread.sleep(2000);
                         for(Publicacion publicacion : publicaciones) {
+                            Notificacion notificacion = new Notificacion();
+                            notificacion.setId(publicacion.getUsuario().getId());
+                            notificacion.setTipo(TipoNotificacionEnum.SORTEO);
+                            String mensaje = publicacion.getUsuario().getPersona().getNombre() +
+                                    " " + publicacion.getUsuario().getPersona().getApellido();
+                            notificacion.setMensaje(mensaje);
+                            notificacion.setLink(publicacion.getUsuario().getRutaImagen());
                             Thread.sleep(1000);
                             System.out.println("USUARIO: "+publicacion.getUsuario().getLogin());
-                            template.convertAndSend("/topic/greetings", publicacion.getUsuario().getLogin());   
+                            template.convertAndSend("/topic/greetings", notificacion);   
                         }
                     } catch (InterruptedException ex) {
                         Logger.getLogger(SorteoService.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }                             
             }
-        }).start();
-//        template.convertAndSend("/topic/greetings", publicacion);        
+        }).start();      
     }
     
 }

@@ -14,7 +14,8 @@ import lombok.Getter;
 public enum TipoNotificacionEnum {
     
     COMENTARIO(1L, "COMENTARIO_RECIBIDO"),
-    MENSAJE(2L, "MENSAJE_RECIBIDO");
+    MENSAJE(2L, "MENSAJE_RECIBIDO"),
+    SORTEO(3L, "USUARIO_SELECCIONADO");
     
     @Getter
     Long codigo;
