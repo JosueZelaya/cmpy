@@ -20,6 +20,7 @@ var cmy_ng = angular.module('cmpy',
     'cmpy.maps',
     'cmpy.anuncios',
     'cmpy.mensajes',
+    'cmpy.sorteo',
     'cmpy.utils'
 ]);
 
@@ -119,6 +120,13 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 url: "vistaNotificaciones",
                 views: {
                     '':{templateUrl: '/resources/js/notificacion/bandeja.html', controller: "notificacionController"}
+                }
+            })
+
+            .state('home.sorteo', {
+                url: "sorteo",
+                views: {
+                    '':{templateUrl: '/resources/js/sorteo/sorteo.html', controller: "sorteoController"}
                 }
             })
 

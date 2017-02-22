@@ -99,7 +99,8 @@ public class HomeController {
             "/terminos",
             "/about",
             "/contratar_tienda",
-            "/update_pass"
+            "/update_pass",
+            "/sorteo"
 	}, method = RequestMethod.GET)    
 //    @RequestMapping(value = {"/{[path:(?!resources).*}/**"}, method = RequestMethod.GET)
     public String angularRoutes(Model model, HttpServletRequest request) {

@@ -18,12 +18,6 @@ menuPrincipal.controller('menuPrincipalController',
 
                 $rootScope.activarNotificacionesPush = function () {
                     
-                    PushNotificationService.receivePublicMessage().then(null, null, function (notificacion) {
-                        toastr.success("Sorteo", notificacion.mensaje, {
-                                allowHtml: true,
-                            });
-                    });
-                    
                     PushNotificationService.receive().then(null, null, function (notificacionUsuario) {
 
                         if (notificacionUsuario.notificacion.tipo === 'COMENTARIO') {
@@ -183,4 +177,3 @@ menuPrincipal.controller('menuPrincipalController',
 
 
             }]);
-
