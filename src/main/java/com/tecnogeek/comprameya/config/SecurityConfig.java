@@ -144,7 +144,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/spider",
                         "/Spider/scanearTiendasOverSSL",
-                        "/Spider/scanearTiendasInsecure"
+                        "/Spider/scanearTiendasInsecure",
+                        "/sorteo/start",
+                        "/sorteo/stop"
                 ).hasRole("ADMIN")
                 .antMatchers("/**")
                 .permitAll()

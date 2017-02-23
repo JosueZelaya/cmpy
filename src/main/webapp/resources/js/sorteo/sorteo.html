@@ -16,6 +16,8 @@
             </div>  
             <div id="publicacionesProductos" class="panel-body">
                 <h1>Bienvenidos al sorteo de comprameya</h1>
+                <button ng-show="authenticated" type="button" class="btn btn-success pull-right" ng-click="start()">Iniciar Sorteo</button>
+                <button ng-show="authenticated" type="button" class="btn btn-success pull-right" ng-click="stop()">Seleccionar Ganador</button>
                 <h3>{{notificacion.mensaje}}</h3><br/>                
             </div>
         </div>

@@ -23,74 +23,89 @@ import org.springframework.stereotype.Service;
  * @author alexander
  */
 @Service
-public class SorteoService extends BaseService<Publicacion, Long>{
-    
+public class SorteoService extends BaseService<Publicacion, Long> {
+
     @Getter
     @Setter
     private List<Publicacion> publicacionList;
 
     @Getter
     private PublicacionRepository repository;
-    
+
     private SimpMessagingTemplate template;
-       
+
     private Tombola tombola;
-    
+
+    private Publicacion publicacionGanadora = new Publicacion();
+
     public SorteoService(@Autowired PublicacionRepository repository,
-            @Autowired SimpMessagingTemplate template){
+            @Autowired SimpMessagingTemplate template) {
         this.repository = repository;
         this.template = template;
-        publicacionList = (List<Publicacion>) repository.getPublicacionesGratis();    
+        publicacionList = (List<Publicacion>) repository.getPublicacionesGratis();
         tombola = new Tombola(template, publicacionList);
-        sendToClient();
     }
-    
-    private void sendToClient(){        
-        tombola.start(); 
-    }
-    
-    private void iniciarSorteo(){
+
+    public void iniciarSorteo() {
         tombola.start();
     }
-    
-    private void detenerTombola(){
+
+    public Publicacion detenerTombola() {
         tombola.interrupt();
+        publicacionGanadora = tombola.getPublicacionSeleccionada();
+        Notificacion notificacion = new Notificacion();
+        notificacion.setId(publicacionGanadora.getUsuario().getId());
+        notificacion.setTipo(TipoNotificacionEnum.SORTEO);
+        String mensaje = publicacionGanadora.getUsuario().getPersona().getNombre()
+                + " " + publicacionGanadora.getUsuario().getPersona().getApellido();
+        notificacion.setMensaje(mensaje);
+        notificacion.setLink(publicacionGanadora.getUsuario().getRutaImagen());
+        System.out.println("USUARIO: " + publicacionGanadora.getUsuario().getLogin());
+        template.convertAndSend("/topic/greetings", notificacion);
+        return publicacionGanadora;
     }
-    
+
 }
 
 @Getter
 @Setter
 class Tombola extends Thread {
-    
+
     private SimpMessagingTemplate template;
     private List<Publicacion> publicaciones;
-    
-    public Tombola(SimpMessagingTemplate template, List<Publicacion> publicaciones){
-       this.template = template;
-       this.publicaciones = publicaciones;
+    private Publicacion publicacionSeleccionada;
+    private volatile boolean isRunning = true;
+
+    public Tombola(SimpMessagingTemplate template, List<Publicacion> publicaciones) {
+        this.template = template;
+        this.publicaciones = publicaciones;
     }
-    
+
     @Override
     public void run() {
-        while(true){
-            try {
-                Thread.sleep(2000);
-                for(Publicacion publicacion : publicaciones) {
-                    Notificacion notificacion = new Notificacion();
-                    notificacion.setId(publicacion.getUsuario().getId());
-                    notificacion.setTipo(TipoNotificacionEnum.SORTEO);
-                    String mensaje = publicacion.getUsuario().getPersona().getNombre() +
-                            " " + publicacion.getUsuario().getPersona().getApellido();
-                    notificacion.setMensaje(mensaje);
-                    notificacion.setLink(publicacion.getUsuario().getRutaImagen());
-                    Thread.sleep(1000);
-                    System.out.println("USUARIO: "+publicacion.getUsuario().getLogin());
-                    template.convertAndSend("/topic/greetings", notificacion);   
+
+        while (true) {
+            if (!interrupted()) {
+                try {
+                    Thread.sleep(2000);
+                    for (Publicacion publicacion : publicaciones) {
+                        publicacionSeleccionada = publicacion;
+                        Notificacion notificacion = new Notificacion();
+                        notificacion.setId(publicacion.getUsuario().getId());
+                        notificacion.setTipo(TipoNotificacionEnum.SORTEO);
+                        String mensaje = publicacion.getUsuario().getPersona().getNombre()
+                                + " " + publicacion.getUsuario().getPersona().getApellido();
+                        notificacion.setMensaje(mensaje);
+                        notificacion.setLink(publicacion.getUsuario().getRutaImagen());
+                        Thread.sleep(1000);
+                        System.out.println("USUARIO: " + publicacion.getUsuario().getLogin());
+                        template.convertAndSend("/topic/greetings", notificacion);
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SorteoService.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (InterruptedException ex) {
-                Logger.getLogger(SorteoService.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }                             
+        }
+
     }
 }
