@@ -34,38 +34,63 @@ public class SorteoService extends BaseService<Publicacion, Long>{
     
     private SimpMessagingTemplate template;
        
+    private Tombola tombola;
+    
     public SorteoService(@Autowired PublicacionRepository repository,
             @Autowired SimpMessagingTemplate template){
         this.repository = repository;
         this.template = template;
         publicacionList = (List<Publicacion>) repository.getPublicacionesGratis();    
-        sendToClient(publicacionList);
+        tombola = new Tombola(template, publicacionList);
+        sendToClient();
     }
     
-    private void sendToClient(final List<Publicacion> publicaciones){
-        new Thread(new Runnable() {
-            public void run() {
-                while(true){
-                    try {
-                        Thread.sleep(2000);
-                        for(Publicacion publicacion : publicaciones) {
-                            Notificacion notificacion = new Notificacion();
-                            notificacion.setId(publicacion.getUsuario().getId());
-                            notificacion.setTipo(TipoNotificacionEnum.SORTEO);
-                            String mensaje = publicacion.getUsuario().getPersona().getNombre() +
-                                    " " + publicacion.getUsuario().getPersona().getApellido();
-                            notificacion.setMensaje(mensaje);
-                            notificacion.setLink(publicacion.getUsuario().getRutaImagen());
-                            Thread.sleep(1000);
-                            System.out.println("USUARIO: "+publicacion.getUsuario().getLogin());
-                            template.convertAndSend("/topic/greetings", notificacion);   
-                        }
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(SorteoService.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }                             
+    private void sendToClient(){        
+        tombola.start(); 
+    }
+    
+    private void iniciarSorteo(){
+        tombola.start();
+    }
+    
+    private void detenerTombola(){
+        tombola.interrupt();
+    }
+    
+}
+
+@Getter
+@Setter
+class Tombola extends Thread {
+    
+    private SimpMessagingTemplate template;
+    private List<Publicacion> publicaciones;
+    
+    public Tombola(SimpMessagingTemplate template, List<Publicacion> publicaciones){
+       this.template = template;
+       this.publicaciones = publicaciones;
+    }
+    
+    @Override
+    public void run() {
+        while(true){
+            try {
+                Thread.sleep(2000);
+                for(Publicacion publicacion : publicaciones) {
+                    Notificacion notificacion = new Notificacion();
+                    notificacion.setId(publicacion.getUsuario().getId());
+                    notificacion.setTipo(TipoNotificacionEnum.SORTEO);
+                    String mensaje = publicacion.getUsuario().getPersona().getNombre() +
+                            " " + publicacion.getUsuario().getPersona().getApellido();
+                    notificacion.setMensaje(mensaje);
+                    notificacion.setLink(publicacion.getUsuario().getRutaImagen());
+                    Thread.sleep(1000);
+                    System.out.println("USUARIO: "+publicacion.getUsuario().getLogin());
+                    template.convertAndSend("/topic/greetings", notificacion);   
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(SorteoService.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }).start();      
+        }                             
     }
-    
 }
