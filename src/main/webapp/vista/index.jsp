@@ -437,4 +437,67 @@
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
+
+
+var ahora = new Date();
+var sorteo = new Date(2017, 1, 25, 20);
+var dif = sorteo - ahora;
+
+var horas = Math.floor(dif / 1000 / 60 / 60, 0 );
+var minutos = Math.floor(((dif / 1000 / 60 / 60) - horas) * 60,0);
+var segundos = Math.floor(((((dif / 1000 / 60 / 60) - horas) * 60) - minutos) * 60,0);
+
+
+
+function imprimirCuentaAtras(){
+  var strhoras = horas < 10 ? "0"+horas.toString():horas.toString();
+  var strminutos = minutos < 10 ? "0"+minutos.toString():minutos.toString();
+  var strsegundos = segundos < 10 ? "0"+segundos.toString():segundos.toString();
+	return strhoras +":"+ strminutos +":"+ strsegundos
+}
+
+function ticktock(){
+
+
+	if(segundos>0){
+  	segundos--;
+  }
+  else
+  {
+  	segundos=59;
+    if(minutos>0)
+    {
+    	minutos--;
+    }
+    else
+    {
+    	minutos=59;
+      if(horas>0)
+      {
+      	horas--;	
+      }
+    }
+  }
+  
+  if(horas==0&&minutos==0&&segundos==0)
+  {
+  	stop();
+  }
+  
+  
+}
+
+var miCuenta = setInterval(
+function(){ 
+ticktock(); 
+document.getElementById("cuenta_atras").innerHTML=imprimirCuentaAtras();
+}, 1000);
+
+function stop(){
+	clearInterval(miCuenta);
+}    
+    
+    
+     
+    
 </script>

@@ -21,6 +21,9 @@ modulo_sorteo.controller('sorteoController',
         activarNotificacionesSorteo = function () {
             PushNotificationService.receivePublicMessage().then(null, null, function (notificacion) {
                 $scope.notificacion = notificacion;
+                
+                
+                
             });
         };
         
