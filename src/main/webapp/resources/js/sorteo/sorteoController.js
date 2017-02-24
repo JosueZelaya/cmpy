@@ -16,25 +16,32 @@ modulo_sorteo.controller('sorteoController',
         
         $scope.stop = function() {
             var req = "/sorteo/stop";
-            return $http.get(req)
-                    .success(function (response) {
-                        $scope.notificacion = response;                
-                    });
+            return $http.get(req);
         };
        
         activarNotificacionesSorteo = function () {
             
             
             PushNotificationService.receivePublicMessage().then(null, null, function (notificacion) {
-                $timeout(function(){$scope.salidaAnimacion = true;$scope.$apply();}, 100);
+                $timeout(function(){$scope.salidaAnimacion = true;}, 100);
                 $scope.notificacion = notificacion;            
-                $timeout(function(){$scope.salidaAnimacion = false;$scope.$apply();},100);
+                $timeout(function(){$scope.salidaAnimacion = false;},100);
                 
-                if(false)
+                if($scope.notificacion.tipo === "GANADOR_SORTEO")
                 {
-                    confetti_global.start();
-                    $rootScope.confeti=true;
+
+                    $timeout(function(){
+                        confetti_global.start();
+                        $rootScope.confeti=true;
+                    },3000);
+                    
+                    $timeout(function(){
+                        confetti_global.stop();
+                        $rootScope.confeti=false;
+                    },30000);
                 }
+                
+               
                 
                 
             });
