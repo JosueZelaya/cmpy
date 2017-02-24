@@ -8,6 +8,7 @@ modulo_sorteo.controller('sorteoController',
     , function ($scope, $rootScope, PushNotificationService, $http,$interval,$timeout) {
         
         $scope.salidaAnimacion = false;
+        $scope.botonstart = false;
         
         $scope.start = function() {
             var req = "/sorteo/start";
@@ -29,20 +30,21 @@ modulo_sorteo.controller('sorteoController',
                 
                 if($scope.notificacion.tipo === "GANADOR_SORTEO")
                 {
+                    $scope.botonstart = true;
 
                     $timeout(function(){
                         confetti_global.start();
                         $rootScope.confeti=true;
+                        
                     },3000);
                     
                     $timeout(function(){
                         confetti_global.stop();
                         $rootScope.confeti=false;
+                        $scope.botonstart = false;
                     },30000);
                 }
-                
-               
-                
+            
                 
             });
         };

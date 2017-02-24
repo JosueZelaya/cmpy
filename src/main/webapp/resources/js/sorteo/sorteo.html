@@ -21,7 +21,7 @@
                 <div class="panel panel-default">
                   <div class="panel-heading text-center">
                     <h2>
-                       <button ng-show="authenticated"  value="VenderYa!" type="submit" class="btn btn-success pull-left" ng-click="start()">
+                       <button ng-show="authenticated" ng-disabled="botonstart"  value="VenderYa!" type="submit" class="btn btn-success pull-left" ng-click="start()">
                         <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
                       </button>    
                         <span id="cuenta_atras" class="label label-default" style="font-size:25px">00:00:00</span>
@@ -36,6 +36,17 @@
                         <h1>
                             {{notificacion.mensaje}}
                         </h1>
+                         <div ng-if="notificacion.usuarioSeleccionado!==null">
+                             <div class="col-md-4">
+                             </div>
+                            <div class="col-md-4">
+                                    <img class="user-image" ng-if="!usuarioSeleccionado.rutaImagen" width="100%" ng-src="/resources/images/default.jpg" alt="..." uib-tooltip="{{usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="usuarioSeleccionado.signInProvider === null && usuarioSeleccionado.rutaImagen" width="100%"  ng-src="/images/getThumbnail/{{usuarioSeleccionado.rutaImagen}}" alt="..." uib-tooltip="{{usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="usuarioSeleccionado.signInProvider !== null && usuarioSeleccionado.rutaImagen" width="100%"  ng-src="{{usuarioSeleccionado.rutaImagen}}" alt="..."  uib-tooltip="{{usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
+                            </div>
+                            <div class="col-md-4">
+                             </div>
+                         </div>
                     </div>
                   </div>
                 </div>
