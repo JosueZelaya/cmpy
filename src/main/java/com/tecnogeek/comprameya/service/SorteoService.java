@@ -75,7 +75,7 @@ public class SorteoService extends BaseService<Publicacion, Long> {
         notificacion.setUsuarioSeleccionado(publicacionSeleccionada.getUsuario());
         String mensaje = publicacionSeleccionada.getUsuario().getPersona().getNombre()
                 + " " + publicacionSeleccionada.getUsuario().getPersona().getApellido()
-                + " numero sorteo: " + publicacionSeleccionada.getId();
+                + ", numero sorteo: " + publicacionSeleccionada.getId();
         notificacion.setMensaje(mensaje);
         notificacion.setLink(publicacionSeleccionada.getUsuario().getRutaImagen());
         System.out.println("USUARIO: " + publicacionSeleccionada.getUsuario().getLogin());
@@ -91,7 +91,7 @@ public class SorteoService extends BaseService<Publicacion, Long> {
         notificacion.setUsuarioSeleccionado(publicacionSeleccionada.getUsuario());
         String mensaje = publicacionSeleccionada.getUsuario().getPersona().getNombre()
                 + " " + publicacionSeleccionada.getUsuario().getPersona().getApellido()
-                + " numero sorteo: " + publicacionSeleccionada.getId();
+                + ", numero sorteo: " + publicacionSeleccionada.getId();
         notificacion.setMensaje(mensaje);
         notificacion.setLink(publicacionSeleccionada.getUsuario().getRutaImagen());
         System.out.println("USUARIO: " + publicacionSeleccionada.getUsuario().getLogin());
@@ -164,7 +164,7 @@ class Tombola extends Thread {
                     notificacion.setTipo(TipoNotificacionEnum.SELECCIONADO_SORTEO);
                     String mensaje = publicacionSeleccionada.getUsuario().getPersona().getNombre()
                             + " " + publicacionSeleccionada.getUsuario().getPersona().getApellido()
-                            + " numero sorteo: " + publicacionSeleccionada.getId();
+                            + ", numero sorteo: " + publicacionSeleccionada.getId();
                     notificacion.setMensaje(mensaje);                    
                     Thread.sleep(100);
                     System.out.println("USUARIO: " + publicacionSeleccionada.getUsuario().getLogin());
