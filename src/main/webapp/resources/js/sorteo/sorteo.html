@@ -34,19 +34,15 @@
                     <div class="panel-body text-center" style="min-height:200px">
                      <div id="texto_sorteo" ng-hide="salidaAnimacion">
                         <h1>
-                            {{notificacion.mensaje}}
-                        </h1>
                          <div ng-if="notificacion.usuarioSeleccionado!==null">
-                             <div class="col-md-4">
-                             </div>
-                            <div class="col-md-4">
+                                
                                     <img class="user-image" ng-if="!notificacion.usuarioSeleccionado.rutaImagen" ng-src="/resources/images/default.jpg" alt="..." uib-tooltip="{{notificacion.usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
                                     <img class="user-image" ng-if="notificacion.usuarioSeleccionado.signInProvider === null && notificacion.usuarioSeleccionado.rutaImagen" ng-src="/images/getThumbnail/{{notificacion.usuarioSeleccionado.rutaImagen}}" alt="..." uib-tooltip="{{notificacion.usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
                                     <img class="user-image" ng-if="notificacion.usuarioSeleccionado.signInProvider !== null && notificacion.usuarioSeleccionado.rutaImagen" ng-src="{{notificacion.usuarioSeleccionado.rutaImagen}}" alt="..."  uib-tooltip="{{notificacion.usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
-                            </div>
-                            <div class="col-md-4">
-                             </div>
                          </div>
+                            {{notificacion.mensaje}}
+                        </h1>
+
                     </div>
                   </div>
                 </div>
