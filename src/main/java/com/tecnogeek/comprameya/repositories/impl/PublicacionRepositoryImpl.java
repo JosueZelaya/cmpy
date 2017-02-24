@@ -206,4 +206,11 @@ public class PublicacionRepositoryImpl implements PublicacionRepositoryCustom{
         return publicacionRepository.count(sonGratis.and(disponibles).and(estanActivas));
     }
     
+    @Override
+    public Iterable<Publicacion> getPublicacionesSorteo() {
+        Long id = TipoPublicacionEnum.GRATIS.getCodigo();
+        BooleanExpression sonGratis = qPublicacion.tipo.id.eq(id);        
+        BooleanExpression estanActivas = qPublicacion.sisActivo.eq(true);
+        return publicacionRepository.findAll(sonGratis.and(estanActivas));
+    }
 }
