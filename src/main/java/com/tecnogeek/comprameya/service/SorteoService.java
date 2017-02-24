@@ -46,12 +46,16 @@ public class SorteoService extends BaseService<Publicacion, Long> {
         tombola = new Tombola(template, publicacionList);
     }
 
-    public void iniciarSorteo() {
-        tombola.start();
+    public void iniciarSorteo() {        
+        if(!tombola.isRunning()){
+            tombola.restart();
+        } else{
+            tombola.start();
+        }
     }
 
     public Publicacion detenerTombola() {
-        tombola.interrupt();
+        tombola.stopRolling();
         publicacionGanadora = tombola.getPublicacionSeleccionada();
         Notificacion notificacion = new Notificacion();
         notificacion.setId(publicacionGanadora.getUsuario().getId());
@@ -80,14 +84,22 @@ class Tombola extends Thread {
         this.template = template;
         this.publicaciones = publicaciones;
     }
+    
+    public void stopRolling(){
+        isRunning = false;
+    }
 
+    public void restart(){
+        isRunning = true;
+    }
+    
     @Override
     public void run() {
 
         while (true) {
-            if (!interrupted()) {
+            if (isRunning) {
                 try {
-                    Thread.sleep(2000);
+//                    Thread.sleep(2000);
                     for (Publicacion publicacion : publicaciones) {
                         publicacionSeleccionada = publicacion;
                         Notificacion notificacion = new Notificacion();
@@ -97,7 +109,7 @@ class Tombola extends Thread {
                                 + " " + publicacion.getUsuario().getPersona().getApellido();
                         notificacion.setMensaje(mensaje);
                         notificacion.setLink(publicacion.getUsuario().getRutaImagen());
-                        Thread.sleep(1000);
+                        Thread.sleep(200);
                         System.out.println("USUARIO: " + publicacion.getUsuario().getLogin());
                         template.convertAndSend("/topic/greetings", notificacion);
                     }
