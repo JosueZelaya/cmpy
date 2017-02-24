@@ -40,9 +40,9 @@
                              <div class="col-md-4">
                              </div>
                             <div class="col-md-4">
-                                    <img class="user-image" ng-if="!usuarioSeleccionado.rutaImagen" width="100%" ng-src="/resources/images/default.jpg" alt="..." uib-tooltip="{{usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
-                                    <img class="user-image" ng-if="usuarioSeleccionado.signInProvider === null && usuarioSeleccionado.rutaImagen" width="100%"  ng-src="/images/getThumbnail/{{usuarioSeleccionado.rutaImagen}}" alt="..." uib-tooltip="{{usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
-                                    <img class="user-image" ng-if="usuarioSeleccionado.signInProvider !== null && usuarioSeleccionado.rutaImagen" width="100%"  ng-src="{{usuarioSeleccionado.rutaImagen}}" alt="..."  uib-tooltip="{{usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="!notificacion.usuarioSeleccionado.rutaImagen" ng-src="/resources/images/default.jpg" alt="..." uib-tooltip="{{notificacion.usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="notificacion.usuarioSeleccionado.signInProvider === null && notificacion.usuarioSeleccionado.rutaImagen" ng-src="/images/getThumbnail/{{notificacion.usuarioSeleccionado.rutaImagen}}" alt="..." uib-tooltip="{{notificacion.usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
+                                    <img class="user-image" ng-if="notificacion.usuarioSeleccionado.signInProvider !== null && notificacion.usuarioSeleccionado.rutaImagen" ng-src="{{notificacion.usuarioSeleccionado.rutaImagen}}" alt="..."  uib-tooltip="{{notificacion.usuarioSeleccionado.persona.nombre}}" tooltip-placement="top"/>
                             </div>
                             <div class="col-md-4">
                              </div>
