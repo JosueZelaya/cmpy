@@ -481,19 +481,24 @@ function ticktock(){
   
   if(horas==0&&minutos==0&&segundos==0)
   {
-  	stop();
+  	stopCuenta();
   }
   
   
 }
 
-var miCuenta = setInterval(
-function(){ 
-ticktock(); 
-document.getElementById("cuenta_atras").innerHTML=imprimirCuentaAtras();
-}, 1000);
+var miCuenta;
 
-function stop(){
+function startCuenta(){
+   miCuenta = setInterval(
+   function(){ 
+   ticktock(); 
+   document.getElementById("cuenta_atras").innerHTML=imprimirCuentaAtras();
+   }, 1000);   
+    
+}
+
+function stopCuenta(){
 	clearInterval(miCuenta);
 }    
     

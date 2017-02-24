@@ -27,8 +27,10 @@ modulo_sorteo.controller('sorteoController',
             });
         };
         
-        init = function () {                    
+        init = function () {
+            
             activarNotificacionesSorteo();
+            startCuenta();
         };
 
         init();

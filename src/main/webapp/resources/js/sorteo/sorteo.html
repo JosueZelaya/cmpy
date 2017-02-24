@@ -16,20 +16,15 @@
             </div>  
             <div id="publicacionesProductos" class="panel-body">
                 <h1>Bienvenidos al sorteo de comprameya</h1>
-                <button ng-show="authenticated" type="button" class="btn btn-success pull-right" ng-click="start()">Iniciar Sorteo</button>
-                <button ng-show="authenticated" type="button" class="btn btn-success pull-right" ng-click="stop()">Seleccionar Ganador</button>
-                <h3>{{notificacion.mensaje}}</h3><br/>                
-
-                
-                
+                 
                 <div class="panel panel-default">
                   <div class="panel-heading text-center">
                     <h1>
-                       <button  value="VenderYa!" type="submit" class="btn btn-success pull-left">
+                       <button ng-show="authenticated"  value="VenderYa!" type="submit" class="btn btn-success pull-left" ng-click="start()">
                         <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
                       </button>    
                         <span id="cuenta_atras" class="label label-default" style="font-size:40px">00:00:00</span>
-                       <button  value="VenderYa!" type="submit" class="btn btn-danger pull-right">
+                       <button ng-show="authenticated"  value="VenderYa!" type="submit" class="btn btn-danger pull-right" ng-click="stop()">
                         <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
                       </button>
                     </h1>  
@@ -37,7 +32,7 @@
                   </div>
                   <div class="panel-body text-center">
                     <h1>
-                      Genaro Alberto Martinez Salazar
+                      {{notificacion.mensaje}}
                     </h1>
                   </div>
                 </div>
