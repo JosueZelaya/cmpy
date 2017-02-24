@@ -14,35 +14,35 @@
 
                 </p>
             </div>  
-            <div id="publicacionesProductos" class="panel-body">
-                <h1>Bienvenidos al sorteo de comprameya</h1>
+            <div id="publicacionesProductos" class="panel-body text-center">
+                <h2>Bienvenidos al sorteo de comprameya</h2>
+                <h4>Sorteo del Drone sabado 25 de febrero a las 8:00 pm Suerte!</h4>
                  
                 <div class="panel panel-default">
                   <div class="panel-heading text-center">
-                    <h1>
+                    <h2>
                        <button ng-show="authenticated"  value="VenderYa!" type="submit" class="btn btn-success pull-left" ng-click="start()">
                         <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
                       </button>    
-                        <span id="cuenta_atras" class="label label-default" style="font-size:40px">00:00:00</span>
+                        <span id="cuenta_atras" class="label label-default" style="font-size:25px">00:00:00</span>
                        <button ng-show="authenticated"  value="VenderYa!" type="submit" class="btn btn-danger pull-right" ng-click="stop()">
                         <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
                       </button>
-                    </h1>  
+                    </h2>  
 
                   </div>
-                  <div class="panel-body text-center">
-                    <h1>
-                      {{notificacion.mensaje}}
-                    </h1>
+                    <div class="panel-body text-center" style="min-height:200px">
+                     <div id="texto_sorteo" ng-hide="salidaAnimacion">
+                        <h1>
+                            {{notificacion.mensaje}}
+                        </h1>
+                    </div>
                   </div>
                 </div>
 
             </div>
         </div>
     </div>
-    
-  
-    
 </div>
 
 
