@@ -22,6 +22,8 @@ public interface PublicacionRepositoryCustom {
     
     public Iterable<Publicacion> getPublicacionesGratis();
     
+    public Iterable<Publicacion> getPublicacionesSorteo();
+    
     public Iterable<Publicacion> getPublicacionesPagadas(int page, int itemsByPage);
     
     public Iterable<Publicacion> getPublicacionesGratis(int page, int itemsByPage);

@@ -70,6 +70,8 @@ module.exports = function (grunt) {
                     './js-min-safe/anuncios/productoController.js': ['./js/anuncios/productoController.js'],
                     './js-min-safe/anuncios/publicacionesFiltradasController.js': ['./js/anuncios/publicacionesFiltradasController.js'],
                     './js-min-safe/anuncios/ubicacionesController.js': ['./js/anuncios/ubicacionesController.js'],
+                    './js-min-safe/sorteo/sorteo.module.js': ['./js/sorteo/sorteo.module.js'],
+                    './js-min-safe/sorteo/sorteoController.js': ['./js/sorteo/sorteoController.js'],
                     './js-min-safe/anuncios/venderController.js': ['./js/anuncios/venderController.js'],
                     './js-min-safe/maps/maps.module.js': ['./js/maps/maps.module.js'],
                     './js-min-safe/maps/mapService.js': ['./js/maps/mapService.js'],

@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.Transient;
 
 /**
  *
@@ -72,4 +73,6 @@ public class Notificacion extends BaseEntity<Long> implements Serializable {
         this.tipo.setNombre(tipo.getNombre());
     }
     
+    @Transient
+    private Usuario usuarioSeleccionado;
 }
