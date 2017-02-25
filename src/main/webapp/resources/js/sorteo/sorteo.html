@@ -21,11 +21,11 @@
                 <div class="panel panel-default">
                   <div class="panel-heading text-center">
                     <h2>
-                       <button ng-show="authenticated" ng-disabled="botonstart"  value="VenderYa!" type="submit" class="btn btn-success pull-left" ng-click="start()">
+                       <button ng-show="authenticated && usuario.role === 'ADMINISTRADOR'" ng-disabled="botonstart"  value="VenderYa!" type="submit" class="btn btn-success pull-left" ng-click="start()">
                         <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
                       </button>    
                         <span id="cuenta_atras" class="label label-default" style="font-size:25px">00:00:00</span>
-                       <button ng-show="authenticated"  value="VenderYa!" type="submit" class="btn btn-danger pull-right" ng-click="stop()">
+                       <button ng-show="authenticated && usuario.role === 'ADMINISTRADOR'"  value="VenderYa!" type="submit" class="btn btn-danger pull-right" ng-click="stop()">
                         <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
                       </button>
                     </h2>  
