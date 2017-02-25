@@ -53,7 +53,7 @@
                         Avisos
                     </button>   
 
-                    <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">                                                   
+                    <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed" ng-hide='true'>                                                   
                         <span class="glyphicon glyphicon-info-sign"></span>
                         Info 
                     </button>
@@ -63,8 +63,8 @@
                         {{visitas}}                        
                     </button>
                     
-                    <a href="#" ui-sref="home.sorteo({'#': 'publicacionesProductos'})" id="botonSorteo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" uib-tooltip="ver el sorteo" tooltip-placement="bottom">
-                        <span class="glyphicon glyphicon-eye-open"></span>
+                    <a href="#" style='color:#FF0000' ui-sref="home.sorteo({'#': 'publicacionesProductos'})" id="botonSorteo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" uib-tooltip="ver el sorteo" tooltip-placement="bottom">
+                        <span class="glyphicon glyphicon-gift"></span>
                         sorteo
                     </a>
 
@@ -196,8 +196,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" ui-sref="home.sorteo({'#': 'publicacionesProductos'})" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" uib-tooltip="ver el sorteo" tooltip-placement="bottom">
-                                <span class="glyphicon glyphicon-eye-open"></span>
+                            <a href="#" style='color:#FF0000' ui-sref="home.sorteo({'#': 'publicacionesProductos'})" aria-expanded="false" aria-controls="navbar" uib-tooltip="ver el sorteo" tooltip-placement="bottom">
+                                <span class="glyphicon glyphicon-gift"></span>
                                 sorteo
                             </a>
                         </li>
