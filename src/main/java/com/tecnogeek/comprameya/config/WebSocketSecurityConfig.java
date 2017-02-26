@@ -19,10 +19,10 @@ public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBro
     @Override
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages
-//            .simpMessageDestMatchers("/queue/**","/topic/**").denyAll()
-//            .simpSubscribeDestMatchers("/queue/**/*-user*","/topic/**/*-user*").denyAll()
-            .anyMessage().permitAll();
-//            .anyMessage().hasRole("USER");
+            .simpMessageDestMatchers("/queue/**","/topic/**").denyAll()
+            .simpSubscribeDestMatchers("/queue/**/*-user*","/topic/**/*-user*").denyAll()
+//            .anyMessage().permitAll();
+            .anyMessage().hasRole("USER");
 
     }
     

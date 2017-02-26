@@ -72,7 +72,7 @@
                         Avisos
                     </button>   
 
-                    <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed" ng-hide='true'>                                                   
+                    <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed" >                                                   
                         <span class="glyphicon glyphicon-info-sign"></span>
                         Info 
                     </button>
@@ -82,10 +82,7 @@
                         {{visitas}}                        
                     </button>
                     
-                    <a href="#" style='color:#FF0000' ui-sref="home.sorteo({'#': 'publicacionesProductos'})" id="botonSorteo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" uib-tooltip="ver el sorteo" tooltip-placement="bottom">
-                        <span class="glyphicon glyphicon-gift"></span>
-                        sorteo
-                    </a>
+
 
                     <a href="/" class="pull-left" ui-sref='home' ui-sref-opts="{reload:true}">
                         <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
@@ -212,12 +209,6 @@
                         <li>
                             <a uib-tooltip="visitas recibidas" tooltip-placement="bottom">{{visitas}}
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" style='color:#FF0000' ui-sref="home.sorteo({'#': 'publicacionesProductos'})" aria-expanded="false" aria-controls="navbar" uib-tooltip="ver el sorteo" tooltip-placement="bottom">
-                                <span class="glyphicon glyphicon-gift"></span>
-                                sorteo
                             </a>
                         </li>
                         <li class="dropdown" uib-dropdown="">
