@@ -471,3 +471,17 @@ div#texto_sorteo.ng-hide-remove {
   z-index:10000;
 }
 /*****Sorteo******/
+
+
+#header-page{
+    background-image:    url(../../../resources/images/back.jpg);
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    min-height: 300px;
+    
+}
+body{
+    
+    padding-bottom: 0px;
+}
