@@ -23,6 +23,7 @@ autenticacion.controller('autenticacionController',
                             $rootScope.username = data.nombre;
                             $rootScope.imageUrl = data.rutaImagen;
                             $rootScope.usuario = data;
+                            console.log("role: " + JSON.stringify(data, null, 2));
 
                             if (data.socialSignInProvider) {
                                 $rootScope.localAccount = false;

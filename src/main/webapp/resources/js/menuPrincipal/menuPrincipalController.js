@@ -17,6 +17,7 @@ menuPrincipal.controller('menuPrincipalController',
                 $scope.mensajes = [];
 
                 $rootScope.activarNotificacionesPush = function () {
+                    
                     PushNotificationService.receive().then(null, null, function (notificacionUsuario) {
 
                         if (notificacionUsuario.notificacion.tipo === 'COMENTARIO') {
@@ -176,4 +177,3 @@ menuPrincipal.controller('menuPrincipalController',
 
 
             }]);
-

@@ -5,7 +5,7 @@ modulo_notificacion.service("PushNotificationService",
             '$window',
             function ($q, $timeout, $log, $window) {
 
-                var service = {}, listener = $q.defer(), socket = {
+                var service = {}, listener = $q.defer(), publicListener = $q.defer(), socket = {
                     client: null,
                     stomp: null
                 }, messageIds = [];
@@ -20,11 +20,12 @@ modulo_notificacion.service("PushNotificationService",
                 windowElement.on('beforeunload', function (event) {
                     // do whatever you want in here before the page unloads.        
                     listener.reject("scope destroyed");
+                    publicListener.reject("scope destroyed");
                     socket.stomp.unsubscribe(service.CHAT_TOPIC);
                     socket.stomp.unsubscribe(service.PRIVATE_CHAT);
                     socket.stomp.disconnect();
 
-                    var service = {}, listener = $q.defer(), socket = {
+                    var service = {}, listener = $q.defer(), publicListener = $q.defer(),  socket = {
                         client: null,
                         stomp: null
                     }, messageIds = [];
@@ -33,11 +34,12 @@ modulo_notificacion.service("PushNotificationService",
                 windowElement.on('onBeforeunload', function (event) {
                     // do whatever you want in here before the page unloads.        
                     listener.reject("scope destroyed");
+                    publicListener.reject("scope destroyed");
                     socket.stomp.unsubscribe(service.CHAT_TOPIC);
                     socket.stomp.unsubscribe(service.PRIVATE_CHAT);
                     socket.stomp.disconnect();
 
-                    var service = {}, listener = $q.defer(), socket = {
+                    var service = {}, listener = $q.defer(), publicListener = $q.defer(), socket = {
                         client: null,
                         stomp: null
                     }, messageIds = [];
@@ -46,10 +48,18 @@ modulo_notificacion.service("PushNotificationService",
                 service.receive = function () {
                     return listener.promise;
                 };
+                
+                service.receivePublicMessage = function () {
+                    return publicListener.promise;
+                };
 
                 //use local promise
                 listener.promise.then(null, null, function onProgress(data) {
                     $log.info('Received data from service');
+                });
+                
+                publicListener.promise.then(null, null, function onProgress(data) {
+                    $log.info('Received public data from service');
                 });
 
                 service.send = function (message) {
@@ -65,6 +75,7 @@ modulo_notificacion.service("PushNotificationService",
 
                 service.disconnect = function () {
                     listener.reject("scope destroyed");
+                    publicListener.reject("scope destroyed");
                     socket.stomp.unsubscribe(service.CHAT_TOPIC);
                     socket.stomp.unsubscribe(service.PRIVATE_CHAT);
                     socket.stomp.disconnect();
@@ -86,7 +97,7 @@ modulo_notificacion.service("PushNotificationService",
 
                 var startListener = function () {
                     socket.stomp.subscribe(service.CHAT_TOPIC, function (data) {
-                        listener.notify(getMessage(data.body));
+                        publicListener.notify(getMessage(data.body));
                     });
                     socket.stomp.subscribe(service.PRIVATE_CHAT, function (data) {
                         listener.notify(getMessage(data.body));
@@ -108,6 +119,7 @@ modulo_notificacion.service("PushNotificationService",
                     };
 
                     listener = $q.defer();
+                    publicListener = $q.defer();
 
                     socket.client = new SockJS(service.SOCKET_URL);
                     socket.stomp = Stomp.over(socket.client);

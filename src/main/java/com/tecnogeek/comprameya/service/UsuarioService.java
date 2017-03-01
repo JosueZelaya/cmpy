@@ -82,19 +82,33 @@ public class UsuarioService {
     
     @Transactional
     public Usuario registerNewUserAccount(RegistrationForm userAccountData) throws DuplicateEmailException {
+        String correo = "";
+        String login = "";
         
-         if(userAccountData.getEmail()==null) {
+        if(userAccountData.isSocialSignIn()) {
+            if(userAccountData.getEmail()!=null){
+                correo = userAccountData.getEmail();
+            } else {
+                correo = userAccountData.getProfileUrl();
+            }
+            login = userAccountData.getProfileUrl();
+        } else {
+            correo = userAccountData.getEmail();
+            login = correo;
+        }
+        
+        if(correo == null) {
             throw new DuplicateEmailException("Para completar el proceso de registro por favor agregue su dirección de correo");
         }
         
-        if (emailExist(userAccountData.getEmail())) {
+        if (userExists(login)) {
             throw new DuplicateEmailException("El correo: " + userAccountData.getEmail() + " ya está siendo usado. Por favor use otro para completar el registro.");
         }
 
         String encodedPassword = encodePassword(userAccountData);
 
         Persona persona = new Persona();
-        persona.setCorreo(userAccountData.getEmail());
+        persona.setCorreo(correo);
         persona.setNombre(userAccountData.getFirstName());
         persona.setApellido(userAccountData.getLastName());
         persona.setTelefono(userAccountData.getTelephone());
@@ -103,7 +117,7 @@ public class UsuarioService {
         Perfil perfil = perfilRepository.findByNombre(Role.USUARIO.getRoleName());
 
         Usuario usuario = new Usuario();
-        usuario.setLogin(userAccountData.getEmail());
+        usuario.setLogin(login);
         usuario.setPass(encodedPassword);
         usuario.setPersona(persona);
         usuario.setPerfil(perfil);
@@ -117,7 +131,7 @@ public class UsuarioService {
         return repository.save(usuario);
     }
 
-    private boolean emailExist(String email) {
+    private boolean userExists(String email) {
         
         if(email == null){
             return false;

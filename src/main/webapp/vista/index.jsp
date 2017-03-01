@@ -14,6 +14,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="fragment" content="!">
+        <meta name="description" content="Compra y Vende lo que deseas, crea tu propia tienda y más...">
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript,compra,compras,venta,ventas,vender,comprar,articulos,el salvador,ahuchapan,
+              santa ana,sonsonate,la libertad,san salvador,chalatenango,cuscatlan,cabañas,san miguel,san francisco,la union,morazán,
+              san vicente,la paz,503,telefonos,celulares,laptops,juegos,carros,civic,toyota,nissan,play,playstation,ps3,ps4,lcd,pantallas,
+              vivienda,ropa,calzado,deportes">
+        <meta name="author" content="TecnoBitz">
+        <meta name="fragment" content="!">
+        <script> window.prerenderReady = false; </script>
         <title>ComprameYa!</title>
 
         <!--<style> .ng-cloak { display: none !important; } </style>-->
@@ -28,6 +37,16 @@
     </head>
     <body ng-cloak class="ng-cloak" flow-prevent-drop>
 
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.2&appId=703643202980040";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));        
+        </script>
+        
         <!-- MAIN CONTENT -->
         <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="menuPrincipalController">
             <div class="container">
@@ -53,7 +72,7 @@
                         Avisos
                     </button>   
 
-                    <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed">                                                   
+                    <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed" >                                                   
                         <span class="glyphicon glyphicon-info-sign"></span>
                         Info 
                     </button>
@@ -62,6 +81,8 @@
                         <span class="glyphicon glyphicon-eye-open"></span>
                         {{visitas}}                        
                     </button>
+                    
+
 
                     <a href="/" class="pull-left" ui-sref='home' ui-sref-opts="{reload:true}">
                         <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
@@ -102,7 +123,8 @@
                                     </a>
                                 </li>
                                 <li ng-if="localAccount" ng-click="open('changePassModal.html')"><a href="#">Cambiar Clave</a></li>
-                                <li><a href="#">Editar Perfil</a></li>
+                                <li ng-if="authenticated" ng-click="open('updateCellModal.html')"><a href="#">Actualizar Teléfono</a></li>
+                                <li ng-if="localAccount" ng-click="open('editProfileModal.html')"><a href="#">Editar Perfil</a></li>
                                 <li><a href="#">Configuracion</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Sesión</li>                                     
@@ -118,7 +140,8 @@
                             </a>
                         </li>
                         <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('changePassModal.html'); cancel()">Cambiar Clave</a></li>
-                        <li ng-if="authenticated && !navCollapsed"><a href="#">Editar Perfil</a></li>
+                        <li ng-if="authenticated && !navCollapsed"><a href="#" ng-click="open('updateCellModal.html'); cancel()">Actualizar Teléfono</a></li>
+                        <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('editProfileModal.html'); cancel()">Editar Perfil</a></li>
                         <li ng-if="authenticated && !navCollapsed"><a href="#">Configuracion</a></li>
                         <li ng-if="authenticated && !navCollapsed" class="divider"></li>
                         <li ng-if="authenticated && !navCollapsed" class="dropdown-header">Sesión</li>                                     
@@ -186,7 +209,7 @@
                         <li>
                             <a uib-tooltip="visitas recibidas" tooltip-placement="bottom">{{visitas}}
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                            </a>                            
+                            </a>
                         </li>
                         <li class="dropdown" uib-dropdown="">
                             <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
@@ -254,6 +277,7 @@
                     </div>                    
                 </form>
             </div>
+            <div class="fb-share-button" data-layout="button_count" data-size="large" data-mobile-iframe="true" data-href="https://www.comprameya.com"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.comprameya.com%2F&amp;src=sdkpreparse">Compartir</a></div>
         </nav>
 
         <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
@@ -312,9 +336,151 @@
                 </button>                
             </div>
         </script>
+        
+        <script type="text/ng-template" id="updateCellModal.html">
+            <div class="modal-body" ng-app="cmpy.autenticacion" ng-controller="updateCellController">
+                <div ng-class="valtitulo">
+                    <label for="updatedCell" class="control-label">Ingrese su nuevo número telefónico:</label>
+                    <input ng-keyup="$event.keyCode == 13 && updateCell()" ng-model="updatedCell" id="updatedCell" type="text" class="form-control"/>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-if="wrongCell">
+                        {{wrongCellMsj}}
+                    </div>
+                </div>        
+                <br/>
+                <button ng-disabled="!ready" ng-click="updateCell()" type="button" class="btn btn-success" uib-tooltip="Actualiza tu teléfono ahora" tooltip-placement="bottom">
+                    Actualizar Teléfono
+                </button>
+                <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar actualizacion de teléfono" tooltip-placement="bottom">
+                    Cancelar
+                </button>                
+            </div>
+        </script>
+        <script type="text/ng-template" id="editProfileModal.html">
+             <div class="modal-body" ng-controller="profileController" >
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
+                    <div class="col-sm-10">
+                      <div class="input-group">
+                        <input type="text" ng-disabled="estado_nombre" ng-model="nombre" class="form-control" placeholder="Ejemplo: Juan Carlos" aria-describedby="basic-addon1">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" ng-click="estado_nombre=!estado_nombre;resetNombre()" type="button">{{etiqueta_nombre}}</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Apellido</label>
+                    <div class="col-sm-10">
+                      <div class="input-group">
+                        <input type="text" ng-disabled="estado_apellido" ng-model="apellido" class="form-control" placeholder="Ejemplo: Perez" aria-describedby="basic-addon1">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" ng-click="estado_apellido=!estado_apellido;resetApellido()" type="button">{{etiqueta_apellido}}</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Telefono</label>
+                    <div class="col-sm-10">
+                      <div class="input-group">
+                        <input type="text" id="telperfil" ng-disabled="estado_telefono" ng-model="telefono" class="form-control" placeholder="Ejemplo: 77778888" aria-describedby="basic-addon1">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" ng-click="estado_telefono=!estado_telefono;resetTelefono()" type="button">{{etiqueta_telefono}}</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-        <!-- PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS -->
-<!--        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
+                   <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Sexo</label>
+                    <div class="col-sm-10">
+                          <label class="radio-inline">
+                            <input type="radio" ng-model="sexo" name="inlineRadioOptions" id="inlineRadio1" value="1"> Hombre
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" ng-model="sexo" name="inlineRadioOptions" id="inlineRadio2" value="0"> Mujer
+                          </label>
+                    </div>
+                  </div>
+                   <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Nacimiento</label>
+                    <div class="col-sm-10">  
+                        <select name="dia" ng-model="dia" class="fecha_account cuenta-save-1 text ui-corner-all form-input-text box-shadow-soft">
+                          <option value="0" selected="selected">Día</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                          <option value="17">17</option>
+                          <option value="18">18</option>
+                          <option value="19">19</option>
+                          <option value="20">20</option>
+                          <option value="21">21</option>
+                          <option value="22">22</option>
+                          <option value="23">23</option>
+                          <option value="24">24</option>
+                          <option value="25">25</option>
+                          <option value="26">26</option>
+                          <option value="27">27</option>
+                          <option value="28">28</option>
+                          <option value="29">29</option>
+                          <option value="30">30</option>
+                          <option value="31">31</option>
+                      </select>
+                      <select name="mes" ng-model="mes" class="fecha_account cuenta-save-1 text ui-corner-all form-input-text box-shadow-soft">
+                            <option value="0" selected="selected">Mes</option>
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                       </select>  
+                        <select name="anio" ng-model="anio" class="fecha_account cuenta-save-1 text ui-corner-all form-input-text box-shadow-soft">
+                            <option value="0" selected="selected">Año</option>
+                            <option ng-repeat="anio in anios" value="{{anio}}">{{anio}}</option>
+                        </select>
+                        
+                    </div>
+             
+                  </div>
+                  <div class="alert alert-danger alert-dismissible fade in" role="alert" ng-show="!val_datos">
+                    {{error}}
+                  </div>
+
+                </form>
+                <button type="button" ng-click="updateProfile()" class="btn btn-success" uib-tooltip="Actualizar perfil" tooltip-placement="bottom">
+                    Actualizar
+                </button>
+                <button ng-click="cancel()" type="button" class="btn btn-warning" uib-tooltip="Cancelar actualizacion" tooltip-placement="bottom">
+                    Cancelar
+                </button>         
+            </div>
+            
+        </script>       
+
+        <script type="text/javascript" src="https://widget.cloudinary.com/global/all.js"></script>
+        <%--PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS --%>
+        <%--<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-sanitize/angular-sanitize.min.js"></script> 
         <script type='text/javascript' src='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
@@ -337,7 +503,10 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/changePassController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/resetPassController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/updateCellController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/autenticacionService.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/ProfileController.js" ></script>   
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/autenticacion/ProfileService.js" ></script>   
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacion.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/notificacionService.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/notificacion/PushNotificationService.js" ></script>
@@ -360,7 +529,10 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/venderController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/empresasController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/productoController.js" ></script>        
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/ubicacionesController.js" ></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/ubicacionesController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorteo/sorteo.module.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorteo/sorteoController.js" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorteo/confeti.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/maps/maps.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/maps/mapService.js" ></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/maps/mapControllers.js" ></script> 
@@ -378,28 +550,18 @@
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">-->
+        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">--%>
 
 
-        <!-- PARA PASAR A PRODUCCIÓN USAR ESTOS SCRIPTS Y COMENTAR LOS ANTERIORES -->
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js" ></script>
+        <%-- PARA PASAR A PRODUCCIÓN USAR ESTOS SCRIPTS Y COMENTAR LOS ANTERIORES --%>
+        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js?1.0.0" ></script>
         <link href="${pageContext.request.contextPath}/resources/min/css/style.min.css" rel="stylesheet" type="text/css" media='all'>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
         <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
-   
-    </body>
-</html>
-
-<script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-</script>        
         
-     
+    </body>
+    <canvas height='1' id='confetti' width='1' ng-show="confeti"></canvas>
+</html>

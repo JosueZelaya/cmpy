@@ -40,6 +40,7 @@ modulo_anuncios.controller('productoController',
 
                     getPublicacion(publicacionId).success(function (publicacion) {
                         $scope.publicacion = publicacion;
+                        setTimeout(function(){ FB.XFBML.parse(); }, 100);
                     });
 
                     getComentarios(publicacionId).success(function (comentarios) {
@@ -74,6 +75,8 @@ modulo_anuncios.controller('productoController',
                 };
 
                 var init = function () {
+                    
+                    $scope.baseImgUrl = "https://res.cloudinary.com/dm8oxzlpb/image/upload/";
 
                     var publicacionId = $stateParams.publicacionId;
 

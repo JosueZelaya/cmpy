@@ -13,6 +13,7 @@ modulo_anuncios.controller('anunciosController',
                     return anunciosService.getAnunciosByCat(tipo, pagina, cat, nivel)
                             .success(function (publicaciones) {
                                 return publicaciones;
+                                setTimeout(function(){ FB.XFBML.parse(); }, 100);
                             });
                 };
 
@@ -20,6 +21,7 @@ modulo_anuncios.controller('anunciosController',
                     return anunciosService.getMisAnuncios(tipo, pagina)
                             .success(function (publicaciones) {
                                 return publicaciones;
+                                setTimeout(function(){ FB.XFBML.parse(); }, 100);
                             });
                 };
 
@@ -41,6 +43,7 @@ modulo_anuncios.controller('anunciosController',
                     return anunciosService.getAnunciosMezclados(tipo, pagina)
                             .success(function (publicaciones) {
                                 return publicaciones;
+                                setTimeout(function(){ FB.XFBML.parse(); }, 100);
                             });
                 };
 
@@ -48,6 +51,7 @@ modulo_anuncios.controller('anunciosController',
                     getAnunciosMezclados(page)
                             .success(function (publicaciones) {
                                 $scope.publicaciones = $scope.publicaciones.concat(publicaciones);
+                                setTimeout(function(){ FB.XFBML.parse(); }, 100);
                             });
                 };
 
@@ -105,6 +109,8 @@ modulo_anuncios.controller('anunciosController',
                 };
 
                 var init = function () {
+                    $scope.baseImgUrl = "https://res.cloudinary.com/dm8oxzlpb/image/upload/";
+                    $scope.thumbSize = "h_150/";
                     $scope.publicaciones = [];
                     $scope.page = 0;
                     cargarPublicacionesGratis($scope.page);

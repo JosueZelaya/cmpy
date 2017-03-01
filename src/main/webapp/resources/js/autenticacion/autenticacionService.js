@@ -48,4 +48,21 @@ autenticacion.service('autenticacionService', function ($http, $log) {
                     return "El email no existe";
                 });
     };
+    
+    this.updateCell = function (newCell) {
+        var formData = new FormData();
+        formData.append("newCell", newCell);
+
+        return $http.post('/user/updateCell', formData, {
+            transformRequest: angular.identity,
+            responseType: 'json',
+            headers: {'Content-Type': undefined}
+        })
+                .then(function (response) {
+                    return "ok";
+                }, function (response) {
+                    return "No se pudo actualizar el teléfono";
+                });
+    };
+    
 });

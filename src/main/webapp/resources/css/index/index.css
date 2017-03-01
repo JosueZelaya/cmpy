@@ -240,7 +240,7 @@ body > div.pac-container.pac-logo{
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
     .panel-flex{display:block;height:3600px;}
-    .imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
+    .imgajust{height:500px !important;width:auto;min-height:auto;min-width:auto;}
     #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:25%;}
     .macro{font-size:24px}
 }
@@ -248,7 +248,7 @@ body > div.pac-container.pac-logo{
 /* Landscape tablets and medium desktops */
 @media (min-width: 992px) and (max-width: 1199px) {
     .panel-flex{display:block;height:3600px;}
-     imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
+     imgajust{height:500px !important;width:auto;min-height:auto;min-width:auto;}
      #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:25%;}
      .macro{font-size:24px}
 }
@@ -256,7 +256,7 @@ body > div.pac-container.pac-logo{
 /* Portrait tablets and small desktops */
 @media (min-width: 768px) and (max-width: 991px) {
     .panel-flex{display:block;height:3600px;}
-     .imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
+     .imgajust{height:500px !important;width:auto;min-height:auto;min-width:auto;}
      #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:25%;}
      .macro{font-size:24px}
 }
@@ -264,7 +264,7 @@ body > div.pac-container.pac-logo{
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
     .panel-flex{display:block;height:38px;}
-    .imgajust{height:100%;width:auto;min-height:auto;min-width:auto;}
+    .imgajust{height:500px !important;width:auto;min-height:auto;min-width:auto;}
     #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:100%;}
     .macro{font-size:24px}
 }
@@ -272,7 +272,7 @@ body > div.pac-container.pac-logo{
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
     .panel-flex{display:block;height:38px;}
-    .imgajust{height:auto;width:100%;min-height:auto;min-width:auto;}
+    .imgajust{height:auto !important;width:100%;min-height:auto;min-width:auto;}
     #publicacionesProductos > div > div:nth-child(1) > div > div.actionBox > div.form-group.ng-scope{width:100%;}
     .macro{font-size:11px}
 }
@@ -420,3 +420,54 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+/*****Sorteo******/
+
+@keyframes entradaTexto{
+  from {
+      height: 50px;
+      transform: translate(0px, -50px);
+      opacity:0;
+  } to {
+      height: 50px;
+      transform: translate(0px, 0px);
+      opacity:1;
+  }
+}
+
+
+@keyframes salidaTexto {
+  from {
+      height: 50px;
+      transform: translate(0px, 0px);
+      opacity:1;      
+  } to {
+      height: 50px;
+      transform: translate(0px, 200px);
+      opacity:0;
+  }
+}
+
+div#texto_sorteo {
+  height: 50px;
+}
+
+div#texto_sorteo.ng-hide {
+  animation: 0.1s salidaTexto;
+}
+
+div#texto_sorteo.ng-hide-remove {
+  animation: 0.1s entradaTexto;
+}
+
+
+
+#confetti{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 1080px;
+  width: 100%;
+  z-index:10000;
+}
+/*****Sorteo******/

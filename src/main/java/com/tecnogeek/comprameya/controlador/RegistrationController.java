@@ -7,6 +7,7 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.dto.RegistrationForm;
 import com.tecnogeek.comprameya.entidad.PasswordResetToken;
+import com.tecnogeek.comprameya.entidad.Persona;
 import com.tecnogeek.comprameya.entidad.Usuario;
 import com.tecnogeek.comprameya.enums.SocialMediaService;
 import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
@@ -29,8 +30,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.tecnogeek.comprameya.service.UsuarioService;
+import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -83,6 +88,58 @@ public class RegistrationController {
     public String updateUser() {
         return "";
     }
+    
+    @RequestMapping(value = "/user/getProfile", method = RequestMethod.GET)
+    public @ResponseBody Usuario getProfile(Model model)  {
+         Usuario usuario = service.getLoggedUser();
+         return usuario; 
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/user/updateCell", method = RequestMethod.POST)
+    public ResponseEntity<String> updateCell(
+            @RequestParam(value = "newCell", required = true) BigInteger newCell){
+        Usuario u = service.getLoggedUser();
+        Persona p = u.getPersona();
+        p.setCelular(newCell);
+        p.setTelefono(newCell);        
+        service.getRepository().save(u);
+        return ResponseEntity.ok("ok");
+    }
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "/user/updateProfile", method = RequestMethod.POST)
+    public ResponseEntity<String> updateProfile
+    (
+        @RequestParam(value = "nombre", required = true) String nombre,
+        @RequestParam(value = "apellido", required = true) String apellido,
+        @RequestParam(value = "telefono", required = true) String telefono,
+        @RequestParam(value = "sexo", required = true) boolean sexo,
+        @RequestParam(value = "dia", required = true) int dia,
+        @RequestParam(value = "mes", required = true) int mes,
+        @RequestParam(value = "anio", required = true) int anio
+    ) throws ParseException 
+    {
+        Usuario u = service.getLoggedUser();
+        Persona p = u.getPersona();
+        
+        p.setNombre(nombre);
+        p.setApellido(apellido);
+        p.setTelefono(BigInteger.valueOf(Long.parseLong(telefono)));
+        
+        p.setGenero(sexo);
+         
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateInString = Integer.toString(dia) + "/" + Integer.toString(mes) + "/" + Integer.toString(anio);
+        Date date = formatter.parse(dateInString);
+        p.setFechaNacimiento(date);
+        
+        service.getRepository().save(u);
+        
+        log.info("{} se actualizo el perfil", u.getLogin());
+        return ResponseEntity.ok("ok");
+    }    
 
     @ResponseBody
     @RequestMapping(value = "/user/updatePass", method = RequestMethod.POST)
@@ -334,11 +391,12 @@ public class RegistrationController {
         RegistrationForm dto = new RegistrationForm();
 
         if (connection != null) {
+            ConnectionKey providerKey = connection.getKey();
             UserProfile socialMediaProfile = connection.fetchUserProfile();
             dto.setEmail(socialMediaProfile.getEmail());
+            dto.setProfileUrl(connection.getProfileUrl());
             dto.setFirstName(socialMediaProfile.getFirstName());
-            dto.setLastName(socialMediaProfile.getLastName());
-            ConnectionKey providerKey = connection.getKey();
+            dto.setLastName(socialMediaProfile.getLastName());            
             dto.setSignInProvider(SocialMediaService.valueOf(providerKey.getProviderId().toUpperCase()));
             dto.setImageUrl(connection.getImageUrl());
         }
@@ -346,4 +404,7 @@ public class RegistrationController {
         return dto;
     }
 
+    private boolean isSocialUser(ConnectionKey providerKey){
+        return SocialMediaService.valueOf(providerKey.getProviderId().toUpperCase())!=null;
+    }
 }

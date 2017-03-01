@@ -20,6 +20,7 @@ var cmy_ng = angular.module('cmpy',
     'cmpy.maps',
     'cmpy.anuncios',
     'cmpy.mensajes',
+    'cmpy.sorteo',
     'cmpy.utils'
 ]);
 
@@ -58,7 +59,7 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     "venderModal@home": {templateUrl: '/resources/js/anuncios/venderModal.html'},
                     "ubicacionesModal@home": {templateUrl: '/resources/js/anuncios/ubicacionesModal.html'},
                     "maps": {templateUrl: '/resources/js/maps/mapaUbicacion.html', controller: 'mapController'},
-                    "mapslectura": {templateUrl: '/resources/js/maps/mapaUbicacionLectura.html', controller: 'ubicacionesController'}
+                    "mapslectura": {templateUrl: '/resources/js/maps/mapaUbicacionLectura.html', controller: 'ubicacionesController'}  
                 },
                 sticky: true,
                 dsr: true
@@ -122,6 +123,13 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                 }
             })
 
+            .state('home.sorteo', {
+                url: "sorteo",
+                views: {
+                    '':{templateUrl: '/resources/js/sorteo/sorteo.html', controller: "sorteoController"}
+                }
+            })
+
             .state('home.terminosServicio', {
                 url: "terminos",
                 views: {
@@ -149,7 +157,8 @@ cmy_ng.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $loca
                     '':{templateUrl: '/resources/js/autenticacion/changePass.html', controller: 'changePassController'}
                 }
             })
-
+            
+            
 //            // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
 //            .state('about', { 
 //                // we'll get to this in a bit       
@@ -164,16 +173,17 @@ cmy_ng.run(['$rootScope', function($rootScope){
   // Previous code ...
   $rootScope.ready = false;
   
-  
-  
   $rootScope.$on("cfpLoadingBar:loading", function(){
       $rootScope.ready = false;
   });
 
   $rootScope.$on("cfpLoadingBar:loaded", function(){
-      $rootScope.ready = true;
+      $rootScope.ready = true;      
   });
 
+  $rootScope.$on("cfpLoadingBar:completed", function(){
+      window.prerenderReady = true;
+  });
 
 
 }]);
