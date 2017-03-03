@@ -48,8 +48,10 @@
         </script>
         
         
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-bottom:20px">
             <div class="row" id="header-page">
+                
+                <div class="container-fluid">
                 <div class="row" id="menu-page">
 
                     <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="menuPrincipalController" style="opacity:0.7">
@@ -264,7 +266,23 @@
                                     </li>
                                 </ul>
                             </div>
-                        <div class="fb-share-button" data-layout="button_count" data-size="large" data-mobile-iframe="true" data-href="https://www.comprameya.com"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.comprameya.com%2F&amp;src=sdkpreparse">Compartir</a></div>
+                        <!--<div class="fb-share-button" data-layout="button_count" data-size="large" data-mobile-iframe="true" data-href="https://www.comprameya.com"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.comprameya.com%2F&amp;src=sdkpreparse">Compartir</a></div>-->
+                    
+
+                       <%--Nuevo Share--%>
+                        
+                        <div style="padding:10px">
+                            <a class="btn btn-default btn-lg" href="#" ui-sref="home" style="padding: 5px 10px 6px 10px" title="Inicio" >
+                                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            </a>
+                            <a class="btn btn-social-icon btn-facebook" href="http://facebook.com/sharer.php?u={{rutaactualencode()}}" title="Comparte en facebook" target="_blank">
+                                <span class="fa fa-facebook"></span>
+                             </a>
+                            <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/home?status=ComprameYa%20{{rutaactualencode()}}%20@ComprameYa" title="Comparte en twitter" target="_blank">
+                                <span class="fa fa-twitter"></span>
+                             </a> 
+                        </div>
+                    
                     </nav>               
 
 
@@ -287,7 +305,8 @@
                        </form>               
                     </div>
 
-                </div>  
+                </div>
+                </div>
             </div>
         </div>
          <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
@@ -490,7 +509,7 @@
 
         <script type="text/javascript" src="https://widget.cloudinary.com/global/all.js"></script>
         <%--PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS --%>
-        <%--<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-sanitize/angular-sanitize.min.js"></script> 
         <script type='text/javascript' src='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
@@ -555,22 +574,24 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mensajes/mensajesController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.module.js" ></script>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-social/bootstrap-social.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
         <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">--%>
+        <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
 
 
         <%-- PARA PASAR A PRODUCCIÓN USAR ESTOS SCRIPTS Y COMENTAR LOS ANTERIORES --%>
         
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js?1.0.0" ></script>
+        <%--<script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js?1.0.0" ></script>
         <link href="${pageContext.request.contextPath}/resources/min/css/style.min.css" rel="stylesheet" type="text/css" media='all'>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
         <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
-        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />--%>
         
     </body>
     <canvas height='1' id='confetti' width='1' ng-show="confeti"></canvas>

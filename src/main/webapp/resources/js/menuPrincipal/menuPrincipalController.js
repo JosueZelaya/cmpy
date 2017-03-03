@@ -15,6 +15,20 @@ menuPrincipal.controller('menuPrincipalController',
                 $scope.pageMensajesNoLeidos = 0;
                 $scope.NoLeidosTotal = 0;
                 $scope.mensajes = [];
+                
+                $scope.rutaactualencode = function(){
+                    
+                    return encodeURI($state.href($state.current.name, $state.params, {absolute: true}));
+                    
+                };  
+                
+                $rootScope.rutaactual = function(){
+                    
+                    return $state.href("home", "", {absolute: true});
+                    
+                };                  
+                        
+                        
 
                 $rootScope.activarNotificacionesPush = function () {
                     
