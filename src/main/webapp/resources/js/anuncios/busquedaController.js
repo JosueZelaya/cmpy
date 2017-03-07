@@ -53,12 +53,14 @@ modulo_anuncios.controller('busquedaController',
                     getPublicacionesByMatch(page, $scope.terminoBusqueda)
                             .success(function (publicaciones) {
                                 $scope.publicaciones = publicaciones;
+                                $scope.busquedaTerminada = true;
                             });
                 };
 
                 var init = function () {
-                    $scope.terminoBusqueda = $stateParams.terminoBusqueda;
-                    $scope.publicaciones = [];
+                    $scope.terminoBusqueda = $stateParams.terminoBusqueda;                    
+                    $scope.busquedaTerminada = false;
+                    //$scope.publicaciones = [];
                     $scope.page = 0;
 
                     cargarPublicacionesGratisByMatch($scope.page);
