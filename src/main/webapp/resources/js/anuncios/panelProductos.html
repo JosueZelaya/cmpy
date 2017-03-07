@@ -24,6 +24,123 @@
 
                     <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="publicacion in publicaciones" ng-if="publicaciones">
                         
+                        <!--Nuevo estilo de miniatura-->
+                        
+                        
+                            <div class="container-fluid tproducto">
+                              <div class="row"> 
+                                <div class="col-xs-5" style="padding-right:0px">
+                             
+
+                                    <div ng-if="publicacion.tipo!=='EXTERNA'">
+                                        <img class="user-image" ng-if="!publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                        <img class="user-image" ng-if="publicacion.usuario.signInProvider === null && publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                        <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null && publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
+                                        <span style="overflow:hidden">&nbsp;&nbsp;{{publicacion.usuario.persona.nombre}}<span>
+                                    </div>
+                                    <div ng-if="publicacion.tipo==='EXTERNA'">
+                                        <img class="user-image" height="28px" width="28px" ng-src="/resources/images/logo.jpg" alt="..."  uib-tooltip="{{publicacion.link}}" tooltip-placement="top"/>
+                                        <span style="overflow:hidden">&nbsp;&nbsp;{{publicacion.usuario.persona.nombre}}</span>
+                                    </div>                                  
+                                  
+                                  
+                                </div>
+
+                                <div class="col-xs-5 text-right" style="padding-right:0px">
+                                    <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.usuario.puntaje) track by $index"></i>
+                                    <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.usuario.puntaje) track by $index"></i>
+                                </div>   
+                                <div class="col-xs-2 text-left">
+                                    <div class="btn-group" uib-dropdown is-open="status.isopen">
+                                      <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                        <li role="menuitem"><a href="#">Ver perfil</a></li>
+                                        <li role="menuitem"><a href="#">Puntuar</a></li>
+                                        <li role="menuitem"><a href="#">Guardar</a></li>
+                                        <li class="divider"></li>
+                                        <li role="menuitem"><a href="#">Compartir...</a></li>
+                                      </ul>
+                                    </div>   
+                                </div>   
+                              </div>
+
+                              <div class="row">
+                                <div class="col-xs-12 img-producto" >
+                                    <a ng-if="publicacion.tipo==='GRATIS'" href="" ui-sref="home.vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})">
+                                        <img ng-if="publicacion.tipo==='GRATIS'" ng-src="{{baseImgUrl + thumbSize + publicacion.imgUrl}}" alt="imagen aqui" class="center-block">
+                                    </a>
+                                    <a ng-if="publicacion.tipo==='EXTERNA'" ng-href="{{publicacion.link}}" target="_blank">
+                                        <img ng-if="publicacion.tipo==='EXTERNA'" ng-src="{{publicacion.imgUrl}}" alt="imagen aqui" class="center-block">
+                                    </a>
+                                </div> 
+                              </div>
+                              <div class="row">
+                                <div class="col-xs-12">
+
+                                  <h4>
+                                      <a ng-if="publicacion.tipo==='GRATIS'" href="" ui-sref="home.vistaProducto({publicacionId: publicacion.id, '#': 'publicacionesProductos'})">
+                                        {{publicacion.titulo.slice(0,15)}}
+                                      </a>
+                                      <a ng-if="publicacion.tipo==='EXTERNA'" ng-href="{{publicacion.link}}" target="_blank">
+                                        {{publicacion.titulo.slice(0,15)}}
+                                      </a>                                      
+                                  </h4>
+                                  <h4 class="text-center">$100</h4>
+                                  <p class="descripcion">
+                                    {{publicacion.descripcion.slice(0, 75)}}
+                                  </p>    
+                                </div>
+
+                              </div>
+                              <div class="row social">
+                                <div class="col-xs-12">
+                                    <a ng-if="publicacion.tipo==='GRATIS'" class="btn btn-social-icon btn-facebook" href="http://facebook.com/sharer.php?u={{rutaactual()}}vistaProducto/{{publicacion.id}}#publicacionesProductos" title="Comparte en facebook" target="_blank">
+                                        <span class="fa fa-facebook"></span>
+                                    </a>
+                                    <a ng-if="publicacion.tipo==='GRATIS'" class="btn btn-social-icon btn-twitter" href="http://twitter.com/home?status=ComprameYa%20{{rutaactual()}}vistaProducto/{{publicacion.id}}#publicacionesProductos%20@ComprameYa" title="Comparte en twitter" target="_blank">
+                                        <span class="fa fa-twitter"></span>
+                                    </a>
+                                    <a ng-if="publicacion.tipo==='EXTERNA'" class="btn btn-social-icon btn-facebook" href="http://facebook.com/sharer.php?u={{publicacion.link}}" title="Comparte en facebook" target="_blank">
+                                        <span class="fa fa-facebook"></span>
+                                    </a>
+                                    <a ng-if="publicacion.tipo==='EXTERNA'" class="btn btn-social-icon btn-twitter" href="http://twitter.com/home?status=ComprameYa%20{{publicacion.link}}%20@ComprameYa" title="Comparte en twitter" target="_blank">
+                                        <span class="fa fa-twitter"></span>
+                                    </a> 
+                                    <a  ng-show="{{publicacion.usuario.id === usuario.id}}" 
+                                       ng-click="eliminarPublicacion(publicacion.id, $index)" 
+                                       confirm-title="Eliminar Publicacion"
+                                       confirm="¿Confirma que desea eliminar la publicacion?" 
+                                       confirm-ok="Sí"
+                                       confirm-cancel="No"
+                                       class="btn btn-danger" role="button" 
+                                       uib-tooltip="eliminar" 
+                                       tooltip-placement="top">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                    </a>
+
+                                    <a ng-show="{{publicacion.usuario.id === usuario.id}}" 
+                                       ng-click="setVendido(publicacion.id, $index)" 
+                                       confirm-title="Producto vendido"
+                                       confirm="¿Este producto ya fue vendido?" 
+                                       confirm-ok="Sí"
+                                       confirm-cancel="No"
+                                       class="btn btn-success" role="button" 
+                                       uib-tooltip="Marcar como vendido" 
+                                       tooltip-placement="top">
+                                        <span class="glyphicon glyphicon-usd"></span>
+                                    </a>
+                                </div>
+                              </div>
+
+                            </div>                        
+                        
+                        
+                        <!--fin de nuevo estilo-->                 
+                        
+                        
+                        
                         <div style="height: 400px;" class="thumbnail">       
 
                             <div class="row">                                

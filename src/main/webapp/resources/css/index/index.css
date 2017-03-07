@@ -479,9 +479,46 @@ div#texto_sorteo.ng-hide-remove {
     background-repeat:   no-repeat;
     background-position: center center; 
     min-height: 300px;
+    -webkit-box-shadow: inset 0px 0px 150px 80px rgba(0,0,0,0.41);
+-moz-box-shadow: inset 0px 0px 150px 80px rgba(0,0,0,0.41);
+box-shadow: inset 0px 0px 150px 80px rgba(0,0,0,0.41);
     
 }
 body{
     
     padding-bottom: 0px;
 }
+
+/****miniaturas publicaciones*****/
+
+.tproducto{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin:5px;
+  padding-top:5px;
+  padding-bottom:5px;
+  box-shadow: inset 10px 10px 22px -6px rgba(0,0,0,0.25);
+  box-shadow: 10px 10px 22px -6px rgba(0,0,0,0.25);
+  min-height: 348px;
+  height: 348px;
+}
+
+.img-producto{
+  max-height:150px;
+  height:150px;
+  overflow:hidden;
+}
+
+.descripcion{
+
+  max-height:40px;
+  height:40px;
+  overflow:hidden;
+  /*box-shadow: inset 0 -10px 10px -10px #000000;*/
+}
+
+.img-header{
+
+    
+}
+
