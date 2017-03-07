@@ -552,7 +552,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/anuncios/ubicacionesController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorteo/sorteo.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorteo/sorteoController.js" ></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorteo/confeti.js" ></script>
+        <!--<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorteo/confeti.js" ></script>-->
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/maps/maps.module.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/maps/mapService.js" ></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/maps/mapControllers.js" ></script> 
