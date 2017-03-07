@@ -38,15 +38,6 @@
     <body ng-cloak class="ng-cloak" flow-prevent-drop>
 
         <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.2&appId=703643202980040";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));        
-        </script>
-        
         
         <div class="container-fluid" style="margin-bottom:20px">
             <div class="row" id="header-page">
@@ -505,8 +496,8 @@
                 </button>         
             </div>
             
-        </script>       
-
+        </script>
+        
         <script type="text/javascript" src="https://widget.cloudinary.com/global/all.js"></script>
         <%--PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS --%>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
