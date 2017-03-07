@@ -288,7 +288,7 @@
                     <div class="col-md-12">
                         <form class="navbar-form navbar-left" role="search">
                            <div class="input-group" style="margin: 0 auto; width:80%">
-                               <input ng-keyup="$event.keyCode == 13 && buscar(terminoBusqueda)" type="text" class="form-control input-lg " placeholder="Buscar producto..." ng-model="terminoBusqueda">
+                               <input type="text" class="form-control input-lg " placeholder="Buscar producto..." ng-model="terminoBusqueda" ng-model-options="{debounce: 1000}">
                                <span class="input-group-btn">
                                    <button class="btn btn-default btn-lg" type="button" ui-sref-opts="{reload:true}" ui-sref="home.busqueda({terminoBusqueda: terminoBusqueda})">BuscarYa!</button>
                                </span>

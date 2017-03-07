@@ -140,6 +140,11 @@ menuPrincipal.controller('menuPrincipalController',
                     $state.go("home.busqueda",
                             {terminoBusqueda: criterio}, {reload: true});
                 };
+                
+                $scope.$watch('terminoBusqueda',function(){
+                    $state.go("home.busqueda",
+                            {terminoBusqueda: $scope.terminoBusqueda}, {reload: true});
+                });
 
                 var updatePageTitle = function () {
                     var total = $rootScope.totalNotificaciones + $scope.NoLeidosTotal;
