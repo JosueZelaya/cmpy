@@ -479,9 +479,9 @@ div#texto_sorteo.ng-hide-remove {
     background-repeat:   no-repeat;
     background-position: center center; 
     min-height: 300px;
-    -webkit-box-shadow: inset 0px 0px 150px 80px rgba(0,0,0,0.41);
--moz-box-shadow: inset 0px 0px 150px 80px rgba(0,0,0,0.41);
-box-shadow: inset 0px 0px 150px 80px rgba(0,0,0,0.41);
+    -webkit-box-shadow: inset 0px 0px 150px 80px rgba(0,0,0,0.2);
+-moz-box-shadow: inset 0px 0px 150px 80px rgba(0,0,0,0.2);
+box-shadow: inset 0px 0px 150px 80px rgba(0,0,0,0.2);
     
 }
 body{
