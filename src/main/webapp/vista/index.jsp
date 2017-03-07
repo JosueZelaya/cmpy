@@ -498,6 +498,16 @@
             
         </script>
         
+        <script type="text/javascript">
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+        
         <script type="text/javascript" src="https://widget.cloudinary.com/global/all.js"></script>
         <%--PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS --%>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
