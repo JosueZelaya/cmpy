@@ -290,7 +290,7 @@
                            <div class="input-group" style="margin: 0 auto; width:80%">
                                <input type="text" class="form-control input-lg " placeholder="Buscar producto..." ng-model="terminoBusqueda" ng-model-options="{debounce: 1000}">
                                <span class="input-group-btn">
-                                   <button class="btn btn-default btn-lg" type="button" ui-sref-opts="{reload:true}" ui-sref="home.busqueda({terminoBusqueda: terminoBusqueda})">BuscarYa!</button>
+                                   <button class="btn btn-default btn-lg" type="button" ui-sref-opts="{reload:true}" ui-sref="home.busqueda({terminoBusqueda: terminoBusqueda})"><span class="glyphicon glyphicon-search"></span></button>
                                </span>
                            </div>                    
                        </form>               
