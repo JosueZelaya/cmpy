@@ -37,7 +37,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         com.github.greengerong.PreRenderSEOFilter seoFilter = new com.github.greengerong.PreRenderSEOFilter();
         FilterRegistration.Dynamic filter =  servletContext.addFilter("prerender", seoFilter);
         //filter.setInitParameter("prerenderToken", "bWTX3wnGG43lSldWSr09");
-        filter.setInitParameter("prerenderServiceUrl", "https://comprameya.com:3000/");
+        filter.setInitParameter("prerenderServiceUrl", "http://localhost:3000/");
         filter.addMappingForUrlPatterns(null , true, "/");        
         super.onStartup(servletContext);
     }
