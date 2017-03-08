@@ -121,6 +121,7 @@ module.exports = function (grunt) {
                                 './bower_components/angular-carousel-3d/dist/carousel-3d.min.css',
                                 './bower_components/angular-loading-bar/build/loading-bar.min.css',
                                 './bower_components/angular-toastr/dist/angular-toastr.min.css',
+                                './bower_components/bootstrap-social/bootstrap-social.css',
                                 './css/index/*.css'                                
                             ]
                 }
