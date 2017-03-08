@@ -15,6 +15,20 @@ menuPrincipal.controller('menuPrincipalController',
                 $scope.pageMensajesNoLeidos = 0;
                 $scope.NoLeidosTotal = 0;
                 $scope.mensajes = [];
+                
+                $scope.rutaactualencode = function(){
+                    
+                    return encodeURI($state.href($state.current.name, $state.params, {absolute: true}));
+                    
+                };  
+                
+                $rootScope.rutaactual = function(){
+                    
+                    return $state.href("home", "", {absolute: true});
+                    
+                };                  
+                        
+                        
 
                 $rootScope.activarNotificacionesPush = function () {
                     
@@ -126,6 +140,11 @@ menuPrincipal.controller('menuPrincipalController',
                     $state.go("home.busqueda",
                             {terminoBusqueda: criterio}, {reload: true});
                 };
+                
+                $scope.$watch('terminoBusqueda',function(){
+                    $state.go("home.busqueda",
+                            {terminoBusqueda: $scope.terminoBusqueda}, {reload: true});
+                });
 
                 var updatePageTitle = function () {
                     var total = $rootScope.totalNotificaciones + $scope.NoLeidosTotal;

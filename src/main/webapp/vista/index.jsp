@@ -37,242 +37,279 @@
     </head>
     <body ng-cloak class="ng-cloak" flow-prevent-drop>
 
-        <div id="fb-root"></div>        
+        <div id="fb-root"></div>
         
-        <!-- MAIN CONTENT -->
-        <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="menuPrincipalController">
-            <div class="container">
-                <div class="navbar-header"> 
+        <div class="container-fluid" style="margin-bottom:20px">
+            <div class="row" id="header-page">
+                
+                <div class="container-fluid">
+                <div class="row" id="menu-page">
 
-                    <button ng-if="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.html')">                
-                        Entrar <span class="glyphicon glyphicon-user">
-                    </button>            
+                    <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="menuPrincipalController" style="opacity:0.9">
+                            <div class="navbar-header"> 
 
-                    <button ng-show="authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
-                        <span class="sr-only">Toggle navigation</span>
-                        <div ng-if="!imageUrl">
-                            <img ng-show="localAccount" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
+                                <button ng-if="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.html')">                
+                                    Entrar <span class="glyphicon glyphicon-user">
+                                </button>            
+
+                                <button ng-show="authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="navCollapsed = !navCollapsed">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <div ng-if="!imageUrl">
+                                        <img ng-show="localAccount" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
+                                    </div>
+                                    <div ng-if="imageUrl">
+                                        <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
+                                        <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
+                                    </div>                        
+                                </button>            
+
+                                <button ng-show="authenticated" id="botonAvisos" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">                                
+                                    </span> <span class="badge badge-notify">{{totalNotificaciones + NoLeidosTotal}}</span>
+                                    Avisos
+                                </button>   
+
+                                <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed" >                                                   
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                    Info 
+                                </button>
+
+                                <button id="botonVisitas" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" uib-tooltip="visitas recibidas" tooltip-placement="bottom">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                    {{visitas}}                        
+                                </button>
+
+                            </div>                 
+                            <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">
+
+                                <ul class="nav navbar-nav"> 
+
+                                    <li ng-if="!authenticated">
+                                        <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
+                                            <span class="glyphicon glyphicon-facetime-video"></span>
+                                        </a>
+                                    </li>
+
+                                    <!--<div ng-show="usuario.login === '' || usuario.login === 'anonymousUser'">-->
+                                    <li ng-if="!authenticated">
+                                        <a href="#" ng-click="open('loginModal.html')">Iniciar Sesion <span class="glyphicon glyphicon-user"></a>
+                                    </li>                           
+                                    <!--</div>-->
+                                    <!--<div ng-show="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
+                                    <li class="dropdown" uib-dropdown="" ng-if="authenticated && navCollapsed">
+                                        <a ng-if="imageUrl" href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
+                                            Yo
+                                            <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
+                                            <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
+                                        </a>
+                                        <a ng-if="!imageUrl" href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                                                
+                                            Yo
+                                            <img ng-show="localAccount" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li ng-if="authenticated">
+                                                <a href="#" ui-sref="home.misPublicaciones"> 
+                                                    Mis Anuncios
+                                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                </a>
+                                            </li>
+                                            <li ng-if="localAccount" ng-click="open('changePassModal.html')"><a href="#">Cambiar Clave</a></li>
+                                            <li ng-if="authenticated" ng-click="open('updateCellModal.html')"><a href="#">Actualizar Teléfono</a></li>
+                                            <li ng-if="localAccount" ng-click="open('editProfileModal.html')"><a href="#">Editar Perfil</a></li>
+                                            <li><a href="#">Configuracion</a></li>
+                                            <li class="divider"></li>
+                                            <li class="dropdown-header">Sesión</li>                                     
+                                            <li><a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
+                                        </ul>
+                                    </li>
+
+
+                                    <li ng-if="authenticated && !navCollapsed">
+                                        <a href="#" ui-sref="home.misPublicaciones"> 
+                                            Mis Anuncios
+                                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                                        </a>
+                                    </li>
+                                    <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('changePassModal.html'); cancel()">Cambiar Clave</a></li>
+                                    <li ng-if="authenticated && !navCollapsed"><a href="#" ng-click="open('updateCellModal.html'); cancel()">Actualizar Teléfono</a></li>
+                                    <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('editProfileModal.html'); cancel()">Editar Perfil</a></li>
+                                    <li ng-if="authenticated && !navCollapsed"><a href="#">Configuracion</a></li>
+                                    <li ng-if="authenticated && !navCollapsed" class="divider"></li>
+                                    <li ng-if="authenticated && !navCollapsed" class="dropdown-header">Sesión</li>                                     
+                                    <li ng-if="authenticated && !navCollapsed"><a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
+
+                                    <!--</div>-->
+                                </ul>                    
+                            </div>
+                            <div class="navbar-right navbar-collapse collapse" uib-collapse="collapseNot">
+                                <ul class="nav navbar-nav"> 
+
+                                    <li class="dropdown" uib-dropdown="" ng-if="authenticated">
+                                        <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
+                                            <span class="glyphicon glyphicon-envelope"></span>
+                                            <span class="badge badge-notify">{{NoLeidosTotal}}</span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li ng-repeat="mensaje in mensajes">
+                                                <a href="" 
+                                                   ng-click="setMensajeUsuarioLeido(mensaje.usuarioEmisor.id);" 
+                                                   ui-sref="home.vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})"
+                                                   ng-click="collapseNot = !collapseNot">
+                                                    <span class="badge pull-right">{{mensaje.total}}</span>
+                                                    {{mensaje.texto.slice(0, 50)}}...  <span class="text-muted" style="font-size: 11px;float:right;margin-right:10px">{{mensaje.usuarioEmisor.persona.nombre}} </span>
+                                                </a>
+                                            </li> 
+                                            <li style="text-align: center">
+                                                <a href="" 
+                                                   ui-sref="home.vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})"
+                                                   ng-click="collapseNot = !collapseNot">
+                                                    Ver Bandeja...
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown" uib-dropdown="" ng-if="authenticated">
+                                        <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                            <span class="badge badge-notify">{{totalNotificaciones}}</span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li ng-repeat="notificacionUsuario in notificaciones">
+                                                <a href="" 
+                                                   ng-click="quitarVisibilidad(notificacionUsuario.id, $index)" 
+                                                   ui-sref-opts="{reload:true}"
+                                                   ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})"
+                                                   ng-click="collapseNot = !collapseNot">
+                                                    {{notificacionUsuario.notificacion.mensaje.slice(0, 50)}}...
+                                                </a>
+                                            </li>
+                                            <li style="text-align: center">
+                                                <a href=""  
+                                                   ui-sref="home.vistaNotificaciones({'#': 'publicacionesProductos'})"
+                                                   ng-click="collapseNot = !collapseNot">
+                                                    Ver Todas ...
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div uib-dropdown="" class="dropdown navbar-right navbar-collapse collapse" uib-collapse="infoCollapsed">                    
+                                <ul ng-if="infoCollapsed" class="nav navbar-nav">
+                                    <li>
+                                        <a uib-tooltip="visitas recibidas" tooltip-placement="bottom">{{visitas}}
+                                            <span class="glyphicon glyphicon-eye-open"></span>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown" uib-dropdown="">
+                                        <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
+                                            Info
+                                            <span class="glyphicon glyphicon-info-sign"></span>
+                                        </a>                            
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
+                                                    <span class="glyphicon glyphicon-facetime-video"></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" ui-sref="home.about({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                                    Nosotros
+                                                </a>
+                                            </li>                                
+
+                                            <li>
+                                                <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                                    Terminos
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" ui-sref="home.crearTienda({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                                    Negocios
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul ng-if="!infoCollapsed" class="nav navbar-nav">
+                                    <li>
+                                        <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
+                                            <span class="glyphicon glyphicon-facetime-video"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" ui-sref="home.about({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                            Nosotros
+                                        </a>
+                                    </li>                                
+
+                                    <li>
+                                        <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                            Terminos
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" ui-sref="home.crearTienda({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
+                                            Negocios
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        <!--<div class="fb-share-button" data-layout="button_count" data-size="large" data-mobile-iframe="true" data-href="https://www.comprameya.com"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.comprameya.com%2F&amp;src=sdkpreparse">Compartir</a></div>-->
+                    
+
+                       <%--Nuevo Share--%>
+                        
+                        <div style="padding:10px">
+                            <a class="btn btn-default btn-lg" href="#" ui-sref="home" style="padding: 5px 10px 6px 10px" title="Inicio" >
+                                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            </a>
+                            <a class="btn btn-social-icon btn-facebook" href="http://facebook.com/sharer.php?u={{rutaactualencode()}}" title="Comparte en facebook" target="_blank">
+                                <span class="fa fa-facebook"></span>
+                             </a>
+                            <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/home?status=ComprameYa%20{{rutaactualencode()}}%20@ComprameYa" title="Comparte en twitter" target="_blank">
+                                <span class="fa fa-twitter"></span>
+                             </a> 
                         </div>
-                        <div ng-if="imageUrl">
-                            <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
-                            <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
-                        </div>                        
-                    </button>            
-
-                    <button ng-show="authenticated" id="botonAvisos" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="collapseNot = !collapseNot">                                
-                        </span> <span class="badge badge-notify">{{totalNotificaciones + NoLeidosTotal}}</span>
-                        Avisos
-                    </button>   
-
-                    <button id="botonInfo" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="infoCollapsed = !infoCollapsed" >                                                   
-                        <span class="glyphicon glyphicon-info-sign"></span>
-                        Info 
-                    </button>
                     
-                    <button id="botonVisitas" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" uib-tooltip="visitas recibidas" tooltip-placement="bottom">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                        {{visitas}}                        
-                    </button>
-                    
+                    </nav>               
 
 
-                    <a href="/" class="pull-left" ui-sref='home' ui-sref-opts="{reload:true}">
-                        <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive" alt="$ComprameYa!">
-                    </a>
 
-                </div>                 
-                <div class="navbar-right navbar-collapse collapse" uib-collapse="navCollapsed">
-
-                    <ul class="nav navbar-nav"> 
-
-                        <li ng-if="!authenticated">
-                            <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
-                                <span class="glyphicon glyphicon-facetime-video"></span>
-                            </a>
-                        </li>
-
-                        <!--<div ng-show="usuario.login === '' || usuario.login === 'anonymousUser'">-->
-                        <li ng-if="!authenticated">
-                            <a href="#" ng-click="open('loginModal.html')">Iniciar Sesion <span class="glyphicon glyphicon-user"></a>
-                        </li>                           
-                        <!--</div>-->
-                        <!--<div ng-show="usuario.login !== '' && usuario.login !== 'anonymousUser'">-->
-                        <li class="dropdown" uib-dropdown="" ng-if="authenticated && navCollapsed">
-                            <a ng-if="imageUrl" href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
-                                Yo
-                                <img ng-show="localAccount" height="28px" width="28px" ng-src="/images/getThumbnail/{{imageUrl}}" alt="..." />
-                                <img ng-show="!localAccount" height="28px" width="28px" ng-src="{{imageUrl}}" alt="..." />
-                            </a>
-                            <a ng-if="!imageUrl" href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                                                
-                                Yo
-                                <img ng-show="localAccount" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." />
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li ng-if="authenticated">
-                                    <a href="#" ui-sref="home.misPublicaciones"> 
-                                        Mis Anuncios
-                                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                                    </a>
-                                </li>
-                                <li ng-if="localAccount" ng-click="open('changePassModal.html')"><a href="#">Cambiar Clave</a></li>
-                                <li ng-if="authenticated" ng-click="open('updateCellModal.html')"><a href="#">Actualizar Teléfono</a></li>
-                                <li ng-if="localAccount" ng-click="open('editProfileModal.html')"><a href="#">Editar Perfil</a></li>
-                                <li><a href="#">Configuracion</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Sesión</li>                                     
-                                <li><a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
-                            </ul>
-                        </li>
-
-
-                        <li ng-if="authenticated && !navCollapsed">
-                            <a href="#" ui-sref="home.misPublicaciones"> 
-                                Mis Anuncios
-                                <span class="glyphicon glyphicon-shopping-cart"></span>
-                            </a>
-                        </li>
-                        <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('changePassModal.html'); cancel()">Cambiar Clave</a></li>
-                        <li ng-if="authenticated && !navCollapsed"><a href="#" ng-click="open('updateCellModal.html'); cancel()">Actualizar Teléfono</a></li>
-                        <li ng-if="localAccount && authenticated && !navCollapsed"><a href="#" ng-click="open('editProfileModal.html'); cancel()">Editar Perfil</a></li>
-                        <li ng-if="authenticated && !navCollapsed"><a href="#">Configuracion</a></li>
-                        <li ng-if="authenticated && !navCollapsed" class="divider"></li>
-                        <li ng-if="authenticated && !navCollapsed" class="dropdown-header">Sesión</li>                                     
-                        <li ng-if="authenticated && !navCollapsed"><a href="" ng-click="logout()">Salir <span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>                                
-
-                        <!--</div>-->
-                    </ul>                    
                 </div>
-                <div class="navbar-right navbar-collapse collapse" uib-collapse="collapseNot">
-                    <ul class="nav navbar-nav"> 
+                <div class="row" style="padding-bottom:8px" >
+                    <div class="col-md-12">
+                        <a href="/" ui-sref='home' ui-sref-opts="{reload:true}">
+                            <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive center-block img-header" alt="$ComprameYa!">
+                        </a>                 
+                    </div>
+                    <div class="col-md-12">
+                        <form class="navbar-form navbar-center" role="search">
+                           <div class="input-group" style="margin: 0 auto; width:80%">
+                               <input type="text" class="form-control input-lg " placeholder="Buscar producto..." ng-model="terminoBusqueda" ng-model-options="{debounce: 1000}">
+                               <span class="input-group-btn">
+                                   <button class="btn btn-default btn-lg" type="button" ui-sref-opts="{reload:true}" ui-sref="home.busqueda({terminoBusqueda: terminoBusqueda})"><span class="glyphicon glyphicon-search"></span></button>
+                               </span>
+                           </div>                    
+                       </form>               
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default pull-left" aria-label="Menu categorias" onclick="openNav()">
+                            <span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Categorias
+                        </button>
+                        <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')">Crear Anuncio</button>
+                        <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html')">
+                            Crear Anuncio
+                        </button>
+                    </div>
 
-                        <li class="dropdown" uib-dropdown="" ng-if="authenticated">
-                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> 
-                                <span class="glyphicon glyphicon-envelope"></span>
-                                <span class="badge badge-notify">{{NoLeidosTotal}}</span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li ng-repeat="mensaje in mensajes">
-                                    <a href="" 
-                                       ng-click="setMensajeUsuarioLeido(mensaje.usuarioEmisor.id);" 
-                                       ui-sref="home.vistaMensaje({usuarioId:mensaje.usuarioEmisor.id,usuarioNombre:mensaje.usuarioEmisor.persona.nombre,asunto:mensaje.titulo})"
-                                       ng-click="collapseNot = !collapseNot">
-                                        <span class="badge pull-right">{{mensaje.total}}</span>
-                                        {{mensaje.texto.slice(0, 50)}}...  <span class="text-muted" style="font-size: 11px;float:right;margin-right:10px">{{mensaje.usuarioEmisor.persona.nombre}} </span>
-                                    </a>
-                                </li> 
-                                <li style="text-align: center">
-                                    <a href="" 
-                                       ui-sref="home.vistaMensaje({usuarioId:0,usuarioNombre:'',asunto:''})"
-                                       ng-click="collapseNot = !collapseNot">
-                                        Ver Bandeja...
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown" uib-dropdown="" ng-if="authenticated">
-                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <span class="glyphicon glyphicon-comment"></span>
-                                <span class="badge badge-notify">{{totalNotificaciones}}</span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li ng-repeat="notificacionUsuario in notificaciones">
-                                    <a href="" 
-                                       ng-click="quitarVisibilidad(notificacionUsuario.id, $index)" 
-                                       ui-sref-opts="{reload:true}"
-                                       ui-sref="home.vistaProducto({publicacionId: {{notificacionUsuario.notificacion.link}}, '#': 'commentBox'})"
-                                       ng-click="collapseNot = !collapseNot">
-                                        {{notificacionUsuario.notificacion.mensaje.slice(0, 50)}}...
-                                    </a>
-                                </li>
-                                <li style="text-align: center">
-                                    <a href=""  
-                                       ui-sref="home.vistaNotificaciones({'#': 'publicacionesProductos'})"
-                                       ng-click="collapseNot = !collapseNot">
-                                        Ver Todas ...
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
-                <div uib-dropdown="" class="dropdown navbar-right navbar-collapse collapse" uib-collapse="infoCollapsed">                    
-                    <ul ng-if="infoCollapsed" class="nav navbar-nav">
-                        <li>
-                            <a uib-tooltip="visitas recibidas" tooltip-placement="bottom">{{visitas}}
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                            </a>
-                        </li>
-                        <li class="dropdown" uib-dropdown="">
-                            <a href="#" uib-dropdown-toggle="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">                                
-                                Info
-                                <span class="glyphicon glyphicon-info-sign"></span>
-                            </a>                            
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
-                                        <span class="glyphicon glyphicon-facetime-video"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" ui-sref="home.about({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
-                                        Nosotros
-                                    </a>
-                                </li>                                
-
-                                <li>
-                                    <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
-                                        Terminos
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" ui-sref="home.crearTienda({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
-                                        Negocios
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul ng-if="!infoCollapsed" class="nav navbar-nav">
-                        <li>
-                            <a href="https://youtu.be/cmfOtIizd70" target="_blank">Video de ayuda
-                                <span class="glyphicon glyphicon-facetime-video"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" ui-sref="home.about({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
-                                Nosotros
-                            </a>
-                        </li>                                
-
-                        <li>
-                            <a href="#" ui-sref="home.terminosServicio({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
-                                Terminos
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" ui-sref="home.crearTienda({'#': 'publicacionesProductos'})" ng-click="infoCollapsed = !infoCollapsed"> 
-                                Negocios
-                            </a>
-                        </li>
-                    </ul>
                 </div>
-                <form class="navbar-form navbar-left" style="width: 100%" role="search">
-
-                    <div class="input-group">
-                        <input ng-keyup="$event.keyCode == 13 && buscar(terminoBusqueda)" type="text" class="form-control input-lg" placeholder="Buscar producto..." ng-model="terminoBusqueda">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btn-lg" type="button" ui-sref-opts="{reload:true}" ui-sref="home.busqueda({terminoBusqueda: terminoBusqueda})">BuscarYa!</button>
-                        </span>
-                    </div>                    
-                </form>
             </div>
-            <div class="fb-share-button" data-layout="button_count" data-size="large" data-mobile-iframe="true" data-href="https://www.comprameya.com"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.comprameya.com%2F&amp;src=sdkpreparse">Compartir</a></div>
-        </nav>
-
-        <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+        </div>
+         <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
         <div ui-view></div>
 
         <%@include file="common/loginModal.jsp" %>
@@ -468,15 +505,6 @@
                 </button>         
             </div>
             
-        </script>       
-
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.2&appId=703643202980040";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));        
         </script>
         
         <script type="text/javascript">
@@ -491,7 +519,7 @@
         
         <script type="text/javascript" src="https://widget.cloudinary.com/global/all.js"></script>
         <%--PARA TRABAJAR EN DESARROLLO USAR ESTOS SCRIPTS --%>
-        <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/blueimp-load-image/js/load-image.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.min.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/bower_components/angular-sanitize/angular-sanitize.min.js"></script> 
         <script type='text/javascript' src='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
@@ -556,23 +584,52 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mensajes/mensajesController.js" ></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/cmpy/cmpy.module.js" ></script>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-social/bootstrap-social.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
         <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/resources/css/index/index.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/commentbox.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/css/index/publicaciones.css" rel="stylesheet">
-        --%>
+
 
         <%-- PARA PASAR A PRODUCCIÓN USAR ESTOS SCRIPTS Y COMENTAR LOS ANTERIORES --%>
         
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js?1.0.1" ></script>
+        <%--<script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js?1.0.0" ></script>
         <link href="${pageContext.request.contextPath}/resources/min/css/style.min.css" rel="stylesheet" type="text/css" media='all'>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
         <link href='${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css' rel='stylesheet' type='text/css' media='all' />
-        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/resources/bower_components/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" type="text/css" />--%>
         
     </body>
-    <!--<canvas height='1' id='confetti' width='1' ng-show="confeti"></canvas>-->
+    <canvas height='1' id='confetti' width='1' ng-show="confeti"></canvas>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 menu3" style="min-height:400px;background-color:#232f3e;">
+         
+            </div>            
+            <div class="col-md-3 menu3" style="min-height:400px;background-color:#232f3e;">
+                <h4 style="color:white"><b>Paginas Amigas</b></h4>
+                <ul>
+                    <li><a href="https://www.facebook.com/Studio-F64-111191842731695">Estudio F64</a></li>
+                </ul>                 
+            </div>
+            <div class="col-md-3 menu3" style="min-height:400px;background-color:#232f3e;">
+                <h4 style="color:white"><b>Enlaces</b></h4>
+                <ul>
+                    <li><a href="/contratar_tienda#publicacionesProductos">Negocios</a></li>
+                    <li><a href="https://youtu.be/cmfOtIizd70">Video de ayuda</a></li>
+                    <li><a href="/terminos#publicacionesProductos">Terminos</a></li>
+                    <li><a href="https://www.facebook.com/PageComprameYa">Fanpage</a></li>
+                     <li><a href="/about#publicacionesProductos">Nosotros</a></li>
+                </ul>                     
+            </div>
+            <div  class="col-md-3 menu3" style="min-height:400px;background-color:#232f3e;">
+
+            </div>
+        </div>
+    </div>
 </html>

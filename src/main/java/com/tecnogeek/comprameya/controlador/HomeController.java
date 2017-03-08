@@ -91,6 +91,7 @@ public class HomeController {
     @RequestMapping(value = {
 	    "/misPublicaciones",
 	    "/categoria/{cat}/{nivel}",
+            "/busqueda/",
 	    "/busqueda/{terminoBusqueda}",
 	    "/vistaProducto/{publicacionId}",
 	    "/vistaProducto/{publicacionId}",
