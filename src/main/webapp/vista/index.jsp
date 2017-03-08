@@ -45,7 +45,7 @@
                 <div class="container-fluid">
                 <div class="row" id="menu-page">
 
-                    <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="menuPrincipalController" style="opacity:0.7">
+                    <nav id="navBar" class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="menuPrincipalController" style="opacity:0.9">
                             <div class="navbar-header"> 
 
                                 <button ng-if="!authenticated" type="button" class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" ng-click="open('loginModal.html')">                
@@ -279,14 +279,14 @@
 
 
                 </div>
-                <div class="row" >
+                <div class="row" style="padding-bottom:8px" >
                     <div class="col-md-12">
                         <a href="/" ui-sref='home' ui-sref-opts="{reload:true}">
                             <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive center-block img-header" alt="$ComprameYa!">
                         </a>                 
                     </div>
                     <div class="col-md-12">
-                        <form class="navbar-form navbar-left" role="search">
+                        <form class="navbar-form navbar-center" role="search">
                            <div class="input-group" style="margin: 0 auto; width:80%">
                                <input type="text" class="form-control input-lg " placeholder="Buscar producto..." ng-model="terminoBusqueda" ng-model-options="{debounce: 1000}">
                                <span class="input-group-btn">
@@ -294,6 +294,15 @@
                                </span>
                            </div>                    
                        </form>               
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default pull-left" aria-label="Menu categorias" onclick="openNav()">
+                            <span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Categorias
+                        </button>
+                        <button ng-show="!authenticated" value="VenderYa!" type="button" class="btn btn-success pull-right" ng-click="open('loginModal.html')">Crear Anuncio</button>
+                        <button ng-show="authenticated" value="VenderYa!" type="submit" class="btn btn-success pull-right" ng-click="open('venderModal.html')">
+                            Crear Anuncio
+                        </button>
                     </div>
 
                 </div>
@@ -599,7 +608,28 @@
     
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12" style="min-height:400px;background-color:#d9d9d9"></div>
+            <div class="col-md-3 menu3" style="min-height:400px;background-color:#232f3e;">
+         
+            </div>            
+            <div class="col-md-3 menu3" style="min-height:400px;background-color:#232f3e;">
+                <h4 style="color:white"><b>Paginas Amigas</b></h4>
+                <ul>
+                    <li><a href="https://www.facebook.com/Studio-F64-111191842731695">Estudio F64</a></li>
+                </ul>                 
+            </div>
+            <div class="col-md-3 menu3" style="min-height:400px;background-color:#232f3e;">
+                <h4 style="color:white"><b>Enlaces</b></h4>
+                <ul>
+                    <li><a href="/contratar_tienda#publicacionesProductos">Negocios</a></li>
+                    <li><a href="https://youtu.be/cmfOtIizd70">Video de ayuda</a></li>
+                    <li><a href="/terminos#publicacionesProductos">Terminos</a></li>
+                    <li><a href="https://www.facebook.com/PageComprameYa">Fanpage</a></li>
+                     <li><a href="/about#publicacionesProductos">Nosotros</a></li>
+                </ul>                     
+            </div>
+            <div  class="col-md-3 menu3" style="min-height:400px;background-color:#232f3e;">
+
+            </div>
         </div>
     </div>
 </html>
