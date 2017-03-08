@@ -597,7 +597,7 @@
 
         <%-- PARA PASAR A PRODUCCIÓN USAR ESTOS SCRIPTS Y COMENTAR LOS ANTERIORES --%>
         
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js?1.0.0" ></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/min/app.min.js?1.0.1" ></script>
         <link href="${pageContext.request.contextPath}/resources/min/css/style.min.css" rel="stylesheet" type="text/css" media='all'>
         <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/bower_components/angular-carousel-3d/dist/carousel-3d.min.css" rel="stylesheet" type="text/css" />
