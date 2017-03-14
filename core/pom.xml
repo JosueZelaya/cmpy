@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>com.tecnobitz</groupId>
+        <artifactId>comprameya</artifactId>
+        <version>1.0</version>
+    </parent>   
+    <artifactId>core</artifactId>
+    <packaging>jar</packaging>
+
+    <name>core</name>
+
+    <developers>
+        <developer>
+          <id>jzelaya</id>
+          <name>Josue Zelaya</name>
+          <email>josue.a.zelaya@gmail.com</email>
+          <organization>TecnoGeek</organization>
+          <roles>
+            <role>developer</role>
+          </roles>
+          <timezone>0</timezone>
+        </developer>
+        <developer>
+          <id>gmartinez</id>
+          <name>Genaro Martinez</name>
+          <email>genaro1024@hotmail.com</email>
+          <organization>TecnoGeek</organization>
+          <roles>
+            <role>developer</role>
+          </roles>
+          <timezone>0</timezone>
+        </developer>
+    </developers>
+
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.finalName>cmy</project.build.finalName>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>        
+        <spring-version>4.3.4.RELEASE</spring-version>
+        <spring-security-version>4.2.0.RELEASE</spring-security-version>
+        <spring-data-version>1.8.1.RELEASE</spring-data-version>
+        <spring-social-version>1.1.4.RELEASE</spring-social-version>     
+        <logback.version>1.1.3</logback.version>
+        <jcl.slf4j.version>1.7.12</jcl.slf4j.version>   
+    </properties>
+    
+    <dependencies>
+        
+        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-version}</version>            
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.mysema.querydsl/querydsl-jpa -->
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+            <version>3.7.4</version>
+        </dependency>
+
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>1.1.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources/java</outputDirectory>
+                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.mysema.querydsl</groupId>
+                        <artifactId>querydsl-apt</artifactId>
+                        <version>3.7.4</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>
