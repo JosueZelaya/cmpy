@@ -6,7 +6,7 @@
 package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.constantes.Constantes;
-import com.tecnobitz.core.entidad.Tienda;
+import com.tecnobitz.cmpy.entidad.Tienda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tecnogeek.comprameya.repositories.TiendaRepository;

@@ -5,9 +5,9 @@
  */
 package com.tecnogeek.comprameya.ws.soap.spider;
 
-import com.tecnobitz.core.entidad.ProductoPS;
-import com.tecnobitz.core.entidad.ProductoPsKey;
-import com.tecnobitz.core.entidad.Tienda;
+import com.tecnobitz.cmpy.entidad.ProductoPS;
+import com.tecnobitz.cmpy.entidad.ProductoPsKey;
+import com.tecnobitz.cmpy.entidad.Tienda;
 import com.tecnogeek.comprameya.repositories.ProductoPSRepository;
 import java.util.Dictionary;
 import java.util.Enumeration;

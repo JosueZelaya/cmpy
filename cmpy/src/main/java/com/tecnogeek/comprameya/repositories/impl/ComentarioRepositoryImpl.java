@@ -7,9 +7,9 @@ package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.Predicate;
 import com.mysema.query.types.expr.BooleanExpression;
-import com.tecnobitz.core.entidad.Comentario;
-import com.tecnobitz.core.entidad.Publicacion;
-import com.tecnobitz.core.entidad.QComentario;
+import com.tecnobitz.cmpy.entidad.Comentario;
+import com.tecnobitz.cmpy.entidad.Publicacion;
+import com.tecnobitz.cmpy.entidad.QComentario;
 import com.tecnogeek.comprameya.repositories.ComentarioRepository;
 import com.tecnogeek.comprameya.repositories.custom.ComentarioRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;

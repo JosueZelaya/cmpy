@@ -7,12 +7,12 @@ package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.expr.BooleanExpression;
-import com.tecnobitz.core.entidad.NotificacionUsuario;
-import com.tecnobitz.core.entidad.QNotificacion;
-import com.tecnobitz.core.entidad.QNotificacionUsuario;
-import com.tecnobitz.core.entidad.QUsuario;
-import com.tecnobitz.core.entidad.Usuario;
-import com.tecnobitz.core.enums.TipoNotificacionEnum;
+import com.tecnobitz.cmpy.entidad.NotificacionUsuario;
+import com.tecnobitz.cmpy.entidad.QNotificacion;
+import com.tecnobitz.cmpy.entidad.QNotificacionUsuario;
+import com.tecnobitz.cmpy.entidad.QUsuario;
+import com.tecnobitz.cmpy.entidad.Usuario;
+import com.tecnobitz.cmpy.enums.TipoNotificacionEnum;
 import com.tecnogeek.comprameya.repositories.custom.NotificacionUsuarioRepositoryCustom;
 import java.util.ArrayList;
 import java.util.HashMap;

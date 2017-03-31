@@ -5,8 +5,8 @@
  */
 package com.tecnogeek.comprameya.repositories;
 
-import com.tecnobitz.core.entidad.ProductoPS;
-import com.tecnobitz.core.entidad.ProductoPsKey;
+import com.tecnobitz.cmpy.entidad.ProductoPS;
+import com.tecnobitz.cmpy.entidad.ProductoPsKey;
 import com.tecnogeek.comprameya.repositories.custom.ProductoPSRepositoryCustom;
 
 /**

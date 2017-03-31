@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnobitz.core.enums.Role;
+import com.tecnobitz.cmpy.enums.Role;
 import java.io.IOException;
 import java.util.Set;
 import javax.servlet.ServletException;

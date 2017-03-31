@@ -14,3 +14,9 @@ cmpy/src/main/webapp/resources/js-min-safe
 cmpy/src/main/webapp/resources/min
 cmpy/src/main/webapp/resources/node_modules
 cmpy/cmpy/target-grunt/
+sorteo/src/main/webapp/resources/bower_components
+sorteo/src/main/webapp/resources/js-min-safe
+sorteo/src/main/webapp/resources/min
+sorteo/src/main/webapp/resources/node_modules
+sorteo/cmpy/target-grunt/
+sorteo/node_modules/

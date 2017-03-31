@@ -6,8 +6,8 @@
 package com.tecnogeek.comprameya.controlador;
 
 import com.google.common.collect.Iterables;
-import com.tecnobitz.core.entidad.Publicacion;
-import com.tecnobitz.core.entidad.Ubicacion;
+import com.tecnobitz.cmpy.entidad.Publicacion;
+import com.tecnobitz.cmpy.entidad.Ubicacion;
 import com.tecnogeek.comprameya.dto.pojoUbicacion;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import com.tecnogeek.comprameya.repositories.UbicacionRepository;

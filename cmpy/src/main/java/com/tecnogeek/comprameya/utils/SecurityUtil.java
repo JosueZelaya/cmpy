@@ -6,7 +6,7 @@
 package com.tecnogeek.comprameya.utils;
 
 import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -6,8 +6,8 @@
 package com.tecnogeek.comprameya.controlador;
 
 
-import com.tecnobitz.core.entidad.SuscripcionUsuario;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.SuscripcionUsuario;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;

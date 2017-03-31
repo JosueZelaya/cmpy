@@ -5,8 +5,8 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnobitz.core.entidad.NotificacionUsuario;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.NotificacionUsuario;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import com.tecnogeek.comprameya.service.NotificacionService;

@@ -5,10 +5,10 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnobitz.core.entidad.Destinatario;
-import com.tecnobitz.core.entidad.Mensaje;
-import com.tecnobitz.core.entidad.Usuario;
-import com.tecnobitz.core.enums.TipoNotificacionEnum;
+import com.tecnobitz.cmpy.entidad.Destinatario;
+import com.tecnobitz.cmpy.entidad.Mensaje;
+import com.tecnobitz.cmpy.entidad.Usuario;
+import com.tecnobitz.cmpy.enums.TipoNotificacionEnum;
 import com.tecnogeek.comprameya.repositories.DestinatarioRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

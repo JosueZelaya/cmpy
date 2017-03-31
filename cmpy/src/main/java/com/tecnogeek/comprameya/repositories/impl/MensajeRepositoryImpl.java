@@ -6,11 +6,11 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.jpa.impl.JPAQuery;
-import com.tecnobitz.core.entidad.Mensaje;
-import com.tecnobitz.core.entidad.QDestinatario;
-import com.tecnobitz.core.entidad.QMensaje;
-import com.tecnobitz.core.entidad.QUsuario;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.Mensaje;
+import com.tecnobitz.cmpy.entidad.QDestinatario;
+import com.tecnobitz.cmpy.entidad.QMensaje;
+import com.tecnobitz.cmpy.entidad.QUsuario;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.MensajeRepository;
 import com.tecnogeek.comprameya.repositories.custom.MensajeRepositoryCustom;
 import javax.persistence.EntityManager;

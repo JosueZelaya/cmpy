@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnobitz.core.entidad.Recurso;
+import com.tecnobitz.cmpy.entidad.Recurso;
 import com.tecnogeek.comprameya.repositories.BaseRepository;
 import com.tecnogeek.comprameya.repositories.RecursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

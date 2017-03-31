@@ -6,9 +6,9 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.Predicate;
-import com.tecnobitz.core.entidad.Publicacion;
-import com.tecnobitz.core.entidad.QUbicacion;
-import com.tecnobitz.core.entidad.Ubicacion;
+import com.tecnobitz.cmpy.entidad.Publicacion;
+import com.tecnobitz.cmpy.entidad.QUbicacion;
+import com.tecnobitz.cmpy.entidad.Ubicacion;
 import com.tecnogeek.comprameya.repositories.UbicacionRepository;
 import com.tecnogeek.comprameya.repositories.custom.UbicacionRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,10 +5,10 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnobitz.core.entidad.Comentario;
-import com.tecnobitz.core.entidad.Publicacion;
-import com.tecnobitz.core.entidad.SuscripcionPublicacion;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.Comentario;
+import com.tecnobitz.cmpy.entidad.Publicacion;
+import com.tecnobitz.cmpy.entidad.SuscripcionPublicacion;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

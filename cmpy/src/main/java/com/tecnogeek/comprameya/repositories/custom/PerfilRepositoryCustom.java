@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.repositories.custom;
 
-import com.tecnobitz.core.entidad.Perfil;
+import com.tecnobitz.cmpy.entidad.Perfil;
 
 /**
  *

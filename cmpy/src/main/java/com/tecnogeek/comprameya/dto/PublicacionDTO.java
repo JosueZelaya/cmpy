@@ -5,13 +5,13 @@
  */
 package com.tecnogeek.comprameya.dto;
 
-import com.tecnobitz.core.entidad.Comentario;
-import com.tecnobitz.core.entidad.Producto;
-import com.tecnobitz.core.entidad.Publicacion;
-import com.tecnobitz.core.entidad.Recurso;
-import com.tecnobitz.core.entidad.TipoPublicacion;
-import com.tecnobitz.core.entidad.Ubicacion;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.Comentario;
+import com.tecnobitz.cmpy.entidad.Producto;
+import com.tecnobitz.cmpy.entidad.Publicacion;
+import com.tecnobitz.cmpy.entidad.Recurso;
+import com.tecnobitz.cmpy.entidad.TipoPublicacion;
+import com.tecnobitz.cmpy.entidad.Ubicacion;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

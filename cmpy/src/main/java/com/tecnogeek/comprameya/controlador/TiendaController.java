@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnobitz.core.entidad.Tienda;
+import com.tecnobitz.cmpy.entidad.Tienda;
 import com.tecnogeek.comprameya.service.TiendaService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;

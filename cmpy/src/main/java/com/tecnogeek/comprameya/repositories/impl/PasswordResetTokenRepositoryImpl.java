@@ -6,8 +6,8 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.expr.BooleanExpression;
-import com.tecnobitz.core.entidad.PasswordResetToken;
-import com.tecnobitz.core.entidad.QPasswordResetToken;
+import com.tecnobitz.cmpy.entidad.PasswordResetToken;
+import com.tecnobitz.cmpy.entidad.QPasswordResetToken;
 import com.tecnogeek.comprameya.repositories.PasswordResetTokenRepository;
 import com.tecnogeek.comprameya.repositories.custom.PasswordResetTokenRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;

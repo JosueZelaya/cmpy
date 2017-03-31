@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.repositories;
 
-import com.tecnobitz.core.entidad.BaseEntity;
+import com.tecnobitz.cmpy.entidad.BaseEntity;
 import java.io.Serializable;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.NoRepositoryBean;

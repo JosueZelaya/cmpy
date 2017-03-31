@@ -7,7 +7,7 @@ package com.tecnogeek.comprameya.dto;
 
 import com.tecnogeek.comprameya.cmpyannotations.PasswordsNotEmpty;
 import com.tecnogeek.comprameya.cmpyannotations.PasswordsNotEqual;
-import com.tecnobitz.core.enums.SocialMediaService;
+import com.tecnobitz.cmpy.enums.SocialMediaService;
 import java.io.Serializable;
 import java.math.BigInteger;
 import javax.validation.constraints.Size;

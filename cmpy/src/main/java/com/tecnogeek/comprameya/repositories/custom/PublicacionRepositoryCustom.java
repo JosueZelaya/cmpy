@@ -5,9 +5,9 @@
  */
 package com.tecnogeek.comprameya.repositories.custom;
 
-import com.tecnobitz.core.entidad.Publicacion;
-import com.tecnobitz.core.entidad.Usuario;
-import com.tecnobitz.core.enums.TipoPublicacionEnum;
+import com.tecnobitz.cmpy.entidad.Publicacion;
+import com.tecnobitz.cmpy.entidad.Usuario;
+import com.tecnobitz.cmpy.enums.TipoPublicacionEnum;
 
 /**
  *

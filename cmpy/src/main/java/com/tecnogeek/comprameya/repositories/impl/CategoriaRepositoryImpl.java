@@ -6,8 +6,8 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.Predicate;
-import com.tecnobitz.core.entidad.Categoria;
-import com.tecnobitz.core.entidad.QCategoria;
+import com.tecnobitz.cmpy.entidad.Categoria;
+import com.tecnobitz.cmpy.entidad.QCategoria;
 import com.tecnogeek.comprameya.repositories.CategoriaRepository;
 import com.tecnogeek.comprameya.repositories.custom.CategoriaRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;

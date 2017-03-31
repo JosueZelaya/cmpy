@@ -6,8 +6,8 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.expr.BooleanExpression;
-import com.tecnobitz.core.entidad.QUsuario;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.QUsuario;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.PerfilRepository;
 import com.tecnogeek.comprameya.repositories.PersonaRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;

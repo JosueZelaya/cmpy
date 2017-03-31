@@ -6,10 +6,10 @@
 package com.tecnogeek.comprameya.controlador;
 
 import com.tecnogeek.comprameya.dto.RegistrationForm;
-import com.tecnobitz.core.entidad.PasswordResetToken;
-import com.tecnobitz.core.entidad.Persona;
-import com.tecnobitz.core.entidad.Usuario;
-import com.tecnobitz.core.enums.SocialMediaService;
+import com.tecnobitz.cmpy.entidad.PasswordResetToken;
+import com.tecnobitz.cmpy.entidad.Persona;
+import com.tecnobitz.cmpy.entidad.Usuario;
+import com.tecnobitz.cmpy.enums.SocialMediaService;
 import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;

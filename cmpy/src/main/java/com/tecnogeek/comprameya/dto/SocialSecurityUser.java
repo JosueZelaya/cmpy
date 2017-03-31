@@ -5,8 +5,8 @@
  */
 package com.tecnogeek.comprameya.dto;
 
-import com.tecnobitz.core.enums.Role;
-import com.tecnobitz.core.enums.SocialMediaService;
+import com.tecnobitz.cmpy.enums.Role;
+import com.tecnobitz.cmpy.enums.SocialMediaService;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;

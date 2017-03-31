@@ -6,7 +6,7 @@
 package com.tecnogeek.comprameya.repositories;
 
 
-import com.tecnobitz.core.entidad.Ubicacion;
+import com.tecnobitz.cmpy.entidad.Ubicacion;
 import com.tecnogeek.comprameya.repositories.custom.UbicacionRepositoryCustom;
 
 /**

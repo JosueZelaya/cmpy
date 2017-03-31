@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnobitz.core.entidad.Comentario;
+import com.tecnobitz.cmpy.entidad.Comentario;
 import com.tecnogeek.comprameya.service.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

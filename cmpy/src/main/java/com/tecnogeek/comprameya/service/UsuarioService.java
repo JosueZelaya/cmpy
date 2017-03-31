@@ -7,11 +7,11 @@ package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.controlador.PublicacionController;
 import com.tecnogeek.comprameya.dto.RegistrationForm;
-import com.tecnobitz.core.entidad.PasswordResetToken;
-import com.tecnobitz.core.entidad.Usuario;
-import com.tecnobitz.core.entidad.Perfil;
-import com.tecnobitz.core.entidad.Persona;
-import com.tecnobitz.core.enums.Role;
+import com.tecnobitz.cmpy.entidad.PasswordResetToken;
+import com.tecnobitz.cmpy.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.Perfil;
+import com.tecnobitz.cmpy.entidad.Persona;
+import com.tecnobitz.cmpy.enums.Role;
 import com.tecnogeek.comprameya.exceptions.DuplicateEmailException;
 import com.tecnogeek.comprameya.repositories.PasswordResetTokenRepository;
 import com.tecnogeek.comprameya.repositories.PerfilRepository;

@@ -5,9 +5,9 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnobitz.core.entidad.Destinatario;
-import com.tecnobitz.core.entidad.Mensaje;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.Destinatario;
+import com.tecnobitz.cmpy.entidad.Mensaje;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnogeek.comprameya.service.MensajeService;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.tecnogeek.comprameya.repositories;
-import com.tecnobitz.core.entidad.Categoria;
+import com.tecnobitz.cmpy.entidad.Categoria;
 import com.tecnogeek.comprameya.repositories.custom.CategoriaRepositoryCustom;
 /**
  *

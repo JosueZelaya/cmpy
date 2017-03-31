@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnobitz.core.entidad.BaseEntity;
+import com.tecnobitz.cmpy.entidad.BaseEntity;
 import com.tecnogeek.comprameya.repositories.BaseRepository;
 import java.io.Serializable;
 

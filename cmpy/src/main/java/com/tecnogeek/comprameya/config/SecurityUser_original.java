@@ -6,7 +6,7 @@
 
 package com.tecnogeek.comprameya.config;
 
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;

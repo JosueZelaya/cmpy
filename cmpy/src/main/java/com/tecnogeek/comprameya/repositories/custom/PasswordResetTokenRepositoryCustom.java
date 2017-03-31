@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.repositories.custom;
 
-import com.tecnobitz.core.entidad.PasswordResetToken;
+import com.tecnobitz.cmpy.entidad.PasswordResetToken;
 
 /**
  *

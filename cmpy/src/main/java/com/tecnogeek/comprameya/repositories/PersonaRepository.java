@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.repositories;
 
-import com.tecnobitz.core.entidad.Persona;
+import com.tecnobitz.cmpy.entidad.Persona;
 import com.tecnogeek.comprameya.repositories.custom.PersonaRepositoryCustom;
 
 /**

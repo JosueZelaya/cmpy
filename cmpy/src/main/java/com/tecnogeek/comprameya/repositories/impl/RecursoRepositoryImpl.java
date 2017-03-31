@@ -6,8 +6,8 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.expr.BooleanExpression;
-import com.tecnobitz.core.entidad.QRecurso;
-import com.tecnobitz.core.entidad.Recurso;
+import com.tecnobitz.cmpy.entidad.QRecurso;
+import com.tecnobitz.cmpy.entidad.Recurso;
 import com.tecnogeek.comprameya.repositories.RecursoRepository;
 import com.tecnogeek.comprameya.repositories.custom.RecursoRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;

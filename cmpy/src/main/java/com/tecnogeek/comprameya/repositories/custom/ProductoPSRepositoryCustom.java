@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.repositories.custom;
 
-import com.tecnobitz.core.entidad.ProductoPS;
+import com.tecnobitz.cmpy.entidad.ProductoPS;
 import java.util.List;
 
 /**

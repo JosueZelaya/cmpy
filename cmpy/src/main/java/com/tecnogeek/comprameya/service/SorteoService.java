@@ -5,9 +5,9 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnobitz.core.entidad.Notificacion;
-import com.tecnobitz.core.entidad.Publicacion;
-import com.tecnobitz.core.enums.TipoNotificacionEnum;
+import com.tecnobitz.cmpy.entidad.Notificacion;
+import com.tecnobitz.cmpy.entidad.Publicacion;
+import com.tecnobitz.cmpy.enums.TipoNotificacionEnum;
 import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import java.util.ArrayList;
 import java.util.List;

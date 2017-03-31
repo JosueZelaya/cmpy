@@ -7,8 +7,8 @@ package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.expr.NumberExpression;
-import com.tecnobitz.core.entidad.QTienda;
-import com.tecnobitz.core.entidad.Tienda;
+import com.tecnobitz.cmpy.entidad.QTienda;
+import com.tecnobitz.cmpy.entidad.Tienda;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

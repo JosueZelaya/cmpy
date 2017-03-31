@@ -5,8 +5,8 @@
  */
 package com.tecnogeek.comprameya.repositories.custom;
 
-import com.tecnobitz.core.entidad.NotificacionUsuario;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.NotificacionUsuario;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import java.util.List;
 
 /**

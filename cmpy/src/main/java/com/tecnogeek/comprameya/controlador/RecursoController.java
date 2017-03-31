@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnobitz.core.entidad.Recurso;
+import com.tecnobitz.cmpy.entidad.Recurso;
 import com.tecnogeek.comprameya.service.RecursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

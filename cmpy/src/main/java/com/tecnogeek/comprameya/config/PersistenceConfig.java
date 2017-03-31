@@ -63,7 +63,7 @@ public class PersistenceConfig {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setDataSource(dataSource());
-        factory.setPackagesToScan("com.tecnobitz.core.entidad");
+        factory.setPackagesToScan("com.tecnobitz.cmpy.entidad");
         factory.setJpaProperties(jpaProperties);
         
         factory.afterPropertiesSet();

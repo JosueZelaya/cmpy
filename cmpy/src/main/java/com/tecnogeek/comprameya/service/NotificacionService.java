@@ -5,11 +5,11 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnobitz.core.entidad.Notificacion;
-import com.tecnobitz.core.entidad.NotificacionUsuario;
-import com.tecnobitz.core.entidad.Publicacion;
-import com.tecnobitz.core.entidad.Usuario;
-import com.tecnobitz.core.enums.TipoNotificacionEnum;
+import com.tecnobitz.cmpy.entidad.Notificacion;
+import com.tecnobitz.cmpy.entidad.NotificacionUsuario;
+import com.tecnobitz.cmpy.entidad.Publicacion;
+import com.tecnobitz.cmpy.entidad.Usuario;
+import com.tecnobitz.cmpy.enums.TipoNotificacionEnum;
 import com.tecnogeek.comprameya.repositories.NotificacionRepository;
 import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;

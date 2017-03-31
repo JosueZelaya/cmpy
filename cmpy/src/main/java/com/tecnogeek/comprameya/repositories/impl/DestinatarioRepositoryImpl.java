@@ -6,9 +6,9 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.expr.BooleanExpression;
-import com.tecnobitz.core.entidad.Destinatario;
-import com.tecnobitz.core.entidad.QDestinatario;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.Destinatario;
+import com.tecnobitz.cmpy.entidad.QDestinatario;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.DestinatarioRepository;
 import com.tecnogeek.comprameya.repositories.custom.DestinatarioRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.repositories;
 
-import com.tecnobitz.core.entidad.Mensaje;
+import com.tecnobitz.cmpy.entidad.Mensaje;
 import com.tecnogeek.comprameya.repositories.custom.MensajeRepositoryCustom;
 
 /**

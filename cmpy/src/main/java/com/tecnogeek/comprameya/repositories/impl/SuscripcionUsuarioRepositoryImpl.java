@@ -6,9 +6,9 @@
 package com.tecnogeek.comprameya.repositories.impl;
 
 import com.mysema.query.types.Predicate;
-import com.tecnobitz.core.entidad.QSuscripcionUsuario;
-import com.tecnobitz.core.entidad.SuscripcionUsuario;
-import com.tecnobitz.core.entidad.Usuario;
+import com.tecnobitz.cmpy.entidad.QSuscripcionUsuario;
+import com.tecnobitz.cmpy.entidad.SuscripcionUsuario;
+import com.tecnobitz.cmpy.entidad.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.tecnogeek.comprameya.repositories.SuscripcionUsuarioRepository;
 import com.tecnogeek.comprameya.repositories.custom.SuscripcionUsuarioRepositoryCustom;

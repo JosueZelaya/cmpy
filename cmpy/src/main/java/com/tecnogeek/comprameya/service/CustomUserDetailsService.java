@@ -6,9 +6,8 @@
 
 package com.tecnogeek.comprameya.service;
 
-
+import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
-import com.tecnobitz.core.entidad.Usuario;
 import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.repositories.custom;
 
-import com.tecnobitz.core.entidad.Categoria;
+import com.tecnobitz.cmpy.entidad.Categoria;
 
 /**
  *
