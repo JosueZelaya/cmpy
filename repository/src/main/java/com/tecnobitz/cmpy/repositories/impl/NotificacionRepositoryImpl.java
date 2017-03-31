@@ -5,7 +5,7 @@
  */
 package com.tecnobitz.cmpy.repositories.impl;
 
-import com.tecnogeek.comprameya.repositories.custom.NotificacionRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.NotificacionRepositoryCustom;
 
 /**
  *

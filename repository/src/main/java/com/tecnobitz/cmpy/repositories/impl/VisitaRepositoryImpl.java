@@ -5,7 +5,7 @@
  */
 package com.tecnobitz.cmpy.repositories.impl;
 
-import com.tecnogeek.comprameya.repositories.custom.VisitaCustomRepository;
+import com.tecnobitz.cmpy.repositories.custom.VisitaCustomRepository;
 
 /**
  *

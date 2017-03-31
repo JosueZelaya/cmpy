@@ -6,7 +6,7 @@
 package com.tecnobitz.cmpy.repositories;
 
 import com.tecnobitz.cmpy.entidad.Tienda;
-import com.tecnogeek.comprameya.repositories.custom.TiendaRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.TiendaRepositoryCustom;
 
 /**
  *

@@ -6,7 +6,7 @@
 package com.tecnobitz.cmpy.repositories;
 
 import com.tecnobitz.cmpy.entidad.Mensaje;
-import com.tecnogeek.comprameya.repositories.custom.MensajeRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.MensajeRepositoryCustom;
 
 /**
  *

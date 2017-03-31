@@ -8,8 +8,8 @@ package com.tecnobitz.cmpy.repositories.impl;
 import com.mysema.query.types.expr.BooleanExpression;
 import com.tecnobitz.cmpy.entidad.QRecurso;
 import com.tecnobitz.cmpy.entidad.Recurso;
-import com.tecnogeek.comprameya.repositories.RecursoRepository;
-import com.tecnogeek.comprameya.repositories.custom.RecursoRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.RecursoRepository;
+import com.tecnobitz.cmpy.repositories.custom.RecursoRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 

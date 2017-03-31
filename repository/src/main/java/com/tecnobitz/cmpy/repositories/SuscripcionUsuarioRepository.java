@@ -6,7 +6,7 @@
 package com.tecnobitz.cmpy.repositories;
 
 import com.tecnobitz.cmpy.entidad.SuscripcionUsuario;
-import com.tecnogeek.comprameya.repositories.custom.SuscripcionUsuarioRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.SuscripcionUsuarioRepositoryCustom;
 
 /**
  *

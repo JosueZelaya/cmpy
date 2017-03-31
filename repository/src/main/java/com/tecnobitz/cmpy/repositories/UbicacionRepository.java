@@ -7,7 +7,7 @@ package com.tecnobitz.cmpy.repositories;
 
 
 import com.tecnobitz.cmpy.entidad.Ubicacion;
-import com.tecnogeek.comprameya.repositories.custom.UbicacionRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.UbicacionRepositoryCustom;
 
 /**
  *

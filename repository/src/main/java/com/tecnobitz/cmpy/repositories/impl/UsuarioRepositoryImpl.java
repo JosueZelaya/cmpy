@@ -8,13 +8,11 @@ package com.tecnobitz.cmpy.repositories.impl;
 import com.mysema.query.types.expr.BooleanExpression;
 import com.tecnobitz.cmpy.entidad.QUsuario;
 import com.tecnobitz.cmpy.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.PerfilRepository;
-import com.tecnogeek.comprameya.repositories.PersonaRepository;
-import com.tecnogeek.comprameya.repositories.UsuarioRepository;
-import com.tecnogeek.comprameya.repositories.custom.UsuarioRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.PerfilRepository;
+import com.tecnobitz.cmpy.repositories.PersonaRepository;
+import com.tecnobitz.cmpy.repositories.UsuarioRepository;
+import com.tecnobitz.cmpy.repositories.custom.UsuarioRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -40,14 +38,5 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryCustom {
 
         return repository.findOne(byLogin.and(isActivo));
     }
-
-    @Override
-    public Usuario getLoggedUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userName = auth.getName();
-        return repository.findActiveUserByLogin(userName);
-    }
-
-    
     
 }

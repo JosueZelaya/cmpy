@@ -5,7 +5,7 @@
  */
 package com.tecnobitz.cmpy.repositories;
 import com.tecnobitz.cmpy.entidad.Categoria;
-import com.tecnogeek.comprameya.repositories.custom.CategoriaRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.CategoriaRepositoryCustom;
 /**
  *
  * @author genaro

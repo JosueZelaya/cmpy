@@ -9,8 +9,8 @@ import com.mysema.query.types.Predicate;
 import com.tecnobitz.cmpy.entidad.Publicacion;
 import com.tecnobitz.cmpy.entidad.QUbicacion;
 import com.tecnobitz.cmpy.entidad.Ubicacion;
-import com.tecnogeek.comprameya.repositories.UbicacionRepository;
-import com.tecnogeek.comprameya.repositories.custom.UbicacionRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.UbicacionRepository;
+import com.tecnobitz.cmpy.repositories.custom.UbicacionRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

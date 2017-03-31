@@ -7,7 +7,7 @@
 package com.tecnobitz.cmpy.repositories;
 
 import com.tecnobitz.cmpy.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.custom.UsuarioRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.UsuarioRepositoryCustom;
 
 /**
  *

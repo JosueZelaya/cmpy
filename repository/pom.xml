@@ -15,8 +15,14 @@
         <dependency>
             <groupId>com.tecnobitz</groupId>
             <artifactId>entity</artifactId>
-            <version>1.0</version>
         </dependency>
+        
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        
     </dependencies>
     
 </project>

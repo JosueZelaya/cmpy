@@ -7,7 +7,7 @@ package com.tecnobitz.cmpy.repositories;
 
 import com.tecnobitz.cmpy.entidad.ProductoPS;
 import com.tecnobitz.cmpy.entidad.ProductoPsKey;
-import com.tecnogeek.comprameya.repositories.custom.ProductoPSRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.ProductoPSRepositoryCustom;
 
 /**
  *

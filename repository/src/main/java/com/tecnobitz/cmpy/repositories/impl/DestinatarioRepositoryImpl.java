@@ -9,8 +9,8 @@ import com.mysema.query.types.expr.BooleanExpression;
 import com.tecnobitz.cmpy.entidad.Destinatario;
 import com.tecnobitz.cmpy.entidad.QDestinatario;
 import com.tecnobitz.cmpy.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.DestinatarioRepository;
-import com.tecnogeek.comprameya.repositories.custom.DestinatarioRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.DestinatarioRepository;
+import com.tecnobitz.cmpy.repositories.custom.DestinatarioRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

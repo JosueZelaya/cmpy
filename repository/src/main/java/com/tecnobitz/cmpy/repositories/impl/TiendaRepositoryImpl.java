@@ -9,11 +9,11 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.expr.NumberExpression;
 import com.tecnobitz.cmpy.entidad.QTienda;
 import com.tecnobitz.cmpy.entidad.Tienda;
+import com.tecnobitz.cmpy.repositories.TiendaRepository;
+import com.tecnobitz.cmpy.repositories.custom.TiendaRepositoryCustom;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import com.tecnogeek.comprameya.repositories.custom.TiendaRepositoryCustom;
-import com.tecnogeek.comprameya.repositories.TiendaRepository;
 import javax.persistence.EntityManager;
 
 /**

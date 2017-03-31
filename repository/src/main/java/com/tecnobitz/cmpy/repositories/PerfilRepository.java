@@ -7,7 +7,7 @@
 package com.tecnobitz.cmpy.repositories;
 
 import com.tecnobitz.cmpy.entidad.Perfil;
-import com.tecnogeek.comprameya.repositories.custom.PerfilRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.PerfilRepositoryCustom;
 
 /**
  *

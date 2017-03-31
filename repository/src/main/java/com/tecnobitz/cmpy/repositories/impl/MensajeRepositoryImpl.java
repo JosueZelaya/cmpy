@@ -11,8 +11,8 @@ import com.tecnobitz.cmpy.entidad.QDestinatario;
 import com.tecnobitz.cmpy.entidad.QMensaje;
 import com.tecnobitz.cmpy.entidad.QUsuario;
 import com.tecnobitz.cmpy.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.MensajeRepository;
-import com.tecnogeek.comprameya.repositories.custom.MensajeRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.MensajeRepository;
+import com.tecnobitz.cmpy.repositories.custom.MensajeRepositoryCustom;
 import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 

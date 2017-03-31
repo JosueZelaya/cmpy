@@ -6,7 +6,7 @@
 package com.tecnobitz.cmpy.repositories;
 
 import com.tecnobitz.cmpy.entidad.Comentario;
-import com.tecnogeek.comprameya.repositories.custom.ComentarioRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.ComentarioRepositoryCustom;
 
 /**
  *

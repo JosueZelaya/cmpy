@@ -6,7 +6,7 @@
 package com.tecnobitz.cmpy.repositories;
 
 import com.tecnobitz.cmpy.entidad.PasswordResetToken;
-import com.tecnogeek.comprameya.repositories.custom.PasswordResetTokenRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.PasswordResetTokenRepositoryCustom;
 
 /**
  *

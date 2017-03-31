@@ -9,9 +9,9 @@ import com.mysema.query.types.Predicate;
 import com.tecnobitz.cmpy.entidad.QSuscripcionUsuario;
 import com.tecnobitz.cmpy.entidad.SuscripcionUsuario;
 import com.tecnobitz.cmpy.entidad.Usuario;
+import com.tecnobitz.cmpy.repositories.SuscripcionUsuarioRepository;
+import com.tecnobitz.cmpy.repositories.custom.SuscripcionUsuarioRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.tecnogeek.comprameya.repositories.SuscripcionUsuarioRepository;
-import com.tecnogeek.comprameya.repositories.custom.SuscripcionUsuarioRepositoryCustom;
 
 /**
  *

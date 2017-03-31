@@ -13,7 +13,7 @@ import com.tecnobitz.cmpy.entidad.QNotificacionUsuario;
 import com.tecnobitz.cmpy.entidad.QUsuario;
 import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnobitz.cmpy.enums.TipoNotificacionEnum;
-import com.tecnogeek.comprameya.repositories.custom.NotificacionUsuarioRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.NotificacionUsuarioRepositoryCustom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;

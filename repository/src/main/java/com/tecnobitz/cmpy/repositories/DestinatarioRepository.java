@@ -6,7 +6,7 @@
 package com.tecnobitz.cmpy.repositories;
 
 import com.tecnobitz.cmpy.entidad.Destinatario;
-import com.tecnogeek.comprameya.repositories.custom.DestinatarioRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.custom.DestinatarioRepositoryCustom;
 
 /**
  *

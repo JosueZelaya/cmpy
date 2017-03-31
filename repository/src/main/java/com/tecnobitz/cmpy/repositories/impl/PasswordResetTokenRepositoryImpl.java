@@ -8,8 +8,8 @@ package com.tecnobitz.cmpy.repositories.impl;
 import com.mysema.query.types.expr.BooleanExpression;
 import com.tecnobitz.cmpy.entidad.PasswordResetToken;
 import com.tecnobitz.cmpy.entidad.QPasswordResetToken;
-import com.tecnogeek.comprameya.repositories.PasswordResetTokenRepository;
-import com.tecnogeek.comprameya.repositories.custom.PasswordResetTokenRepositoryCustom;
+import com.tecnobitz.cmpy.repositories.PasswordResetTokenRepository;
+import com.tecnobitz.cmpy.repositories.custom.PasswordResetTokenRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
