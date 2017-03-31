@@ -8,7 +8,7 @@ package com.tecnogeek.comprameya.service;
 import com.tecnobitz.cmpy.entidad.Notificacion;
 import com.tecnobitz.cmpy.entidad.Publicacion;
 import com.tecnobitz.cmpy.enums.TipoNotificacionEnum;
-import com.tecnogeek.comprameya.repositories.PublicacionRepository;
+import com.tecnobitz.cmpy.repositories.PublicacionRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

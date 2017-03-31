@@ -8,7 +8,8 @@ package com.tecnogeek.comprameya.cron;
 import com.tecnobitz.cmpy.entidad.ProductoPS;
 import com.tecnobitz.cmpy.entidad.ProductoPsKey;
 import com.tecnobitz.cmpy.entidad.Tienda;
-import com.tecnogeek.comprameya.repositories.ProductoPSRepository;
+import com.tecnobitz.cmpy.repositories.ProductoPSRepository;
+import com.tecnobitz.cmpy.repositories.TiendaRepository;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.List;
@@ -16,7 +17,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import com.tecnogeek.comprameya.repositories.TiendaRepository;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 

@@ -10,9 +10,10 @@ import com.tecnobitz.cmpy.entidad.NotificacionUsuario;
 import com.tecnobitz.cmpy.entidad.Publicacion;
 import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnobitz.cmpy.enums.TipoNotificacionEnum;
-import com.tecnogeek.comprameya.repositories.NotificacionRepository;
-import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
-import com.tecnogeek.comprameya.repositories.UsuarioRepository;
+import com.tecnobitz.cmpy.repositories.BaseRepository;
+import com.tecnobitz.cmpy.repositories.NotificacionRepository;
+import com.tecnobitz.cmpy.repositories.NotificacionUsuarioRepository;
+import com.tecnobitz.cmpy.repositories.UsuarioRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class NotificacionService {
+public class NotificacionService extends BaseService<NotificacionUsuario, Long>{
     
     @Autowired
     NotificacionUsuarioRepository notificacionUsuarioRepository;
@@ -40,7 +41,7 @@ public class NotificacionService {
     private SimpMessagingTemplate template;
     
     public List<NotificacionUsuario> getTodasNotificaciones(){
-        Usuario usuario = usuarioRepository.getLoggedUser();
+        Usuario usuario = getLoggedUser();
         
         if(usuario==null){
             return null;
@@ -50,7 +51,7 @@ public class NotificacionService {
     }
     
     public List<NotificacionUsuario> getNotificaciones(){
-        Usuario usuario = usuarioRepository.getLoggedUser();
+        Usuario usuario = getLoggedUser();
         
         if(usuario==null){
             return null;
@@ -126,6 +127,11 @@ public class NotificacionService {
     
     public void sendToClient(NotificacionUsuario nt){
         template.convertAndSendToUser(nt.getUsuario().getLogin(), "/queue/greetings",nt);
+    }
+
+    @Override
+    public BaseRepository<NotificacionUsuario, Long> getRepository() {
+        return notificacionUsuarioRepository;
     }
     
 }

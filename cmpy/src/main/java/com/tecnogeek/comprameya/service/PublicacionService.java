@@ -15,18 +15,18 @@ import com.tecnobitz.cmpy.entidad.Recurso;
 import com.tecnobitz.cmpy.entidad.Tienda;
 import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnobitz.cmpy.enums.TipoPublicacionEnum;
-import com.tecnogeek.comprameya.repositories.BaseRepository;
-import com.tecnogeek.comprameya.repositories.ProductoPSRepository;
+import com.tecnobitz.cmpy.repositories.BaseRepository;
+import com.tecnobitz.cmpy.repositories.ProductoPSRepository;
+import com.tecnobitz.cmpy.repositories.PublicacionRepository;
+import com.tecnobitz.cmpy.repositories.TiendaRepository;
+import com.tecnobitz.cmpy.repositories.UsuarioRepository;
 import com.tecnogeek.comprameya.utils.Utilidades;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.tecnogeek.comprameya.repositories.PublicacionRepository;
-import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.Iterator;
 import java.util.List;
-import com.tecnogeek.comprameya.repositories.TiendaRepository;
 
 /**
  *
@@ -64,7 +64,7 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
     public void eliminar(Long publicacionId) throws Exception {
         Publicacion publicacion = getRepository().findOne(publicacionId);
 
-        Usuario loggedUser = usuarioRepository.getLoggedUser();
+        Usuario loggedUser = getLoggedUser();
         if (!loggedUser.equals(publicacion.getUsuario())) {
             throw new Exception("ERROR: No es el propietario de la publicacion");
         }
@@ -82,7 +82,7 @@ public class PublicacionService extends BaseService<Publicacion, Long> {
     public void marcarVendida(Long publicacionId) throws Exception {
         Publicacion publicacion = getRepository().findOne(publicacionId);
 
-        Usuario loggedUser = usuarioRepository.getLoggedUser();
+        Usuario loggedUser = getLoggedUser();
         if (!loggedUser.equals(publicacion.getUsuario())) {
             throw new Exception("ERROR: No es el propietario de la publicacion");
         }

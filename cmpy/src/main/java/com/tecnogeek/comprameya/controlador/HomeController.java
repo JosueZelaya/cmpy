@@ -5,6 +5,8 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
+import com.tecnobitz.cmpy.repositories.CategoriaRepository;
+import com.tecnobitz.cmpy.repositories.PublicacionRepository;
 import com.tecnogeek.comprameya.dto.SocialSecurityUserDTO;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.service.UsuarioService;
@@ -16,8 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.tecnogeek.comprameya.repositories.CategoriaRepository;
-import com.tecnogeek.comprameya.repositories.PublicacionRepository;
 import com.tecnogeek.comprameya.service.VisitaService;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

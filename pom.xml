@@ -413,6 +413,12 @@
                 <artifactId>entity</artifactId>
                 <version>1.0</version>
             </dependency>
+            
+            <dependency>
+                <groupId>com.tecnobitz</groupId>
+                <artifactId>repository</artifactId>
+                <version>1.0</version>
+            </dependency>
 
         </dependencies>  
     </dependencyManagement>  

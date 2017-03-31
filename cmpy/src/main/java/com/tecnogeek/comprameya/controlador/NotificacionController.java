@@ -7,9 +7,10 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnobitz.cmpy.entidad.NotificacionUsuario;
 import com.tecnobitz.cmpy.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.NotificacionUsuarioRepository;
-import com.tecnogeek.comprameya.repositories.UsuarioRepository;
+import com.tecnobitz.cmpy.repositories.NotificacionUsuarioRepository;
+import com.tecnobitz.cmpy.repositories.UsuarioRepository;
 import com.tecnogeek.comprameya.service.NotificacionService;
+import com.tecnogeek.comprameya.service.UsuarioService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class NotificacionController {
     @Autowired
     NotificacionService notificacionService;
     
+    @Autowired
+    UsuarioService usuarioService;
+    
     @RequestMapping(value="/getTodasNotificaciones/",method=RequestMethod.GET)  
     public List<NotificacionUsuario> getTodasNotificaciones(){        
         return notificacionService.getTodasNotificaciones();
@@ -61,7 +65,7 @@ public class NotificacionController {
     
     @RequestMapping(value="/solicitarNotificacionesPush/",method=RequestMethod.GET)  
     public void enviarNotificaciones(){
-        Usuario usuario = usuarioRepository.getLoggedUser();
+        Usuario usuario = notificacionService.getLoggedUser();
         
         if(usuario==null){
             return;

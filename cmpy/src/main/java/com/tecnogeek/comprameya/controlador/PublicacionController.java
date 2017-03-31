@@ -18,6 +18,8 @@ import com.tecnobitz.cmpy.entidad.Categoria;
 import com.tecnobitz.cmpy.entidad.Publicacion;
 import com.tecnobitz.cmpy.entidad.SuscripcionPublicacion;
 import com.tecnobitz.cmpy.enums.TipoPublicacionEnum;
+import com.tecnobitz.cmpy.repositories.PublicacionRepository;
+import com.tecnobitz.cmpy.repositories.UsuarioRepository;
 import com.tecnogeek.comprameya.service.PublicacionService;
 import com.tecnogeek.comprameya.utils.FileManager;
 import com.tecnogeek.comprameya.utils.Utilidades;
@@ -34,8 +36,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import com.tecnogeek.comprameya.repositories.PublicacionRepository;
-import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -146,7 +146,7 @@ public class PublicacionController {
                 ? Constantes.TOTAL_ANUNCIOS_GRATIS_MOSTRAR
                 : Constantes.TOTAL_ANUNCIOS_EXTERNOS_MOSTRAR;
 
-        Usuario loggedUser = usuarioRepository.getLoggedUser();
+        Usuario loggedUser = publicacionService.getLoggedUser();
 
         Iterable<Publicacion> publicaciones = publicacionService.getPublicaciones(page, totalAnuncios, tipoPublicacion, true, loggedUser);
 
@@ -184,7 +184,7 @@ public class PublicacionController {
             @RequestParam(value = "descripcion", required = true) String descripcion,
             @RequestParam(value = "multipleFiles", required = false) List<MultipartFile> files,
             Model model) {
-        Usuario loggedUser = usuarioRepository.getLoggedUser();
+        Usuario loggedUser = publicacionService.getLoggedUser();
         Publicacion publicacion = new Publicacion();
         publicacion.setTitulo(titulo);
         publicacion.setDescripcion(descripcion);
@@ -222,7 +222,7 @@ public class PublicacionController {
             @RequestParam(value = "urls", required = false) List<String> urls,
             Model model) throws IOException {
         
-        Usuario usuario = usuarioRepository.getLoggedUser();
+        Usuario usuario = publicacionService.getLoggedUser();
         log.info("{} intenta agregar la publicacion: {}", usuario.getLogin(), titulo);
         log.info("titulo {}", titulo);
         log.info("precio {}", precio);

@@ -9,13 +9,14 @@ import com.tecnobitz.cmpy.entidad.Destinatario;
 import com.tecnobitz.cmpy.entidad.Mensaje;
 import com.tecnobitz.cmpy.entidad.Usuario;
 import com.tecnobitz.cmpy.enums.TipoNotificacionEnum;
-import com.tecnogeek.comprameya.repositories.DestinatarioRepository;
+import com.tecnobitz.cmpy.repositories.DestinatarioRepository;
+import com.tecnobitz.cmpy.repositories.MensajeRepository;
+import com.tecnobitz.cmpy.repositories.UsuarioRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.tecnogeek.comprameya.repositories.MensajeRepository;
-import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;
+import lombok.Getter;
 
 /**
  *
@@ -23,11 +24,13 @@ import java.util.ArrayList;
  */
 
 @Service
-public class MensajeService {
+public class MensajeService extends BaseService<Mensaje, Long> {
     public MensajeService(){}
     
+    @Getter
     @Autowired
-    MensajeRepository mensajeRepository;
+    MensajeRepository repository;
+    
     @Autowired
     UsuarioRepository usuarioRepository;
     @Autowired 
@@ -37,19 +40,19 @@ public class MensajeService {
         
     public Iterable<Mensaje> getMensajeUsuario(long usuario_id,Usuario usuarioLocal,int page)
     {
-         return mensajeRepository.getMensajeUsuario(usuario_id,usuarioLocal,page);
+         return repository.getMensajeUsuario(usuario_id,usuarioLocal,page);
     }
 
     public Iterable<Usuario> getUsuarios(Usuario usuariolocal)
     {
         
-        return mensajeRepository.getUsuarios(usuariolocal);
+        return repository.getUsuarios(usuariolocal);
         
     }
     
     public Boolean setMensaje(String titulo, String texto, List<Long> destinatarios){
            
-        Usuario emisor = usuarioRepository.getLoggedUser();
+        Usuario emisor = getLoggedUser();
         
         Mensaje mensaje = new Mensaje();
         mensaje.setTexto(texto);
@@ -57,7 +60,7 @@ public class MensajeService {
         mensaje.setUsuarioEmisor(emisor);
         mensaje.setVisto(false);
         
-        mensajeRepository.save(mensaje);
+        repository.save(mensaje);
         
         List<Destinatario> listades = new ArrayList();
         List<Usuario> usuariosNotificar = new ArrayList();
@@ -90,25 +93,25 @@ public class MensajeService {
     
      public Iterable<Mensaje> getMensajeNoLeido(Usuario usuarioLocal,int page) {
      
-         return mensajeRepository.getMensajeNoLeido(usuarioLocal, page);
+         return repository.getMensajeNoLeido(usuarioLocal, page);
      
      }
      
      public Long getMensajeUsuarioNoleidoTotal(Long usuarioId,Usuario usuarioLocal){
-         return mensajeRepository.getMensajeUsuarioNoleidoTotal(usuarioId, usuarioLocal);
+         return repository.getMensajeUsuarioNoleidoTotal(usuarioId, usuarioLocal);
      }
      
      public Long getMensajeNoLeidoTotal(Usuario usuarioLocal){
-         return mensajeRepository.getMensajeNoLeidoTotal(usuarioLocal);
+         return repository.getMensajeNoLeidoTotal(usuarioLocal);
      }
      
      public Boolean setMensajeUsuarioLeido(Long usuarioId,Usuario usuarioLocal){
-         Iterable<Mensaje> mensajes = mensajeRepository.getMensajeUsuarioNoleido(usuarioId, usuarioLocal);
+         Iterable<Mensaje> mensajes = repository.getMensajeUsuarioNoleido(usuarioId, usuarioLocal);
          
          for(Mensaje m: mensajes)
          {
              m.setVisto(true);
-            mensajeRepository.save(m);
+            repository.save(m);
          }
          
          return true;

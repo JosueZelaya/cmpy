@@ -5,7 +5,7 @@
  */
 package com.tecnogeek.comprameya.service;
 
-import com.tecnogeek.comprameya.repositories.ProductoPSRepository;
+import com.tecnobitz.cmpy.repositories.ProductoPSRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

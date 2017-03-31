@@ -5,12 +5,10 @@
  */
 package com.tecnogeek.comprameya.controlador;
 
-import com.tecnobitz.cmpy.entidad.Destinatario;
 import com.tecnobitz.cmpy.entidad.Mensaje;
 import com.tecnobitz.cmpy.entidad.Usuario;
+import com.tecnobitz.cmpy.repositories.UsuarioRepository;
 import com.tecnogeek.comprameya.service.MensajeService;
-import com.tecnogeek.comprameya.repositories.UsuarioRepository;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +35,7 @@ public class MensajeController {
     @RequestMapping(value = "/get/{usuarioId}/{page}", method = RequestMethod.GET)
     public @ResponseBody Iterable<Mensaje> getMensajeUsuario(@PathVariable("usuarioId") long usuarioId,@PathVariable("page") int page)  {          
 
-        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Usuario usuarioLocal = mensajeService.getLoggedUser();
         
         Iterable<Mensaje> resul = mensajeService.getMensajeUsuario(usuarioId,usuarioLocal,page);
         
@@ -65,7 +63,7 @@ public class MensajeController {
     @RequestMapping(value = "/usuarios/get", method = RequestMethod.GET)
     public @ResponseBody  Iterable<Usuario> getUsuarios() {          
 
-        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Usuario usuarioLocal = mensajeService.getLoggedUser();
         Iterable<Usuario> res = mensajeService.getUsuarios(usuarioLocal);
         return res;
         
@@ -74,7 +72,7 @@ public class MensajeController {
     @RequestMapping(value = "/get/noleidos/{page}", method = RequestMethod.GET)
     public @ResponseBody  Iterable<Mensaje> getMensajesNoLeidos(@PathVariable("page") int page){
         
-        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Usuario usuarioLocal = mensajeService.getLoggedUser();
         Iterable<Mensaje> res = mensajeService.getMensajeNoLeido(usuarioLocal, page);
         
         return res;
@@ -82,20 +80,20 @@ public class MensajeController {
     
     @RequestMapping(value = "/get/usuario/noleidos/total/{usuarioId}", method = RequestMethod.GET)
     public @ResponseBody  Long getMensajeUsuarioNoleidoTotal(@PathVariable("usuarioId") long usuarioId){
-        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Usuario usuarioLocal = mensajeService.getLoggedUser();
         Long total = mensajeService.getMensajeUsuarioNoleidoTotal(usuarioId, usuarioLocal);
         return total;
     }
     
     @RequestMapping(value = "/get/noleidos/total", method = RequestMethod.GET)
     public @ResponseBody  Long getMensajeNoLeidoTotal(){
-        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Usuario usuarioLocal = mensajeService.getLoggedUser();
         return mensajeService.getMensajeNoLeidoTotal(usuarioLocal);
     }
     
     @RequestMapping(value = "/set/leido/{usuarioId}", method = RequestMethod.GET)
     public @ResponseBody  Boolean setMensajeUsuarioLeido(@PathVariable("usuarioId") long usuarioId){
-        Usuario usuarioLocal = usuarioRepository.getLoggedUser();
+        Usuario usuarioLocal = mensajeService.getLoggedUser();
         return mensajeService.setMensajeUsuarioLeido(usuarioId, usuarioLocal);
     }
     

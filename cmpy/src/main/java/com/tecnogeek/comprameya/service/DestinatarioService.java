@@ -5,9 +5,9 @@
  */
 package com.tecnogeek.comprameya.service;
 
+import com.tecnobitz.cmpy.repositories.DestinatarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.tecnogeek.comprameya.repositories.DestinatarioRepository;
 
 /**
  *

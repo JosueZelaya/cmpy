@@ -8,8 +8,9 @@ package com.tecnogeek.comprameya.controlador;
 
 import com.tecnobitz.cmpy.entidad.SuscripcionUsuario;
 import com.tecnobitz.cmpy.entidad.Usuario;
+import com.tecnobitz.cmpy.repositories.SuscripcionUsuarioRepository;
+import com.tecnobitz.cmpy.repositories.UsuarioRepository;
 import com.tecnogeek.comprameya.dto.pojoUsuario;
-import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.tecnogeek.comprameya.repositories.SuscripcionUsuarioRepository;
 
 /**
  *

@@ -9,12 +9,12 @@ import com.tecnobitz.cmpy.entidad.Comentario;
 import com.tecnobitz.cmpy.entidad.Publicacion;
 import com.tecnobitz.cmpy.entidad.SuscripcionPublicacion;
 import com.tecnobitz.cmpy.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.BaseRepository;
+import com.tecnobitz.cmpy.repositories.BaseRepository;
+import com.tecnobitz.cmpy.repositories.ComentarioRepository;
+import com.tecnobitz.cmpy.repositories.PublicacionRepository;
+import com.tecnobitz.cmpy.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.tecnogeek.comprameya.repositories.ComentarioRepository;
-import com.tecnogeek.comprameya.repositories.PublicacionRepository;
-import com.tecnogeek.comprameya.repositories.UsuarioRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +53,7 @@ public class ComentarioService extends BaseService<Comentario, Long>{
     }
     
     public Comentario save(Long publicacionId, String texto){
-        Usuario loggedUser = usuarioRepository.getLoggedUser();
+        Usuario loggedUser = getLoggedUser();
         
         Publicacion publicacion = publicacionRepository.getPublicacion(publicacionId);
                 

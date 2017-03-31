@@ -280,6 +280,12 @@
             <groupId>com.tecnobitz</groupId>
             <artifactId>entity</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>com.tecnobitz</groupId>
+            <artifactId>repository</artifactId>
+        </dependency>
+        
     </dependencies>
     
 <!--    <profiles>

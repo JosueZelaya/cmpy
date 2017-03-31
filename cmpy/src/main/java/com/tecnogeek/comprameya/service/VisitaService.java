@@ -6,7 +6,7 @@
 package com.tecnogeek.comprameya.service;
 
 import com.tecnobitz.cmpy.entidad.Visita;
-import com.tecnogeek.comprameya.repositories.VisitaRepository;
+import com.tecnobitz.cmpy.repositories.VisitaRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

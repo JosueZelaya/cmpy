@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 
 @Configuration
-@EnableJpaRepositories(basePackages="com.tecnogeek.comprameya.repositories")
+@EnableJpaRepositories(basePackages="com.tecnobitz.cmpy.repositories")
 @EnableTransactionManagement
 public class PersistenceConfig {
  

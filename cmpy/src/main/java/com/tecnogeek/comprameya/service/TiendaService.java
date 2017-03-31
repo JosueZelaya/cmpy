@@ -7,9 +7,9 @@ package com.tecnogeek.comprameya.service;
 
 import com.tecnogeek.comprameya.constantes.Constantes;
 import com.tecnobitz.cmpy.entidad.Tienda;
+import com.tecnobitz.cmpy.repositories.TiendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.tecnogeek.comprameya.repositories.TiendaRepository;
 import java.util.List;
 
 /**

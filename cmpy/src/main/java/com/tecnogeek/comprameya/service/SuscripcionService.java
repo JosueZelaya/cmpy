@@ -9,12 +9,12 @@ import com.tecnobitz.cmpy.entidad.Publicacion;
 import com.tecnobitz.cmpy.entidad.SuscripcionPublicacion;
 import com.tecnobitz.cmpy.entidad.SuscripcionUsuario;
 import com.tecnobitz.cmpy.entidad.Usuario;
-import com.tecnogeek.comprameya.repositories.SuscripcionPublicacionRepository;
+import com.tecnobitz.cmpy.repositories.SuscripcionPublicacionRepository;
+import com.tecnobitz.cmpy.repositories.SuscripcionUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-import com.tecnogeek.comprameya.repositories.SuscripcionUsuarioRepository;
 
 /**
  *
