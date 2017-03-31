@@ -18,30 +18,36 @@
                         <!--Nuevo estilo de miniatura-->
                         
                         
-                            <div class="container-fluid tproducto">
+                            <div class="container-fluid tproducto" style="overflow:hidden">
                               <div class="row"> 
-                                <div class="col-xs-5" style="padding-right:0px">
+                                <div class="col-xs-1" style="padding-right:2px;padding-left:3px;">
                              
 
                                     <div ng-if="publicacion.tipo!=='EXTERNA'">
                                         <img class="user-image" ng-if="!publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="/resources/images/default.jpg" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
                                         <img class="user-image" ng-if="publicacion.usuario.signInProvider === null && publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="/images/getThumbnail/{{publicacion.usuario.rutaImagen}}" alt="..." uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
                                         <img class="user-image" ng-if="publicacion.usuario.signInProvider !== null && publicacion.usuario.rutaImagen" height="28px" width="28px" ng-src="{{publicacion.usuario.rutaImagen}}" alt="..."  uib-tooltip="{{publicacion.usuario.persona.nombre}}" tooltip-placement="top"/>
-                                        <span style="overflow:hidden">&nbsp;&nbsp;{{publicacion.usuario.persona.nombre}}<span>
+                                        
                                     </div>
                                     <div ng-if="publicacion.tipo==='EXTERNA'">
                                         <img class="user-image" height="28px" width="28px" ng-src="/resources/images/logo.jpg" alt="..."  uib-tooltip="{{publicacion.link}}" tooltip-placement="top"/>
-                                        <span style="overflow:hidden">&nbsp;&nbsp;{{publicacion.usuario.persona.nombre}}</span>
+                                        
                                     </div>                                  
                                   
                                   
                                 </div>
+                                  
+                                <div class="col-xs-4" style="padding-right:0px;padding-left:3px;height: 20px;overflow:hidden">
+                             
+                                    &nbsp;&nbsp;{{publicacion.usuario.persona.nombre}}
+                               
+                                </div>                                  
 
-                                <div class="col-xs-5 text-right" style="padding-right:0px">
+                                <div class="col-xs-5 text-right" style="padding-right:0px;padding-left:3px">
                                     <i class="price-text-color glyphicon glyphicon-star" ng-repeat="estrella in getNumbers(publicacion.usuario.puntaje) track by $index"></i>
                                     <i class="price-text-color glyphicon glyphicon-star-empty" ng-repeat="estrella in getNumbers(5 - publicacion.usuario.puntaje) track by $index"></i>
                                 </div>   
-                                <div class="col-xs-2 text-left">
+                                <div class="col-xs-2 text-left" style="padding-left:3px">
                                     <div class="btn-group" uib-dropdown is-open="status.isopen">
                                       <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
                                         <span class="caret"></span>
