@@ -6,7 +6,6 @@
 
 package com.tecnogeek.comprameya.config;
 
-import com.github.greengerong.PreRenderSEOFilter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.servlet.Filter;
