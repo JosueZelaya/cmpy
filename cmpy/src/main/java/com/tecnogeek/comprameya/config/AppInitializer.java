@@ -36,7 +36,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         com.github.greengerong.PreRenderSEOFilter seoFilter = new com.github.greengerong.PreRenderSEOFilter();
         FilterRegistration.Dynamic filter =  servletContext.addFilter("prerender", seoFilter);
         filter.setInitParameter("prerenderToken", "bWTX3wnGG43lSldWSr09");
-        filter.setInitParameter("prerenderServiceUrl", "http://service.prerender.io/");
         filter.addMappingForUrlPatterns(null , true, "/");        
         super.onStartup(servletContext);
     }
