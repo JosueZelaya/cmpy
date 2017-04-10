@@ -282,7 +282,7 @@
                 <div class="row" style="padding-bottom:8px" >
                     <div class="col-md-12">
                         <a href="/" ui-sref='home' ui-sref-opts="{reload:true}">
-                            <img ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive center-block img-header" alt="$ComprameYa!">
+                            <img style="height: 125px" ng-src="/resources/images/logo_normal_trans_sm.png" class="img-responsive center-block img-header" alt="$ComprameYa!">
                         </a>                 
                     </div>
                     <div class="col-md-12">
